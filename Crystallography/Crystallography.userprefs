@@ -1,8 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Crystallography\AppMain.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Crystallography\Game.cs">
     <Files>
-      <File FileName="Crystallography\AppMain.cs" Line="1" Column="1" />
+      <File FileName="Crystallography\AppMain.cs" Line="58" Column="1" />
+      <File FileName="Crystallography\Game.cs" Line="107" Column="20" />
+      <File FileName="Crystallography\Board.cs" Line="1224" Column="1" />
+      <File FileName="Crystallography\NoCleanupScene.cs" Line="25" Column="1" />
+      <File FileName="Crystallography\Support.cs" Line="708" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
