@@ -44,11 +44,13 @@ namespace Pong
 			//start with a minor amount of movement 
 			_physicsBody.Force = new Vector2(-10.0f, 0); 
 			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false); 
-			}
-		
-		      public override void Update (float dt)
-        {
-            // Reset rotation to prevent "spinning" on collision
+			
+		}
+		     public override void Update (float dt)
+        	{
+			
+            
+			// Reset rotation to prevent "spinning" on collision
             _physicsBody.Rotation = 0.0f;
             
             

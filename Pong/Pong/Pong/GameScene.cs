@@ -4,6 +4,7 @@ using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 using Sce.PlayStation.HighLevel.Physics2D;
 using Sce.PlayStation.Core.Audio;
+using Sce.PlayStation.Core.Input; 
 
 namespace Pong
 {
@@ -88,7 +89,19 @@ namespace Pong
             
             if(Input2.GamePad0.Select.Press)
                 Director.Instance.ReplaceScene(new MenuScene());
-            
+            //switch to multitouch
+			Touch.GetData(0); 
+			foreach (var touchData in Touch.GetData(0)) {
+            if (touchData.Status == TouchStatus.Down ||
+                touchData.Status == TouchStatus.Move) {
+
+                int pointX = (int)((touchData.X + 0.5f) * 
+					                   Director.Instance.GL.Context.GetViewport().Width);
+                int pointY = (int)((touchData.Y + 0.5f) * Director.Instance.GL.Context.GetViewport().Height);
+				System.Console.WriteLine("pointX" + pointX + "pointY"+pointY); 
+               // this.FillCircle(colorTable[colorId], pointX, pointY, 96);
+            }
+			}
             //We don't need these, but sadly, the Simulate call does.
             Vector2 dummy1 = new Vector2();
             Vector2 dummy2 = new Vector2();
