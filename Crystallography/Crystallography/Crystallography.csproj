@@ -35,6 +35,9 @@
     <Reference Include="System.Core" />
     <Reference Include="Sce.PlayStation.Core" />
     <Reference Include="Sce.PlayStation.HighLevel.GameEngine2D" />
+    <Reference Include="Sce.PlayStation.HighLevel.Model" />
+    <Reference Include="Sce.PlayStation.HighLevel.Physics2D" />
+    <Reference Include="Sce.PlayStation.HighLevel.UI" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppMain.cs" />
@@ -42,6 +45,8 @@
     <Compile Include="Board.cs" />
     <Compile Include="NoCleanupScene.cs" />
     <Compile Include="Support.cs" />
+    <Compile Include="TitleScene.cs" />
+    <Compile Include="MenuScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -53,8 +58,10 @@
   <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
   <ItemGroup>
     <Folder Include="assets\" />
+    <Folder Include="sound\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\header.png" />
+    <Content Include="sound\music_ingame.mp3" />
   </ItemGroup>
 </Project>
