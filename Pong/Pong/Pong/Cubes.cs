@@ -1,11 +1,8 @@
 using System;
-using Sce.Pss.Core;
-using Sce.Pss.Core.Graphics;
-using Sce.Pss.Core.Imaging;
-using Sce.Pss.HighLevel.GameEngine2D;
-using Sce.Pss.HighLevel.GameEngine2D.Base;
 
-
+using Sce.PlayStation.Core.Graphics; 
+using Sce.PlayStation.HighLevel.GameEngine2D; 
+using Sce.PlayStation.HighLevel.GameEngine2D.Base; 
 namespace Pong
 {
 	public class Cubes : SpriteUV
@@ -15,10 +12,11 @@ namespace Pong
 		public Cubes (CubeType type) 	
 		{
 			_type = type; 
-			//write logic that gets each cube type 
-			
+			//write logic that gets each cube type
 			
 		}
+		
+		
 		
 		public override void Update (float dt)
         {

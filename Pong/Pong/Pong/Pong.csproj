@@ -38,6 +38,8 @@
     <Reference Include="Sce.PlayStation.HighLevel.Model" />
     <Reference Include="Sce.PlayStation.HighLevel.Physics2D" />
     <Reference Include="Sce.PlayStation.HighLevel.UI" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="I18N" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppMain.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Sound.cs" />
     <Compile Include="GameOver.cs" />
     <Compile Include="Cubes.cs" />
+    <Compile Include="SpriteSheetSingleton.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
