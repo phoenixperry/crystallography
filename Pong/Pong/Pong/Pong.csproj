@@ -51,6 +51,7 @@
     <Compile Include="SoundPlayer.cs" />
     <Compile Include="Sound.cs" />
     <Compile Include="GameOver.cs" />
+    <Compile Include="Cubes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

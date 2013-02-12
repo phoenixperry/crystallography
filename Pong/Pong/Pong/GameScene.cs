@@ -4,7 +4,7 @@ using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 using Sce.PlayStation.HighLevel.Physics2D;
 using Sce.PlayStation.Core.Audio;
-using Sce.PlayStation.Core.Input; 
+using Sce.PlayStation.Core.Input;
 
 namespace Pong
 {
@@ -99,7 +99,7 @@ namespace Pong
 					                   Director.Instance.GL.Context.GetViewport().Width);
                 int pointY = (int)((touchData.Y + 0.5f) * Director.Instance.GL.Context.GetViewport().Height);
 				System.Console.WriteLine("pointX" + pointX + "pointY"+pointY); 
-               // this.FillCircle(colorTable[colorId], pointX, pointY, 96);
+               // this.FillCircle(colorTable[colorId], pointX, pointY, 96); --> this code lines graphics to location obvious 
             }
 			}
             //We don't need these, but sadly, the Simulate call does.
