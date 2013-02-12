@@ -1,10 +1,10 @@
-﻿<Properties>
+﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Crystallography\GameScene.cs">
     <Files>
       <File FileName="Crystallography\AppMain.cs" Line="5" Column="26" />
       <File FileName="Crystallography\TitleScene.cs" Line="9" Column="26" />
-      <File FileName="Crystallography\GameScene.cs" Line="50" Column="4" />
+      <File FileName="Crystallography\GameScene.cs" Line="81" Column="29" />
       <File FileName="Crystallography\Card.cs" Line="43" Column="57" />
       <File FileName="Crystallography\GamePhysics.cs" Line="43" Column="60" />
       <File FileName="Crystallography\MenuScene.cs" Line="37" Column="8" />
