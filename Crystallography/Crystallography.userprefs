@@ -1,12 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Crystallography\Game.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Crystallography\GameScene.cs">
     <Files>
-      <File FileName="Crystallography\AppMain.cs" Line="58" Column="1" />
-      <File FileName="Crystallography\Game.cs" Line="107" Column="20" />
-      <File FileName="Crystallography\Board.cs" Line="1224" Column="1" />
-      <File FileName="Crystallography\NoCleanupScene.cs" Line="25" Column="1" />
-      <File FileName="Crystallography\Support.cs" Line="708" Column="1" />
+      <File FileName="Crystallography\AppMain.cs" Line="5" Column="26" />
+      <File FileName="Crystallography\TitleScene.cs" Line="9" Column="26" />
+      <File FileName="Crystallography\GameScene.cs" Line="50" Column="4" />
+      <File FileName="Crystallography\Card.cs" Line="43" Column="57" />
+      <File FileName="Crystallography\GamePhysics.cs" Line="43" Column="60" />
+      <File FileName="Crystallography\MenuScene.cs" Line="37" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
