@@ -25,6 +25,7 @@ local.properties
 # CDT-specific
 .cproject
 
+
 # PDT-specific
 .buildpath
 
@@ -107,6 +108,7 @@ ClientBin
 stylecop.*
 ~$*
 *.dbmdl
+*.pidb
 Generated_Code #added for RIA/Silverlight projects
 
 # Backup & report files from converting an old project file to a newer
