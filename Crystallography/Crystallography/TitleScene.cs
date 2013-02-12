@@ -19,7 +19,7 @@ namespace Crystallography
         public TitleScene ()
         {
             this.Camera.SetViewFromViewport();
-            _texture = new Texture2D("Application/assets/header.png",false);
+            _texture = new Texture2D("Application/assets/images/title.png",false);
             _ti = new TextureInfo(_texture);
             SpriteUV titleScreen = new SpriteUV(_ti);
             titleScreen.Scale = _ti.TextureSizef;
@@ -34,7 +34,7 @@ namespace Crystallography
             ActionManager.Instance.AddAction(tintAction,titleScreen);
             tintAction.Run();
             
-            _titleSong = new Bgm("/Application/sound/music_ingame.mp3");
+            _titleSong = new Bgm("/Application/assets/sounds/music_ingame.mp3");
             
             if(_songPlayer != null)
             _songPlayer.Dispose();
