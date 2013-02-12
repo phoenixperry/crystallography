@@ -17,7 +17,7 @@ namespace Crystallography
         private float _screenHeight;
             
             
-        public enum BODIES { Ball = 0, Player, Ai, LeftBumper, RightBumper };
+        public enum BODIES { Ball = 0, Player, Ai, LeftBumper, RightBumper, TopBumper, BottomBumper };
     
 		
 		public GamePhysics ()
@@ -36,51 +36,88 @@ namespace Crystallography
                 // And turn the bouncy bouncy on
                 this.RestitutionCoeff = 1.0f;
                 
-                this.NumBody = 5; // Ball, 2 paddles, 2 bumpers
-                this.NumShape = 3; // One of each of the above
-                
+//                this.NumBody = 7; // Ball, 2 paddles, 2 bumpers
+//                this.NumShape = 4; // One of each of the above
+			
+			//Shape Library
+			//BALL
+			this.SceneShapes[this.NumShape] = new PhysicsShape(GamePhysics.BALLRADIUS/PtoM);
+			this.NumShape++;
+			//PADDLE
+			Vector2 box = new Vector2(PADDLEWIDHT/2f/PtoM,-PADDLEHEIGHT/2f/PtoM);
+            this.SceneShapes[this.NumShape] = new PhysicsShape(box);
+			this.NumShape++;
+			//VERT. BUMPERS
+			this.SceneShapes[this.NumShape] = new PhysicsShape((new Vector2(1.0f,_screenHeight)) / PtoM);
+			this.NumShape++;
+			//HORIZ. BUMPERS
+			this.SceneShapes[this.NumShape] = new PhysicsShape((new Vector2(_screenWidth,1.0f)) / PtoM);
+			this.NumShape++;
+			
+			
                 //create the ball physics object
-                this.SceneShapes[0] = new PhysicsShape(GamePhysics.BALLRADIUS/PtoM);
-                this.SceneBodies[0] = new PhysicsBody(SceneShapes[0],0.1f);
-                this.SceneBodies[0].ShapeIndex = 0;
-                this.sceneBodies[0].ColFriction = 0.01f;
-                this.SceneBodies[0].Position = new Vector2(_screenWidth/2,_screenHeight/2) / PtoM;
                 
+                this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[0],0.1f);
+                this.SceneBodies[this.NumBody].ShapeIndex = 0;
+                this.sceneBodies[this.NumBody].ColFriction = 0.01f;
+                this.SceneBodies[this.NumBody].Position = new Vector2(_screenWidth/2,_screenHeight/2) / PtoM;
+                this.NumBody++;
                 
                 //Paddle shape --> this is where we need to plug in our diiferent types 
-                Vector2 box = new Vector2(PADDLEWIDHT/2f/PtoM,-PADDLEHEIGHT/2f/PtoM);
-                this.SceneShapes[1] = new PhysicsShape(box);
+                
                 
                 //Player paddle
-                this.SceneBodies[1] = new PhysicsBody(SceneShapes[1],1.0f);
-                this.SceneBodies[1].Position = new Vector2(_screenWidth/2f,0f+PADDLEHEIGHT/2+ 10f) / PtoM;
-                this.SceneBodies[1].Rotation = 0;
-                this.SceneBodies[1].ShapeIndex = 1;
-                
+                this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[1],1.0f);
+                this.SceneBodies[this.NumBody].Position = new Vector2(-50f,-50f) / PtoM;
+                this.SceneBodies[this.NumBody].Rotation = 0;
+                this.SceneBodies[this.NumBody].ShapeIndex = 1;
+                this.NumBody++;
+			                 
                 //Ai paddle
-                this.SceneBodies[2] = new PhysicsBody(SceneShapes[1],1.0f);
-                float aiX = ((_screenWidth/2f)/PtoM);
-                float aiY = (_screenHeight - PADDLEHEIGHT/2 - 10f)/ PtoM;
-                this.SceneBodies[2].Position = new Vector2(aiX,aiY);
-                this.SceneBodies[2].Rotation = 0;
-                this.SceneBodies[2].ShapeIndex = 1;
-                
+                this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[1],1.0f);
+                float aiX = (50f/PtoM);
+                float aiY = (-50f/ PtoM);
+                this.SceneBodies[this.NumBody].Position = new Vector2(aiX,aiY);
+                this.SceneBodies[this.NumBody].Rotation = 0;
+                this.SceneBodies[this.NumBody].ShapeIndex = 1;
+            	this.NumBody++;
+			
                 //Now a shape for left and right bumpers to keep ball on screen
-                this.SceneShapes[2] = new PhysicsShape((new Vector2(1.0f,_screenHeight)) / PtoM);
+                
+				//This is the shape for the top and bottom bumpers
+				
                 
                 //Left bumper
-                this.SceneBodies[3] = new PhysicsBody(SceneShapes[2],PhysicsUtility.FltMax);
-                this.SceneBodies[3].Position = new Vector2(0,_screenHeight/2f) / PtoM;
-                this.sceneBodies[3].ShapeIndex = 2;
-                this.sceneBodies[3].Rotation = 0;
-                this.SceneBodies[3].SetBodyStatic();
+                this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[2],PhysicsUtility.FltMax);
+                this.SceneBodies[this.NumBody].Position = new Vector2(0,_screenHeight/2f) / PtoM;
+                this.sceneBodies[this.NumBody].ShapeIndex = 2;
+                this.sceneBodies[this.NumBody].Rotation = 0;
+                this.SceneBodies[this.NumBody].SetBodyStatic();
+				this.NumBody++;
                 
                 //Right bumper
-                this.SceneBodies[4] = new PhysicsBody(SceneShapes[2],PhysicsUtility.FltMax);
-                this.SceneBodies[4].Position = new Vector2(_screenWidth,_screenHeight/2f) / PtoM;
-                this.sceneBodies[4].ShapeIndex = 2;
-                this.sceneBodies[4].Rotation = 0;
-                this.SceneBodies[4].SetBodyStatic();
+                this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[2],PhysicsUtility.FltMax);
+                this.SceneBodies[this.NumBody].Position = new Vector2(_screenWidth,_screenHeight/2f) / PtoM;
+                this.sceneBodies[this.NumBody].ShapeIndex = 2;
+                this.sceneBodies[this.NumBody].Rotation = 0;
+                this.SceneBodies[this.NumBody].SetBodyStatic();
+				this.NumBody++;
+			
+				//Top bumper
+				this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[3],PhysicsUtility.FltMax);
+				this.SceneBodies[this.NumBody].Position = new Vector2(_screenWidth/2f,0) / PtoM;
+				this.sceneBodies[this.NumBody].ShapeIndex = 3;
+				this.sceneBodies[this.NumBody].Rotation = 0;
+				this.SceneBodies[this.NumBody].SetBodyStatic();
+				this.NumBody++;
+			
+				//Bottom bumper
+				this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[3],PhysicsUtility.FltMax);
+				this.SceneBodies[this.NumBody].Position = new Vector2(_screenWidth/2f,_screenHeight) / PtoM;
+				this.sceneBodies[this.NumBody].ShapeIndex = 3;
+				this.sceneBodies[this.NumBody].Rotation = 0;
+				this.SceneBodies[this.NumBody].SetBodyStatic();
+				this.NumBody++;
             }
         }
     }	

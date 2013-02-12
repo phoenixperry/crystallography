@@ -14,13 +14,13 @@ namespace Crystallography
 //    private Paddle _player,_ai;
     public static Card ball;
     private GamePhysics _physics;
-	private static DragGestureDetector _dragGestureDetector;
+//	private static DragGestureDetector _dragGestureDetector;
 //    private Scoreboard _scoreboard;
     private SoundPlayer _pongBlipSoundPlayer;
     private Sound _pongSound;
         
         // Change the following value to true if you want bounding boxes to be rendered
-        private static Boolean DEBUG_BOUNDINGBOXS = false;
+        private static Boolean DEBUG_BOUNDINGBOXS = true;
         
         public GameScene ()
         {
@@ -30,9 +30,9 @@ namespace Crystallography
             
             ball = new Card(_physics.SceneBodies[(int)GamePhysics.BODIES.Ball]);
 //            _player = new Paddle(Paddle.PaddleType.PLAYER, 
-//                                 _physics.SceneBodies[(int)PongPhysics.BODIES.Player]);
+//                                 _physics.SceneBodies[(int)GamePhysics.BODIES.Player]);
 //            _ai = new Paddle(Paddle.PaddleType.AI, 
-//                             _physics.SceneBodies[(int)PongPhysics.BODIES.Ai]);
+//                             _physics.SceneBodies[(int)GamePhysics.BODIES.Ai]);
 //            _scoreboard = new Scoreboard();
             
 //            this.AddChild(_scoreboard);
@@ -40,36 +40,56 @@ namespace Crystallography
 //            this.AddChild(_player);
 //            this.AddChild(_ai);
 			
-			 _dragGestureDetector = new DragGestureDetector();
-			_dragGestureDetector.DragDetected += delegate(object sender, DragEventArgs e) {
-				var newPos = new Vector2(e.Source.X,e.Source.Y) + e.Distance;
-				e.Source.SetPosition(newPos.X,newPos.Y);
+//			 _dragGestureDetector = new DragGestureDetector();
+//			_dragGestureDetector.DragDetected += delegate(object sender, DragEventArgs e) {
+//				var newPos = new Vector2(e.Source.X,e.Source.Y) + e.Distance;
+//				e.Source.SetPosition(newPos.X,newPos.Y);
 //				_label.Text = "Dragged";
-			};
+//			};
 			
 			
             
             
             // This is debug routine that will draw the physics bounding box around the players paddle
-//            if(DEBUG_BOUNDINGBOXS)
-//            {
-//                this.AdHocDraw += () => {
-//                    var bottomLeftPlayer = _physics.SceneBodies[(int)PongPhysics.BODIES.Player].AabbMin;
-//                    var topRightPlayer = _physics.SceneBodies[(int)PongPhysics.BODIES.Player].AabbMax;
-//                    Director.Instance.DrawHelpers.DrawBounds2Fill(
-//                        new Bounds2(bottomLeftPlayer*PongPhysics.PtoM,topRightPlayer*PongPhysics.PtoM));
-//
-//                    var bottomLeftAi = _physics.SceneBodies[(int)PongPhysics.BODIES.Ai].AabbMin;
-//                    var topRightAi = _physics.SceneBodies[(int)PongPhysics.BODIES.Ai].AabbMax;
-//                    Director.Instance.DrawHelpers.DrawBounds2Fill(
-//                        new Bounds2(bottomLeftAi*PongPhysics.PtoM,topRightAi*PongPhysics.PtoM));
-//
-//                    var bottomLeftBall = _physics.SceneBodies[(int)PongPhysics.BODIES.Ball].AabbMin;
-//                    var topRightBall = _physics.SceneBodies[(int)PongPhysics.BODIES.Ball].AabbMax;
-//                    Director.Instance.DrawHelpers.DrawBounds2Fill(
-//                        new Bounds2(bottomLeftBall*PongPhysics.PtoM,topRightBall*PongPhysics.PtoM));
-//                };
-//            }
+            if(DEBUG_BOUNDINGBOXS)
+            {
+                this.AdHocDraw += () => {
+                    var bottomLeftPlayer = _physics.SceneBodies[(int)GamePhysics.BODIES.Player].AabbMin;
+                    var topRightPlayer = _physics.SceneBodies[(int)GamePhysics.BODIES.Player].AabbMax;
+                    Director.Instance.DrawHelpers.DrawBounds2Fill(
+                        new Bounds2(bottomLeftPlayer*GamePhysics.PtoM,topRightPlayer*GamePhysics.PtoM));
+
+                    var bottomLeftAi = _physics.SceneBodies[(int)GamePhysics.BODIES.Ai].AabbMin;
+                    var topRightAi = _physics.SceneBodies[(int)GamePhysics.BODIES.Ai].AabbMax;
+                    Director.Instance.DrawHelpers.DrawBounds2Fill(
+                        new Bounds2(bottomLeftAi*GamePhysics.PtoM,topRightAi*GamePhysics.PtoM));
+
+                    var bottomLeftBall = _physics.SceneBodies[(int)GamePhysics.BODIES.Ball].AabbMin;
+                    var topRightBall = _physics.SceneBodies[(int)GamePhysics.BODIES.Ball].AabbMax;
+                    Director.Instance.DrawHelpers.DrawBounds2Fill(
+                        new Bounds2(bottomLeftBall*GamePhysics.PtoM,topRightBall*GamePhysics.PtoM));
+					
+					var bottomLeftLeftBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.LeftBumper].AabbMin;
+					var topRightLeftBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.LeftBumper].AabbMax;
+					Director.Instance.DrawHelpers.DrawBounds2Fill(
+						new Bounds2 (bottomLeftLeftBumper*GamePhysics.PtoM,topRightLeftBumper*GamePhysics.PtoM));
+					
+					var bottomLeftRightBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.RightBumper].AabbMin;
+					var topRightRightBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.RightBumper].AabbMax;
+					Director.Instance.DrawHelpers.DrawBounds2Fill(
+						new Bounds2 (bottomLeftRightBumper*GamePhysics.PtoM,topRightRightBumper*GamePhysics.PtoM));
+					
+					var bottomLeftTopBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.TopBumper].AabbMin;
+					var topRightTopBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.TopBumper].AabbMax;
+					Director.Instance.DrawHelpers.DrawBounds2Fill(
+						new Bounds2 (bottomLeftTopBumper*GamePhysics.PtoM,topRightTopBumper*GamePhysics.PtoM));
+					
+					var bottomLeftBottomBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.BottomBumper].AabbMin;
+					var topRightBottomBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.BottomBumper].AabbMax;
+					Director.Instance.DrawHelpers.DrawBounds2Fill(
+						new Bounds2 (bottomLeftBottomBumper*GamePhysics.PtoM,topRightBottomBumper*GamePhysics.PtoM));
+                };
+            }
             
             //Now load the sound fx and create a player
          //   _pongSound = new Sound("/Application/audio/pongblip.mp3");
