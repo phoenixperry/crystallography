@@ -13,8 +13,8 @@ namespace Pong
         private TextureInfo _ti;
         private Texture2D _texture;
         
-        private Bgm _titleSong;
-        private BgmPlayer _songPlayer;
+//        private Bgm _titleSong;
+//        private BgmPlayer _songPlayer;
         
         public TitleScene ()
         {
@@ -34,11 +34,11 @@ namespace Pong
             ActionManager.Instance.AddAction(tintAction,titleScreen);
             tintAction.Run();
             
-            _titleSong = new Bgm("/Application/audio/titlesong.mp3");
+//            _titleSong = new Bgm("/Application/audio/titlesong.mp3");
             
-            if(_songPlayer != null)
-            _songPlayer.Dispose();
-            _songPlayer = _titleSong.CreatePlayer();
+//            if(_songPlayer != null)
+//            _songPlayer.Dispose();
+//            _songPlayer = _titleSong.CreatePlayer();
             
             Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
 
@@ -48,15 +48,15 @@ namespace Pong
         
         public override void OnEnter ()
         {
-            _songPlayer.Loop = true;
-            _songPlayer.Play();
+//            _songPlayer.Loop = true;
+//            _songPlayer.Play();
         }
         public override void OnExit ()
         {
             base.OnExit ();
-            _songPlayer.Stop();
-            _songPlayer.Dispose();
-            _songPlayer = null;
+//            _songPlayer.Stop();
+//            _songPlayer.Dispose();
+//            _songPlayer = null;
         }
         
         public override void Update (float dt)

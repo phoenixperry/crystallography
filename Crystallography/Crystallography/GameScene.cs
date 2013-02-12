@@ -184,6 +184,11 @@ namespace Crystallography
                 ResetBall();
             }
         }
+		
+		public void UpdateInput (float dt) {
+			
+		}
+		
         
         ~GameScene(){
            // _pongBlipSoundPlayer.Dispose();
