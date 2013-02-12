@@ -7,7 +7,7 @@ using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
 using Sce.PlayStation.HighLevel.UI;
-namespace Pong
+namespace Crystallography
 {
 	public class MenuScene: Sce.PlayStation.HighLevel.GameEngine2D.Scene
 	{
@@ -34,9 +34,9 @@ namespace Pong
 			buttonUI1.Alpha = 0.8f; 
 			
 			buttonUI1.SetPosition(dialog.Width/2-150,200.0f); 
-//			buttonUI1.TouchEventReceived += (sender, e) =>  {
-//				Director.Instance.ReplaceScene(new GameScene()); 
-//			}; 
+			buttonUI1.TouchEventReceived += (sender, e) =>  {
+				Director.Instance.ReplaceScene(new GameScene()); 
+			}; 
 			
 			 Button buttonUI2 = new Button();
             buttonUI2.Name = "buttonMenu";

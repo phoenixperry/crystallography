@@ -2,7 +2,7 @@ using System;
 
 using Sce.PlayStation.HighLevel.UI; 
 using Sce.PlayStation.HighLevel.GameEngine2D; 
-namespace Pong
+namespace Crystallography
 {
 	public class AppMain
 	{

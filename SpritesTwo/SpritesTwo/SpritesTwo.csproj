@@ -54,10 +54,8 @@
     <Content Include="..\walk.png">
       <Link>walk.png</Link>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\walk.xml">
+    <Content Include="..\walk.xml">
       <Link>walk.xml</Link>
-    </None>
+    </Content>
   </ItemGroup>
 </Project>

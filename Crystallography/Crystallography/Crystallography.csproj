@@ -47,6 +47,9 @@
     <Compile Include="Support.cs" />
     <Compile Include="TitleScene.cs" />
     <Compile Include="MenuScene.cs" />
+    <Compile Include="GameScene.cs" />
+    <Compile Include="Card.cs" />
+    <Compile Include="GamePhysics.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -63,5 +66,6 @@
   <ItemGroup>
     <Content Include="assets\header.png" />
     <Content Include="sound\music_ingame.mp3" />
+    <Content Include="assets\redTop.png" />
   </ItemGroup>
 </Project>
