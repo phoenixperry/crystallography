@@ -15,6 +15,7 @@ namespace Pong
             Director.Instance.RunWithScene(new TitleScene());               
 			
 		}
+		
 	}
 }
 

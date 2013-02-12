@@ -61,7 +61,8 @@ namespace Pong
 		public override void Update(float dt){
 			base.Update(dt); 
 			UISystem.Update(Touch.GetData(0)); 
-		}
+	
+	}
 		public override void Draw ()
         {
             base.Draw();
