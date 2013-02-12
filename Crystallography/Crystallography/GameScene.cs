@@ -12,12 +12,17 @@ namespace Crystallography
     public class GameScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
     {
 //    private Paddle _player,_ai;
-    public static Card ball;
-    private GamePhysics _physics;
+    	public static Card ball;
+    	private GamePhysics _physics;
 //	private static DragGestureDetector _dragGestureDetector;
 //    private Scoreboard _scoreboard;
-    private SoundPlayer _pongBlipSoundPlayer;
-    private Sound _pongSound;
+    	private SoundPlayer _pongBlipSoundPlayer;
+   		private Sound _pongSound;
+		
+		public bool WasTouch;
+		public bool IsTouch;
+		public Card SelectedCard;
+		public Vector2 TouchStart;
         
         // Change the following value to true if you want bounding boxes to be rendered
         private static Boolean DEBUG_BOUNDINGBOXS = true;
@@ -183,13 +188,54 @@ namespace Crystallography
             {
                 ResetBall();
             }
+			
+			UpdateInput(dt);
         }
 		
 		public void UpdateInput (float dt) {
+			Input2.TouchData touch = Input2.Touch00;
 			
+			WasTouch = IsTouch;
+			IsTouch = touch.Down;
+			
+			var normalized = touch.Pos;
+			var world = Director.Instance.CurrentScene.Camera.NormalizedToWorld(normalized);
+			var card = GetCardAtPosition(world);
+			var moved = TouchStart - world;
+			var moved_distance = moved.SafeLength();
+			
+			// New Touch Starting This Frame
+			if (IsTouch && !WasTouch) {
+				
+				if (card != null) {
+					TouchStart = world;
+					SelectedCard = card;
+					_physics.SceneBodies[(int)GamePhysics.BODIES.Ball].Position = 
+                				new Vector2(world.X,world.Y) / GamePhysics.PtoM;
+				}
+			}
+			else if (IsTouch && WasTouch) {
+				_physics.SceneBodies[(int)GamePhysics.BODIES.Ball].Position = 
+								new Vector2(world.X,world.Y) / GamePhysics.PtoM;
+			}
 		}
 		
-        
+        public Card GetCardAtPosition(Vector2 position) {
+			var halfDimensions = new Vector2(ball.CalcSizeInPixels().X/2f,ball.CalcSizeInPixels().Y/2f);
+			var lowerLeft = new Vector2(ball.Position.X-halfDimensions.X, ball.Position.Y+halfDimensions.Y);
+//			ball.CalcSizeInPixels().X;
+			var upperRight = new Vector2(ball.Position.X+halfDimensions.X, ball.Position.Y-halfDimensions.Y);
+			
+			if (position.X > lowerLeft.X && position.Y < lowerLeft.Y &&
+			    position.X < upperRight.X && position.Y > upperRight.Y) {
+//				ball.Color = Colors.Grey05;
+				return ball;
+			}
+			
+			return null;
+			                             
+		}
+		
         ~GameScene(){
            // _pongBlipSoundPlayer.Dispose();
         }

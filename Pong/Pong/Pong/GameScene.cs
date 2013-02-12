@@ -99,7 +99,7 @@ namespace Pong
 					                   Director.Instance.GL.Context.GetViewport().Width);
                 int pointY = (int)((touchData.Y + 0.5f) * Director.Instance.GL.Context.GetViewport().Height);
 				System.Console.WriteLine("pointX" + pointX + "pointY"+pointY); 
-               // this.FillCircle(colorTable[colorId], pointX, pointY, 96); --> this code lines graphics to location obvious 
+//                this.FillCircle(colorTable[colorId], pointX, pointY, 96); //--> this code lines graphics to location obvious 
             }
 			}
             //We don't need these, but sadly, the Simulate call does.

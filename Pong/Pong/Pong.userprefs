@@ -1,12 +1,12 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Pong\SpriteSheetSingleton.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Pong\GameScene.cs">
     <Files>
       <File FileName="Pong\AppMain.cs" Line="16" Column="4" />
-      <File FileName="Pong\TitleScene.cs" Line="79" Column="2" />
+      <File FileName="Pong\TitleScene.cs" Line="17" Column="40" />
       <File FileName="Pong\MenuScene.cs" Line="63" Column="36" />
-      <File FileName="Pong\GameScene.cs" Line="100" Column="31" />
-      <File FileName="Pong\Paddle.cs" Line="22" Column="33" />
+      <File FileName="Pong\GameScene.cs" Line="106" Column="44" />
+      <File FileName="Pong\Paddle.cs" Line="10" Column="30" />
       <File FileName="Pong\Cubes.cs" Line="5" Column="52" />
       <File FileName="Pong\SpriteSheetSingleton.cs" Line="22" Column="36" />
     </Files>

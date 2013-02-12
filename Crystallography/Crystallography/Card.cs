@@ -11,7 +11,7 @@ namespace Crystallography
     {
         private PhysicsBody _physicsBody;
         // Change this value to make the game faster or slower
-        public const float BALL_VELOCITY = 5.0f;
+        public const float BALL_VELOCITY = 1.0f;
         
         public Card (PhysicsBody physicsBody)
         {
