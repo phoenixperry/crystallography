@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AppMain.cs" />
     <Compile Include="Logic.cs" />
+    <Compile Include="Cube.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
