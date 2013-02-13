@@ -37,6 +37,8 @@ namespace Crystallography
             tintAction.Run();
 
             _titleSong = new Bgm("/Application/assets/sounds/music_ingame.mp3");
+// started working out game logic in a seperate project Card Match Login
+
             
             if(_songPlayer != null)
             _songPlayer.Dispose();
