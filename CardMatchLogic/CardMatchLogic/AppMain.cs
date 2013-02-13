@@ -29,7 +29,8 @@ namespace CardMatchLogic
 	
 			var scene = new Scene(); 
 			scene.Camera.SetViewFromViewport(); 
-			leftFace = new SpriteSingleton("gamePieces.png", "gamePieces.xml"); 
+			leftFace = new SpriteSingleton(); 
+			leftFace = SpriteSingleton.getInstance(); 
 			var sprite = leftFace.Get("leftSide"); 
 			sprite.Position = scene.Camera.CalcBounds().Center; 
 			sprite.CenterSprite(); 
