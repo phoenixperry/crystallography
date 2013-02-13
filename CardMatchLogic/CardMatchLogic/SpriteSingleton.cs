@@ -9,22 +9,22 @@ using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.HighLevel.GameEngine2D; 
 using Sce.PlayStation.HighLevel.GameEngine2D.Base; 
 
-namespace SpriteSheet
+namespace CardMatchLogic
 {
 
-		 public class Walker
+		 public class SpriteSingleton
  {
  
   private TextureInfo _textureInfo;
   private Texture2D _texture;
   private System.Collections.Generic.Dictionary<string, Sce.PlayStation.HighLevel.GameEngine2D.Base.Vector2i> _sprites;
   
-  public Walker (string imageFilename, string imageDetailsFilename)
+  public SpriteSingleton (string imageFilename, string imageDetailsFilename)
   {
    //XDocument doc = XDocument.Load ("application/" + imageDetailsFilename);
   
 //XDocument doc = XDocument.Load ("application/" + imageDetailsFilename);
-FileStream fileStream = File.OpenRead( "/Application/" + imageDetailsFilename);
+FileStream fileStream = File.OpenRead( "/Application/assets/" + imageDetailsFilename);
 StreamReader fileStreamReader = new StreamReader(fileStream);
 string xml = fileStreamReader.ReadToEnd();
 fileStreamReader.Close();
@@ -44,14 +44,16 @@ XDocument doc = XDocument.Parse(xml);
    _sprites = new Dictionary<string,Sce.PlayStation.HighLevel.GameEngine2D.Base.Vector2i>(); 
     foreach(var curLine in lines)
 	{
-    _sprites.Add(curLine.Name,new Vector2i((curLine.X1/curLine.Width),9-(curLine.Y1/curLine.Height)));
+   // _sprites.Add(curLine.Name,new Vector2i((curLine.X1/curLine.Width),2-(curLine.Y1/curLine.Height)));
+	_sprites.Add(curLine.Name, new Vector2i(curLine.X1, curLine.Y1)); 
    }
-   _texture = new Texture2D("/Application/" + imageFilename,false);
-   _textureInfo = new TextureInfo(_texture,new Vector2i(4,10));
+   _texture = new Texture2D("/Application/assets/" + imageFilename,false);
+   _textureInfo = new TextureInfo(_texture,new Vector2i(3,1));
+			//the Vector2i are number of sprites, number of rows - playstation reads from bottom up 
   
   }
   
-  ~Walker()
+  ~SpriteSingleton()
   {
    _texture.Dispose();
    _textureInfo.Dispose ();
@@ -62,6 +64,7 @@ XDocument doc = XDocument.Parse(xml);
    var spriteTile = new SpriteTile(_textureInfo);
    spriteTile.TileIndex2D = new Vector2i(x,y);
    spriteTile.Quad.S = new Sce.PlayStation.Core.Vector2 (168,146);
+			
    return spriteTile;
   }
 		public Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile Get(string name) 

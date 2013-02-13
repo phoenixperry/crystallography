@@ -1,9 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="c:\Users\phoenix\Documents\GitHub\crystallography\SpritesTwo\SpritesTwo\Walker.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SpritesTwo\AppMain.cs">
     <Files>
-      <File FileName="SpritesTwo\AppMain.cs" Line="24" Column="28" />
-      <File FileName="c:\Users\phoenix\Documents\GitHub\crystallography\SpritesTwo\SpritesTwo\Walker.cs" Line="27" Column="1" />
+      <File FileName="SpritesTwo\AppMain.cs" Line="13" Column="22" />
+      <File FileName="c:\Users\phoenix\Documents\GitHub\crystallography\SpritesTwo\SpritesTwo\Walker.cs" Line="75" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
