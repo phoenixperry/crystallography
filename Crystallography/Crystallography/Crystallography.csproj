@@ -51,6 +51,7 @@
     <Compile Include="Card.cs" />
     <Compile Include="GamePhysics.cs" />
     <Compile Include="Cube.cs" />
+    <Compile Include="Group.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -69,5 +70,8 @@
     <Content Include="assets\redTop.png" />
     <Content Include="assets\sounds\music_ingame.mp3" />
     <Content Include="assets\images\title.png" />
+    <Content Include="assets\images\rightSide.png" />
+    <Content Include="assets\images\topSide.png" />
+    <Content Include="assets\images\leftSide.png" />
   </ItemGroup>
 </Project>

@@ -25,7 +25,7 @@ namespace Crystallography
 
 			ib.Image = new ImageAsset("/Application/assets/images/title.png"); 
 // started working out game logic in a seperate project Card Match Login
-			ib.Height = dialog.Height; 
+//			ib.Height = dialog.Height; 
 			ib.SetPosition(0.0f, 0.0f); 
 			
 			Button buttonUI1 = new Button(); 

@@ -14,11 +14,13 @@ namespace Crystallography
 //    private Paddle _player,_ai;
 //    	public static Card ball;
 		public static Card[] cards;
+		public static Group[] groups;
     	private GamePhysics _physics;
 //	private static DragGestureDetector _dragGestureDetector;
 //    private Scoreboard _scoreboard;
     	private SoundPlayer _pongBlipSoundPlayer;
    		private Sound _pongSound;
+		
 		
 		public bool WasTouch;
 		public bool IsTouch;
@@ -54,6 +56,13 @@ namespace Crystallography
 				this.AddChild (cards[i]);
 			}
 			
+			groups = new Group[1];
+			
+			for (int i=0; i<1; i++) {
+				groups[i] = new Group(_physics.addGroupPhysics(new Vector2(400f,400f)));
+				this.AddChild (groups[i]);
+			}
+				
 //            this.AddChild(_scoreboard);
 //            this.AddChild(ball);
 //            this.AddChild(_player);
@@ -232,6 +241,7 @@ namespace Crystallography
 					SelectedCard = card;
 					SelectedCard.physicsBody.Position = 
                 				new Vector2(world.X,world.Y) / GamePhysics.PtoM;
+					groups[0].addCard(SelectedCard);
 				}
 			}
 			// Drag
@@ -267,9 +277,11 @@ namespace Crystallography
 						System.Console.WriteLine ("Snap!");
 //						closest.physicsBody.Position = new Vector2(world.X-30f,world.Y-20f) / GamePhysics.PtoM;
 						FirstAttachedCard = closest;
-					} else {
+						groups[0].addCard(closest);
+					} else if ( SecondAttachedCard == null ) {
 //						closest.physicsBody.Position = new Vector2(world.X+30f,world.Y-20f) / GamePhysics.PtoM;
 						SecondAttachedCard = closest;
+						groups[0].addCard (closest);
 					}
 				}
 				if ( FirstAttachedCard != null ) {
