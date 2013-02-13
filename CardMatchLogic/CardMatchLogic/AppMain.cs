@@ -44,8 +44,7 @@ namespace CardMatchLogic
       		spriteName= "leftSide";
       
      		sprite.TileIndex2D = leftFace.Get (spriteName).TileIndex2D;
-		
-			
+			sprite.RunAction(new TintTo (new Vector4(1.0f,0.0f,0.0f,1.0f),0.1f)); 	
 			var cube = new Cube(); 
 			cube.card1("r"); 
 			cube.card2 ("b"); 
