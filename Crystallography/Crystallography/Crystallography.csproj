@@ -50,6 +50,7 @@
     <Compile Include="GameScene.cs" />
     <Compile Include="Card.cs" />
     <Compile Include="GamePhysics.cs" />
+    <Compile Include="Cube.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

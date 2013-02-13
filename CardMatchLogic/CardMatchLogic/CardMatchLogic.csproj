@@ -37,10 +37,12 @@
     <Reference Include="Sce.PlayStation.HighLevel.GameEngine2D" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="Sce.PlayStation.HighLevel.Model" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppMain.cs" />
-    <Compile Include="Logic.cs" />
+    <Compile Include="Cube.cs" />
+    <Compile Include="SpriteSingleton.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

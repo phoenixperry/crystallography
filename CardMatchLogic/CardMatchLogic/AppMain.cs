@@ -5,75 +5,68 @@ using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
+using Sce.PlayStation.HighLevel.GameEngine2D; 
+using Sce.PlayStation.HighLevel.GameEngine2D.Base; 
 
 namespace CardMatchLogic
 {
 	public class AppMain
 	{
-		private static GraphicsContext graphics;
-		public CardList cardList = new CardList();
-        public String card; 
-		public enum CardList{red, pink, blue}
-		//1 = red 
-		//2 = pink 
-		//3 = blue 
-		//public static Dictionary dict <string, List<string>>(); 
-			
-		
-			
+		public static SpriteSingleton leftFace;
+		public static SpriteSingleton rightFace;
 		public static void Main (string[] args)
 		{
-			Initialize ();
-			Console.WriteLine("pick a card"); 
+			Sce.PlayStation.Core.Graphics.GraphicsContext
+	 context = new Sce.PlayStation.Core.Graphics.GraphicsContext(); 
+
+			uint sprites_capacity = 500; 
+			uint draw_helpers_capacity=400; 
+		
+			Director.Initialize(sprites_capacity, 
+			                    draw_helpers_capacity, context); 
+			Director.Instance.GL.Context.SetClearColor(Colors.Grey20); 
 			
-			if(line =="red") {
-				 var dict = new Dictionary<string, List<string>> ();
-				List<string> possibleMatch = new List<string>(); 
-	            dict["redKey"] = new List<string>{"111", "132", "123", 
-	                "222"};
-				var card= "red";
-				
-				switch (card) { 
-	                case "red":
-	                    Console.WriteLine("red");
-						possibleMatch = dict["redKey"]; 
-						foreach(string pos in possibleMatch){
-						Console.WriteLine(pos); }
-	                    break;
-				default:
-					break;
-				}
-				
-				// next card 
-				
+	
+			var scene = new Scene(); 
+			scene.Camera.SetViewFromViewport(); 
+			leftFace = new SpriteSingleton(); 
+			leftFace = SpriteSingleton.getInstance(); 
+			var sprite = leftFace.Get("leftSide"); 
+			sprite.Position = scene.Camera.CalcBounds().Center; 
+			sprite.CenterSprite(); 
+			//sprite.Scale = new Vector2(1,1); 
+			scene.AddChild(sprite); 
+
+	
+  		 Director.Instance.RunWithScene(scene,true);
+    		string spriteName;
+
+      		spriteName= "leftSide";
+      
+     		sprite.TileIndex2D = leftFace.Get (spriteName).TileIndex2D;
+		
+			
+			var cube = new Cube(); 
+			cube.card1("r"); 
+			cube.card2 ("b"); 
+			cube.card3("p"); 
+			
+			var cubeTest = cube.testCube(); 
+			Console.WriteLine(cubeTest); 
+		
+				while(!Input2.GamePad0.Cross.Press) 
+			{
+	
+				Sce.PlayStation.Core.Environment.SystemEvents.CheckEvents(); 
+				Director.Instance.Update(); 
+				Director.Instance.Render(); 
+				Director.Instance.GL.Context.SwapBuffers(); 
+				Director.Instance.PostSwap();
+			
 			}
-			while (true) {
-				SystemEvents.CheckEvents ();
-				Update ();
-				Render ();
-			}
 		}
+	
+				
+	
+	}}
 
-		public static void Initialize ()
-		{
-			// Set up the graphics system
-			graphics = new GraphicsContext ();
-		}
-
-		public static void Update ()
-		{
-			// Query gamepad for current state
-			var gamePadData = GamePad.GetData (0);
-		}
-
-		public static void Render ()
-		{
-			// Clear the screen
-			graphics.SetClearColor (0.0f, 0.0f, 0.0f, 0.0f);
-			graphics.Clear ();
-
-			// Present the screen
-			graphics.SwapBuffers ();
-		}
-	}
-}

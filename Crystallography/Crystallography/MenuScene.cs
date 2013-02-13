@@ -23,7 +23,7 @@ namespace Crystallography
 			ImageBox ib = new ImageBox(); 
 			ib.Width = dialog.Width; 
 
-			ib.Image = new ImageAsset("/Application/assets/header.png"); 
+			ib.Image = new ImageAsset("/Application/assets/images/title.png"); 
 // started working out game logic in a seperate project Card Match Login
 			ib.Height = dialog.Height; 
 			ib.SetPosition(0.0f, 0.0f); 

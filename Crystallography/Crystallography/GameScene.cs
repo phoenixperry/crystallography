@@ -162,6 +162,7 @@ namespace Crystallography
             Vector2 dummy1 = new Vector2();
             Vector2 dummy2 = new Vector2();
             
+            
             //Update the physics simulation
             _physics.Simulate(-1,ref dummy1,ref dummy2);
             

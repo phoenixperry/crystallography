@@ -61,7 +61,7 @@ XDocument doc = XDocument.Parse(xml);
   {
    var spriteTile = new SpriteTile(_textureInfo);
    spriteTile.TileIndex2D = new Vector2i(x,y);
-   spriteTile.Quad.S = new Sce.PlayStation.Core.Vector2 (128,96);
+   spriteTile.Quad.S = new Sce.PlayStation.Core.Vector2 (168,146);
    return spriteTile;
   }
 		public Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile Get(string name) 
