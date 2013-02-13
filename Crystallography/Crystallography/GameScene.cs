@@ -23,6 +23,8 @@ namespace Crystallography
 		public bool WasTouch;
 		public bool IsTouch;
 		public Card SelectedCard;
+		public Card FirstAttachedCard;
+		public Card SecondAttachedCard;
 		public Vector2 TouchStart;
         
         // Change the following value to true if you want bounding boxes to be rendered
@@ -65,8 +67,6 @@ namespace Crystallography
 //			};
 			
 			
-            
-            
             // This is debug routine that will draw the physics bounding box around the players paddle
             if(DEBUG_BOUNDINGBOXS)
             {
@@ -151,10 +151,10 @@ namespace Crystallography
             if (touchData.Status == TouchStatus.Down ||
                 touchData.Status == TouchStatus.Move) {
 
-                int pointX = (int)((touchData.X + 0.5f) * 
-					                   Director.Instance.GL.Context.GetViewport().Width);
-                int pointY = (int)((touchData.Y + 0.5f) * Director.Instance.GL.Context.GetViewport().Height);
-				System.Console.WriteLine("pointX" + pointX + "pointY"+pointY); 
+//                int pointX = (int)((touchData.X + 0.5f) * 
+//					                   Director.Instance.GL.Context.GetViewport().Width);
+//                int pointY = (int)((touchData.Y + 0.5f) * Director.Instance.GL.Context.GetViewport().Height);
+//				System.Console.WriteLine("pointX" + pointX + "pointY"+pointY); 
                // this.FillCircle(colorTable[colorId], pointX, pointY, 96); --> this code lines graphics to location obvious 
             }
 			}
@@ -233,15 +233,50 @@ namespace Crystallography
                 				new Vector2(world.X,world.Y) / GamePhysics.PtoM;
 				}
 			}
+			// Drag
 			else if (IsTouch && WasTouch) {
 				if ( SelectedCard != null ) {
 					SelectedCard.physicsBody.Position = new Vector2(world.X,world.Y) / GamePhysics.PtoM;
 				}
 			}
-			
+			// Release
 			else if (SelectedCard != null && touch.Release) {
 				SelectedCard.physicsBody.Velocity = -moved.Normalize();
 				SelectedCard = null;
+				FirstAttachedCard = null;
+				SecondAttachedCard = null;
+			}
+			
+			if ( SelectedCard != null ) {
+				float distance;
+				float closestDistance = 0.0f;
+				Card closest = null;
+				foreach ( Card c in cards ) {
+					if ( c != null && c != SelectedCard && c != FirstAttachedCard && c != SecondAttachedCard) {
+						distance = Vector2.Distance(c.Position, SelectedCard.Position);
+						if (closestDistance == 0.0f || closestDistance > distance) {
+							closestDistance = distance;
+							closest = c;
+						}
+					}
+				}
+				System.Console.WriteLine("Distance: " + closestDistance);
+				if ( closestDistance < 50f ) {
+					if ( FirstAttachedCard == null ) {
+						System.Console.WriteLine ("Snap!");
+//						closest.physicsBody.Position = new Vector2(world.X-30f,world.Y-20f) / GamePhysics.PtoM;
+						FirstAttachedCard = closest;
+					} else {
+//						closest.physicsBody.Position = new Vector2(world.X+30f,world.Y-20f) / GamePhysics.PtoM;
+						SecondAttachedCard = closest;
+					}
+				}
+				if ( FirstAttachedCard != null ) {
+					FirstAttachedCard.physicsBody.Position = new Vector2(world.X-30f,world.Y-20f) / GamePhysics.PtoM;
+				}
+				if ( SecondAttachedCard != null ) {
+					SecondAttachedCard.physicsBody.Position = new Vector2(world.X+30f,world.Y-20f) / GamePhysics.PtoM;
+				}
 			}
 		}
 		
@@ -249,12 +284,10 @@ namespace Crystallography
 			foreach ( Card c in cards ) {
 				var halfDimensions = new Vector2(c.CalcSizeInPixels().X/2f, c.CalcSizeInPixels().Y/2f);
 				var lowerLeft = new Vector2(c.Position.X-halfDimensions.X, c.Position.Y+halfDimensions.Y);
-//				ball.CalcSizeInPixels().X;
 				var upperRight = new Vector2(c.Position.X+halfDimensions.X, c.Position.Y-halfDimensions.Y);
 			
 				if (position.X > lowerLeft.X && position.Y < lowerLeft.Y &&
 			    	position.X < upperRight.X && position.Y > upperRight.Y) {
-//					ball.Color = Colors.Grey05;
 					return c;
 				}
 			}

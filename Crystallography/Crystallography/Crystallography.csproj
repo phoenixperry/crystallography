@@ -61,12 +61,10 @@
   <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
   <ItemGroup>
     <Folder Include="assets\" />
-    <Folder Include="sound\" />
     <Folder Include="assets\sounds\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\header.png" />
-    <Content Include="sound\music_ingame.mp3" />
     <Content Include="assets\redTop.png" />
     <Content Include="assets\sounds\music_ingame.mp3" />
   </ItemGroup>
