@@ -20,7 +20,7 @@ namespace Crystallography
         {
             this.Camera.SetViewFromViewport();
 
-            _texture = new Texture2D("Application/assets/images/title.png",false);
+            _texture = new Texture2D("Application/assets/header.png",false);
 // started working out game logic in a seperate project Card Match Login
             _ti = new TextureInfo(_texture);
             SpriteUV titleScreen = new SpriteUV(_ti);
@@ -36,7 +36,7 @@ namespace Crystallography
             ActionManager.Instance.AddAction(tintAction,titleScreen);
             tintAction.Run();
 
-            _titleSong = new Bgm("/Application/assets/sounds/music_ingame.mp3");
+            _titleSong = new Bgm("/Application/sound/music_ingame.mp3");
 // started working out game logic in a seperate project Card Match Login
             
             if(_songPlayer != null)

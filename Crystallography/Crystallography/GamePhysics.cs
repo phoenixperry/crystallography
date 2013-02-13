@@ -56,31 +56,32 @@ namespace Crystallography
 			
 			
                 //create the ball physics object
-                
-                this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[0],0.1f);
-                this.SceneBodies[this.NumBody].ShapeIndex = 0;
-                this.sceneBodies[this.NumBody].ColFriction = 0.01f;
-                this.SceneBodies[this.NumBody].Position = new Vector2(_screenWidth/2,_screenHeight/2) / PtoM;
-                this.NumBody++;
+            System.Random rand = new System.Random();
+//			addCardPhysics (new Vector2(_screenWidth * (float)rand.NextDouble(), _screenHeight * (float)rand.NextDouble()));
+//                this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[0],0.1f);
+//                this.SceneBodies[this.NumBody].ShapeIndex = 0;
+//                this.sceneBodies[this.NumBody].ColFriction = 0.01f;
+//                this.SceneBodies[this.NumBody].Position = new Vector2(_screenWidth/2,_screenHeight/2) / PtoM;
+//                this.NumBody++;
                 
                 //Paddle shape --> this is where we need to plug in our diiferent types 
                 
                 
                 //Player paddle
-                this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[1],1.0f);
-                this.SceneBodies[this.NumBody].Position = new Vector2(-50f,-50f) / PtoM;
-                this.SceneBodies[this.NumBody].Rotation = 0;
-                this.SceneBodies[this.NumBody].ShapeIndex = 1;
-                this.NumBody++;
+//                this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[1],1.0f);
+//                this.SceneBodies[this.NumBody].Position = new Vector2(-50f,-50f) / PtoM;
+//                this.SceneBodies[this.NumBody].Rotation = 0;
+//                this.SceneBodies[this.NumBody].ShapeIndex = 1;
+//                this.NumBody++;
 			                 
                 //Ai paddle
-                this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[1],1.0f);
-                float aiX = (50f/PtoM);
-                float aiY = (-50f/ PtoM);
-                this.SceneBodies[this.NumBody].Position = new Vector2(aiX,aiY);
-                this.SceneBodies[this.NumBody].Rotation = 0;
-                this.SceneBodies[this.NumBody].ShapeIndex = 1;
-            	this.NumBody++;
+//                this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[1],1.0f);
+//                float aiX = (50f/PtoM);
+//                float aiY = (-50f/ PtoM);
+//                this.SceneBodies[this.NumBody].Position = new Vector2(aiX,aiY);
+//                this.SceneBodies[this.NumBody].Rotation = 0;
+//                this.SceneBodies[this.NumBody].ShapeIndex = 1;
+//            	this.NumBody++;
 			
                 //Now a shape for left and right bumpers to keep ball on screen
                 
@@ -119,5 +120,14 @@ namespace Crystallography
 				this.SceneBodies[this.NumBody].SetBodyStatic();
 				this.NumBody++;
             }
+		
+		public PhysicsBody addCardPhysics(Vector2 position) {
+			this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[0],0.1f);
+            this.SceneBodies[this.NumBody].ShapeIndex = 0;
+            this.sceneBodies[this.NumBody].ColFriction = 0.01f;
+            this.SceneBodies[this.NumBody].Position = position / PtoM;
+            this.NumBody++;
+			return SceneBodies[this.NumBody-1];
+		}
         }
     }	
