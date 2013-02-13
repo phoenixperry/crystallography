@@ -1,0 +1,17 @@
+﻿<Properties GitUserInfo="UsingGIT">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Crystallography\TitleScene.cs">
+    <Files>
+      <File FileName="Crystallography\AppMain.cs" Line="5" Column="26" />
+      <File FileName="Crystallography\TitleScene.cs" Line="32" Column="31" />
+      <File FileName="Crystallography\GameScene.cs" Line="101" Column="40" />
+      <File FileName="Crystallography\Card.cs" Line="43" Column="57" />
+      <File FileName="Crystallography\GamePhysics.cs" Line="43" Column="60" />
+      <File FileName="Crystallography\MenuScene.cs" Line="25" Column="51" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
