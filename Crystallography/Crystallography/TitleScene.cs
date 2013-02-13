@@ -53,7 +53,8 @@ namespace Crystallography
         public override void OnEnter ()
         {
             _songPlayer.Loop = true;
-            _songPlayer.Play();
+            _songPlayer.Volume = 0.2f;
+			_songPlayer.Play();
         }
         public override void OnExit ()
         {
