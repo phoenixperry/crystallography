@@ -28,6 +28,11 @@ namespace Crystallography
 		public Card FirstAttachedCard;
 		public Card SecondAttachedCard;
 		public Vector2 TouchStart;
+		
+		//singleton vars 
+		private SpriteSingleton instance; 
+		private SpriteTile spriteTile; 
+		private string spriteName; 
         
         // Change the following value to true if you want bounding boxes to be rendered
         private static Boolean DEBUG_BOUNDINGBOXS = true;
@@ -37,7 +42,13 @@ namespace Crystallography
             this.Camera.SetViewFromViewport();
             _physics = new GamePhysics();
 
-            
+            		instance = SpriteSingleton.getInstance(); 
+			setFace(); 
+			spriteTile = instance.Get (spriteName); 
+			spriteTile.Position = new Vector2(100.0f, 100.0f); 
+			this.AddChild(spriteTile); 
+			setColor(); 			
+				
 //            ball = new Card(_physics.SceneBodies[(int)GamePhysics.BODIES.Ball]);
 //            _player = new Paddle(Paddle.PaddleType.PLAYER, 
 //                                 _physics.SceneBodies[(int)GamePhysics.BODIES.Player]);
@@ -333,6 +344,45 @@ namespace Crystallography
 			}
 			return null;                            
 		}
+		 		private void setColor() {
+ 			System.Random rand = new System.Random(); 
+ 			switch(rand.Next(1,4)) 
+ 			{
+ 				case 1: 
+ 				//pink
+ 					spriteTile.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 
+ 					break;
+ 				case 2:
+ 				//red 
+ 					spriteTile.RunAction(new TintTo (new Vector4(0.90f,0.075f,0.075f,1.0f),0.1f)); 
+ 					break;
+ 				case 3: 	
+ 				//teal
+ 					spriteTile.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 	
+ 					break; 
+ 				default:
+ 					break; 
+ 			}
+ 		}
+ 		
+ 		public void setFace() {
+ 			System.Random rand = new System.Random();
+ 			switch(rand.Next(1,4))
+ 				{
+ 					case 1:
+ 						spriteName = "leftSide";
+ 						break;
+ 					case 2:
+ 						spriteName = "rightSide";
+ 						break;
+ 					case 3:
+ 						spriteName = "topSide";
+ 						break;
+ 					default:
+ 					break;
+ 		}
+ 		}			
+
 		
         ~GameScene(){
            // _pongBlipSoundPlayer.Dispose();

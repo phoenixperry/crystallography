@@ -9,6 +9,8 @@ namespace Crystallography
 {
     public class Card : SpriteUV
     {
+
+
         private PhysicsBody _physicsBody;
         // Change this value to make the game faster or slower
         public const float BALL_VELOCITY = 1.0f;
@@ -17,6 +19,7 @@ namespace Crystallography
         
         public Card (PhysicsBody physicsBody)
         {
+		
             _physicsBody = physicsBody;
             
 			groupID = -1;
