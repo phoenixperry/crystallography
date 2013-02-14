@@ -21,9 +21,9 @@ namespace Crystallography
             
 			groupID = -1;
 			
-            this.TextureInfo = new TextureInfo(new Texture2D("Application/assets/images/topSide.png", false));
-            this.Scale = this.TextureInfo.TextureSizef/4f;
-            this.Pivot = new Sce.PlayStation.Core.Vector2(0.5f,0.5f);
+//            this.TextureInfo = new TextureInfo(new Texture2D("Application/assets/images/topSide.png", false));
+//            this.Scale = this.TextureInfo.TextureSizef/4f;
+//            this.Pivot = new Sce.PlayStation.Core.Vector2(0.5f,0.5f);
 			
 			
 			System.Random rand = new System.Random();
