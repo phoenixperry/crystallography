@@ -7,18 +7,20 @@ using Sce.PlayStation.HighLevel.Physics2D;
 
 namespace Crystallography
 {
-    public class Card : SpriteUV
+    public class Card : SpriteTile
     {
-		//singleton vars 
-		private SpriteSingleton instance; 
-		private SpriteTile spriteTile; 
-		private string spriteName; 
+		//singleton vars
+		private SpriteSingleton instance;
+		private SpriteTile spriteTile;
+		private string spriteName;
 
 
         private PhysicsBody _physicsBody;
+		private static SpriteSingleton _ss = SpriteSingleton.getInstance();
+//		private SpriteSingleton _ss;
         // Change this value to make the game faster or slower
         public const float BALL_VELOCITY = 1.0f;
-		
+
 		public int groupID;
         
         public Card (PhysicsBody physicsBody)
@@ -27,17 +29,19 @@ namespace Crystallography
 			setFace(); 
 			spriteTile = instance.Get (spriteName); 
 			spriteTile.Position = new Vector2(10.0f, 10.0f); 
-			this.AddChild(spriteTile); 
+			this.AddChild(spriteTile);
 			setColor(); 	
 			spriteTile.Position = new Vector2(50.0f, 50.0f);
 		
             _physicsBody = physicsBody;
+//			_ss = SpriteSingleton.getInstance();
+            
 			groupID = -1;
-			
-			
-//just changed 
-            this.TextureInfo = new TextureInfo(new Texture2D("Application/assets/images/topSide.png", false));
-            this.Scale = this.TextureInfo.TextureSizef/4f;
+			this.TextureInfo = _ss.Get ("topSide").TextureInfo;
+			this.TileIndex2D = _ss.Get ("topSide").TileIndex2D;
+//            this.TextureInfo = new TextureInfo(new Texture2D("Application/assets/images/topSide.png", false));
+//            this.Scale = this.TextureInfo.TextureSizef/4f;
+			this.Scale = this.CalcSizeInPixels()/4f;
             this.Pivot = new Sce.PlayStation.Core.Vector2(0.5f,0.5f);
 			
 			
@@ -114,7 +118,7 @@ namespace Crystallography
  					spriteTile.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 
  					break;
  				case 2:
- 				//red 
+ 				//red
  					spriteTile.RunAction(new TintTo (new Vector4(0.90f,0.075f,0.075f,1.0f),0.1f)); 
  					break;
  				case 3: 	

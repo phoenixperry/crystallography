@@ -70,19 +70,12 @@
     <Folder Include="assets\images\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\redTop.png" />
     <Content Include="assets\sounds\music_ingame.mp3" />
-    <Content Include="assets\images\title.png" />
-    <Content Include="assets\images\rightSide.png" />
-    <Content Include="assets\images\topSide.png" />
     <Content Include="assets\images\leftSide.png" />
-    <Content Include="assets\images\gamePieces.png">
-      <Link>gamePieces.png</Link>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\images\gamePieces.xml">
-      <Link>gamePieces.xml</Link>
-    </None>
+    <Content Include="assets\images\rightSide.png" />
+    <Content Include="assets\images\title.png" />
+    <Content Include="assets\images\topSide.png" />
+    <Content Include="assets\images\gamePieces.png" />
+    <Content Include="assets\images\gamePieces.xml" />
   </ItemGroup>
 </Project>

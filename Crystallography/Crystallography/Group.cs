@@ -14,54 +14,96 @@ namespace Crystallography
 		
 		private Texture2D[] _textures;
 		private TextureInfo[] _tis;
-		private SpriteUV[] _sprites;
-		private PhysicsBody _physicsBody;
+		private SpriteTile[] _sprites;
+		private static SpriteSingleton _ss = SpriteSingleton.getInstance();
+		private int _population;
+//		private PhysicsBody _physicsBody;
 		
 		public enum POSITIONS {Top = 0, Left, Right};
 		
-		public Group(PhysicsBody physicsBody)
+		public Group(PhysicsBody physicsBody=null)
 		{
-			_physicsBody = physicsBody;
+//			_physicsBody = physicsBody;
 			
 			cards = new Card[3];
 			
-			_textures = new Texture2D[3];
-			_tis = new TextureInfo[3];
-			_sprites = new SpriteUV[3];
+//			_textures = new Texture2D[3];
+//			_tis = new TextureInfo[3];
+//			_sprites = new SpriteTile[3];
+			_population = 0;
 			
-			_textures[0] = new Texture2D("Application/assets/images/topSide.png", false);
-			_textures[1] = new Texture2D("Application/assets/images/leftSide.png", false);
-			_textures[2] = new Texture2D("Application/assets/images/rightSide.png", false);
+//			_textures[0] = new Texture2D("Application/assets/images/topSide.png", false);
+//			_textures[1] = new Texture2D("Application/assets/images/leftSide.png", false);
+//			_textures[2] = new Texture2D("Application/assets/images/rightSide.png", false);
 			
-			for (int i=0; i<3; i++) {
-				_tis[i] = new TextureInfo(_textures[i]);
-				_sprites[i] = new SpriteUV(_tis[i]);
-				_sprites[i].Scale = _tis[i].TextureSizef/4f;
-				_sprites[i].Pivot = new Vector2(0.5f, 0.5f);
-				_sprites[i].Visible = false;
-				this.AddChild(_sprites[i]);
-			}
-			_sprites[0].Position = new Vector2(0f,0f);
-			_sprites[1].Position = new Vector2(-12f,-18f);
-			_sprites[2].Position = new Vector2(10f,-18f);
+//			_sprites[0] = _ss.Get("topSide");
+//			_sprites[1] = _ss.Get("leftSide");
+//			_sprites[2] = _ss.Get("rightSide");
+			
+//			for (int i=0; i<3; i++) {
+//				_tis[i] = new TextureInfo(_textures[i]);
+//				_sprites[i] = new SpriteUV(_tis[i]);
+//				_sprites[i].Scale = _sprites[i].CalcSizeInPixels()/4f;
+//				_sprites[i].Pivot = new Vector2(0.5f, 0.5f);
+//				_sprites[i].Visible = false;
+//				this.AddChild(_sprites[i]);
+//			}
+//			_sprites[0].Position = new Vector2(0f,0f);
+//			_sprites[1].Position = new Vector2(-12f,-18f);
+//			_sprites[2].Position = new Vector2(10f,-18f);
 			
 			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
 		}
 		
-		public void addCard (Card card)
+		public void tryAddingCard (Card card)
+		{
+			// Filter out current group members
+			if (Array.IndexOf(cards,card) != -1) {
+				return;
+			}
+			if ( card.groupID != -1) {
+				Group g = GameScene.groups[card.groupID];
+				if (g != this && Array.IndexOf(g.cards,card) != -1) {
+					if (g.population >= 2 ) {
+						// Filter out 2-groups merging with 2-groups
+						if (this.population >= 2) {
+							return;
+						// Add single entity to existing group of 2
+						} else {
+							card = cards[0];
+							clearGroup();
+							g.tryAddingCard(card);
+							return;
+						}
+					}
+				}
+			}
+			addCard(card);
+		}
+		
+		private void addCard (Card card)
 		{
 			for (int i=0; i<3; i++) {
 				if ( cards[i] == null ) {
 					cards[i] = card;
-//					Director.Instance.CurrentScene.RemoveChild(card,false);
-//					card.physicsBody.Sleep = true;
-//					card.physicsBody.CollisionFilter = (1 << 1);
-					card.TextureInfo = _tis[i];
-//					_sprites[i].Color = card.Color;
-//					_sprites[i].Visible = true;
+					switch(i) {
+						case 0:	
+							card.TileIndex2D = _ss.Get("topSide").TileIndex2D;
+							break;
+						case 1:
+							card.TileIndex2D = _ss.Get ("leftSide").TileIndex2D;
+							break;
+						case 2:
+							card.TileIndex2D = _ss.Get ("rightSide").TileIndex2D;
+							break;
+						default:
+							break;
+					}
 					if (i==2) {
 						complete = true;
 					}
+					card.groupID = cards[0].groupID;
+					_population++;
 					return;
 				}
 			}
@@ -72,13 +114,16 @@ namespace Crystallography
 			for (int i=0; i<3; i++) {
 				if ( cards[i] == card ) {
 					card.groupID = -1;
+					card.TileIndex2D = _ss.Get ("topSide").TileIndex2D;
 					cards[i] = null;
+					_population--;
 				}
 			}
 		}
 		
 		public void clearGroup()
 		{
+			complete = false;
 			for (int i=0; i<3; i++) {
 				if ( cards[i] != null ) {
 					removeCard (cards[i]);
@@ -86,9 +131,30 @@ namespace Crystallography
 			}
 		}
 		
+		public void analyze()
+		{
+			bool match = true;
+			if( cards[0].Color == cards[1].Color && cards[0].Color == cards[2].Color ) {
+//				return match;
+			} else {
+				match = ( cards[0].Color != cards[1].Color && 
+				          cards[0].Color != cards[2].Color && 
+				          cards[1].Color != cards[2].Color );
+//				return match;
+			}
+			if (match) {
+				System.Console.WriteLine("SET!");
+			}
+			clearGroup();
+		}
+		
+		public int population {
+			get { return _population; }
+		}
+		
 		public override void Update(float dt)
 		{
-			this.Position = _physicsBody.Position * GamePhysics.PtoM;
+//			this.Position = _physicsBody.Position * GamePhysics.PtoM;
 			base.Update (dt);
 			
 		}
