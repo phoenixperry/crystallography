@@ -26,11 +26,16 @@ namespace CardMatchLogic
 				_card3 =s; 
 			}
 			public bool testCube(){
-				if((_card1 != _card2 && _card1 != _card3) || 
+				if((_card1 != _card2 && _card1 != _card3 && _card2 != _card3) || 
 			   (_card1 == _card2 && _card1== _card3)){
+					Console.WriteLine("it's a cube"); 
 					return true;
+		
 				}
-				else{return false;} 
+				else{
+					Console.WriteLine("not a cube"); 
+					return false;} 
+					
 			}
 	
 	}

@@ -53,10 +53,10 @@ namespace CardMatchLogic
 			//sprite.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 	
 
 			var cube = new Cube(); 
-			cube.card1("r"); 
-			cube.card2 ("b"); 
-			cube.card3("p"); 
-			
+			cube.card1("red"); 
+			cube.card2 ("blue"); 
+			cube.card3("blue"); 
+		
 				while(!Input2.GamePad0.Cross.Press) 
 			{	
 				Sce.PlayStation.Core.Environment.SystemEvents.CheckEvents(); 
@@ -64,6 +64,7 @@ namespace CardMatchLogic
 				Director.Instance.Render(); 
 				Director.Instance.GL.Context.SwapBuffers(); 
 				Director.Instance.PostSwap();
+					cube.testCube(); 
 			
 			}
 		}
