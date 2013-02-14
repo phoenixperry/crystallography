@@ -32,10 +32,9 @@ namespace CardMatchLogic
 			
 			cubeFaces = new SpriteSingleton(); 
 			cubeFaces = SpriteSingleton.getInstance(); 
-			sprite = cubeFaces.Get("rightSide"); 
+			sprite = cubeFaces.Get("leftSide"); 
 		
-			sprite.Position = scene.Camera.CalcBounds().Center; 
-
+			sprite.Position = scene.Camera.CalcBounds().Center;
 			sprite.CenterSprite(); 
 			//sprite.Scale = new Vector2(1,1); 
 			scene.AddChild(sprite); 
@@ -43,20 +42,23 @@ namespace CardMatchLogic
 	
   		 Director.Instance.RunWithScene(scene,true);
 			//pink 
-			//sprite.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,0.96f),0.1f)); 	
+			sprite.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 	
+			//red 
+			//sprite.RunAction(new TintTo (new Vector4(0.90f,0.075f,0.075f,1.0f),0.1f)); 
 			
+			var spriteName="leftSide"; 
+			sprite.TileIndex2D = cubeFaces.Get (spriteName).TileIndex2D;
+			Console.WriteLine(sprite.TileIndex2D);
+			//teal 
+			//sprite.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 	
+
 			var cube = new Cube(); 
 			cube.card1("r"); 
 			cube.card2 ("b"); 
 			cube.card3("p"); 
-		var spriteName="rightSide"; 
 			
 				while(!Input2.GamePad0.Cross.Press) 
-			{
-				  sprite.TileIndex2D = cubeFaces.Get (spriteName).TileIndex2D;
-			Console.WriteLine(sprite.TileIndex2D);
-        	sprite.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 	
-	
+			{	
 				Sce.PlayStation.Core.Environment.SystemEvents.CheckEvents(); 
 				Director.Instance.Update(); 
 				Director.Instance.Render(); 
