@@ -30,9 +30,9 @@ namespace Crystallography
 		public Vector2 TouchStart;
 		
 		//singleton vars 
-		private SpriteSingleton instance; 
-		private SpriteTile spriteTile; 
-		private string spriteName; 
+//		private SpriteSingleton instance; 
+//		private SpriteTile spriteTile; 
+//		private string spriteName; 
         
         // Change the following value to true if you want bounding boxes to be rendered
         private static Boolean DEBUG_BOUNDINGBOXS = true;
@@ -42,12 +42,14 @@ namespace Crystallography
             this.Camera.SetViewFromViewport();
             _physics = new GamePhysics();
 
-            		instance = SpriteSingleton.getInstance(); 
-			setFace(); 
-			spriteTile = instance.Get (spriteName); 
-			spriteTile.Position = new Vector2(100.0f, 100.0f); 
-			this.AddChild(spriteTile); 
-			setColor(); 			
+//            instance = SpriteSingleton.getInstance(); 
+//			setFace(); 
+//			spriteTile = instance.Get (spriteName); 
+//			instance = SpriteSingleton.getInstance(); 
+//			spriteTile = instance.Get ("topSide"); 
+//			spriteTile.Position = new Vector2(100.0f, 100.0f); 
+//			this.AddChild(spriteTile); 
+//			setColor(); 			
 				
 //            ball = new Card(_physics.SceneBodies[(int)GamePhysics.BODIES.Ball]);
 //            _player = new Paddle(Paddle.PaddleType.PLAYER, 
@@ -58,9 +60,9 @@ namespace Crystallography
 			
             var _screenWidth = Director.Instance.GL.Context.GetViewport().Width;
             var _screenHeight = Director.Instance.GL.Context.GetViewport().Height;
-			cards = new Card[20];
 			System.Random rand = new System.Random();
 			
+			cards = new Card[20];
 			for (int i = 0; i < 20; i++) {
 //				cards[i] = new Card(_physics.SceneBodies[(int)GamePhysics.BODIES.Ball]);
 				cards[i] = new Card(_physics.addCardPhysics(new Vector2(50f + 0.75f * _screenWidth * (float)rand.NextDouble(), 50f + 0.75f * _screenHeight * (float)rand.NextDouble ())));
@@ -83,10 +85,10 @@ namespace Crystallography
 				this.AddChild (cards[i]);
 			}
 			
-			groups = new Group[1];
+			groups = new Group[20];
 			
-			for (int i=0; i<1; i++) {
-				groups[i] = new Group(_physics.addGroupPhysics(new Vector2(400f,400f)));
+			for (int i=0; i<20; i++) {
+				groups[i] = new Group();//_physics.addGroupPhysics(new Vector2(400f,400f)));
 //				this.AddChild (groups[i]);
 			}
 				
@@ -268,8 +270,11 @@ namespace Crystallography
 					SelectedCard = card;
 					SelectedCard.physicsBody.Position = 
                 				new Vector2(world.X,world.Y) / GamePhysics.PtoM;
-					SelectedCard.groupID = Array.FindIndex(groups, IsGroupFree);
-					groups[SelectedCard.groupID].addCard(SelectedCard);
+					// Start new group if necessary
+					if (SelectedCard.groupID == -1 ) {
+						SelectedCard.groupID = Array.FindIndex(groups, IsGroupFree);
+						groups[SelectedCard.groupID].tryAddingCard(SelectedCard);
+					}
 				}
 			}
 			// Drag
@@ -280,10 +285,13 @@ namespace Crystallography
 			}
 			// Release
 			else if (SelectedCard != null && touch.Release) {
-				SelectedCard.physicsBody.Velocity = -moved.Normalize();
+//				SelectedCard.physicsBody.Velocity = -moved.Normalize();
 				Group g = groups[SelectedCard.groupID];
-				g.clearGroup();
-				Array.Clear(g.cards,0,g.cards.Length);
+				if (g.complete) {
+					g.analyze();
+				}
+//				g.clearGroup();
+//				Array.Clear(g.cards,0,g.cards.Length);
 				SelectedCard = null;
 				FirstAttachedCard = null;
 				SecondAttachedCard = null;
@@ -302,21 +310,18 @@ namespace Crystallography
 						}
 					}
 				}
-				System.Console.WriteLine("Distance: " + closestDistance);
+//				System.Console.WriteLine("Distance: " + closestDistance);
 				if ( closestDistance < 50f ) {
 					if ( FirstAttachedCard == null ) {
-						System.Console.WriteLine ("Snap!");
-//						closest.physicsBody.Position = new Vector2(world.X-30f,world.Y-20f) / GamePhysics.PtoM;
 						FirstAttachedCard = closest;
-						FirstAttachedCard.groupID = SelectedCard.groupID;
-						groups[SelectedCard.groupID].addCard(closest);
+//						FirstAttachedCard.groupID = SelectedCard.groupID;
+						groups[SelectedCard.groupID].tryAddingCard(closest);
 					} else if ( SecondAttachedCard == null ) {
-//						closest.physicsBody.Position = new Vector2(world.X+30f,world.Y-20f) / GamePhysics.PtoM;
 						SecondAttachedCard = closest;
-						SecondAttachedCard.groupID = SelectedCard.groupID;
-						groups[SelectedCard.groupID].addCard (closest);
-//						groups[0].addCard (closest);
+//						SecondAttachedCard.groupID = SelectedCard.groupID;
+						groups[SelectedCard.groupID].tryAddingCard (closest);
 					}
+					SelectedCard = groups[SelectedCard.groupID].cards[0];
 				}
 //				if ( FirstAttachedCard != null ) {
 //					FirstAttachedCard.physicsBody.Position = new Vector2(world.X-12f,world.Y-18f) / GamePhysics.PtoM;
@@ -344,44 +349,44 @@ namespace Crystallography
 			}
 			return null;                            
 		}
-		 		private void setColor() {
- 			System.Random rand = new System.Random(); 
- 			switch(rand.Next(1,4)) 
- 			{
- 				case 1: 
- 				//pink
- 					spriteTile.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 
- 					break;
- 				case 2:
- 				//red 
- 					spriteTile.RunAction(new TintTo (new Vector4(0.90f,0.075f,0.075f,1.0f),0.1f)); 
- 					break;
- 				case 3: 	
- 				//teal
- 					spriteTile.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 	
- 					break; 
- 				default:
- 					break; 
- 			}
- 		}
+//		 		private void setColor() {
+// 			System.Random rand = new System.Random(); 
+// 			switch(rand.Next(1,4)) 
+// 			{
+// 				case 1: 
+// 				//pink
+// 					spriteTile.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 
+// 					break;
+// 				case 2:
+// 				//red 
+// 					spriteTile.RunAction(new TintTo (new Vector4(0.90f,0.075f,0.075f,1.0f),0.1f)); 
+// 					break;
+// 				case 3: 	
+// 				//teal
+// 					spriteTile.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 	
+// 					break; 
+// 				default:
+// 					break; 
+// 			}
+// 		}
  		
- 		public void setFace() {
- 			System.Random rand = new System.Random();
- 			switch(rand.Next(1,4))
- 				{
- 					case 1:
- 						spriteName = "leftSide";
- 						break;
- 					case 2:
- 						spriteName = "rightSide";
- 						break;
- 					case 3:
- 						spriteName = "topSide";
- 						break;
- 					default:
- 					break;
- 		}
- 		}			
+// 		public void setFace() {
+// 			System.Random rand = new System.Random();
+// 			switch(rand.Next(1,4))
+// 				{
+// 					case 1:
+// 						spriteName = "leftSide";
+// 						break;
+// 					case 2:
+// 						spriteName = "rightSide";
+// 						break;
+// 					case 3:
+// 						spriteName = "topSide";
+// 						break;
+// 					default:
+// 					break;
+// 		}
+// 		}			
 
 		
         ~GameScene(){

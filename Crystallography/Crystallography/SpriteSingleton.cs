@@ -13,9 +13,9 @@ namespace Crystallography
 	public class SpriteSingleton
  {
  
-  private TextureInfo _textureInfo;
-  private Texture2D _texture;
-  private System.Collections.Generic.Dictionary<string, Sce.PlayStation.HighLevel.GameEngine2D.Base.Vector2i> _sprites;
+  public TextureInfo _textureInfo;
+  public Texture2D _texture;
+  private System.Collections.Generic.Dictionary<string, Sce.PlayStation.HighLevel.GameEngine2D.Base.Vector2i> _sprites;  
   private static SpriteSingleton instance; 
   private static bool isOkToCreate = false; 	
 public static int test=0; 

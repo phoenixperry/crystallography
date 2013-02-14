@@ -9,6 +9,10 @@ namespace Crystallography
 {
     public class Card : SpriteUV
     {
+		//singleton vars 
+		private SpriteSingleton instance; 
+		private SpriteTile spriteTile; 
+		private string spriteName; 
 
 
         private PhysicsBody _physicsBody;
@@ -19,11 +23,19 @@ namespace Crystallography
         
         public Card (PhysicsBody physicsBody)
         {
+			instance = SpriteSingleton.getInstance(); 
+			setFace(); 
+			spriteTile = instance.Get (spriteName); 
+			spriteTile.Position = new Vector2(10.0f, 10.0f); 
+			this.AddChild(spriteTile); 
+			setColor(); 	
+			spriteTile.Position = new Vector2(50.0f, 50.0f);
 		
             _physicsBody = physicsBody;
-            
 			groupID = -1;
 			
+			
+//just changed 
             this.TextureInfo = new TextureInfo(new Texture2D("Application/assets/images/topSide.png", false));
             this.Scale = this.TextureInfo.TextureSizef/4f;
             this.Pivot = new Sce.PlayStation.Core.Vector2(0.5f,0.5f);
@@ -58,10 +70,7 @@ namespace Crystallography
 		
         public override void Update (float dt)
         {
-
-            
-			
-			// Ungrouped
+	// Ungrouped
             if ( groupID == -1 ) {
             	standardMovement ();
 			// Grouped
@@ -96,6 +105,44 @@ namespace Crystallography
             // Otherwise the ball could get faster and faster ( or slower ) on each collision
             _physicsBody.Velocity = normalizedVel * BALL_VELOCITY;
 		}
+				 		private void setColor() {
+ 			System.Random rand = new System.Random(); 
+ 			switch(rand.Next(1,4)) 
+ 			{
+ 				case 1: 
+ 				//pink
+ 					spriteTile.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 
+ 					break;
+ 				case 2:
+ 				//red 
+ 					spriteTile.RunAction(new TintTo (new Vector4(0.90f,0.075f,0.075f,1.0f),0.1f)); 
+ 					break;
+ 				case 3: 	
+ 				//teal
+ 					spriteTile.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 	
+ 					break; 
+ 				default:
+ 					break; 
+ 			}
+ 		}
+ 		
+ 		public void setFace() {
+ 			System.Random rand = new System.Random();
+ 			switch(rand.Next(1,4))
+ 				{
+ 					case 1:
+ 						spriteName = "leftSide";
+ 						break;
+ 					case 2:
+ 						spriteName = "rightSide";
+ 						break;
+ 					case 3:
+ 						spriteName = "topSide";
+ 						break;
+ 					default:
+ 					break;
+ 		}
+ 		}		
 		
         ~Card()
         {
