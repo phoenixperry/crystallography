@@ -42,10 +42,12 @@ namespace CardMatchLogic
 		     };
 		   
 		   _sprites = new Dictionary<string,Sce.PlayStation.HighLevel.GameEngine2D.Base.Vector2i>(); 
-		    foreach(var curLine in lines)
+		   
+			foreach(var curLine in lines)
 			{
 		   // _sprites.Add(curLine.Name,new Vector2i((curLine.X1/curLine.Width),2-(curLine.Y1/curLine.Height)));
 			_sprites.Add(curLine.Name, new Vector2i(curLine.X1, curLine.Y1)); 
+			Console.WriteLine(curLine.Name + "was addded to the dictionary"); 
 		   }
 		   _texture = new Texture2D("/Application/assets/gamePieces.png", false);
 		   _textureInfo = new TextureInfo(_texture,new Vector2i(3,1));
@@ -58,8 +60,10 @@ namespace CardMatchLogic
 }			
   ~SpriteSingleton()
   {
+	Console.WriteLine("dispose"); 
    _texture.Dispose();
    _textureInfo.Dispose ();
+	
   }
   public static SpriteSingleton getInstance(){
 			if(instance==null){
@@ -80,7 +84,10 @@ namespace CardMatchLogic
   }
 		public Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile Get(string name) 
 		{
-			return Get (_sprites[name].X, _sprites[name].Y); 
+			var _name = name; 
+			Console.WriteLine("this is what is passed" + _name + _sprites[_name].X); 
+			return Get (_sprites[_name].X, _sprites[_name].X); 
+		
 		
 		}
 		}
