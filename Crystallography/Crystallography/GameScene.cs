@@ -21,9 +21,6 @@ namespace Crystallography
     	private SoundPlayer _pongBlipSoundPlayer;
    		private Sound _pongSound;
 		
-		private SpriteSingleton instance; 
-		private SpriteTile spriteTile; 
-		private string spriteName; 
 		
 		public bool WasTouch;
 		public bool IsTouch;
@@ -37,16 +34,9 @@ namespace Crystallography
         
         public GameScene ()
         {
-			instance = SpriteSingleton.getInstance(); 
-			setFace(); 
-			spriteTile = instance.Get (spriteName); 
-			spriteTile.Position = new Vector2(100.0f, 100.0f); 
-			this.AddChild(spriteTile); 
-			setColor(); 			
-				
             this.Camera.SetViewFromViewport();
             _physics = new GamePhysics();
-			
+
             
 //            ball = new Card(_physics.SceneBodies[(int)GamePhysics.BODIES.Ball]);
 //            _player = new Paddle(Paddle.PaddleType.PLAYER, 
@@ -61,16 +51,6 @@ namespace Crystallography
 			System.Random rand = new System.Random();
 			
 			for (int i = 0; i < 20; i++) {
-			instance = SpriteSingleton.getInstance(); 
-			setFace(); 
-			spriteTile = instance.Get (spriteName); 
-			spriteTile.Position = new Vector2(100.0f+i, 100.0f+i); 
-			this.AddChild(spriteTile); 
-			setColor(); 	
-			//all of the transforms now need to be applied to the sprite tile!  Must all be refractored 
-				
-//			spriteTile.Scale = this.TextureInfo.TextureSizef/4f;
-//            this.Pivot = new Sce.PlayStation.Core.Vector2(0.5f,0.5f);	
 //				cards[i] = new Card(_physics.SceneBodies[(int)GamePhysics.BODIES.Ball]);
 				cards[i] = new Card(_physics.addCardPhysics(new Vector2(50f + 0.75f * _screenWidth * (float)rand.NextDouble(), 50f + 0.75f * _screenHeight * (float)rand.NextDouble ())));
 				switch(rand.Next(1,4))
@@ -354,44 +334,6 @@ namespace Crystallography
 			return null;                            
 		}
 		
-		private void setColor() {
-			System.Random rand = new System.Random(); 
-			switch(rand.Next(1,4)) 
-			{
-				case 1: 
-				//pink
-					spriteTile.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 
-					break;
-				case 2:
-				//red 
-					spriteTile.RunAction(new TintTo (new Vector4(0.90f,0.075f,0.075f,1.0f),0.1f)); 
-					break;
-				case 3: 	
-				//teal
-					spriteTile.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 	
-					break; 
-				default:
-					break; 
-			}
-		}
-		
-		public void setFace() {
-			System.Random rand = new System.Random();
-			switch(rand.Next(1,4))
-				{
-					case 1:
-						spriteName = "leftSide";
-						break;
-					case 2:
-						spriteName = "rightSide";
-						break;
-					case 3:
-						spriteName = "topSide";
-						break;
-					default:
-					break;
-		}
-		}			
         ~GameScene(){
            // _pongBlipSoundPlayer.Dispose();
         }
