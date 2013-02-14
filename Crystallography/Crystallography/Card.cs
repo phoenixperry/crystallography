@@ -7,11 +7,13 @@ using Sce.PlayStation.HighLevel.Physics2D;
 
 namespace Crystallography
 {
-    public class Card : SpriteUV
+    public class Card : SpriteTile
     {
 
 
         private PhysicsBody _physicsBody;
+		private static SpriteSingleton _ss = SpriteSingleton.getInstance();
+//		private SpriteSingleton _ss;
         // Change this value to make the game faster or slower
         public const float BALL_VELOCITY = 1.0f;
 		
@@ -21,11 +23,14 @@ namespace Crystallography
         {
 		
             _physicsBody = physicsBody;
+//			_ss = SpriteSingleton.getInstance();
             
 			groupID = -1;
-			
-            this.TextureInfo = new TextureInfo(new Texture2D("Application/assets/images/topSide.png", false));
-            this.Scale = this.TextureInfo.TextureSizef/4f;
+			this.TextureInfo = _ss.Get ("topSide").TextureInfo;
+			this.TileIndex2D = _ss.Get ("topSide").TileIndex2D;
+//            this.TextureInfo = new TextureInfo(new Texture2D("Application/assets/images/topSide.png", false));
+//            this.Scale = this.TextureInfo.TextureSizef/4f;
+			this.Scale = this.CalcSizeInPixels()/4f;
             this.Pivot = new Sce.PlayStation.Core.Vector2(0.5f,0.5f);
 			
 			
