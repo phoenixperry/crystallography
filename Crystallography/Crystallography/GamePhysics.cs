@@ -129,5 +129,14 @@ namespace Crystallography
             this.NumBody++;
 			return SceneBodies[this.NumBody-1];
 		}
-        }
-    }	
+		
+		public PhysicsBody addGroupPhysics(Vector2 position) {
+			this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[0],0.1f);
+            this.SceneBodies[this.NumBody].ShapeIndex = 0;
+            this.sceneBodies[this.NumBody].ColFriction = 0.01f;
+            this.SceneBodies[this.NumBody].Position = position / PtoM;
+            this.NumBody++;
+			return SceneBodies[this.NumBody-1];
+		}
+    }
+}	
