@@ -54,7 +54,6 @@
     <Compile Include="Cube.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="SpriteSingleton.cs" />
-    <Compile Include="CardTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
