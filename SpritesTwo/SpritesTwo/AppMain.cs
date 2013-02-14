@@ -20,6 +20,7 @@ namespace SpriteSheet
    Director.Instance.GL.Context.SetClearColor(255,255,255,0);
 
    walker = new Walker("walk.png","walk.xml");
+		Console.WriteLine("made"); 
    
    var scene = new Scene();
    scene.Camera.SetViewFromViewport();

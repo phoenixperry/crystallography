@@ -24,47 +24,76 @@ namespace CardMatchLogic
   public SpriteSingleton ()
   {
 	if(isOkToCreate){
-		FileStream fileStream = File.OpenRead( "/Application/assets/gamePieces.xml");
-		StreamReader fileStreamReader = new StreamReader(fileStream);
-		string xml = fileStreamReader.ReadToEnd();
-		fileStreamReader.Close();
-		fileStream.Close();
-		XDocument doc = XDocument.Parse(xml);
+//		FileStream fileStream = File.OpenRead( "/Application/assets/gamePieces.xml");
+//		StreamReader fileStreamReader = new StreamReader(fileStream);
+//		string xml = fileStreamReader.ReadToEnd();
+//		fileStreamReader.Close();
+//		fileStream.Close();
+//		XDocument doc = XDocument.Parse(xml);
+//
+//			var lines = from sprite in doc.Root.Elements("sprite")
+//			select new
+//		     {
+//		      Name = sprite.Attribute("n").Value,
+//		      X1 = (int)sprite.Attribute ("x"),
+//		      Y1 = (int)sprite.Attribute ("y"),
+//		      Height = (int)sprite.Attribute ("h"),
+//		      Width = (int)sprite.Attribute("w")
+//		     };
+//
+//		   _sprites = new Dictionary<string,Sce.PlayStation.HighLevel.GameEngine2D.Base.Vector2i>(); 
+//		    foreach(var curLine in lines)
+//			{
+//		   // _sprites.Add(curLine.Name,new Vector2i((curLine.X1/curLine.Width),2-(curLine.Y1/curLine.Height)));
+//			_sprites.Add(curLine.Name, new Vector2i(curLine.X1, curLine.Y1)); 
+//		   }
+//		   _texture = new Texture2D("/Application/assets/gamePieces.png", false);
+//		   _textureInfo = new TextureInfo(_texture,new Vector2i(3,1));
+//					//the Vector2i are number of sprites, number of rows - playstation reads from bottom up 
+//			}
+//			
+//			
 			
-			var lines = from sprite in doc.Root.Elements("sprite")
-			select new
-		     {
-		      Name = sprite.Attribute("n").Value,
-		      X1 = (int)sprite.Attribute ("x"),
-		      Y1 = (int)sprite.Attribute ("y"),
-		      Height = (int)sprite.Attribute ("h"),
-		      Width = (int)sprite.Attribute("w")
-		     };
-		   
-		   _sprites = new Dictionary<string,Sce.PlayStation.HighLevel.GameEngine2D.Base.Vector2i>(); 
-		   
-			foreach(var curLine in lines)
-			{
-		   // _sprites.Add(curLine.Name,new Vector2i((curLine.X1/curLine.Width),2-(curLine.Y1/curLine.Height)));
-			_sprites.Add(curLine.Name, new Vector2i(curLine.X1, curLine.Y1)); 
-			Console.WriteLine(curLine.Name + "was addded to the dictionary"); 
-		   }
-		   _texture = new Texture2D("/Application/assets/gamePieces.png", false);
-		   _textureInfo = new TextureInfo(_texture,new Vector2i(3,1));
-					//the Vector2i are number of sprites, number of rows - playstation reads from bottom up 
-			}
+			
+FileStream fileStream = File.OpenRead("/Application/assets/gamePieces.xml");
+StreamReader fileStreamReader = new StreamReader(fileStream);
+string xml = fileStreamReader.ReadToEnd();
+fileStreamReader.Close();
+fileStream.Close();
+XDocument doc = XDocument.Parse(xml);
+	
+	var lines = from sprite in doc.Root.Elements("sprite")
+	select new
+     {
+      Name = sprite.Attribute("n").Value,
+      X1 = (int)sprite.Attribute ("x"),
+      Y1 = (int)sprite.Attribute ("y"),
+      Height = (int)sprite.Attribute ("h"),
+      Width = (int)sprite.Attribute("w")
+     };
+   
+   _sprites = new Dictionary<string,Sce.PlayStation.HighLevel.GameEngine2D.Base.Vector2i>(); 
+    foreach(var curLine in lines)
+	{
+    _sprites.Add(curLine.Name,new Vector2i((curLine.X1/curLine.Width),(curLine.Y1/curLine.Height)));
+	//note if you add more than one line of sprites you must do this
+	// _sprites.Add(curLine.Name,new Vector2i((curLine.X1/curLine.Width),9-(curLine.Y1/curLine.Height))); 
+	//where 9 is the num of rows minus 1 to reverse the order :/ 
+   }
+   _texture = new Texture2D("/Application/assets/gamePieces.png", false);
+   _textureInfo = new TextureInfo(_texture,new Vector2i(3,1));
+  
+		}
+			
+			
+			
+			
+			
 	  if(!isOkToCreate) {
 			Console.WriteLine("this is a singleton. access via get Instance"); 
 		}
-			
+
 }			
-  ~SpriteSingleton()
-  {
-	Console.WriteLine("dispose"); 
-   _texture.Dispose();
-   _textureInfo.Dispose ();
-	
-  }
   public static SpriteSingleton getInstance(){
 			if(instance==null){
 				isOkToCreate = true; 
@@ -74,22 +103,23 @@ namespace CardMatchLogic
 			}
 			return instance; 
 		}
-  public Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile Get(int x, int y)
+public Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile Get(int x, int y)
   {
    var spriteTile = new SpriteTile(_textureInfo);
    spriteTile.TileIndex2D = new Vector2i(x,y);
    spriteTile.Quad.S = new Sce.PlayStation.Core.Vector2 (168,146);
-			
    return spriteTile;
   }
 		public Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile Get(string name) 
 		{
-			var _name = name; 
-			Console.WriteLine("this is what is passed" + _name + _sprites[_name].X); 
-			return Get (_sprites[_name].X, _sprites[_name].X); 
-		
+			return Get (_sprites[name].X, _sprites[name].Y); 
 		
 		}
+~SpriteSingleton()
+  {
+   _texture.Dispose();
+   _textureInfo.Dispose ();
+  }
 		}
 	}
 
