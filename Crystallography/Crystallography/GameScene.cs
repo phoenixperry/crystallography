@@ -21,6 +21,9 @@ namespace Crystallography
     	private SoundPlayer _pongBlipSoundPlayer;
    		private Sound _pongSound;
 		
+		private SpriteSingleton instance; 
+		private SpriteTile spriteTile; 
+		
 		
 		public bool WasTouch;
 		public bool IsTouch;
@@ -34,9 +37,16 @@ namespace Crystallography
         
         public GameScene ()
         {
+			instance = SpriteSingleton.getInstance(); 
+			spriteTile = instance.Get ("leftSide"); 
+			spriteTile.Position = new Vector2(100.0f, 100.0f); 
+			this.AddChild(spriteTile); 
+			spriteTile.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 
+			
+				
             this.Camera.SetViewFromViewport();
             _physics = new GamePhysics();
-
+			
             
 //            ball = new Card(_physics.SceneBodies[(int)GamePhysics.BODIES.Ball]);
 //            _player = new Paddle(Paddle.PaddleType.PLAYER, 
