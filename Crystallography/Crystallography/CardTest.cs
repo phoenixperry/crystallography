@@ -4,7 +4,7 @@ namespace Crystallography
 {
 	public class CardTest
 	{
-		public CardTest ()
+		public CardTest (string _cardType)
 		{
 		}
 	}

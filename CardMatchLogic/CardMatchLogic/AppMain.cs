@@ -30,7 +30,7 @@ namespace CardMatchLogic
 			var scene = new Scene(); 
 			scene.Camera.SetViewFromViewport(); 
 			
-			cubeFaces = new SpriteSingleton(); 
+			//cubeFaces = new SpriteSingleton(); 
 			cubeFaces = SpriteSingleton.getInstance(); 
 			sprite = cubeFaces.Get("leftSide"); 
 		
