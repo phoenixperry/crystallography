@@ -39,14 +39,11 @@ namespace Crystallography
 				_sprites[i].Scale = _tis[i].TextureSizef/4f;
 				_sprites[i].Pivot = new Vector2(0.5f, 0.5f);
 				_sprites[i].Visible = false;
-//				_sprites[i].Color = Colors.Red;
 				this.AddChild(_sprites[i]);
 			}
 			_sprites[0].Position = new Vector2(0f,0f);
-//			_sprites[0].Color = Colors.Red;
 			_sprites[1].Position = new Vector2(-12f,-18f);
 			_sprites[2].Position = new Vector2(10f,-18f);
-//			_sprites[2].Color = Colors.LightBlue;
 			
 			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
 		}
@@ -56,14 +53,35 @@ namespace Crystallography
 			for (int i=0; i<3; i++) {
 				if ( cards[i] == null ) {
 					cards[i] = card;
-					Director.Instance.CurrentScene.RemoveChild(card,false);
-					card.physicsBody.Sleep = true;
-					_sprites[i].Color = card.Color;
-					_sprites[i].Visible = true;
+//					Director.Instance.CurrentScene.RemoveChild(card,false);
+//					card.physicsBody.Sleep = true;
+//					card.physicsBody.CollisionFilter = (1 << 1);
+					card.TextureInfo = _tis[i];
+//					_sprites[i].Color = card.Color;
+//					_sprites[i].Visible = true;
 					if (i==2) {
 						complete = true;
 					}
 					return;
+				}
+			}
+		}
+		
+		public void removeCard (Card card)
+		{
+			for (int i=0; i<3; i++) {
+				if ( cards[i] == card ) {
+					card.groupID = -1;
+					cards[i] = null;
+				}
+			}
+		}
+		
+		public void clearGroup()
+		{
+			for (int i=0; i<3; i++) {
+				if ( cards[i] != null ) {
+					removeCard (cards[i]);
 				}
 			}
 		}
@@ -73,6 +91,15 @@ namespace Crystallography
 			this.Position = _physicsBody.Position * GamePhysics.PtoM;
 			base.Update (dt);
 			
+		}
+		
+		public void updateCard(Card card) 
+		{
+			if ( card == cards[1] ) {
+				card.physicsBody.Position = new Vector2(cards[0].Position.X-12f,cards[0].Position.Y-18f) / GamePhysics.PtoM;
+			} else {
+				card.physicsBody.Position = new Vector2(cards[0].Position.X+10f,cards[0].Position.Y-18f) / GamePhysics.PtoM;
+			}
 		}
 		
 		~Group()
