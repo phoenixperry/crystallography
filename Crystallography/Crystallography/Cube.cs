@@ -26,7 +26,7 @@ namespace Crystallography
 				_card3 =s; 
 			}
 			public bool testCube(){
-				if((_card1 != _card2 && _card1 != _card3) || 
+				if((_card1 != _card2 && _card1 != _card3 && _card2 != _card3) || 
 			   (_card1 == _card2 && _card1== _card3)){
 					return true;
 				}
