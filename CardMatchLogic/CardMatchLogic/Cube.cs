@@ -29,6 +29,7 @@ namespace CardMatchLogic
 				if((_card1 != _card2 && _card1 != _card3 && _card2 != _card3) || 
 			   (_card1 == _card2 && _card1== _card3)){
 					Console.WriteLine("it's a cube"); 
+					
 					return true;
 		
 				}
