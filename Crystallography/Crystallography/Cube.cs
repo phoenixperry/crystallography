@@ -44,6 +44,15 @@ namespace Crystallography
 			
 			this.Scale = this.CalcSizeInPixels()/4f;
 			this.Pivot = new Sce.PlayStation.Core.Vector2(0.5f,0.5f);
+			
+			System.Random rand = new System.Random();
+            this.Position = new Sce.PlayStation.Core.Vector2(0,0);
+			float angle = (float)rand.Next(0,360);
+        
+            if((angle%90) <=25) angle +=25.0f;
+            this._physicsBody.Velocity = new Vector2(0.0f,Card.BALL_VELOCITY).Rotate(PhysicsUtility.GetRadian(angle));;
+            
+            Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
 		}
 		
 		private void Initialize()
@@ -60,6 +69,31 @@ namespace Crystallography
 		private void setColorData(Vector4 color)
 		{
 			colorData = new int[] { (int)(color.X * 255f), (int)(color.Y * 255f), (int)(color.Z * 255f) };
+		}
+		
+		public override void Update (float dt)
+        {
+			standardMovement();
+			this.Position = _physicsBody.Position * GamePhysics.PtoM;
+		}
+		
+		private void standardMovement() {
+			// We want to prevent situations where the balls is bouncing side to side
+            // so if there isnt a certain amount of movement on the Y axis, set it to + or - 0.2 randomly
+            // Note, this can result in the ball bouncing "back", as in it comes from the top of the screen
+            // But riccochets back up at the user.  Frankly, this keeps things interesting imho
+			var normalizedVel = _physicsBody.Velocity.Normalize();
+        	    if(System.Math.Abs (normalizedVel.Y) < 0.2f) {
+                	System.Random rand = new System.Random();
+                	if(rand.Next (0,1) == 0) {
+                    	normalizedVel.Y+= 0.2f;
+					} else {
+                    	normalizedVel.Y-= 0.2f;
+					}
+				}
+			// Pong is a mess with physics, so just fix the ball velocity
+            // Otherwise the ball could get faster and faster ( or slower ) on each collision
+            _physicsBody.Velocity = normalizedVel * Card.BALL_VELOCITY;
 		}
 		
 		private void addToTexture(Image img, Vector2i offset, int[] color)
