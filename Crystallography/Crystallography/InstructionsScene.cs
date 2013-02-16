@@ -9,11 +9,11 @@ using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 using Sce.PlayStation.HighLevel.UI;
 namespace Crystallography
 {
-	public class MenuScene: Sce.PlayStation.HighLevel.GameEngine2D.Scene
-	{
-		private Sce.PlayStation.HighLevel.UI.Scene _uiScene; 
+	public class InstructionsScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
 		
-		public MenuScene ()
+	{
+		private Sce.PlayStation.HighLevel.UI.Scene _uiScene; 			
+		public InstructionsScene ()
 		{
 			this.Camera.SetViewFromViewport(); 
 			Sce.PlayStation.HighLevel.UI.Panel dialog = new Panel(); 
@@ -34,11 +34,10 @@ namespace Crystallography
 			buttonUI1.Width = 300; 
 			buttonUI1.Height = 50; 
 			buttonUI1.Alpha = 0.8f; 
-			buttonUI1.SetPosition(dialog.Width/2-150,200.0f); 
+			buttonUI1.SetPosition(dialog.Width/2-150,400.0f); 
 			buttonUI1.TouchEventReceived += (sender, e) =>  {
 				Director.Instance.ReplaceScene(new GameScene()); 
 			}; 
-			
 			Button buttonUI2 = new Button();
             buttonUI2.Name = "buttonMenu";
             buttonUI2.Text = "Main Menu";
@@ -50,30 +49,15 @@ namespace Crystallography
             Director.Instance.ReplaceScene(new TitleScene());
             };  
 
-			Button buttonUI3 = new Button(); 
-			buttonUI3.Name = "buttonPlay"; 
-			buttonUI3.Text = "How to Play"; 
-			buttonUI3.Width = 300; 
-			buttonUI3.Height = 50; 
-			buttonUI3.Alpha = 0.8f; 
-			
-			buttonUI3.SetPosition(dialog.Width/2-150,300.0f); 
-			buttonUI3.TouchEventReceived += (sender, e) =>  {
-				Director.Instance.ReplaceScene(new InstructionsScene()); 
-			}; 
-			
-			
 			dialog.AddChildLast(ib); 
 			dialog.AddChildLast(buttonUI1); 
 			dialog.AddChildLast(buttonUI2); 
-			dialog.AddChildLast(buttonUI3); 
 			_uiScene = new Sce.PlayStation.HighLevel.UI.Scene(); 
 			_uiScene.RootWidget.AddChildLast(dialog); 
 			UISystem.SetScene(_uiScene); 
 			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false); 
-			
 		}
-		public override void Update(float dt){
+			public override void Update(float dt){
 			base.Update(dt); 
 			UISystem.Update(Touch.GetData(0)); 
 		}
@@ -83,11 +67,10 @@ namespace Crystallography
             UISystem.Render ();
         }
         
-        ~MenuScene()
+        ~InstructionsScene()
         {
             
         }
 	}
 }
-
 
