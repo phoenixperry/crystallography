@@ -6,18 +6,16 @@ using Sce.PlayStation.HighLevel.Physics2D;
 using Sce.PlayStation.HighLevel.UI;
 using Sce.PlayStation.Core.Audio;
 using Sce.PlayStation.Core.Input;
+using Sce.PlayStation.Core.Imaging;
+using Sce.PlayStation.Core.Graphics;
 
 namespace Crystallography
 {
     public class GameScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
     {
-//    private Paddle _player,_ai;
-//    	public static Card ball;
 		public static Card[] cards;
 		public static Group[] groups;
     	private GamePhysics _physics;
-//	private static DragGestureDetector _dragGestureDetector;
-//    private Scoreboard _scoreboard;
     	private SoundPlayer _pongBlipSoundPlayer;
    		private Sound _pongSound;
 		
@@ -28,6 +26,8 @@ namespace Crystallography
 		public Card FirstAttachedCard;
 		public Card SecondAttachedCard;
 		public Vector2 TouchStart;
+		
+		public SpriteUV s;
 		
 		//singleton vars 
 //		private SpriteSingleton instance; 
@@ -84,6 +84,101 @@ namespace Crystallography
 				
 				this.AddChild (cards[i]);
 			}
+			
+//			Cube cube = new Cube(new Card[] {cards[0], cards[1], cards[2] }, null);
+//			cube.Position = new Vector2(100f,100f);
+//			this.AddChild(cube);
+			
+//			cards[0].Color = Colors.Red;
+				
+//				FrameBuffer fb = new FrameBuffer();
+//				Texture2D destination = new Texture2D(256, 256, false, PixelFormat.Rgba,PixelBufferOption.Renderable);
+//				fb.SetColorTarget(destination,0);
+//				
+//				Director.Instance.GL.Context.SetFrameBuffer(fb);
+//				Director.Instance.GL.Context.SetClearColor(0,0,0,255);
+//				Director.Instance.GL.Context.Clear();
+//				Director.Instance.GL.Context.SetTexture(0,cards[0].TextureInfo.Texture);
+//
+//				Director.Instance.GL.Context.SetFrameBuffer(Director.Instance.GL.Context.Screen);
+//				Director.Instance.GL.Context.SetClearColor(0,0,0,0);
+//				
+//				s = new SpriteUV();
+//				s.TextureInfo = new TextureInfo(destination);
+//				s.Position = new Vector2(100,100);
+//				s.Scale = s.CalcSizeInPixels()/4f;
+//				this.AddChild(s);
+				
+//				s = new SpriteUV( new TextureInfo( 
+//				                                  new Sce.PlayStation.Core.Graphics.Texture2D(100,100,false,
+//				                                            Sce.PlayStation.Core.Graphics.PixelFormat.Rgba) ) );
+				
+//				Sce.PlayStation.HighLevel.UI.ImageAsset img = new Sce.PlayStation.HighLevel.UI.ImageAsset(cards[0].TextureInfo.Texture);
+//				Sce.PlayStation.Core.Imaging.Image img = new Sce.PlayStation.Core.Imaging.Image(Sce.PlayStation.Core.Imaging.ImageMode.Rgba, new Sce.PlayStation.Core.Imaging.ImageSize(100,100), new Sce.PlayStation.Core.Imaging.ImageColor(255,255,255,255));
+//				Director.Instance.GL.SetBlendMode(Sce.PlayStation.HighLevel.GameEngine2D.Base.BlendMode.Additive);
+//				Director.Instance.GL.Context.Enable (EnableMode.Blend);
+//				Director.Instance.GL.Context.SetBlendFunc();
+//				Director.Instance.GL.Context.SetBlendFuncAlpha(Sce.PlayStation.Core.Graphics.BlendFuncMode.Add);
+//			Image img = new Image("Application/assets/images/topSide.png");
+//			Image img2 = new Image("Application/assets/images/leftSide.png");
+//			img.Decode ();
+//			img2.Decode ();
+//			Image img4 = new Image(ImageMode.Rgba, new ImageSize(168,146), img.ToBuffer());
+//			Image img5 = new Image(ImageMode.Rgba, new ImageSize(168,146), img2.ToBuffer());
+//			img5.DrawImage(img4, new ImagePosition(0,50));	
+				
+				
+//				Image img3 = new Image("Application/assets/images/rightSide.png");
+//				img.Decode();
+//				img2.Decode();
+//				img2 = new Image(ImageMode.Rgba, new ImageSize(168, 146), img2.ToBuffer());
+//				img3.Decode();
+//				Director.Instance.GL.Context.Enable (Sce.PlayStation.Core.Graphics.EnableMode.Blend);
+//				Director.Instance.GL.Context.SetBlendFunc(new Sce.PlayStation.Core.Graphics.BlendFunc);
+//				Director.Instance.GL.Context.SetBlendFuncAlpha(Sce.PlayStation.Core.Graphics.BlendFuncMode.Add);
+//				Director.Instance.GL.Context.ReadPixels(
+//				img.DrawImage(img2, new ImagePosition(0,50));
+//				Director.Instance.GL.SetBlendMode(Sce.PlayStation.HighLevel.GameEngine2D.Base.BlendMode.None);
+//				img.DrawImage(img3, new ImagePosition(0,0));
+//				System.Console.WriteLine(img.DecodeSize.Width + " " + img.DecodeSize.Height);
+//				System.Console.WriteLine(img.Size.Width + " " + img.Size.Height);
+//				img.Resize(new ImageSize(100,100));
+				
+//			Sce.PlayStation.Core.Graphics.Texture2D t = new Sce.PlayStation.Core.Graphics.Texture2D(168,146,false,Sce.PlayStation.Core.Graphics.PixelFormat.Rgba);
+//			Byte[] source = Director.Instance.GL.Context.ReadPixels(cards[0].TextureInfo.Texture,0,0,0,0,0,168,146);
+			
+//			Byte[] data = img.ToBuffer ();
+//			int[] color = new int[] { (int)(cards[0].Color.X * 255f), (int)(cards[0].Color.Y * 255f), (int)(cards[0].Color.Z * 255f) };
+//			
+//			for (int j=0; j < data.Length/4; j++) {
+//				if (data[j*4+3] != 0) {
+//					data[j*4] = (Byte)color[0];
+//					data[j*4+1] = (Byte)color[1];
+//					data[j*4+2] = (Byte)color[2];
+//					var x = j%168;
+//					var y = (j-x)/168;
+//					t.SetPixels(0,data,PixelFormat.Rgba,j*4,168*4,x,y,1,1);
+//				}
+//			}
+//				
+//			data = img2.ToBuffer ();
+//			
+//			for (int j=0; j < data.Length/4; j++) {
+//				if (data[j*4+3] != 0) {
+//					var x = j%168;
+//					var y = (j-x)/168;
+//					t.SetPixels(0,data,PixelFormat.Rgba,j*4,168*4,x,y,1,1);
+//				}
+//			}
+//			
+////				t.SetPixels(0,img5.ToBuffer());
+////				t.SetPixels (1,img2.ToBuffer ());
+////				Sce.PlayStation.HighLevel.UI.ImageAsset img = new Sce.PlayStation.HighLevel.UI.ImageAsset(cards[0].TextureInfo.Texture);
+//				s = new SpriteUV( new TextureInfo(t) );
+//				s.Position = new Vector2(100f,100f);
+//				s.Scale = s.CalcSizeInPixels()/4f;
+//				img.Dispose();
+//				this.AddChild(s);
 			
 			groups = new Group[20];
 			
@@ -338,6 +433,7 @@ namespace Crystallography
 		
         public Card GetCardAtPosition(Vector2 position) {
 			foreach ( Card c in cards ) {
+				if ( c == null ) continue;
 				var halfDimensions = new Vector2(c.CalcSizeInPixels().X/2f, c.CalcSizeInPixels().Y/2f);
 				var lowerLeft = new Vector2(c.Position.X-halfDimensions.X, c.Position.Y+halfDimensions.Y);
 				var upperRight = new Vector2(c.Position.X+halfDimensions.X, c.Position.Y-halfDimensions.Y);
