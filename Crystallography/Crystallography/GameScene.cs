@@ -16,6 +16,8 @@ namespace Crystallography
 		public static Card[] cards;
 		public static Group[] groups;
     	public static GamePhysics _physics;
+//		public static LevelData levelData;
+		private static CardData[] currentLevelData;
     	private SoundPlayer _pongBlipSoundPlayer;
    		private Sound _pongSound;
 		
@@ -62,25 +64,28 @@ namespace Crystallography
             var _screenHeight = Director.Instance.GL.Context.GetViewport().Height;
 			System.Random rand = new System.Random();
 			
-			cards = new Card[20];
-			for (int i = 0; i < 20; i++) {
+			currentLevelData = LevelData.LEVEL_DATA[LevelData.CURRENT_LEVEL];
+//			cards = new Card[20];
+			cards = new Card[currentLevelData.Length];
+			for (int i = 0; i < cards.Length; i++) {
 //				cards[i] = new Card(_physics.SceneBodies[(int)GamePhysics.BODIES.Ball]);
-				cards[i] = new Card(_physics.addCardPhysics(new Vector2(50f + 0.75f * _screenWidth * (float)rand.NextDouble(), 50f + 0.75f * _screenHeight * (float)rand.NextDouble ())));
-				switch(rand.Next(1,4))
-				{
-					case 1:
-						cards[i].Color = Colors.Red;
-						break;
-					case 2:
-						cards[i].Color = Colors.White;
-						break;
-					case 3:
-						cards[i].Color = Colors.LightBlue;
-						break;
-					default:
-						cards[i].Color = Colors.LightBlue;
-					break;
-				}
+				Vector2 start_pos = new Vector2(50f + 0.75f * _screenWidth * (float)rand.NextDouble(), 50f + 0.75f * _screenHeight * (float)rand.NextDouble ());
+				cards[i] = new Card(_physics.addCardPhysics(start_pos), currentLevelData[i]);
+//				switch(rand.Next(1,4))
+//				{
+//					case 1:
+//						cards[i].Color = Colors.Red;
+//						break;
+//					case 2:
+//						cards[i].Color = Colors.White;
+//						break;
+//					case 3:
+//						cards[i].Color = Colors.LightBlue;
+//						break;
+//					default:
+//						cards[i].Color = Colors.LightBlue;
+//					break;
+//				}
 				
 				this.AddChild (cards[i]);
 			}
@@ -180,9 +185,9 @@ namespace Crystallography
 //				img.Dispose();
 //				this.AddChild(s);
 			
-			groups = new Group[20];
+			groups = new Group[cards.Length];
 			
-			for (int i=0; i<20; i++) {
+			for (int i=0; i<cards.Length; i++) {
 				groups[i] = new Group();//_physics.addGroupPhysics(new Vector2(400f,400f)));
 //				this.AddChild (groups[i]);
 			}

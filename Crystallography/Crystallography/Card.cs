@@ -7,12 +7,36 @@ using Sce.PlayStation.HighLevel.Physics2D;
 
 namespace Crystallography
 {
+	
+	// HANDY DATA STRUCTURE
+	public struct CardData{
+		public enum COLOR { WHITE=0x1, RED=0x2, BLUE=0x4 };
+		public enum PATTERN { SOLID=0x10, DOT=0x20, STRIPE=0x40 };
+		public enum SOUND { A=0x100, B=0x200, C=0x400 };
+		
+		public int color;
+		public int pattern;
+		public int sound;
+		
+		public CardData( int Color, int Pattern, int Sound )
+		{
+			color = Color;
+			pattern = Pattern;
+			sound = Sound;
+		}
+	}
+	
+	// MAIN CARD CLASS
     public class Card : SpriteTile
     {
+		
+		
 		//singleton vars
 		private SpriteSingleton instance;
 		private SpriteTile spriteTile;
 		private string spriteName;
+		public int[] attributes;
+		public CardData cardData;
 
 
         private PhysicsBody _physicsBody;
@@ -23,18 +47,20 @@ namespace Crystallography
 
 		public int groupID;
         
-        public Card (PhysicsBody physicsBody)
+        public Card (PhysicsBody physicsBody, CardData data)
         {
-			instance = SpriteSingleton.getInstance(); 
-			setFace(); 
+			instance = SpriteSingleton.getInstance();
+			cardData = data;
+//			setFace(); 
+			spriteName = "topSide";
 			spriteTile = instance.Get (spriteName); 
 			spriteTile.Position = new Vector2(10.0f, 10.0f); 
 			this.AddChild(spriteTile);
-			setColor(); 	
+			setColor(data.color);
+			setSound(data.sound);
 			spriteTile.Position = new Vector2(50.0f, 50.0f);
 		
             _physicsBody = physicsBody;
-//			_ss = SpriteSingleton.getInstance();
             
 			groupID = -1;
 			this.TextureInfo = _ss.Get ("topSide").TextureInfo;
@@ -109,21 +135,24 @@ namespace Crystallography
             // Otherwise the ball could get faster and faster ( or slower ) on each collision
             _physicsBody.Velocity = normalizedVel * BALL_VELOCITY;
 		}
-				 		private void setColor() {
- 			System.Random rand = new System.Random(); 
- 			switch(rand.Next(1,4)) 
+		private void setColor(int color) {
+// 			System.Random rand = new System.Random(); 
+ 			switch(color) 
  			{
- 				case 1: 
+ 				case (int)CardData.COLOR.WHITE: 
  				//pink
- 					spriteTile.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 
+// 					spriteTile.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 
+					this.Color = new Vector4(0.96f,0.88f,0.88f,1.0f);
  					break;
- 				case 2:
+ 				case (int)CardData.COLOR.RED:
  				//red
- 					spriteTile.RunAction(new TintTo (new Vector4(0.90f,0.075f,0.075f,1.0f),0.1f)); 
+// 					spriteTile.RunAction(new TintTo (new Vector4(0.90f,0.075f,0.075f,1.0f),0.1f));
+					this.Color = new Vector4(0.90f,0.075f,0.075f,1.0f);
  					break;
- 				case 3: 	
+ 				case (int)CardData.COLOR.BLUE: 	
  				//teal
- 					spriteTile.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 	
+ 					spriteTile.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 
+					this.Color = new Vector4(0.16f,0.88f,0.88f,1.0f);
  					break; 
  				default:
  					break; 
@@ -147,6 +176,19 @@ namespace Crystallography
  					break;
  		}
  		}		
+		
+		public void setSound(int sound) {
+			switch(sound){
+				case (int)CardData.SOUND.A:
+					break;
+				case (int)CardData.SOUND.B:
+					break;
+				case (int)CardData.SOUND.C:
+					break;
+				default:
+					break;
+			}
+		}
 		
         ~Card()
         {

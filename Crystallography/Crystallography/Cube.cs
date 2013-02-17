@@ -9,8 +9,7 @@ using Sce.PlayStation.Core.Imaging;
 namespace Crystallography
 {
 	public class Cube : SpriteUV
-	{
-		
+	{	
 		private string _card1; 
 		private string _card2; 
 		private string _card3; 

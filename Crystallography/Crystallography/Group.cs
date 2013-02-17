@@ -136,14 +136,49 @@ namespace Crystallography
 		public void analyze()
 		{
 			bool match = true;
-			if( cards[0].Color == cards[1].Color && cards[0].Color == cards[2].Color ) {
-//				return match;
-			} else {
-				match = ( cards[0].Color != cards[1].Color && 
-				          cards[0].Color != cards[2].Color && 
-				          cards[1].Color != cards[2].Color );
-//				return match;
+			
+			int[] data = new int[3];
+
+			match = match && 0 != ( cards[0].cardData.color & cards[1].cardData.color & cards[2].cardData.color );
+			if (!match) {
+				// NOT ALL SAME
+				match = (int)CardData.COLOR.BLUE + (int)CardData.COLOR.RED + (int)CardData.COLOR.WHITE == ( cards[0].cardData.color | cards[1].cardData.color | cards[2].cardData.color );
+				if (!match) {
+					// NOT ALL SAME OR ALL DIFFERENT -- NOT A VALID SET
+					clearGroup ();
+					return;
+				}
 			}
+			match = match && 0 != ( cards[0].cardData.pattern & cards[1].cardData.pattern & cards[2].cardData.pattern );
+			if (!match) {
+				// NOT ALL SAME
+				match = (int)CardData.PATTERN.DOT + (int)CardData.PATTERN.SOLID + (int)CardData.PATTERN.STRIPE == ( cards[0].cardData.pattern | cards[1].cardData.pattern | cards[2].cardData.pattern );
+				if (!match) {
+					// NOT ALL SAME OR ALL DIFFERENT -- NOT A VALID SET
+					clearGroup ();
+					return;
+				}
+			}
+			match = match && 0 != ( cards[0].cardData.sound & cards[1].cardData.sound & cards[2].cardData.sound );	
+			if (!match) {
+				// NOT ALL SAME
+				match = (int)CardData.SOUND.A + (int)CardData.SOUND.B + (int)CardData.SOUND.C == ( cards[0].cardData.sound | cards[1].cardData.sound | cards[2].cardData.sound );
+				if (!match) {
+					// NOT ALL SAME OR ALL DIFFERENT -- NOT A VALID SET
+					clearGroup ();
+					return;
+				}
+			}
+			
+			
+//			if( cards[0].Color == cards[1].Color && cards[0].Color == cards[2].Color ) {
+////				return match;
+//			} else {
+//				match = ( cards[0].Color != cards[1].Color && 
+//				          cards[0].Color != cards[2].Color && 
+//				          cards[1].Color != cards[2].Color );
+////				return match;
+//			}
 			if (match) {
 				System.Console.WriteLine("SET!");
 				Cube cube = new Cube(cards, GameScene._physics.addCardPhysics(cards[0].Position));

@@ -78,5 +78,10 @@
     <Content Include="assets\images\topSide.png" />
     <Content Include="assets\images\gamePieces.png" />
     <Content Include="assets\images\gamePieces.xml" />
+    <Content Include="assets\images\header.png" />
+    <Content Include="assets\images\play.png" />
+    <Content Include="assets\images\playOver.png" />
+    <Content Include="assets\images\instructions.png" />
+    <Content Include="assets\images\instructionsOver.png" />
   </ItemGroup>
 </Project>
