@@ -18,8 +18,27 @@ namespace Crystallography
     	public static GamePhysics _physics;
 //		public static LevelData levelData;
 		private static CardData[] currentLevelData;
-    	private SoundPlayer _pongBlipSoundPlayer;
-   		private Sound _pongSound;
+//    	private SoundPlayer _pongBlipSoundPlayer;
+//   		private Sound _pongSound;
+		
+//		private Bgm _titleSong;
+//		private BgmPlayer _songPlayer;
+//		public static SoundPlayer soundPlayer;
+		public static Sound sndCubed;
+		public static SoundPlayer sndCubedPlayer;
+		public static Sound sndSide1;
+		public static SoundPlayer sndSide1Player;
+		public static Sound sndSide2;
+		public static SoundPlayer sndSide2Player;
+		public static Sound sndSound1;
+		public static SoundPlayer sndSound1Player;
+		public static Sound sndSound2;
+		public static SoundPlayer sndSound2Player;
+		public static Sound sndSound3;
+		public static SoundPlayer sndSound3Player;
+		public static Sound sndWrong;
+		public static SoundPlayer sndWrongPlayer;
+		private static bool _sndInitialized = false;
 		
 		
 		public bool WasTouch;
@@ -37,12 +56,16 @@ namespace Crystallography
 //		private string spriteName; 
         
         // Change the following value to true if you want bounding boxes to be rendered
-        private static Boolean DEBUG_BOUNDINGBOXS = true;
+        private static Boolean DEBUG_BOUNDINGBOXS = false;
         
         public GameScene ()
         {
             this.Camera.SetViewFromViewport();
             _physics = new GamePhysics();
+			if (!_sndInitialized)
+			{
+				initializeSound();
+			}
 
 //            instance = SpriteSingleton.getInstance(); 
 //			setFace(); 
@@ -89,6 +112,13 @@ namespace Crystallography
 				
 				this.AddChild (cards[i]);
 			}
+			
+//			_titleSong = new Bgm("/Application/assets/sounds/play.mp3");
+//			if(_songPlayer == null) {
+//            	_songPlayer.Dispose();
+//				_songPlayer = _titleSong.CreatePlayer();
+//			}
+//            _songPlayer = _titleSong.CreatePlayer();
 			
 //			Cube cube = new Cube(new Card[] {cards[0], cards[1], cards[2] }, _physics.addCardPhysics(new Vector2(100f,100f)));
 //			cube.Position = new Vector2(100f,100f);
@@ -263,6 +293,40 @@ namespace Crystallography
             Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
         }
         
+//		public override void OnEnter ()
+//        {
+//            _songPlayer.Loop = true;
+//            _songPlayer.Volume = 0.2f;
+//			_songPlayer.Play();
+//        }
+//        public override void OnExit ()
+//        {
+//            base.OnExit ();
+//            _songPlayer.Stop();
+//            _songPlayer.Dispose();
+//            _songPlayer = null;
+//        }
+		
+		private void initializeSound()
+		{
+//			soundPlayer = new SoundPlayer();
+			sndCubed = new Sound("/Application/assets/sounds/cubed.wav");
+			sndCubedPlayer = sndCubed.CreatePlayer ();
+			sndSide1 = new Sound("/Application/assets/sounds/side1.wav");
+			sndSide1Player = sndSide1.CreatePlayer();
+			sndSide2 = new Sound("/Application/assets/sounds/side2.wav");
+			sndSide2Player = sndSide2.CreatePlayer();
+			sndSound1 = new Sound("/Application/assets/sounds/sound1.wav");
+			sndSound1Player = sndSound1.CreatePlayer();
+			sndSound2 = new Sound("/Application/assets/sounds/sound2.wav");
+			sndSound2Player = sndSound2.CreatePlayer();
+			sndSound3 = new Sound("/Application/assets/sounds/sound3.wav");
+			sndSound3Player = sndSound3.CreatePlayer();
+			sndWrong = new Sound("/Application/assets/sounds/wrong.wav");
+			sndWrongPlayer = sndWrong.CreatePlayer();
+			_sndInitialized = true;
+		}
+		
         private void ResetBall()
         {
             //Move ball to screen center and release in a random directory
@@ -377,6 +441,7 @@ namespace Crystallography
 						SelectedCard.groupID = Array.FindIndex(groups, IsGroupFree);
 						groups[SelectedCard.groupID].tryAddingCard(SelectedCard);
 					}
+					playSound(card.cardData);
 				}
 			}
 			// Drag
@@ -397,11 +462,14 @@ namespace Crystallography
 //					Array.Copy(g.cards, triad, 3);
 					if ( g.evaluateCompleteGroup() ) {
 						for (int i=0; i<3; i++) {
+							sndCubedPlayer.Play();
 							cards = removeCardFromDeck (triad[i], cards);
 						}
 						if(!setsPossible(cards)) {
 								goToNextLevel();
 							}
+					} else {
+						sndWrongPlayer.Play ();
 					}
 					
 				}
@@ -429,10 +497,12 @@ namespace Crystallography
 				if ( closestDistance < 50f ) {
 					if ( FirstAttachedCard == null ) {
 						FirstAttachedCard = closest;
+						playSound(closest.cardData);
 //						FirstAttachedCard.groupID = SelectedCard.groupID;
 						groups[SelectedCard.groupID].tryAddingCard(closest);
 					} else if ( SecondAttachedCard == null ) {
 						SecondAttachedCard = closest;
+						playSound(closest.cardData);
 //						SecondAttachedCard.groupID = SelectedCard.groupID;
 						groups[SelectedCard.groupID].tryAddingCard (closest);
 					}
@@ -445,6 +515,24 @@ namespace Crystallography
 //					SecondAttachedCard.physicsBody.Position = new Vector2(world.X+10f,world.Y-18f) / GamePhysics.PtoM;
 //				}
 			}
+		}
+		
+		private static void playSound(CardData data)
+		{
+			switch((int)data.sound)
+ 				{
+					case (int)CardData.SOUND.A:
+						sndSound1Player.Play();
+ 						break;
+ 					case (int)CardData.SOUND.B:
+ 						sndSound2Player.Play();
+ 						break;
+ 					case (int)CardData.SOUND.C:
+ 						sndSound3Player.Play();
+ 						break;
+ 					default:
+ 					break;
+ 				}	
 		}
 		
 		private static bool IsGroupFree(Group g) {

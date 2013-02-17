@@ -92,5 +92,13 @@
     <Content Include="assets\images\stripeRight.png" />
     <Content Include="assets\images\stripeTop.png" />
     <Content Include="assets\images\dotTop.png" />
+    <Content Include="assets\sounds\side1.wav" />
+    <Content Include="assets\sounds\play.mp3" />
+    <Content Include="assets\sounds\cubed.wav" />
+    <Content Include="assets\sounds\side2.wav" />
+    <Content Include="assets\sounds\sound1.wav" />
+    <Content Include="assets\sounds\sound2.wav" />
+    <Content Include="assets\sounds\sound3.wav" />
+    <Content Include="assets\sounds\wrong.wav" />
   </ItemGroup>
 </Project>

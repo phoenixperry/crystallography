@@ -18,6 +18,8 @@ namespace Crystallography
 		public int pattern;
 		public int sound;
 		
+		
+		
 		public CardData( int Color, int Pattern, int Sound )
 		{
 			color = Color;

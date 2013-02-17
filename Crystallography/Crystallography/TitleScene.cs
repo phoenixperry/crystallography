@@ -36,7 +36,7 @@ namespace Crystallography
             ActionManager.Instance.AddAction(tintAction,titleScreen);
             tintAction.Run();
 
-            _titleSong = new Bgm("/Application/assets/sounds/music_ingame.mp3");
+            _titleSong = new Bgm("/Application/assets/sounds/play.mp3");
 // started working out game logic in a seperate project Card Match Login
 
             
@@ -56,13 +56,13 @@ namespace Crystallography
             _songPlayer.Volume = 0.2f;
 			_songPlayer.Play();
         }
-        public override void OnExit ()
-        {
-            base.OnExit ();
-            _songPlayer.Stop();
-            _songPlayer.Dispose();
-            _songPlayer = null;
-        }
+//        public override void OnExit ()
+//        {
+//            base.OnExit ();
+//            _songPlayer.Stop();
+//            _songPlayer.Dispose();
+//            _songPlayer = null;
+//        }
         
         public override void Update (float dt)
         {
