@@ -20,7 +20,7 @@ namespace Crystallography
         {
             this.Camera.SetViewFromViewport();
 
-            _texture = new Texture2D("Application/assets/images/title.png",false);
+            _texture = new Texture2D("/Application/assets/images/header.png",false);
 // started working out game logic in a seperate project Card Match Login
             _ti = new TextureInfo(_texture);
             SpriteUV titleScreen = new SpriteUV(_ti);
