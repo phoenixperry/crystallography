@@ -15,7 +15,7 @@ namespace Crystallography
     {
 		public static Card[] cards;
 		public static Group[] groups;
-    	private GamePhysics _physics;
+    	public static GamePhysics _physics;
     	private SoundPlayer _pongBlipSoundPlayer;
    		private Sound _pongSound;
 		
@@ -85,7 +85,7 @@ namespace Crystallography
 				this.AddChild (cards[i]);
 			}
 			
-//			Cube cube = new Cube(new Card[] {cards[0], cards[1], cards[2] }, null);
+//			Cube cube = new Cube(new Card[] {cards[0], cards[1], cards[2] }, _physics.addCardPhysics(new Vector2(100f,100f)));
 //			cube.Position = new Vector2(100f,100f);
 //			this.AddChild(cube);
 			
@@ -382,7 +382,7 @@ namespace Crystallography
 			else if (SelectedCard != null && touch.Release) {
 //				SelectedCard.physicsBody.Velocity = -moved.Normalize();
 				Group g = groups[SelectedCard.groupID];
-				if (g.complete) {
+				if (g.population == 3) {
 					g.analyze();
 				}
 //				g.clearGroup();

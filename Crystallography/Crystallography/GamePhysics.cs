@@ -130,6 +130,17 @@ namespace Crystallography
 			return SceneBodies[this.NumBody-1];
 		}
 		
+		public void removePhysicsBody(PhysicsBody pb)
+		{
+			pb.Clear();
+			int i = Array.IndexOf(this.SceneBodies, pb);
+			this.SceneBodies[i] = null;
+			for (int j=i; j < numBody-1; j++) {
+				this.SceneBodies[j] = this.SceneBodies[j+1];
+			}
+			numBody--;
+		}
+		
 		public PhysicsBody addGroupPhysics(Vector2 position) {
 			this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[0],0.1f);
             this.SceneBodies[this.NumBody].ShapeIndex = 0;

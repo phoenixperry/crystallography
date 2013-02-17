@@ -89,12 +89,15 @@ namespace Crystallography
 					switch(i) {
 						case 0:	
 							card.TileIndex2D = _ss.Get("topSide").TileIndex2D;
+							_population++;
 							break;
 						case 1:
 							card.TileIndex2D = _ss.Get ("leftSide").TileIndex2D;
+							_population++;
 							break;
 						case 2:
 							card.TileIndex2D = _ss.Get ("rightSide").TileIndex2D;
+							_population++;
 							break;
 						default:
 							break;
@@ -103,7 +106,6 @@ namespace Crystallography
 						complete = true;
 					}
 					card.groupID = cards[0].groupID;
-					_population++;
 					return;
 				}
 			}
@@ -144,6 +146,12 @@ namespace Crystallography
 			}
 			if (match) {
 				System.Console.WriteLine("SET!");
+				Cube cube = new Cube(cards, GameScene._physics.addCardPhysics(cards[0].Position));
+				Director.Instance.CurrentScene.AddChild(cube);
+				foreach ( Card c in cards ) {
+					Director.Instance.CurrentScene.RemoveChild(c, true);
+					GameScene._physics.removePhysicsBody(c.physicsBody);
+				}
 			}
 			clearGroup();
 		}
