@@ -7,18 +7,18 @@ using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 using Sce.PlayStation.Core.Input;
 namespace Crystallography
 {
-	public class InstructionsScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
+	public class InstructionsScene2 : Sce.PlayStation.HighLevel.GameEngine2D.Scene
 		
 	{
 		private TextureInfo _ti;
         private Texture2D _texture;
         
-		public InstructionsScene ()
+		public InstructionsScene2 ()
 		{
        
             this.Camera.SetViewFromViewport();
 
-            _texture = new Texture2D("/Application/assets/images/allSame.png",false);
+            _texture = new Texture2D("/Application/assets/images/allDiff.png",false);
 // started working out game logic in a seperate project Card Match Login
             _ti = new TextureInfo(_texture);
             SpriteUV titleScreen = new SpriteUV(_ti);
@@ -56,11 +56,11 @@ namespace Crystallography
             var touches = Touch.GetData(0).ToArray();
             if((touches.Length >0 && touches[0].Status == TouchStatus.Down) || Input2.GamePad0.Cross.Press)
             {
-                Director.Instance.ReplaceScene(new InstructionsScene2());
+                Director.Instance.ReplaceScene(new GameScene());
             }
         }
     
-        ~InstructionsScene()
+        ~InstructionsScene2()
         {
              _texture.Dispose();
             _ti.Dispose ();
