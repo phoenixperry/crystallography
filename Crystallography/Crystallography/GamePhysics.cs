@@ -135,6 +135,7 @@ namespace Crystallography
 			pb.Clear();
 			int i = Array.IndexOf(this.SceneBodies, pb);
 			this.SceneBodies[i] = null;
+			//this is what is crashing on my side
 			for (int j=i; j < numBody-1; j++) {
 				this.SceneBodies[j] = this.SceneBodies[j+1];
 				this.SceneBodies[j+1] = null;

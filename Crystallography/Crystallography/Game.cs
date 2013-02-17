@@ -84,8 +84,8 @@ namespace Crystallography
 			Sce.PlayStation.HighLevel.GameEngine2D.Scheduler.Instance.Schedule(GameScene, TickGame, 0.0f, false);
 
 			var transition = new TransitionSolidFade(GameScene) { 
-				PreviousScene = Director.Instance.CurrentScene, Duration = 1.5f, 
-				Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear };
+			PreviousScene = Director.Instance.CurrentScene, Duration = 1.5f, 
+			Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear };
 			Director.Instance.ReplaceScene(transition);
 
 			Board.Refresh(0);
