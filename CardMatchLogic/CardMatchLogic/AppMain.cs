@@ -32,7 +32,7 @@ namespace CardMatchLogic
 			
 			//cubeFaces = new SpriteSingleton(); 
 			cubeFaces = SpriteSingleton.getInstance(); 
-			sprite = cubeFaces.Get("leftSide"); 
+			sprite = cubeFaces.Get("topSide"); 
 		
 			sprite.Position = scene.Camera.CalcBounds().Center;
 			sprite.CenterSprite(); 
@@ -42,11 +42,11 @@ namespace CardMatchLogic
 	
   		 Director.Instance.RunWithScene(scene,true);
 			//pink 
-			sprite.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 	
+			//sprite.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 	
 			//red 
 			//sprite.RunAction(new TintTo (new Vector4(0.90f,0.075f,0.075f,1.0f),0.1f)); 
 			
-			var spriteName="leftSide"; 
+			var spriteName="topSide"; 
 			sprite.TileIndex2D = cubeFaces.Get (spriteName).TileIndex2D;
 			Console.WriteLine(sprite.TileIndex2D);
 			//teal 

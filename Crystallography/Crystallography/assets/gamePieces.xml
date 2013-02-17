@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:8f2431c398d39db9f0e458f011a6be35$ -->
+<!-- $TexturePacker:SmartUpdate:6c5698de135b8684c80713611bd5c343$ -->
 <!--Format:
 n  => name of the sprite
 x  => sprite x pos in texture
@@ -13,8 +13,14 @@ oW => sprite's original width (only available if trimmed)
 oH => sprite's original height (only available if trimmed)
 r => 'y' only set if sprite is rotated
 -->
-<TextureAtlas imagePath="gamePieces.png" width="504" height="146">
-    <sprite n="leftSide" x="0" y="0" w="168" h="146"/>
-    <sprite n="rightSide" x="168" y="0" w="168" h="146"/>
-    <sprite n="topSide" x="336" y="0" w="168" h="146"/>
+<TextureAtlas imagePath="gamePieces.png" width="1512" height="146">
+    <sprite n="dotLeft" x="0" y="0" w="168" h="146"/>
+    <sprite n="dotRight" x="168" y="0" w="168" h="146"/>
+    <sprite n="dotTop" x="336" y="0" w="168" h="146"/>
+    <sprite n="leftSide" x="504" y="0" w="168" h="146"/>
+    <sprite n="rightSide" x="672" y="0" w="168" h="146"/>
+    <sprite n="stripeLeft" x="840" y="0" w="168" h="146"/>
+    <sprite n="stripeRight" x="1008" y="0" w="168" h="146"/>
+    <sprite n="stripeTop" x="1176" y="0" w="168" h="146"/>
+    <sprite n="topSide" x="1344" y="0" w="168" h="146"/>
 </TextureAtlas>

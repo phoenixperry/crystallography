@@ -50,7 +50,7 @@ public static int test=0;
 			//where 9 is the num of rows minus 1 to reverse the order :/ 
 	   }
    _texture = new Texture2D("/Application/assets/images/gamePieces.png", false);
-   _textureInfo = new TextureInfo(_texture,new Vector2i(3,1));
+   _textureInfo = new TextureInfo(_texture,new Vector2i(9,1));
   
 	}
 	  if(!isOkToCreate) {

@@ -81,13 +81,10 @@ XDocument doc = XDocument.Parse(xml);
 	//where 9 is the num of rows minus 1 to reverse the order :/ 
    }
    _texture = new Texture2D("/Application/assets/gamePieces.png", false);
-   _textureInfo = new TextureInfo(_texture,new Vector2i(3,1));
+   _textureInfo = new TextureInfo(_texture,new Vector2i(9,1));
+				Console.WriteLine(_textureInfo); 
   
-		}
-			
-			
-			
-			
+		}			
 			
 	  if(!isOkToCreate) {
 			Console.WriteLine("this is a singleton. access via get Instance"); 
