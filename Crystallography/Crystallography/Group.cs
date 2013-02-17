@@ -14,7 +14,7 @@ namespace Crystallography
 		
 		private Texture2D[] _textures;
 		private TextureInfo[] _tis;
-		private SpriteTile[] _sprites;
+//		private SpriteTile[] _sprites;
 		private static SpriteSingleton _ss = SpriteSingleton.getInstance();
 		private int _population;
 //		private PhysicsBody _physicsBody;
@@ -87,16 +87,37 @@ namespace Crystallography
 				if ( cards[i] == null ) {
 					cards[i] = card;
 					switch(i) {
-						case 0:	
-							card.TileIndex2D = _ss.Get("topSide").TileIndex2D;
+						case 0:
+							if ( card.cardData.pattern == (int)CardData.PATTERN.SOLID ) {
+								card.TileIndex2D = _ss.Get("topSide").TileIndex2D;
+							} else if ( card.cardData.pattern == (int)CardData.PATTERN.STRIPE ) {
+								card.TileIndex2D = _ss.Get("stripeTop").TileIndex2D;
+							} else {
+								card.TileIndex2D = _ss.Get("dotTop").TileIndex2D;
+							}
+//							card.TileIndex2D = _ss.Get("topSide").TileIndex2D;
 							_population++;
 							break;
 						case 1:
-							card.TileIndex2D = _ss.Get ("leftSide").TileIndex2D;
+							if ( card.cardData.pattern == (int)CardData.PATTERN.SOLID ) {
+								card.TileIndex2D = _ss.Get("leftSide").TileIndex2D;
+							} else if ( card.cardData.pattern == (int)CardData.PATTERN.STRIPE ) {
+								card.TileIndex2D = _ss.Get("stripeLeft").TileIndex2D;
+							} else {
+								card.TileIndex2D = _ss.Get("dotLeft").TileIndex2D;
+							}
+//							card.TileIndex2D = _ss.Get ("leftSide").TileIndex2D;
 							_population++;
 							break;
 						case 2:
-							card.TileIndex2D = _ss.Get ("rightSide").TileIndex2D;
+							if ( card.cardData.pattern == (int)CardData.PATTERN.SOLID ) {
+								card.TileIndex2D = _ss.Get("rightSide").TileIndex2D;
+							} else if ( card.cardData.pattern == (int)CardData.PATTERN.STRIPE ) {
+								card.TileIndex2D = _ss.Get("stripeRight").TileIndex2D;
+							} else {
+								card.TileIndex2D = _ss.Get("dotRight").TileIndex2D;
+							}
+//							card.TileIndex2D = _ss.Get ("rightSide").TileIndex2D;
 							_population++;
 							break;
 						default:
@@ -116,7 +137,14 @@ namespace Crystallography
 			for (int i=0; i<3; i++) {
 				if ( cards[i] == card ) {
 					card.groupID = -1;
-					card.TileIndex2D = _ss.Get ("topSide").TileIndex2D;
+					if ( card.cardData.pattern == (int)CardData.PATTERN.SOLID ) {
+						card.TileIndex2D = _ss.Get("topSide").TileIndex2D;
+					} else if ( card.cardData.pattern == (int)CardData.PATTERN.STRIPE ) {
+						card.TileIndex2D = _ss.Get("stripeTop").TileIndex2D;
+					} else {
+						card.TileIndex2D = _ss.Get("dotTop").TileIndex2D;
+					}
+//					card.TileIndex2D = _ss.Get ("topSide").TileIndex2D;
 					cards[i] = null;
 					_population--;
 				}
@@ -133,11 +161,28 @@ namespace Crystallography
 			}
 		}
 		
-		public void analyze()
+		public bool evaluateCompleteGroup()
+		{
+			bool match = false;
+			if (analyze(cards)) {
+				match = true;
+				System.Console.WriteLine("SET!");
+				Cube cube = new Cube(cards, GameScene._physics.addCardPhysics(cards[0].Position));
+				Director.Instance.CurrentScene.AddChild(cube);
+//				foreach ( Card c in cards ) {
+//					Director.Instance.CurrentScene.RemoveChild(c, true);
+//					GameScene._physics.removePhysicsBody(c.physicsBody);
+//				}
+			}
+			clearGroup();
+			return match;
+		}
+		
+		public static bool analyze(Card[] cards)
 		{
 			bool match = true;
 			
-			int[] data = new int[3];
+//			int[] data = new int[3];
 
 			match = match && 0 != ( cards[0].cardData.color & cards[1].cardData.color & cards[2].cardData.color );
 			if (!match) {
@@ -145,8 +190,8 @@ namespace Crystallography
 				match = (int)CardData.COLOR.BLUE + (int)CardData.COLOR.RED + (int)CardData.COLOR.WHITE == ( cards[0].cardData.color | cards[1].cardData.color | cards[2].cardData.color );
 				if (!match) {
 					// NOT ALL SAME OR ALL DIFFERENT -- NOT A VALID SET
-					clearGroup ();
-					return;
+//					clearGroup ();
+					return match;
 				}
 			}
 			match = match && 0 != ( cards[0].cardData.pattern & cards[1].cardData.pattern & cards[2].cardData.pattern );
@@ -155,8 +200,8 @@ namespace Crystallography
 				match = (int)CardData.PATTERN.DOT + (int)CardData.PATTERN.SOLID + (int)CardData.PATTERN.STRIPE == ( cards[0].cardData.pattern | cards[1].cardData.pattern | cards[2].cardData.pattern );
 				if (!match) {
 					// NOT ALL SAME OR ALL DIFFERENT -- NOT A VALID SET
-					clearGroup ();
-					return;
+//					clearGroup ();
+					return match;
 				}
 			}
 			match = match && 0 != ( cards[0].cardData.sound & cards[1].cardData.sound & cards[2].cardData.sound );	
@@ -165,12 +210,10 @@ namespace Crystallography
 				match = (int)CardData.SOUND.A + (int)CardData.SOUND.B + (int)CardData.SOUND.C == ( cards[0].cardData.sound | cards[1].cardData.sound | cards[2].cardData.sound );
 				if (!match) {
 					// NOT ALL SAME OR ALL DIFFERENT -- NOT A VALID SET
-					clearGroup ();
-					return;
+//					clearGroup ();
+					return match;
 				}
 			}
-			
-			
 //			if( cards[0].Color == cards[1].Color && cards[0].Color == cards[2].Color ) {
 ////				return match;
 //			} else {
@@ -179,16 +222,17 @@ namespace Crystallography
 //				          cards[1].Color != cards[2].Color );
 ////				return match;
 //			}
-			if (match) {
-				System.Console.WriteLine("SET!");
-				Cube cube = new Cube(cards, GameScene._physics.addCardPhysics(cards[0].Position));
-				Director.Instance.CurrentScene.AddChild(cube);
-				foreach ( Card c in cards ) {
-					Director.Instance.CurrentScene.RemoveChild(c, true);
-					GameScene._physics.removePhysicsBody(c.physicsBody);
-				}
-			}
-			clearGroup();
+//			if (match) {
+//				System.Console.WriteLine("SET!");
+//				Cube cube = new Cube(cards, GameScene._physics.addCardPhysics(cards[0].Position));
+//				Director.Instance.CurrentScene.AddChild(cube);
+//				foreach ( Card c in cards ) {
+//					Director.Instance.CurrentScene.RemoveChild(c, true);
+//					GameScene._physics.removePhysicsBody(c.physicsBody);
+//				}
+//			}
+//			clearGroup();
+			return match;
 		}
 		
 		public int population {

@@ -137,6 +137,7 @@ namespace Crystallography
 			this.SceneBodies[i] = null;
 			for (int j=i; j < numBody-1; j++) {
 				this.SceneBodies[j] = this.SceneBodies[j+1];
+				this.SceneBodies[j+1] = null;
 			}
 			numBody--;
 		}

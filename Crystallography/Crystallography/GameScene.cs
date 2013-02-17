@@ -191,7 +191,9 @@ namespace Crystallography
 				groups[i] = new Group();//_physics.addGroupPhysics(new Vector2(400f,400f)));
 //				this.AddChild (groups[i]);
 			}
-				
+			
+			Console.WriteLine("Possible Sets Remain: " + setsPossible(cards));
+			
 //            this.AddChild(_scoreboard);
 //            this.AddChild(ball);
 //            this.AddChild(_player);
@@ -388,7 +390,20 @@ namespace Crystallography
 //				SelectedCard.physicsBody.Velocity = -moved.Normalize();
 				Group g = groups[SelectedCard.groupID];
 				if (g.population == 3) {
-					g.analyze();
+					Card[] triad = new Card[3];
+					triad[0] = cards[Array.IndexOf(cards,g.cards[0])];
+					triad[1] = cards[Array.IndexOf(cards,g.cards[1])];
+					triad[2] = cards[Array.IndexOf(cards,g.cards[2])];
+//					Array.Copy(g.cards, triad, 3);
+					if ( g.evaluateCompleteGroup() ) {
+						for (int i=0; i<3; i++) {
+							cards = removeCardFromDeck (triad[i], cards);
+						}
+						if(!setsPossible(cards)) {
+								goToNextLevel();
+							}
+					}
+					
 				}
 //				g.clearGroup();
 //				Array.Clear(g.cards,0,g.cards.Length);
@@ -450,6 +465,17 @@ namespace Crystallography
 			}
 			return null;                            
 		}
+		
+		public void goToNextLevel()
+		{
+			LevelData.CURRENT_LEVEL++;
+			if (LevelData.CURRENT_LEVEL < LevelData.LEVEL_DATA.Length) { // THERE ARE STILL MORE LEVELS
+				Director.Instance.ReplaceScene(new GameScene());
+			} else { // ALL LEVELS COMPLETED
+				Director.Instance.ReplaceScene(new TitleScene());
+			}
+		}
+		
 //		 		private void setColor() {
 // 			System.Random rand = new System.Random(); 
 // 			switch(rand.Next(1,4)) 
@@ -489,6 +515,49 @@ namespace Crystallography
 // 		}
 // 		}			
 
+		public static bool setsPossible( Card[] deck )
+		{			
+			int len = ((Array)deck).Length;
+			if ( len < 3 ) {
+				return false;
+			}
+			
+			Card[] triad = new Card[3];
+			
+			for (int i=0; i < len-2; i++) {
+				for (int j=i+1; j < len-1; j++) {
+					for (int k=j+1; k < len; k++) {
+						triad[0] = deck[i];
+						triad[1] = deck[j];
+						triad[2] = deck[k];
+						if (Group.analyze(triad)) {
+							Console.WriteLine("Possible Sets Remain: TRUE");
+							return true;
+						}
+					}
+				}
+			}
+			Console.WriteLine("Possible Sets Remain: FALSE");
+			return false;
+		}
+		
+		public static Card[] removeCardFromDeck(Card c, Card[] deck) 
+		{
+			int len = ((Array)deck).Length;
+			int i = Array.IndexOf (deck,c);
+			deck[i] = null;
+			if (i != len-1) {
+				for (int j=i; j < len-1; j++) {
+					deck[j] = deck[j+1];
+					deck[j+1] = null;
+					Director.Instance.CurrentScene.RemoveChild(c, true);
+				}
+			}
+			GameScene._physics.removePhysicsBody(c.physicsBody);
+			Card[] newDeck = new Card[len-1];
+			Array.Copy(deck, newDeck, len-1);
+			return newDeck;
+		}
 		
         ~GameScene(){
            // _pongBlipSoundPlayer.Dispose();

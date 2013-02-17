@@ -84,5 +84,13 @@
     <Content Include="assets\images\playOver.png" />
     <Content Include="assets\images\instructions.png" />
     <Content Include="assets\images\instructionsOver.png" />
+    <Content Include="assets\images\allSame.png" />
+    <Content Include="assets\images\allDiff.png" />
+    <Content Include="assets\images\dotLeft.png" />
+    <Content Include="assets\images\dotRight.png" />
+    <Content Include="assets\images\stripeLeft.png" />
+    <Content Include="assets\images\stripeRight.png" />
+    <Content Include="assets\images\stripeTop.png" />
+    <Content Include="assets\images\dotTop.png" />
   </ItemGroup>
 </Project>

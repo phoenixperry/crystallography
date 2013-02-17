@@ -51,8 +51,8 @@ namespace Crystallography
         {
 			instance = SpriteSingleton.getInstance();
 			cardData = data;
-//			setFace(); 
-			spriteName = "topSide";
+			setFace(data.pattern); 
+//			spriteName = "topSide";
 			spriteTile = instance.Get (spriteName); 
 			spriteTile.Position = new Vector2(10.0f, 10.0f); 
 			this.AddChild(spriteTile);
@@ -63,8 +63,8 @@ namespace Crystallography
             _physicsBody = physicsBody;
             
 			groupID = -1;
-			this.TextureInfo = _ss.Get ("topSide").TextureInfo;
-			this.TileIndex2D = _ss.Get ("topSide").TileIndex2D;
+			this.TextureInfo = _ss.Get (spriteName).TextureInfo;
+			this.TileIndex2D = _ss.Get (spriteName).TileIndex2D;
 //            this.TextureInfo = new TextureInfo(new Texture2D("Application/assets/images/topSide.png", false));
 //            this.Scale = this.TextureInfo.TextureSizef/4f;
 			this.Scale = this.CalcSizeInPixels()/4f;
@@ -159,18 +159,19 @@ namespace Crystallography
  			}
  		}
  		
- 		public void setFace() {
- 			System.Random rand = new System.Random();
- 			switch(rand.Next(1,4))
+ 		public void setFace(int pattern) {
+// 			System.Random rand = new System.Random();
+ 			switch(pattern)
  				{
- 					case 1:
- 						spriteName = "leftSide";
+ 					case (int)CardData.PATTERN.SOLID:
+// 						spriteName = "leftSide";
+						spriteName = "topSide";
  						break;
- 					case 2:
- 						spriteName = "rightSide";
+ 					case (int)CardData.PATTERN.STRIPE:
+ 						spriteName = "stripeTop";
  						break;
- 					case 3:
- 						spriteName = "topSide";
+ 					case (int)CardData.PATTERN.DOT:
+ 						spriteName = "dotTop";
  						break;
  					default:
  					break;
@@ -192,8 +193,8 @@ namespace Crystallography
 		
         ~Card()
         {
-            this.TextureInfo.Texture.Dispose();
-            this.TextureInfo.Dispose();
+//            this.TextureInfo.Texture.Dispose();
+//            this.TextureInfo.Dispose();
         }
     }
 }

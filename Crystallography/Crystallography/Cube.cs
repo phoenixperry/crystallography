@@ -18,7 +18,13 @@ namespace Crystallography
 		private PhysicsBody _physicsBody;
 		private static Image _imgTop;
 		private static Image _imgLeft; 
-		private static Image _imgRight; 
+		private static Image _imgRight;
+		private static Image _imgTopStripe;
+		private static Image _imgLeftStripe; 
+		private static Image _imgRightStripe;
+		private static Image _imgTopDot;
+		private static Image _imgLeftDot; 
+		private static Image _imgRightDot;
 		private static Byte[] data;
 		private static bool initialized = false;
 		private static int[] colorData;
@@ -35,11 +41,31 @@ namespace Crystallography
 //			this.TextureInfo.Texture = new Texture2D(167, 191,false,PixelFormat.Rgba);
 			
 			setColorData (cards[0].Color);
-			addToTexture (_imgTop, new Vector2i(45,0), colorData );
+			if ( cards[0].cardData.pattern == (int)CardData.PATTERN.SOLID ) {
+				addToTexture (_imgTop, new Vector2i(45,0), colorData );
+			} else if ( cards[0].cardData.pattern == (int)CardData.PATTERN.STRIPE ) {
+				addToTexture (_imgTopStripe, new Vector2i(45,0), colorData );
+			} else {
+				addToTexture (_imgTopDot, new Vector2i(45,0), colorData );
+			}
 			setColorData (cards[1].Color);
-			addToTexture (_imgLeft, new Vector2i(0,-78), colorData );
+			if ( cards[0].cardData.pattern == (int)CardData.PATTERN.SOLID ) {
+				addToTexture (_imgLeft, new Vector2i(0,-78), colorData );
+			} else if ( cards[0].cardData.pattern == (int)CardData.PATTERN.STRIPE ) {
+				addToTexture (_imgLeftStripe, new Vector2i(0,-78), colorData );
+			} else {
+				addToTexture (_imgLeftDot, new Vector2i(0,-78), colorData );
+			}
+//			addToTexture (_imgLeft, new Vector2i(0,-78), colorData );
 			setColorData (cards[2].Color);
-			addToTexture (_imgRight, new Vector2i(92,-78), colorData);
+			if ( cards[0].cardData.pattern == (int)CardData.PATTERN.SOLID ) {
+				addToTexture (_imgRight, new Vector2i(92,-78), colorData);
+			} else if ( cards[0].cardData.pattern == (int)CardData.PATTERN.STRIPE ) {
+				addToTexture (_imgRightStripe, new Vector2i(92,-78), colorData);
+			} else {
+				addToTexture (_imgRightDot, new Vector2i(92,-78), colorData);
+			}
+//			addToTexture (_imgRight, new Vector2i(92,-78), colorData);
 			
 			this.Scale = this.CalcSizeInPixels()/4f;
 			this.Pivot = new Sce.PlayStation.Core.Vector2(0.5f,0.5f);
@@ -62,6 +88,18 @@ namespace Crystallography
 			_imgLeft.Decode();
 			_imgRight = new Image("Application/assets/images/rightSide.png");
 			_imgRight.Decode();
+			_imgTopStripe = new Image("Application/assets/images/stripeTop.png");
+			_imgTopStripe.Decode();
+			_imgLeftStripe = new Image("Application/assets/images/stripeLeft.png");
+			_imgLeftStripe.Decode();
+			_imgRightStripe = new Image("Application/assets/images/stripeRight.png");
+			_imgRightStripe.Decode();
+			_imgTopDot = new Image("Application/assets/images/dotTop.png");
+			_imgTopDot.Decode();
+			_imgLeftDot = new Image("Application/assets/images/dotLeft.png");
+			_imgLeftDot.Decode();
+			_imgRightDot = new Image("Application/assets/images/dotRight.png");
+			_imgRightDot.Decode();
 			initialized = true;
 		}
 		
@@ -101,9 +139,11 @@ namespace Crystallography
 			
 			for (int j=0; j < data.Length/4; j++) {
 				if (data[j*4+3] != 0) {
-					data[j*4] = (Byte)color[0];
-					data[j*4+1] = (Byte)color[1];
-					data[j*4+2] = (Byte)color[2];
+					if( 255 == data[j*4] && 255 == data[j*4+1] && 255 == data[j*4+2]) {
+						data[j*4] = (Byte)color[0];
+						data[j*4+1] = (Byte)color[1];
+						data[j*4+2] = (Byte)color[2];
+					}
 					var x = j%168 + offset.X;
 					var y = (j-x)/168 - offset.Y;
 					this.TextureInfo.Texture.SetPixels(0,data,PixelFormat.Rgba,j*4,167*4,x,y,1,1);
