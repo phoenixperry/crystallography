@@ -240,7 +240,7 @@ namespace Crystallography
 
 		public class SoundSystem
 		{
-			public static SoundSystem Instance = new SoundSystem("/Application/assets/");
+			public static SoundSystem Instance = new SoundSystem("/Application/assets/sounds/");
 
 			public string AssetsPrefix;
 			public Dictionary<string, SoundPlayer> SoundDatabase;
@@ -295,7 +295,7 @@ namespace Crystallography
 
 		public class MusicSystem
 		{
-			public static MusicSystem Instance = new MusicSystem("/Application/assets/");
+			public static MusicSystem Instance = new MusicSystem("/Application/assets/sounds/");
 
 			public string AssetsPrefix;
 			public Dictionary<string, BgmPlayer> MusicDatabase;

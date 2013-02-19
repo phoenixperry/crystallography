@@ -16,30 +16,7 @@ namespace Crystallography
 		public static Card[] cards;
 		public static Group[] groups;
     	public static GamePhysics _physics;
-//		public static LevelData levelData;
 		private static CardData[] currentLevelData;
-//    	private SoundPlayer _pongBlipSoundPlayer;
-//   		private Sound _pongSound;
-		
-//		private Bgm _titleSong;
-//		private BgmPlayer _songPlayer;
-//		public static SoundPlayer soundPlayer;
-		public static Sound sndCubed;
-		public static SoundPlayer sndCubedPlayer;
-		public static Sound sndSide1;
-		public static SoundPlayer sndSide1Player;
-		public static Sound sndSide2;
-		public static SoundPlayer sndSide2Player;
-		public static Sound sndSound1;
-		public static SoundPlayer sndSound1Player;
-		public static Sound sndSound2;
-		public static SoundPlayer sndSound2Player;
-		public static Sound sndSound3;
-		public static SoundPlayer sndSound3Player;
-		public static Sound sndWrong;
-		public static SoundPlayer sndWrongPlayer;
-		private static bool _sndInitialized = false;
-		
 		
 		public bool WasTouch;
 		public bool IsTouch;
@@ -50,11 +27,6 @@ namespace Crystallography
 		
 		public SpriteUV s;
 		
-		//singleton vars 
-//		private SpriteSingleton instance; 
-//		private SpriteTile spriteTile; 
-//		private string spriteName; 
-        
         // Change the following value to true if you want bounding boxes to be rendered
         private static Boolean DEBUG_BOUNDINGBOXS = false;
         
@@ -62,180 +34,27 @@ namespace Crystallography
         {
             this.Camera.SetViewFromViewport();
             _physics = new GamePhysics();
-			if (!_sndInitialized)
-			{
-				initializeSound();
-			}
 
-//            instance = SpriteSingleton.getInstance(); 
-//			setFace(); 
-//			spriteTile = instance.Get (spriteName); 
-//			instance = SpriteSingleton.getInstance(); 
-//			spriteTile = instance.Get ("topSide"); 
-//			spriteTile.Position = new Vector2(100.0f, 100.0f); 
-//			this.AddChild(spriteTile); 
-//			setColor(); 			
-				
-//            ball = new Card(_physics.SceneBodies[(int)GamePhysics.BODIES.Ball]);
-//            _player = new Paddle(Paddle.PaddleType.PLAYER, 
-//                                 _physics.SceneBodies[(int)GamePhysics.BODIES.Player]);
-//            _ai = new Paddle(Paddle.PaddleType.AI, 
-//                             _physics.SceneBodies[(int)GamePhysics.BODIES.Ai]);
-//            _scoreboard = new Scoreboard();
-			
             var _screenWidth = Director.Instance.GL.Context.GetViewport().Width;
             var _screenHeight = Director.Instance.GL.Context.GetViewport().Height;
 			System.Random rand = new System.Random();
 			
 			currentLevelData = LevelData.LEVEL_DATA[LevelData.CURRENT_LEVEL];
-//			cards = new Card[20];
 			cards = new Card[currentLevelData.Length];
 			for (int i = 0; i < cards.Length; i++) {
-//				cards[i] = new Card(_physics.SceneBodies[(int)GamePhysics.BODIES.Ball]);
-				Vector2 start_pos = new Vector2(50f + 0.75f * _screenWidth * (float)rand.NextDouble(), 50f + 0.75f * _screenHeight * (float)rand.NextDouble ());
+				Vector2 start_pos = new Vector2(50f + 0.75f * _screenWidth * (float)rand.NextDouble(), 
+				                                50f + 0.75f * _screenHeight * (float)rand.NextDouble ());
 				cards[i] = new Card(_physics.addCardPhysics(start_pos), currentLevelData[i]);
-//				switch(rand.Next(1,4))
-//				{
-//					case 1:
-//						cards[i].Color = Colors.Red;
-//						break;
-//					case 2:
-//						cards[i].Color = Colors.White;
-//						break;
-//					case 3:
-//						cards[i].Color = Colors.LightBlue;
-//						break;
-//					default:
-//						cards[i].Color = Colors.LightBlue;
-//					break;
-//				}
-				
 				this.AddChild (cards[i]);
 			}
-			
-//			_titleSong = new Bgm("/Application/assets/sounds/play.mp3");
-//			if(_songPlayer == null) {
-//            	_songPlayer.Dispose();
-//				_songPlayer = _titleSong.CreatePlayer();
-//			}
-//            _songPlayer = _titleSong.CreatePlayer();
-			
-//			Cube cube = new Cube(new Card[] {cards[0], cards[1], cards[2] }, _physics.addCardPhysics(new Vector2(100f,100f)));
-//			cube.Position = new Vector2(100f,100f);
-//			this.AddChild(cube);
-			
-//			cards[0].Color = Colors.Red;
-				
-//				FrameBuffer fb = new FrameBuffer();
-//				Texture2D destination = new Texture2D(256, 256, false, PixelFormat.Rgba,PixelBufferOption.Renderable);
-//				fb.SetColorTarget(destination,0);
-//				
-//				Director.Instance.GL.Context.SetFrameBuffer(fb);
-//				Director.Instance.GL.Context.SetClearColor(0,0,0,255);
-//				Director.Instance.GL.Context.Clear();
-//				Director.Instance.GL.Context.SetTexture(0,cards[0].TextureInfo.Texture);
-//
-//				Director.Instance.GL.Context.SetFrameBuffer(Director.Instance.GL.Context.Screen);
-//				Director.Instance.GL.Context.SetClearColor(0,0,0,0);
-//				
-//				s = new SpriteUV();
-//				s.TextureInfo = new TextureInfo(destination);
-//				s.Position = new Vector2(100,100);
-//				s.Scale = s.CalcSizeInPixels()/4f;
-//				this.AddChild(s);
-				
-//				s = new SpriteUV( new TextureInfo( 
-//				                                  new Sce.PlayStation.Core.Graphics.Texture2D(100,100,false,
-//				                                            Sce.PlayStation.Core.Graphics.PixelFormat.Rgba) ) );
-				
-//				Sce.PlayStation.HighLevel.UI.ImageAsset img = new Sce.PlayStation.HighLevel.UI.ImageAsset(cards[0].TextureInfo.Texture);
-//				Sce.PlayStation.Core.Imaging.Image img = new Sce.PlayStation.Core.Imaging.Image(Sce.PlayStation.Core.Imaging.ImageMode.Rgba, new Sce.PlayStation.Core.Imaging.ImageSize(100,100), new Sce.PlayStation.Core.Imaging.ImageColor(255,255,255,255));
-//				Director.Instance.GL.SetBlendMode(Sce.PlayStation.HighLevel.GameEngine2D.Base.BlendMode.Additive);
-//				Director.Instance.GL.Context.Enable (EnableMode.Blend);
-//				Director.Instance.GL.Context.SetBlendFunc();
-//				Director.Instance.GL.Context.SetBlendFuncAlpha(Sce.PlayStation.Core.Graphics.BlendFuncMode.Add);
-//			Image img = new Image("Application/assets/images/topSide.png");
-//			Image img2 = new Image("Application/assets/images/leftSide.png");
-//			img.Decode ();
-//			img2.Decode ();
-//			Image img4 = new Image(ImageMode.Rgba, new ImageSize(168,146), img.ToBuffer());
-//			Image img5 = new Image(ImageMode.Rgba, new ImageSize(168,146), img2.ToBuffer());
-//			img5.DrawImage(img4, new ImagePosition(0,50));	
-				
-				
-//				Image img3 = new Image("Application/assets/images/rightSide.png");
-//				img.Decode();
-//				img2.Decode();
-//				img2 = new Image(ImageMode.Rgba, new ImageSize(168, 146), img2.ToBuffer());
-//				img3.Decode();
-//				Director.Instance.GL.Context.Enable (Sce.PlayStation.Core.Graphics.EnableMode.Blend);
-//				Director.Instance.GL.Context.SetBlendFunc(new Sce.PlayStation.Core.Graphics.BlendFunc);
-//				Director.Instance.GL.Context.SetBlendFuncAlpha(Sce.PlayStation.Core.Graphics.BlendFuncMode.Add);
-//				Director.Instance.GL.Context.ReadPixels(
-//				img.DrawImage(img2, new ImagePosition(0,50));
-//				Director.Instance.GL.SetBlendMode(Sce.PlayStation.HighLevel.GameEngine2D.Base.BlendMode.None);
-//				img.DrawImage(img3, new ImagePosition(0,0));
-//				System.Console.WriteLine(img.DecodeSize.Width + " " + img.DecodeSize.Height);
-//				System.Console.WriteLine(img.Size.Width + " " + img.Size.Height);
-//				img.Resize(new ImageSize(100,100));
-				
-//			Sce.PlayStation.Core.Graphics.Texture2D t = new Sce.PlayStation.Core.Graphics.Texture2D(168,146,false,Sce.PlayStation.Core.Graphics.PixelFormat.Rgba);
-//			Byte[] source = Director.Instance.GL.Context.ReadPixels(cards[0].TextureInfo.Texture,0,0,0,0,0,168,146);
-			
-//			Byte[] data = img.ToBuffer ();
-//			int[] color = new int[] { (int)(cards[0].Color.X * 255f), (int)(cards[0].Color.Y * 255f), (int)(cards[0].Color.Z * 255f) };
-//			
-//			for (int j=0; j < data.Length/4; j++) {
-//				if (data[j*4+3] != 0) {
-//					data[j*4] = (Byte)color[0];
-//					data[j*4+1] = (Byte)color[1];
-//					data[j*4+2] = (Byte)color[2];
-//					var x = j%168;
-//					var y = (j-x)/168;
-//					t.SetPixels(0,data,PixelFormat.Rgba,j*4,168*4,x,y,1,1);
-//				}
-//			}
-//				
-//			data = img2.ToBuffer ();
-//			
-//			for (int j=0; j < data.Length/4; j++) {
-//				if (data[j*4+3] != 0) {
-//					var x = j%168;
-//					var y = (j-x)/168;
-//					t.SetPixels(0,data,PixelFormat.Rgba,j*4,168*4,x,y,1,1);
-//				}
-//			}
-//			
-////				t.SetPixels(0,img5.ToBuffer());
-////				t.SetPixels (1,img2.ToBuffer ());
-////				Sce.PlayStation.HighLevel.UI.ImageAsset img = new Sce.PlayStation.HighLevel.UI.ImageAsset(cards[0].TextureInfo.Texture);
-//				s = new SpriteUV( new TextureInfo(t) );
-//				s.Position = new Vector2(100f,100f);
-//				s.Scale = s.CalcSizeInPixels()/4f;
-//				img.Dispose();
-//				this.AddChild(s);
 			
 			groups = new Group[cards.Length];
 			
 			for (int i=0; i<cards.Length; i++) {
-				groups[i] = new Group();//_physics.addGroupPhysics(new Vector2(400f,400f)));
-//				this.AddChild (groups[i]);
+				groups[i] = new Group();
 			}
 			
-			Console.WriteLine("Possible Sets Remain: " + setsPossible(cards));
-			
-//            this.AddChild(_scoreboard);
-//            this.AddChild(ball);
-//            this.AddChild(_player);
-//            this.AddChild(_ai);
-			
-//			 _dragGestureDetector = new DragGestureDetector();
-//			_dragGestureDetector.DragDetected += delegate(object sender, DragEventArgs e) {
-//				var newPos = new Vector2(e.Source.X,e.Source.Y) + e.Distance;
-//				e.Source.SetPosition(newPos.X,newPos.Y);
-//				_label.Text = "Dragged";
-//			};
-			
+//			Console.WriteLine("Possible Sets Remain: " + setsPossible(cards));
 			
             // This is debug routine that will draw the physics bounding box around the players paddle
             if(DEBUG_BOUNDINGBOXS)
@@ -249,171 +68,43 @@ namespace Crystallography
 								new Bounds2(bottomLeft*GamePhysics.PtoM, topRight*GamePhysics.PtoM));
 						}
 					}
-//                    var bottomLeftPlayer = _physics.SceneBodies[(int)GamePhysics.BODIES.Player].AabbMin;
-//                    var topRightPlayer = _physics.SceneBodies[(int)GamePhysics.BODIES.Player].AabbMax;
-//                    Director.Instance.DrawHelpers.DrawBounds2Fill(
-//                        new Bounds2(bottomLeftPlayer*GamePhysics.PtoM,topRightPlayer*GamePhysics.PtoM));
-//
-//                    var bottomLeftAi = _physics.SceneBodies[(int)GamePhysics.BODIES.Ai].AabbMin;
-//                    var topRightAi = _physics.SceneBodies[(int)GamePhysics.BODIES.Ai].AabbMax;
-//                    Director.Instance.DrawHelpers.DrawBounds2Fill(
-//                        new Bounds2(bottomLeftAi*GamePhysics.PtoM,topRightAi*GamePhysics.PtoM));
-//
-//                    var bottomLeftBall = _physics.SceneBodies[(int)GamePhysics.BODIES.Ball].AabbMin;
-//                    var topRightBall = _physics.SceneBodies[(int)GamePhysics.BODIES.Ball].AabbMax;
-//                    Director.Instance.DrawHelpers.DrawBounds2Fill(
-//                        new Bounds2(bottomLeftBall*GamePhysics.PtoM,topRightBall*GamePhysics.PtoM));
-//					
-//					var bottomLeftLeftBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.LeftBumper].AabbMin;
-//					var topRightLeftBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.LeftBumper].AabbMax;
-//					Director.Instance.DrawHelpers.DrawBounds2Fill(
-//						new Bounds2 (bottomLeftLeftBumper*GamePhysics.PtoM,topRightLeftBumper*GamePhysics.PtoM));
-//					
-//					var bottomLeftRightBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.RightBumper].AabbMin;
-//					var topRightRightBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.RightBumper].AabbMax;
-//					Director.Instance.DrawHelpers.DrawBounds2Fill(
-//						new Bounds2 (bottomLeftRightBumper*GamePhysics.PtoM,topRightRightBumper*GamePhysics.PtoM));
-//					
-//					var bottomLeftTopBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.TopBumper].AabbMin;
-//					var topRightTopBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.TopBumper].AabbMax;
-//					Director.Instance.DrawHelpers.DrawBounds2Fill(
-//						new Bounds2 (bottomLeftTopBumper*GamePhysics.PtoM,topRightTopBumper*GamePhysics.PtoM));
-//					
-//					var bottomLeftBottomBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.BottomBumper].AabbMin;
-//					var topRightBottomBumper = _physics.SceneBodies[(int)GamePhysics.BODIES.BottomBumper].AabbMax;
-//					Director.Instance.DrawHelpers.DrawBounds2Fill(
-//						new Bounds2 (bottomLeftBottomBumper*GamePhysics.PtoM,topRightBottomBumper*GamePhysics.PtoM));
                 };
             }
-            
-            //Now load the sound fx and create a player
-         //   _pongSound = new Sound("/Application/audio/pongblip.mp3");
-           // _pongBlipSoundPlayer = _pongSound.CreatePlayer();
-            
-            Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
+			
+			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
         }
         
-//		public override void OnEnter ()
-//        {
-//            _songPlayer.Loop = true;
-//            _songPlayer.Volume = 0.2f;
-//			_songPlayer.Play();
-//        }
-//        public override void OnExit ()
-//        {
-//            base.OnExit ();
-//            _songPlayer.Stop();
-//            _songPlayer.Dispose();
-//            _songPlayer = null;
-//        }
-		
-		private void initializeSound()
-		{
-//			soundPlayer = new SoundPlayer();
-			sndCubed = new Sound("/Application/assets/sounds/cubed.wav");
-			sndCubedPlayer = sndCubed.CreatePlayer ();
-			sndSide1 = new Sound("/Application/assets/sounds/side1.wav");
-			sndSide1Player = sndSide1.CreatePlayer();
-			sndSide2 = new Sound("/Application/assets/sounds/side2.wav");
-			sndSide2Player = sndSide2.CreatePlayer();
-			sndSound1 = new Sound("/Application/assets/sounds/sound1.wav");
-			sndSound1Player = sndSound1.CreatePlayer();
-			sndSound2 = new Sound("/Application/assets/sounds/sound2.wav");
-			sndSound2Player = sndSound2.CreatePlayer();
-			sndSound3 = new Sound("/Application/assets/sounds/sound3.wav");
-			sndSound3Player = sndSound3.CreatePlayer();
-			sndWrong = new Sound("/Application/assets/sounds/wrong.wav");
-			sndWrongPlayer = sndWrong.CreatePlayer();
-			_sndInitialized = true;
-		}
-		
-        private void ResetBall()
+		public override void OnEnter ()
         {
-            //Move ball to screen center and release in a random directory
-//            _physics.SceneBodies[(int)GamePhysics.BODIES.Ball].Position = 
-//                new Vector2(Director.Instance.GL.Context.GetViewport().Width/2,
-//                            Director.Instance.GL.Context.GetViewport().Height/2) / GamePhysics.PtoM;
-            
-//            System.Random rand = new System.Random();
-//            float angle = (float)rand.Next(0,360);
-        
-//            if((angle%90) <=15) angle +=15.0f;
-        
-//            _physics.SceneBodies[(int)GamePhysics.BODIES.Ball].Velocity = 
-//                new Vector2(0.0f,5.0f).Rotate(PhysicsUtility.GetRadian(angle));
+			base.OnEnter();
         }
-        
+		
+        public override void OnExit ()
+        {
+			base.OnExit();
+        }
+		
         public override void Update (float dt)
         {
             base.Update (dt);
             
-            if(Input2.GamePad0.Select.Press)
-                Director.Instance.ReplaceScene(new MenuScene());
-            //switch to multitouch
+            //TODO: support multitouch controls
 			Touch.GetData(0); 
 			foreach (var touchData in Touch.GetData(0)) {
-            if (touchData.Status == TouchStatus.Down ||
-                touchData.Status == TouchStatus.Move) {
-
-//                int pointX = (int)((touchData.X + 0.5f) * 
-//					                   Director.Instance.GL.Context.GetViewport().Width);
-//                int pointY = (int)((touchData.Y + 0.5f) * Director.Instance.GL.Context.GetViewport().Height);
-//				System.Console.WriteLine("pointX" + pointX + "pointY"+pointY); 
-               // this.FillCircle(colorTable[colorId], pointX, pointY, 96); --> this code lines graphics to location obvious 
-            }
+            	if (touchData.Status == TouchStatus.Down ||
+                	touchData.Status == TouchStatus.Move) {
+					
+				}
 			}
+			
             //We don't need these, but sadly, the Simulate call does.
             Vector2 dummy1 = new Vector2();
             Vector2 dummy2 = new Vector2();
-            
-            
-            //Update the physics simulation
+			
+            //PHYSICS UPDATE CALL
             _physics.Simulate(-1,ref dummy1,ref dummy2);
             
-            //Now check if the ball it either paddle, and if so, play the sound
-//            if(_physics.QueryContact((uint)GamePhysics.BODIES.Ball,(uint)GamePhysics.BODIES.Player) ||
-//                _physics.QueryContact((uint)GamePhysics.BODIES.Ball,(uint)GamePhysics.BODIES.Ai))
-            {
-             //   if(_pongBlipSoundPlayer.Status == SoundStatus.Stopped)
-               //     _pongBlipSoundPlayer.Play();
-            }
-            
-            //Check if the ball went off the top or bottom of the screen and update score accordingly
-//            Results result = Results.StillPlaying;
-//            bool scored = false;
-            
-//            if(ball.Position.Y > Director.Instance.GL.Context.GetViewport().Height + ball.Scale.Y/2)
-//            {
-//                result = _scoreboard.AddScore(true);
-//                scored = true;
-//            }
-//            if(ball.Position.Y < 0 - ball.Scale.Y/2)
-//            {
-//                result =_scoreboard.AddScore(false);
-//                scored = true;
-//            }
-            
-            // Did someone win?  If so, show the GameOver scene
-//            if(result == Results.AiWin) 
-//                Director.Instance.ReplaceScene(new GameOverScene(false));
-//            if(result == Results.PlayerWin) 
-//                Director.Instance.ReplaceScene(new GameOverScene(true));
-            
-            //If someone did score, but game isn't over, reset the ball position to the middle of the screen
-//            if(scored == true)
-//            {
-//                ResetBall ();
-//            }
-            
-            //Finally a sanity check to make sure the ball didn't leave the field.
-//            var ballPB = _physics.SceneBodies[(int)GamePhysics.BODIES.Ball];
-            
-//            if(ballPB.Position.X < -(ball.Scale.X/2f)/GamePhysics.PtoM ||
-//               ballPB.Position.X > (Director.Instance.GL.Context.GetViewport().Width)/GamePhysics.PtoM)
-//            {
-//                ResetBall();
-//            }
-			
+			//INPUT UPDATE CALL
 			UpdateInput(dt);
         }
 		
@@ -430,7 +121,6 @@ namespace Crystallography
 			
 			// New Touch Starting This Frame
 			if (IsTouch && !WasTouch) {
-				
 				if (card != null) {
 					TouchStart = world;
 					SelectedCard = card;
@@ -444,37 +134,35 @@ namespace Crystallography
 					playSound(card.cardData);
 				}
 			}
-			// Drag
+			// On Drag
 			else if (IsTouch && WasTouch) {
 				if ( SelectedCard != null ) {
 					SelectedCard.physicsBody.Position = new Vector2(world.X,world.Y) / GamePhysics.PtoM;
 				}
 			}
-			// Release
+			// On Release
 			else if (SelectedCard != null && touch.Release) {
-//				SelectedCard.physicsBody.Velocity = -moved.Normalize();
 				Group g = groups[SelectedCard.groupID];
 				if (g.population == 3) {
 					Card[] triad = new Card[3];
-					triad[0] = cards[Array.IndexOf(cards,g.cards[0])];
-					triad[1] = cards[Array.IndexOf(cards,g.cards[1])];
-					triad[2] = cards[Array.IndexOf(cards,g.cards[2])];
-//					Array.Copy(g.cards, triad, 3);
+//					triad[0] = cards[Array.IndexOf(cards,g.cards[0])];
+//					triad[1] = cards[Array.IndexOf(cards,g.cards[1])];
+//					triad[2] = cards[Array.IndexOf(cards,g.cards[2])];
+					Array.Copy(g.cards, triad, 3);
 					if ( g.evaluateCompleteGroup() ) {
 						for (int i=0; i<3; i++) {
-							sndCubedPlayer.Play();
+							Support.SoundSystem.Instance.Play("cubed.wav");
 							cards = removeCardFromDeck (triad[i], cards);
 						}
 						if(!setsPossible(cards)) {
 								goToNextLevel();
 							}
 					} else {
-						sndWrongPlayer.Play ();
+//						sndWrongPlayer.Play ();
+						Support.SoundSystem.Instance.Play("wrong.wav");
 					}
 					
 				}
-//				g.clearGroup();
-//				Array.Clear(g.cards,0,g.cards.Length);
 				SelectedCard = null;
 				FirstAttachedCard = null;
 				SecondAttachedCard = null;
@@ -498,12 +186,10 @@ namespace Crystallography
 					if ( FirstAttachedCard == null ) {
 						FirstAttachedCard = closest;
 						playSound(closest.cardData);
-//						FirstAttachedCard.groupID = SelectedCard.groupID;
 						groups[SelectedCard.groupID].tryAddingCard(closest);
 					} else if ( SecondAttachedCard == null ) {
 						SecondAttachedCard = closest;
 						playSound(closest.cardData);
-//						SecondAttachedCard.groupID = SelectedCard.groupID;
 						groups[SelectedCard.groupID].tryAddingCard (closest);
 					}
 					SelectedCard = groups[SelectedCard.groupID].cards[0];
@@ -522,13 +208,13 @@ namespace Crystallography
 			switch((int)data.sound)
  				{
 					case (int)CardData.SOUND.A:
-						sndSound1Player.Play();
+						Support.SoundSystem.Instance.Play("sound1.wav");
  						break;
  					case (int)CardData.SOUND.B:
- 						sndSound2Player.Play();
+						Support.SoundSystem.Instance.Play("sound2.wav");
  						break;
  					case (int)CardData.SOUND.C:
- 						sndSound3Player.Play();
+						Support.SoundSystem.Instance.Play("sound3.wav");
  						break;
  					default:
  					break;
@@ -562,46 +248,7 @@ namespace Crystallography
 			} else { // ALL LEVELS COMPLETED
 				Director.Instance.ReplaceScene(new TitleScene());
 			}
-		}
-		
-//		 		private void setColor() {
-// 			System.Random rand = new System.Random(); 
-// 			switch(rand.Next(1,4)) 
-// 			{
-// 				case 1: 
-// 				//pink
-// 					spriteTile.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f)); 
-// 					break;
-// 				case 2:
-// 				//red 
-// 					spriteTile.RunAction(new TintTo (new Vector4(0.90f,0.075f,0.075f,1.0f),0.1f)); 
-// 					break;
-// 				case 3: 	
-// 				//teal
-// 					spriteTile.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 	
-// 					break; 
-// 				default:
-// 					break; 
-// 			}
-// 		}
- 		
-// 		public void setFace() {
-// 			System.Random rand = new System.Random();
-// 			switch(rand.Next(1,4))
-// 				{
-// 					case 1:
-// 						spriteName = "leftSide";
-// 						break;
-// 					case 2:
-// 						spriteName = "rightSide";
-// 						break;
-// 					case 3:
-// 						spriteName = "topSide";
-// 						break;
-// 					default:
-// 					break;
-// 		}
-// 		}			
+		}			
 
 		public static bool setsPossible( Card[] deck )
 		{			

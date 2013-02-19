@@ -13,15 +13,11 @@ namespace Crystallography
         private TextureInfo _ti;
         private Texture2D _texture;
         
-        private Bgm _titleSong;
-        private BgmPlayer _songPlayer;
-        
         public TitleScene ()
         {
             this.Camera.SetViewFromViewport();
 
             _texture = new Texture2D("/Application/assets/images/header.png",false);
-// started working out game logic in a seperate project Card Match Login
             _ti = new TextureInfo(_texture);
             SpriteUV titleScreen = new SpriteUV(_ti);
             titleScreen.Scale = _ti.TextureSizef;
@@ -35,14 +31,9 @@ namespace Crystallography
             var tintAction = new TintTo(origColor,10.0f);
             ActionManager.Instance.AddAction(tintAction,titleScreen);
             tintAction.Run();
-
-            _titleSong = new Bgm("/Application/assets/sounds/play.mp3");
-// started working out game logic in a seperate project Card Match Login
-
-            
-            if(_songPlayer != null)
-            _songPlayer.Dispose();
-            _songPlayer = _titleSong.CreatePlayer();
+			
+			// MUSIC
+			Support.MusicSystem.Instance.Play("play.mp3");
             
             Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
 
@@ -52,9 +43,7 @@ namespace Crystallography
         
         public override void OnEnter ()
         {
-            _songPlayer.Loop = true;
-            _songPlayer.Volume = 0.2f;
-			_songPlayer.Play();
+			base.OnEnter();
         }
 //        public override void OnExit ()
 //        {
