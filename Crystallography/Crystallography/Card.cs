@@ -18,8 +18,6 @@ namespace Crystallography
 		public int pattern;
 		public int sound;
 		
-		
-		
 		public CardData( int Color, int Pattern, int Sound )
 		{
 			color = Color;
@@ -34,7 +32,7 @@ namespace Crystallography
 		
 		
 		//singleton vars
-		private SpriteSingleton instance;
+//		private SpriteSingleton instance;
 		private SpriteTile spriteTile;
 		private string spriteName;
 		public int[] attributes;
@@ -51,38 +49,27 @@ namespace Crystallography
         
         public Card (PhysicsBody physicsBody, CardData data)
         {
-			instance = SpriteSingleton.getInstance();
+//			instance = SpriteSingleton.getInstance();
 			cardData = data;
 			setFace(data.pattern); 
-//			spriteName = "topSide";
-			spriteTile = instance.Get (spriteName); 
-			spriteTile.Position = new Vector2(10.0f, 10.0f); 
-			this.AddChild(spriteTile);
+//			spriteTile = instance.Get (spriteName); 
+//			spriteTile.Position = new Vector2(10.0f, 10.0f); 
+//			this.AddChild(spriteTile);
 			setColor(data.color);
 			setSound(data.sound);
-			spriteTile.Position = new Vector2(50.0f, 50.0f);
+//			spriteTile.Position = new Vector2(50.0f, 50.0f);
 		
             _physicsBody = physicsBody;
             
 			groupID = -1;
 			this.TextureInfo = _ss.Get (spriteName).TextureInfo;
 			this.TileIndex2D = _ss.Get (spriteName).TileIndex2D;
-//            this.TextureInfo = new TextureInfo(new Texture2D("Application/assets/images/topSide.png", false));
-//            this.Scale = this.TextureInfo.TextureSizef/4f;
 			this.Scale = this.CalcSizeInPixels()/4f;
             this.Pivot = new Sce.PlayStation.Core.Vector2(0.5f,0.5f);
 			
 			
 			System.Random rand = new System.Random();
-            this.Position = new Sce.PlayStation.Core.Vector2(0,0);
-//                (float)Director.Instance.GL.Context.GetViewport().Width * (float)rand.NextDouble(),
-//                (float)Director.Instance.GL.Context.GetViewport().Height * (float)rand.NextDouble());
-			
-//			_physicsBody.Position = new Sce.PlayStation.Core.Vector2(
-//				(float)Director.Instance.GL.Context.GetViewport().Width * (float)rand.NextDouble(),
-//                (float)Director.Instance.GL.Context.GetViewport().Height * (float)rand.NextDouble());
-            
-			
+            this.Position = new Sce.PlayStation.Core.Vector2(0,0);            
             
             //Right angles are exceedingly boring, so make sure we dont start on one
             //So if our Random angle is between 90 +- 25 degrees or 270 +- 25 degrees
@@ -102,7 +89,7 @@ namespace Crystallography
 		
         public override void Update (float dt)
         {
-	// Ungrouped
+			// Ungrouped
             if ( groupID == -1 ) {
             	standardMovement ();
 			// Grouped
@@ -153,7 +140,7 @@ namespace Crystallography
  					break;
  				case (int)CardData.COLOR.BLUE: 	
  				//teal
- 					spriteTile.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 
+// 					spriteTile.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f)); 
 					this.Color = new Vector4(0.16f,0.88f,0.88f,1.0f);
  					break; 
  				default:

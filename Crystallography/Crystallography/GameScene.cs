@@ -20,10 +20,15 @@ namespace Crystallography
 		
 		public bool WasTouch;
 		public bool IsTouch;
-		public Card SelectedCard;
-		public Card FirstAttachedCard;
-		public Card SecondAttachedCard;
+		public static Card SelectedCard;
+		public static Card FirstAttachedCard;
+		public static Card SecondAttachedCard;
 		public Vector2 TouchStart;
+		
+		public Node n = new Node();
+		public Node childN1 = new Node();
+		public Node childN2 = new Node();
+		public Node childN3 = new Node();
 		
 		public SpriteUV s;
 		
@@ -31,7 +36,7 @@ namespace Crystallography
         private static Boolean DEBUG_BOUNDINGBOXS = false;
         
         public GameScene ()
-        {
+		{
             this.Camera.SetViewFromViewport();
             _physics = new GamePhysics();
 
@@ -70,6 +75,32 @@ namespace Crystallography
 					}
                 };
             }
+			n.Pivot = new Vector2(0.5f, 0.5f);
+//			n.AdHocDraw += () => {
+//				Director.Instance.DrawHelpers.DrawCircle( new Vector2(0.5f, 0.5f), 1, 16);
+//			};
+			n.Position = new Vector2(100f, 100f);
+			n.Visible = false;
+			childN1.Pivot = new Vector2(0.5f, 0.5f);
+//			childN1.AdHocDraw += () => {
+//				Director.Instance.DrawHelpers.DrawCircle( new Vector2 (0.5f,0.5f) , 1, 16);
+//			};
+			
+			childN2.Pivot = new Vector2(0.5f, 0.5f);
+//			childN2.AdHocDraw += () => {
+//				Director.Instance.DrawHelpers.DrawCircle( new Vector2(0.5f, 0.5f), 1, 16);
+//			};
+			
+			childN3.Pivot = new Vector2(0.5f, 0.5f);
+//			childN3.AdHocDraw += () => {
+//				Director.Instance.DrawHelpers.DrawCircle( new Vector2(0.5f, 0.5f), 1, 16);
+//			};
+			
+			n.AddChild (childN1);
+			n.AddChild (childN2);
+			n.AddChild (childN3);
+			this.AddChild(n);
+			
 			
 			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
         }
@@ -119,54 +150,149 @@ namespace Crystallography
 			var moved = TouchStart - world;
 			var moved_distance = moved.SafeLength();
 			
+			if ( SelectedCard != null ) {
+				SelectedCard.physicsBody.Position = childN1.LocalToWorld(childN1.Position) / GamePhysics.PtoM;
+//				SelectedCard.physicsBody.Position = new Vector2(world.X,world.Y) / GamePhysics.PtoM;
+			}
+			if ( FirstAttachedCard != null ) {
+				FirstAttachedCard.physicsBody.Position = childN2.LocalToWorld(childN2.Position) / GamePhysics.PtoM;
+//				SelectedCard.physicsBody.Position = new Vector2(world.X,world.Y) / GamePhysics.PtoM;
+			}
+			if ( SecondAttachedCard != null ) {
+				SecondAttachedCard.physicsBody.Position = childN3.LocalToWorld(childN3.Position) / GamePhysics.PtoM;
+//				SelectedCard.physicsBody.Position = new Vector2(world.X,world.Y) / GamePhysics.PtoM;
+			}
+			
 			// New Touch Starting This Frame
 			if (IsTouch && !WasTouch) {
+				//TEST
+				n.Visible = childN1.Visible = childN2.Visible = childN3.Visible = true;
+				n.Position = new Vector2(world.X, world.Y);
+				childN1.RunAction(new MovePivotTo(new Vector2(0.5f, -35.5f), 0.5f));
+				childN1.RunAction(new MoveTo(new Vector2(0.5f, 35.5f), 0.5f));
+//				RotateBy rot = new RotateBy(new Vector2(1f,0f).Rotate(-90.0f), 1.0f) 
+//											{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear };
+//				childN1.RunAction (new RepeatForever() { InnerAction = rot });
+				
+				childN2.RunAction(new MovePivotTo(new Vector2(0f, -36.0f).Rotate(0.7853981f) + new Vector2(0.5f,0.5f), 0.5f));
+				childN2.RunAction(new MoveTo(new Vector2(0f, 35.0f).Rotate(0.7853981f) + new Vector2(0.5f,0.5f), 0.5f));
+//				rot = new RotateBy(new Vector2(1f,0f).Rotate(-90.0f), 1.0f) 
+//											{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear };
+//				childN2.RunAction (new RepeatForever() { InnerAction = rot });
+				
+				childN3.RunAction(new MovePivotTo(new Vector2(0f, -36.0f).Rotate(-0.7853981f) + new Vector2(0.5f,0.5f), 0.5f));
+				childN3.RunAction(new MoveTo(new Vector2(0f, 35.0f).Rotate(-0.7853981f) + new Vector2(0.5f,0.5f), 0.5f));
+//				rot = new RotateBy(new Vector2(1f,0f).Rotate(-90.0f), 1.0f) 
+//											{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear };
+//				childN3.RunAction (new RepeatForever() { InnerAction = rot });
+				// END TEST
+				
 				if (card != null) {
 					TouchStart = world;
 					SelectedCard = card;
 					SelectedCard.physicsBody.Position = 
                 				new Vector2(world.X,world.Y) / GamePhysics.PtoM;
+//								new Vector2(childN1.Position.X,childN1.Position.Y) / GamePhysics.PtoM;
 					// Start new group if necessary
 					if (SelectedCard.groupID == -1 ) {
 						SelectedCard.groupID = Array.FindIndex(groups, IsGroupFree);
 						groups[SelectedCard.groupID].tryAddingCard(SelectedCard);
 					}
 					playSound(card.cardData);
+					
+					SelectedCard.physicsBody.Position = new Vector2(world.X,world.Y) / GamePhysics.PtoM;;
+					
+//					SelectedCard.RunAction (new MovePivotTo(new Vector2(0.5f, -1.5f), 0.5f));
+//					rot = new RotateBy(new Vector2(1f,0f).Rotate(-90.0f), 2.0f) 
+//											{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear };
+//					SelectedCard.RunAction (new RepeatForever() { InnerAction = rot });
 				}
 			}
 			// On Drag
 			else if (IsTouch && WasTouch) {
-				if ( SelectedCard != null ) {
-					SelectedCard.physicsBody.Position = new Vector2(world.X,world.Y) / GamePhysics.PtoM;
-				}
+				//TEST
+				n.Position = new Vector2(world.X, world.Y);
+				//END TEST
+				
+//				if ( SelectedCard != null ) {
+//					SelectedCard.physicsBody.Position = childN1.LocalToWorld(childN1.Position) / GamePhysics.PtoM;
+////					SelectedCard.physicsBody.Position = new Vector2(world.X,world.Y) / GamePhysics.PtoM;
+//				}
+//				if ( FirstAttachedCard != null ) {
+//					FirstAttachedCard.physicsBody.Position = childN2.LocalToWorld(childN2.Position) / GamePhysics.PtoM;
+////					SelectedCard.physicsBody.Position = new Vector2(world.X,world.Y) / GamePhysics.PtoM;
+//				}
+//				if ( SecondAttachedCard != null ) {
+//					SecondAttachedCard.physicsBody.Position = childN3.LocalToWorld(childN3.Position) / GamePhysics.PtoM;
+////					SelectedCard.physicsBody.Position = new Vector2(world.X,world.Y) / GamePhysics.PtoM;
+//				}
 			}
 			// On Release
 			else if (SelectedCard != null && touch.Release) {
+//				SelectedCard.StopAllActions();
+//				SelectedCard.RunAction (new RotateTo(new Vector2(1f,0f).Rotate (0f),0.25f)
+//				                       { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear });
+//				SelectedCard.RunAction ( new MovePivotTo(new Vector2(0.5f, 0.5f), 0.5f));
+//				if (FirstAttachedCard != null) {
+//					FirstAttachedCard.StopAllActions();
+//					FirstAttachedCard.RunAction (new RotateTo(new Vector2(1f,0f).Rotate (0f),0.25f)
+//					                             { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear });
+//					FirstAttachedCard.RunAction ( new MovePivotTo(new Vector2(0.5f, 0.5f), 0.5f));
+//				}
+//				if (SecondAttachedCard != null) {
+//					SecondAttachedCard.StopAllActions();
+//					SecondAttachedCard.RunAction (new RotateTo(new Vector2(1f,0f).Rotate (0f),0.25f)
+//					                              { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear });
+//					SecondAttachedCard.RunAction ( new MovePivotTo(new Vector2(0.5f, 0.5f), 0.5f));
+//				}
+				
 				Group g = groups[SelectedCard.groupID];
-				if (g.population == 3) {
-					Card[] triad = new Card[3];
-//					triad[0] = cards[Array.IndexOf(cards,g.cards[0])];
-//					triad[1] = cards[Array.IndexOf(cards,g.cards[1])];
-//					triad[2] = cards[Array.IndexOf(cards,g.cards[2])];
-					Array.Copy(g.cards, triad, 3);
-					if ( g.evaluateCompleteGroup() ) {
-						for (int i=0; i<3; i++) {
-							Support.SoundSystem.Instance.Play("cubed.wav");
-							cards = removeCardFromDeck (triad[i], cards);
-						}
-						if(!setsPossible(cards)) {
-								goToNextLevel();
-							}
-					} else {
-//						sndWrongPlayer.Play ();
-						Support.SoundSystem.Instance.Play("wrong.wav");
-					}
-					
-				}
-				SelectedCard = null;
-				FirstAttachedCard = null;
-				SecondAttachedCard = null;
+			
+				Sequence sequence = new Sequence();
+				sequence.Add ( new DelayTime() { Duration = 0.26f } );
+				sequence.Add ( new CallFunc(() => TestForCube()));
+				this.RunAction (sequence);
+				
+//				if (g.population == 3) {
+//					Card[] triad = new Card[3];
+//					Array.Copy(g.cards, triad, 3);
+//					if ( g.evaluateCompleteGroup() ) {
+//						for (int i=0; i<3; i++) {
+//							Support.SoundSystem.Instance.Play("cubed.wav");
+//							cards = removeCardFromDeck (triad[i], cards);
+//						}
+//						if(!setsPossible(cards)) {
+//							Sequence sequence = new Sequence();
+//							sequence.Add( new DelayTime() { Duration = 1.0f } );
+//							sequence.Add( new CallFunc(() => this.goToNextLevel()));
+//							this.RunAction(sequence);
+//						}
+//					} else {
+////						sndWrongPlayer.Play ();
+//						Support.SoundSystem.Instance.Play("wrong.wav");
+//					}
+//					
+//				}
+//				SelectedCard = null;
+//				FirstAttachedCard = null;
+//				SecondAttachedCard = null;
 			}
+			
+			// TEST
+			if (touch.Release)
+			{
+				n.StopAllActions();
+				childN1.StopAllActions();
+				childN2.StopAllActions();
+				childN3.StopAllActions();
+				childN1.RunAction( new MovePivotTo( new Vector2(0.5f, 0.5f), 0.5f));
+				childN1.RunAction( new MoveTo( new Vector2(0f, 7.5f), 0.5f));
+				childN2.RunAction( new MovePivotTo( new Vector2(0.5f, 0.5f), 0.5f));
+				childN2.RunAction( new MoveTo( new Vector2(-5f, -1.5f), 0.5f));
+				childN3.RunAction( new MovePivotTo( new Vector2(0.5f, 0.5f), 0.5f));
+				childN3.RunAction( new MoveTo( new Vector2(5f, -1.5f), 0.5f));
+			}
+			// END TEST
 			
 			if ( SelectedCard != null ) {
 				float distance;
@@ -174,14 +300,14 @@ namespace Crystallography
 				Card closest = null;
 				foreach ( Card c in cards ) {
 					if ( c != null && c != SelectedCard && c != FirstAttachedCard && c != SecondAttachedCard) {
-						distance = Vector2.Distance(c.Position, SelectedCard.Position);
+//						distance = Vector2.Distance(c.Position, SelectedCard.Position);
+						distance = Vector2.Distance(world, c.Position);
 						if (closestDistance == 0.0f || closestDistance > distance) {
 							closestDistance = distance;
 							closest = c;
 						}
 					}
 				}
-//				System.Console.WriteLine("Distance: " + closestDistance);
 				if ( closestDistance < 50f ) {
 					if ( FirstAttachedCard == null ) {
 						FirstAttachedCard = closest;
@@ -194,12 +320,6 @@ namespace Crystallography
 					}
 					SelectedCard = groups[SelectedCard.groupID].cards[0];
 				}
-//				if ( FirstAttachedCard != null ) {
-//					FirstAttachedCard.physicsBody.Position = new Vector2(world.X-12f,world.Y-18f) / GamePhysics.PtoM;
-//				}
-//				if ( SecondAttachedCard != null ) {
-//					SecondAttachedCard.physicsBody.Position = new Vector2(world.X+10f,world.Y-18f) / GamePhysics.PtoM;
-//				}
 			}
 		}
 		
@@ -225,6 +345,34 @@ namespace Crystallography
 			return (g.cards[0] == null);
 		}
 		
+		private static void TestForCube()
+		{
+			Group g = groups[SelectedCard.groupID];
+			if (g.population == 3) {
+				Card[] triad = new Card[3];
+				Array.Copy(g.cards, triad, 3);
+				if ( g.evaluateCompleteGroup() ) {
+					for (int i=0; i<3; i++) {
+						Support.SoundSystem.Instance.Play("cubed.wav");
+						cards = removeCardFromDeck (triad[i], cards);
+					}
+					if(!setsPossible(cards)) {
+						Sequence sequence = new Sequence();
+						sequence.Add( new DelayTime() { Duration = 1.0f } );
+						sequence.Add( new CallFunc(() => GameScene.goToNextLevel()));
+						Director.Instance.CurrentScene.RunAction(sequence);
+					}
+				} else {
+//					sndWrongPlayer.Play ();
+					Support.SoundSystem.Instance.Play("wrong.wav");
+				}
+				
+			}
+			SelectedCard = null;
+			FirstAttachedCard = null;
+			SecondAttachedCard = null;
+		}
+		
         public Card GetCardAtPosition(Vector2 position) {
 			foreach ( Card c in cards ) {
 				if ( c == null ) continue;
@@ -240,7 +388,7 @@ namespace Crystallography
 			return null;                            
 		}
 		
-		public void goToNextLevel()
+		public static void goToNextLevel()
 		{
 			LevelData.CURRENT_LEVEL++;
 			if (LevelData.CURRENT_LEVEL < LevelData.LEVEL_DATA.Length) { // THERE ARE STILL MORE LEVELS

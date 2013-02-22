@@ -249,9 +249,11 @@ namespace Crystallography
 		public void updateCard(Card card) 
 		{
 			if ( card == cards[1] ) {
-				card.physicsBody.Position = new Vector2(cards[0].Position.X-12f,cards[0].Position.Y-18f) / GamePhysics.PtoM;
+//				card.physicsBody.Position = new Vector2(cards[0].Position.X-12f,cards[0].Position.Y-18f) / GamePhysics.PtoM;
+//				card.physicsBody.Position = cards[0].physicsBody.Position;
 			} else {
-				card.physicsBody.Position = new Vector2(cards[0].Position.X+10f,cards[0].Position.Y-18f) / GamePhysics.PtoM;
+//				card.physicsBody.Position = new Vector2(cards[0].Position.X+10f,cards[0].Position.Y-18f) / GamePhysics.PtoM;
+//				card.physicsBody.Position = cards[0].physicsBody.Position;
 			}
 		}
 		

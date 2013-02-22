@@ -57,6 +57,10 @@
     <Compile Include="InstructionsScene.cs" />
     <Compile Include="LevelData.cs" />
     <Compile Include="InstructionScene2.cs" />
+    <Compile Include="Quality.cs" />
+    <Compile Include="QColor.cs" />
+    <Compile Include="QPattern.cs" />
+    <Compile Include="MovePivotTo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
