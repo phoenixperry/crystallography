@@ -44,6 +44,9 @@
     <Compile Include="AppMain.cs" />
     <Compile Include="Cube.cs" />
     <Compile Include="SpriteSingleton.cs" />
+    <Compile Include="Card.cs" />
+    <Compile Include="GamePhysics.cs" />
+    <Compile Include="LevelData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
