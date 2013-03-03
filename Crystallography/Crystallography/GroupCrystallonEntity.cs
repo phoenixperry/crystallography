@@ -51,7 +51,9 @@ namespace Crystallography
 		{
 			if (doCleanup) {
 				foreach ( var member in members ) {
-					member.removeFromScene( doCleanup );
+					if( member != null ) {
+						member.removeFromScene( doCleanup );
+					}
 				}
 				members = null;
 				for( int i=0; i<_pucks.Length; i++ ) {
@@ -106,8 +108,9 @@ namespace Crystallography
 					Attach(e);	// LAZY TYPECASTING... CLEAN UP LATER?
 				}
 			}
-			pGroupEntity.RemoveAll();
-			pGroupEntity.removeFromScene(true);
+//			pGroupEntity.RemoveAll();
+			GroupManager.Instance.Remove( pGroupEntity );
+//			pGroupEntity.removeFromScene(true);
 			return this;
 		}
 		

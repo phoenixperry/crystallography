@@ -40,6 +40,12 @@ namespace Crystallography
 			return pGroup;
 		}
 		
+		public void Remove( GroupCrystallonEntity pGroup ) {
+			rm ( pGroup );
+			pGroup.RemoveAll();
+			pGroup.removeFromScene( true );
+		}
+		
 		/// <summary>
 		/// Reset this instance. Removes all known groups from the scene, and clears the list.
 		/// </summary>
@@ -51,7 +57,7 @@ namespace Crystallography
 		}
 		
 		/// <summary>
-		/// Remove one specified pGroup.
+		/// Remove one specified GroupCrystallonEntity.
 		/// </summary>
 		/// <param name='pGroup'>
 		/// Group to be removed.

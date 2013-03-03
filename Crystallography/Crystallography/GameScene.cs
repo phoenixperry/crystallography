@@ -22,8 +22,8 @@ namespace Crystallography
 		public static bool ORIENTATION_MATTERS = true;
 		public static Random Random = new Random();
 		
-		public static Card[] cards;
-		public static Group[] groups;
+//		public static Card[] cards;
+//		public static Group[] groups;
     	public static GamePhysics _physics;
 		protected static List<ICrystallonEntity> _allEntites = new List<ICrystallonEntity>();
 //		private static CardData[] currentLevelData;
@@ -46,7 +46,8 @@ namespace Crystallography
 //		public Node childN2 = new Node();
 //		public Node childN3 = new Node();
 		
-		public SpriteUV s;
+//		public SpriteUV s;
+		
 		// END TEST VARIABLES
 		
 		// GET & SET -----------------------------------------------------------------------------------

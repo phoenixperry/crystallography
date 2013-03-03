@@ -14,7 +14,7 @@ namespace Crystallography
 														new Vector2(10.5f,-8.0f) };
 		protected readonly static float DEFAULT_SPEED = 1.0f;
 		
-		protected CardData _data;
+//		protected CardData _data;
 		
 		// GET & SET ----------------------------------------------------------------
 		

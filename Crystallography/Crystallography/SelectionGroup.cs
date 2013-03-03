@@ -251,19 +251,18 @@ namespace Crystallography
 				Sequence sequence = new Sequence();
 				sequence.Add( new MoveTo( Vector2.Zero, 0.2f )
 							{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-				_pucks[0].RunAction( sequence );
-			} else {
-//				for (int i=0; i<population; i++) {
 				foreach (AbstractCrystallonEntity e in members) {
 					if ( e != null ) {
-//					if ( members[i] != null ) {
+						_pucks[Array.IndexOf(_pucks, e.getNode ().Parent)].RunAction( sequence );
+					}
+				}
+			} else {
+				foreach (AbstractCrystallonEntity e in members) {
+					if ( e != null ) {
 						var offset = ( e.getAttachOffset( Array.IndexOf(_pucks, e.getNode ().Parent) ) );
-//						var offset = ( members[i] as AbstractCrystallonEntity ).getAttachOffset(i);
-						
 						Sequence sequence = new Sequence();
 						sequence.Add ( new MoveTo( offset, 0.2f ) 
 						             { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//						_pucks[i].RunAction( sequence );
 						_pucks[Array.IndexOf(_pucks, e.getNode().Parent)].RunAction( sequence );
 					}
 				}
@@ -281,8 +280,8 @@ namespace Crystallography
 				} else {
 					releaseDelay.Add ( new CallFunc( () => GroupFailed() ) );
 				}
-				releaseDelay.Add ( new CallFunc( () => Release() ) );
 			}
+			releaseDelay.Add ( new CallFunc( () => Release() ) );
 			_scene.RunAction( releaseDelay );
 		}
 		

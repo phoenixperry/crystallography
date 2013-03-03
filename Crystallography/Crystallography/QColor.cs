@@ -7,7 +7,7 @@ namespace Crystallography
 {
 	public class QColor : AbstractQuality
 	{
-		public static List<Card>[] lists = new List<Card>[3] {new List<Card>(), new List<Card>(), new List<Card>()};
+//		public static List<Card>[] lists = new List<Card>[3] {new List<Card>(), new List<Card>(), new List<Card>()};
 		public static Vector4[] palette = new Vector4[3];
 		public static IQuality Instance;
 		

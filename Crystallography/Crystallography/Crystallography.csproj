@@ -42,24 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppMain.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="Board.cs" />
-    <Compile Include="NoCleanupScene.cs" />
     <Compile Include="Support.cs" />
     <Compile Include="TitleScene.cs" />
     <Compile Include="MenuScene.cs" />
     <Compile Include="GameScene.cs" />
-    <Compile Include="Card.cs" />
     <Compile Include="GamePhysics.cs" />
-    <Compile Include="Cube.cs" />
-    <Compile Include="Group.cs" />
     <Compile Include="SpriteSingleton.cs" />
     <Compile Include="InstructionsScene.cs" />
-    <Compile Include="LevelData.cs" />
     <Compile Include="InstructionScene2.cs" />
     <Compile Include="QColor.cs" />
     <Compile Include="QPattern.cs" />
-    <Compile Include="MovePivotTo.cs" />
     <Compile Include="AbstractCrystallonEntity.cs" />
     <Compile Include="CardCrystallonEntity.cs" />
     <Compile Include="SpriteTileCrystallonEntity.cs" />
@@ -74,6 +66,8 @@
     <Compile Include="QSound.cs" />
     <Compile Include="CardManager.cs" />
     <Compile Include="GroupManager.cs" />
+    <Compile Include="deprecated\MovePivotTo.cs" />
+    <Compile Include="deprecated\NoCleanupScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -88,6 +82,7 @@
     <Folder Include="assets\sounds\" />
     <Folder Include="assets\images\" />
     <Folder Include="assets\levels\" />
+    <Folder Include="deprecated\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\sounds\music_ingame.mp3" />
@@ -121,5 +116,13 @@
     <Content Include="assets\images\TopStripe.png" />
     <Content Include="assets\images\LeftStripe.png" />
     <Content Include="assets\images\RightStripe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="deprecated\Board.cs" />
+    <None Include="deprecated\Card.cs" />
+    <None Include="deprecated\Cube.cs" />
+    <None Include="deprecated\Game.cs" />
+    <None Include="deprecated\Group.cs" />
+    <None Include="deprecated\LevelData.cs" />
   </ItemGroup>
 </Project>
