@@ -56,7 +56,7 @@ namespace Crystallography
             var touches = Touch.GetData(0).ToArray();
             if((touches.Length >0 && touches[0].Status == TouchStatus.Down) || Input2.GamePad0.Cross.Press)
             {
-                Director.Instance.ReplaceScene(new GameScene());
+                Director.Instance.ReplaceScene(new GameScene( 0 )); // TODO Add support for starting at other levels.
             }
         }
     

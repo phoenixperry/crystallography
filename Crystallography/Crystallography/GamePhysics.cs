@@ -9,7 +9,7 @@ namespace Crystallography
 	public class GamePhysics:PhysicsScene
 	{
 		//pixels to meters 
-		public const float PtoM =50.0f; 
+		public static readonly float PtoM = 50.0f; 
 		private const float BALLRADIUS = 35.0f/2f; 
 		private const float PADDLEWIDHT = 125.0f; 
 		private const float PADDLEHEIGHT = 38.0f; 
@@ -130,15 +130,44 @@ namespace Crystallography
 			return SceneBodies[this.NumBody-1];
 		}
 		
+		public void RegisterPhysicsShape( PhysicsShape pShape ) {
+			this.SceneShapes[numShape] = new PhysicsShape( pShape );
+			this.NumShape++;
+		}
+		
+		public PhysicsBody RegisterPhysicsBody(PhysicsShape pShape, float pMass, float pColFriction, Vector2 pPosition) {
+//			if (!Array.Exists<PhysicsShape>(SceneShapes, pShape)) {
+			int i = NumShape-1;
+			while(i>=0) {
+				if(SceneShapes[i] == pShape) {
+					break;
+				}
+				i--;
+			}
+			if( i == -1) { // REQUESTED SceneShape COULD NOT BE FOUND IN REGISTRY, SO REGISTER IT
+				RegisterPhysicsShape( pShape );
+				i = NumShape-1;
+			}
+			this.SceneBodies[this.NumBody] = new PhysicsBody( pShape, pMass );
+//			this.SceneBodies[this.NumBody].ShapeIndex = Array.FindIndex<PhysicsShape>(this.SceneShapes, pShape);
+			this.SceneBodies[this.NumBody].ShapeIndex = (uint)i;
+			this.SceneBodies[this.NumBody].ColFriction = pColFriction;
+			this.SceneBodies[this.NumBody].Position = pPosition / PtoM;
+			this.NumBody++;
+			return SceneBodies[this.NumBody-1];
+		}
+		
 		public void removePhysicsBody(PhysicsBody pb)
 		{
 			pb.Clear();
 			int i = Array.IndexOf(this.SceneBodies, pb);
 			this.SceneBodies[i] = null;
-			//this is what is crashing on my side
-			for (int j=i; j < numBody-1; j++) {
-				this.SceneBodies[j] = this.SceneBodies[j+1];
-				this.SceneBodies[j+1] = null;
+			if (i != NumBody-1 ) {
+				// clean up hole in the array unless we just removed the last element
+				for (int j=i; j < numBody-1; j++) {
+					this.SceneBodies[j] = this.SceneBodies[j+1];
+					this.SceneBodies[j+1] = null;
+				}
 			}
 			numBody--;
 		}

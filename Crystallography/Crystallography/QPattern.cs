@@ -4,37 +4,40 @@ using Sce.PlayStation.HighLevel.GameEngine2D;
 
 namespace Crystallography
 {
-	public class QPattern : Quality
+	public class QPattern : AbstractQuality
 	{
-		public QPattern()
+		public QPattern() : base()
 		{
+			_name = "QPattern";
 		}
 		
-		public override void ApplyQuality (Node host, uint val)
+		public override void Apply ( ICrystallonEntity pEntity, int pVariant)
 		{
-			SpriteBase sprite = host as SpriteBase;
+			SpriteTileCrystallonEntity e = pEntity as SpriteTileCrystallonEntity;
 			
-			switch(val) 
- 			{
- 				case (int)VALUE.ONE: 
- 				//pink
-//					host.Run
-//					host.Color = new Vector4(0.96f,0.88f,0.88f,1.0f);
-					sprite.RunAction(new TintTo (new Vector4(0.96f,0.88f,0.88f,1.0f),0.1f));
- 					break;
- 				case (int)VALUE.TWO:
- 				//red
-//					host.Color = new Vector4(0.90f,0.075f,0.075f,1.0f);
-					sprite.RunAction(new TintTo (new Vector4(0.90f,0.075f,0.075f,1.0f),0.1f));
- 					break;
- 				case (int)VALUE.THREE: 	
- 				//teal
-//					host.Color = new Vector4(0.16f,0.88f,0.88f,1.0f);
-					sprite.RunAction(new TintTo (new Vector4(0.16f,0.88f,0.88f,1.0f),0.1f));
- 					break; 
- 				default:
- 					break; 
- 			}
+			switch(pVariant)
+			{
+			case (0):
+				e.setPattern("Solid");
+				break;
+			case (1):
+				e.setPattern("Stripe");
+				break;
+			case (2):
+				e.setPattern("Dot");
+				break;
+			default:
+				throw new NotImplementedException("QPattern.Apply : pVariant must be 0,1,2");
+				break;
+			}
+			var ss = SpriteSingleton.getInstance();
+			(e.getNode() as SpriteTile).TileIndex2D = ss.Get( e.getOrientation() + e.getPattern() ).TileIndex2D;
+			
+		}
+		
+		public override bool Match (ICrystallonEntity[] pEntities)
+		{
+			return base.Match(pEntities);
 		}
 	}
 }

@@ -33,7 +33,7 @@ namespace Crystallography
 		
 		//singleton vars
 //		private SpriteSingleton instance;
-		private SpriteTile spriteTile;
+//		private SpriteTile spriteTile;
 		private string spriteName;
 		public int[] attributes;
 		public CardData cardData;
@@ -41,7 +41,6 @@ namespace Crystallography
 
         private PhysicsBody _physicsBody;
 		private static SpriteSingleton _ss = SpriteSingleton.getInstance();
-//		private SpriteSingleton _ss;
         // Change this value to make the game faster or slower
         public const float BALL_VELOCITY = 1.0f;
 

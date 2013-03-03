@@ -57,10 +57,23 @@
     <Compile Include="InstructionsScene.cs" />
     <Compile Include="LevelData.cs" />
     <Compile Include="InstructionScene2.cs" />
-    <Compile Include="Quality.cs" />
     <Compile Include="QColor.cs" />
     <Compile Include="QPattern.cs" />
     <Compile Include="MovePivotTo.cs" />
+    <Compile Include="AbstractCrystallonEntity.cs" />
+    <Compile Include="CardCrystallonEntity.cs" />
+    <Compile Include="SpriteTileCrystallonEntity.cs" />
+    <Compile Include="ICrystallonEntity.cs" />
+    <Compile Include="NodeCrystallonEntity.cs" />
+    <Compile Include="GroupCrystallonEntity.cs" />
+    <Compile Include="SelectionGroup.cs" />
+    <Compile Include="QualityManager.cs" />
+    <Compile Include="IQuality.cs" />
+    <Compile Include="AbstractQuality.cs" />
+    <Compile Include="QOrientation.cs" />
+    <Compile Include="QSound.cs" />
+    <Compile Include="CardManager.cs" />
+    <Compile Include="GroupManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -74,13 +87,11 @@
     <Folder Include="assets\" />
     <Folder Include="assets\sounds\" />
     <Folder Include="assets\images\" />
+    <Folder Include="assets\levels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\sounds\music_ingame.mp3" />
-    <Content Include="assets\images\leftSide.png" />
-    <Content Include="assets\images\rightSide.png" />
     <Content Include="assets\images\title.png" />
-    <Content Include="assets\images\topSide.png" />
     <Content Include="assets\images\gamePieces.png" />
     <Content Include="assets\images\gamePieces.xml" />
     <Content Include="assets\images\header.png" />
@@ -90,12 +101,6 @@
     <Content Include="assets\images\instructionsOver.png" />
     <Content Include="assets\images\allSame.png" />
     <Content Include="assets\images\allDiff.png" />
-    <Content Include="assets\images\dotLeft.png" />
-    <Content Include="assets\images\dotRight.png" />
-    <Content Include="assets\images\stripeLeft.png" />
-    <Content Include="assets\images\stripeRight.png" />
-    <Content Include="assets\images\stripeTop.png" />
-    <Content Include="assets\images\dotTop.png" />
     <Content Include="assets\sounds\side1.wav" />
     <Content Include="assets\sounds\play.mp3" />
     <Content Include="assets\sounds\cubed.wav" />
@@ -104,5 +109,17 @@
     <Content Include="assets\sounds\sound2.wav" />
     <Content Include="assets\sounds\sound3.wav" />
     <Content Include="assets\sounds\wrong.wav" />
+    <Content Include="assets\levels\levelData.xml" />
+    <Content Include="assets\levels\level_0.xml" />
+    <Content Include="assets\levels\level_1.xml" />
+    <Content Include="assets\images\TopDot.png" />
+    <Content Include="assets\images\LeftDot.png" />
+    <Content Include="assets\images\RightDot.png" />
+    <Content Include="assets\images\LeftSolid.png" />
+    <Content Include="assets\images\RightSolid.png" />
+    <Content Include="assets\images\TopSolid.png" />
+    <Content Include="assets\images\TopStripe.png" />
+    <Content Include="assets\images\LeftStripe.png" />
+    <Content Include="assets\images\RightStripe.png" />
   </ItemGroup>
 </Project>

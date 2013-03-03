@@ -47,7 +47,7 @@ namespace Crystallography
 			buttonUI1.Visible = true;
 			
 			buttonUI1.TouchEventReceived += (sender, e) =>  {
-				Director.Instance.ReplaceScene(new GameScene()); 
+				Director.Instance.ReplaceScene(new GameScene( 0 )); // TODO Add support for starting at other levels.
 			}; 
 			
 			// BUTTON 2

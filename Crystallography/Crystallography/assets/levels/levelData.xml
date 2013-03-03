@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:02d710746156ffaa73738305847c5a23$ -->
+<!--Format:
+n  => level number
+color => 0,1,2
+pattern => 0,1,2
+sound => 0,1,2
+orientation => 0,1,2 (TOP, LEFT, RIGHT)
+-->
+<GameData>
+    <Level Value="0"> 
+		<Card>
+			<Quality Name="Orientation" Value="0" />
+			<Quality Name="Color" Value="0" />
+			<Quality Name="Pattern" Value="0" />
+			<Quality Name="Sound" Value="0" />
+		</Card>
+		<Card>
+			<Quality Name="Orientation" Value="1" />
+			<Quality Name="Color" Value="0" />
+			<Quality Name="Pattern" Value="0" />
+			<Quality Name="Sound" Value="0" />
+		</Card>
+		<Card>
+			<Quality Name="Orientation" Value="2" />
+			<Quality Name="Color" Value="0" />
+			<Quality Name="Pattern" Value="0" />
+			<Quality Name="Sound" Value="0" />
+		</Card>
+	</Level>
+	<Level Value="1"> 
+		<Card>
+			<Quality Name="Orientation" Value="0" />
+			<Quality Name="Color" Value="0" />
+			<Quality Name="Pattern" Value="0" />
+			<Quality Name="Sound" Value="0" />
+		</Card>
+		<Card>
+			<Quality Name="Orientation" Value="1" />
+			<Quality Name="Color" Value="1" />
+			<Quality Name="Pattern" Value="0" />
+			<Quality Name="Sound" Value="0" />
+		</Card>
+		<Card>
+			<Quality Name="Orientation" Value="1" />
+			<Quality Name="Color" Value="1" />
+			<Quality Name="Pattern" Value="0" />
+			<Quality Name="Sound" Value="0" />
+		</Card>
+	</Level>
+</GameData>

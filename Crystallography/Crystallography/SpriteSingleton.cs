@@ -63,8 +63,8 @@ public static int test=0;
 				isOkToCreate = true; 
 				instance = new SpriteSingleton(); 
 				isOkToCreate = false; 
-				test++;
-				Console.WriteLine("Singleton instance created" + isOkToCreate + test);
+//				test++;
+//				Console.WriteLine("Singleton instance created" + isOkToCreate + test);
 			}
 			return instance; 
 	}
