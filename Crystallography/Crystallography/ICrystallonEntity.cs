@@ -12,6 +12,8 @@ namespace Crystallography
 		
 		Vector2 getPosition();
 		
+		int getQualityVariant( string pQualityName );
+		
 		void setBody( PhysicsBody body );
 		
 		void setNode( Node node );

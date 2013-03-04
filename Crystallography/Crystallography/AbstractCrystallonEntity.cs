@@ -15,6 +15,15 @@ namespace Crystallography
 		
 		// CONSTRUCTORS--------------------
 		
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Crystallography.AbstractCrystallonEntity"/> class.
+		/// </summary>
+		/// <param name='pScene'>
+		/// Reference to the current scene.
+		/// </param>
+		/// <param name='pGamePhysics'>
+		/// Reference to the <see cref="Crystallography.GamePhysics"/>.
+		/// </param>
 		public AbstractCrystallonEntity( Scene pScene, GamePhysics pGamePhysics ) {
 			_scene = pScene;
 			_physics = pGamePhysics;
@@ -23,22 +32,83 @@ namespace Crystallography
 		
 		// METHODS--------------------------
 		
+		/// <summary>
+		/// Returns this entity's <c>Node</c>-descended object.
+		/// </summary>
+		/// <returns>
+		/// <see cref="Sce.PlayStation.HighLevel.GameEngine2D.Node"/>-descended entity.
+		/// </returns>
 		public abstract Node getNode();
 		
+		/// <summary>
+		/// Returns this entity's <c>PhysicsBody</c>.
+		/// </summary>
+		/// <returns>
+		/// <see cref="Sce.PlayStation.HighLevel.Physics2D.PhysicsBody"/>
+		/// </returns>
 		public abstract PhysicsBody getBody();
 		
+		/// <summary>
+		/// Returns an offset position <c>Vector2</c> for this sort of entity when it is in a <c>GroupCrystallonEntity</c>.
+		/// </summary>
+		/// <returns>
+		/// The position <c>Vector2</c>
+		/// </returns>
+		/// <param name='position'>
+		/// An <c>int</c>, probs 0, 1, or 2.
+		/// </param>
 		public abstract Vector2 getAttachOffset(int position);
 		
+		/// <summary>
+		/// Sets the <c>PhysicsBody</c> for this entity.
+		/// </summary>
+		/// <param name='body'>
+		/// <see cref="Sce.PlayStation.HighLevel.Physics2D.PhysicsBody"/>
+		/// </param>
 		public abstract void setBody(PhysicsBody body);
 		
+		/// <summary>
+		/// Sets the <c>Node</c>-descended entity for this entity.
+		/// </summary>
+		/// <param name='node'>
+		/// <see cref="Sce.PlayStation.HighLevel.GameEngine2D.Node"/>-descended entity.
+		/// </param>
 		public abstract void setNode( Node node );
 		
-//		public abstract void setOrientation( string pOrientation );
+		/// <summary>
+		/// Returns the variant number for the specified Quality
+		/// </summary>
+		/// <param name='pQualityName'>
+		/// <c>string</c> name of the quality class
+		/// </param>
+		public int getQualityVariant( string pQualityName ) {
+			for ( int i=0; i<QualityManager.Instance.qualityDict[pQualityName].Length; i++ ) {
+				if (QualityManager.Instance.qualityDict[pQualityName][i].Contains(this) ) {
+					return i;
+				}
+//					index = QualityManager.Instance.qualityDict[pQualityName][i];
+//					if ( index != -1 ) {	// FOUND IT!
+//						break;
+//					}
+//				}
+			}
+			return -1;
+		}
 		
-//		public abstract void setPattern ( string pPattern );
-		
+		/// <summary>
+		/// This entity's once-per-frame update method.
+		/// </summary>
+		/// <param name='dt'>
+		/// Elapsed time since last frame.
+		/// </param>
 		public abstract void Update(float dt);
 		
+		/// <summary>
+		/// Adds an impulse vector to this entity's physics body
+		/// </summary>
+		/// <param name='pImpulse'>
+		/// <see cref="Sce.PlayStation.Core.Vector2"/> impulse.
+		/// </param>
 		public void addImpulse(Vector2 pImpulse) {
 			PhysicsBody body = getBody ();
 			if ( body != null ) {
@@ -46,10 +116,19 @@ namespace Crystallography
 			}
 		}
 		
+		/// <summary>
+		/// Sets the sound that plays when this entity is interacted with.
+		/// </summary>
+		/// <param name='pSoundName'>
+		/// <c>string</c> name of the sound.
+		/// </param>
 		public void setSound( string pSoundName ) {
 			_sound = pSoundName;
 		}
 		
+		/// <summary>
+		/// Attaches this entity to the current <c>Scene</c> after removing it from it's current <c>Parent</c>.
+		/// </summary>
 		public void addToScene() {
 			Node node = getNode();
 			if (node.Parent == _scene) { // ALREADY ATTACHED TO SCENE -- DONE
@@ -58,13 +137,14 @@ namespace Crystallography
 				node.Parent.RemoveChild(node, false);
 			}
 			(_scene as GameScene).AddChildEntity(this);
-				
-//			PhysicsBody body = getBody ();
-//			if (body == null && hasPhysics){
-//				_physics.RegisterPhysicsBody();
-//			}
 		}
 		
+		/// <summary>
+		/// Attach this entity to a <c>Node</c>-descended entity after removing it from its current <c>Parent</c>.
+		/// </summary>
+		/// <param name='pNewParent'>
+		/// <see cref="Sce.PlayStation.HighLevel.GameEngine2D.Node"/>
+		/// </param>
 		public void attachTo( Node pNewParent ) {
 			Node node = getNode();
 			if (node.Parent == pNewParent ) {
@@ -83,12 +163,21 @@ namespace Crystallography
 			pNewParent.AddChild(node);
 		}
 		
+		/// <summary>
+		/// Removes this entity from the GameScene & the GamePhysics.
+		/// </summary>
+		/// <param name='doCleanup'>
+		/// Do cleanup?
+		/// </param>
 		public  virtual void removeFromScene(bool doCleanup=false) {
 			Node node = getNode();
 			removePhysicsBody();
 			(_scene as GameScene).RemoveChildEntity( this, doCleanup );
 		}
 		
+		/// <summary>
+		/// Removes this entity's <c>PhysicBody</c>.
+		/// </summary>
 		private void removePhysicsBody() {
 			PhysicsBody body = getBody();
 			if (body != null) {
@@ -97,10 +186,28 @@ namespace Crystallography
 			}
 		}
 		
+		/// <summary>
+		/// Sets the location of this entity's pivot point in uv-coordinates. To center, use (0.5f, 0.5f).
+		/// </summary>
+		/// <param name='pX'>
+		/// <c>float</c> Horizontal (u) coordinate.
+		/// </param>
+		/// <param name='pY'>
+		/// <c>float</c> Vertical (v) coordinate.
+		/// </param>
 		public void setPivot(float pX, float pY) {
 			getNode().Pivot = new Vector2 ( pX, pY );
 		}
 		
+		/// <summary>
+		/// Sets this entity's position relative to its <c>Parent</c> (often the scene) in pixels.
+		/// </summary>
+		/// <param name='pX'>
+		/// P x.
+		/// </param>
+		/// <param name='pY'>
+		/// P y.
+		/// </param>
 		public void setPosition(float pX, float pY) {
 			Vector2 v2 = new Vector2( pX, pY );
 			PhysicsBody body = getBody();
@@ -111,11 +218,12 @@ namespace Crystallography
 			}
 		}
 		
-//		public Vector2 getPositionLocal() {
-//			Node node = getNode();
-//			return new Vector2(node.Position.X, node.Position.Y);
-//		}
-		
+		/// <summary>
+		/// Gets this entity's position, relative to its <c>Parent</c>, in pixels.
+		/// </summary>
+		/// <returns>
+		/// <see cref="Sce.PlayStation.Core.Vector2"/>
+		/// </returns>
 		public Vector2 getPosition() {
 			PhysicsBody body = getBody();
 			if (body != null) {
@@ -125,6 +233,12 @@ namespace Crystallography
 			}
 		}
 		
+		/// <summary>
+		/// Sets this entity's position, relative to its <c>Parent</c> in pixels.
+		/// </summary>
+		/// <param name='pPixelPosition'>
+		/// <see cref="Sce.PlayStation.Core.Vector2"/>
+		/// </param>
 		public void setPosition(Vector2 pPixelPosition) {
 			PhysicsBody body = getBody();
 			if (body != null) {
@@ -134,10 +248,19 @@ namespace Crystallography
 			}
 		}
 		
+		/// <summary>
+		/// Tells the <c>SoundSystem</c> to play this entity's interaction sound.
+		/// </summary>
 		public virtual void playSound() {
 			Support.SoundSystem.Instance.Play(_sound);
 		}
 		
+		/// <summary>
+		/// Sets the velocity in meters / second.
+		/// </summary>
+		/// <param name='pVelocity'>
+		/// <see cref="Sce.PlayStation.Core.Vector2"/>
+		/// </param>
 		public void setVelocity(Vector2 pVelocity) {
 			PhysicsBody body = getBody();
 			if (body != null) {
@@ -145,6 +268,15 @@ namespace Crystallography
 			}
 		}
 		
+		/// <summary>
+		/// Sets the velocity in pixels / second.
+		/// </summary>
+		/// <param name='pPixelsPerSecond'>
+		/// <c>float</c> pixels / second.
+		/// </param>
+		/// <param name='pRadians'>
+		/// Heading. Ignore to just continue with current heading.
+		/// </param>
 		public void setVelocity(float pPixelsPerSecond, float pRadians = float.NaN) {
 			PhysicsBody body = getBody();
 			if (body != null) {

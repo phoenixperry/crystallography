@@ -14,12 +14,12 @@ namespace Crystallography
 {
     public class GameScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
     {
-		private static readonly int TOTAL_LEVELS = 2;
+		private static readonly int TOTAL_LEVELS = 3;
 		
 		// Change the following value to true if you want bounding boxes to be rendered
         private static bool DEBUG_BOUNDINGBOXS = false;
 		
-		public static bool ORIENTATION_MATTERS = true;
+		public static bool ORIENTATION_MATTERS = false;
 		public static Random Random = new Random();
 		
 //		public static Card[] cards;

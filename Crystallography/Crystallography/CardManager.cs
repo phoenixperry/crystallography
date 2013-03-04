@@ -17,6 +17,15 @@ namespace Crystallography
 		
 		// CONSTRUCTOR ---------------------------------------------------------------------
 		
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Crystallography.CardManager"/> class.
+		/// </summary>
+		/// <param name='pScene'>
+		/// Instance of the current scene
+		/// </param>
+		/// <param name='pPhysics'>
+		/// Instance of <c>GamePhysics</c>
+		/// </param>
 		public CardManager ( Scene pScene, GamePhysics pPhysics )
 		{
 			if(Instance == null) {
@@ -29,17 +38,32 @@ namespace Crystallography
 		
 		// METHODS -------------------------------------------------------------------------
 		
+		/// <summary>
+		/// Add the specified <c>CardCrystallonEntity</c> to <c>availableCards</c>.
+		/// </summary>
+		/// <see cref="Crystallography.CardCrystallonEntity"/>
+		/// P card.
+		/// </param>
 		private CardCrystallonEntity add( CardCrystallonEntity pCard ) {
 			availableCards.Add(pCard);
 			return pCard;
 		}
 		
+		/// <summary>
+		/// Public method for removing sets of <c>CardCrystallonEntities</c> from <c>availableCards</c>.
+		/// </summary>
+		/// <param name='pCardEntities'>
+		/// An array of <c>CardCrystallonEntites</c>
+		/// </param>
 		public void matched( CardCrystallonEntity[] pCardEntities ) {
 			foreach ( CardCrystallonEntity e in pCardEntities ) {
 				rm(e);
 			}
 		}
 		
+		/// <summary>
+		/// Returns whether or not at least one possible match remains, based on the contents of <c>availableCards</c>
+		/// </summary>
 		public bool MatchesPossible() {
 			int len = availableCards.Count;
 			if ( len >= 3 ) {	// ---------------------------------------------------------------- At least 3 cards must remain
@@ -62,6 +86,9 @@ namespace Crystallography
 			return false;
 		}
 		
+		/// <summary>
+		/// Reset the <c>CardManager</c>. Probably want to call this before starting a new level.
+		/// </summary>
 		public void Reset () {
 			foreach( var card in availableCards ) {
 				card.removeFromScene();
@@ -69,11 +96,19 @@ namespace Crystallography
 			availableCards.Clear();
 		}
 		
+		/// <summary>
+		/// Remove a <c>CardCrystallonEntity</c> from <c>availableCards</c>.
+		/// </summary>
+		/// <param name='pCard'>
+		/// <see cref="Crystallography.CardCrystallonEntity"/>
+		/// </param>
 		private void rm( CardCrystallonEntity pCard ) {
 			availableCards.Remove(pCard);
 		}
 		
-		// Spawn a card at a random location
+		/// <summary>
+		/// Creates a new <c>CardCrystallonEntity</c>, adds it to the current scene at a random location.
+		/// </summary>
 		public CardCrystallonEntity spawn() {
 			var _screenWidth = Director.Instance.GL.Context.GetViewport().Width;
             var _screenHeight = Director.Instance.GL.Context.GetViewport().Height;
@@ -81,7 +116,15 @@ namespace Crystallography
 			       50f + 0.75f * _screenHeight * GameScene.Random.NextFloat());
 		}
 		
-		// Spawn a card at a specific location
+		/// <summary>
+		/// Creates a new <c>CardCrystallonEntity</c>, adds it to the current scene, and sets its starting position.
+		/// </summary>
+		/// <param name='pX'>
+		/// <c>float</c> X coordinate in pixels.
+		/// </param>
+		/// <param name='pY'>
+		/// <c>float</c> Y coordinate in pixels.
+		/// </param>
 		public CardCrystallonEntity spawn( float pX, float pY ) {
 			var ss = SpriteSingleton.getInstance();
 			CardCrystallonEntity card = new CardCrystallonEntity(_scene, _physics, ss.Get("TopSolid").TextureInfo, ss.Get ("TopSolid").TileIndex2D, 

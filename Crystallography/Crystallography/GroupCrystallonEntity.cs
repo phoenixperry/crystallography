@@ -16,12 +16,33 @@ namespace Crystallography
 		
 		// GET & SET -------------------------------------------------------------
 		
+		/// <summary>
+		/// Use this to get the number of members of this group!
+		/// </summary>
+		/// <value>
+		/// <c>int</c> population.
+		/// </value>
 		public int population {
 			get { return _numMembers; }
 		}
 		
 		// CONSTRUCTOR -----------------------------------------------------------
 		
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Crystallography.GroupCrystallonEntity"/> class.
+		/// </summary>
+		/// <param name='pScene'>
+		/// Instance of the parent scene.
+		/// </param>
+		/// <param name='pGamePhysics'>
+		/// Instance of <c>GamePhysics</c>
+		/// </param>
+		/// <param name='pShape'>
+		/// <see cref="Sce.PlayStation.HighLevel.Physics2D.PhysicsShape"/>
+		/// </param>
+		/// <param name='pMaxMembers'>
+		/// <c>int</c> Maximum allowed population. Probs 3. 0 = no limit.
+		/// </param>
 		public GroupCrystallonEntity(Scene pScene, GamePhysics pGamePhysics, PhysicsShape pShape = null, int pMaxMembers=0) 
 																	: base( pScene, pGamePhysics, pShape ) {
 			_maxMembers = pMaxMembers;
@@ -35,6 +56,9 @@ namespace Crystallography
 		
 		// OVERRIDES -------------------------------------------------------------
 		
+		/// <summary>
+		/// Play the sounds of all group members in sequence: top, left, right.
+		/// </summary>
 		public override void playSound ()
 		{
 			//TODO This doesn't work, but it needs to. At least it doesn't crash for some reason...
@@ -47,6 +71,12 @@ namespace Crystallography
 			getNode().RunAction( sequence );
 		}
 		
+		/// <summary>
+		/// Removes the group from the scene. If doCleanup is true, it gets the object and any children ready for deletion.
+		/// </summary>
+		/// <param name='doCleanup'>
+		/// Do cleanup.
+		/// </param>
 		public override void removeFromScene (bool doCleanup)
 		{
 			if (doCleanup) {
@@ -67,6 +97,12 @@ namespace Crystallography
 			base.removeFromScene (doCleanup);
 		}
 		
+		/// <summary>
+		/// The once-per-frame update method.
+		/// </summary>
+		/// <param name='dt'>
+		/// <c>float</c> elapsed time since last frame.
+		/// </param>
 		public override void Update (float dt)
 		{
 			base.Update(dt);
@@ -81,6 +117,12 @@ namespace Crystallography
 		
 		// METHODS ---------------------------------------------------------------
 		
+		/// <summary>
+		/// Add the specified <c>ICrystallonEntity</c> to this group.
+		/// </summary>
+		/// <param name='pEntity'>
+		/// <see cref="Crystallography.ICrystallonEntity"/>
+		/// </param>
 		public virtual GroupCrystallonEntity Add(ICrystallonEntity pEntity) {
 			if (pEntity is SpriteTileCrystallonEntity) {
 				return AddSpriteTile(pEntity as SpriteTileCrystallonEntity);
@@ -90,6 +132,15 @@ namespace Crystallography
 			return this;
 		}
 		
+		/// <summary>
+		/// Add the specified <c>SpriteTileCrystallonEntity</c> to the group.
+		/// </summary>
+		/// <returns>
+		/// This <c>GroupCrystallonEntity</c>
+		/// </returns>
+		/// <param name='pEntity'>
+		/// <see cref="Crystallography.SpriteTileCrystallonEntity"/>
+		/// </param>
 		public GroupCrystallonEntity AddSpriteTile(SpriteTileCrystallonEntity pEntity) {
 			IncreaseSlots( 1 );
 //			members[GetOrientationIndex( pEntity )] = pEntity;
@@ -98,6 +149,15 @@ namespace Crystallography
 			return this;
 		}
 		
+		/// <summary>
+		/// Add all members of a <c>GroupCrystallonEntity</c> to this group.
+		/// </summary>
+		/// <returns>
+		/// This <c>GroupCrystallonEntity</c>
+		/// </returns>
+		/// <param name='pGroupEntity'>
+		/// <see cref="Crystallography.GroupCrystallonEntity"/>
+		/// </param>
 		public GroupCrystallonEntity AddGroup( GroupCrystallonEntity pGroupEntity ) {
 			IncreaseSlots(pGroupEntity.members.Length);
 			for ( int i=0; i<pGroupEntity.members.Length; i++) {
@@ -108,17 +168,27 @@ namespace Crystallography
 					Attach(e);	// LAZY TYPECASTING... CLEAN UP LATER?
 				}
 			}
-//			pGroupEntity.RemoveAll();
 			GroupManager.Instance.Remove( pGroupEntity );
-//			pGroupEntity.removeFromScene(true);
 			return this;
 		}
 		
+		/// <summary>
+		/// Add a puck, i.e. a root node, to help position entities relative to each other in the group.
+		/// </summary>
+		/// <param name='pIndex'>
+		/// <c>int</c> which puck is this? Probs 0, 1 or 2.
+		/// </param>
 		private void AddPuck( int pIndex ) {
 			_pucks[pIndex] = new Node();
 			getNode().AddChild(_pucks[pIndex]);
 		}
 		
+		/// <summary>
+		/// Actually reparent an entity into this group.
+		/// </summary>
+		/// <param name='pEntity'>
+		/// <see cref="Crystallography.AbstractCrystallonEntity"/>
+		/// </param>
 		private void Attach( AbstractCrystallonEntity pEntity ) {
 			//create a child-node, give it a positional offset, make pEntity a child of child-node
 			int index = GetOrientationIndex( pEntity );
@@ -128,13 +198,19 @@ namespace Crystallography
 			Node puck = _pucks[index];
 			pEntity.attachTo(puck);
 			pEntity.getNode().Position *= 0;
+			if( GameScene.ORIENTATION_MATTERS == false ) {
+				QualityManager.Instance.SetQuality( pEntity, "QOrientation", index );
+			}
 			_numMembers++;
 			if ( this is SelectionGroup  == false ) {	// SelectionGroup has its own positioning code -- HACK This implementation is just sort of inelegant. Maybe abstract some of this out later?
 				if ( population  > 1 ) {
 					foreach( AbstractCrystallonEntity e in members ) {
+//					for (int i=0; i<members.Length; i++ {
 						if( e != null) {
-							int attachPosition = GetOrientationIndex( e );
-							_pucks[attachPosition].Position = e.getAttachOffset( attachPosition );
+//						if ( members[i] != null ) {
+							int puckIndex = Array.IndexOf(_pucks, e.getNode().Parent);
+//							int attachPosition = GetOrientationIndex( e );
+							_pucks[puckIndex].Position = e.getAttachOffset( puckIndex );
 						}
 					}
 				} else { // JUST CENTER THE OBJECT IF THERE'S ONLY ONE.
@@ -143,6 +219,15 @@ namespace Crystallography
 			}
 		}
 		
+		/// <summary>
+		/// If an entity has a fixed orientation, this tells us what it is. If not, it just tells us what orientation to use.
+		/// </summary>
+		/// <returns>
+		/// <c>int</c> The orientation index.
+		/// </returns>
+		/// <param name='pEntity'>
+		/// <see cref="Crystallography.AbstractCrystallonEntity"/>
+		/// </param>
 		private int GetOrientationIndex( AbstractCrystallonEntity pEntity ) {
 			if (!GameScene.ORIENTATION_MATTERS) {
 				return population;
@@ -165,6 +250,9 @@ namespace Crystallography
 			return attachPosition;
 		}
 		
+		/// <summary>
+		/// Returns the index of the first <c>null</c> position in <c>members</c>. -1 if all positions contain something.
+		/// </summary>
 		private int GetFreeSlot() {
 			for ( int i=0; i<members.Length; i++ ) {
 				if (members[i] == null) {
@@ -174,6 +262,12 @@ namespace Crystallography
 			return -1;
 		}
 		
+		/// <summary>
+		/// Resize <c>members</c> and <c>_pucks</c> so the group can hold more members.
+		/// </summary>
+		/// <param name='pNumber'>
+		/// <c>int</c> How many entities do we need to add to the group?
+		/// </param>
 		private void IncreaseSlots( int pNumber ) {
 			int freeSlots = members.Length - _numMembers;
 			if ( pNumber > freeSlots ) {
@@ -188,6 +282,15 @@ namespace Crystallography
 			}
 		}
 		
+		/// <summary>
+		/// Removes the <c>ICrystallonEntity</c> at the given index from <c>members</c>.
+		/// </summary>
+		/// <returns>
+		/// <see cref="Crystallography.ICrystallonEntity"/>
+		/// </returns>
+		/// <param name='pIndex'>
+		/// <c>int</c> the index of the entity to be removed.
+		/// </param>
 		protected ICrystallonEntity PopIndex( int pIndex ) {
 			ICrystallonEntity e = members[pIndex];
 			if ( pIndex == members.Length-1 ) {
@@ -202,6 +305,12 @@ namespace Crystallography
 			return e;
 		}
 		
+		/// <summary>
+		/// Remove the specified <c>ICrystallonEntity</c> from <c>members</c>. DOES NOT detach it from its parent puck.
+		/// </summary>
+		/// <param name='pEntity'>
+		/// <see cref="Crystallography.ICrystallonEntity"/>
+		/// </param>
 		public ICrystallonEntity Remove( ICrystallonEntity pEntity ) {
 			int index = Array.IndexOf(members, pEntity);
 			if (index != -1) {
@@ -210,6 +319,9 @@ namespace Crystallography
 			return null;
 		}
 		
+		/// <summary>
+		/// Clear this group of all its members.
+		/// </summary>
 		public void RemoveAll() {
 			for( int i=members.Length-1; i>=0; i--) {
 				if ( members[i] != null ) {

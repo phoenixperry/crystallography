@@ -157,7 +157,6 @@ namespace Crystallography
 		/// The GroupCrystallonEntity
 		/// </returns>
 		private GroupCrystallonEntity ReleaseGroup() {
-//			GroupCrystallonEntity g = new GroupCrystallonEntity(_scene, _physics, _physics.SceneShapes[0], MAX_CAPACITY);
 			var spawnPos = this.getPosition();
 			var g = GroupManager.Instance.spawn(spawnPos.X, spawnPos.Y);
 			foreach (AbstractCrystallonEntity e in members) {
@@ -165,10 +164,8 @@ namespace Crystallography
 			}
 			RemoveAll();
 			Array.Clear(members,0,MAX_CAPACITY);
-//			g.setPosition(this.getPosition());
 			g.Update(0); //HACK prevents group images from being at origin for 1 frame.
 			g.setVelocity(1.0f, GameScene.Random.NextAngle());
-//			g.addToScene();
 			return g;
 		}
 		
@@ -218,13 +215,19 @@ namespace Crystallography
 				foreach ( ICrystallonEntity e in GameScene.getAllEntities() )
 				{
 					if (e == null) {
-						continue; // e IS NOT A THING -- (IF THIS HAPPENS, IT'S PROBS A BUG)
+						continue; // --------------------------------- e IS NOT A THING -- (IF THIS HAPPENS, IT'S PROBS A BUG)
 					}
 					if (Array.IndexOf(members, e) != -1) {
-						continue; // e IS ALREADY PART OF THE GROUP -- IGNORE IT
+						continue; // --------------------------------- e IS ALREADY PART OF THE GROUP -- IGNORE IT
 					}
 					if (e == this) {
-						continue; // e IS THE SELECTION GROUP ITSELF -- FIND A WAY TO FILTER THIS OUT, LATER...
+						continue; // --------------------------------- e IS THE SELECTION GROUP ITSELF -- FIND A WAY TO FILTER THIS OUT, LATER...
+					}
+					if ( GameScene.ORIENTATION_MATTERS ) {
+						int orientation = e.getQualityVariant( "QOrientation" );
+						if ( _pucks[orientation].Children.Count != 0 ) {
+							continue;	// --------------------------- e IS OF AN ORIENTATION THAT IS ALREADY IN THE GROUP
+						}
 					}
 					distance = Vector2.Distance( getPosition(), e.getPosition() );
 					if (closestDistance > distance) {

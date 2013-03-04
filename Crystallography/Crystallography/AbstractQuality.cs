@@ -16,11 +16,30 @@ namespace Crystallography
 		
 		protected string _name;
 		
+		
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Crystallography.AbstractQuality"/> class.
+		/// </summary>
 		public AbstractQuality(){
 		}
 		
+		/// <summary>
+		/// Apply the specified Variant of this quality to the ICrystallonEntity.
+		/// </summary>
+		/// <param name='pEntity'>
+		/// <c>ICrystallonEntity</c>
+		/// </param>
+		/// <param name='pVariant'>
+		/// <c>int</c> of variant to apply. Probs 0, 1, or 2.
+		/// </param>
 		public abstract void Apply( ICrystallonEntity pEntity, int pVariant );
 		
+		/// <summary>
+		/// Compare all qualities on all ICrystallonEntities. Returns <c>true</c> if all-same or all-different.
+		/// </summary>
+		/// <param name='pEntities'>
+		/// <c>ICrystallonEntity</c> Array to be analyzed.
+		/// </param>
 		public virtual bool Match( ICrystallonEntity[] pEntities ) {
 			List<ICrystallonEntity>[] variants = QualityManager.Instance.qualityDict[_name];
 			int[] results = {0,0,0};
