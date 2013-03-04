@@ -80,7 +80,9 @@ namespace Crystallography
 			}
 			addCard(card);
 		}
-		
+		//this function takes the card that is selected, 
+		//and if there's a match, gets the other 2 corresponding faces 
+		//and makes the cube. -- I think. 
 		private void addCard (Card card)
 		{
 			for (int i=0; i<3; i++) {
@@ -144,7 +146,7 @@ namespace Crystallography
 					} else {
 						card.TileIndex2D = _ss.Get("dotTop").TileIndex2D;
 					}
-//					card.TileIndex2D = _ss.Get ("topSide").TileIndex2D;
+					card.TileIndex2D = _ss.Get ("topSide").TileIndex2D;
 					cards[i] = null;
 					_population--;
 				}
@@ -213,7 +215,7 @@ namespace Crystallography
 //					clearGroup ();
 					return match;
 				}
-			}
+		}
 //			if( cards[0].Color == cards[1].Color && cards[0].Color == cards[2].Color ) {
 ////				return match;
 //			} else {
