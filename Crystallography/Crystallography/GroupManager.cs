@@ -40,10 +40,20 @@ namespace Crystallography
 			return pGroup;
 		}
 		
-		public void Remove( GroupCrystallonEntity pGroup ) {
-			rm ( pGroup );
-			pGroup.RemoveAll();
-			pGroup.removeFromScene( true );
+		/// <summary>
+		/// Remove a group from the Scene, with the option to delete it entirely
+		/// </summary>
+		/// <param name='pGroup'>
+		/// <see cref="Crystallography.GroupCrystallonEntity"/>
+		/// </param>
+		/// <param name='pDelete'>
+		/// Remove all references to the group from the GroupManager? Defaults to <c>false</c>.
+		/// </param>
+		public void Remove( GroupCrystallonEntity pGroup, bool pDelete=false ) {
+			if ( pDelete ) {
+				rm ( pGroup );
+			}
+			pGroup.removeFromScene( pDelete );
 		}
 		
 		/// <summary>
@@ -51,7 +61,7 @@ namespace Crystallography
 		/// </summary>
 		public void Reset () {
 			foreach( var g in availableGroups ) {
-				g.removeFromScene( true );
+				Remove ( g );
 			}
 			availableGroups.Clear();
 		}
@@ -63,6 +73,7 @@ namespace Crystallography
 		/// Group to be removed.
 		/// </param>
 		private void rm( GroupCrystallonEntity pGroup ) {
+			pGroup.RemoveAll();
 			availableGroups.Remove(pGroup);
 		}
 		
@@ -85,9 +96,10 @@ namespace Crystallography
 		/// <param name='pY'>
 		/// Y coordinate
 		/// </param>
-		public GroupCrystallonEntity spawn( float pX, float pY ) {
+		public GroupCrystallonEntity spawn( float pX, float pY, bool pComplete = false ) {
 			var ss = SpriteSingleton.getInstance();
-			GroupCrystallonEntity g = new GroupCrystallonEntity(_scene, _physics, _physics.SceneShapes[0], SelectionGroup.MAX_CAPACITY);
+			GroupCrystallonEntity g = new GroupCrystallonEntity(_scene, _physics, _physics.SceneShapes[0], 
+			                                                    SelectionGroup.MAX_CAPACITY, pComplete);
 			g.setPosition( pX, pY );
 			g.addToScene();
 			return add(g);

@@ -97,7 +97,7 @@ namespace Crystallography
 		/// </summary>
 		public void GroupComplete() {
 			Support.SoundSystem.Instance.Play("cubed.wav");
-			CardManager.Instance.matched( Array.ConvertAll( members, item => (CardCrystallonEntity)item ) );
+			CardManager.Instance.MakeUnavailable( Array.ConvertAll( members, item => (CardCrystallonEntity)item ) );
 			if ( CardManager.Instance.MatchesPossible() == false ) {
 				Sequence sequence = new Sequence();
 				sequence.Add( new DelayTime( 1.0f ) );
@@ -113,20 +113,32 @@ namespace Crystallography
 		public void GroupFailed() {
 			Support.SoundSystem.Instance.Play("wrong.wav");
 			//TODO Break up into component parts.
+			this.Break();
 		}
 		
 		/// <summary>
 		/// Release the currently selected ICrystallonEntity from the SelectionGroup.
 		/// </summary>
-		public ICrystallonEntity Release () {
-			if (population < 1) {
+//		public ICrystallonEntity Release () {
+		public override AbstractCrystallonEntity Release ( AbstractCrystallonEntity e )
+		{
+			int i = 0;
+			bool isComplete = false;
+			if ( e is SpriteTileCrystallonEntity ) {
+				return ReleaseSingle (e as SpriteTileCrystallonEntity );
+			} else if ( population  == MAX_CAPACITY ) { // -------------------------------------------------------- EVALUATE CUBES!
+				if (QualityManager.Instance.EvaluateMatch( members ) ) {
+					GroupComplete();
+					isComplete = true;
+				} else {
+					GroupFailed();
 					return null;
+				}
 			}
-			if (population < 2) {
-				return ReleaseSingle();
-			} else {
-				return ReleaseGroup();
+			if ( e is NodeCrystallonEntity ) {
+				return ReleaseGroup ( isComplete );
 			}
+			return null;
 		}
 		
 		/// <summary>
@@ -135,19 +147,22 @@ namespace Crystallography
 		/// <returns>
 		/// The CardCrystallonEntity
 		/// </returns>
-		private CardCrystallonEntity ReleaseSingle() {
-			Node node = getNode();
-			for ( int i=0; i<members.Length; i++ ) {
-				if ( members[i] != null ) {
-					CardCrystallonEntity c = members[i] as CardCrystallonEntity;
-					Remove( c );
-					c.setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[0], 0.1f, 0.01f, this.getPosition()));
-					c.setVelocity(1.0f, GameScene.Random.NextAngle());
-					c.addToScene();
-					return c;
-				}
-			}
-			return null;
+//		private CardCrystallonEntity ReleaseSingle() {
+		protected override AbstractCrystallonEntity ReleaseSingle ( AbstractCrystallonEntity e )
+		{
+			return base.ReleaseSingle( e );
+//			Node node = getNode();
+//			for ( int i=0; i<members.Length; i++ ) {
+//				if ( members[i] != null ) {
+//					CardCrystallonEntity c = members[i] as CardCrystallonEntity;
+//					Remove( c );
+//					c.setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[0], 0.1f, 0.01f, this.getPosition()));
+//					c.setVelocity(1.0f, GameScene.Random.NextAngle());
+//					c.addToScene();
+//					return c;
+//				}
+//			}
+//			return null;
 		}
 		
 		/// <summary>
@@ -156,7 +171,7 @@ namespace Crystallography
 		/// <returns>
 		/// The GroupCrystallonEntity
 		/// </returns>
-		private GroupCrystallonEntity ReleaseGroup() {
+		protected GroupCrystallonEntity ReleaseGroup( bool pComplete ) {
 			var spawnPos = this.getPosition();
 			var g = GroupManager.Instance.spawn(spawnPos.X, spawnPos.Y);
 			foreach (AbstractCrystallonEntity e in members) {
@@ -272,19 +287,19 @@ namespace Crystallography
 			}
 			Sequence releaseDelay = new Sequence();
 			releaseDelay.Add ( new DelayTime( 0.25f ) );
-			if ( population  == MAX_CAPACITY ) { // -------------------------------------------------------- EVALUATE CUBES!
-				if (QualityManager.Instance.EvaluateMatch( members ) ) {
-//					Support.SoundSystem.Instance.Play("cubed.wav");
-//					CardManager.Instance.matched( Array.ConvertAll( members, item => (CardCrystallonEntity)item ) );
-//					if ( CardManager.Instance.MatchesPossible() == false ) {
-//						GameScene.goToNextLevel();
-//					}
-					releaseDelay.Add ( new CallFunc( () => GroupComplete() ) );
-				} else {
-					releaseDelay.Add ( new CallFunc( () => GroupFailed() ) );
-				}
-			}
-			releaseDelay.Add ( new CallFunc( () => Release() ) );
+//			if ( population  == MAX_CAPACITY ) { // -------------------------------------------------------- EVALUATE CUBES!
+//				if (QualityManager.Instance.EvaluateMatch( members ) ) {
+////					Support.SoundSystem.Instance.Play("cubed.wav");
+////					CardManager.Instance.matched( Array.ConvertAll( members, item => (CardCrystallonEntity)item ) );
+////					if ( CardManager.Instance.MatchesPossible() == false ) {
+////						GameScene.goToNextLevel();
+////					}
+//					releaseDelay.Add ( new CallFunc( () => GroupComplete() ) );
+//				} else {
+//					releaseDelay.Add ( new CallFunc( () => GroupFailed() ) );
+//				}
+//			}
+			releaseDelay.Add ( new CallFunc( () => Release( this ) ) );
 			_scene.RunAction( releaseDelay );
 		}
 		

@@ -16,6 +16,8 @@ namespace Crystallography
 		
 		// GET & SET -------------------------------------------------------------
 		
+		public bool complete { get; protected set; }
+		
 		/// <summary>
 		/// Use this to get the number of members of this group!
 		/// </summary>
@@ -43,8 +45,9 @@ namespace Crystallography
 		/// <param name='pMaxMembers'>
 		/// <c>int</c> Maximum allowed population. Probs 3. 0 = no limit.
 		/// </param>
-		public GroupCrystallonEntity(Scene pScene, GamePhysics pGamePhysics, PhysicsShape pShape = null, int pMaxMembers=0) 
-																	: base( pScene, pGamePhysics, pShape ) {
+		public GroupCrystallonEntity(Scene pScene, GamePhysics pGamePhysics, PhysicsShape pShape = null, 
+		                             int pMaxMembers=0, bool pComplete = false) 
+																				: base( pScene, pGamePhysics, pShape ) {
 			_maxMembers = pMaxMembers;
 			_numMembers = 0;
 			members = new ICrystallonEntity[_maxMembers];
@@ -52,6 +55,7 @@ namespace Crystallography
 			for (int i=0; i < _maxMembers; i++) {
 				AddPuck(i);
 			}
+			complete = pComplete;
 		}
 		
 		// OVERRIDES -------------------------------------------------------------
@@ -219,6 +223,21 @@ namespace Crystallography
 			}
 		}
 		
+		public void Break() {
+			Node puck;
+//			foreach ( AbstractCrystallonEntity e in members ) {
+			for (int i=members.Length-1; i>=0; i--) {
+				if ( members[i] != null ) {
+					var e = members[i] as AbstractCrystallonEntity;
+					puck = Array.Find( _pucks, (obj) => obj == e.getNode().Parent );
+					var launchVelocity = puck.Position.Normalize();
+					Release( e );
+					e.setVelocity( launchVelocity );
+				}
+			}
+			RemoveAll();
+		}
+		
 		/// <summary>
 		/// If an entity has a fixed orientation, this tells us what it is. If not, it just tells us what orientation to use.
 		/// </summary>
@@ -260,6 +279,7 @@ namespace Crystallography
 				}
 			}
 			return -1;
+			Array.FindIndex( members, (obj) => obj == null );
 		}
 		
 		/// <summary>
@@ -301,8 +321,61 @@ namespace Crystallography
 				}
 				_numMembers--;
 			}
+			members[pIndex] = null;
 			//TODO Remove puck nodes (unless this is the SelectionGroup, keep those.)
 			return e;
+		}
+		
+		/// <summary>
+		/// Release an entity from the Group.
+		/// </summary>
+		public virtual AbstractCrystallonEntity Release ( AbstractCrystallonEntity e) {
+			if ( e is SpriteTileCrystallonEntity ) {
+				return ReleaseSingle (e as SpriteTileCrystallonEntity );
+//			} else if ( e is NodeCrystallonEntity ) {
+//				return ReleaseGroup(e as NodeCrystallonEntity );
+			} else {
+				return null;
+			}
+//			if (population < 1) {
+//					return null;
+//			}
+//			if (population < 2) {
+//				return ReleaseSingle();
+//			} else {
+//				return ReleaseGroup();
+//			}
+		}
+		
+		/// <summary>
+		/// Called we're only releasing a single entity.
+		/// </summary>
+		/// <returns>
+		/// The CardCrystallonEntity
+		/// </returns>
+		protected virtual AbstractCrystallonEntity ReleaseSingle( AbstractCrystallonEntity pEntity ) {
+			Remove (pEntity);
+			if(complete) {
+				if ( pEntity is CardCrystallonEntity ) {
+					CardManager.Instance.Add( pEntity as CardCrystallonEntity );
+				}
+			}
+			pEntity.setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[0], 0.1f, 0.01f, this.getPosition()));
+			pEntity.setVelocity(1.0f, GameScene.Random.NextAngle());
+			pEntity.addToScene();
+			return pEntity;
+//			Node node = getNode();
+//			for ( int i=0; i<members.Length; i++ ) {
+//				if ( members[i] != null ) {
+//					CardCrystallonEntity c = members[i] as CardCrystallonEntity;
+//					Remove( c );
+//					c.setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[0], 0.1f, 0.01f, this.getPosition()));
+//					c.setVelocity(1.0f, GameScene.Random.NextAngle());
+//					c.addToScene();
+//					return c;
+//				}
+//			}
+//			return null;
 		}
 		
 		/// <summary>
@@ -311,7 +384,7 @@ namespace Crystallography
 		/// <param name='pEntity'>
 		/// <see cref="Crystallography.ICrystallonEntity"/>
 		/// </param>
-		public ICrystallonEntity Remove( ICrystallonEntity pEntity ) {
+		protected ICrystallonEntity Remove( ICrystallonEntity pEntity ) {
 			int index = Array.IndexOf(members, pEntity);
 			if (index != -1) {
 				return PopIndex (index);

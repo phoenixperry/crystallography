@@ -44,20 +44,27 @@ namespace Crystallography
 		/// <see cref="Crystallography.CardCrystallonEntity"/>
 		/// P card.
 		/// </param>
-		private CardCrystallonEntity add( CardCrystallonEntity pCard ) {
+		public CardCrystallonEntity Add( CardCrystallonEntity pCard ) {
 			availableCards.Add(pCard);
 			return pCard;
 		}
 		
 		/// <summary>
-		/// Public method for removing sets of <c>CardCrystallonEntities</c> from <c>availableCards</c>.
+		/// Removes a <c>CardCrystallonEntity</c> from the scene, with the option to delete entirely.
 		/// </summary>
 		/// <param name='pCardEntities'>
 		/// An array of <c>CardCrystallonEntites</c>
 		/// </param>
-		public void matched( CardCrystallonEntity[] pCardEntities ) {
+		public void Remove( CardCrystallonEntity pCardEntity, bool pDelete=false ) {
+			if ( pDelete ) {
+				rm(pCardEntity);
+			}
+			pCardEntity.removeFromScene( pDelete );
+		}
+		
+		public void MakeUnavailable( CardCrystallonEntity[] pCardEntities ) {
 			foreach ( CardCrystallonEntity e in pCardEntities ) {
-				rm(e);
+				rm ( e );
 			}
 		}
 		

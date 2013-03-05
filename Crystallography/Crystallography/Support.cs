@@ -21,7 +21,17 @@ namespace Crystallography
 		public static TextureFilterMode DefaultTextureFilterMode = TextureFilterMode.Linear;
 		public static Dictionary<string, Texture2D> TextureCache = new Dictionary<string, Texture2D>();
 		public static Dictionary<string, TextureInfo> TextureInfoCache = new Dictionary<string, TextureInfo>();
-
+		
+		/// <summary>
+		/// Returns the index of the first slot in the array that equals <c>null</c>.
+		/// </summary>
+		/// <param name='pArray'>
+		/// <see cref="System.Array"/>
+		/// </param>
+		public static int FindFreeSlot( object[] pArray ) {
+			return System.Array.FindIndex(pArray, (obj) => obj == null);
+		}
+		
 		public static Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile SpriteFromFile(string filename)
 		{
 			if (TextureCache.ContainsKey(filename) == false)
