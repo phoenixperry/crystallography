@@ -27,6 +27,8 @@ namespace Crystallography
 		public int population {
 			get { return _numMembers; }
 		}
+
+		public Node[] pucks { get {return _pucks;} }
 		
 		// CONSTRUCTOR -----------------------------------------------------------
 		
@@ -202,9 +204,9 @@ namespace Crystallography
 			Node puck = _pucks[index];
 			pEntity.attachTo(puck);
 			pEntity.getNode().Position *= 0;
-			if( GameScene.ORIENTATION_MATTERS == false ) {
+#if( !ORIENTATION_MATTERS )
 				QualityManager.Instance.SetQuality( pEntity, "QOrientation", index );
-			}
+#endif
 			_numMembers++;
 			if ( this is SelectionGroup  == false ) {	// SelectionGroup has its own positioning code -- HACK This implementation is just sort of inelegant. Maybe abstract some of this out later?
 				if ( population  > 1 ) {
@@ -247,9 +249,9 @@ namespace Crystallography
 		/// <see cref="Crystallography.AbstractCrystallonEntity"/>
 		/// </param>
 		private int GetOrientationIndex( AbstractCrystallonEntity pEntity ) {
-			if (!GameScene.ORIENTATION_MATTERS) {
+#if (!ORIENTATION_MATTERS)
 				return population;
-			}
+#endif
 			string orientation = ( pEntity as SpriteTileCrystallonEntity ).getOrientation();
 			int attachPosition = -1;
 			switch (orientation) {
@@ -351,10 +353,11 @@ namespace Crystallography
 		/// The CardCrystallonEntity
 		/// </returns>
 		protected virtual AbstractCrystallonEntity ReleaseSingle( AbstractCrystallonEntity pEntity ) {
-			if ( pEntity is CardCrystallonEntity && GameScene.ORIENTATION_MATTERS == false ) {
-//					new QOrientation().Apply(e, 0); // HACK OMGWTFBBQ DO THIS IN A NON-SHITTY WAY.
-					QOrientation.Instance.Apply(pEntity,0);
-				}
+#if !ORIENTATION_MATTERS
+			if ( pEntity is CardCrystallonEntity ) {
+				QOrientation.Instance.Apply(pEntity,0);
+			}
+#endif
 			Remove (pEntity);
 			if(complete) {
 				if ( pEntity is CardCrystallonEntity ) {

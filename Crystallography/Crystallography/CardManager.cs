@@ -8,32 +8,35 @@ namespace Crystallography
 	public class CardManager
 	{
 		public static List<CardCrystallonEntity> availableCards;
+		protected static CardManager _instance;
 		protected Scene _scene;
 		protected GamePhysics _physics;
 		
 		// GET & SET -----------------------------------------------------------------------
 		
-		public static CardManager Instance { get; private set; }
+//		public static CardManager Instance { get; private set; }
+		public static CardManager Instance { 
+			get {
+				if( _instance == null) {
+					return _instance = new CardManager();
+				}
+				return _instance;
+			}
+			private set{
+				_instance = value;
+			}
+		}
 		
 		// CONSTRUCTOR ---------------------------------------------------------------------
 		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Crystallography.CardManager"/> class.
 		/// </summary>
-		/// <param name='pScene'>
-		/// Instance of the current scene
-		/// </param>
-		/// <param name='pPhysics'>
-		/// Instance of <c>GamePhysics</c>
-		/// </param>
-		public CardManager ( Scene pScene, GamePhysics pPhysics )
-		{
-			if(Instance == null) {
-				Instance = this;
+		protected CardManager () {
 				availableCards = new List<CardCrystallonEntity>();
-				_scene = pScene;
-				_physics = pPhysics;
-			}
+				_scene = Director.Instance.CurrentScene;
+				_physics = GamePhysics.Instance;
+//			}
 		}
 		
 		// METHODS -------------------------------------------------------------------------
@@ -96,11 +99,12 @@ namespace Crystallography
 		/// <summary>
 		/// Reset the <c>CardManager</c>. Probably want to call this before starting a new level.
 		/// </summary>
-		public void Reset () {
+		public void Reset ( Scene pScene ) {
 			foreach( var card in availableCards ) {
 				card.removeFromScene();
 			}
 			availableCards.Clear();
+			_scene = pScene;
 		}
 		
 		/// <summary>

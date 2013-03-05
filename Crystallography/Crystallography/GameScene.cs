@@ -19,7 +19,6 @@ namespace Crystallography
 		// Change the following value to true if you want bounding boxes to be rendered
         private static bool DEBUG_BOUNDINGBOXS = false;
 		
-		public static bool ORIENTATION_MATTERS = true;
 		public static Random Random = new Random();
 		
 //		public static Card[] cards;
@@ -64,14 +63,14 @@ namespace Crystallography
 		{
 			currentLevel = pCurrentLevel;
             this.Camera.SetViewFromViewport();
-            _physics = new GamePhysics();
+            _physics = GamePhysics.Instance;
 			
 			_selectionGroup = new SelectionGroup(this, _physics, null);
 			_selectionGroup.addToScene();
 			
-			new CardManager( this, _physics );
-			new GroupManager( this, _physics );
-			new QualityManager();
+			CardManager.Instance.Reset( this );
+			GroupManager.Instance.Reset( this );
+//			new QualityManager();
 			QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
 //			QualityManager qm = new QualityManager();
 //			qm.LoadLevelQualities( currentLevel );
@@ -152,12 +151,12 @@ namespace Crystallography
 		/// <summary>
 		/// Restarts GameScene at next level OR Goes to TitleScene if there are no more levels.
 		/// </summary>
-		public static void goToNextLevel() {
+		public void goToNextLevel( ) {
 //			LevelData.CURRENT_LEVEL++;
 			currentLevel++;
 			if (currentLevel < TOTAL_LEVELS) {
-				CardManager.Instance.Reset();
-				GroupManager.Instance.Reset();
+				CardManager.Instance.Reset( this );
+				GroupManager.Instance.Reset( this );
 				QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
 //				Director.Instance.ReplaceScene( new GameScene( currentLevel ) );
 			} else {

@@ -8,6 +8,8 @@ namespace Crystallography
 {
 	public class GamePhysics:PhysicsScene
 	{
+		protected static GamePhysics _instance;
+		
 		//pixels to meters 
 		public static readonly float PtoM = 50.0f; 
 		private const float BALLRADIUS = 35.0f/2f; 
@@ -18,9 +20,24 @@ namespace Crystallography
             
             
         public enum BODIES { Ball = 0, Player, Ai, LeftBumper, RightBumper, TopBumper, BottomBumper };
-    
+    	
+		// GET & SET ------------------------------------------------------------------------------------
 		
-		public GamePhysics ()
+		public static GamePhysics Instance {
+			get {
+				if (_instance == null) {
+					return _instance = new GamePhysics();
+				}
+				return _instance;
+			}
+			private set {
+				_instance = value;
+			}
+		}
+		
+		// CONSTRUCTOR ----------------------------------------------------------------------------------
+		
+		protected GamePhysics ()
 		{
 			_screenWidth = Director.Instance.GL.Context.GetViewport().Width;
             _screenHeight = Director.Instance.GL.Context.GetViewport().Height;
@@ -121,6 +138,8 @@ namespace Crystallography
 				this.NumBody++;
             }
 		
+		// METHODS ------------------------------------------------------------------------------------------------
+		
 		public PhysicsBody addCardPhysics(Vector2 position) {
 			this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[0],0.1f);
             this.SceneBodies[this.NumBody].ShapeIndex = 0;
@@ -179,6 +198,12 @@ namespace Crystallography
             this.SceneBodies[this.NumBody].Position = position / PtoM;
             this.NumBody++;
 			return SceneBodies[this.NumBody-1];
+		}
+		
+		// DESTRUCTOR -------------------------------------------------------------------------------------------
+		
+		~GamePhysics() {
+			Instance = null;
 		}
     }
 }	

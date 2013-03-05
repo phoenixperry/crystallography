@@ -8,23 +8,34 @@ namespace Crystallography
 	public class GroupManager
 	{
 		public static List<GroupCrystallonEntity> availableGroups;
+		protected static GroupManager _instance;
 		protected Scene _scene;
 		protected GamePhysics _physics;
 		
 		// GET & SET -----------------------------------------------------------------------
 		
-		public static GroupManager Instance { get; private set; }
+		public static GroupManager Instance { 
+			get{
+				if (_instance == null) {
+					return _instance = new GroupManager();
+				}
+				return _instance;
+			}
+			private set{
+				_instance = value;
+			}
+		}
 		
 		// CONSTRUCTOR ---------------------------------------------------------------------
 		
-		public GroupManager ( Scene pScene, GamePhysics pPhysics )
+		protected GroupManager ()// Scene pScene, GamePhysics pPhysics )
 		{
-			if(Instance == null) {
-				Instance = this;
+//			if(Instance == null) {
+//				Instance = this;
 				availableGroups = new List<GroupCrystallonEntity>();
-				_scene = pScene;
-				_physics = pPhysics;
-			}
+				_scene = Director.Instance.CurrentScene;
+				_physics = GamePhysics.Instance;
+//			}
 		}
 		
 		// METHODS -------------------------------------------------------------------------
@@ -59,11 +70,12 @@ namespace Crystallography
 		/// <summary>
 		/// Reset this instance. Removes all known groups from the scene, and clears the list.
 		/// </summary>
-		public void Reset () {
+		public void Reset ( Scene pScene ) {
 			foreach( var g in availableGroups ) {
 				Remove ( g );
 			}
 			availableGroups.Clear();
+			_scene = pScene;
 		}
 		
 		/// <summary>

@@ -101,7 +101,7 @@ namespace Crystallography
 			if ( CardManager.Instance.MatchesPossible() == false ) {
 				Sequence sequence = new Sequence();
 				sequence.Add( new DelayTime( 1.0f ) );
-				sequence.Add( new CallFunc( () => GameScene.goToNextLevel() ) );
+				sequence.Add( new CallFunc( () => (_scene as GameScene).goToNextLevel() ) );
 //				_scene.RunAction( new CallFunc( () => GameScene.goToNextLevel() ) );
 				_scene.RunAction(sequence);
 			}
@@ -237,12 +237,26 @@ namespace Crystallography
 					if (e == this) {
 						continue; // --------------------------------- e IS THE SELECTION GROUP ITSELF -- FIND A WAY TO FILTER THIS OUT, LATER...
 					}
-					if ( GameScene.ORIENTATION_MATTERS ) {
+#if ORIENTATION_MATTERS 
+					if ( e is GroupCrystallonEntity ) {
+						bool collision = false;
+						var g = e as GroupCrystallonEntity;
+						for (int i=0; i<g.pucks.Length; i++) {
+							if( g.pucks[i].Children.Count > 0 && this.pucks[i].Children.Count > 0) {
+								collision = true;
+								break;
+							}
+						}
+						if (collision) {
+							continue;	// ----------------- e IS A GROUP WITH MEMBERS THAT OVERLAP WITH SELECTION GROUP -- IGNORE
+						}
+					} else {
 						int orientation = e.getQualityVariant( "QOrientation" );
 						if ( _pucks[orientation].Children.Count != 0 ) {
 							continue;	// --------------------------- e IS OF AN ORIENTATION THAT IS ALREADY IN THE GROUP
 						}
 					}
+#endif
 					distance = Vector2.Distance( getPosition(), e.getPosition() );
 					if (closestDistance > distance) {
 						closestDistance = distance;

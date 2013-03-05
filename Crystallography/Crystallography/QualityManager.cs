@@ -12,6 +12,8 @@ namespace Crystallography
 {
 	public class QualityManager
 	{
+		protected static QualityManager _instance;
+		
 		/// <summary>
 		/// This is sort of a complex data structure, so here's how it works:
 		/// qualityDict							:	Dictionary; Keys: names of classes that implement <c>IQuality</c>
@@ -27,20 +29,30 @@ namespace Crystallography
 		
 		// GET & SET ------------------------------------------------------------------------------------------------
 		
-		public static QualityManager Instance { get; private set; }
+		public static QualityManager Instance { 
+			get {
+				if( _instance == null) {
+					return _instance = new QualityManager();
+				}
+				return _instance;
+			}
+			private set{
+				_instance = value;
+			}
+		}
 		
 		// CONSTRUCTOR -----------------------------------------------------------------------------------------------
 		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Crystallography.QualityManager"/> class.
 		/// </summary>
-		public QualityManager() {
-			if ( Instance == null ) {
+		protected QualityManager() {
+//			if ( Instance == null ) {
 				Instance = this;
-			}
-			if ( qualityDict == null ) {
+//			}
+//			if ( qualityDict == null ) {
 				qualityDict = new Dictionary<string, List<ICrystallonEntity>[]>();
-			}
+//			}
 		}
 		
 		// METHODS ---------------------------------------------------------------------------------------------------
@@ -66,9 +78,11 @@ namespace Crystallography
 		/// </summary>
 		private void ApplyQualities() {
 			foreach ( string key in qualityDict.Keys ) {
-				if ( key == "QOrientation" && GameScene.ORIENTATION_MATTERS == false ) {
+#if !ORIENTATION_MATTERS
+				if ( key == "QOrientation" ) {
 					continue;
 				}
+#endif
 				var type = Type.GetType( "Crystallography." + key );
 				var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
 				var variations = qualityDict[key];
@@ -150,9 +164,11 @@ namespace Crystallography
 		public bool EvaluateMatch( ICrystallonEntity[] pEntities ) {
 			bool valid = true;
 			foreach ( string key in qualityDict.Keys ) {
-				if ( key == "QOrientation" && GameScene.ORIENTATION_MATTERS == false ) {
+#if !ORIENTATION_MATTERS
+				if ( key == "QOrientation" ) {
 					continue;	// -------------------------------- Orientation doesn't matter; don't bother.
 				}
+#endif
 				var variations = qualityDict[key];
 				if ( variations[0] == null || variations[1] == null || variations[2] == null ) {
 					continue;	// -------------------------------- This quality has no variations in this level; don't bother.
