@@ -225,7 +225,6 @@ namespace Crystallography
 		
 		public void Break() {
 			Node puck;
-//			foreach ( AbstractCrystallonEntity e in members ) {
 			for (int i=members.Length-1; i>=0; i--) {
 				if ( members[i] != null ) {
 					var e = members[i] as AbstractCrystallonEntity;
@@ -332,8 +331,6 @@ namespace Crystallography
 		public virtual AbstractCrystallonEntity Release ( AbstractCrystallonEntity e) {
 			if ( e is SpriteTileCrystallonEntity ) {
 				return ReleaseSingle (e as SpriteTileCrystallonEntity );
-//			} else if ( e is NodeCrystallonEntity ) {
-//				return ReleaseGroup(e as NodeCrystallonEntity );
 			} else {
 				return null;
 			}
@@ -354,6 +351,10 @@ namespace Crystallography
 		/// The CardCrystallonEntity
 		/// </returns>
 		protected virtual AbstractCrystallonEntity ReleaseSingle( AbstractCrystallonEntity pEntity ) {
+			if ( pEntity is CardCrystallonEntity && GameScene.ORIENTATION_MATTERS == false ) {
+//					new QOrientation().Apply(e, 0); // HACK OMGWTFBBQ DO THIS IN A NON-SHITTY WAY.
+					QOrientation.Instance.Apply(pEntity,0);
+				}
 			Remove (pEntity);
 			if(complete) {
 				if ( pEntity is CardCrystallonEntity ) {

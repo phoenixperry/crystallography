@@ -14,13 +14,15 @@ namespace Crystallography
 	{
 //		public enum VALUE { ONE=0x1, TWO=0x2, THREE=0x4 };
 		
+//		protected AbstractQuality _instance;
+		
 		protected string _name;
 		
 		
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Crystallography.AbstractQuality"/> class.
+		/// IQuality implementors have protected constructors. Access them through their <c>public static Instance</c> variables.
 		/// </summary>
-		public AbstractQuality(){
+		protected AbstractQuality(){
 		}
 		
 		/// <summary>

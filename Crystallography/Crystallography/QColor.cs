@@ -7,14 +7,34 @@ namespace Crystallography
 {
 	public class QColor : AbstractQuality
 	{
-//		public static List<Card>[] lists = new List<Card>[3] {new List<Card>(), new List<Card>(), new List<Card>()};
+		protected static AbstractQuality _instance;
+		
+		// GET & SET --------------------------------------------------------------
+		
+		/// <summary>
+		/// An instance of the class. Creates one if it doesn't already exist.
+		/// </summary>
+		public static QColor Instance {
+			get {
+				if(_instance == null) {
+					_instance = new QColor();
+					return _instance as QColor;
+				} else { 
+					return _instance as QColor; 
+				}
+			}
+			protected set {
+				_instance = value;
+			}
+		}
+		
 		public static Vector4[] palette = new Vector4[3];
-		public static IQuality Instance;
 		
 		// CONSTRUCTOR ------------------------------------------------------------------
 		
-		public QColor() : base()
+		protected QColor() : base()
 		{
+			Instance = this;
 			_name = "QColor";
 			Instance = this;
 			setPalette( new Vector4(0.96f,0.88f,0.88f,1.0f), // pink
@@ -30,22 +50,6 @@ namespace Crystallography
 		
 		public override bool Match ( ICrystallonEntity[] pEntities ) {
 			return base.Match(pEntities);
-//			List<ICrystallonEntity>[] variants = QualityManager.Instance.qualityDict["QColor"];
-//			int[] results = {0,0,0};
-//			
-//			foreach ( ICrystallonEntity e in pEntities ) {
-//				for (int i=0; i<variants.Length; i++) {
-//					if ( variants[i].Contains(e) ) {
-//						results[i]++;
-//						break;
-//					}
-//				}
-//			}
-//			if ( Array.IndexOf(results, 2) == -1 ) { // Successful match is 1 of each or 3 of one. Any 2s => FAIL
-//				return true;
-//			} else {
-//				return false;
-//			}
 		}
 		
 		// METHODS ----------------------------------------------------------------------

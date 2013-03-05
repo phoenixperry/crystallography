@@ -6,10 +6,32 @@ namespace Crystallography
 {
 	public class QOrientation : AbstractQuality
 	{
+		protected static AbstractQuality _instance;
+		
+		// GET & SET --------------------------------------------------------------
+		
+		/// <summary>
+		/// An instance of the class. Creates one if it doesn't already exist.
+		/// </summary>
+		public static QOrientation Instance {
+			get {
+				if(_instance == null) {
+					_instance = new QOrientation();
+					return _instance as QOrientation;
+				} else { 
+					return _instance as QOrientation;
+				}
+			}
+			protected set {
+				_instance = value;
+			}
+		}
+		
 		// CONSTRUCTOR ------------------------------------------------------------
 		
-		public QOrientation () : base()
+		protected QOrientation () : base()
 		{
+			Instance = this;
 			_name = "QOrientation";
 		}
 		
@@ -18,7 +40,6 @@ namespace Crystallography
 		public override void Apply ( ICrystallonEntity pEntity, int pVariant )
 		{
 			SpriteTileCrystallonEntity e = pEntity as SpriteTileCrystallonEntity;
-			
 			switch(pVariant)
 			{
 			case (0):

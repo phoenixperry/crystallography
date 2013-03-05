@@ -4,10 +4,32 @@ namespace Crystallography
 {
 	public class QSound : AbstractQuality
 	{
+		protected static AbstractQuality _instance;
+		
+		// GET & SET -------------------------------------------------------------
+		
+		/// <summary>
+		/// An instance of the class. Creates one if it doesn't already exist.
+		/// </summary>
+		public static QSound Instance {
+			get {
+				if(_instance == null) {
+					_instance = new QSound();
+					return _instance as QSound;
+				} else { 
+					return _instance as QSound; 
+				}
+			}
+			protected set {
+				_instance = value;
+			}
+		}
+		
 		// CONSTRUCTOR -----------------------------------------------------------
 		
-		public QSound () : base()
+		protected QSound () : base()
 		{
+			Instance = this;
 			_name = "QSound";
 		}
 		

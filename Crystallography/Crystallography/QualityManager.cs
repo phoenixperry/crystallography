@@ -4,6 +4,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Collections.Generic; 
 using System.IO;
+using System.Reflection;
 
 using Sce.PlayStation.HighLevel.GameEngine2D;
 
@@ -65,14 +66,16 @@ namespace Crystallography
 		/// </summary>
 		private void ApplyQualities() {
 			foreach ( string key in qualityDict.Keys ) {
+				if ( key == "QOrientation" && GameScene.ORIENTATION_MATTERS == false ) {
+					continue;
+				}
 				var type = Type.GetType( "Crystallography." + key );
-				var quality = (IQuality)Activator.CreateInstance(type);
+				var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
 				var variations = qualityDict[key];
 				for ( int i=0; i<variations.Length; i++ ) {
 					var cardList = variations[i];
 					if ( cardList != null ) {
 						foreach ( var card in cardList ) {
-							//TODO Apply the quality to the card
 							quality.Apply(card, i);
 						}
 					}
@@ -155,7 +158,8 @@ namespace Crystallography
 					continue;	// -------------------------------- This quality has no variations in this level; don't bother.
 				} else {
 					var type = Type.GetType( "Crystallography." + key );
-					var quality = (IQuality)Activator.CreateInstance( type );
+//					var quality = (IQuality)Activator.CreateInstance( type );
+					var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
 					valid = quality.Match( pEntities );
 					if ( valid == false ) {
 						return valid;
@@ -227,7 +231,8 @@ namespace Crystallography
 		/// </param>
 		public void SetQuality ( AbstractCrystallonEntity pEntity, string pQualityName, int pVariant ) {
 			var type = Type.GetType( "Crystallography." + pQualityName );
-			var quality = (IQuality)Activator.CreateInstance( type );
+//			var quality = (IQuality)Activator.CreateInstance( type );
+			var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
 			Remove( pEntity, pQualityName );
 			Add( pEntity, pQualityName, pVariant );
 			quality.Apply( pEntity, pVariant );

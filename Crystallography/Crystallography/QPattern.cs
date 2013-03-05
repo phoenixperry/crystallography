@@ -6,10 +6,36 @@ namespace Crystallography
 {
 	public class QPattern : AbstractQuality
 	{
-		public QPattern() : base()
+		protected static AbstractQuality _instance;
+		
+		// GET & SET --------------------------------------------------------------
+		
+		/// <summary>
+		/// An instance of the class. Creates one if it doesn't already exist.
+		/// </summary>
+		public static QPattern Instance {
+			get {
+				if(_instance == null) {
+					_instance = new QPattern();
+					return _instance as QPattern;
+				} else { 
+					return _instance as QPattern;
+				}
+			}
+			protected set {
+				_instance = value;
+			}
+		}
+		
+		// CONSTRUCTOR -----------------------------------------------------------
+		
+		protected QPattern() : base()
 		{
+			Instance = this;
 			_name = "QPattern";
 		}
+		
+		// OVERRIDES -------------------------------------------------------------
 		
 		public override void Apply ( ICrystallonEntity pEntity, int pVariant)
 		{

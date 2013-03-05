@@ -122,7 +122,6 @@ namespace Crystallography
 //		public ICrystallonEntity Release () {
 		public override AbstractCrystallonEntity Release ( AbstractCrystallonEntity e )
 		{
-			int i = 0;
 			bool isComplete = false;
 			if ( e is SpriteTileCrystallonEntity ) {
 				return ReleaseSingle (e as SpriteTileCrystallonEntity );
