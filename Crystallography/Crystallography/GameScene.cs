@@ -14,7 +14,7 @@ namespace Crystallography
 {
     public class GameScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
     {
-		private static readonly int TOTAL_LEVELS = 3;
+		private static readonly int TOTAL_LEVELS = 11;
 		
 		// Change the following value to true if you want bounding boxes to be rendered
         private static bool DEBUG_BOUNDINGBOXS = false;
@@ -155,11 +155,12 @@ namespace Crystallography
 //			LevelData.CURRENT_LEVEL++;
 			currentLevel++;
 			if (currentLevel < TOTAL_LEVELS) {
+				Console.WriteLine( "Resetting to start level " + currentLevel );
 				CardManager.Instance.Reset( this );
 				GroupManager.Instance.Reset( this );
 				QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
-//				Director.Instance.ReplaceScene( new GameScene( currentLevel ) );
 			} else {
+				Console.WriteLine( "All known levels (" + TOTAL_LEVELS + ") complete. Returning to TitleScene." );
 				Director.Instance.ReplaceScene( new TitleScene() );
 			}
 		}

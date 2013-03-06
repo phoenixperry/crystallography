@@ -1,5 +1,3 @@
-#define ORIENTATION_MATTERS
-
 using System;
 using Sce.PlayStation.Core;
 using Sce.PlayStation.HighLevel.UI; 

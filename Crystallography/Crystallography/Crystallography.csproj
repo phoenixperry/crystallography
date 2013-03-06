@@ -16,7 +16,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;ORIENTATION_MATTERS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -117,6 +117,14 @@
     <Content Include="assets\images\LeftStripe.png" />
     <Content Include="assets\images\RightStripe.png" />
     <Content Include="assets\levels\level_2.xml" />
+    <Content Include="assets\levels\level_3.xml" />
+    <Content Include="assets\levels\level_4.xml" />
+    <Content Include="assets\levels\level_5.xml" />
+    <Content Include="assets\levels\level_6.xml" />
+    <Content Include="assets\levels\level_7.xml" />
+    <Content Include="assets\levels\level_8.xml" />
+    <Content Include="assets\levels\level_9.xml" />
+    <Content Include="assets\levels\level_10.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Board.cs" />
