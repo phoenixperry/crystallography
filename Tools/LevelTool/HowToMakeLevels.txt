@@ -1,0 +1,74 @@
+HOW TO MAKE LEVELS WITH THE LEVEL TOOL
+--------------------------------------
+
+1. OPEN. Open crystalonlevels.xls in your favorite spreadsheet editor.
+
+2. EDIT. Edit as you like. Each row is effectively 1 card. Each cell should offer a dropdown list of valid choices.
+
+         Levels:        An integer showing which level this card will appear in.
+         Orientation:   Top, left, or right.     NOTE: This quality is only applied if the game is built with ORIENTATION_MATTERS 
+                                                       defined
+         Color:         Pink, Red, Blue.         NOTE: We can make palettes within the game whatever we want. 
+                                                       Color names here just make it easier to read. 
+                                                       Even if the in-game colors for a level are Orange, Mauve and Burnt Sienna, 
+                                                       they'll still be represented as PINK/RED/BLUE here.
+         Pattern:       Solid, Stripe, Dot.
+         Sound:         High, Medium, Low.
+         Animation:     Steady, Glitch, Particle.
+
+       NOTE: LEAVE A CELL BLANK if you do not want the card to have that quality.
+                However, some qualities, like Orientation, Color, Pattern and Sound 
+                are considered requirements. If this turns out to be a problem, I can 
+                rewrite the code to enforce defaults, should these fields be left
+                blank.
+   
+       WARNING: Format matters! I've set up cell-validation to aid you! Please comply!
+
+3. SAVE. File->Save your work.
+
+4. EXPORT. Convert to .csv: File->Save-As... and set the extension to .csv
+
+       NOTE: Only the active sheet will be saved, so make sure you're looking at
+                Page1 (the one with the list of all the cards on it) when you do this.
+   
+       WARNING: When you use Save-As, your spreadsheet editor will assume you want 
+                   to keep saving in .csv format until you specify otherwise. MAKE 
+                   SURE TO SAVE YOUR WORK AS AN .xls BEFORE YOU QUIT, OR YOU RUN 
+                   THE RISK OF LOSING YOUR CHANGES IN THE MASTER FILE!
+
+5. CONVERT. Run csv2crystallonlevels.exe. This should create a folder called "levels" that will contain a bunch of level .xml docs
+
+6. APPLY. Put the whole \levels\ directory in [GitHub root]\crystallography\Crystallography\Crystallography\assets
+
+7. BUILD. Build Crystallon as you normally do. It will be using all the levels you just copied into its assets directory!
+
+       NOTE: If you *CHANGED* the total number of levels in the game, you'll need to
+                manually update that number in the code. Near the very top of GameScene.cs look for:
+
+       ---- code snippet ----
+
+       namespace Crystallography
+       {
+           public class GameScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
+           {
+                private static readonly int TOTAL_LEVELS = 11; <---------------------- CHANGE THIS NUMBER!
+
+       ---- /code snippet ----     
+
+               Because we have a level_0, TOTAL_LEVELS should be 1 higher than the 
+                  highest numbered level you created. Maybe someday I will automate 
+                  this. Let me know if it's seriously cramping your style.
+
+DONE!
+
+
+
+
+
+
+
+HOW TO ADD A TOTALLY NEW QUALITY COLUMN
+---------------------------------------
+
+Don't. Let me do it. There are some assumptions I'm making about formatting, etc.
+If this turns out to be a big problem, I'll look into making it more robust.
