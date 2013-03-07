@@ -31,7 +31,7 @@ namespace Crystallography
 		
 		protected QOrientation () : base()
 		{
-			Instance = this;
+//			Instance = this;
 			_name = "QOrientation";
 		}
 		

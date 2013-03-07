@@ -1,10 +1,8 @@
 using System;
-using Sce.PlayStation.Core;
-using Sce.PlayStation.HighLevel.GameEngine2D;
 
 namespace Crystallography
 {
-	public class QPattern : AbstractQuality
+	public class QAnimation : AbstractQuality
 	{
 		protected static AbstractQuality _instance;
 		
@@ -13,13 +11,13 @@ namespace Crystallography
 		/// <summary>
 		/// An instance of the class. Creates one if it doesn't already exist.
 		/// </summary>
-		public static QPattern Instance {
+		public static QAnimation Instance {
 			get {
 				if(_instance == null) {
-					_instance = new QPattern();
-					return _instance as QPattern;
+					_instance = new QAnimation();
+					return _instance as QAnimation;
 				} else { 
-					return _instance as QPattern;
+					return _instance as QAnimation;
 				}
 			}
 			protected set {
@@ -29,10 +27,9 @@ namespace Crystallography
 		
 		// CONSTRUCTOR -----------------------------------------------------------
 		
-		protected QPattern() : base()
-		{
-//			Instance = this;
-			_name = "QPattern";
+		
+		public QAnimation () : base() {
+			_name = "QAnimation";
 		}
 		
 		// OVERRIDES -------------------------------------------------------------
@@ -44,20 +41,20 @@ namespace Crystallography
 			switch(pVariant)
 			{
 			case (0):
-				e.setPattern("Solid");
+//				e.setPattern("Solid");
 				break;
 			case (1):
-				e.setPattern("Stripe");
+//				e.setPattern("Stripe");
 				break;
 			case (2):
-				e.setPattern("Dot");
+//				e.setPattern("Dot");
 				break;
 			default:
-				throw new NotImplementedException("QPattern.Apply : pVariant must be 0,1,2");
+				throw new NotImplementedException("QAnimation.Apply : pVariant must be 0,1,2");
 				break;
 			}
-			var ss = SpriteSingleton.getInstance();
-			(e.getNode() as SpriteTile).TileIndex2D = ss.Get( e.getOrientation() + e.getPattern() ).TileIndex2D;
+//			var ss = SpriteSingleton.getInstance();
+//			(e.getNode() as SpriteTile).TileIndex2D = ss.Get( e.getOrientation() + e.getPattern() ).TileIndex2D;
 			
 		}
 		
@@ -67,3 +64,4 @@ namespace Crystallography
 		}
 	}
 }
+

@@ -16,7 +16,7 @@ namespace Crystallography
 		
 		// GET & SET -------------------------------------------------------------
 		
-		public bool complete { get; protected set; }
+		public bool complete;
 		
 		/// <summary>
 		/// Use this to get the number of members of this group!
@@ -330,7 +330,7 @@ namespace Crystallography
 		/// <summary>
 		/// Release an entity from the Group.
 		/// </summary>
-		public virtual AbstractCrystallonEntity Release ( AbstractCrystallonEntity e) {
+		public virtual AbstractCrystallonEntity Release ( AbstractCrystallonEntity e, bool pForceBreak = false) {
 			if ( e is SpriteTileCrystallonEntity ) {
 				return ReleaseSingle (e as SpriteTileCrystallonEntity );
 			} else {
@@ -399,7 +399,7 @@ namespace Crystallography
 		/// <summary>
 		/// Clear this group of all its members.
 		/// </summary>
-		public void RemoveAll() {
+		public virtual void RemoveAll() {
 			for( int i=members.Length-1; i>=0; i--) {
 				if ( members[i] != null ) {
 					Remove( members[i] );

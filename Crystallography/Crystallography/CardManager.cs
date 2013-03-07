@@ -14,7 +14,7 @@ namespace Crystallography
 		
 		// GET & SET -----------------------------------------------------------------------
 		
-//		public static CardManager Instance { get; private set; }
+
 		public static CardManager Instance { 
 			get {
 				if( _instance == null) {

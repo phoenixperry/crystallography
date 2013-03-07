@@ -7,9 +7,9 @@ namespace Crystallography
 {
 	public abstract class AbstractCrystallonEntity : ICrystallonEntity  {
 		
-		protected readonly Scene _scene;
 		protected readonly GamePhysics _physics;
 		
+		protected  Scene _scene;
 		protected Vector2 _offset;
 		protected string _sound;
 		

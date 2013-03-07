@@ -34,7 +34,7 @@ namespace Crystallography
 		
 		protected QColor() : base()
 		{
-			Instance = this;
+//			Instance = this;
 			_name = "QColor";
 			Instance = this;
 			setPalette( new Vector4(0.96f,0.88f,0.88f,1.0f), // pink

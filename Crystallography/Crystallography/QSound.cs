@@ -29,7 +29,7 @@ namespace Crystallography
 		
 		protected QSound () : base()
 		{
-			Instance = this;
+//			Instance = this;
 			_name = "QSound";
 		}
 		

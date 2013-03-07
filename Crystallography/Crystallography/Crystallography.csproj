@@ -68,6 +68,8 @@
     <Compile Include="GroupManager.cs" />
     <Compile Include="deprecated\MovePivotTo.cs" />
     <Compile Include="deprecated\NoCleanupScene.cs" />
+    <Compile Include="QAnimation.cs" />
+    <Compile Include="InputManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -125,6 +127,7 @@
     <Content Include="assets\levels\level_8.xml" />
     <Content Include="assets\levels\level_9.xml" />
     <Content Include="assets\levels\level_10.xml" />
+    <Content Include="assets\fonts\Bariol_Regular.otf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Board.cs" />
