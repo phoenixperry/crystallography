@@ -10,6 +10,23 @@ namespace Crystallography
 		
 		protected static SelectionGroup _instance;
 		
+		public static readonly int MAX_CAPACITY = 3;
+		protected static readonly float SNAP_DISTANCE = 50.0f;
+		protected static readonly float EASE_DISTANCE = 50.0f;
+		
+		private AbstractCrystallonEntity lastEntityReleased;
+		
+		public event EventHandler<CubeCompleteEventArgs> CubeCompleteDetected;
+		public event EventHandler CubeFailedDetected;
+		
+//		protected static Input2.TouchData _touch;
+//		protected Vector2 _currentTouchPos;
+//		protected Vector2 _touchStartPos;
+//		protected bool _isTouch;
+//		protected bool _wasTouch;
+		
+		// GET & SET -------------------------------------------------------------
+		
 		public static SelectionGroup Instance {
 			get {
 				if (_instance == null) {
@@ -23,30 +40,16 @@ namespace Crystallography
 			}
 		}
 		
-		public static readonly int MAX_CAPACITY = 3;
-		protected static readonly float SNAP_DISTANCE = 50.0f;
-		protected static readonly float EASE_DISTANCE = 50.0f;
-		
-		private AbstractCrystallonEntity lastEntityReleased;
-		
-//		protected static Input2.TouchData _touch;
-//		protected Vector2 _currentTouchPos;
-//		protected Vector2 _touchStartPos;
-//		protected bool _isTouch;
-//		protected bool _wasTouch;
-		
-		// GET & SET -------------------------------------------------------------
-		
 		/// <summary>
 		/// Update touch data. Should be called once per frame.
 		/// </summary>
-		public void setTouch() {
+//		public void setTouch() {
 //			_touch = Input2.Touch00;
 //			_wasTouch = _isTouch;
 //			_isTouch = _touch.Down;
 //			var normalized = _touch.Pos;
 //			_currentTouchPos = Director.Instance.CurrentScene.Camera.NormalizedToWorld(normalized);
-		}
+//		}
 		
 		// CONSTRUCTOR -----------------------------------------------------------
 		
@@ -69,14 +72,53 @@ namespace Crystallography
 			InputManager.Instance.TouchJustUpDetected += HandleInputManagerInstanceTouchJustUpDetected;
 			InputManager.Instance.TouchDownDetected += HandleInputManagerInstanceTouchDownDetected;
 		}
-
+		
+		// EVENT HANDLERS --------------------------------------------------------
+		
+		/// <summary>
+		/// Handles <c>InputManager.DoubleTapDetected</c>.
+		/// </summary>
+		/// <param name='sender'>
+		/// InputManager instance
+		/// </param>
+		/// <param name='e'>
+		/// <see cref="Crystallography.InputManager.BaseTouchEventArgs"/>
+		/// </param>
+		void HandleInputManagerInstanceDoubleTapDetected (object sender, EventArgs e)
+		{
+			if( population > 1 ) {
+				EaseIn ( true );
+			}
+			if (lastEntityReleased is GroupCrystallonEntity) {
+				(lastEntityReleased as GroupCrystallonEntity).Break ();
+			} 
+		}
+		
+		/// <summary>
+		/// Handles <c>InputManager.TouchJustUpDetected</c>.
+		/// </summary>
+		/// <param name='sender'>
+		/// InputManager instance
+		/// </param>
+		/// <param name='e'>
+		/// <see cref="Crystallography.InputManager.BaseTouchEventArgs"/>
+		/// </param>
 		void HandleInputManagerInstanceTouchJustUpDetected (object sender, BaseTouchEventArgs e)
 		{
 			if ( population >0 ) {
 				EaseIn();
 			}
 		}
-
+		
+		/// <summary>
+		/// Handles <c>InputManager.TouchJustDownDetected</c>.
+		/// </summary>
+		/// <param name='sender'>
+		/// Input Manager instance
+		/// </param>
+		/// <param name='e'>
+		/// <see cref="Crystallography.InputManager.BaseTouchEventArgs"/>
+		/// </param>
 		void HandleInputManagerInstanceTouchJustDownDetected (object sender, BaseTouchEventArgs e)
 		{
 			var entity = GetEntityAtPosition( e.touchPosition );
@@ -85,25 +127,22 @@ namespace Crystallography
 				EaseOut();
 			}
 		}
-
+		
+		/// <summary>
+		/// Handles <c>InputManager.TouchDownDetected</c>.
+		/// </summary>
+		/// <param name='sender'>
+		/// InputManager instance
+		/// </param>
+		/// <param name='e'>
+		/// <see cref="Crystallography.InputManager.BaseTouchEventArgs"/>
+		/// </param>
 		void HandleInputManagerInstanceTouchDownDetected (object sender, SustainedTouchEventArgs e)
 		{
-//			Console.WriteLine( "Touch Down Detected" );
 			setPosition( e.touchPosition );
 			if ( population > 0 ) {
 				SnapTo();
 			}
-		}
-
-		void HandleInputManagerInstanceDoubleTapDetected (object sender, EventArgs e)
-		{
-//			Console.WriteLine ("Double Tap Detected!");
-			if( population > 1 ) {
-				EaseIn ( true );
-			}
-			if (lastEntityReleased is GroupCrystallonEntity) {
-				(lastEntityReleased as GroupCrystallonEntity).Break ();
-			} 
 		}
 		
 		// OVERRIDES -------------------------------------------------------------
@@ -256,14 +295,19 @@ namespace Crystallography
 		/// </summary>
 		public void GroupComplete() {
 			Support.SoundSystem.Instance.Play("cubed.wav");
-			CardManager.Instance.MakeUnavailable( Array.ConvertAll( members, item => (CardCrystallonEntity)item ) );
-			if ( CardManager.Instance.MatchesPossible() == false ) {
-				Sequence sequence = new Sequence();
-				sequence.Add( new DelayTime( 1.0f ) );
-				sequence.Add( new CallFunc( () => (_scene as GameScene).goToNextLevel() ) );
-//				_scene.RunAction( new CallFunc( () => GameScene.goToNextLevel() ) );
-				_scene.RunAction(sequence);
+			EventHandler<CubeCompleteEventArgs> handler = CubeCompleteDetected;
+			if ( handler != null ) {
+				handler( this, new CubeCompleteEventArgs {
+					members = Array.ConvertAll( this.members, item => (CardCrystallonEntity)item )
+				});
 			}
+//			CardManager.Instance.MakeUnavailable( Array.ConvertAll( members, item => (CardCrystallonEntity)item ) );
+//			if ( CardManager.Instance.MatchesPossible() == false ) {
+//				Sequence sequence = new Sequence();
+//				sequence.Add( new DelayTime( 1.0f ) );
+//				sequence.Add( new CallFunc( () => (_scene as GameScene).goToNextLevel() ) );
+//				_scene.RunAction(sequence);
+//			}
 		}
 		
 		/// <summary>
@@ -271,7 +315,10 @@ namespace Crystallography
 		/// </summary>
 		public void GroupFailed() {
 			Support.SoundSystem.Instance.Play("wrong.wav");
-			//TODO Break up into component parts.
+			EventHandler handler = CubeFailedDetected;
+			if ( handler != null ) {
+				handler( this, null );
+			}
 			this.Break();
 		}
 		
@@ -346,8 +393,6 @@ namespace Crystallography
 		public void Reset( Scene pScene ) {
 			RemoveAll();
 			lastEntityReleased = null;
-//			_isTouch = false;
-//			_wasTouch = false;
 			_scene = pScene;
 		}
 		
@@ -411,5 +456,14 @@ namespace Crystallography
 			Instance = null;
 		}
 		
+	}
+	
+	// HELPER CLASSES ------------------------------------------------------------------------------
+	
+	/// <summary>
+	/// CubeCompleteEvent arguments.
+	/// </summary>
+	public class CubeCompleteEventArgs : EventArgs {
+		public CardCrystallonEntity[] members;
 	}
 }

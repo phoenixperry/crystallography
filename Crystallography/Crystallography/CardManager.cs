@@ -12,6 +12,8 @@ namespace Crystallography
 		protected Scene _scene;
 		protected GamePhysics _physics;
 		
+		public event EventHandler NoMatchesPossibleDetected;
+		
 		// GET & SET -----------------------------------------------------------------------
 		
 
@@ -33,10 +35,23 @@ namespace Crystallography
 		/// Initializes a new instance of the <see cref="Crystallography.CardManager"/> class.
 		/// </summary>
 		protected CardManager () {
-				availableCards = new List<CardCrystallonEntity>();
-				_scene = Director.Instance.CurrentScene;
-				_physics = GamePhysics.Instance;
-//			}
+			availableCards = new List<CardCrystallonEntity>();
+			_scene = Director.Instance.CurrentScene;
+			_physics = GamePhysics.Instance;
+			SelectionGroup.Instance.CubeCompleteDetected += HandleSelectionGroupInstanceCubeCompleteDetected;
+		}
+		
+		// EVENT HANDLERS ------------------------------------------------------------------
+		
+		void HandleSelectionGroupInstanceCubeCompleteDetected (object sender, CubeCompleteEventArgs e)
+		{
+			MakeUnavailable( e.members );
+			if ( MatchesPossible() == false ) {
+				EventHandler handler = NoMatchesPossibleDetected;
+				if (handler != null) {
+					handler( this, null );
+				}
+			}
 		}
 		
 		// METHODS -------------------------------------------------------------------------
@@ -93,6 +108,10 @@ namespace Crystallography
 				}
 			}
 			Console.WriteLine("Possible Sets Remain: FALSE");
+			EventHandler handler = NoMatchesPossibleDetected;
+			if ( handler != null ) {
+				handler( this, null );
+			}
 			return false;
 		}
 		

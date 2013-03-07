@@ -88,6 +88,8 @@ namespace Crystallography
 			
 			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
 			
+			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected;
+			
 			// FONT TEST
 			
 			Font bariol = new Font("/Application/assets/fonts/Bariol_Regular.otf", 18, FontStyle.Regular);
@@ -129,6 +131,14 @@ namespace Crystallography
 //			this.AddChild(box);
 			
 			// END DOUBLE TAP GESTURE DETECTOR TEST
+        }
+
+        void HandleCardManagerInstanceNoMatchesPossibleDetected (object sender, EventArgs e)
+        {
+        	Sequence sequence = new Sequence();
+			sequence.Add( new DelayTime( 1.0f ) );
+			sequence.Add( new CallFunc( () => goToNextLevel() ) );
+			this.RunAction(sequence);
         }
         
 		// OVERRIDES ---------------------------------------------------------------------------

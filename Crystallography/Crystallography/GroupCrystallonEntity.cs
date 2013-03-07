@@ -14,6 +14,8 @@ namespace Crystallography
 		protected Node[] _pucks;
 		private int _numMembers;
 		
+		public static event EventHandler BreakDetected;
+		
 		// GET & SET -------------------------------------------------------------
 		
 		public bool complete;
@@ -237,6 +239,10 @@ namespace Crystallography
 				}
 			}
 			RemoveAll();
+			EventHandler handler = BreakDetected;
+			if ( handler != null ) {
+				handler( this, null );
+			}
 		}
 		
 		/// <summary>
