@@ -128,6 +128,8 @@
     <Content Include="assets\levels\level_9.xml" />
     <Content Include="assets\levels\level_10.xml" />
     <Content Include="assets\fonts\Bariol_Regular.otf" />
+    <Content Include="assets\sounds\score_down.wav" />
+    <Content Include="assets\sounds\score_up.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Board.cs" />
