@@ -108,10 +108,6 @@ namespace Crystallography
 				}
 			}
 			Console.WriteLine("Possible Sets Remain: FALSE");
-			EventHandler handler = NoMatchesPossibleDetected;
-			if ( handler != null ) {
-				handler( this, null );
-			}
 			return false;
 		}
 		

@@ -334,7 +334,7 @@ namespace Crystallography
 				return ReleaseSingle (e as SpriteTileCrystallonEntity );
 			} else if ( !pForceBreak ) {	// --------------------------- don't bother testing if Break forced
 				if ( population  == MAX_CAPACITY ) { // -------------------------------------------------------- EVALUATE CUBES!
-					if (QualityManager.Instance.EvaluateMatch( members ) ) {
+					if (QualityManager.Instance.EvaluateMatch( members, true ) ) {
 						GroupComplete();
 						isComplete = true;
 					} else {

@@ -47,12 +47,8 @@ namespace Crystallography
 		/// Initializes a new instance of the <see cref="Crystallography.QualityManager"/> class.
 		/// </summary>
 		protected QualityManager() {
-//			if ( Instance == null ) {
-				Instance = this;
-//			}
-//			if ( qualityDict == null ) {
-				qualityDict = new Dictionary<string, List<ICrystallonEntity>[]>();
-//			}
+			Instance = this;
+			qualityDict = new Dictionary<string, List<ICrystallonEntity>[]>();
 		}
 		
 		// METHODS ---------------------------------------------------------------------------------------------------
@@ -161,28 +157,52 @@ namespace Crystallography
 		/// <param name='pEntities'>
 		/// Array of <see cref="Crystallography.ICrystallonEntity"/>
 		/// </param>
-		public bool EvaluateMatch( ICrystallonEntity[] pEntities ) {
-			bool valid = true;
+		/// <param name='pForScore'>
+		/// Is this to score points, or just to test whether matches are still possible? Default = <c>false</c>.
+		/// </param>
+		public bool EvaluateMatch( ICrystallonEntity[] pEntities, bool pForScore = false ) {
+			// TODO this whole function is inefficient... revisit later.
+			
+//			bool valid = true;
+			int score;
+			Dictionary<AbstractQuality, bool> qDict = new Dictionary<AbstractQuality, bool>();
 			foreach ( string key in qualityDict.Keys ) {
 #if !ORIENTATION_MATTERS
 				if ( key == "QOrientation" ) {
-					continue;	// -------------------------------- Orientation doesn't matter; don't bother.
+					continue;	// -------------------------------- Orientation is ALWAYS all different. Don't bother.
 				}
 #endif
+//				Console.WriteLine( "Evaluating: " + key );
 				var variations = qualityDict[key];
-				if ( variations[0] == null || variations[1] == null || variations[2] == null ) {
-					continue;	// -------------------------------- This quality has no variations in this level; don't bother.
+				var type = Type.GetType( "Crystallography." + key );
+				var quality = (AbstractQuality)type.GetProperty("Instance").GetValue(null, null);
+				if ( variations[0] == null || variations[1] == null || variations[2] == null ) {	// no variations of this quality in this level
+					qDict.Add(quality, true);	// --------------------------------------------------- worth All-Same points.
+					continue;
 				} else {
-					var type = Type.GetType( "Crystallography." + key );
-//					var quality = (IQuality)Activator.CreateInstance( type );
-					var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
-					valid = quality.Match( pEntities );
-					if ( valid == false ) {
-						return valid;
+					score = quality.Match( pEntities, pForScore );
+					if ( score == 0 ) {	//------------------------------------------------------------ No match. Just quit.
+						qDict.Clear();
+						qDict = null;
+						return false;
+					} else {	// ------------------------------------------------------------------- Is it an All-Same match?
+						qDict.Add ( quality, (score == quality.allSameScore) ) ;
 					}
 				}
 			}
-			return valid;
+			if (pForScore) {
+				foreach ( AbstractQuality key in qDict.Keys ) {
+#if ORIENTATION_MATTERS
+					if ( key is QOrientation) {	// we need to match orientation to ensure valid sets exist, but don't score points for it.
+						continue;
+					}
+#endif
+					key.Score( qDict[key] );
+				}
+			}
+			qDict.Clear();
+			qDict = null;
+			return true;
 		}
 		
 		/// <summary>
@@ -227,6 +247,7 @@ namespace Crystallography
 		/// The level to load next.
 		/// </param>
 		public void Reset( CardManager pCardManagerInstance, int pLevelNum ) {
+			//TODO Keep this from being called both BEFORE and AFTER level transition. Pick ONE.
 			ClearQualityDictionary();
 			LoadLevelQualities( pLevelNum );
 			BuildQualityDictionary( pCardManagerInstance );

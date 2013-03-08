@@ -59,10 +59,10 @@ namespace Crystallography
 			(e.getNode() as SpriteTile).TileIndex2D = ss.Get( e.getOrientation() + e.getPattern() ).TileIndex2D;
 		}
 		
-		public override bool Match (ICrystallonEntity[] pEntities)
-		{
-			return base.Match(pEntities);
-		}
+//		public override bool Match (ICrystallonEntity[] pEntities)
+//		{
+//			return base.Match(pEntities);
+//		}
 		
 		// METHODS ----------------------------------------------------------------
 	}

@@ -10,6 +10,6 @@ namespace Crystallography
 		
 		void Apply( ICrystallonEntity pEntity, int pVariant );
 		
-		bool Match( ICrystallonEntity[] pEntities );
+		int Match( ICrystallonEntity[] pEntities, bool pForScore );
 	}
 }

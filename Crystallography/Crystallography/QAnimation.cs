@@ -58,10 +58,10 @@ namespace Crystallography
 			
 		}
 		
-		public override bool Match (ICrystallonEntity[] pEntities)
-		{
-			return base.Match(pEntities);
-		}
+//		public override bool Match (ICrystallonEntity[] pEntities)
+//		{
+//			return base.Match(pEntities);
+//		}
 	}
 }
 

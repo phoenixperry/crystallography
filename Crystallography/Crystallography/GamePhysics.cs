@@ -123,7 +123,7 @@ namespace Crystallography
 			
 				//Top bumper
 				this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[3],PhysicsUtility.FltMax);
-				this.SceneBodies[this.NumBody].Position = new Vector2(_screenWidth/2f,0) / PtoM;
+				this.SceneBodies[this.NumBody].Position = new Vector2(_screenWidth/2f,34) / PtoM;
 				this.sceneBodies[this.NumBody].ShapeIndex = 3;
 				this.sceneBodies[this.NumBody].Rotation = 0;
 				this.SceneBodies[this.NumBody].SetBodyStatic();

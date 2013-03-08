@@ -4,7 +4,7 @@ using Sce.PlayStation.Core;
 using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 using Sce.PlayStation.HighLevel.Physics2D;
-//using Sce.PlayStation.HighLevel.UI;
+using Sce.PlayStation.HighLevel.UI;
 using Sce.PlayStation.Core.Audio;
 using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.Core.Imaging;
@@ -92,20 +92,22 @@ namespace Crystallography
 			
 			// FONT TEST
 			
-			Font bariol = new Font("/Application/assets/fonts/Bariol_Regular.otf", 18, FontStyle.Regular);
-			Label scoreLabel = new Label();
-			FontMap fontMap = new FontMap( bariol, 100 );
-			scoreLabel.Text = "score ";
-			scoreLabel.Color = Colors.White;
-			scoreLabel.FontMap = fontMap;
-			scoreLabel.Position = Vector2.One * 10;
-			this.AddChild(scoreLabel);
-			Label scoreNumber = new Label();
-			scoreNumber.Text = "1234567890";
-			scoreNumber.Color = Colors.White;
-			scoreNumber.FontMap = fontMap;
-			scoreNumber.Position = new Vector2(60, 10);
-			this.AddChild(scoreNumber);
+			UISystem.SetScene( new Crystallography.UI.ScoreScene() );
+			
+//			Font bariol = new Font("/Application/assets/fonts/Bariol_Regular.otf", 18, FontStyle.Regular);
+//			Label scoreLabel = new Label();
+//			FontMap fontMap = new FontMap( bariol, 100 );
+//			scoreLabel.Text = "score ";
+//			scoreLabel.Color = Colors.White;
+//			scoreLabel.FontMap = fontMap;
+//			scoreLabel.Position = Vector2.One * 10;
+//			this.AddChild(scoreLabel);
+//			Label scoreNumber = new Label();
+//			scoreNumber.Text = "1234567890";
+//			scoreNumber.Color = Colors.White;
+//			scoreNumber.FontMap = fontMap;
+//			scoreNumber.Position = new Vector2(60, 10);
+//			this.AddChild(scoreNumber);
 			
 			// END FONT TEST
 			
@@ -157,6 +159,7 @@ namespace Crystallography
         {
             base.Update (dt);
             
+			UISystem.Update( Touch.GetData(0) );
             //TODO: support multitouch controls
 //			Touch.GetData(0); 
 //			foreach (var touchData in Touch.GetData(0)) {
@@ -177,6 +180,12 @@ namespace Crystallography
 //			UpdateInput(dt);
 			InputManager.Instance.Update(dt);
         }
+		
+		public override void Draw ()
+		{
+			base.Draw ();
+			UISystem.Render();
+		}
 		
 		// METHODS -------------------------------------------------------------------------------------------------
 		

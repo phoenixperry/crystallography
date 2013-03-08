@@ -70,6 +70,10 @@
     <Compile Include="deprecated\NoCleanupScene.cs" />
     <Compile Include="QAnimation.cs" />
     <Compile Include="InputManager.cs" />
+    <Compile Include="ui\ScoreScene.composer.cs" />
+    <Compile Include="ui\ScoreScene.cs" />
+    <Compile Include="ui\UIStringTable.cs" />
+    <Compile Include="ui\FontManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -85,6 +89,7 @@
     <Folder Include="assets\images\" />
     <Folder Include="assets\levels\" />
     <Folder Include="deprecated\" />
+    <Folder Include="ui\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\sounds\music_ingame.mp3" />
@@ -130,6 +135,7 @@
     <Content Include="assets\fonts\Bariol_Regular.otf" />
     <Content Include="assets\sounds\score_down.wav" />
     <Content Include="assets\sounds\score_up.wav" />
+    <Content Include="assets\fonts\Bariol_Bold.otf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Board.cs" />

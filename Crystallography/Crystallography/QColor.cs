@@ -48,9 +48,9 @@ namespace Crystallography
 			pEntity.getNode().RunAction( new TintTo( palette[pVariant], 0.0f ) );
 		}
 		
-		public override bool Match ( ICrystallonEntity[] pEntities ) {
-			return base.Match(pEntities);
-		}
+//		public override bool Match ( ICrystallonEntity[] pEntities ) {
+//			return base.Match(pEntities);
+//		}
 		
 		// METHODS ----------------------------------------------------------------------
 		
