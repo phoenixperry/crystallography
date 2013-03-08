@@ -74,6 +74,8 @@
     <Compile Include="ui\ScoreScene.cs" />
     <Compile Include="ui\UIStringTable.cs" />
     <Compile Include="ui\FontManager.cs" />
+    <Compile Include="ui\CreditsScene.composer.cs" />
+    <Compile Include="ui\CreditsScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

@@ -16,18 +16,52 @@ namespace Crystallography.UI
 		private int _displayScore;
 		private float _updateTimer;
 		
+		public static event EventHandler<PauseEventArgs> PauseDetected;
+		public static event EventHandler QuitButtonPressDetected;
+		
+//		public bool paused { get; protected set; }
+		
+		// CONSTRUCTOR ---------------------------------------------------------------------
+		
         public ScoreScene() {
             InitializeWidget();
+			
+			// Set fonts to non-system font
 			ScoreLabelText.Font = FontManager.Instance.Get("Bariol", 25);
 			ScoreText.Font = FontManager.Instance.Get ("Bariol", 20, "Bold");
-			Reset();
+			PauseMenuText.Font = FontManager.Instance.Get ("Bariol", 44);
+			ResumeButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
+			GiveUpButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
+			
+			// Assign Event Handlers
+			InputManager.Instance.StartJustUpDetected += (sender, e) => { PauseToggle(); };
+			ResumeButton.TouchEventReceived += HandleResumeButtonTouchEventReceived;
+			GiveUpButton.TouchEventReceived += HandleGiveUpButtonTouchEventReceived;
 			AbstractQuality.MatchScoreDetected += HandleAbstractQualityMatchScoreDetected;
-        }
-		
+			
+			Reset();
+		}
+
 		// EVENT HANDLERS -------------------------------------------------------------------
 		
 		void HandleAbstractQualityMatchScoreDetected (object sender, MatchScoreEventArgs e) {
 			ScheduleScoreModifier( e.Points );
+        }
+		
+		void HandleGiveUpButtonTouchEventReceived (object sender, TouchEventArgs e)
+        {
+			EventHandler handler = QuitButtonPressDetected;
+			if (handler != null ) {
+				handler(this, null);
+			}
+        }
+		
+		void HandleResumeButtonTouchEventReceived (object sender, TouchEventArgs e)
+        {
+			//TODO: Buttons should activate on up, but the SDK is funky w/r/t "button up" events. Redo later.
+//        	if( e.TouchEvents.PrimaryTouchEvent.Type == TouchEventType.Up ) {
+				Pause ( false );
+//			}
         }
 		
 		// OVERRIDES ------------------------------------------------------------------------
@@ -47,6 +81,11 @@ namespace Crystallography.UI
 					} else {
 						mod = sign;
 					}
+					if (sign > 0) {
+						Support.SoundSystem.Instance.Play("score_up.wav");
+					} else {
+						Support.SoundSystem.Instance.Play("score_down.wav");
+					}
 					_displayScore += mod;
 					ScoreText.Text = _displayScore.ToString();
 					_updateTimer = 0.0f;
@@ -56,18 +95,37 @@ namespace Crystallography.UI
 		
 		// METHODS --------------------------------------------------------------------------
 		
-		public void ScheduleScoreModifier( int pHowMuch ) {
-			if (_score == _displayScore) { // -------------- Throw a little delay on score display update if not currently updating.
-				_updateTimer = -INITIAL_SCORE_UPDATE_DELAY;
+		public void Pause( bool pOn ) {
+//			paused = pOn;
+			PauseMenu.Visible = pOn;
+			EventHandler<PauseEventArgs> handler = PauseDetected;
+			if (handler != null) {
+				handler( this, new PauseEventArgs { isPaused = pOn } );
 			}
-			_score += pHowMuch;
 		}
-
+		
+		public void PauseToggle() {
+			Pause( !GameScene.paused );
+		}
+		
 		public void Reset () {
 			_score = 0;
 			_displayScore = 0;
 			_updateTimer = 0.0f;
 			ScoreText.Text = _displayScore.ToString();
 		}
+		
+		public void ScheduleScoreModifier( int pHowMuch ) {
+			if (_score == _displayScore) { // -------------- Throw a little delay on score display update if not currently updating.
+				_updateTimer = -INITIAL_SCORE_UPDATE_DELAY;
+			}
+			_score += pHowMuch;
+		}
     }
+	
+	// HELPER CLASSES --------------------------------------------------------------------------------------
+	
+	public class PauseEventArgs : EventArgs {
+		public bool isPaused;
+	}
 }

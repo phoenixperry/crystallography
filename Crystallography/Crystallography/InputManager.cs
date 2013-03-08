@@ -19,6 +19,9 @@ namespace Crystallography
 		public event EventHandler<BaseTouchEventArgs> 		DoubleTapDetected;
 		public event EventHandler<BaseTouchEventArgs> 		DragDetected;
 		public event EventHandler<BaseTouchEventArgs> 		DragReleaseDetected;
+		
+		public event EventHandler							StartJustUpDetected;
+		
 		public event EventHandler<BaseTouchEventArgs> 		TapDetected;
 		public event EventHandler<SustainedTouchEventArgs> 	TouchDownDetected;
 		public event EventHandler<BaseTouchEventArgs> 		TouchJustDownDetected;
@@ -78,21 +81,27 @@ namespace Crystallography
 		/// </param>
 		public void Update( float dt ) {
 			
-			if ( Input2.Touch00.Press ) {	// -------------------------------- on new touch
-				OnTouchJustDown( new BaseTouchEventArgs {
-					touchPosition = Director.Instance.CurrentScene.Camera.NormalizedToWorld( Input2.Touch00.Pos )
-				} );
-			} else if (Input2.Touch00.On) { // -------------------------------- on sustained touch
-				OnTouchDown( new SustainedTouchEventArgs {
-					touchPosition = Director.Instance.CurrentScene.Camera.NormalizedToWorld( Input2.Touch00.Pos ),
-					elapsed = dt
-				} );
-			} else if (Input2.Touch00.Release) {	// ------------------------ on new release
-				OnTouchJustUp( new BaseTouchEventArgs {
-					touchPosition = Director.Instance.CurrentScene.Camera.NormalizedToWorld( Input2.Touch00.Pos )
-				} );
-			} else {	// ---------------------------------------------------- on sustained release
-				releaseDuration += dt;
+			if( !GameScene.paused ) {	// ---------------------------------------- touch controls for UI are handled elsewhere.
+				if ( Input2.Touch00.Press ) {	// -------------------------------- on new touch
+					OnTouchJustDown( new BaseTouchEventArgs {
+						touchPosition = Director.Instance.CurrentScene.Camera.NormalizedToWorld( Input2.Touch00.Pos )
+					} );
+				} else if (Input2.Touch00.On) { // -------------------------------- on sustained touch
+					OnTouchDown( new SustainedTouchEventArgs {
+						touchPosition = Director.Instance.CurrentScene.Camera.NormalizedToWorld( Input2.Touch00.Pos ),
+						elapsed = dt
+					} );
+				} else if (Input2.Touch00.Release) {	// ------------------------ on new release
+					OnTouchJustUp( new BaseTouchEventArgs {
+						touchPosition = Director.Instance.CurrentScene.Camera.NormalizedToWorld( Input2.Touch00.Pos )
+					} );
+				} else {	// ---------------------------------------------------- on sustained release
+					releaseDuration += dt;
+				}
+			}
+			
+			if ( Input2.GamePad0.Start.Release ) {
+				OnStartJustUp();
 			}
 		}
 		
@@ -106,6 +115,13 @@ namespace Crystallography
 			EventHandler<BaseTouchEventArgs> handler = DoubleTapDetected;
 			if ( handler != null ) {
 				handler( this, e );
+			}
+		}
+		
+		protected void OnStartJustUp() {
+			EventHandler handler = StartJustUpDetected;
+			if ( handler != null ) {
+				handler( this, null );
 			}
 		}
 		

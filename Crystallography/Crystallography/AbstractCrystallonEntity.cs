@@ -200,25 +200,6 @@ namespace Crystallography
 		}
 		
 		/// <summary>
-		/// Sets this entity's position relative to its <c>Parent</c> (often the scene) in pixels.
-		/// </summary>
-		/// <param name='pX'>
-		/// P x.
-		/// </param>
-		/// <param name='pY'>
-		/// P y.
-		/// </param>
-		public void setPosition(float pX, float pY) {
-			Vector2 v2 = new Vector2( pX, pY );
-			PhysicsBody body = getBody();
-			if (body != null) {
-				body.Position = v2 / GamePhysics.PtoM;
-			} else {
-				getNode().Position = v2;
-			}
-		}
-		
-		/// <summary>
 		/// Gets this entity's position, relative to its <c>Parent</c>, in pixels.
 		/// </summary>
 		/// <returns>
@@ -234,12 +215,42 @@ namespace Crystallography
 		}
 		
 		/// <summary>
+		/// Sets this entity's position relative to its <c>Parent</c> (often the scene) in pixels.
+		/// </summary>
+		/// <param name='pX'>
+		/// P x.
+		/// </param>
+		/// <param name='pY'>
+		/// P y.
+		/// </param>
+		public void setPosition(float pX, float pY) {
+			Vector2 v2 = new Vector2( pX, pY );
+			setPosition(v2);
+//			PhysicsBody body = getBody();
+//			if (body != null) {
+//				body.Position = v2 / GamePhysics.PtoM;
+//			} else {
+//				getNode().Position = v2;
+//			}
+		}
+		
+		/// <summary>
 		/// Sets this entity's position, relative to its <c>Parent</c> in pixels.
 		/// </summary>
 		/// <param name='pPixelPosition'>
 		/// <see cref="Sce.PlayStation.Core.Vector2"/>
 		/// </param>
 		public void setPosition(Vector2 pPixelPosition) {
+			if ( pPixelPosition.Y < 34 ) {
+				pPixelPosition.Y = 35;
+			} else if ( pPixelPosition.Y > Director.Instance.GL.Context.GetViewport().Height ) {
+				pPixelPosition.Y = Director.Instance.GL.Context.GetViewport().Height-1;
+			}
+			if ( pPixelPosition.X < 0 ) {
+				pPixelPosition.X = 1;
+			} else if ( pPixelPosition.X > Director.Instance.GL.Context.GetViewport().Width ) {
+				pPixelPosition.X = Director.Instance.GL.Context.GetViewport().Width-1;
+			}
 			PhysicsBody body = getBody();
 			if (body != null) {
 				body.Position = pPixelPosition / GamePhysics.PtoM;

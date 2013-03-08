@@ -31,8 +31,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="__DummyProgram.cs" />
-    <Compile Include="ScoreScene.composer.cs" />
-    <Compile Include="ScoreScene.cs" />
+    <Compile Include="CreditsScene.composer.cs" />
+    <Compile Include="CreditsScene.cs" />
     <Compile Include="UIStringTable.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Sce.PlayStation.Core.Environment;
 
-namespace Crystallography
+namespace Crystallography.UI
 {
     public static class UIStringTable
     {
