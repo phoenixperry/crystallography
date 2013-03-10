@@ -76,6 +76,27 @@
     <Compile Include="ui\FontManager.cs" />
     <Compile Include="ui\CreditsScene.composer.cs" />
     <Compile Include="ui\CreditsScene.cs" />
+    <Compile Include="ui\CreditsPanel.composer.cs" />
+    <Compile Include="ui\CreditsPanel.cs" />
+    <Compile Include="ui\InstructionsPanel.composer.cs" />
+    <Compile Include="ui\InstructionsPanel.cs" />
+    <Compile Include="ui\InstructionsScene.composer.cs" />
+    <Compile Include="ui\InstructionsScene.cs" />
+    <Compile Include="ui\LevelSelectItem.composer.cs" />
+    <Compile Include="ui\LevelSelectItem.cs" />
+    <Compile Include="ui\LevelSelectPanel.composer.cs" />
+    <Compile Include="ui\LevelSelectPanel.cs" />
+    <Compile Include="ui\LevelSelectScene.composer.cs" />
+    <Compile Include="ui\LevelSelectScene.cs" />
+    <Compile Include="ui\MenuScene.composer.cs" />
+    <Compile Include="ui\MenuScene.cs" />
+    <Compile Include="ui\SplashScene.composer.cs" />
+    <Compile Include="ui\SplashScene.cs" />
+    <Compile Include="ui\ThanksPanel.composer.cs" />
+    <Compile Include="ui\ThanksPanel.cs" />
+    <Compile Include="ui\TitleScene.composer.cs" />
+    <Compile Include="ui\TitleScene.cs" />
+    <Compile Include="MenuSystemScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

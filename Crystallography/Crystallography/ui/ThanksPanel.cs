@@ -5,13 +5,15 @@ using Sce.PlayStation.Core.Imaging;
 using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.HighLevel.UI;
 
-namespace Crystallography
+namespace Crystallography.UI
 {
-    public partial class CreditsScene : Scene
+    public partial class ThanksPanel : Panel
     {
-        public CreditsScene()
+        public ThanksPanel()
         {
             InitializeWidget();
+			ThanksText.Font = FontManager.Instance.Get("Bariol", 36);
+			ThanksNamesText.Font = FontManager.Instance.Get("Bariol", 25);
         }
     }
 }

@@ -38,6 +38,8 @@ namespace Crystallography
 		
         public GameScene ( int pCurrentLevel )
 		{
+			Touch.GetData(0).Clear();
+			
 			UISystem.SetScene( new Crystallography.UI.ScoreScene() );
 			
 			currentLevel = pCurrentLevel;

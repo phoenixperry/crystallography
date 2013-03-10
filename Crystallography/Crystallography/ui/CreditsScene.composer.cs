@@ -13,9 +13,8 @@ namespace Crystallography.UI
     {
         Panel sceneBackgroundPanel;
         Label CreditsTitleText;
-        Label BenText;
-        Label PhoenixText;
-        Label MargaretText;
+        PagePanel PagePanel_1;
+        Button BackButton;
 
         private void InitializeWidget()
         {
@@ -28,12 +27,10 @@ namespace Crystallography.UI
             sceneBackgroundPanel.Name = "sceneBackgroundPanel";
             CreditsTitleText = new Label();
             CreditsTitleText.Name = "CreditsTitleText";
-            BenText = new Label();
-            BenText.Name = "BenText";
-            PhoenixText = new Label();
-            PhoenixText.Name = "PhoenixText";
-            MargaretText = new Label();
-            MargaretText.Name = "MargaretText";
+            PagePanel_1 = new PagePanel();
+            PagePanel_1.Name = "PagePanel_1";
+            BackButton = new Button();
+            BackButton.Name = "BackButton";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -43,30 +40,19 @@ namespace Crystallography.UI
             CreditsTitleText.Font = new UIFont(FontAlias.System, 72, FontStyle.Regular);
             CreditsTitleText.LineBreak = LineBreak.Character;
 
-            // BenText
-            BenText.TextColor = new UIColor(229f / 255f, 19f / 255f, 19f / 255f, 255f / 255f);
-            BenText.Font = new UIFont(FontAlias.System, 36, FontStyle.Regular);
-            BenText.LineBreak = LineBreak.Character;
-            BenText.VerticalAlignment = VerticalAlignment.Top;
+            // PagePanel_1
+            PagePanel_1.AddPage(new CreditsPanel());
+            PagePanel_1.AddPage(new ThanksPanel());
 
-            // PhoenixText
-            PhoenixText.TextColor = new UIColor(41f / 255f, 226f / 255f, 226f / 255f, 255f / 255f);
-            PhoenixText.Font = new UIFont(FontAlias.System, 36, FontStyle.Regular);
-            PhoenixText.LineBreak = LineBreak.Character;
-            PhoenixText.VerticalAlignment = VerticalAlignment.Top;
-
-            // MargaretText
-            MargaretText.TextColor = new UIColor(247f / 255f, 226f / 255f, 246f / 255f, 255f / 255f);
-            MargaretText.Font = new UIFont(FontAlias.System, 36, FontStyle.Regular);
-            MargaretText.LineBreak = LineBreak.Character;
-            MargaretText.VerticalAlignment = VerticalAlignment.Top;
+            // BackButton
+            BackButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            BackButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
 
             // CreditsScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
             this.RootWidget.AddChildLast(CreditsTitleText);
-            this.RootWidget.AddChildLast(BenText);
-            this.RootWidget.AddChildLast(PhoenixText);
-            this.RootWidget.AddChildLast(MargaretText);
+            this.RootWidget.AddChildLast(PagePanel_1);
+            this.RootWidget.AddChildLast(BackButton);
 
             SetWidgetLayout(orientation);
 
@@ -92,20 +78,15 @@ namespace Crystallography.UI
                     CreditsTitleText.Anchors = Anchors.None;
                     CreditsTitleText.Visible = true;
 
-                    BenText.SetPosition(20, 188);
-                    BenText.SetSize(214, 36);
-                    BenText.Anchors = Anchors.None;
-                    BenText.Visible = true;
+                    PagePanel_1.SetPosition(36, 154);
+                    PagePanel_1.SetSize(100, 50);
+                    PagePanel_1.Anchors = Anchors.None;
+                    PagePanel_1.Visible = true;
 
-                    PhoenixText.SetPosition(20, 188);
-                    PhoenixText.SetSize(214, 36);
-                    PhoenixText.Anchors = Anchors.None;
-                    PhoenixText.Visible = true;
-
-                    MargaretText.SetPosition(20, 188);
-                    MargaretText.SetSize(214, 36);
-                    MargaretText.Anchors = Anchors.None;
-                    MargaretText.Visible = true;
+                    BackButton.SetPosition(689, 473);
+                    BackButton.SetSize(214, 56);
+                    BackButton.Anchors = Anchors.None;
+                    BackButton.Visible = true;
 
                     break;
 
@@ -123,20 +104,15 @@ namespace Crystallography.UI
                     CreditsTitleText.Anchors = Anchors.None;
                     CreditsTitleText.Visible = true;
 
-                    BenText.SetPosition(36, 199);
-                    BenText.SetSize(389, 50);
-                    BenText.Anchors = Anchors.None;
-                    BenText.Visible = true;
+                    PagePanel_1.SetPosition(44, 114);
+                    PagePanel_1.SetSize(885, 344);
+                    PagePanel_1.Anchors = Anchors.None;
+                    PagePanel_1.Visible = true;
 
-                    PhoenixText.SetPosition(36, 299);
-                    PhoenixText.SetSize(389, 50);
-                    PhoenixText.Anchors = Anchors.None;
-                    PhoenixText.Visible = true;
-
-                    MargaretText.SetPosition(36, 399);
-                    MargaretText.SetSize(389, 50);
-                    MargaretText.Anchors = Anchors.None;
-                    MargaretText.Visible = true;
+                    BackButton.SetPosition(707, 475);
+                    BackButton.SetSize(214, 56);
+                    BackButton.Anchors = Anchors.None;
+                    BackButton.Visible = true;
 
                     break;
             }
@@ -147,11 +123,7 @@ namespace Crystallography.UI
         {
             CreditsTitleText.Text = "credits";
 
-            BenText.Text = "ben johnson";
-
-            PhoenixText.Text = "phoenix perry";
-
-            MargaretText.Text = "margaret schedel";
+            BackButton.Text = "Back";
 
             this.Title = "CreditsScene";
         }

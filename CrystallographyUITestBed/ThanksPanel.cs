@@ -7,9 +7,9 @@ using Sce.PlayStation.HighLevel.UI;
 
 namespace Crystallography
 {
-    public partial class CreditsScene : Scene
+    public partial class ThanksPanel : Panel
     {
-        public CreditsScene()
+        public ThanksPanel()
         {
             InitializeWidget();
         }

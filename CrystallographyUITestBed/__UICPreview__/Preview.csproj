@@ -31,11 +31,26 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="__DummyProgram.cs" />
-    <Compile Include="CreditsScene.composer.cs" />
-    <Compile Include="CreditsScene.cs" />
+    <Compile Include="MenuScene.composer.cs" />
+    <Compile Include="MenuScene.cs" />
     <Compile Include="UIStringTable.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\\assets\header.png" >
+      <Link>assets\header.png</Link>
+    </Content>
+    <Content Include="..\\assets\instructions.png" >
+      <Link>assets\instructions.png</Link>
+    </Content>
+    <Content Include="..\\assets\instructionsOver.png" >
+      <Link>assets\instructionsOver.png</Link>
+    </Content>
+    <Content Include="..\\assets\play.png" >
+      <Link>assets\play.png</Link>
+    </Content>
+    <Content Include="..\\assets\playOver.png" >
+      <Link>assets\playOver.png</Link>
+    </Content>
     <Content Include="..\\assets\fonts\Bariol_Regular.otf" >
       <Link>assets\fonts\Bariol_Regular.otf</Link>
     </Content>

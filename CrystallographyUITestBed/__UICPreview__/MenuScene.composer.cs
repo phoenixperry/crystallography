@@ -7,14 +7,13 @@ using Sce.PlayStation.Core.Imaging;
 using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.HighLevel.UI;
 
-namespace Crystallography.UI
+namespace Preview
 {
-    partial class CreditsScene
+    partial class MenuScene
     {
         Panel sceneBackgroundPanel;
-        Label CreditsTitleText;
-        PagePanel PagePanel_1;
-        Button BackButton;
+        Button Button_1;
+        Button Button_2;
 
         private void InitializeWidget()
         {
@@ -25,34 +24,26 @@ namespace Crystallography.UI
         {
             sceneBackgroundPanel = new Panel();
             sceneBackgroundPanel.Name = "sceneBackgroundPanel";
-            CreditsTitleText = new Label();
-            CreditsTitleText.Name = "CreditsTitleText";
-            PagePanel_1 = new PagePanel();
-            PagePanel_1.Name = "PagePanel_1";
-            BackButton = new Button();
-            BackButton.Name = "BackButton";
+            Button_1 = new Button();
+            Button_1.Name = "Button_1";
+            Button_2 = new Button();
+            Button_2.Name = "Button_2";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
 
-            // CreditsTitleText
-            CreditsTitleText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            CreditsTitleText.Font = new UIFont(FontAlias.System, 72, FontStyle.Regular);
-            CreditsTitleText.LineBreak = LineBreak.Character;
+            // Button_1
+            Button_1.IconImage = new ImageAsset("/Application/assets/play.png");
+            Button_1.BackgroundFilterColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 0f / 255f);
 
-            // PagePanel_1
-            PagePanel_1.AddPage(new CreditsPanel());
-            PagePanel_1.AddPage(new ThanksPanel());
+            // Button_2
+            Button_2.IconImage = new ImageAsset("/Application/assets/instructions.png");
+            Button_2.BackgroundFilterColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 0f / 255f);
 
-            // BackButton
-            BackButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            BackButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
-
-            // CreditsScene
+            // MenuScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
-            this.RootWidget.AddChildLast(CreditsTitleText);
-            this.RootWidget.AddChildLast(PagePanel_1);
-            this.RootWidget.AddChildLast(BackButton);
+            this.RootWidget.AddChildLast(Button_1);
+            this.RootWidget.AddChildLast(Button_2);
 
             SetWidgetLayout(orientation);
 
@@ -73,20 +64,15 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    CreditsTitleText.SetPosition(20, 27);
-                    CreditsTitleText.SetSize(214, 36);
-                    CreditsTitleText.Anchors = Anchors.None;
-                    CreditsTitleText.Visible = true;
+                    Button_1.SetPosition(371, 146);
+                    Button_1.SetSize(214, 56);
+                    Button_1.Anchors = Anchors.None;
+                    Button_1.Visible = true;
 
-                    PagePanel_1.SetPosition(36, 154);
-                    PagePanel_1.SetSize(100, 50);
-                    PagePanel_1.Anchors = Anchors.None;
-                    PagePanel_1.Visible = true;
-
-                    BackButton.SetPosition(689, 473);
-                    BackButton.SetSize(214, 56);
-                    BackButton.Anchors = Anchors.None;
-                    BackButton.Visible = true;
+                    Button_2.SetPosition(357, 360);
+                    Button_2.SetSize(214, 56);
+                    Button_2.Anchors = Anchors.None;
+                    Button_2.Visible = true;
 
                     break;
 
@@ -99,20 +85,15 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    CreditsTitleText.SetPosition(36, 28);
-                    CreditsTitleText.SetSize(327, 72);
-                    CreditsTitleText.Anchors = Anchors.None;
-                    CreditsTitleText.Visible = true;
+                    Button_1.SetPosition(334, 21);
+                    Button_1.SetSize(289, 280);
+                    Button_1.Anchors = Anchors.None;
+                    Button_1.Visible = true;
 
-                    PagePanel_1.SetPosition(44, 114);
-                    PagePanel_1.SetSize(885, 344);
-                    PagePanel_1.Anchors = Anchors.None;
-                    PagePanel_1.Visible = true;
-
-                    BackButton.SetPosition(707, 475);
-                    BackButton.SetSize(214, 56);
-                    BackButton.Anchors = Anchors.None;
-                    BackButton.Visible = true;
+                    Button_2.SetPosition(334, 289);
+                    Button_2.SetSize(289, 233);
+                    Button_2.Anchors = Anchors.None;
+                    Button_2.Visible = true;
 
                     break;
             }
@@ -121,11 +102,7 @@ namespace Crystallography.UI
 
         public void UpdateLanguage()
         {
-            CreditsTitleText.Text = "credits";
-
-            BackButton.Text = "Back";
-
-            this.Title = "CreditsScene";
+            this.Title = "MenuScene";
         }
 
         private void onShowing(object sender, EventArgs e)

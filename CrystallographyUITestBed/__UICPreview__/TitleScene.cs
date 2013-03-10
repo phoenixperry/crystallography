@@ -5,11 +5,11 @@ using Sce.PlayStation.Core.Imaging;
 using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.HighLevel.UI;
 
-namespace Crystallography
+namespace Preview
 {
-    public partial class CreditsScene : Scene
+    public partial class TitleScene : Scene
     {
-        public CreditsScene()
+        public TitleScene()
         {
             InitializeWidget();
         }
