@@ -12,6 +12,7 @@ namespace Crystallography
 		protected  Scene _scene;
 		protected Vector2 _offset;
 		protected string _sound;
+		public Vector2 pickupLocation;
 		
 		// CONSTRUCTORS--------------------
 		
@@ -28,6 +29,7 @@ namespace Crystallography
 			_scene = pScene;
 			_physics = pGamePhysics;
 			_offset = Vector2.Zero;
+			pickupLocation = Vector2.Zero;
 		}
 		
 		// METHODS--------------------------
