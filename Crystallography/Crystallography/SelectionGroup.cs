@@ -16,8 +16,9 @@ namespace Crystallography
 		protected static readonly float EASE_DISTANCE = 50.0f;
 		
 		private AbstractCrystallonEntity lastEntityReleased;
+		private Vector2 lastPosition;
 		
-		protected List<AbstractCrystallonEntity> potentialMembers;
+//		protected List<AbstractCrystallonEntity> potentialMembers;
 		
 		public event EventHandler<CubeCompleteEventArgs> CubeCompleteDetected;
 		public event EventHandler CubeFailedDetected;
@@ -37,6 +38,8 @@ namespace Crystallography
 			}
 		}
 		
+		public float velocity { get; private set; }
+		
 		// CONSTRUCTOR -----------------------------------------------------------
 		
 		/// <summary>
@@ -52,7 +55,8 @@ namespace Crystallography
 		/// A PhysicsShape for collision purposes
 		/// </param>
 		protected SelectionGroup() : base( Director.Instance.CurrentScene, GamePhysics.Instance, null, MAX_CAPACITY ) {
-			potentialMembers = new List<AbstractCrystallonEntity>();
+//			potentialMembers = new List<AbstractCrystallonEntity>();
+			
 			Reset ( Director.Instance.CurrentScene );
 			
 			InputManager.Instance.DoubleTapDetected += HandleInputManagerInstanceDoubleTapDetected;
@@ -128,7 +132,7 @@ namespace Crystallography
 		void HandleInputManagerInstanceTouchDownDetected (object sender, SustainedTouchEventArgs e)
 		{
 			setPosition( e.touchPosition );
-			if ( population > 0 ) {
+			if ( population > 0  && velocity < 300.0f) {
 				SnapTo();
 			}
 		}
@@ -154,9 +158,12 @@ namespace Crystallography
 		public override void Update (float dt)
 		{	
 			base.Update(dt);
-			if (potentialMembers.Count > 0) {
-				CheckPotentialMembers();
-			}
+			
+			velocity = Vector2.Distance( getPosition(), lastPosition ) / dt;
+			lastPosition = getPosition();
+//			if (potentialMembers.Count > 0) {
+//				CheckPotentialMembers();
+//			}
 //			var moved = _touchStartPos - _currentTouchPos;
 //			var moved_distance = moved.SafeLength();
 //			
@@ -182,30 +189,30 @@ namespace Crystallography
 		
 		// METHODS ---------------------------------------------------------------
 		
-		private void CheckPotentialMembers() {
-			AbstractCrystallonEntity e = null;
-			foreach (var member in potentialMembers) {
-				e = member;
-				float d = Vector2.Distance( getPosition(), member.pickupLocation );
-//				Console.WriteLine(d);
-				if( d >= SNAP_DISTANCE+50.0f ) {
-					this.Release( e );
-					e.setPosition(e.pickupLocation);
-					break;
-				}
-				e = null;
-			}
-			if ( e !=null ) {
-				potentialMembers.Remove(e);
-			}
-		}
+//		private void CheckPotentialMembers() {
+//			AbstractCrystallonEntity e = null;
+//			foreach (var member in potentialMembers) {
+//				e = member;
+//				float d = Vector2.Distance( getPosition(), member.pickupLocation );
+////				Console.WriteLine(d);
+//				if( d >= SNAP_DISTANCE+50.0f ) {
+//					this.Release( e );
+//					e.setPosition(e.pickupLocation);
+//					break;
+//				}
+//				e = null;
+//			}
+//			if ( e !=null ) {
+//				potentialMembers.Remove(e);
+//			}
+//		}
 		
 		/// <summary>
 		/// Cute li'l animation that runs when player lets go of the SelectionGroup.
 		/// If the group had 3 members, we also test to see whether it was a valid match.
 		/// </summary>
 		private void EaseIn( bool pForceBreak = false ) {
-			potentialMembers.Clear();
+//			potentialMembers.Clear();
 			for (int i=0; i<MAX_CAPACITY; i++) {
 				_pucks[i].StopAllActions();
 			}
@@ -401,7 +408,8 @@ namespace Crystallography
 		/// </param>
 		public void Reset( Scene pScene ) {
 			RemoveAll();
-			potentialMembers.Clear();
+//			potentialMembers.Clear();
+			lastPosition = getPosition();
 			lastEntityReleased = null;
 			_scene = pScene;
 		}
@@ -455,7 +463,7 @@ namespace Crystallography
 				
 				if ( closestDistance < SNAP_DISTANCE ) {
 					( closest as AbstractCrystallonEntity ).pickupLocation = closest.getPosition();
-					potentialMembers.Add(closest as AbstractCrystallonEntity);
+//					potentialMembers.Add(closest as AbstractCrystallonEntity);
 					Add (closest);
 				}
 			}
