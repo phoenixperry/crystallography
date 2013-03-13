@@ -1,0 +1,14 @@
+level 1
+red: E51313
+blue: 29E2E2
+pink: F4EAF4
+
+level 2  
+orange: F94A0D
+yellow: FFF30B
+teal: 03FFBD
+
+level 3 
+red: E21414
+blue: CEF4E2
+green:CEFF00
