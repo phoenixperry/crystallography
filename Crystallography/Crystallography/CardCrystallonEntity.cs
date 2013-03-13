@@ -78,5 +78,16 @@ namespace Crystallography
 		
 		// METHODS -------------------------------------------------------------------
 		
+		public override AbstractCrystallonEntity BeReleased(Vector2 pPosition) {
+#if !ORIENTATION_MATTERS
+			QOrientation.Instance.Apply(this,0);
+#endif
+			CardManager.Instance.Add( this as CardCrystallonEntity );
+			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[0], 0.1f, 0.01f, pPosition));
+			setVelocity(1.0f, GameScene.Random.NextAngle());
+			addToScene();
+			return this;
+		}
+		
 	}
 }

@@ -34,6 +34,8 @@ namespace Crystallography
 		
 		// METHODS--------------------------
 		
+		public abstract AbstractCrystallonEntity BeReleased( Vector2 position );
+		
 		/// <summary>
 		/// Returns this entity's <c>Node</c>-descended object.
 		/// </summary>
@@ -88,11 +90,6 @@ namespace Crystallography
 				if (QualityManager.Instance.qualityDict[pQualityName][i].Contains(this) ) {
 					return i;
 				}
-//					index = QualityManager.Instance.qualityDict[pQualityName][i];
-//					if ( index != -1 ) {	// FOUND IT!
-//						break;
-//					}
-//				}
 			}
 			return -1;
 		}
@@ -225,7 +222,7 @@ namespace Crystallography
 		/// <param name='pY'>
 		/// P y.
 		/// </param>
-		public void setPosition(float pX, float pY) {
+		public virtual void setPosition(float pX, float pY) {
 			Vector2 v2 = new Vector2( pX, pY );
 			setPosition(v2);
 //			PhysicsBody body = getBody();

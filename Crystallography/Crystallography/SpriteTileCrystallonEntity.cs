@@ -65,7 +65,7 @@ namespace Crystallography
 			}
 		}
 		
-		// CONSTRUCTORS------------------------------
+		// CONSTRUCTORS----------------------------------------------------------------------------
 		
 		public SpriteTileCrystallonEntity( Scene pScene, GamePhysics pGamePhysics, 
 		                              TextureInfo pTextureInfo, Vector2i pTileIndex2D, PhysicsShape pShape = null) 
@@ -90,12 +90,17 @@ namespace Crystallography
 			Scheduler.Instance.Schedule(_sprite, Update, 0, false, 0);
 		}
 		
-		// OVERRIDES-------------------------------
+		// OVERRIDES------------------------------------------------------------------------------
 		
 		public override void Update (float dt)
 		{
 			// empty
 		}
 		
+		// METHODS -------------------------------------------------------------------------------
+		
+		public override AbstractCrystallonEntity BeReleased ( Vector2 position ) {
+			return this;
+		}
 	}
 }

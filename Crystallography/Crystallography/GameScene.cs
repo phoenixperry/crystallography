@@ -24,6 +24,8 @@ namespace Crystallography
     	public static GamePhysics _physics;
 		protected static List<ICrystallonEntity> _allEntites = new List<ICrystallonEntity>();
 		
+		public static event EventHandler LevelChangeDetected;
+		
 		// GET & SET -----------------------------------------------------------------------------------
 		
 		public static int currentLevel { get; private set; }
@@ -72,9 +74,11 @@ namespace Crystallography
 			
 			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
 			
-			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected;
+//			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected;
 			Crystallography.UI.ScoreScene.QuitButtonPressDetected += (sender, e) => { QuitToTitle(); };
 			Crystallography.UI.ScoreScene.PauseDetected += (sender, e) => { Pause(e.isPaused); };
+			
+			Pause (false);
         }
 		
 		// EVENT HANDLERS --------------------------------------------------------------------------
@@ -103,14 +107,15 @@ namespace Crystallography
         {
             base.Update (dt);
             
+			//INPUT UPDATE CALL
+			
+			
 			UISystem.Update( Touch.GetData(0) );
+			InputManager.Instance.Update(dt);
 			
             //We don't need these, but sadly, the Simulate call does.
             Vector2 dummy1 = new Vector2();
             Vector2 dummy2 = new Vector2();
-			
-			//INPUT UPDATE CALL
-			InputManager.Instance.Update(dt);
 			
 			if( paused == false ) {
 				//PHYSICS UPDATE CALL
@@ -168,7 +173,6 @@ namespace Crystallography
 		/// Restarts GameScene at next level OR Goes to TitleScene if there are no more levels.
 		/// </summary>
 		public void goToNextLevel( ) {
-//			LevelData.CURRENT_LEVEL++;
 			currentLevel++;
 			if (currentLevel < TOTAL_LEVELS) {
 				Console.WriteLine( "Resetting to start level " + currentLevel );
@@ -182,7 +186,8 @@ namespace Crystallography
 		}
 		
 		public void QuitToTitle() {
-			Director.Instance.ReplaceScene( new TitleScene() );
+			Director.Instance.ReplaceScene( new MenuSystemScene(false) );
+
 		}
 		
         ~GameScene(){

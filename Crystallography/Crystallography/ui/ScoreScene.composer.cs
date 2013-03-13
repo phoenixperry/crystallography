@@ -18,6 +18,7 @@ namespace Crystallography.UI
         Button ResumeButton;
         Button GiveUpButton;
         Panel PauseMenu;
+        Button NextLevelButton;
 
         private void InitializeWidget()
         {
@@ -40,6 +41,8 @@ namespace Crystallography.UI
             GiveUpButton.Name = "GiveUpButton";
             PauseMenu = new Panel();
             PauseMenu.Name = "PauseMenu";
+            NextLevelButton = new Button();
+            NextLevelButton.Name = "NextLevelButton";
 
             // ScoreLabelText
             ScoreLabelText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
@@ -79,9 +82,14 @@ namespace Crystallography.UI
             PauseMenu.AddChildLast(ResumeButton);
             PauseMenu.AddChildLast(GiveUpButton);
 
+            // NextLevelButton
+            NextLevelButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            NextLevelButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+
             // ScoreScene
             this.RootWidget.AddChildLast(Panel_1);
             this.RootWidget.AddChildLast(PauseMenu);
+            this.RootWidget.AddChildLast(NextLevelButton);
 
             SetWidgetLayout(orientation);
 
@@ -132,6 +140,11 @@ namespace Crystallography.UI
                     PauseMenu.Anchors = Anchors.None;
                     PauseMenu.Visible = true;
 
+                    NextLevelButton.SetPosition(746, 488);
+                    NextLevelButton.SetSize(214, 56);
+                    NextLevelButton.Anchors = Anchors.None;
+                    NextLevelButton.Visible = true;
+
                     break;
 
                 default:
@@ -173,6 +186,11 @@ namespace Crystallography.UI
                     PauseMenu.Anchors = Anchors.None;
                     PauseMenu.Visible = false;
 
+                    NextLevelButton.SetPosition(746, 488);
+                    NextLevelButton.SetSize(214, 56);
+                    NextLevelButton.Anchors = Anchors.None;
+                    NextLevelButton.Visible = true;
+
                     break;
             }
             _currentLayoutOrientation = orientation;
@@ -189,6 +207,8 @@ namespace Crystallography.UI
             ResumeButton.Text = "Resume";
 
             GiveUpButton.Text = "Give Up";
+
+            NextLevelButton.Text = "Next Level";
         }
 
         private void onShowing(object sender, EventArgs e)

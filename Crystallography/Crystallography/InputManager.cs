@@ -1,5 +1,6 @@
 using System;
 using Sce.PlayStation.Core;
+using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
@@ -13,11 +14,12 @@ namespace Crystallography
 		private static readonly float MAX_TAP_DISTANCE = 50;
 		
 		private static int tapCount;
+		private static bool dragging;
 		
 		protected static InputManager _instance;
 		
 		public event EventHandler<BaseTouchEventArgs> 		DoubleTapDetected;
-		public event EventHandler<BaseTouchEventArgs> 		DragDetected;
+		public event EventHandler<SustainedTouchEventArgs> 		DragDetected;
 		public event EventHandler<BaseTouchEventArgs> 		DragReleaseDetected;
 		
 		public event EventHandler							StartJustUpDetected;
@@ -46,10 +48,13 @@ namespace Crystallography
 		}
 		
 		public static float lastPressDuration	{ get; protected set; }
+		public static float lastReleaseDuration { get; protected set; }
 		public static float pressDuration		{ get; protected set; }
 		public static float releaseDuration		{ get; protected set; }
 		public static float tapDistance 		{ get; protected set; }
 		public static Vector2 firstTapPosition 	{ get; protected set; }
+		
+		public Input2.TouchData Touch01			{ get { return Input2.Touch.GetData(0u)[1]; } }
 		
 		// CONSTRUCTOR ------------------------------------------------------
 		
@@ -66,6 +71,7 @@ namespace Crystallography
 		/// Reset the InputManager.
 		/// </summary>
 		public void Reset() {
+			dragging = false;
 			tapCount = 0;
 			pressDuration = 0.0f;
 			firstTapPosition = Vector2.Zero;
@@ -98,6 +104,10 @@ namespace Crystallography
 				} else {	// ---------------------------------------------------- on sustained release
 					releaseDuration += dt;
 				}
+				//TODO Possible cube rotation manipulation using 2nd finger swipe...
+//				if ( (Touch01 as Input2.TouchData).Press ) {
+//					OnTouchDown
+//				}
 			}
 			
 			if ( Input2.GamePad0.Start.Release ) {
@@ -112,16 +122,28 @@ namespace Crystallography
 		/// <see cref="Crystallography.InputManager.BaseTouchEventArgs"/>
 		/// </param>
 		protected void OnDoubleTap( BaseTouchEventArgs e ) {
+			Console.WriteLine("DoubleTap!");
 			EventHandler<BaseTouchEventArgs> handler = DoubleTapDetected;
 			if ( handler != null ) {
 				handler( this, e );
 			}
 		}
 		
+		/// <summary>
+		/// Raises the <c>StartJustUpDetected</c> event.
+		/// </summary>
 		protected void OnStartJustUp() {
 			EventHandler handler = StartJustUpDetected;
 			if ( handler != null ) {
 				handler( this, null );
+			}
+		}
+		
+		protected void OnDrag( SustainedTouchEventArgs e ) {
+			dragging = true;
+			EventHandler<SustainedTouchEventArgs> handler = DragDetected;
+			if (handler != null) {
+				handler( this, e );
 			}
 		}
 		
@@ -133,7 +155,7 @@ namespace Crystallography
 		/// </param>
 		protected void OnTap( BaseTouchEventArgs e ) {
 			tapCount++;
-			if ( releaseDuration < MAX_RELEASE_DURATION ) {
+			if ( lastReleaseDuration < MAX_RELEASE_DURATION ) {
 				if ( tapCount > 1 ) {	// ----------------------------------- on double-tap
 					OnDoubleTap ( e );
 					return;
@@ -154,6 +176,9 @@ namespace Crystallography
 		/// </param>
 		protected void OnTouchDown( SustainedTouchEventArgs e ) {
 			pressDuration += e.elapsed;
+			if (pressDuration > MAX_PRESS_DURATION && dragging == false) {
+				OnDrag ( e );
+			}
 			EventHandler<SustainedTouchEventArgs> handler = TouchDownDetected;
 			if (handler != null ) {
 				handler( this, e );
@@ -167,6 +192,10 @@ namespace Crystallography
 		/// <see cref="Crystallography.InputManager.BaseTouchEventArgs"/>
 		/// </param>
 		protected void OnTouchJustDown( BaseTouchEventArgs e ) {
+			if(releaseDuration > MAX_RELEASE_DURATION) {
+				tapCount = 0;
+			}
+			lastReleaseDuration = releaseDuration;
 			pressDuration = 0.0f;
 			EventHandler<BaseTouchEventArgs> handler = TouchJustDownDetected;
 			if (handler != null ) {
@@ -181,6 +210,7 @@ namespace Crystallography
 		/// <see cref="Crystallography.InputManager.BaseTouchEventArgs"/>
 		/// </param>
 		protected void OnTouchJustUp( BaseTouchEventArgs e ) {
+			dragging = false;
 			if (pressDuration < MAX_PRESS_DURATION ) {	// ------------------- on tap
 				OnTap( e );
 			} else {

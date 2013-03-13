@@ -20,7 +20,7 @@ namespace Crystallography
 					return _instance = new GroupManager();
 				}
 				return _instance;
-			}
+		}
 			private set{
 				_instance = value;
 			}
@@ -46,7 +46,7 @@ namespace Crystallography
 		/// <param name='pGroup'>
 		/// The GroupCrystallonEntity.
 		/// </param>
-		private GroupCrystallonEntity add( GroupCrystallonEntity pGroup ) {
+		public GroupCrystallonEntity Add( GroupCrystallonEntity pGroup ) {
 			availableGroups.Add(pGroup);
 			return pGroup;
 		}
@@ -110,11 +110,16 @@ namespace Crystallography
 		/// </param>
 		public GroupCrystallonEntity spawn( float pX, float pY, bool pComplete = false ) {
 			var ss = SpriteSingleton.getInstance();
-			GroupCrystallonEntity g = new GroupCrystallonEntity(_scene, _physics, _physics.SceneShapes[0], 
+			GroupCrystallonEntity g;
+			if (pComplete) {
+				g = new CubeCrystallonEntity(_scene, _physics, _physics.SceneShapes[0]);
+			} else {
+				g = new GroupCrystallonEntity(_scene, _physics, _physics.SceneShapes[0], 
 			                                                    SelectionGroup.MAX_CAPACITY, pComplete);
+			}
 			g.setPosition( pX, pY );
 			g.addToScene();
-			return add(g);
+			return Add(g);
 		}
 	}
 }

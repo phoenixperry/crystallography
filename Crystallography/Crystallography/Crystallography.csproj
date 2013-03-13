@@ -16,7 +16,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;ORIENTATION_MATTERS</DefineConstants>
+    <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -97,6 +97,7 @@
     <Compile Include="ui\TitleScene.composer.cs" />
     <Compile Include="ui\TitleScene.cs" />
     <Compile Include="MenuSystemScene.cs" />
+    <Compile Include="CubeCrystallonEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

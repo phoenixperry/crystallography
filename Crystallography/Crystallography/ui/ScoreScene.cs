@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Imaging;
+using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.HighLevel.UI;
 using Sce.PlayStation.HighLevel.GameEngine2D;
@@ -32,17 +33,34 @@ namespace Crystallography.UI
 			PauseMenuText.Font = FontManager.Instance.Get ("Bariol", 44);
 			ResumeButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
 			GiveUpButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
+			NextLevelButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
 			
 			// Assign Event Handlers
 			InputManager.Instance.StartJustUpDetected += (sender, e) => { PauseToggle(); };
 			ResumeButton.TouchEventReceived += HandleResumeButtonTouchEventReceived;
 			GiveUpButton.TouchEventReceived += HandleGiveUpButtonTouchEventReceived;
+			NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
 			AbstractQuality.MatchScoreDetected += HandleAbstractQualityMatchScoreDetected;
+			CardManager.Instance.NoMatchesPossibleDetected += (sender, e) => {NextLevelButton.Visible = true;};
+			
+//			GameScene.LevelChangeDetected += (sender, e) => { NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived; };
 			
 			Reset();
 		}
 
-		// EVENT HANDLERS -------------------------------------------------------------------
+        void HandleNextLevelButtonButtonAction (object sender, TouchEventArgs e)
+        {
+			foreach (TouchEvent v in e.TouchEvents){
+//        		e.TouchEvents[0].WorldPosition;
+//				NextLevelButton.
+				Console.WriteLine(v.Type.ToString());
+				if (v.Type == TouchEventType.None) {
+					(Director.Instance.CurrentScene as GameScene).goToNextLevel();
+				}
+			}
+        }
+
+        // EVENT HANDLERS -------------------------------------------------------------------
 		
 		void HandleAbstractQualityMatchScoreDetected (object sender, MatchScoreEventArgs e) {
 			ScheduleScoreModifier( e.Points );
@@ -54,6 +72,23 @@ namespace Crystallography.UI
 			if (handler != null ) {
 				handler(this, null);
 			}
+        }
+		
+		void HandleNextLevelButtonTouchEventReceived (object sender, TouchEventArgs e)
+        {
+//			foreach( TouchEvent v in e.TouchEvents) {
+//				Console.WriteLine(v.Type.ToString());
+			TouchEvent v = e.TouchEvents[0];
+				if (v.Type == TouchEventType.Up) {
+//					NextLevelButton.TouchEventReceived -= HandleNextLevelButtonTouchEventReceived;
+//			NextLevelButton.
+			
+					(Director.Instance.CurrentScene as GameScene).goToNextLevel();
+					NextLevelButton.Visible = false;
+//					NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
+				}
+//			}
+        	
         }
 		
 		void HandleResumeButtonTouchEventReceived (object sender, TouchEventArgs e)
@@ -113,6 +148,7 @@ namespace Crystallography.UI
 			_displayScore = 0;
 			_updateTimer = 0.0f;
 			ScoreText.Text = _displayScore.ToString();
+			NextLevelButton.Visible = false;
 		}
 		
 		public void ScheduleScoreModifier( int pHowMuch ) {

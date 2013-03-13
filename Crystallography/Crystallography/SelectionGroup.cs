@@ -10,17 +10,18 @@ namespace Crystallography
 	public class SelectionGroup : GroupCrystallonEntity {
 		
 		protected static SelectionGroup _instance;
+//		protected static System.Type _selectionType;
 		
 		public static readonly int MAX_CAPACITY = 3;
 		protected static readonly float SNAP_DISTANCE = 50.0f;
 		protected static readonly float EASE_DISTANCE = 50.0f;
+		protected static readonly float MAXIMUM_PICKUP_VELOCITY = 300.0f;
 		
 		private AbstractCrystallonEntity lastEntityReleased;
 		private Vector2 lastPosition;
 		
-//		protected List<AbstractCrystallonEntity> potentialMembers;
-		
 		public event EventHandler<CubeCompleteEventArgs> CubeCompleteDetected;
+		public event EventHandler<CubeGroupCompleteEventArgs> CubeGroupCompleteDetected;
 		public event EventHandler CubeFailedDetected;
 		
 		// GET & SET -------------------------------------------------------------
@@ -63,9 +64,25 @@ namespace Crystallography
 			InputManager.Instance.TouchJustDownDetected += HandleInputManagerInstanceTouchJustDownDetected;
 			InputManager.Instance.TouchJustUpDetected += HandleInputManagerInstanceTouchJustUpDetected;
 			InputManager.Instance.TouchDownDetected += HandleInputManagerInstanceTouchDownDetected;
+			InputManager.Instance.DragDetected += HandleInputManagerInstanceDragDetected;
 		}
+
+		
 		
 		// EVENT HANDLERS --------------------------------------------------------
+		
+		void HandleInputManagerInstanceDragDetected (object sender, SustainedTouchEventArgs e)
+		{
+//			var entity = GetEntityAtPosition( e.touchPosition );
+			MemberType = (lastEntityReleased!=null) ? lastEntityReleased.GetType() : null;	// -------------- Cards or Cubes?
+			if(MemberType != null) {
+				Console.WriteLine(MemberType);
+			}
+			if (lastEntityReleased != null) {
+				Add (lastEntityReleased);
+				EaseOut();
+			}
+		}
 		
 		/// <summary>
 		/// Handles <c>InputManager.DoubleTapDetected</c>.
@@ -114,10 +131,12 @@ namespace Crystallography
 		void HandleInputManagerInstanceTouchJustDownDetected (object sender, BaseTouchEventArgs e)
 		{
 			var entity = GetEntityAtPosition( e.touchPosition );
-			if (entity != null) {
-				Add (entity);
-				EaseOut();
-			}
+			lastEntityReleased = entity as AbstractCrystallonEntity;
+//			MemberType = (entity!=null) ? entity.GetType() : null;	// -------------- Cards or Cubes?
+//			if (entity != null) {
+//				Add (entity);
+//				EaseOut();
+//			}
 		}
 		
 		/// <summary>
@@ -132,8 +151,10 @@ namespace Crystallography
 		void HandleInputManagerInstanceTouchDownDetected (object sender, SustainedTouchEventArgs e)
 		{
 			setPosition( e.touchPosition );
-			if ( population > 0  && velocity < 300.0f) {
-				SnapTo();
+			if ( population > 0 ) {
+				if (velocity < MAXIMUM_PICKUP_VELOCITY) {
+					SnapTo();
+				}
 			}
 		}
 		
@@ -160,59 +181,19 @@ namespace Crystallography
 			base.Update(dt);
 			
 			velocity = Vector2.Distance( getPosition(), lastPosition ) / dt;
+//			if (velocity>0) {
+//				Console.WriteLine(velocity);
+//			}
 			lastPosition = getPosition();
-//			if (potentialMembers.Count > 0) {
-//				CheckPotentialMembers();
-//			}
-//			var moved = _touchStartPos - _currentTouchPos;
-//			var moved_distance = moved.SafeLength();
-//			
-//			// HANDLE INPUT
-//			if ( _isTouch ) {	// ------------------------- OnNewTouch AND OnDrag
-//				setPosition(_currentTouchPos);
-//				if ( !_wasTouch ) {	// --------------------- OnNewTouch ONLY
-//					_touchStartPos = _currentTouchPos;
-//					var entity = GetEntityAtPosition(_touchStartPos);
-//					if (entity != null) {
-//						Add (entity);
-//						EaseOut();
-//					}
-//				} else {	// ----------------------------- OnDrag ONLY
-//					
-//				}
-//			} else if ( _wasTouch ) { // ------------------- OnTouchReleased
-//				if ( population >0 ) {
-//					EaseIn();
-//				}
-//			}
 		}
 		
 		// METHODS ---------------------------------------------------------------
-		
-//		private void CheckPotentialMembers() {
-//			AbstractCrystallonEntity e = null;
-//			foreach (var member in potentialMembers) {
-//				e = member;
-//				float d = Vector2.Distance( getPosition(), member.pickupLocation );
-////				Console.WriteLine(d);
-//				if( d >= SNAP_DISTANCE+50.0f ) {
-//					this.Release( e );
-//					e.setPosition(e.pickupLocation);
-//					break;
-//				}
-//				e = null;
-//			}
-//			if ( e !=null ) {
-//				potentialMembers.Remove(e);
-//			}
-//		}
 		
 		/// <summary>
 		/// Cute li'l animation that runs when player lets go of the SelectionGroup.
 		/// If the group had 3 members, we also test to see whether it was a valid match.
 		/// </summary>
 		private void EaseIn( bool pForceBreak = false ) {
-//			potentialMembers.Clear();
 			for (int i=0; i<MAX_CAPACITY; i++) {
 				_pucks[i].StopAllActions();
 			}
@@ -256,13 +237,23 @@ namespace Crystallography
 			_pucks[0].RunAction( sequence );
 			
 			sequence = new Sequence();
-			sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE, 20.5f), 0.2f)
-			            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
+			if ( MemberType.ToString() == "Crystallography.CardCrystallonEntity") { 
+				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE, 20.5f), 0.2f)
+				            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
+			} else {
+				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
+				            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
+			}
 			_pucks[1].RunAction( sequence );
 			
 			sequence = new Sequence();
-			sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE, 20.5f), 0.2f)
-			            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
+			if ( MemberType.ToString() == "Crystallography.CardCrystallonEntity") { 
+				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE, 20.5f), 0.2f)
+			           	 	{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
+			} else {
+				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
+			           	 	{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
+			}
 			_pucks[2].RunAction( sequence );
 		}
 		
@@ -282,12 +273,6 @@ namespace Crystallography
 			foreach (ICrystallonEntity e in allEntities) {
 				if (e == null) continue;	// e IS NOT ACTUALLY A THING -- IGNORE (BUT IF THIS EVER HAPPENS, IT'S PROBS A BUG)
 				if ( e is NodeCrystallonEntity ) { // ----------------------------- e DESCENDS FROM NodeCrystallonEntity, LIKE GROUPS DO
-					if (e is GroupCrystallonEntity) {
-//						if( (e as GroupCrystallonEntity).complete ) {
-//							lastEntityReleased = e as AbstractCrystallonEntity;
-//							continue;	// e IS A COMPLETE CUBE -- IGNORE
-//						}
-					}
 					PhysicsBody body = e.getBody();
 					if (body == null) continue; // e IS SINGLE POINT IN SPACE -- IGNORE
 					lowerLeft = body.AabbMin * GamePhysics.PtoM;
@@ -311,11 +296,20 @@ namespace Crystallography
 		/// </summary>
 		public void GroupComplete() {
 			Support.SoundSystem.Instance.Play("cubed.wav");
-			EventHandler<CubeCompleteEventArgs> handler = CubeCompleteDetected;
-			if ( handler != null ) {
-				handler( this, new CubeCompleteEventArgs {
-					members = Array.ConvertAll( this.members, item => (CardCrystallonEntity)item )
-				});
+			if ( MemberType == typeof(CardCrystallonEntity) ) {
+				EventHandler<CubeCompleteEventArgs> handler = CubeCompleteDetected;
+				if ( handler != null ) {
+					handler( this, new CubeCompleteEventArgs {
+						members = Array.ConvertAll( this.members, item => (CardCrystallonEntity)item )
+					});
+				}
+			} else {
+				EventHandler<CubeGroupCompleteEventArgs> handler = CubeGroupCompleteDetected;
+				if ( handler != null ) {
+					handler( this, new CubeGroupCompleteEventArgs {
+						members = Array.ConvertAll( this.members, item => (CubeCrystallonEntity)item )
+					});
+				}
 			}
 //			CardManager.Instance.MakeUnavailable( Array.ConvertAll( members, item => (CardCrystallonEntity)item ) );
 //			if ( CardManager.Instance.MatchesPossible() == false ) {
@@ -344,25 +338,41 @@ namespace Crystallography
 //		public ICrystallonEntity Release () {
 		public override AbstractCrystallonEntity Release ( AbstractCrystallonEntity e, bool pForceBreak = false )
 		{
-			lastEntityReleased = e;
+			AbstractCrystallonEntity entity = e;
+			if (pForceBreak) {
+				lastEntityReleased = null;
+				return ReleaseSingle ( entity );
+			} else if (population == 1) {
+				entity = members[0] as AbstractCrystallonEntity;
+				return lastEntityReleased = ReleaseSingle ( entity );
+			}
 			bool isComplete = false;
-			if ( e is SpriteTileCrystallonEntity ) {
-				return ReleaseSingle (e as SpriteTileCrystallonEntity );
-			} else if ( !pForceBreak ) {	// --------------------------- don't bother testing if Break forced
+			if ( !pForceBreak ) {	// --------------------------- don't bother testing if Break forced
 				if ( population  == MAX_CAPACITY ) { // -------------------------------------------------------- EVALUATE CUBES!
-					if (QualityManager.Instance.EvaluateMatch( members, true ) ) {
+					if ( MemberType == typeof(CubeCrystallonEntity) ) {
+						ICrystallonEntity[] a = { (members[0] as CubeCrystallonEntity).Top,
+													(members[1] as CubeCrystallonEntity).Right,
+													(members[2] as CubeCrystallonEntity).Left };
+						if (!QualityManager.Instance.EvaluateMatch( a, true )) { // TOP:LEFT + LEFT:TOP
+							GroupFailed ();
+							return null;
+						}
 						GroupComplete();
-						isComplete = true;
 					} else {
-						GroupFailed();
-						return null;
+						if (QualityManager.Instance.EvaluateMatch( members, true ) ) {
+							GroupComplete();
+							isComplete = true;
+						} else {
+							GroupFailed();
+							return null;
+						}
 					}
 				}
 			}
-			if ( e is NodeCrystallonEntity ) {
-				return ReleaseGroup ( isComplete, pForceBreak );
+			if ( entity is NodeCrystallonEntity ) {
+				return lastEntityReleased = ReleaseGroup ( isComplete, pForceBreak );
 			}
-			return null;
+			return lastEntityReleased = null;
 		}
 		
 		/// <summary>
@@ -385,7 +395,7 @@ namespace Crystallography
 		/// </returns>
 		protected GroupCrystallonEntity ReleaseGroup( bool pComplete, bool pForceBreak = false ) {
 			var spawnPos = this.getPosition();
-			var g = GroupManager.Instance.spawn(spawnPos.X, spawnPos.Y);
+			var g = GroupManager.Instance.spawn(spawnPos.X, spawnPos.Y, pComplete);
 			g.complete = pComplete;
 			foreach (AbstractCrystallonEntity e in members) {
 				g.Add(e);
@@ -409,6 +419,7 @@ namespace Crystallography
 		public void Reset( Scene pScene ) {
 			RemoveAll();
 //			potentialMembers.Clear();
+			MemberType = null;
 			lastPosition = getPosition();
 			lastEntityReleased = null;
 			_scene = pScene;
@@ -434,18 +445,39 @@ namespace Crystallography
 					if (e == this) {
 						continue; // --------------------------------- e IS THE SELECTION GROUP ITSELF -- FIND A WAY TO FILTER THIS OUT, LATER...
 					}
-#if ORIENTATION_MATTERS 
-					if ( e is GroupCrystallonEntity ) {
-						bool collision = false;
-						var g = e as GroupCrystallonEntity;
-						for (int i=0; i<g.pucks.Length; i++) {
-							if( g.pucks[i].Children.Count > 0 && this.pucks[i].Children.Count > 0) {
-								collision = true;
-								break;
+					if ( this.MemberType != e.GetType () ) {
+						if (e.GetType().ToString() != "Crystallography.GroupCrystallonEntity") {	// types don't match & not a group
+							continue;
+						} else {
+							var g = e as GroupCrystallonEntity;
+							if ( g.MemberType != this.MemberType ) { // ----------------- type doesn't match group members' type
+								continue;
 							}
 						}
-						if (collision) {
-							continue;	// ----------------- e IS A GROUP WITH MEMBERS THAT OVERLAP WITH SELECTION GROUP -- IGNORE
+					}
+//					if ( e is GroupCrystallonEntity && !(e is CubeCrystallonEntity) ) {
+//						var g = e as GroupCrystallonEntity;
+//						if ( g.MemberType != this.MemberType ) {
+//							continue;
+//						}
+//					}
+//					if ( e.GetType() != this.MemberType ){
+//						continue;
+//					}
+#if ORIENTATION_MATTERS 
+					if ( e is GroupCrystallonEntity ) {
+						if ( !(e is CubeCrystallonEntity) ) {
+							bool collision = false;
+							var g = e as GroupCrystallonEntity;
+							for (int i=0; i<g.pucks.Length; i++) {
+								if( g.pucks[i].Children.Count > 0 && this.pucks[i].Children.Count > 0) {
+									collision = true;
+									break;	// ----------------- found an overlapping group member...
+								}
+							}
+							if (collision) {
+								continue;	// ----------------- e IS A GROUP WITH MEMBERS THAT OVERLAP WITH SELECTION GROUP -- IGNORE
+							}
 						}
 					} else {
 						int orientation = e.getQualityVariant( "QOrientation" );
@@ -463,7 +495,6 @@ namespace Crystallography
 				
 				if ( closestDistance < SNAP_DISTANCE ) {
 					( closest as AbstractCrystallonEntity ).pickupLocation = closest.getPosition();
-//					potentialMembers.Add(closest as AbstractCrystallonEntity);
 					Add (closest);
 				}
 			}
@@ -485,5 +516,8 @@ namespace Crystallography
 	/// </summary>
 	public class CubeCompleteEventArgs : EventArgs {
 		public CardCrystallonEntity[] members;
+	}
+	public class CubeGroupCompleteEventArgs : EventArgs {
+		public CubeCrystallonEntity[] members;
 	}
 }

@@ -14,6 +14,7 @@ namespace Crystallography
 		protected Node[] _pucks;
 		private int _numMembers;
 		
+		
 		public static event EventHandler BreakDetected;
 		
 		// GET & SET -------------------------------------------------------------
@@ -31,6 +32,8 @@ namespace Crystallography
 		}
 
 		public Node[] pucks { get {return _pucks;} }
+		
+		public System.Type MemberType {get; set;}
 		
 		// CONSTRUCTOR -----------------------------------------------------------
 		
@@ -71,11 +74,16 @@ namespace Crystallography
 		{
 			//TODO This doesn't work, but it needs to. At least it doesn't crash for some reason...
 			Sequence sequence = new Sequence();
-			sequence.Add( new CallFunc( () => ( members[0] as AbstractCrystallonEntity ).playSound() ) );
-			sequence.Add ( new DelayTime( 0.5f ) );
-			sequence.Add( new CallFunc( () => ( members[1] as AbstractCrystallonEntity ).playSound() ) );
-			sequence.Add ( new DelayTime( 0.5f ) );
-			sequence.Add( new CallFunc( () => ( members[2] as AbstractCrystallonEntity ).playSound() ) );
+			foreach ( var member in members ) {
+				if (member == null) {
+					continue;
+				}
+				sequence.Add( new CallFunc( () => ( member as AbstractCrystallonEntity ).playSound() ) );
+				sequence.Add ( new DelayTime( 0.5f ) );
+			}
+//			sequence.Add( new CallFunc( () => ( members[1] as AbstractCrystallonEntity ).playSound() ) );
+//			sequence.Add ( new DelayTime( 0.5f ) );
+//			sequence.Add( new CallFunc( () => ( members[2] as AbstractCrystallonEntity ).playSound() ) );
 			getNode().RunAction( sequence );
 		}
 		
@@ -132,11 +140,25 @@ namespace Crystallography
 		/// <see cref="Crystallography.ICrystallonEntity"/>
 		/// </param>
 		public virtual GroupCrystallonEntity Add(ICrystallonEntity pEntity) {
+			
+			if ( population == 0 && !(this is SelectionGroup) ) {
+				MemberType = pEntity.GetType();
+			}
+			
 			if (pEntity is SpriteTileCrystallonEntity) {
 				return AddSpriteTile(pEntity as SpriteTileCrystallonEntity);
+			} else if ( pEntity is CubeCrystallonEntity ) { 
+				return AddCube( pEntity as CubeCrystallonEntity );
 			} else if  (pEntity is GroupCrystallonEntity) {
 				return AddGroup (pEntity as GroupCrystallonEntity);
 			}
+			return this;
+		}
+		
+		public GroupCrystallonEntity AddCube( CubeCrystallonEntity pEntity ) {
+			IncreaseSlots( 1 );
+			members[GetFreeSlot()] = pEntity;
+			Attach (pEntity);
 			return this;
 		}
 		
@@ -151,7 +173,6 @@ namespace Crystallography
 		/// </param>
 		public GroupCrystallonEntity AddSpriteTile(SpriteTileCrystallonEntity pEntity) {
 			IncreaseSlots( 1 );
-//			members[GetOrientationIndex( pEntity )] = pEntity;
 			members[GetFreeSlot()] = pEntity;
 			Attach(pEntity);
 			return this;
@@ -167,17 +188,24 @@ namespace Crystallography
 		/// <see cref="Crystallography.GroupCrystallonEntity"/>
 		/// </param>
 		public GroupCrystallonEntity AddGroup( GroupCrystallonEntity pGroupEntity ) {
-			IncreaseSlots(pGroupEntity.members.Length);
-			for ( int i=0; i<pGroupEntity.members.Length; i++) {
-				AbstractCrystallonEntity e = pGroupEntity.members[i] as AbstractCrystallonEntity;
-				if ( e != null ) {
-					int index = GetFreeSlot();
-					members[index] = e;
-					Attach(e);	// LAZY TYPECASTING... CLEAN UP LATER?
+			if (pGroupEntity.complete) {
+				IncreaseSlots( 1 );
+				members[GetFreeSlot()] = pGroupEntity;
+				Attach(pGroupEntity);
+				return this;
+			} else {
+				IncreaseSlots(pGroupEntity.members.Length);
+				for ( int i=0; i<pGroupEntity.members.Length; i++) {
+					AbstractCrystallonEntity e = pGroupEntity.members[i] as AbstractCrystallonEntity;
+					if ( e != null ) {
+						int index = GetFreeSlot();
+						members[index] = e;
+						Attach(e);	// LAZY TYPECASTING... CLEAN UP LATER?
+					}
 				}
+				GroupManager.Instance.Remove( pGroupEntity );
+				return this;
 			}
-			GroupManager.Instance.Remove( pGroupEntity );
-			return this;
 		}
 		
 		/// <summary>
@@ -207,17 +235,16 @@ namespace Crystallography
 			pEntity.attachTo(puck);
 			pEntity.getNode().Position *= 0;
 #if( !ORIENTATION_MATTERS )
+			if ((pEntity is CubeCrystallonEntity) == false ) {
 				QualityManager.Instance.SetQuality( pEntity, "QOrientation", index );
+			}
 #endif
 			_numMembers++;
 			if ( this is SelectionGroup  == false ) {	// SelectionGroup has its own positioning code -- HACK This implementation is just sort of inelegant. Maybe abstract some of this out later?
 				if ( population  > 1 ) {
 					foreach( AbstractCrystallonEntity e in members ) {
-//					for (int i=0; i<members.Length; i++ {
 						if( e != null) {
-//						if ( members[i] != null ) {
 							int puckIndex = Array.IndexOf(_pucks, e.getNode().Parent);
-//							int attachPosition = GetOrientationIndex( e );
 							_pucks[puckIndex].Position = e.getAttachOffset( puckIndex );
 						}
 					}
@@ -227,6 +254,27 @@ namespace Crystallography
 			}
 		}
 		
+		/// <summary>
+		/// Reattaches this group to the scene.
+		/// </summary>
+		/// <returns>
+		/// This group.
+		/// </returns>
+		/// <param name='position'>
+		/// Position.
+		/// </param>
+		public override AbstractCrystallonEntity BeReleased( Vector2 pPosition ) {
+			GroupManager.Instance.Add( this );
+			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[0], 0.1f, 0.01f, pPosition));
+			setVelocity(1.0f, GameScene.Random.NextAngle());
+
+			addToScene();
+			return this;
+		}
+		
+		/// <summary>
+		/// Break this group into its component objects.
+		/// </summary>
 		public void Break() {
 			Node puck;
 			for (int i=members.Length-1; i>=0; i--) {
@@ -234,14 +282,19 @@ namespace Crystallography
 					var e = members[i] as AbstractCrystallonEntity;
 					puck = Array.Find( _pucks, (obj) => obj == e.getNode().Parent );
 					var launchVelocity = puck.Position.Normalize();
-					Release( e );
+					Release( e, true );
 					e.setVelocity( launchVelocity );
 				}
 			}
-			RemoveAll();
+//			RemoveAll();
 			EventHandler handler = BreakDetected;
 			if ( handler != null ) {
 				handler( this, null );
+			}
+			if (this is SelectionGroup == false) { 
+				GroupManager.Instance.Remove(this, true);
+			} else {
+				RemoveAll();
 			}
 		}
 		
@@ -258,6 +311,11 @@ namespace Crystallography
 #if (!ORIENTATION_MATTERS)
 				return population;
 #endif
+			if ( pEntity is GroupCrystallonEntity ) {
+				if ( (pEntity as GroupCrystallonEntity).complete) {
+					return population;
+				}
+			}
 			string orientation = ( pEntity as SpriteTileCrystallonEntity ).getOrientation();
 			int attachPosition = -1;
 			switch (orientation) {
@@ -359,21 +417,22 @@ namespace Crystallography
 		/// The CardCrystallonEntity
 		/// </returns>
 		protected virtual AbstractCrystallonEntity ReleaseSingle( AbstractCrystallonEntity pEntity ) {
-#if !ORIENTATION_MATTERS
-			if ( pEntity is CardCrystallonEntity ) {
-				QOrientation.Instance.Apply(pEntity,0);
-			}
-#endif
 			Remove (pEntity);
-			if(complete) {
-				if ( pEntity is CardCrystallonEntity ) {
-					CardManager.Instance.Add( pEntity as CardCrystallonEntity );
-				}
-			}
-			pEntity.setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[0], 0.1f, 0.01f, this.getPosition()));
-			pEntity.setVelocity(1.0f, GameScene.Random.NextAngle());
-			pEntity.addToScene();
-			return pEntity;
+			return pEntity.BeReleased( this.getPosition() );
+//#if !ORIENTATION_MATTERS
+//			if ( pEntity is CardCrystallonEntity ) {
+//				QOrientation.Instance.Apply(pEntity,0);
+//			}
+//#endif
+//			if(complete) {
+//				if ( pEntity is CardCrystallonEntity ) {
+//					CardManager.Instance.Add( pEntity as CardCrystallonEntity );
+//				}
+//			}
+//			pEntity.setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[0], 0.1f, 0.01f, this.getPosition()));
+//			pEntity.setVelocity(1.0f, GameScene.Random.NextAngle());
+//			pEntity.addToScene();
+//			return pEntity;
 //			Node node = getNode();
 //			for ( int i=0; i<members.Length; i++ ) {
 //				if ( members[i] != null ) {

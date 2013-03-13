@@ -63,8 +63,11 @@ namespace Crystallography
 		/// P card.
 		/// </param>
 		public CardCrystallonEntity Add( CardCrystallonEntity pCard ) {
-			availableCards.Add(pCard);
+			if (availableCards.Contains(pCard) == false) {
+				availableCards.Add(pCard);
+			}
 			return pCard;
+			
 		}
 		
 		/// <summary>
