@@ -98,6 +98,8 @@
     <Compile Include="ui\TitleScene.cs" />
     <Compile Include="MenuSystemScene.cs" />
     <Compile Include="CubeCrystallonEntity.cs" />
+    <Compile Include="ui\ScorePanel.composer.cs" />
+    <Compile Include="ui\ScorePanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
