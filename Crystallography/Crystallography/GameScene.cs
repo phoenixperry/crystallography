@@ -22,6 +22,7 @@ namespace Crystallography
 		public static Random Random = new Random();
 		
     	public static GamePhysics _physics;
+		public static Layer background;
 		protected static List<ICrystallonEntity> _allEntites = new List<ICrystallonEntity>();
 		
 		public static event EventHandler LevelChangeDetected;
@@ -41,6 +42,9 @@ namespace Crystallography
         public GameScene ( int pCurrentLevel )
 		{
 			Touch.GetData(0).Clear();
+			
+			background = new Crystallography.BG.CrystallonBackground();
+			this.AddChild(background);
 			
 			UISystem.SetScene( new Crystallography.UI.ScoreScene() );
 			
