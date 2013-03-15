@@ -103,6 +103,7 @@
     <Compile Include="Layer.cs" />
     <Compile Include="bg\CrystallonBackground.cs" />
     <Compile Include="GlitchSpriteSheetSingleton.cs" />
+    <Compile Include="ui\ScorePopup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

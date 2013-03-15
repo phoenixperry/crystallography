@@ -108,7 +108,7 @@ namespace Crystallography.BG
 			sequence.Add( new CallFunc( () => {OnMoveComplete( n2 );} ) );
 			n2.RunAction( sequence );
 			
-//			n2.RunAction( new MoveTo( BLUE_BASE + GameScene.Random.NextFloat() * BLUE_RANGE, 2.0f ) );
+
 		}
 		
 		public void OnMoveComplete( Node pNode ) {

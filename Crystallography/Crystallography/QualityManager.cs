@@ -203,9 +203,10 @@ namespace Crystallography
 					s += key.Score( qDict[key] ); //pEntities[0].getNode().Parent.Parent.Position );
 				}
 				MatchScoreEventArgs args = new MatchScoreEventArgs{ 
-				Points = s,
-				Position = SelectionGroup.Instance.getPosition()
+					Points = s,
+					Entity = pEntities[0]
 				};
+				
 				EventHandler<MatchScoreEventArgs> handler = MatchScoreDetected;
 				if ( handler != null ) {
 					handler( this, args );
@@ -299,6 +300,6 @@ namespace Crystallography
 	
 	public class MatchScoreEventArgs : EventArgs {
 		public int Points { get; set; }
-		public Sce.PlayStation.Core.Vector2 Position { get; set; }
+		public ICrystallonEntity Entity { get; set; }
 	}
 }
