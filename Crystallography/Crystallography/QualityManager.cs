@@ -27,6 +27,8 @@ namespace Crystallography
 		/// </summary>
 		private XDocument doc;
 		
+		public static event EventHandler<MatchScoreEventArgs> MatchScoreDetected;
+		
 		// GET & SET ------------------------------------------------------------------------------------------------
 		
 		public static QualityManager Instance { 
@@ -191,13 +193,22 @@ namespace Crystallography
 				}
 			}
 			if (pForScore) {
+				int s = 0;
 				foreach ( AbstractQuality key in qDict.Keys ) {
 #if ORIENTATION_MATTERS
 					if ( key is QOrientation) {	// we need to match orientation to ensure valid sets exist, but don't score points for it.
 						continue;
 					}
 #endif
-					key.Score( qDict[key] );
+					s += key.Score( qDict[key] ); //pEntities[0].getNode().Parent.Parent.Position );
+				}
+				MatchScoreEventArgs args = new MatchScoreEventArgs{ 
+				Points = s,
+				Position = SelectionGroup.Instance.getPosition()
+				};
+				EventHandler<MatchScoreEventArgs> handler = MatchScoreDetected;
+				if ( handler != null ) {
+					handler( this, args );
 				}
 			}
 			qDict.Clear();
@@ -268,7 +279,6 @@ namespace Crystallography
 		/// </param>
 		public void SetQuality ( AbstractCrystallonEntity pEntity, string pQualityName, int pVariant ) {
 			var type = Type.GetType( "Crystallography." + pQualityName );
-//			var quality = (IQuality)Activator.CreateInstance( type );
 			var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
 			Remove( pEntity, pQualityName );
 			Add( pEntity, pQualityName, pVariant );
@@ -283,5 +293,12 @@ namespace Crystallography
 			qualityDict = null;
 			doc = null;
 		}
+	}
+	
+	// HELPER CLASSES ------------------------------------------------------------------------------------------------
+	
+	public class MatchScoreEventArgs : EventArgs {
+		public int Points { get; set; }
+		public Sce.PlayStation.Core.Vector2 Position { get; set; }
 	}
 }

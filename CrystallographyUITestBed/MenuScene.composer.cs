@@ -16,6 +16,7 @@ namespace Crystallography.UI
         Button LevelSelectButton;
         Button CreditsButton;
         Button OptionsButton;
+        ImageBox ImageBox_1;
 
         private void InitializeWidget()
         {
@@ -34,6 +35,8 @@ namespace Crystallography.UI
             CreditsButton.Name = "CreditsButton";
             OptionsButton = new Button();
             OptionsButton.Name = "OptionsButton";
+            ImageBox_1 = new ImageBox();
+            ImageBox_1.Name = "ImageBox_1";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -54,12 +57,17 @@ namespace Crystallography.UI
             OptionsButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             OptionsButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
 
+            // ImageBox_1
+            ImageBox_1.Image = null;
+            ImageBox_1.ImageScaleType = ImageScaleType.Center;
+
             // MenuScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
             this.RootWidget.AddChildLast(NewGameButton);
             this.RootWidget.AddChildLast(LevelSelectButton);
             this.RootWidget.AddChildLast(CreditsButton);
             this.RootWidget.AddChildLast(OptionsButton);
+            this.RootWidget.AddChildLast(ImageBox_1);
 
             SetWidgetLayout(orientation);
 
@@ -100,6 +108,11 @@ namespace Crystallography.UI
                     OptionsButton.Anchors = Anchors.None;
                     OptionsButton.Visible = true;
 
+                    ImageBox_1.SetPosition(146, 158);
+                    ImageBox_1.SetSize(200, 200);
+                    ImageBox_1.Anchors = Anchors.None;
+                    ImageBox_1.Visible = true;
+
                     break;
 
                 default:
@@ -130,6 +143,11 @@ namespace Crystallography.UI
                     OptionsButton.SetSize(214, 56);
                     OptionsButton.Anchors = Anchors.None;
                     OptionsButton.Visible = true;
+
+                    ImageBox_1.SetPosition(350, 27);
+                    ImageBox_1.SetSize(259, 473);
+                    ImageBox_1.Anchors = Anchors.Height;
+                    ImageBox_1.Visible = true;
 
                     break;
             }

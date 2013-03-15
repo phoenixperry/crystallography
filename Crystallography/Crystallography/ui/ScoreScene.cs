@@ -20,8 +20,6 @@ namespace Crystallography.UI
 		public static event EventHandler<PauseEventArgs> PauseDetected;
 		public static event EventHandler QuitButtonPressDetected;
 		
-//		public bool paused { get; protected set; }
-		
 		// CONSTRUCTOR ---------------------------------------------------------------------
 		
         public ScoreScene() {
@@ -40,10 +38,8 @@ namespace Crystallography.UI
 			ResumeButton.TouchEventReceived += HandleResumeButtonTouchEventReceived;
 			GiveUpButton.TouchEventReceived += HandleGiveUpButtonTouchEventReceived;
 			NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
-			AbstractQuality.MatchScoreDetected += HandleAbstractQualityMatchScoreDetected;
+			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
 			CardManager.Instance.NoMatchesPossibleDetected += (sender, e) => {NextLevelButton.Visible = true;};
-			
-//			GameScene.LevelChangeDetected += (sender, e) => { NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived; };
 			
 			Reset();
 		}
@@ -51,8 +47,6 @@ namespace Crystallography.UI
         void HandleNextLevelButtonButtonAction (object sender, TouchEventArgs e)
         {
 			foreach (TouchEvent v in e.TouchEvents){
-//        		e.TouchEvents[0].WorldPosition;
-//				NextLevelButton.
 				Console.WriteLine(v.Type.ToString());
 				if (v.Type == TouchEventType.None) {
 					(Director.Instance.CurrentScene as GameScene).goToNextLevel();
@@ -62,8 +56,10 @@ namespace Crystallography.UI
 
         // EVENT HANDLERS -------------------------------------------------------------------
 		
-		void HandleAbstractQualityMatchScoreDetected (object sender, MatchScoreEventArgs e) {
+		void HandleQualityManagerMatchScoreDetected (object sender, MatchScoreEventArgs e) {
 			ScheduleScoreModifier( e.Points );
+			ScorePanel panel = new ScorePanel( e.Position, e.Points );
+			this.RootWidget.AddChildLast(panel);
         }
 		
 		void HandleGiveUpButtonTouchEventReceived (object sender, TouchEventArgs e)
@@ -76,27 +72,17 @@ namespace Crystallography.UI
 		
 		void HandleNextLevelButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
-//			foreach( TouchEvent v in e.TouchEvents) {
-//				Console.WriteLine(v.Type.ToString());
 			TouchEvent v = e.TouchEvents[0];
-				if (v.Type == TouchEventType.Up) {
-//					NextLevelButton.TouchEventReceived -= HandleNextLevelButtonTouchEventReceived;
-//			NextLevelButton.
-			
-					(Director.Instance.CurrentScene as GameScene).goToNextLevel();
-					NextLevelButton.Visible = false;
-//					NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
-				}
-//			}
-        	
+			if (v.Type == TouchEventType.Up) {
+				(Director.Instance.CurrentScene as GameScene).goToNextLevel();
+				NextLevelButton.Visible = false;
+			}
         }
 		
 		void HandleResumeButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
 			//TODO: Buttons should activate on up, but the SDK is funky w/r/t "button up" events. Redo later.
-//        	if( e.TouchEvents.PrimaryTouchEvent.Type == TouchEventType.Up ) {
 				Pause ( false );
-//			}
         }
 		
 		// OVERRIDES ------------------------------------------------------------------------

@@ -98,6 +98,10 @@
     <Compile Include="ui\TitleScene.cs" />
     <Compile Include="MenuSystemScene.cs" />
     <Compile Include="CubeCrystallonEntity.cs" />
+    <Compile Include="ui\ScorePanel.composer.cs" />
+    <Compile Include="ui\ScorePanel.cs" />
+    <Compile Include="Layer.cs" />
+    <Compile Include="bg\CrystallonBackground.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -114,6 +118,8 @@
     <Folder Include="assets\levels\" />
     <Folder Include="deprecated\" />
     <Folder Include="ui\" />
+    <Folder Include="assets\images\bg\" />
+    <Folder Include="bg\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\sounds\music_ingame.mp3" />
@@ -160,6 +166,11 @@
     <Content Include="assets\sounds\score_down.wav" />
     <Content Include="assets\sounds\score_up.wav" />
     <Content Include="assets\fonts\Bariol_Bold.otf" />
+    <Content Include="assets\images\bg\1\leftHollowWhite.png" />
+    <Content Include="assets\images\bg\1\leftSolidWhite.png" />
+    <Content Include="assets\images\bg\1\rightHollowWhite.png" />
+    <Content Include="assets\images\bg\1\rightSolidWhite.png" />
+    <Content Include="assets\images\bg\1\topSolidChevron.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Board.cs" />

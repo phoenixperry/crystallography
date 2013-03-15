@@ -17,7 +17,7 @@ namespace Crystallography
 		
 		protected string _name;
 		
-		public static event EventHandler<MatchScoreEventArgs> MatchScoreDetected;
+		
 		
 		/// <summary>
 		/// IQuality implementors have protected constructors. Access them through their <c>public static Instance</c> variables.
@@ -62,28 +62,19 @@ namespace Crystallography
 				return 0;
 			} else if ( pForScore ) {
 				if (results[0] == 1) { // --------------------- All Different
-//					Score (false);
 					return allDifferentScore;
 				} else { // ----------------------------------- All Same
-//					Score (true);
 					return allSameScore;
 				}
 			}
 			return -1;
 		}
 		
-		public virtual void Score( bool pAllSame ) {
-			MatchScoreEventArgs args = new MatchScoreEventArgs{ Points = pAllSame ? allSameScore : allDifferentScore };
-//			Console.WriteLine( this.GetType().ToString() + ": " + (pAllSame ? allSameScore : allDifferentScore) );
-			EventHandler<MatchScoreEventArgs> handler = MatchScoreDetected;
-					if ( handler != null ) {
-						handler( this, args );
-					}
+		public virtual int Score( bool pAllSame ) {
+			return pAllSame ? allSameScore : allDifferentScore;
 		}
 	}
 	
 	// HELPER CLASSES ------------------------------------------------------
-	public class MatchScoreEventArgs : EventArgs {
-		public int Points { get; set; }
-	}
+	
 }	
