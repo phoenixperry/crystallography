@@ -44,7 +44,9 @@ namespace Crystallography.UI
 			Reset();
 		}
 
-        void HandleNextLevelButtonButtonAction (object sender, TouchEventArgs e)
+        // EVENT HANDLERS -------------------------------------------------------------------
+		
+		void HandleNextLevelButtonButtonAction (object sender, TouchEventArgs e)
         {
 			foreach (TouchEvent v in e.TouchEvents){
 				Console.WriteLine(v.Type.ToString());
@@ -53,13 +55,12 @@ namespace Crystallography.UI
 				}
 			}
         }
-
-        // EVENT HANDLERS -------------------------------------------------------------------
 		
 		void HandleQualityManagerMatchScoreDetected (object sender, MatchScoreEventArgs e) {
 			ScheduleScoreModifier( e.Points );
-			ScorePanel panel = new ScorePanel( e.Position, e.Points );
-			this.RootWidget.AddChildLast(panel);
+//			ScorePanel panel = new ScorePanel( e.Entity, e.Points );
+			new ScorePopup( e.Entity, e.Points );
+//			this.RootWidget.AddChildLast(panel);
         }
 		
 		void HandleGiveUpButtonTouchEventReceived (object sender, TouchEventArgs e)
@@ -82,7 +83,7 @@ namespace Crystallography.UI
 		void HandleResumeButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
 			//TODO: Buttons should activate on up, but the SDK is funky w/r/t "button up" events. Redo later.
-				Pause ( false );
+			Pause ( false );
         }
 		
 		// OVERRIDES ------------------------------------------------------------------------
