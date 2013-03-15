@@ -1,52 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:02d710746156ffaa73738305847c5a23$ -->
-<!--Format:
-n  => level number
-color => 0,1,2
-pattern => 0,1,2
-sound => 0,1,2
-orientation => 0,1,2 (TOP, LEFT, RIGHT)
--->
 <GameData>
-    <Level Value="0"> 
-		<Card>
-			<Quality Name="Orientation" Value="0" />
-			<Quality Name="Color" Value="0" />
-			<Quality Name="Pattern" Value="0" />
-			<Quality Name="Sound" Value="0" />
-		</Card>
-		<Card>
-			<Quality Name="Orientation" Value="1" />
-			<Quality Name="Color" Value="0" />
-			<Quality Name="Pattern" Value="0" />
-			<Quality Name="Sound" Value="0" />
-		</Card>
-		<Card>
-			<Quality Name="Orientation" Value="2" />
-			<Quality Name="Color" Value="0" />
-			<Quality Name="Pattern" Value="0" />
-			<Quality Name="Sound" Value="0" />
-		</Card>
-	</Level>
-	<Level Value="1"> 
-		<Card>
-			<Quality Name="Orientation" Value="0" />
-			<Quality Name="Color" Value="0" />
-			<Quality Name="Pattern" Value="0" />
-			<Quality Name="Sound" Value="0" />
-		</Card>
-		<Card>
-			<Quality Name="Orientation" Value="1" />
-			<Quality Name="Color" Value="1" />
-			<Quality Name="Pattern" Value="0" />
-			<Quality Name="Sound" Value="0" />
-		</Card>
-		<Card>
-			<Quality Name="Orientation" Value="1" />
-			<Quality Name="Color" Value="1" />
-			<Quality Name="Pattern" Value="0" />
-			<Quality Name="Sound" Value="0" />
-		</Card>
-	</Level>
+    <Level Value="0">
+        <Color Red="0.956863" Green="0.917647" Blue="0.956863" />
+        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
+        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+    </Level>
+    <Level Value="1"> 
+        <Color Red="0.011765" Green="1.0" Blue="0.741176" />
+        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
+        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+    </Level>
+    <Level Value="2">
+        <Color Red="0.807843" Green="1.0" Blue="0.0" />
+        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
+        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+    </Level>
 </GameData>

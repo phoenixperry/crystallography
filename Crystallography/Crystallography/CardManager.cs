@@ -157,7 +157,7 @@ namespace Crystallography
 		public CardCrystallonEntity spawn( float pX, float pY ) {
 			var ss = SpriteSingleton.getInstance();
 			CardCrystallonEntity card = new CardCrystallonEntity(_scene, _physics, ss.Get("TopSolid").TextureInfo, ss.Get ("TopSolid").TileIndex2D, 
-			                                _physics.SceneShapes[0]); //, currentLevelData[0]);
+			                                _physics.SceneShapes[0]);
 			card.setPosition( pX, pY );
 			card.addToScene();
 			availableCards.Add(card);

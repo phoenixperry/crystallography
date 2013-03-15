@@ -56,7 +56,7 @@ namespace Crystallography
 		public CardCrystallonEntity (Scene pScene, GamePhysics pGamePhysics, 
 		                             TextureInfo pTextureInfo, Vector2i pTileIndex2D, PhysicsShape pShape)
 													: base(pScene, pGamePhysics, pTextureInfo, pTileIndex2D, pShape) {
-			_sprite.Scale/=4f;
+			_sprite.Scale/=3f;
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 		}
 		
