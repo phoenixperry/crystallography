@@ -15,6 +15,15 @@ namespace Crystallography
 	
 		public TextureInfo _textureInfo;
 		public Texture2D _texture;
+		
+		public TextureInfo _glitchInfo; 
+		public Texture2D _glitchTexture; 
+		
+		public TextureInfo _fallInfo; 
+		public TextureInfo _fallTexture; 
+		
+		
+		
 		private System.Collections.Generic.Dictionary<string, Sce.PlayStation.HighLevel.GameEngine2D.Base.Vector2i> _sprites;  
 		private static SpriteSingleton instance; 
 		private static bool isOkToCreate = false;
@@ -39,7 +48,24 @@ namespace Crystallography
 						Y1 = (int)sprite.Attribute ("y"),
 		      			Height = (int)sprite.Attribute ("h"),
 		      			Width = (int)sprite.Attribute("w")
-		     	};
+
+				///////////////////////////////////////////////
+				FileStream glitchStream = File.OpenRead("/Application/assets/images/gamePieces.xml");
+				StreamReader fileStreamReader = new StreamReader(fileStream);
+				string xml = fileStreamReader.ReadToEnd();
+				fileStreamReader.Close();
+				fileStream.Close();
+				XDocument doc = XDocument.Parse(xml);
+			
+				var lines = from sprite in doc.Root.Elements("sprite")
+					select new {
+						Name = sprite.Attribute("n").Value,
+						X1 = (int)sprite.Attribute ("x"),
+						Y1 = (int)sprite.Attribute ("y"),
+		      			Height = (int)sprite.Attribute ("h"),
+		      			Width = (int)sprite.Attribute("w")
+				
+				};
 		   		
    				_sprites = new Dictionary<string,Sce.PlayStation.HighLevel.GameEngine2D.Base.Vector2i>(); 
 	    		foreach(var curLine in lines)
