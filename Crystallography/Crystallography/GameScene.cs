@@ -109,12 +109,13 @@ namespace Crystallography
 		
         public override void Update ( float dt )
         {
+//			UISystem.Update( Touch.GetData(0) );
             base.Update (dt);
             
 			//INPUT UPDATE CALL
 			
 			
-			UISystem.Update( Touch.GetData(0) );
+			
 			InputManager.Instance.Update(dt);
 			
             //We don't need these, but sadly, the Simulate call does.
@@ -130,7 +131,7 @@ namespace Crystallography
 		public override void Draw ()
 		{
 			base.Draw ();
-			UISystem.Render();
+//			UISystem.Render();
 		}
 		
 		// METHODS -------------------------------------------------------------------------------------------------

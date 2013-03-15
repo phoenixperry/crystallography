@@ -12,6 +12,7 @@ namespace Crystallography.UI
     partial class MenuScene
     {
         Panel sceneBackgroundPanel;
+        ImageBox ImageBox_1;
         Button NewGameButton;
         Button LevelSelectButton;
         Button CreditsButton;
@@ -27,6 +28,8 @@ namespace Crystallography.UI
         {
             sceneBackgroundPanel = new Panel();
             sceneBackgroundPanel.Name = "sceneBackgroundPanel";
+            ImageBox_1 = new ImageBox();
+            ImageBox_1.Name = "ImageBox_1";
             NewGameButton = new Button();
             NewGameButton.Name = "NewGameButton";
             LevelSelectButton = new Button();
@@ -40,6 +43,10 @@ namespace Crystallography.UI
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+
+            // ImageBox_1
+            ImageBox_1.Image = null;
+            ImageBox_1.ImageScaleType = ImageScaleType.Center;
 
             // NewGameButton
             NewGameButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -63,6 +70,7 @@ namespace Crystallography.UI
 
             // MenuScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
+            this.RootWidget.AddChildLast(ImageBox_1);
             this.RootWidget.AddChildLast(NewGameButton);
             this.RootWidget.AddChildLast(LevelSelectButton);
             this.RootWidget.AddChildLast(CreditsButton);
@@ -87,6 +95,11 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.SetSize(544, 960);
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
+
+                    ImageBox_1.SetPosition(146, 158);
+                    ImageBox_1.SetSize(200, 200);
+                    ImageBox_1.Anchors = Anchors.None;
+                    ImageBox_1.Visible = true;
 
                     NewGameButton.SetPosition(329, 168);
                     NewGameButton.SetSize(214, 56);
@@ -123,6 +136,11 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.SetSize(960, 544);
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
+
+                    ImageBox_1.SetPosition(350, 35);
+                    ImageBox_1.SetSize(259, 473);
+                    ImageBox_1.Anchors = Anchors.Height;
+                    ImageBox_1.Visible = true;
 
                     NewGameButton.SetPosition(373, 92);
                     NewGameButton.SetSize(214, 56);

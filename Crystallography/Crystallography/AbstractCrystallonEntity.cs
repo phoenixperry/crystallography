@@ -14,6 +14,14 @@ namespace Crystallography
 		protected string _sound;
 		public Vector2 pickupLocation;
 		
+		// GET & SET ---------------------------------------------------------
+		
+		public System.Collections.Generic.List<Node> Children { get { return getNode ().Children; } }
+		
+		public Node Parent { get { return getNode ().Parent; } }
+		
+		public bool Visible { get { return getNode ().Visible; } set { getNode ().Visible = value; } }
+		
 		// CONSTRUCTORS--------------------
 		
 		/// <summary>

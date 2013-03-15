@@ -17,6 +17,8 @@ namespace Crystallography.UI
 		private int _displayScore;
 		private float _updateTimer;
 		
+		private float _displayTimer;
+		
 		public static event EventHandler<PauseEventArgs> PauseDetected;
 		public static event EventHandler QuitButtonPressDetected;
 		
@@ -28,6 +30,9 @@ namespace Crystallography.UI
 			// Set fonts to non-system font
 			ScoreLabelText.Font = FontManager.Instance.Get("Bariol", 25);
 			ScoreText.Font = FontManager.Instance.Get ("Bariol", 20, "Bold");
+			TimerSecondsText.Font = FontManager.Instance.Get ("Bariol", 20, "Bold");
+			TimerMinutesText.Font = FontManager.Instance.Get ("Bariol", 20, "Bold");
+			TimerSeparatorText.Font = FontManager.Instance.Get ("Bariol", 20, "Bold");
 			PauseMenuText.Font = FontManager.Instance.Get ("Bariol", 44);
 			ResumeButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
 			GiveUpButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
@@ -90,6 +95,11 @@ namespace Crystallography.UI
 		
 		protected override void OnUpdate (float elapsedTime)
 		{
+//			float dt = elapsedTime - _lastFrame;
+//			_lastFrame = elapsedTime;
+			if (GameScene.paused == false ) {
+				calculateTimer( elapsedTime );
+			}
 			base.OnUpdate (elapsedTime);
 			
 			if ( _score != _displayScore ) {
@@ -117,6 +127,14 @@ namespace Crystallography.UI
 		
 		// METHODS --------------------------------------------------------------------------
 		
+		private void calculateTimer(float elapsedTime) {
+			_displayTimer += elapsedTime/1000.0f;
+			var minutes = Math.Floor(_displayTimer/60.0f);
+			var seconds = _displayTimer - (60.0f * minutes);
+			TimerMinutesText.Text = minutes.ToString();
+			TimerSecondsText.Text = seconds.ToString("00.0");
+		}
+		
 		public void Pause( bool pOn ) {
 //			paused = pOn;
 			PauseMenu.Visible = pOn;
@@ -133,6 +151,7 @@ namespace Crystallography.UI
 		public void Reset () {
 			_score = 0;
 			_displayScore = 0;
+			_displayTimer = 0.0f;
 			_updateTimer = 0.0f;
 			ScoreText.Text = _displayScore.ToString();
 			NextLevelButton.Visible = false;
