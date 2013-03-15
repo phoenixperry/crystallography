@@ -41,6 +41,7 @@ namespace Crystallography
 		
         public GameScene ( int pCurrentLevel )
 		{
+			testAnimation();
 			Touch.GetData(0).Clear();
 			
 			background = new Crystallography.BG.CrystallonBackground();
@@ -58,9 +59,9 @@ namespace Crystallography
 			var sg = SelectionGroup.Instance;
 			sg.Reset( this );
 			sg.addToScene();
-
-			QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
 			
+			QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
+	
             // This is debug routine that will draw the physics bounding box around all physics bodies
             if(DEBUG_BOUNDINGBOXS)
             {
@@ -112,7 +113,6 @@ namespace Crystallography
             base.Update (dt);
             
 			//INPUT UPDATE CALL
-			
 			
 			UISystem.Update( Touch.GetData(0) );
 			InputManager.Instance.Update(dt);
@@ -193,9 +193,20 @@ namespace Crystallography
 			Director.Instance.ReplaceScene( new MenuSystemScene(false) );
 
 		}
-		
+
         ~GameScene(){
            // _pongBlipSoundPlayer.Dispose();
         }
-    }
+
+	public void testAnimation(){
+			
+			SpriteTile a = AnimationGlitchSpriteSingleton.getInstance().Get("1"); 
+	 		 a.Position = new Vector2(100,100); 
+ 			 //a.CenterSprite();
+			 //a.Scale = new Vector2(1,1);
+			this.AddChild(a);	
+			
+
+		}  
+	}
 }

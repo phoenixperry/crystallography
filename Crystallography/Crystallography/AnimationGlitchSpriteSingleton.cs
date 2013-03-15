@@ -11,7 +11,7 @@ using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
 namespace Crystallography
 {		 
-	public class SpriteSingleton {
+	public class AnimationGlitchSpriteSingleton {
 	
 		public TextureInfo _textureInfo;
 		public Texture2D _texture;
@@ -25,16 +25,16 @@ namespace Crystallography
 		
 		
 		private System.Collections.Generic.Dictionary<string, Sce.PlayStation.HighLevel.GameEngine2D.Base.Vector2i> _sprites;  
-		private static SpriteSingleton instance; 
+		private static AnimationGlitchSpriteSingleton instance; 
 		private static bool isOkToCreate = false;
 		public static int test=0; 
 		
 		// CONSTRUCTOR ---------------------------------------------------------------------------------------
 		
-		public SpriteSingleton () {
+		public AnimationGlitchSpriteSingleton () {
 			if(!isOkToCreate) Console.WriteLine (this + "is a singleton. Use get instance"); 
 			if(isOkToCreate){
-				FileStream fileStream = File.OpenRead("/Application/assets/images/gamePieces.xml");
+				FileStream fileStream = File.OpenRead("/Application/assets/animation/leftGlitch/leftOneLine.xml");
 				StreamReader fileStreamReader = new StreamReader(fileStream);
 				string xml = fileStreamReader.ReadToEnd();
 				fileStreamReader.Close();
@@ -47,7 +47,7 @@ namespace Crystallography
 						X1 = (int)sprite.Attribute ("x"),
 						Y1 = (int)sprite.Attribute ("y"),
 		      			Height = (int)sprite.Attribute ("h"),
-		      			Width = (int)sprite.Attribute("w")
+		      			Width = (int)sprite.Attribute("w"),
 			};
 		   		
    				_sprites = new Dictionary<string,Sce.PlayStation.HighLevel.GameEngine2D.Base.Vector2i>(); 
@@ -55,11 +55,12 @@ namespace Crystallography
 				{
 	    			_sprites.Add(curLine.Name,new Vector2i((curLine.X1/curLine.Width),(curLine.Y1/curLine.Height)));
 				//note if you add more than one line of sprites you must do this
-				// _sprites.Add(curLine.Name,new Vector2i((curLine.X1/curLine.Width),9-(curLine.Y1/curLine.Height))); 
+				// _sprites.Add(curLine.Name,new Vector2i((curLine.X1/curLine.Width),1-(curLine.Y1/curLine.Height))); 
 				//where 9 is the num of rows minus 1 to reverse the order :/ 
 	   			}
-   				_texture = new Texture2D("/Application/assets/images/gamePieces.png", false);
-   				_textureInfo = new TextureInfo(_texture,new Vector2i(9,1));
+   				_texture = new Texture2D("/Application/assets/animation/leftGlitch/leftOneLine.png", false);
+   				_textureInfo = new TextureInfo(_texture,new Vector2i(5,1));
+			
   
 			}
 	  		if(!isOkToCreate) {
@@ -69,10 +70,10 @@ namespace Crystallography
 		
 		// METHODS ----------------------------------------------------------------------------------------------
 		
-  		public static SpriteSingleton getInstance(){
+  		public static AnimationGlitchSpriteSingleton getInstance(){
 			if( instance ==null ) {
 				isOkToCreate = true; 
-				instance = new SpriteSingleton(); 
+				instance = new AnimationGlitchSpriteSingleton(); 
 				isOkToCreate = false; 
 //				test++;
 //				Console.WriteLine("Singleton instance created" + isOkToCreate + test);
@@ -83,22 +84,22 @@ namespace Crystallography
 		public Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile Get(int x, int y) {
 			var spriteTile = new SpriteTile(_textureInfo);
 		   	spriteTile.TileIndex2D = new Vector2i(x,y);
-		   	spriteTile.Quad.S = new Sce.PlayStation.Core.Vector2 (168,146);
+		   	spriteTile.Quad.S = new Sce.PlayStation.Core.Vector2 (146,168);
 		   	return spriteTile;
 		}
 
 		public Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile Get(string name) {
- 			return Get (_sprites[name].X, _sprites[name].Y);
+			return Get (_sprites[name].X, _sprites[name].Y);
 		}
 		
 		// DESRUCTOR ------------------------------------------------------------------------------------------
 		
-		~SpriteSingleton() {
-   			_texture.Dispose();
-   			_textureInfo.Dispose ();
-			_sprites.Clear();
-			_sprites = null;
-			instance = null;
+		~AnimationGlitchSpriteSingleton() {
+//   			_texture.Dispose();
+//   			_textureInfo.Dispose ();
+//			_sprites.Clear();
+//			_sprites = null;
+//			instance = null;
   		}
 	}
 }
