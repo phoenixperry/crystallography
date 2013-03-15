@@ -105,6 +105,7 @@
     <Compile Include="ui\ScorePopup.cs" />
     <Compile Include="AnimationFallSpriteSinleton.cs" />
     <Compile Include="AnimationGlitchSpriteSingleton.cs" />
+    <Compile Include="GlitchAnimation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

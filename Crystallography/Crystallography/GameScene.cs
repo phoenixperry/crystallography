@@ -37,11 +37,14 @@ namespace Crystallography
 		
 		public static bool paused { get; private set; }
 		
+		public GlitchAnimation ga; 
 		// CONSTRUCTOR ----------------------------------------------------------------------------------
 		
         public GameScene ( int pCurrentLevel )
 		{
-			testAnimation();
+			ga = new GlitchAnimation(); 
+			this.AddChild(ga); 
+			
 			Touch.GetData(0).Clear();
 			
 			background = new Crystallography.BG.CrystallonBackground();
@@ -200,15 +203,5 @@ namespace Crystallography
            // _pongBlipSoundPlayer.Dispose();
         }
 
-	public void testAnimation(){
-			
-			SpriteTile a = AnimationGlitchSpriteSingleton.getInstance().Get("1"); 
-	 		 a.Position = new Vector2(100,100); 
- 			 //a.CenterSprite();
-			 //a.Scale = new Vector2(1,1);
-			this.AddChild(a);	
-			
-
-		}  
 	}
 }
