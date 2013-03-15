@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Sce.PlayStation.Core;
+using Sce.PlayStation.Core.Environment;
+using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.HighLevel.UI; 
 using Sce.PlayStation.HighLevel.GameEngine2D; 
 namespace Crystallography
@@ -53,8 +56,20 @@ namespace Crystallography
 		public static void Main (string[] args)
 		{
 			Director.Initialize();
-            UISystem.Initialize(Director.Instance.GL.Context);
-            Director.Instance.RunWithScene( new MenuSystemScene(true) );
+			UISystem.Initialize(Director.Instance.GL.Context);
+			Director.Instance.RunWithScene( new MenuSystemScene(false), true );
+			
+			while( true ){
+				SystemEvents.CheckEvents();
+				UISystem.Update( Touch.GetData(0) );
+				Director.Instance.Update();
+				
+				Director.Instance.Render();
+				UISystem.Render();
+				
+				Director.Instance.GL.Context.SwapBuffers();
+				Director.Instance.PostSwap();
+			}
 		}
 	}
 }

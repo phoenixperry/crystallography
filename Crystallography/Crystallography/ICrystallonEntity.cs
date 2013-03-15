@@ -6,6 +6,12 @@ using Sce.PlayStation.HighLevel.Physics2D;
 namespace Crystallography
 {
 	public interface ICrystallonEntity {
+		System.Collections.Generic.List<Node> Children {get;}
+			
+		Node Parent {get;}
+		
+		bool Visible {get; set;}
+		
 		Node getNode();
 		
 		PhysicsBody getBody();

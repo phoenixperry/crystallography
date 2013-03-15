@@ -13,6 +13,9 @@ namespace Crystallography.UI
     {
         Label ScoreLabelText;
         Label ScoreText;
+        Label TimerSeparatorText;
+        Label TimerSecondsText;
+        Label TimerMinutesText;
         Panel Panel_1;
         Label PauseMenuText;
         Button ResumeButton;
@@ -31,6 +34,12 @@ namespace Crystallography.UI
             ScoreLabelText.Name = "ScoreLabelText";
             ScoreText = new Label();
             ScoreText.Name = "ScoreText";
+            TimerSeparatorText = new Label();
+            TimerSeparatorText.Name = "TimerSeparatorText";
+            TimerSecondsText = new Label();
+            TimerSecondsText.Name = "TimerSecondsText";
+            TimerMinutesText = new Label();
+            TimerMinutesText.Name = "TimerMinutesText";
             Panel_1 = new Panel();
             Panel_1.Name = "Panel_1";
             PauseMenuText = new Label();
@@ -54,11 +63,33 @@ namespace Crystallography.UI
             ScoreText.Font = new UIFont(FontAlias.System, 18, FontStyle.Regular);
             ScoreText.LineBreak = LineBreak.Character;
 
+            // TimerSeparatorText
+            TimerSeparatorText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+            TimerSeparatorText.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            TimerSeparatorText.TextTrimming = TextTrimming.None;
+            TimerSeparatorText.LineBreak = LineBreak.Character;
+            TimerSeparatorText.HorizontalAlignment = HorizontalAlignment.Center;
+
+            // TimerSecondsText
+            TimerSecondsText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+            TimerSecondsText.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            TimerSecondsText.TextTrimming = TextTrimming.None;
+            TimerSecondsText.LineBreak = LineBreak.Character;
+
+            // TimerMinutesText
+            TimerMinutesText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+            TimerMinutesText.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            TimerMinutesText.LineBreak = LineBreak.Character;
+            TimerMinutesText.HorizontalAlignment = HorizontalAlignment.Right;
+
             // Panel_1
             Panel_1.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
             Panel_1.Clip = true;
             Panel_1.AddChildLast(ScoreLabelText);
             Panel_1.AddChildLast(ScoreText);
+            Panel_1.AddChildLast(TimerSeparatorText);
+            Panel_1.AddChildLast(TimerSecondsText);
+            Panel_1.AddChildLast(TimerMinutesText);
 
             // PauseMenuText
             PauseMenuText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
@@ -115,6 +146,21 @@ namespace Crystallography.UI
                     ScoreText.Anchors = Anchors.None;
                     ScoreText.Visible = true;
 
+                    TimerSeparatorText.SetPosition(382, 508);
+                    TimerSeparatorText.SetSize(214, 36);
+                    TimerSeparatorText.Anchors = Anchors.None;
+                    TimerSeparatorText.Visible = true;
+
+                    TimerSecondsText.SetPosition(502, 508);
+                    TimerSecondsText.SetSize(214, 36);
+                    TimerSecondsText.Anchors = Anchors.None;
+                    TimerSecondsText.Visible = true;
+
+                    TimerMinutesText.SetPosition(262, 508);
+                    TimerMinutesText.SetSize(214, 36);
+                    TimerMinutesText.Anchors = Anchors.None;
+                    TimerMinutesText.Visible = true;
+
                     Panel_1.SetPosition(0, 444);
                     Panel_1.SetSize(100, 100);
                     Panel_1.Anchors = Anchors.None;
@@ -161,6 +207,21 @@ namespace Crystallography.UI
                     ScoreText.Anchors = Anchors.None;
                     ScoreText.Visible = true;
 
+                    TimerSeparatorText.SetPosition(476, -2);
+                    TimerSeparatorText.SetSize(26, 36);
+                    TimerSeparatorText.Anchors = Anchors.None;
+                    TimerSeparatorText.Visible = true;
+
+                    TimerSecondsText.SetPosition(490, -1);
+                    TimerSecondsText.SetSize(65, 36);
+                    TimerSecondsText.Anchors = Anchors.None;
+                    TimerSecondsText.Visible = true;
+
+                    TimerMinutesText.SetPosition(352, -1);
+                    TimerMinutesText.SetSize(135, 36);
+                    TimerMinutesText.Anchors = Anchors.None;
+                    TimerMinutesText.Visible = true;
+
                     Panel_1.SetPosition(0, 510);
                     Panel_1.SetSize(960, 34);
                     Panel_1.Anchors = Anchors.None;
@@ -201,6 +262,12 @@ namespace Crystallography.UI
             ScoreLabelText.Text = "score:";
 
             ScoreText.Text = "0123456789";
+
+            TimerSeparatorText.Text = ":";
+
+            TimerSecondsText.Text = "00.0";
+
+            TimerMinutesText.Text = "000";
 
             PauseMenuText.Text = "pause.";
 
