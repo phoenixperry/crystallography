@@ -17,7 +17,7 @@ namespace SpriteSheet
   public static void Main (string[] args)
   {
    Director.Initialize();
-   Director.Instance.GL.Context.SetClearColor(255,255,255,0);
+   Director.Instance.GL.Context.SetClearColor(0,0,0,0);
 
    walker = new Walker("walk.png","walk.xml");
 		Console.WriteLine("made"); 
