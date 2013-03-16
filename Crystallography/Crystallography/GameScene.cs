@@ -41,6 +41,8 @@ namespace Crystallography
 		
         public GameScene ( int pCurrentLevel )
 		{
+			var ga = new GlitchAnimation(); 
+			this.AddChild(ga); 
 			Touch.GetData(0).Clear();
 			
 			UISystem.SetScene( new Crystallography.UI.ScoreScene() );

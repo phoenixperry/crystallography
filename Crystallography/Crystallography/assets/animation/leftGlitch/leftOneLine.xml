@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:a0d364c0f9c04414f3bbe31f61db5611$ -->
+<!-- $TexturePacker:SmartUpdate:207120a312aeb93344d6525bea6a1707$ -->
 <!--Format:
 n  => name of the sprite
 x  => sprite x pos in texture
@@ -13,10 +13,10 @@ oW => sprite's original width (only available if trimmed)
 oH => sprite's original height (only available if trimmed)
 r => 'y' only set if sprite is rotated
 -->
-<TextureAtlas imagePath="leftOneLine.png" width="1024" height="256">
-    <sprite n="1" x="0" y="0" w="168" h="146"/>
-    <sprite n="2" x="168" y="0" w="168" h="146"/>
-    <sprite n="3" x="336" y="0" w="168" h="146"/>
-    <sprite n="4" x="504" y="0" w="168" h="146"/>
-    <sprite n="5" x="672" y="0" w="168" h="146"/>
+<TextureAtlas imagePath="leftOneLine.png" width="512" height="256">
+    <sprite n="1" x="354" y="2" w="86" h="146"/>
+    <sprite n="2" x="266" y="2" w="86" h="146"/>
+    <sprite n="3" x="178" y="2" w="86" h="146"/>
+    <sprite n="4" x="2" y="2" w="86" h="134"/>
+    <sprite n="5" x="90" y="2" w="86" h="146"/>
 </TextureAtlas>

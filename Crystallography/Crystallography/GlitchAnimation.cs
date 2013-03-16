@@ -29,7 +29,6 @@ namespace Crystallography
 			
 		}
 			public void testAnimation(){
-			
 			a = AnimationGlitchSpriteSingleton.getInstance().Get("1"); 
 	 		a.Position = new Vector2(100,100); 
 			a.CenterSprite(); 
@@ -46,6 +45,7 @@ namespace Crystallography
 					Console.WriteLine(spriteName); 
 					a.Pivot = new Vector2(0.5f, 0.5f); 
 					a.TileIndex2D = AnimationGlitchSpriteSingleton.getInstance().Get(spriteName).TileIndex2D;
+					Console.WriteLine(a.CalcSizeInPixels()); 
 					 
 					if(spriteOffset >= 5) {
 						glitchNow = !glitchNow; 
