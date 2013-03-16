@@ -61,7 +61,6 @@ namespace Crystallography
    				_texture = new Texture2D("/Application/assets/animation/leftGlitch/leftOneLine.png", false);
    				_textureInfo = new TextureInfo(_texture,new Vector2i(5,1));
 			
-  
 			}
 	  		if(!isOkToCreate) {
 				Console.WriteLine("this is a singleton. access via get Instance"); 

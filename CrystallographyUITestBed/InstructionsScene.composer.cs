@@ -39,6 +39,7 @@ namespace Crystallography.UI
 
             // PagePanel_1
             PagePanel_1.AddPage(new InstructionsPanel());
+            PagePanel_1.AddPage(new Instructions2());
 
             // InstructionsScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);

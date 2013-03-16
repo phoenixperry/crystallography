@@ -9,9 +9,8 @@ using Sce.PlayStation.HighLevel.UI;
 
 namespace Crystallography.UI
 {
-    partial class InstructionsPanel
+    partial class Instructions2
     {
-        Button StartButton;
 
         private void InitializeWidget()
         {
@@ -20,24 +19,10 @@ namespace Crystallography.UI
 
         private void InitializeWidget(LayoutOrientation orientation)
         {
-            StartButton = new Button();
-            StartButton.Name = "StartButton";
 
-            // StartButton
-            StartButton.IconImage = new ImageAsset("/Application/assets/images/UI/play.png");
-            StartButton.Style = ButtonStyle.Custom;
-            StartButton.CustomImage = new CustomButtonImageSettings()
-            {
-                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/play.png"),
-                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/playOVer.png"),
-                BackgroundDisabledImage = null,
-                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
-            };
-
-            // InstructionsPanel
-            this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            // Instructions2
+            this.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
             this.Clip = true;
-            this.AddChildLast(StartButton);
 
             SetWidgetLayout(orientation);
 
@@ -50,24 +35,14 @@ namespace Crystallography.UI
             switch (orientation)
             {
                 case LayoutOrientation.Vertical:
-                    this.SetSize(425, 924);
+                    this.SetSize(544, 960);
                     this.Anchors = Anchors.None;
-
-                    StartButton.SetPosition(688, 346);
-                    StartButton.SetSize(214, 56);
-                    StartButton.Anchors = Anchors.None;
-                    StartButton.Visible = true;
 
                     break;
 
                 default:
-                    this.SetSize(924, 425);
+                    this.SetSize(960, 544);
                     this.Anchors = Anchors.None;
-
-                    StartButton.SetPosition(643, 343);
-                    StartButton.SetSize(258, 63);
-                    StartButton.Anchors = Anchors.None;
-                    StartButton.Visible = true;
 
                     break;
             }

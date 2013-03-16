@@ -17,7 +17,6 @@ namespace Crystallography.UI
         Button LevelSelectButton;
         Button CreditsButton;
         Button OptionsButton;
-        ImageBox ImageBox_1;
 
         private void InitializeWidget()
         {
@@ -38,35 +37,57 @@ namespace Crystallography.UI
             CreditsButton.Name = "CreditsButton";
             OptionsButton = new Button();
             OptionsButton.Name = "OptionsButton";
-            ImageBox_1 = new ImageBox();
-            ImageBox_1.Name = "ImageBox_1";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
 
             // ImageBox_1
-            ImageBox_1.Image = null;
-            ImageBox_1.ImageScaleType = ImageScaleType.Center;
+            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/menuButtonBackground.png");
+            ImageBox_1.ImageScaleType = ImageScaleType.AspectInside;
 
             // NewGameButton
-            NewGameButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            NewGameButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            NewGameButton.IconImage = null;
+            NewGameButton.Style = ButtonStyle.Custom;
+            NewGameButton.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/play.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/playOVer.png"),
+                BackgroundDisabledImage = new ImageAsset("/Application/assets/system_assets/button_9patch_disable.png"),
+                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+            };
 
             // LevelSelectButton
-            LevelSelectButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            LevelSelectButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            LevelSelectButton.IconImage = null;
+            LevelSelectButton.Style = ButtonStyle.Custom;
+            LevelSelectButton.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/selectlevel.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/selectLevelOver.png"),
+                BackgroundDisabledImage = new ImageAsset("/Application/assets/system_assets/button_9patch_disable.png"),
+                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+            };
 
             // CreditsButton
-            CreditsButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            CreditsButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            CreditsButton.IconImage = null;
+            CreditsButton.Style = ButtonStyle.Custom;
+            CreditsButton.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/quit.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/quitOver.png"),
+                BackgroundDisabledImage = null,
+                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+            };
 
             // OptionsButton
-            OptionsButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            OptionsButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
-
-            // ImageBox_1
-            ImageBox_1.Image = null;
-            ImageBox_1.ImageScaleType = ImageScaleType.Center;
+            OptionsButton.IconImage = null;
+            OptionsButton.Style = ButtonStyle.Custom;
+            OptionsButton.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/instructions.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/instructionsOver.png"),
+                BackgroundDisabledImage = null,
+                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+            };
 
             // MenuScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
@@ -75,7 +96,6 @@ namespace Crystallography.UI
             this.RootWidget.AddChildLast(LevelSelectButton);
             this.RootWidget.AddChildLast(CreditsButton);
             this.RootWidget.AddChildLast(OptionsButton);
-            this.RootWidget.AddChildLast(ImageBox_1);
 
             SetWidgetLayout(orientation);
 
@@ -96,7 +116,7 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    ImageBox_1.SetPosition(146, 158);
+                    ImageBox_1.SetPosition(400, 71);
                     ImageBox_1.SetSize(200, 200);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
@@ -121,11 +141,6 @@ namespace Crystallography.UI
                     OptionsButton.Anchors = Anchors.None;
                     OptionsButton.Visible = true;
 
-                    ImageBox_1.SetPosition(146, 158);
-                    ImageBox_1.SetSize(200, 200);
-                    ImageBox_1.Anchors = Anchors.None;
-                    ImageBox_1.Visible = true;
-
                     break;
 
                 default:
@@ -137,35 +152,30 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    ImageBox_1.SetPosition(350, 35);
-                    ImageBox_1.SetSize(259, 473);
-                    ImageBox_1.Anchors = Anchors.Height;
+                    ImageBox_1.SetPosition(351, 34);
+                    ImageBox_1.SetSize(258, 478);
+                    ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    NewGameButton.SetPosition(373, 92);
-                    NewGameButton.SetSize(214, 56);
+                    NewGameButton.SetPosition(351, 109);
+                    NewGameButton.SetSize(258, 63);
                     NewGameButton.Anchors = Anchors.None;
                     NewGameButton.Visible = true;
 
-                    LevelSelectButton.SetPosition(373, 194);
-                    LevelSelectButton.SetSize(214, 56);
+                    LevelSelectButton.SetPosition(351, 197);
+                    LevelSelectButton.SetSize(258, 63);
                     LevelSelectButton.Anchors = Anchors.None;
                     LevelSelectButton.Visible = true;
 
-                    CreditsButton.SetPosition(373, 398);
-                    CreditsButton.SetSize(214, 56);
+                    CreditsButton.SetPosition(351, 369);
+                    CreditsButton.SetSize(258, 63);
                     CreditsButton.Anchors = Anchors.None;
                     CreditsButton.Visible = true;
 
-                    OptionsButton.SetPosition(373, 294);
-                    OptionsButton.SetSize(214, 56);
+                    OptionsButton.SetPosition(351, 283);
+                    OptionsButton.SetSize(258, 63);
                     OptionsButton.Anchors = Anchors.None;
                     OptionsButton.Visible = true;
-
-                    ImageBox_1.SetPosition(350, 27);
-                    ImageBox_1.SetSize(259, 473);
-                    ImageBox_1.Anchors = Anchors.Height;
-                    ImageBox_1.Visible = true;
 
                     break;
             }
@@ -174,14 +184,6 @@ namespace Crystallography.UI
 
         public void UpdateLanguage()
         {
-            NewGameButton.Text = "New Game";
-
-            LevelSelectButton.Text = "Level Select";
-
-            CreditsButton.Text = "Credits";
-
-            OptionsButton.Text = "Options";
-
             this.Title = "MenuScene";
         }
 

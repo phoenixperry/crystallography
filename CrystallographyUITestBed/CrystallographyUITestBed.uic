@@ -788,6 +788,928 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
+              <X>44.761495562293931</X>
+              <Y>112.5412354617672</Y>
+              <Width>885</Width>
+              <Height>344</Height>
+              <Visible>true</Visible>
+              <Anchors>None</Anchors>
+            </LayoutProperty>
+            <LayoutProperty>
+              <X>36</X>
+              <Y>154.12814703968542</Y>
+              <Width>100</Width>
+              <Height>50</Height>
+              <Visible>true</Visible>
+              <Anchors>None</Anchors>
+            </LayoutProperty>
+          </LayoutProperty>
+          <Property i:type="PagePanelProperty">
+            <Effect>FadeInEffect</Effect>
+            <OwnerNode z:Ref="i15" />
+            <VariableName>PagePanel_1</VariableName>
+            <Panels>
+              <ObjectTreeNode z:Id="i16">
+                <Parent z:Ref="i1" />
+                <Nodes>
+                  <UICNode z:Id="i17" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i16" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>14.612095671392808</X>
+                        <Y>228.34030244248663</Y>
+                        <Width>389</Width>
+                        <Height>50</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>20</X>
+                        <Y>188</Y>
+                        <Width>214</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="LabelProperty">
+                      <Effect>None</Effect>
+                      <OwnerNode z:Ref="i17" />
+                      <VariableName>MargaretText</VariableName>
+                      <H_Alignment>Left</H_Alignment>
+                      <HasTextShadow>false</HasTextShadow>
+                      <LineBreaks>Character</LineBreaks>
+                      <Text>ben johnson</Text>
+                      <TextAlpha>100</TextAlpha>
+                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                        <d12p1:A>255</d12p1:A>
+                        <d12p1:B>246</d12p1:B>
+                        <d12p1:G>226</d12p1:G>
+                        <d12p1:R>247</d12p1:R>
+                        <d12p1:ScA>1</d12p1:ScA>
+                        <d12p1:ScB>0.921581864</d12p1:ScB>
+                        <d12p1:ScG>0.7605245</d12p1:ScG>
+                        <d12p1:ScR>0.9301109</d12p1:ScR>
+                      </TextColor>
+                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:FontFamily>System</d12p1:FontFamily>
+                        <d12p1:FontSize>36</d12p1:FontSize>
+                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
+                      </TextFont>
+                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                      <TextTrimming>EllipsisCharacter</TextTrimming>
+                      <V_Alignment>Top</V_Alignment>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>Label</WidgetType>
+                    <ID>1142286759</ID>
+                    <ZIndex>1</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                  <UICNode z:Id="i18" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i16" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>14.612095671392808</X>
+                        <Y>65</Y>
+                        <Width>876</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>32</X>
+                        <Y>99</Y>
+                        <Width>214</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="LabelProperty">
+                      <Effect>None</Effect>
+                      <OwnerNode z:Ref="i18" />
+                      <VariableName>Label_1</VariableName>
+                      <H_Alignment>Left</H_Alignment>
+                      <HasTextShadow>false</HasTextShadow>
+                      <LineBreaks>Character</LineBreaks>
+                      <Text>Game Designer, System Design, Level Design, Lead Engineer  </Text>
+                      <TextAlpha>100</TextAlpha>
+                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                        <d12p1:A>255</d12p1:A>
+                        <d12p1:B>19</d12p1:B>
+                        <d12p1:G>19</d12p1:G>
+                        <d12p1:R>229</d12p1:R>
+                        <d12p1:ScA>1</d12p1:ScA>
+                        <d12p1:ScB>0.006512091</d12p1:ScB>
+                        <d12p1:ScG>0.006512091</d12p1:ScG>
+                        <d12p1:ScR>0.7835378</d12p1:ScR>
+                      </TextColor>
+                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:FontFamily>System</d12p1:FontFamily>
+                        <d12p1:FontSize>16</d12p1:FontSize>
+                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
+                      </TextFont>
+                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                      <TextTrimming>EllipsisCharacter</TextTrimming>
+                      <V_Alignment>Middle</V_Alignment>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>Label</WidgetType>
+                    <ID>2116470799</ID>
+                    <ZIndex>2</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                  <UICNode z:Id="i19" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i16" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>14.612095671392808</X>
+                        <Y>167.50790326521246</Y>
+                        <Width>658</Width>
+                        <Height>46</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>32.763610822907935</X>
+                        <Y>213.34030244248652</Y>
+                        <Width>214</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="LabelProperty">
+                      <Effect>None</Effect>
+                      <OwnerNode z:Ref="i19" />
+                      <VariableName>Label_2</VariableName>
+                      <H_Alignment>Left</H_Alignment>
+                      <HasTextShadow>false</HasTextShadow>
+                      <LineBreaks>Character</LineBreaks>
+                      <Text>Game Designer, Creative Director, Developer, User Interface Design, User Testing</Text>
+                      <TextAlpha>100</TextAlpha>
+                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                        <d12p1:A>255</d12p1:A>
+                        <d12p1:B>226</d12p1:B>
+                        <d12p1:G>226</d12p1:G>
+                        <d12p1:R>41</d12p1:R>
+                        <d12p1:ScA>1</d12p1:ScA>
+                        <d12p1:ScB>0.7605245</d12p1:ScB>
+                        <d12p1:ScG>0.7605245</d12p1:ScG>
+                        <d12p1:ScR>0.0221738853</d12p1:ScR>
+                      </TextColor>
+                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:FontFamily>System</d12p1:FontFamily>
+                        <d12p1:FontSize>16</d12p1:FontSize>
+                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
+                      </TextFont>
+                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                      <TextTrimming>EllipsisCharacter</TextTrimming>
+                      <V_Alignment>Middle</V_Alignment>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>Label</WidgetType>
+                    <ID>610198286</ID>
+                    <ZIndex>3</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                  <UICNode z:Id="i20" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i16" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>14.612095671392808</X>
+                        <Y>266.93939393939365</Y>
+                        <Width>433</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>44.150748296881716</X>
+                        <Y>228.24242424242431</Y>
+                        <Width>214</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="LabelProperty">
+                      <Effect>None</Effect>
+                      <OwnerNode z:Ref="i20" />
+                      <VariableName>Label_3</VariableName>
+                      <H_Alignment>Left</H_Alignment>
+                      <HasTextShadow>false</HasTextShadow>
+                      <LineBreaks>Character</LineBreaks>
+                      <Text>Game Designer, Audio design, Level Design</Text>
+                      <TextAlpha>100</TextAlpha>
+                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                        <d12p1:A>255</d12p1:A>
+                        <d12p1:B>244</d12p1:B>
+                        <d12p1:G>234</d12p1:G>
+                        <d12p1:R>244</d12p1:R>
+                        <d12p1:ScA>1</d12p1:ScA>
+                        <d12p1:ScB>0.9046612</d12p1:ScB>
+                        <d12p1:ScG>0.822785735</d12p1:ScG>
+                        <d12p1:ScR>0.9046612</d12p1:ScR>
+                      </TextColor>
+                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:FontFamily>System</d12p1:FontFamily>
+                        <d12p1:FontSize>16</d12p1:FontSize>
+                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
+                      </TextFont>
+                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                      <TextTrimming>EllipsisCharacter</TextTrimming>
+                      <V_Alignment>Middle</V_Alignment>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>Label</WidgetType>
+                    <ID>112971436</ID>
+                    <ZIndex>4</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                  <UICNode z:Id="i21" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i16" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>14.612095671392808</X>
+                        <Y>39</Y>
+                        <Width>214</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>32.763610822907935</X>
+                        <Y>49.454545454545553</Y>
+                        <Width>214</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="LabelProperty">
+                      <Effect>None</Effect>
+                      <OwnerNode z:Ref="i21" />
+                      <VariableName>Label_4</VariableName>
+                      <H_Alignment>Left</H_Alignment>
+                      <HasTextShadow>false</HasTextShadow>
+                      <LineBreaks>Character</LineBreaks>
+                      <Text>ben johnson</Text>
+                      <TextAlpha>100</TextAlpha>
+                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                        <d12p1:A>255</d12p1:A>
+                        <d12p1:B>19</d12p1:B>
+                        <d12p1:G>19</d12p1:G>
+                        <d12p1:R>229</d12p1:R>
+                        <d12p1:ScA>1</d12p1:ScA>
+                        <d12p1:ScB>0.006512091</d12p1:ScB>
+                        <d12p1:ScG>0.006512091</d12p1:ScG>
+                        <d12p1:ScR>0.7835378</d12p1:ScR>
+                      </TextColor>
+                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:FontFamily>System</d12p1:FontFamily>
+                        <d12p1:FontSize>25</d12p1:FontSize>
+                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
+                      </TextFont>
+                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                      <TextTrimming>EllipsisCharacter</TextTrimming>
+                      <V_Alignment>Middle</V_Alignment>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>Label</WidgetType>
+                    <ID>801678651</ID>
+                    <ZIndex>5</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                  <UICNode z:Id="i22" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i16" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>13</X>
+                        <Y>144</Y>
+                        <Width>392</Width>
+                        <Height>37</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>20</X>
+                        <Y>188</Y>
+                        <Width>214</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="LabelProperty">
+                      <Effect>None</Effect>
+                      <OwnerNode z:Ref="i22" />
+                      <VariableName>PhoenixText</VariableName>
+                      <H_Alignment>Left</H_Alignment>
+                      <HasTextShadow>false</HasTextShadow>
+                      <LineBreaks>Character</LineBreaks>
+                      <Text>phoenix perry</Text>
+                      <TextAlpha>100</TextAlpha>
+                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                        <d12p1:A>255</d12p1:A>
+                        <d12p1:B>226</d12p1:B>
+                        <d12p1:G>226</d12p1:G>
+                        <d12p1:R>41</d12p1:R>
+                        <d12p1:ScA>1</d12p1:ScA>
+                        <d12p1:ScB>0.7605245</d12p1:ScB>
+                        <d12p1:ScG>0.7605245</d12p1:ScG>
+                        <d12p1:ScR>0.0221738853</d12p1:ScR>
+                      </TextColor>
+                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:FontFamily>System</d12p1:FontFamily>
+                        <d12p1:FontSize>26</d12p1:FontSize>
+                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
+                      </TextFont>
+                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                      <TextTrimming>EllipsisCharacter</TextTrimming>
+                      <V_Alignment>Top</V_Alignment>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>Label</WidgetType>
+                    <ID>1142286759</ID>
+                    <ZIndex>6</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                  <UICNode z:Id="i23" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i16" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>169</X>
+                        <Y>41.5</Y>
+                        <Width>73</Width>
+                        <Height>31</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>91.76787643221769</X>
+                        <Y>-51.333333333333343</Y>
+                        <Width>200</Width>
+                        <Height>200</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="ImageBoxProperty">
+                      <Effect>None</Effect>
+                      <OwnerNode z:Ref="i23" />
+                      <VariableName>ImageBox_1</VariableName>
+                      <Image>images\UI\icons\tie.png</Image>
+                      <NinePatchMargin xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:ButtomRowHeight>0</d12p1:ButtomRowHeight>
+                        <d12p1:LeftColumnWidth>0</d12p1:LeftColumnWidth>
+                        <d12p1:RightColumnWidth>0</d12p1:RightColumnWidth>
+                        <d12p1:TopRowHeight>0</d12p1:TopRowHeight>
+                      </NinePatchMargin>
+                      <ScaleType>Center</ScaleType>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>ImageBox</WidgetType>
+                    <ID>757687309</ID>
+                    <ZIndex>7</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                  <UICNode z:Id="i24" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i16" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>253.61209567139281</X>
+                        <Y>113</Y>
+                        <Width>197</Width>
+                        <Height>62</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>197.83203553241856</X>
+                        <Y>65</Y>
+                        <Width>200</Width>
+                        <Height>200</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="ImageBoxProperty">
+                      <Effect>None</Effect>
+                      <OwnerNode z:Ref="i24" />
+                      <VariableName>ImageBox_2</VariableName>
+                      <Image>images\UI\icons\glasses.png</Image>
+                      <NinePatchMargin xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:ButtomRowHeight>0</d12p1:ButtomRowHeight>
+                        <d12p1:LeftColumnWidth>0</d12p1:LeftColumnWidth>
+                        <d12p1:RightColumnWidth>0</d12p1:RightColumnWidth>
+                        <d12p1:TopRowHeight>0</d12p1:TopRowHeight>
+                      </NinePatchMargin>
+                      <ScaleType>Center</ScaleType>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>ImageBox</WidgetType>
+                    <ID>499092901</ID>
+                    <ZIndex>8</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                  <UICNode z:Id="i25" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i16" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>340</X>
+                        <Y>229</Y>
+                        <Width>54</Width>
+                        <Height>62</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>253.61209567139281</X>
+                        <Y>144</Y>
+                        <Width>200</Width>
+                        <Height>200</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="ImageBoxProperty">
+                      <Effect>None</Effect>
+                      <OwnerNode z:Ref="i25" />
+                      <VariableName>ImageBox_3</VariableName>
+                      <Image>images\UI\icons\journal.png</Image>
+                      <NinePatchMargin xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:ButtomRowHeight>0</d12p1:ButtomRowHeight>
+                        <d12p1:LeftColumnWidth>0</d12p1:LeftColumnWidth>
+                        <d12p1:RightColumnWidth>0</d12p1:RightColumnWidth>
+                        <d12p1:TopRowHeight>0</d12p1:TopRowHeight>
+                      </NinePatchMargin>
+                      <ScaleType>Center</ScaleType>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>ImageBox</WidgetType>
+                    <ID>1221591355</ID>
+                    <ZIndex>9</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                  <UICNode z:Id="i26" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i16" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>14.612095671392808</X>
+                        <Y>242</Y>
+                        <Width>301</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>17.612095671392808</X>
+                        <Y>242.34030244248663</Y>
+                        <Width>214</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="LabelProperty">
+                      <Effect>None</Effect>
+                      <OwnerNode z:Ref="i26" />
+                      <VariableName>Label_5</VariableName>
+                      <H_Alignment>Left</H_Alignment>
+                      <HasTextShadow>false</HasTextShadow>
+                      <LineBreaks>Character</LineBreaks>
+                      <Text>margaret schedel</Text>
+                      <TextAlpha>100</TextAlpha>
+                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                        <d12p1:A>255</d12p1:A>
+                        <d12p1:B>244</d12p1:B>
+                        <d12p1:G>234</d12p1:G>
+                        <d12p1:R>244</d12p1:R>
+                        <d12p1:ScA>1</d12p1:ScA>
+                        <d12p1:ScB>0.9046612</d12p1:ScB>
+                        <d12p1:ScG>0.822785735</d12p1:ScG>
+                        <d12p1:ScR>0.9046612</d12p1:ScR>
+                      </TextColor>
+                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:FontFamily>System</d12p1:FontFamily>
+                        <d12p1:FontSize>25</d12p1:FontSize>
+                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
+                      </TextFont>
+                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                      <TextTrimming>EllipsisCharacter</TextTrimming>
+                      <V_Alignment>Middle</V_Alignment>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>Label</WidgetType>
+                    <ID>1446577485</ID>
+                    <ZIndex>10</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                </Nodes>
+                <LayoutProperty>
+                  <LayoutProperty>
+                    <X>0</X>
+                    <Y>0</Y>
+                    <Width>885</Width>
+                    <Height>344</Height>
+                    <Visible>true</Visible>
+                    <Anchors>None</Anchors>
+                  </LayoutProperty>
+                  <LayoutProperty>
+                    <X>0</X>
+                    <Y>0</Y>
+                    <Width>544</Width>
+                    <Height>960</Height>
+                    <Visible>true</Visible>
+                    <Anchors>None</Anchors>
+                  </LayoutProperty>
+                </LayoutProperty>
+                <Property i:type="PanelProperty">
+                  <Effect>None</Effect>
+                  <OwnerNode z:Ref="i16" />
+                  <VariableName>CreditsPanel</VariableName>
+                  <BackgroundAlpha>100</BackgroundAlpha>
+                  <BackgroundColor xmlns:d10p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                    <d10p1:A>255</d10p1:A>
+                    <d10p1:B>0</d10p1:B>
+                    <d10p1:G>0</d10p1:G>
+                    <d10p1:R>0</d10p1:R>
+                    <d10p1:ScA>1</d10p1:ScA>
+                    <d10p1:ScB>0</d10p1:ScB>
+                    <d10p1:ScG>0</d10p1:ScG>
+                    <d10p1:ScR>0</d10p1:ScR>
+                  </BackgroundColor>
+                </Property>
+                <IsRoot>true</IsRoot>
+                <PivotPos>LeftTop</PivotPos>
+                <WidgetType>Panel</WidgetType>
+                <ID>1898721010</ID>
+                <ZIndex>0</ZIndex>
+                <LayoutAssistInfo>
+                  <SnapGuidesList>
+                    <ArrayOfSnapGuide />
+                    <ArrayOfSnapGuide />
+                  </SnapGuidesList>
+                  <OwnerNode z:Ref="i16" />
+                </LayoutAssistInfo>
+                <IsHideInLayout>false</IsHideInLayout>
+                <IsLockInLayout>false</IsLockInLayout>
+              </ObjectTreeNode>
+              <ObjectTreeNode z:Id="i27">
+                <Parent z:Ref="i1" />
+                <Nodes>
+                  <UICNode z:Id="i28" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i27" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>32</X>
+                        <Y>49</Y>
+                        <Width>389</Width>
+                        <Height>50</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>20</X>
+                        <Y>188</Y>
+                        <Width>214</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="LabelProperty">
+                      <Effect>None</Effect>
+                      <OwnerNode z:Ref="i28" />
+                      <VariableName>ThanksText</VariableName>
+                      <H_Alignment>Left</H_Alignment>
+                      <HasTextShadow>false</HasTextShadow>
+                      <LineBreaks>Character</LineBreaks>
+                      <Text>thanks to</Text>
+                      <TextAlpha>100</TextAlpha>
+                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                        <d12p1:A>255</d12p1:A>
+                        <d12p1:B>19</d12p1:B>
+                        <d12p1:G>19</d12p1:G>
+                        <d12p1:R>229</d12p1:R>
+                        <d12p1:ScA>1</d12p1:ScA>
+                        <d12p1:ScB>0.006512091</d12p1:ScB>
+                        <d12p1:ScG>0.006512091</d12p1:ScG>
+                        <d12p1:ScR>0.7835378</d12p1:ScR>
+                      </TextColor>
+                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:FontFamily>System</d12p1:FontFamily>
+                        <d12p1:FontSize>36</d12p1:FontSize>
+                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
+                      </TextFont>
+                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                      <TextTrimming>EllipsisCharacter</TextTrimming>
+                      <V_Alignment>Top</V_Alignment>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>Label</WidgetType>
+                    <ID>0</ID>
+                    <ZIndex>0</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                  <UICNode z:Id="i29" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i27" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>32</X>
+                        <Y>99</Y>
+                        <Width>821</Width>
+                        <Height>40</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>32</X>
+                        <Y>129.72708117180844</Y>
+                        <Width>214</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="LabelProperty">
+                      <Effect>FadeInEffect</Effect>
+                      <OwnerNode z:Ref="i29" />
+                      <VariableName>ThanksNamesText</VariableName>
+                      <H_Alignment>Left</H_Alignment>
+                      <HasTextShadow>false</HasTextShadow>
+                      <LineBreaks>Character</LineBreaks>
+                      <Text>Indiecade, Matt Parker, Nicolas Fortugno, Jim Wallace and the PSM team. </Text>
+                      <TextAlpha>100</TextAlpha>
+                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                        <d12p1:A>255</d12p1:A>
+                        <d12p1:B>244</d12p1:B>
+                        <d12p1:G>234</d12p1:G>
+                        <d12p1:R>244</d12p1:R>
+                        <d12p1:ScA>1</d12p1:ScA>
+                        <d12p1:ScB>0.9046612</d12p1:ScB>
+                        <d12p1:ScG>0.822785735</d12p1:ScG>
+                        <d12p1:ScR>0.9046612</d12p1:ScR>
+                      </TextColor>
+                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:FontFamily>System</d12p1:FontFamily>
+                        <d12p1:FontSize>25</d12p1:FontSize>
+                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
+                      </TextFont>
+                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                      <TextTrimming>EllipsisCharacter</TextTrimming>
+                      <V_Alignment>Top</V_Alignment>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>Label</WidgetType>
+                    <ID>1544718903</ID>
+                    <ZIndex>0</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                  <UICNode z:Id="i30" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i27" />
+                    <Nodes />
+                    <LayoutProperty>
+                      <LayoutProperty>
+                        <X>32</X>
+                        <Y>154</Y>
+                        <Width>801</Width>
+                        <Height>53</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                      <LayoutProperty>
+                        <X>32</X>
+                        <Y>154</Y>
+                        <Width>214</Width>
+                        <Height>36</Height>
+                        <Visible>true</Visible>
+                        <Anchors>None</Anchors>
+                      </LayoutProperty>
+                    </LayoutProperty>
+                    <Property i:type="LabelProperty">
+                      <Effect>FadeInEffect</Effect>
+                      <OwnerNode z:Ref="i30" />
+                      <VariableName>Label_1</VariableName>
+                      <H_Alignment>Left</H_Alignment>
+                      <HasTextShadow>false</HasTextShadow>
+                      <LineBreaks>Character</LineBreaks>
+                      <Text>open source fonts by ismael gonzález gonzález &amp; raúl garcía del pomar</Text>
+                      <TextAlpha>100</TextAlpha>
+                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                        <d12p1:A>255</d12p1:A>
+                        <d12p1:B>250</d12p1:B>
+                        <d12p1:G>234</d12p1:G>
+                        <d12p1:R>250</d12p1:R>
+                        <d12p1:ScA>1</d12p1:ScA>
+                        <d12p1:ScB>0.9559733</d12p1:ScB>
+                        <d12p1:ScG>0.822785735</d12p1:ScG>
+                        <d12p1:ScR>0.9559733</d12p1:ScR>
+                      </TextColor>
+                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:FontFamily>System</d12p1:FontFamily>
+                        <d12p1:FontSize>14</d12p1:FontSize>
+                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
+                      </TextFont>
+                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
+                      <TextTrimming>EllipsisCharacter</TextTrimming>
+                      <V_Alignment>Middle</V_Alignment>
+                    </Property>
+                    <IsRoot>false</IsRoot>
+                    <PivotPos>LeftTop</PivotPos>
+                    <WidgetType>Label</WidgetType>
+                    <ID>1267791319</ID>
+                    <ZIndex>0</ZIndex>
+                    <LayoutAssistInfo>
+                      <SnapGuidesList>
+                        <ArrayOfSnapGuide />
+                        <ArrayOfSnapGuide />
+                      </SnapGuidesList>
+                    </LayoutAssistInfo>
+                    <IsHideInLayout>false</IsHideInLayout>
+                    <IsLockInLayout>false</IsLockInLayout>
+                  </UICNode>
+                </Nodes>
+                <LayoutProperty>
+                  <LayoutProperty>
+                    <X>0</X>
+                    <Y>0</Y>
+                    <Width>885</Width>
+                    <Height>344</Height>
+                    <Visible>true</Visible>
+                    <Anchors>None</Anchors>
+                  </LayoutProperty>
+                  <LayoutProperty>
+                    <X>0</X>
+                    <Y>0</Y>
+                    <Width>544</Width>
+                    <Height>960</Height>
+                    <Visible>true</Visible>
+                    <Anchors>None</Anchors>
+                  </LayoutProperty>
+                </LayoutProperty>
+                <Property i:type="PanelProperty">
+                  <Effect>None</Effect>
+                  <OwnerNode z:Ref="i27" />
+                  <VariableName>ThanksPanel</VariableName>
+                  <BackgroundAlpha>100</BackgroundAlpha>
+                  <BackgroundColor xmlns:d10p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                    <d10p1:A>255</d10p1:A>
+                    <d10p1:B>34</d10p1:B>
+                    <d10p1:G>34</d10p1:G>
+                    <d10p1:R>34</d10p1:R>
+                    <d10p1:ScA>1</d10p1:ScA>
+                    <d10p1:ScB>0.0159962941</d10p1:ScB>
+                    <d10p1:ScG>0.0159962941</d10p1:ScG>
+                    <d10p1:ScR>0.0159962941</d10p1:ScR>
+                  </BackgroundColor>
+                </Property>
+                <IsRoot>true</IsRoot>
+                <PivotPos>LeftTop</PivotPos>
+                <WidgetType>Panel</WidgetType>
+                <ID>1555206809</ID>
+                <ZIndex>0</ZIndex>
+                <LayoutAssistInfo>
+                  <SnapGuidesList>
+                    <ArrayOfSnapGuide />
+                    <ArrayOfSnapGuide />
+                  </SnapGuidesList>
+                  <OwnerNode z:Ref="i27" />
+                </LayoutAssistInfo>
+                <IsHideInLayout>false</IsHideInLayout>
+                <IsLockInLayout>false</IsLockInLayout>
+              </ObjectTreeNode>
+            </Panels>
+          </Property>
+          <IsRoot>false</IsRoot>
+          <PivotPos>LeftTop</PivotPos>
+          <WidgetType>PagePanel</WidgetType>
+          <ID>411461688</ID>
+          <ZIndex>1</ZIndex>
+          <LayoutAssistInfo>
+            <SnapGuidesList>
+              <ArrayOfSnapGuide />
+              <ArrayOfSnapGuide />
+            </SnapGuidesList>
+          </LayoutAssistInfo>
+          <IsHideInLayout>false</IsHideInLayout>
+          <IsLockInLayout>false</IsLockInLayout>
+        </UICNode>
+        <UICNode z:Id="i31" i:type="ObjectTreeNode">
+          <Parent z:Ref="i14" />
+          <Nodes />
+          <LayoutProperty>
+            <LayoutProperty>
               <X>36</X>
               <Y>28</Y>
               <Width>327</Width>
@@ -806,7 +1728,7 @@
           </LayoutProperty>
           <Property i:type="LabelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i15" />
+            <OwnerNode z:Ref="i31" />
             <VariableName>CreditsTitleText</VariableName>
             <H_Alignment>Left</H_Alignment>
             <HasTextShadow>false</HasTextShadow>
@@ -836,7 +1758,7 @@
           <PivotPos>LeftTop</PivotPos>
           <WidgetType>Label</WidgetType>
           <ID>425927949</ID>
-          <ZIndex>1</ZIndex>
+          <ZIndex>2</ZIndex>
           <LayoutAssistInfo>
             <SnapGuidesList>
               <ArrayOfSnapGuide />
@@ -846,478 +1768,15 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i16" i:type="ObjectTreeNode">
+        <UICNode z:Id="i32" i:type="ObjectTreeNode">
           <Parent z:Ref="i14" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>44.761495562293931</X>
-              <Y>114.95401775082468</Y>
-              <Width>885</Width>
-              <Height>344</Height>
-              <Visible>true</Visible>
-              <Anchors>None</Anchors>
-            </LayoutProperty>
-            <LayoutProperty>
-              <X>36</X>
-              <Y>154.12814703968542</Y>
-              <Width>100</Width>
-              <Height>50</Height>
-              <Visible>true</Visible>
-              <Anchors>None</Anchors>
-            </LayoutProperty>
-          </LayoutProperty>
-          <Property i:type="PagePanelProperty">
-            <Effect>None</Effect>
-            <OwnerNode z:Ref="i16" />
-            <VariableName>PagePanel_1</VariableName>
-            <Panels>
-              <ObjectTreeNode z:Id="i17">
-                <Parent z:Ref="i1" />
-                <Nodes>
-                  <UICNode z:Id="i18" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i17" />
-                    <Nodes />
-                    <LayoutProperty>
-                      <LayoutProperty>
-                        <X>32.763610822907935</X>
-                        <Y>49.204703115625762</Y>
-                        <Width>389</Width>
-                        <Height>50</Height>
-                        <Visible>true</Visible>
-                        <Anchors>None</Anchors>
-                      </LayoutProperty>
-                      <LayoutProperty>
-                        <X>20</X>
-                        <Y>188.39986743953068</Y>
-                        <Width>214</Width>
-                        <Height>36</Height>
-                        <Visible>true</Visible>
-                        <Anchors>None</Anchors>
-                      </LayoutProperty>
-                    </LayoutProperty>
-                    <Property i:type="LabelProperty">
-                      <Effect>None</Effect>
-                      <OwnerNode z:Ref="i18" />
-                      <VariableName>BenText</VariableName>
-                      <H_Alignment>Left</H_Alignment>
-                      <HasTextShadow>false</HasTextShadow>
-                      <LineBreaks>Character</LineBreaks>
-                      <Text>ben johnson</Text>
-                      <TextAlpha>100</TextAlpha>
-                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
-                        <d12p1:A>255</d12p1:A>
-                        <d12p1:B>19</d12p1:B>
-                        <d12p1:G>19</d12p1:G>
-                        <d12p1:R>229</d12p1:R>
-                        <d12p1:ScA>1</d12p1:ScA>
-                        <d12p1:ScB>0.00651209056</d12p1:ScB>
-                        <d12p1:ScG>0.00651209056</d12p1:ScG>
-                        <d12p1:ScR>0.7835378</d12p1:ScR>
-                      </TextColor>
-                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
-                        <d12p1:FontFamily>System</d12p1:FontFamily>
-                        <d12p1:FontSize>36</d12p1:FontSize>
-                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
-                      </TextFont>
-                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
-                      <TextTrimming>EllipsisCharacter</TextTrimming>
-                      <V_Alignment>Top</V_Alignment>
-                    </Property>
-                    <IsRoot>false</IsRoot>
-                    <PivotPos>LeftTop</PivotPos>
-                    <WidgetType>Label</WidgetType>
-                    <ID>1142286759</ID>
-                    <ZIndex>1</ZIndex>
-                    <LayoutAssistInfo>
-                      <SnapGuidesList>
-                        <ArrayOfSnapGuide />
-                        <ArrayOfSnapGuide />
-                      </SnapGuidesList>
-                    </LayoutAssistInfo>
-                    <IsHideInLayout>false</IsHideInLayout>
-                    <IsLockInLayout>false</IsLockInLayout>
-                  </UICNode>
-                  <UICNode z:Id="i19" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i17" />
-                    <Nodes />
-                    <LayoutProperty>
-                      <LayoutProperty>
-                        <X>32.763610822907935</X>
-                        <Y>149.50790326521246</Y>
-                        <Width>389</Width>
-                        <Height>50</Height>
-                        <Visible>true</Visible>
-                        <Anchors>None</Anchors>
-                      </LayoutProperty>
-                      <LayoutProperty>
-                        <X>20</X>
-                        <Y>188</Y>
-                        <Width>214</Width>
-                        <Height>36</Height>
-                        <Visible>true</Visible>
-                        <Anchors>None</Anchors>
-                      </LayoutProperty>
-                    </LayoutProperty>
-                    <Property i:type="LabelProperty">
-                      <Effect>None</Effect>
-                      <OwnerNode z:Ref="i19" />
-                      <VariableName>PhoenixText</VariableName>
-                      <H_Alignment>Left</H_Alignment>
-                      <HasTextShadow>false</HasTextShadow>
-                      <LineBreaks>Character</LineBreaks>
-                      <Text>phoenix perry</Text>
-                      <TextAlpha>100</TextAlpha>
-                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
-                        <d12p1:A>255</d12p1:A>
-                        <d12p1:B>226</d12p1:B>
-                        <d12p1:G>226</d12p1:G>
-                        <d12p1:R>41</d12p1:R>
-                        <d12p1:ScA>1</d12p1:ScA>
-                        <d12p1:ScB>0.7605245</d12p1:ScB>
-                        <d12p1:ScG>0.7605245</d12p1:ScG>
-                        <d12p1:ScR>0.0221738853</d12p1:ScR>
-                      </TextColor>
-                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
-                        <d12p1:FontFamily>System</d12p1:FontFamily>
-                        <d12p1:FontSize>36</d12p1:FontSize>
-                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
-                      </TextFont>
-                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
-                      <TextTrimming>EllipsisCharacter</TextTrimming>
-                      <V_Alignment>Top</V_Alignment>
-                    </Property>
-                    <IsRoot>false</IsRoot>
-                    <PivotPos>LeftTop</PivotPos>
-                    <WidgetType>Label</WidgetType>
-                    <ID>1142286759</ID>
-                    <ZIndex>2</ZIndex>
-                    <LayoutAssistInfo>
-                      <SnapGuidesList>
-                        <ArrayOfSnapGuide />
-                        <ArrayOfSnapGuide />
-                      </SnapGuidesList>
-                    </LayoutAssistInfo>
-                    <IsHideInLayout>false</IsHideInLayout>
-                    <IsLockInLayout>false</IsLockInLayout>
-                  </UICNode>
-                  <UICNode z:Id="i20" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i17" />
-                    <Nodes />
-                    <LayoutProperty>
-                      <LayoutProperty>
-                        <X>32.763610822907935</X>
-                        <Y>249.34030244248652</Y>
-                        <Width>389</Width>
-                        <Height>50</Height>
-                        <Visible>true</Visible>
-                        <Anchors>None</Anchors>
-                      </LayoutProperty>
-                      <LayoutProperty>
-                        <X>20</X>
-                        <Y>188</Y>
-                        <Width>214</Width>
-                        <Height>36</Height>
-                        <Visible>true</Visible>
-                        <Anchors>None</Anchors>
-                      </LayoutProperty>
-                    </LayoutProperty>
-                    <Property i:type="LabelProperty">
-                      <Effect>None</Effect>
-                      <OwnerNode z:Ref="i20" />
-                      <VariableName>MargaretText</VariableName>
-                      <H_Alignment>Left</H_Alignment>
-                      <HasTextShadow>false</HasTextShadow>
-                      <LineBreaks>Character</LineBreaks>
-                      <Text>margaret schedel</Text>
-                      <TextAlpha>100</TextAlpha>
-                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
-                        <d12p1:A>255</d12p1:A>
-                        <d12p1:B>246</d12p1:B>
-                        <d12p1:G>226</d12p1:G>
-                        <d12p1:R>247</d12p1:R>
-                        <d12p1:ScA>1</d12p1:ScA>
-                        <d12p1:ScB>0.921581864</d12p1:ScB>
-                        <d12p1:ScG>0.7605245</d12p1:ScG>
-                        <d12p1:ScR>0.9301109</d12p1:ScR>
-                      </TextColor>
-                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
-                        <d12p1:FontFamily>System</d12p1:FontFamily>
-                        <d12p1:FontSize>36</d12p1:FontSize>
-                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
-                      </TextFont>
-                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
-                      <TextTrimming>EllipsisCharacter</TextTrimming>
-                      <V_Alignment>Top</V_Alignment>
-                    </Property>
-                    <IsRoot>false</IsRoot>
-                    <PivotPos>LeftTop</PivotPos>
-                    <WidgetType>Label</WidgetType>
-                    <ID>1142286759</ID>
-                    <ZIndex>3</ZIndex>
-                    <LayoutAssistInfo>
-                      <SnapGuidesList>
-                        <ArrayOfSnapGuide />
-                        <ArrayOfSnapGuide />
-                      </SnapGuidesList>
-                    </LayoutAssistInfo>
-                    <IsHideInLayout>false</IsHideInLayout>
-                    <IsLockInLayout>false</IsLockInLayout>
-                  </UICNode>
-                </Nodes>
-                <LayoutProperty>
-                  <LayoutProperty>
-                    <X>0</X>
-                    <Y>0</Y>
-                    <Width>885</Width>
-                    <Height>344</Height>
-                    <Visible>true</Visible>
-                    <Anchors>None</Anchors>
-                  </LayoutProperty>
-                  <LayoutProperty>
-                    <X>0</X>
-                    <Y>0</Y>
-                    <Width>544</Width>
-                    <Height>960</Height>
-                    <Visible>true</Visible>
-                    <Anchors>None</Anchors>
-                  </LayoutProperty>
-                </LayoutProperty>
-                <Property i:type="PanelProperty">
-                  <Effect>None</Effect>
-                  <OwnerNode z:Ref="i17" />
-                  <VariableName>CreditsPanel</VariableName>
-                  <BackgroundAlpha>100</BackgroundAlpha>
-                  <BackgroundColor xmlns:d10p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
-                    <d10p1:A>255</d10p1:A>
-                    <d10p1:B>34</d10p1:B>
-                    <d10p1:G>34</d10p1:G>
-                    <d10p1:R>34</d10p1:R>
-                    <d10p1:ScA>1</d10p1:ScA>
-                    <d10p1:ScB>0.0159962941</d10p1:ScB>
-                    <d10p1:ScG>0.0159962941</d10p1:ScG>
-                    <d10p1:ScR>0.0159962941</d10p1:ScR>
-                  </BackgroundColor>
-                </Property>
-                <IsRoot>true</IsRoot>
-                <PivotPos>LeftTop</PivotPos>
-                <WidgetType>Panel</WidgetType>
-                <ID>1898721010</ID>
-                <ZIndex>0</ZIndex>
-                <LayoutAssistInfo>
-                  <SnapGuidesList>
-                    <ArrayOfSnapGuide />
-                    <ArrayOfSnapGuide />
-                  </SnapGuidesList>
-                  <OwnerNode z:Ref="i17" />
-                </LayoutAssistInfo>
-                <IsHideInLayout>false</IsHideInLayout>
-                <IsLockInLayout>false</IsLockInLayout>
-              </ObjectTreeNode>
-              <ObjectTreeNode z:Id="i21">
-                <Parent z:Ref="i1" />
-                <Nodes>
-                  <UICNode z:Id="i22" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i21" />
-                    <Nodes />
-                    <LayoutProperty>
-                      <LayoutProperty>
-                        <X>32</X>
-                        <Y>49</Y>
-                        <Width>389</Width>
-                        <Height>50</Height>
-                        <Visible>true</Visible>
-                        <Anchors>None</Anchors>
-                      </LayoutProperty>
-                      <LayoutProperty>
-                        <X>20</X>
-                        <Y>188</Y>
-                        <Width>214</Width>
-                        <Height>36</Height>
-                        <Visible>true</Visible>
-                        <Anchors>None</Anchors>
-                      </LayoutProperty>
-                    </LayoutProperty>
-                    <Property i:type="LabelProperty">
-                      <Effect>None</Effect>
-                      <OwnerNode z:Ref="i22" />
-                      <VariableName>ThanksText</VariableName>
-                      <H_Alignment>Left</H_Alignment>
-                      <HasTextShadow>false</HasTextShadow>
-                      <LineBreaks>Character</LineBreaks>
-                      <Text>thanks to</Text>
-                      <TextAlpha>100</TextAlpha>
-                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
-                        <d12p1:A>255</d12p1:A>
-                        <d12p1:B>255</d12p1:B>
-                        <d12p1:G>255</d12p1:G>
-                        <d12p1:R>255</d12p1:R>
-                        <d12p1:ScA>1</d12p1:ScA>
-                        <d12p1:ScB>1</d12p1:ScB>
-                        <d12p1:ScG>1</d12p1:ScG>
-                        <d12p1:ScR>1</d12p1:ScR>
-                      </TextColor>
-                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
-                        <d12p1:FontFamily>System</d12p1:FontFamily>
-                        <d12p1:FontSize>36</d12p1:FontSize>
-                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
-                      </TextFont>
-                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
-                      <TextTrimming>EllipsisCharacter</TextTrimming>
-                      <V_Alignment>Top</V_Alignment>
-                    </Property>
-                    <IsRoot>false</IsRoot>
-                    <PivotPos>LeftTop</PivotPos>
-                    <WidgetType>Label</WidgetType>
-                    <ID>0</ID>
-                    <ZIndex>0</ZIndex>
-                    <LayoutAssistInfo>
-                      <SnapGuidesList>
-                        <ArrayOfSnapGuide />
-                        <ArrayOfSnapGuide />
-                      </SnapGuidesList>
-                    </LayoutAssistInfo>
-                    <IsHideInLayout>false</IsHideInLayout>
-                    <IsLockInLayout>false</IsLockInLayout>
-                  </UICNode>
-                  <UICNode z:Id="i23" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i21" />
-                    <Nodes />
-                    <LayoutProperty>
-                      <LayoutProperty>
-                        <X>32</X>
-                        <Y>129</Y>
-                        <Width>821</Width>
-                        <Height>184</Height>
-                        <Visible>true</Visible>
-                        <Anchors>None</Anchors>
-                      </LayoutProperty>
-                      <LayoutProperty>
-                        <X>32</X>
-                        <Y>129.72708117180844</Y>
-                        <Width>214</Width>
-                        <Height>36</Height>
-                        <Visible>true</Visible>
-                        <Anchors>None</Anchors>
-                      </LayoutProperty>
-                    </LayoutProperty>
-                    <Property i:type="LabelProperty">
-                      <Effect>None</Effect>
-                      <OwnerNode z:Ref="i23" />
-                      <VariableName>ThanksNamesText</VariableName>
-                      <H_Alignment>Left</H_Alignment>
-                      <HasTextShadow>false</HasTextShadow>
-                      <LineBreaks>Character</LineBreaks>
-                      <Text>Indiecade, Matt Parker, Nicolas Fortuna, Jim Wallace and the PSM team</Text>
-                      <TextAlpha>100</TextAlpha>
-                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
-                        <d12p1:A>255</d12p1:A>
-                        <d12p1:B>255</d12p1:B>
-                        <d12p1:G>255</d12p1:G>
-                        <d12p1:R>255</d12p1:R>
-                        <d12p1:ScA>1</d12p1:ScA>
-                        <d12p1:ScB>1</d12p1:ScB>
-                        <d12p1:ScG>1</d12p1:ScG>
-                        <d12p1:ScR>1</d12p1:ScR>
-                      </TextColor>
-                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
-                        <d12p1:FontFamily>System</d12p1:FontFamily>
-                        <d12p1:FontSize>25</d12p1:FontSize>
-                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
-                      </TextFont>
-                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
-                      <TextTrimming>EllipsisCharacter</TextTrimming>
-                      <V_Alignment>Top</V_Alignment>
-                    </Property>
-                    <IsRoot>false</IsRoot>
-                    <PivotPos>LeftTop</PivotPos>
-                    <WidgetType>Label</WidgetType>
-                    <ID>1544718903</ID>
-                    <ZIndex>0</ZIndex>
-                    <LayoutAssistInfo>
-                      <SnapGuidesList>
-                        <ArrayOfSnapGuide />
-                        <ArrayOfSnapGuide />
-                      </SnapGuidesList>
-                    </LayoutAssistInfo>
-                    <IsHideInLayout>false</IsHideInLayout>
-                    <IsLockInLayout>false</IsLockInLayout>
-                  </UICNode>
-                </Nodes>
-                <LayoutProperty>
-                  <LayoutProperty>
-                    <X>0</X>
-                    <Y>0</Y>
-                    <Width>885</Width>
-                    <Height>344</Height>
-                    <Visible>true</Visible>
-                    <Anchors>None</Anchors>
-                  </LayoutProperty>
-                  <LayoutProperty>
-                    <X>0</X>
-                    <Y>0</Y>
-                    <Width>544</Width>
-                    <Height>960</Height>
-                    <Visible>true</Visible>
-                    <Anchors>None</Anchors>
-                  </LayoutProperty>
-                </LayoutProperty>
-                <Property i:type="PanelProperty">
-                  <Effect>None</Effect>
-                  <OwnerNode z:Ref="i21" />
-                  <VariableName>ThanksPanel</VariableName>
-                  <BackgroundAlpha>100</BackgroundAlpha>
-                  <BackgroundColor xmlns:d10p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
-                    <d10p1:A>255</d10p1:A>
-                    <d10p1:B>34</d10p1:B>
-                    <d10p1:G>34</d10p1:G>
-                    <d10p1:R>34</d10p1:R>
-                    <d10p1:ScA>1</d10p1:ScA>
-                    <d10p1:ScB>0.0159962941</d10p1:ScB>
-                    <d10p1:ScG>0.0159962941</d10p1:ScG>
-                    <d10p1:ScR>0.0159962941</d10p1:ScR>
-                  </BackgroundColor>
-                </Property>
-                <IsRoot>true</IsRoot>
-                <PivotPos>LeftTop</PivotPos>
-                <WidgetType>Panel</WidgetType>
-                <ID>1555206809</ID>
-                <ZIndex>0</ZIndex>
-                <LayoutAssistInfo>
-                  <SnapGuidesList>
-                    <ArrayOfSnapGuide />
-                    <ArrayOfSnapGuide />
-                  </SnapGuidesList>
-                  <OwnerNode z:Ref="i21" />
-                </LayoutAssistInfo>
-                <IsHideInLayout>false</IsHideInLayout>
-                <IsLockInLayout>false</IsLockInLayout>
-              </ObjectTreeNode>
-            </Panels>
-          </Property>
-          <IsRoot>false</IsRoot>
-          <PivotPos>LeftTop</PivotPos>
-          <WidgetType>PagePanel</WidgetType>
-          <ID>411461688</ID>
-          <ZIndex>0</ZIndex>
-          <LayoutAssistInfo>
-            <SnapGuidesList>
-              <ArrayOfSnapGuide />
-              <ArrayOfSnapGuide />
-            </SnapGuidesList>
-          </LayoutAssistInfo>
-          <IsHideInLayout>false</IsHideInLayout>
-          <IsLockInLayout>false</IsLockInLayout>
-        </UICNode>
-        <UICNode z:Id="i24" i:type="ObjectTreeNode">
-          <Parent z:Ref="i14" />
-          <Nodes />
-          <LayoutProperty>
-            <LayoutProperty>
-              <X>707</X>
-              <Y>475.30348284455687</Y>
-              <Width>214</Width>
-              <Height>56</Height>
+              <X>763.76149556229393</X>
+              <Y>396.84431839521341</Y>
+              <Width>166</Width>
+              <Height>109</Height>
               <Visible>true</Visible>
               <Anchors>None</Anchors>
             </LayoutProperty>
@@ -1332,12 +1791,16 @@
           </LayoutProperty>
           <Property i:type="ButtonProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i24" />
+            <OwnerNode z:Ref="i32" />
             <VariableName>BackButton</VariableName>
-            <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
-            <BackgroundType>Default</BackgroundType>
-            <ButtonImage></ButtonImage>
-            <ButtonType>TextButton</ButtonType>
+            <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+              <d7p1:BackgroundDisablelImage i:nil="true" />
+              <d7p1:BackgroundNormalImage>images\UI\back_2.png</d7p1:BackgroundNormalImage>
+              <d7p1:BackgroundPressImage i:nil="true" />
+            </BackgroundButtonImage>
+            <BackgroundType>Custom</BackgroundType>
+            <ButtonImage i:nil="true" />
+            <ButtonType>ImageButton</ButtonType>
             <FilterColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
               <d7p1:A>255</d7p1:A>
               <d7p1:B>255</d7p1:B>
@@ -1379,7 +1842,7 @@
           <PivotPos>LeftTop</PivotPos>
           <WidgetType>Button</WidgetType>
           <ID>1321394217</ID>
-          <ZIndex>0</ZIndex>
+          <ZIndex>3</ZIndex>
           <LayoutAssistInfo>
             <SnapGuidesList>
               <ArrayOfSnapGuide />
@@ -1442,26 +1905,26 @@
       <IsHideInLayout>false</IsHideInLayout>
       <IsLockInLayout>false</IsLockInLayout>
     </UICNode>
-    <UICNode z:Ref="i17" />
-    <UICNode z:Ref="i21" />
-    <UICNode z:Id="i25" i:type="ObjectTreeNode">
+    <UICNode z:Ref="i16" />
+    <UICNode z:Ref="i27" />
+    <UICNode z:Id="i33" i:type="ObjectTreeNode">
       <Parent z:Ref="i1" />
       <Nodes>
-        <UICNode z:Id="i26" i:type="ObjectTreeNode">
-          <Parent z:Ref="i25" />
+        <UICNode z:Id="i34" i:type="ObjectTreeNode">
+          <Parent z:Ref="i33" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>350.5</X>
-              <Y>35.027367711959869</Y>
-              <Width>259</Width>
-              <Height>473</Height>
+              <X>351</X>
+              <Y>34.244097392718913</Y>
+              <Width>258</Width>
+              <Height>478</Height>
               <Visible>true</Visible>
-              <Anchors>Height</Anchors>
+              <Anchors>None</Anchors>
             </LayoutProperty>
             <LayoutProperty>
-              <X>146.35819065704214</X>
-              <Y>158.45454545454538</Y>
+              <X>400.82582527920079</X>
+              <Y>71.83892574353888</Y>
               <Width>200</Width>
               <Height>200</Height>
               <Visible>true</Visible>
@@ -1470,21 +1933,21 @@
           </LayoutProperty>
           <Property i:type="ImageBoxProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i26" />
+            <OwnerNode z:Ref="i34" />
             <VariableName>ImageBox_1</VariableName>
-            <Image i:nil="true" />
+            <Image>images\UI\menuButtonBackground.png</Image>
             <NinePatchMargin xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
               <d7p1:ButtomRowHeight>0</d7p1:ButtomRowHeight>
               <d7p1:LeftColumnWidth>0</d7p1:LeftColumnWidth>
               <d7p1:RightColumnWidth>0</d7p1:RightColumnWidth>
               <d7p1:TopRowHeight>0</d7p1:TopRowHeight>
             </NinePatchMargin>
-            <ScaleType>Center</ScaleType>
+            <ScaleType>AspectInside</ScaleType>
           </Property>
           <IsRoot>false</IsRoot>
           <PivotPos>LeftTop</PivotPos>
           <WidgetType>ImageBox</WidgetType>
-          <ID>2304599</ID>
+          <ID>282185294</ID>
           <ZIndex>1</ZIndex>
           <LayoutAssistInfo>
             <SnapGuidesList>
@@ -1495,15 +1958,15 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i27" i:type="ObjectTreeNode">
-          <Parent z:Ref="i25" />
+        <UICNode z:Id="i35" i:type="ObjectTreeNode">
+          <Parent z:Ref="i33" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>373</X>
-              <Y>92</Y>
-              <Width>214</Width>
-              <Height>56</Height>
+              <X>351</X>
+              <Y>109.3709548795452</Y>
+              <Width>258</Width>
+              <Height>63</Height>
               <Visible>true</Visible>
               <Anchors>None</Anchors>
             </LayoutProperty>
@@ -1518,16 +1981,16 @@
           </LayoutProperty>
           <Property i:type="ButtonProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i27" />
+            <OwnerNode z:Ref="i35" />
             <VariableName>NewGameButton</VariableName>
             <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
               <d7p1:BackgroundDisablelImage>system_assets/button_9patch_disable.png</d7p1:BackgroundDisablelImage>
-              <d7p1:BackgroundNormalImage>system_assets/button_9patch_normal.png</d7p1:BackgroundNormalImage>
-              <d7p1:BackgroundPressImage>system_assets/button_9patch_press.png</d7p1:BackgroundPressImage>
+              <d7p1:BackgroundNormalImage>images\UI\play.png</d7p1:BackgroundNormalImage>
+              <d7p1:BackgroundPressImage>images\UI\playOVer.png</d7p1:BackgroundPressImage>
             </BackgroundButtonImage>
-            <BackgroundType>Default</BackgroundType>
+            <BackgroundType>Custom</BackgroundType>
             <ButtonImage></ButtonImage>
-            <ButtonType>TextButton</ButtonType>
+            <ButtonType>ImageButton</ButtonType>
             <FilterColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
               <d7p1:A>255</d7p1:A>
               <d7p1:B>255</d7p1:B>
@@ -1579,15 +2042,15 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i28" i:type="ObjectTreeNode">
-          <Parent z:Ref="i25" />
+        <UICNode z:Id="i36" i:type="ObjectTreeNode">
+          <Parent z:Ref="i33" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>373</X>
-              <Y>194</Y>
-              <Width>214</Width>
-              <Height>56</Height>
+              <X>351</X>
+              <Y>197.29824284475245</Y>
+              <Width>258</Width>
+              <Height>63</Height>
               <Visible>true</Visible>
               <Anchors>None</Anchors>
             </LayoutProperty>
@@ -1602,16 +2065,16 @@
           </LayoutProperty>
           <Property i:type="ButtonProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i28" />
+            <OwnerNode z:Ref="i36" />
             <VariableName>LevelSelectButton</VariableName>
             <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
               <d7p1:BackgroundDisablelImage>system_assets/button_9patch_disable.png</d7p1:BackgroundDisablelImage>
-              <d7p1:BackgroundNormalImage>system_assets/button_9patch_normal.png</d7p1:BackgroundNormalImage>
-              <d7p1:BackgroundPressImage>system_assets/button_9patch_press.png</d7p1:BackgroundPressImage>
+              <d7p1:BackgroundNormalImage>images\UI\selectlevel.png</d7p1:BackgroundNormalImage>
+              <d7p1:BackgroundPressImage>images\UI\selectLevelOver.png</d7p1:BackgroundPressImage>
             </BackgroundButtonImage>
-            <BackgroundType>Default</BackgroundType>
+            <BackgroundType>Custom</BackgroundType>
             <ButtonImage></ButtonImage>
-            <ButtonType>TextButton</ButtonType>
+            <ButtonType>ImageButton</ButtonType>
             <FilterColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
               <d7p1:A>255</d7p1:A>
               <d7p1:B>255</d7p1:B>
@@ -1663,15 +2126,15 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i29" i:type="ObjectTreeNode">
-          <Parent z:Ref="i25" />
+        <UICNode z:Id="i37" i:type="ObjectTreeNode">
+          <Parent z:Ref="i33" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>373</X>
-              <Y>398</Y>
-              <Width>214</Width>
-              <Height>56</Height>
+              <X>351</X>
+              <Y>369.45931710121357</Y>
+              <Width>258</Width>
+              <Height>63</Height>
               <Visible>true</Visible>
               <Anchors>None</Anchors>
             </LayoutProperty>
@@ -1686,12 +2149,16 @@
           </LayoutProperty>
           <Property i:type="ButtonProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i29" />
+            <OwnerNode z:Ref="i37" />
             <VariableName>CreditsButton</VariableName>
-            <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
-            <BackgroundType>Default</BackgroundType>
+            <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+              <d7p1:BackgroundDisablelImage i:nil="true" />
+              <d7p1:BackgroundNormalImage>images\UI\quit.png</d7p1:BackgroundNormalImage>
+              <d7p1:BackgroundPressImage>images\UI\quitOver.png</d7p1:BackgroundPressImage>
+            </BackgroundButtonImage>
+            <BackgroundType>Custom</BackgroundType>
             <ButtonImage></ButtonImage>
-            <ButtonType>TextButton</ButtonType>
+            <ButtonType>ImageButton</ButtonType>
             <FilterColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
               <d7p1:A>255</d7p1:A>
               <d7p1:B>255</d7p1:B>
@@ -1743,15 +2210,15 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i30" i:type="ObjectTreeNode">
-          <Parent z:Ref="i25" />
+        <UICNode z:Id="i38" i:type="ObjectTreeNode">
+          <Parent z:Ref="i33" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>373</X>
-              <Y>294</Y>
-              <Width>214</Width>
-              <Height>56</Height>
+              <X>351</X>
+              <Y>283.45931710121357</Y>
+              <Width>258</Width>
+              <Height>63</Height>
               <Visible>true</Visible>
               <Anchors>None</Anchors>
             </LayoutProperty>
@@ -1766,12 +2233,16 @@
           </LayoutProperty>
           <Property i:type="ButtonProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i30" />
+            <OwnerNode z:Ref="i38" />
             <VariableName>OptionsButton</VariableName>
-            <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
-            <BackgroundType>Default</BackgroundType>
+            <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+              <d7p1:BackgroundDisablelImage i:nil="true" />
+              <d7p1:BackgroundNormalImage>images\UI\instructions.png</d7p1:BackgroundNormalImage>
+              <d7p1:BackgroundPressImage>images\UI\instructionsOver.png</d7p1:BackgroundPressImage>
+            </BackgroundButtonImage>
+            <BackgroundType>Custom</BackgroundType>
             <ButtonImage></ButtonImage>
-            <ButtonType>TextButton</ButtonType>
+            <ButtonType>ImageButton</ButtonType>
             <FilterColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
               <d7p1:A>255</d7p1:A>
               <d7p1:B>255</d7p1:B>
@@ -1813,55 +2284,7 @@
           <PivotPos>LeftTop</PivotPos>
           <WidgetType>Button</WidgetType>
           <ID>462234420</ID>
-          <ZIndex>0</ZIndex>
-          <LayoutAssistInfo>
-            <SnapGuidesList>
-              <ArrayOfSnapGuide />
-              <ArrayOfSnapGuide />
-            </SnapGuidesList>
-          </LayoutAssistInfo>
-          <IsHideInLayout>false</IsHideInLayout>
-          <IsLockInLayout>false</IsLockInLayout>
-        </UICNode>
-        <UICNode z:Id="i31" i:type="ObjectTreeNode">
-          <Parent z:Ref="i25" />
-          <Nodes />
-          <LayoutProperty>
-            <LayoutProperty>
-              <X>350.5</X>
-              <Y>27.060606060606233</Y>
-              <Width>259</Width>
-              <Height>473</Height>
-              <Visible>true</Visible>
-              <Anchors>Height</Anchors>
-            </LayoutProperty>
-            <LayoutProperty>
-              <X>146.35819065704214</X>
-              <Y>158.45454545454538</Y>
-              <Width>200</Width>
-              <Height>200</Height>
-              <Visible>true</Visible>
-              <Anchors>None</Anchors>
-            </LayoutProperty>
-          </LayoutProperty>
-          <Property i:type="ImageBoxProperty">
-            <Effect>None</Effect>
-            <OwnerNode z:Ref="i31" />
-            <VariableName>ImageBox_1</VariableName>
-            <Image i:nil="true" />
-            <NinePatchMargin xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
-              <d7p1:ButtomRowHeight>0</d7p1:ButtomRowHeight>
-              <d7p1:LeftColumnWidth>0</d7p1:LeftColumnWidth>
-              <d7p1:RightColumnWidth>0</d7p1:RightColumnWidth>
-              <d7p1:TopRowHeight>0</d7p1:TopRowHeight>
-            </NinePatchMargin>
-            <ScaleType>Center</ScaleType>
-          </Property>
-          <IsRoot>false</IsRoot>
-          <PivotPos>LeftTop</PivotPos>
-          <WidgetType>ImageBox</WidgetType>
-          <ID>2304599</ID>
-          <ZIndex>0</ZIndex>
+          <ZIndex>5</ZIndex>
           <LayoutAssistInfo>
             <SnapGuidesList>
               <ArrayOfSnapGuide />
@@ -1892,7 +2315,7 @@
       </LayoutProperty>
       <Property i:type="SceneProperty">
         <Effect>None</Effect>
-        <OwnerNode z:Ref="i25" />
+        <OwnerNode z:Ref="i33" />
         <VariableName>MenuScene</VariableName>
         <BackgroundAlpha>100</BackgroundAlpha>
         <BackgroundColor xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -1919,16 +2342,16 @@
           <ArrayOfSnapGuide />
           <ArrayOfSnapGuide />
         </SnapGuidesList>
-        <OwnerNode z:Ref="i25" />
+        <OwnerNode z:Ref="i33" />
       </LayoutAssistInfo>
       <IsHideInLayout>false</IsHideInLayout>
       <IsLockInLayout>false</IsLockInLayout>
     </UICNode>
-    <UICNode z:Id="i32" i:type="ObjectTreeNode">
+    <UICNode z:Id="i39" i:type="ObjectTreeNode">
       <Parent z:Ref="i1" />
       <Nodes>
-        <UICNode z:Id="i33" i:type="ObjectTreeNode">
-          <Parent z:Ref="i32" />
+        <UICNode z:Id="i40" i:type="ObjectTreeNode">
+          <Parent z:Ref="i39" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -1949,10 +2372,10 @@
             </LayoutProperty>
           </LayoutProperty>
           <Property i:type="ImageBoxProperty">
-            <Effect>None</Effect>
-            <OwnerNode z:Ref="i33" />
+            <Effect>FadeInEffect</Effect>
+            <OwnerNode z:Ref="i40" />
             <VariableName>TitleImage</VariableName>
-            <Image>header.png</Image>
+            <Image>images\UI\header.png</Image>
             <NinePatchMargin xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
               <d7p1:ButtomRowHeight>0</d7p1:ButtomRowHeight>
               <d7p1:LeftColumnWidth>0</d7p1:LeftColumnWidth>
@@ -1975,8 +2398,8 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i34" i:type="ObjectTreeNode">
-          <Parent z:Ref="i32" />
+        <UICNode z:Id="i41" i:type="ObjectTreeNode">
+          <Parent z:Ref="i39" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -1998,7 +2421,7 @@
           </LayoutProperty>
           <Property i:type="LabelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i34" />
+            <OwnerNode z:Ref="i41" />
             <VariableName>TouchToStartText</VariableName>
             <H_Alignment>Center</H_Alignment>
             <HasTextShadow>false</HasTextShadow>
@@ -2059,7 +2482,7 @@
       </LayoutProperty>
       <Property i:type="SceneProperty">
         <Effect>None</Effect>
-        <OwnerNode z:Ref="i32" />
+        <OwnerNode z:Ref="i39" />
         <VariableName>TitleScene</VariableName>
         <BackgroundAlpha>0</BackgroundAlpha>
         <BackgroundColor xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -2086,16 +2509,16 @@
           <ArrayOfSnapGuide />
           <ArrayOfSnapGuide />
         </SnapGuidesList>
-        <OwnerNode z:Ref="i32" />
+        <OwnerNode z:Ref="i39" />
       </LayoutAssistInfo>
       <IsHideInLayout>false</IsHideInLayout>
       <IsLockInLayout>false</IsLockInLayout>
     </UICNode>
-    <UICNode z:Id="i35" i:type="ObjectTreeNode">
+    <UICNode z:Id="i42" i:type="ObjectTreeNode">
       <Parent z:Ref="i1" />
       <Nodes>
-        <UICNode z:Id="i36" i:type="ObjectTreeNode">
-          <Parent z:Ref="i35" />
+        <UICNode z:Id="i43" i:type="ObjectTreeNode">
+          <Parent z:Ref="i42" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -2117,12 +2540,12 @@
           </LayoutProperty>
           <Property i:type="LabelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i36" />
+            <OwnerNode z:Ref="i43" />
             <VariableName>SplashText</VariableName>
             <H_Alignment>Center</H_Alignment>
             <HasTextShadow>false</HasTextShadow>
             <LineBreaks>Character</LineBreaks>
-            <Text>team crystallon</Text>
+            <Text>12 eyes</Text>
             <TextAlpha>100</TextAlpha>
             <TextColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
               <d7p1:A>255</d7p1:A>
@@ -2178,7 +2601,7 @@
       </LayoutProperty>
       <Property i:type="SceneProperty">
         <Effect>None</Effect>
-        <OwnerNode z:Ref="i35" />
+        <OwnerNode z:Ref="i42" />
         <VariableName>SplashScene</VariableName>
         <BackgroundAlpha>100</BackgroundAlpha>
         <BackgroundColor xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -2205,16 +2628,16 @@
           <ArrayOfSnapGuide />
           <ArrayOfSnapGuide />
         </SnapGuidesList>
-        <OwnerNode z:Ref="i35" />
+        <OwnerNode z:Ref="i42" />
       </LayoutAssistInfo>
       <IsHideInLayout>false</IsHideInLayout>
       <IsLockInLayout>false</IsLockInLayout>
     </UICNode>
-    <UICNode z:Id="i37" i:type="ObjectTreeNode">
+    <UICNode z:Id="i44" i:type="ObjectTreeNode">
       <Parent z:Ref="i1" />
       <Nodes>
-        <UICNode z:Id="i38" i:type="ObjectTreeNode">
-          <Parent z:Ref="i37" />
+        <UICNode z:Id="i45" i:type="ObjectTreeNode">
+          <Parent z:Ref="i44" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -2236,7 +2659,7 @@
           </LayoutProperty>
           <Property i:type="LabelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i38" />
+            <OwnerNode z:Ref="i45" />
             <VariableName>InstructionsTitleText</VariableName>
             <H_Alignment>Left</H_Alignment>
             <HasTextShadow>false</HasTextShadow>
@@ -2266,7 +2689,7 @@
           <PivotPos>LeftTop</PivotPos>
           <WidgetType>Label</WidgetType>
           <ID>281270005</ID>
-          <ZIndex>0</ZIndex>
+          <ZIndex>1</ZIndex>
           <LayoutAssistInfo>
             <SnapGuidesList>
               <ArrayOfSnapGuide />
@@ -2276,8 +2699,8 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i39" i:type="ObjectTreeNode">
-          <Parent z:Ref="i37" />
+        <UICNode z:Id="i46" i:type="ObjectTreeNode">
+          <Parent z:Ref="i44" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -2299,84 +2722,21 @@
           </LayoutProperty>
           <Property i:type="PagePanelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i39" />
+            <OwnerNode z:Ref="i46" />
             <VariableName>PagePanel_1</VariableName>
             <Panels>
-              <ObjectTreeNode z:Id="i40">
+              <ObjectTreeNode z:Id="i47">
                 <Parent z:Ref="i1" />
                 <Nodes>
-                  <UICNode z:Id="i41" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i40" />
+                  <UICNode z:Id="i48" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i47" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
-                        <X>19.722244219435652</X>
-                        <Y>34.146750606834871</Y>
-                        <Width>214</Width>
-                        <Height>36</Height>
-                        <Visible>true</Visible>
-                        <Anchors>None</Anchors>
-                      </LayoutProperty>
-                      <LayoutProperty>
-                        <X>19.722244219435652</X>
-                        <Y>34.146750606834871</Y>
-                        <Width>214</Width>
-                        <Height>36</Height>
-                        <Visible>true</Visible>
-                        <Anchors>None</Anchors>
-                      </LayoutProperty>
-                    </LayoutProperty>
-                    <Property i:type="LabelProperty">
-                      <Effect>None</Effect>
-                      <OwnerNode z:Ref="i41" />
-                      <VariableName>InstructionsText</VariableName>
-                      <H_Alignment>Left</H_Alignment>
-                      <HasTextShadow>false</HasTextShadow>
-                      <LineBreaks>Character</LineBreaks>
-                      <Text>blah blah blah</Text>
-                      <TextAlpha>100</TextAlpha>
-                      <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
-                        <d12p1:A>255</d12p1:A>
-                        <d12p1:B>0</d12p1:B>
-                        <d12p1:G>0</d12p1:G>
-                        <d12p1:R>0</d12p1:R>
-                        <d12p1:ScA>1</d12p1:ScA>
-                        <d12p1:ScB>0</d12p1:ScB>
-                        <d12p1:ScG>0</d12p1:ScG>
-                        <d12p1:ScR>0</d12p1:ScR>
-                      </TextColor>
-                      <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
-                        <d12p1:FontFamily>System</d12p1:FontFamily>
-                        <d12p1:FontSize>25</d12p1:FontSize>
-                        <d12p1:FontStyle>Regular</d12p1:FontStyle>
-                      </TextFont>
-                      <TextShadow xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
-                      <TextTrimming>EllipsisCharacter</TextTrimming>
-                      <V_Alignment>Middle</V_Alignment>
-                    </Property>
-                    <IsRoot>false</IsRoot>
-                    <PivotPos>LeftTop</PivotPos>
-                    <WidgetType>Label</WidgetType>
-                    <ID>1924715940</ID>
-                    <ZIndex>0</ZIndex>
-                    <LayoutAssistInfo>
-                      <SnapGuidesList>
-                        <ArrayOfSnapGuide />
-                        <ArrayOfSnapGuide />
-                      </SnapGuidesList>
-                    </LayoutAssistInfo>
-                    <IsHideInLayout>false</IsHideInLayout>
-                    <IsLockInLayout>false</IsLockInLayout>
-                  </UICNode>
-                  <UICNode z:Id="i42" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i40" />
-                    <Nodes />
-                    <LayoutProperty>
-                      <LayoutProperty>
-                        <X>688.14210484778789</X>
-                        <Y>346.54117833414614</Y>
-                        <Width>214</Width>
-                        <Height>56</Height>
+                        <X>643.30388705902419</X>
+                        <Y>343.76595132570424</Y>
+                        <Width>258</Width>
+                        <Height>63</Height>
                         <Visible>true</Visible>
                         <Anchors>None</Anchors>
                       </LayoutProperty>
@@ -2391,12 +2751,16 @@
                     </LayoutProperty>
                     <Property i:type="ButtonProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i42" />
+                      <OwnerNode z:Ref="i48" />
                       <VariableName>StartButton</VariableName>
-                      <BackgroundButtonImage xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
-                      <BackgroundType>Default</BackgroundType>
-                      <ButtonImage></ButtonImage>
-                      <ButtonType>TextButton</ButtonType>
+                      <BackgroundButtonImage xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                        <d12p1:BackgroundDisablelImage i:nil="true" />
+                        <d12p1:BackgroundNormalImage>images\UI\play.png</d12p1:BackgroundNormalImage>
+                        <d12p1:BackgroundPressImage>images\UI\playOVer.png</d12p1:BackgroundPressImage>
+                      </BackgroundButtonImage>
+                      <BackgroundType>Custom</BackgroundType>
+                      <ButtonImage>images\UI\play.png</ButtonImage>
+                      <ButtonType>ImageButton</ButtonType>
                       <FilterColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
                         <d12p1:A>255</d12p1:A>
                         <d12p1:B>255</d12p1:B>
@@ -2414,17 +2778,17 @@
                         <d12p1:RightColumnWidth>42</d12p1:RightColumnWidth>
                         <d12p1:TopRowHeight>27</d12p1:TopRowHeight>
                       </NinePatchMargin>
-                      <Text>Start</Text>
+                      <Text>play</Text>
                       <TextAlpha>100</TextAlpha>
                       <TextColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
                         <d12p1:A>255</d12p1:A>
-                        <d12p1:B>0</d12p1:B>
-                        <d12p1:G>0</d12p1:G>
-                        <d12p1:R>0</d12p1:R>
+                        <d12p1:B>255</d12p1:B>
+                        <d12p1:G>255</d12p1:G>
+                        <d12p1:R>255</d12p1:R>
                         <d12p1:ScA>1</d12p1:ScA>
-                        <d12p1:ScB>0</d12p1:ScB>
-                        <d12p1:ScG>0</d12p1:ScG>
-                        <d12p1:ScR>0</d12p1:ScR>
+                        <d12p1:ScB>1</d12p1:ScB>
+                        <d12p1:ScG>1</d12p1:ScG>
+                        <d12p1:ScR>1</d12p1:ScR>
                       </TextColor>
                       <TextFont xmlns:d12p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
                         <d12p1:FontFamily>System</d12p1:FontFamily>
@@ -2438,7 +2802,7 @@
                     <PivotPos>LeftTop</PivotPos>
                     <WidgetType>Button</WidgetType>
                     <ID>1812043962</ID>
-                    <ZIndex>0</ZIndex>
+                    <ZIndex>2</ZIndex>
                     <LayoutAssistInfo>
                       <SnapGuidesList>
                         <ArrayOfSnapGuide />
@@ -2469,18 +2833,18 @@
                 </LayoutProperty>
                 <Property i:type="PanelProperty">
                   <Effect>None</Effect>
-                  <OwnerNode z:Ref="i40" />
+                  <OwnerNode z:Ref="i47" />
                   <VariableName>InstructionsPanel</VariableName>
                   <BackgroundAlpha>100</BackgroundAlpha>
                   <BackgroundColor xmlns:d10p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
                     <d10p1:A>255</d10p1:A>
-                    <d10p1:B>153</d10p1:B>
-                    <d10p1:G>153</d10p1:G>
-                    <d10p1:R>153</d10p1:R>
+                    <d10p1:B>0</d10p1:B>
+                    <d10p1:G>0</d10p1:G>
+                    <d10p1:R>0</d10p1:R>
                     <d10p1:ScA>1</d10p1:ScA>
-                    <d10p1:ScB>0.318546772</d10p1:ScB>
-                    <d10p1:ScG>0.318546772</d10p1:ScG>
-                    <d10p1:ScR>0.318546772</d10p1:ScR>
+                    <d10p1:ScB>0</d10p1:ScB>
+                    <d10p1:ScG>0</d10p1:ScG>
+                    <d10p1:ScR>0</d10p1:ScR>
                   </BackgroundColor>
                 </Property>
                 <IsRoot>true</IsRoot>
@@ -2493,7 +2857,59 @@
                     <ArrayOfSnapGuide />
                     <ArrayOfSnapGuide />
                   </SnapGuidesList>
-                  <OwnerNode z:Ref="i40" />
+                  <OwnerNode z:Ref="i47" />
+                </LayoutAssistInfo>
+                <IsHideInLayout>false</IsHideInLayout>
+                <IsLockInLayout>false</IsLockInLayout>
+              </ObjectTreeNode>
+              <ObjectTreeNode z:Id="i49">
+                <Parent z:Ref="i1" />
+                <Nodes />
+                <LayoutProperty>
+                  <LayoutProperty>
+                    <X>0</X>
+                    <Y>0</Y>
+                    <Width>960</Width>
+                    <Height>544</Height>
+                    <Visible>true</Visible>
+                    <Anchors>None</Anchors>
+                  </LayoutProperty>
+                  <LayoutProperty>
+                    <X>0</X>
+                    <Y>0</Y>
+                    <Width>544</Width>
+                    <Height>960</Height>
+                    <Visible>true</Visible>
+                    <Anchors>None</Anchors>
+                  </LayoutProperty>
+                </LayoutProperty>
+                <Property i:type="PanelProperty">
+                  <Effect>None</Effect>
+                  <OwnerNode z:Ref="i49" />
+                  <VariableName>Instructions2</VariableName>
+                  <BackgroundAlpha>100</BackgroundAlpha>
+                  <BackgroundColor xmlns:d10p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                    <d10p1:A>255</d10p1:A>
+                    <d10p1:B>153</d10p1:B>
+                    <d10p1:G>153</d10p1:G>
+                    <d10p1:R>153</d10p1:R>
+                    <d10p1:ScA>1</d10p1:ScA>
+                    <d10p1:ScB>0.3185468</d10p1:ScB>
+                    <d10p1:ScG>0.3185468</d10p1:ScG>
+                    <d10p1:ScR>0.3185468</d10p1:ScR>
+                  </BackgroundColor>
+                </Property>
+                <IsRoot>true</IsRoot>
+                <PivotPos>LeftTop</PivotPos>
+                <WidgetType>Panel</WidgetType>
+                <ID>337884819</ID>
+                <ZIndex>0</ZIndex>
+                <LayoutAssistInfo>
+                  <SnapGuidesList>
+                    <ArrayOfSnapGuide />
+                    <ArrayOfSnapGuide />
+                  </SnapGuidesList>
+                  <OwnerNode z:Ref="i49" />
                 </LayoutAssistInfo>
                 <IsHideInLayout>false</IsHideInLayout>
                 <IsLockInLayout>false</IsLockInLayout>
@@ -2504,7 +2920,7 @@
           <PivotPos>LeftTop</PivotPos>
           <WidgetType>PagePanel</WidgetType>
           <ID>710460260</ID>
-          <ZIndex>0</ZIndex>
+          <ZIndex>2</ZIndex>
           <LayoutAssistInfo>
             <SnapGuidesList>
               <ArrayOfSnapGuide />
@@ -2535,7 +2951,7 @@
       </LayoutProperty>
       <Property i:type="SceneProperty">
         <Effect>None</Effect>
-        <OwnerNode z:Ref="i37" />
+        <OwnerNode z:Ref="i44" />
         <VariableName>InstructionsScene</VariableName>
         <BackgroundAlpha>100</BackgroundAlpha>
         <BackgroundColor xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -2562,17 +2978,17 @@
           <ArrayOfSnapGuide />
           <ArrayOfSnapGuide />
         </SnapGuidesList>
-        <OwnerNode z:Ref="i37" />
+        <OwnerNode z:Ref="i44" />
       </LayoutAssistInfo>
       <IsHideInLayout>false</IsHideInLayout>
       <IsLockInLayout>false</IsLockInLayout>
     </UICNode>
-    <UICNode z:Ref="i40" />
-    <UICNode z:Id="i43" i:type="ObjectTreeNode">
+    <UICNode z:Ref="i47" />
+    <UICNode z:Id="i50" i:type="ObjectTreeNode">
       <Parent z:Ref="i1" />
       <Nodes>
-        <UICNode z:Id="i44" i:type="ObjectTreeNode">
-          <Parent z:Ref="i43" />
+        <UICNode z:Id="i51" i:type="ObjectTreeNode">
+          <Parent z:Ref="i50" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -2594,7 +3010,7 @@
           </LayoutProperty>
           <Property i:type="LabelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i44" />
+            <OwnerNode z:Ref="i51" />
             <VariableName>LevelSelectTitleText</VariableName>
             <H_Alignment>Left</H_Alignment>
             <HasTextShadow>false</HasTextShadow>
@@ -2634,8 +3050,8 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i45" i:type="ObjectTreeNode">
-          <Parent z:Ref="i43" />
+        <UICNode z:Id="i52" i:type="ObjectTreeNode">
+          <Parent z:Ref="i50" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -2657,14 +3073,14 @@
           </LayoutProperty>
           <Property i:type="PagePanelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i45" />
+            <OwnerNode z:Ref="i52" />
             <VariableName>PagePanel_1</VariableName>
             <Panels>
-              <ObjectTreeNode z:Id="i46">
+              <ObjectTreeNode z:Id="i53">
                 <Parent z:Ref="i1" />
                 <Nodes>
-                  <UICNode z:Id="i47" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i46" />
+                  <UICNode z:Id="i54" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i53" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
@@ -2686,7 +3102,7 @@
                     </LayoutProperty>
                     <Property i:type="PanelProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i47" />
+                      <OwnerNode z:Ref="i54" />
                       <VariableName>Panel_1</VariableName>
                       <BackgroundAlpha>100</BackgroundAlpha>
                       <BackgroundColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -2714,8 +3130,8 @@
                     <IsHideInLayout>false</IsHideInLayout>
                     <IsLockInLayout>false</IsLockInLayout>
                   </UICNode>
-                  <UICNode z:Id="i48" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i46" />
+                  <UICNode z:Id="i55" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i53" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
@@ -2737,7 +3153,7 @@
                     </LayoutProperty>
                     <Property i:type="PanelProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i48" />
+                      <OwnerNode z:Ref="i55" />
                       <VariableName>Panel_2</VariableName>
                       <BackgroundAlpha>100</BackgroundAlpha>
                       <BackgroundColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -2765,8 +3181,8 @@
                     <IsHideInLayout>false</IsHideInLayout>
                     <IsLockInLayout>false</IsLockInLayout>
                   </UICNode>
-                  <UICNode z:Id="i49" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i46" />
+                  <UICNode z:Id="i56" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i53" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
@@ -2788,7 +3204,7 @@
                     </LayoutProperty>
                     <Property i:type="PanelProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i49" />
+                      <OwnerNode z:Ref="i56" />
                       <VariableName>Panel_3</VariableName>
                       <BackgroundAlpha>100</BackgroundAlpha>
                       <BackgroundColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -2816,8 +3232,8 @@
                     <IsHideInLayout>false</IsHideInLayout>
                     <IsLockInLayout>false</IsLockInLayout>
                   </UICNode>
-                  <UICNode z:Id="i50" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i46" />
+                  <UICNode z:Id="i57" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i53" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
@@ -2839,7 +3255,7 @@
                     </LayoutProperty>
                     <Property i:type="PanelProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i50" />
+                      <OwnerNode z:Ref="i57" />
                       <VariableName>Panel_4</VariableName>
                       <BackgroundAlpha>100</BackgroundAlpha>
                       <BackgroundColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -2867,8 +3283,8 @@
                     <IsHideInLayout>false</IsHideInLayout>
                     <IsLockInLayout>false</IsLockInLayout>
                   </UICNode>
-                  <UICNode z:Id="i51" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i46" />
+                  <UICNode z:Id="i58" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i53" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
@@ -2890,7 +3306,7 @@
                     </LayoutProperty>
                     <Property i:type="PanelProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i51" />
+                      <OwnerNode z:Ref="i58" />
                       <VariableName>Panel_5</VariableName>
                       <BackgroundAlpha>100</BackgroundAlpha>
                       <BackgroundColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -2918,8 +3334,8 @@
                     <IsHideInLayout>false</IsHideInLayout>
                     <IsLockInLayout>false</IsLockInLayout>
                   </UICNode>
-                  <UICNode z:Id="i52" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i46" />
+                  <UICNode z:Id="i59" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i53" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
@@ -2941,7 +3357,7 @@
                     </LayoutProperty>
                     <Property i:type="PanelProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i52" />
+                      <OwnerNode z:Ref="i59" />
                       <VariableName>Panel_6</VariableName>
                       <BackgroundAlpha>100</BackgroundAlpha>
                       <BackgroundColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -2969,8 +3385,8 @@
                     <IsHideInLayout>false</IsHideInLayout>
                     <IsLockInLayout>false</IsLockInLayout>
                   </UICNode>
-                  <UICNode z:Id="i53" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i46" />
+                  <UICNode z:Id="i60" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i53" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
@@ -2992,7 +3408,7 @@
                     </LayoutProperty>
                     <Property i:type="PanelProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i53" />
+                      <OwnerNode z:Ref="i60" />
                       <VariableName>Panel_7</VariableName>
                       <BackgroundAlpha>100</BackgroundAlpha>
                       <BackgroundColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -3020,8 +3436,8 @@
                     <IsHideInLayout>false</IsHideInLayout>
                     <IsLockInLayout>false</IsLockInLayout>
                   </UICNode>
-                  <UICNode z:Id="i54" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i46" />
+                  <UICNode z:Id="i61" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i53" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
@@ -3043,7 +3459,7 @@
                     </LayoutProperty>
                     <Property i:type="PanelProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i54" />
+                      <OwnerNode z:Ref="i61" />
                       <VariableName>Panel_8</VariableName>
                       <BackgroundAlpha>100</BackgroundAlpha>
                       <BackgroundColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -3071,8 +3487,8 @@
                     <IsHideInLayout>false</IsHideInLayout>
                     <IsLockInLayout>false</IsLockInLayout>
                   </UICNode>
-                  <UICNode z:Id="i55" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i46" />
+                  <UICNode z:Id="i62" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i53" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
@@ -3094,7 +3510,7 @@
                     </LayoutProperty>
                     <Property i:type="PanelProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i55" />
+                      <OwnerNode z:Ref="i62" />
                       <VariableName>Panel_9</VariableName>
                       <BackgroundAlpha>100</BackgroundAlpha>
                       <BackgroundColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -3122,8 +3538,8 @@
                     <IsHideInLayout>false</IsHideInLayout>
                     <IsLockInLayout>false</IsLockInLayout>
                   </UICNode>
-                  <UICNode z:Id="i56" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i46" />
+                  <UICNode z:Id="i63" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i53" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
@@ -3145,7 +3561,7 @@
                     </LayoutProperty>
                     <Property i:type="PanelProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i56" />
+                      <OwnerNode z:Ref="i63" />
                       <VariableName>Panel_10</VariableName>
                       <BackgroundAlpha>100</BackgroundAlpha>
                       <BackgroundColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -3173,8 +3589,8 @@
                     <IsHideInLayout>false</IsHideInLayout>
                     <IsLockInLayout>false</IsLockInLayout>
                   </UICNode>
-                  <UICNode z:Id="i57" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i46" />
+                  <UICNode z:Id="i64" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i53" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
@@ -3196,7 +3612,7 @@
                     </LayoutProperty>
                     <Property i:type="PanelProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i57" />
+                      <OwnerNode z:Ref="i64" />
                       <VariableName>Panel_11</VariableName>
                       <BackgroundAlpha>100</BackgroundAlpha>
                       <BackgroundColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -3224,8 +3640,8 @@
                     <IsHideInLayout>false</IsHideInLayout>
                     <IsLockInLayout>false</IsLockInLayout>
                   </UICNode>
-                  <UICNode z:Id="i58" i:type="ObjectTreeNode">
-                    <Parent z:Ref="i46" />
+                  <UICNode z:Id="i65" i:type="ObjectTreeNode">
+                    <Parent z:Ref="i53" />
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
@@ -3247,7 +3663,7 @@
                     </LayoutProperty>
                     <Property i:type="PanelProperty">
                       <Effect>None</Effect>
-                      <OwnerNode z:Ref="i58" />
+                      <OwnerNode z:Ref="i65" />
                       <VariableName>Panel_12</VariableName>
                       <BackgroundAlpha>100</BackgroundAlpha>
                       <BackgroundColor xmlns:d12p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -3296,7 +3712,7 @@
                 </LayoutProperty>
                 <Property i:type="PanelProperty">
                   <Effect>None</Effect>
-                  <OwnerNode z:Ref="i46" />
+                  <OwnerNode z:Ref="i53" />
                   <VariableName>LevelSelectPanel</VariableName>
                   <BackgroundAlpha>100</BackgroundAlpha>
                   <BackgroundColor xmlns:d10p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -3320,13 +3736,13 @@
                     <ArrayOfSnapGuide />
                     <ArrayOfSnapGuide />
                   </SnapGuidesList>
-                  <OwnerNode z:Ref="i46" />
+                  <OwnerNode z:Ref="i53" />
                 </LayoutAssistInfo>
                 <IsHideInLayout>false</IsHideInLayout>
                 <IsLockInLayout>false</IsLockInLayout>
               </ObjectTreeNode>
-              <ObjectTreeNode z:Ref="i46" />
-              <ObjectTreeNode z:Ref="i46" />
+              <ObjectTreeNode z:Ref="i53" />
+              <ObjectTreeNode z:Ref="i53" />
             </Panels>
           </Property>
           <IsRoot>false</IsRoot>
@@ -3343,8 +3759,8 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i59" i:type="ObjectTreeNode">
-          <Parent z:Ref="i43" />
+        <UICNode z:Id="i66" i:type="ObjectTreeNode">
+          <Parent z:Ref="i50" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -3366,7 +3782,7 @@
           </LayoutProperty>
           <Property i:type="ButtonProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i59" />
+            <OwnerNode z:Ref="i66" />
             <VariableName>StartButton</VariableName>
             <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
             <BackgroundType>Default</BackgroundType>
@@ -3423,8 +3839,8 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i60" i:type="ObjectTreeNode">
-          <Parent z:Ref="i43" />
+        <UICNode z:Id="i67" i:type="ObjectTreeNode">
+          <Parent z:Ref="i50" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -3446,7 +3862,7 @@
           </LayoutProperty>
           <Property i:type="LabelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i60" />
+            <OwnerNode z:Ref="i67" />
             <VariableName>LevelNumberText</VariableName>
             <H_Alignment>Right</H_Alignment>
             <HasTextShadow>false</HasTextShadow>
@@ -3486,8 +3902,8 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i61" i:type="ObjectTreeNode">
-          <Parent z:Ref="i43" />
+        <UICNode z:Id="i68" i:type="ObjectTreeNode">
+          <Parent z:Ref="i50" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -3509,7 +3925,7 @@
           </LayoutProperty>
           <Property i:type="LabelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i61" />
+            <OwnerNode z:Ref="i68" />
             <VariableName>LevelTimeText</VariableName>
             <H_Alignment>Right</H_Alignment>
             <HasTextShadow>false</HasTextShadow>
@@ -3549,8 +3965,8 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i62" i:type="ObjectTreeNode">
-          <Parent z:Ref="i43" />
+        <UICNode z:Id="i69" i:type="ObjectTreeNode">
+          <Parent z:Ref="i50" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -3572,7 +3988,7 @@
           </LayoutProperty>
           <Property i:type="LabelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i62" />
+            <OwnerNode z:Ref="i69" />
             <VariableName>GradeText</VariableName>
             <H_Alignment>Right</H_Alignment>
             <HasTextShadow>false</HasTextShadow>
@@ -3612,8 +4028,8 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i63" i:type="ObjectTreeNode">
-          <Parent z:Ref="i43" />
+        <UICNode z:Id="i70" i:type="ObjectTreeNode">
+          <Parent z:Ref="i50" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -3635,7 +4051,7 @@
           </LayoutProperty>
           <Property i:type="LabelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i63" />
+            <OwnerNode z:Ref="i70" />
             <VariableName>ScoreText</VariableName>
             <H_Alignment>Right</H_Alignment>
             <HasTextShadow>false</HasTextShadow>
@@ -3675,8 +4091,8 @@
           <IsHideInLayout>false</IsHideInLayout>
           <IsLockInLayout>false</IsLockInLayout>
         </UICNode>
-        <UICNode z:Id="i64" i:type="ObjectTreeNode">
-          <Parent z:Ref="i43" />
+        <UICNode z:Id="i71" i:type="ObjectTreeNode">
+          <Parent z:Ref="i50" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -3698,7 +4114,7 @@
           </LayoutProperty>
           <Property i:type="ButtonProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i64" />
+            <OwnerNode z:Ref="i71" />
             <VariableName>BackButton</VariableName>
             <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
             <BackgroundType>Default</BackgroundType>
@@ -3776,7 +4192,7 @@
       </LayoutProperty>
       <Property i:type="SceneProperty">
         <Effect>None</Effect>
-        <OwnerNode z:Ref="i43" />
+        <OwnerNode z:Ref="i50" />
         <VariableName>LevelSelectScene</VariableName>
         <BackgroundAlpha>100</BackgroundAlpha>
         <BackgroundColor xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -3803,17 +4219,17 @@
           <ArrayOfSnapGuide />
           <ArrayOfSnapGuide />
         </SnapGuidesList>
-        <OwnerNode z:Ref="i43" />
+        <OwnerNode z:Ref="i50" />
       </LayoutAssistInfo>
       <IsHideInLayout>false</IsHideInLayout>
       <IsLockInLayout>false</IsLockInLayout>
     </UICNode>
-    <UICNode z:Ref="i46" />
-    <UICNode z:Id="i65" i:type="ObjectTreeNode">
+    <UICNode z:Ref="i53" />
+    <UICNode z:Id="i72" i:type="ObjectTreeNode">
       <Parent z:Ref="i1" />
       <Nodes>
-        <UICNode z:Id="i66" i:type="ObjectTreeNode">
-          <Parent z:Ref="i65" />
+        <UICNode z:Id="i73" i:type="ObjectTreeNode">
+          <Parent z:Ref="i72" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -3835,7 +4251,7 @@
           </LayoutProperty>
           <Property i:type="ButtonProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i66" />
+            <OwnerNode z:Ref="i73" />
             <VariableName>Button_1</VariableName>
             <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData" i:nil="true" />
             <BackgroundType>Default</BackgroundType>
@@ -3913,7 +4329,7 @@
       </LayoutProperty>
       <Property i:type="PanelProperty">
         <Effect>None</Effect>
-        <OwnerNode z:Ref="i65" />
+        <OwnerNode z:Ref="i72" />
         <VariableName>LevelSelectItem</VariableName>
         <BackgroundAlpha>0</BackgroundAlpha>
         <BackgroundColor xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -3937,16 +4353,16 @@
           <ArrayOfSnapGuide />
           <ArrayOfSnapGuide />
         </SnapGuidesList>
-        <OwnerNode z:Ref="i65" />
+        <OwnerNode z:Ref="i72" />
       </LayoutAssistInfo>
       <IsHideInLayout>false</IsHideInLayout>
       <IsLockInLayout>false</IsLockInLayout>
     </UICNode>
-    <UICNode z:Id="i67" i:type="ObjectTreeNode">
+    <UICNode z:Id="i74" i:type="ObjectTreeNode">
       <Parent z:Ref="i1" />
       <Nodes>
-        <UICNode z:Id="i68" i:type="ObjectTreeNode">
-          <Parent z:Ref="i67" />
+        <UICNode z:Id="i75" i:type="ObjectTreeNode">
+          <Parent z:Ref="i74" />
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
@@ -3968,7 +4384,7 @@
           </LayoutProperty>
           <Property i:type="LabelProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i68" />
+            <OwnerNode z:Ref="i75" />
             <VariableName>ScoreText</VariableName>
             <H_Alignment>Center</H_Alignment>
             <HasTextShadow>false</HasTextShadow>
@@ -4029,7 +4445,7 @@
       </LayoutProperty>
       <Property i:type="PanelProperty">
         <Effect>None</Effect>
-        <OwnerNode z:Ref="i67" />
+        <OwnerNode z:Ref="i74" />
         <VariableName>ScorePanel</VariableName>
         <BackgroundAlpha>0</BackgroundAlpha>
         <BackgroundColor xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
@@ -4053,11 +4469,12 @@
           <ArrayOfSnapGuide />
           <ArrayOfSnapGuide />
         </SnapGuidesList>
-        <OwnerNode z:Ref="i67" />
+        <OwnerNode z:Ref="i74" />
       </LayoutAssistInfo>
       <IsHideInLayout>false</IsHideInLayout>
       <IsLockInLayout>false</IsLockInLayout>
     </UICNode>
+    <UICNode z:Ref="i49" />
   </Nodes>
   <MajorVersion>0</MajorVersion>
   <MinorVersion>1</MinorVersion>
