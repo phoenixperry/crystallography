@@ -31,8 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="__DummyProgram.cs" />
-    <Compile Include="MenuScene.composer.cs" />
-    <Compile Include="MenuScene.cs" />
+    <Compile Include="LevelSelectScene.composer.cs" />
+    <Compile Include="LevelSelectScene.cs" />
+    <Compile Include="LevelSelectPanel.composer.cs" />
+    <Compile Include="LevelSelectPanel.cs" />
     <Compile Include="UIStringTable.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +55,135 @@
     </Content>
     <Content Include="..\\assets\fonts\Bariol_Regular.otf" >
       <Link>assets\fonts\Bariol_Regular.otf</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\back.png" >
+      <Link>assets\images\UI\back.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\backOver.png" >
+      <Link>assets\images\UI\backOver.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\back_2.png" >
+      <Link>assets\images\UI\back_2.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\blueBtn.png" >
+      <Link>assets\images\UI\blueBtn.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\blueBtnOver.png" >
+      <Link>assets\images\UI\blueBtnOver.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\credits.png" >
+      <Link>assets\images\UI\credits.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\cubeUI.png" >
+      <Link>assets\images\UI\cubeUI.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\cubeUIRoll.png" >
+      <Link>assets\images\UI\cubeUIRoll.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\greyBar.png" >
+      <Link>assets\images\UI\greyBar.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\header.png" >
+      <Link>assets\images\UI\header.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\instructions.png" >
+      <Link>assets\images\UI\instructions.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\instructions1.png" >
+      <Link>assets\images\UI\instructions1.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\instructions2.png" >
+      <Link>assets\images\UI\instructions2.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\instructions3.png" >
+      <Link>assets\images\UI\instructions3.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\instructions4.png" >
+      <Link>assets\images\UI\instructions4.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\instructions5.png" >
+      <Link>assets\images\UI\instructions5.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\instructions6.png" >
+      <Link>assets\images\UI\instructions6.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\instructions7.png" >
+      <Link>assets\images\UI\instructions7.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\instructions8.png" >
+      <Link>assets\images\UI\instructions8.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\instructionsOver.png" >
+      <Link>assets\images\UI\instructionsOver.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\lockIcon.png" >
+      <Link>assets\images\UI\lockIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\makeShapes.png" >
+      <Link>assets\images\UI\makeShapes.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\menuButtonBackground.png" >
+      <Link>assets\images\UI\menuButtonBackground.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\play.png" >
+      <Link>assets\images\UI\play.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\playOVer.png" >
+      <Link>assets\images\UI\playOVer.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\quit.png" >
+      <Link>assets\images\UI\quit.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\quitOver.png" >
+      <Link>assets\images\UI\quitOver.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\redBtn.png" >
+      <Link>assets\images\UI\redBtn.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\redBtnOver.png" >
+      <Link>assets\images\UI\redBtnOver.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\redPageIcon.png" >
+      <Link>assets\images\UI\redPageIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\score.png" >
+      <Link>assets\images\UI\score.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\selectlevel.png" >
+      <Link>assets\images\UI\selectlevel.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\selectLevelOver.png" >
+      <Link>assets\images\UI\selectLevelOver.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\start.png" >
+      <Link>assets\images\UI\start.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\startOver.png" >
+      <Link>assets\images\UI\startOver.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\statsBox.png" >
+      <Link>assets\images\UI\statsBox.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\timer.png" >
+      <Link>assets\images\UI\timer.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\triBtnGraphics.png" >
+      <Link>assets\images\UI\triBtnGraphics.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\Untitled-5.png" >
+      <Link>assets\images\UI\Untitled-5.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\whitePageIcon.png" >
+      <Link>assets\images\UI\whitePageIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\icons\glasses.png" >
+      <Link>assets\images\UI\icons\glasses.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\icons\journal.png" >
+      <Link>assets\images\UI\icons\journal.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\icons\tie.png" >
+      <Link>assets\images\UI\icons\tie.png</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -57,55 +57,55 @@ namespace Crystallography.UI
             Panel_12.Name = "Panel_12";
 
             // Panel_1
-            Panel_1.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_1.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_1.Clip = true;
 
             // Panel_2
-            Panel_2.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_2.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_2.Clip = true;
 
             // Panel_3
-            Panel_3.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_3.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_3.Clip = true;
 
             // Panel_4
-            Panel_4.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_4.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_4.Clip = true;
 
             // Panel_5
-            Panel_5.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_5.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_5.Clip = true;
 
             // Panel_6
-            Panel_6.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_6.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_6.Clip = true;
 
             // Panel_7
-            Panel_7.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_7.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_7.Clip = true;
 
             // Panel_8
-            Panel_8.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_8.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_8.Clip = true;
 
             // Panel_9
-            Panel_9.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_9.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_9.Clip = true;
 
             // Panel_10
-            Panel_10.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_10.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_10.Clip = true;
 
             // Panel_11
-            Panel_11.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_11.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_11.Clip = true;
 
             // Panel_12
-            Panel_12.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_12.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_12.Clip = true;
 
             // LevelSelectPanel
-            this.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             this.Clip = true;
             this.AddChildLast(Panel_1);
             this.AddChildLast(Panel_2);
@@ -200,7 +200,7 @@ namespace Crystallography.UI
                     this.SetSize(567, 396);
                     this.Anchors = Anchors.None;
 
-                    Panel_1.SetPosition(40, 24);
+                    Panel_1.SetPosition(33, 24);
                     Panel_1.SetSize(100, 100);
                     Panel_1.Anchors = Anchors.None;
                     Panel_1.Visible = true;

@@ -11,7 +11,7 @@ namespace Crystallography.UI
 {
     partial class InstructionsPanel
     {
-        Button StartButton;
+        ImageBox ImageBox_1;
 
         private void InitializeWidget()
         {
@@ -20,24 +20,17 @@ namespace Crystallography.UI
 
         private void InitializeWidget(LayoutOrientation orientation)
         {
-            StartButton = new Button();
-            StartButton.Name = "StartButton";
+            ImageBox_1 = new ImageBox();
+            ImageBox_1.Name = "ImageBox_1";
 
-            // StartButton
-            StartButton.IconImage = new ImageAsset("/Application/assets/images/UI/play.png");
-            StartButton.Style = ButtonStyle.Custom;
-            StartButton.CustomImage = new CustomButtonImageSettings()
-            {
-                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/play.png"),
-                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/playOVer.png"),
-                BackgroundDisabledImage = null,
-                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
-            };
+            // ImageBox_1
+            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/instructions1.png");
+            ImageBox_1.ImageScaleType = ImageScaleType.Center;
 
             // InstructionsPanel
             this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             this.Clip = true;
-            this.AddChildLast(StartButton);
+            this.AddChildLast(ImageBox_1);
 
             SetWidgetLayout(orientation);
 
@@ -53,10 +46,10 @@ namespace Crystallography.UI
                     this.SetSize(425, 924);
                     this.Anchors = Anchors.None;
 
-                    StartButton.SetPosition(688, 346);
-                    StartButton.SetSize(214, 56);
-                    StartButton.Anchors = Anchors.None;
-                    StartButton.Visible = true;
+                    ImageBox_1.SetPosition(320, 75);
+                    ImageBox_1.SetSize(200, 200);
+                    ImageBox_1.Anchors = Anchors.None;
+                    ImageBox_1.Visible = true;
 
                     break;
 
@@ -64,10 +57,10 @@ namespace Crystallography.UI
                     this.SetSize(924, 425);
                     this.Anchors = Anchors.None;
 
-                    StartButton.SetPosition(643, 343);
-                    StartButton.SetSize(258, 63);
-                    StartButton.Anchors = Anchors.None;
-                    StartButton.Visible = true;
+                    ImageBox_1.SetPosition(78, -25);
+                    ImageBox_1.SetSize(767, 475);
+                    ImageBox_1.Anchors = Anchors.None;
+                    ImageBox_1.Visible = true;
 
                     break;
             }

@@ -11,8 +11,10 @@ namespace Crystallography.UI
 {
     partial class ScoreScene
     {
+        ImageBox ImageBox_2;
         Label ScoreLabelText;
         Label ScoreText;
+        ImageBox ImageBox_1;
         Label TimerSeparatorText;
         Label TimerSecondsText;
         Label TimerMinutesText;
@@ -30,10 +32,14 @@ namespace Crystallography.UI
 
         private void InitializeWidget(LayoutOrientation orientation)
         {
+            ImageBox_2 = new ImageBox();
+            ImageBox_2.Name = "ImageBox_2";
             ScoreLabelText = new Label();
             ScoreLabelText.Name = "ScoreLabelText";
             ScoreText = new Label();
             ScoreText.Name = "ScoreText";
+            ImageBox_1 = new ImageBox();
+            ImageBox_1.Name = "ImageBox_1";
             TimerSeparatorText = new Label();
             TimerSeparatorText.Name = "TimerSeparatorText";
             TimerSecondsText = new Label();
@@ -53,15 +59,23 @@ namespace Crystallography.UI
             NextLevelButton = new Button();
             NextLevelButton.Name = "NextLevelButton";
 
+            // ImageBox_2
+            ImageBox_2.Image = new ImageAsset("/Application/assets/images/UI/score.png");
+            ImageBox_2.ImageScaleType = ImageScaleType.Center;
+
             // ScoreLabelText
             ScoreLabelText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            ScoreLabelText.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            ScoreLabelText.Font = new UIFont(FontAlias.System, 22, FontStyle.Regular);
             ScoreLabelText.LineBreak = LineBreak.Character;
 
             // ScoreText
             ScoreText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
             ScoreText.Font = new UIFont(FontAlias.System, 18, FontStyle.Regular);
             ScoreText.LineBreak = LineBreak.Character;
+
+            // ImageBox_1
+            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/timer.png");
+            ImageBox_1.ImageScaleType = ImageScaleType.Center;
 
             // TimerSeparatorText
             TimerSeparatorText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
@@ -83,10 +97,12 @@ namespace Crystallography.UI
             TimerMinutesText.HorizontalAlignment = HorizontalAlignment.Right;
 
             // Panel_1
-            Panel_1.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            Panel_1.BackgroundColor = new UIColor(40f / 255f, 40f / 255f, 40f / 255f, 255f / 255f);
             Panel_1.Clip = true;
+            Panel_1.AddChildLast(ImageBox_2);
             Panel_1.AddChildLast(ScoreLabelText);
             Panel_1.AddChildLast(ScoreText);
+            Panel_1.AddChildLast(ImageBox_1);
             Panel_1.AddChildLast(TimerSeparatorText);
             Panel_1.AddChildLast(TimerSecondsText);
             Panel_1.AddChildLast(TimerMinutesText);
@@ -99,11 +115,27 @@ namespace Crystallography.UI
             // ResumeButton
             ResumeButton.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
             ResumeButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            ResumeButton.Style = ButtonStyle.Custom;
+            ResumeButton.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/blueBtn.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/blueBtnOver.png"),
+                BackgroundDisabledImage = null,
+                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+            };
             ResumeButton.BackgroundFilterColor = new UIColor(41f / 255f, 226f / 255f, 226f / 255f, 255f / 255f);
 
             // GiveUpButton
             GiveUpButton.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
             GiveUpButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            GiveUpButton.Style = ButtonStyle.Custom;
+            GiveUpButton.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/redBtn.png"),
+                BackgroundPressedImage = null,
+                BackgroundDisabledImage = null,
+                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+            };
             GiveUpButton.BackgroundFilterColor = new UIColor(229f / 255f, 19f / 255f, 19f / 255f, 255f / 255f);
 
             // PauseMenu
@@ -114,13 +146,23 @@ namespace Crystallography.UI
             PauseMenu.AddChildLast(GiveUpButton);
 
             // NextLevelButton
-            NextLevelButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            NextLevelButton.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
             NextLevelButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            NextLevelButton.Style = ButtonStyle.Custom;
+            NextLevelButton.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/redBtn.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/redBtnOver.png"),
+                BackgroundDisabledImage = null,
+                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+            };
 
             // ScoreScene
             this.RootWidget.AddChildLast(Panel_1);
             this.RootWidget.AddChildLast(PauseMenu);
             this.RootWidget.AddChildLast(NextLevelButton);
+            this.Showing += new EventHandler(onShowing);
+            this.Shown += new EventHandler(onShown);
 
             SetWidgetLayout(orientation);
 
@@ -136,6 +178,11 @@ namespace Crystallography.UI
                     this.DesignWidth = 544;
                     this.DesignHeight = 960;
 
+                    ImageBox_2.SetPosition(-26, 416);
+                    ImageBox_2.SetSize(200, 200);
+                    ImageBox_2.Anchors = Anchors.None;
+                    ImageBox_2.Visible = true;
+
                     ScoreLabelText.SetPosition(0, -12);
                     ScoreLabelText.SetSize(214, 36);
                     ScoreLabelText.Anchors = Anchors.None;
@@ -145,6 +192,11 @@ namespace Crystallography.UI
                     ScoreText.SetSize(214, 36);
                     ScoreText.Anchors = Anchors.None;
                     ScoreText.Visible = true;
+
+                    ImageBox_1.SetPosition(396, 430);
+                    ImageBox_1.SetSize(200, 200);
+                    ImageBox_1.Anchors = Anchors.None;
+                    ImageBox_1.Visible = true;
 
                     TimerSeparatorText.SetPosition(382, 508);
                     TimerSeparatorText.SetSize(214, 36);
@@ -197,27 +249,37 @@ namespace Crystallography.UI
                     this.DesignWidth = 960;
                     this.DesignHeight = 544;
 
-                    ScoreLabelText.SetPosition(0, -2);
+                    ImageBox_2.SetPosition(-18, -92);
+                    ImageBox_2.SetSize(265, 200);
+                    ImageBox_2.Anchors = Anchors.None;
+                    ImageBox_2.Visible = true;
+
+                    ScoreLabelText.SetPosition(19, -4);
                     ScoreLabelText.SetSize(74, 36);
                     ScoreLabelText.Anchors = Anchors.None;
                     ScoreLabelText.Visible = true;
 
-                    ScoreText.SetPosition(74, 0);
+                    ScoreText.SetPosition(87, -2);
                     ScoreText.SetSize(145, 36);
                     ScoreText.Anchors = Anchors.None;
                     ScoreText.Visible = true;
 
-                    TimerSeparatorText.SetPosition(476, -2);
+                    ImageBox_1.SetPosition(366, -1);
+                    ImageBox_1.SetSize(261, 36);
+                    ImageBox_1.Anchors = Anchors.None;
+                    ImageBox_1.Visible = true;
+
+                    TimerSeparatorText.SetPosition(476, -1);
                     TimerSeparatorText.SetSize(26, 36);
                     TimerSeparatorText.Anchors = Anchors.None;
                     TimerSeparatorText.Visible = true;
 
-                    TimerSecondsText.SetPosition(490, -1);
+                    TimerSecondsText.SetPosition(490, 1);
                     TimerSecondsText.SetSize(65, 36);
                     TimerSecondsText.Anchors = Anchors.None;
                     TimerSecondsText.Visible = true;
 
-                    TimerMinutesText.SetPosition(352, -1);
+                    TimerMinutesText.SetPosition(352, 2);
                     TimerMinutesText.SetSize(135, 36);
                     TimerMinutesText.Anchors = Anchors.None;
                     TimerMinutesText.Visible = true;
@@ -227,28 +289,28 @@ namespace Crystallography.UI
                     Panel_1.Anchors = Anchors.None;
                     Panel_1.Visible = true;
 
-                    PauseMenuText.SetPosition(21, 19);
-                    PauseMenuText.SetSize(214, 62);
+                    PauseMenuText.SetPosition(7, 24);
+                    PauseMenuText.SetSize(242, 62);
                     PauseMenuText.Anchors = Anchors.None;
                     PauseMenuText.Visible = true;
 
-                    ResumeButton.SetPosition(277, 22);
-                    ResumeButton.SetSize(214, 56);
+                    ResumeButton.SetPosition(262, 14);
+                    ResumeButton.SetSize(289, 71);
                     ResumeButton.Anchors = Anchors.None;
                     ResumeButton.Visible = true;
 
-                    GiveUpButton.SetPosition(516, 22);
-                    GiveUpButton.SetSize(214, 56);
+                    GiveUpButton.SetPosition(562, 15);
+                    GiveUpButton.SetSize(289, 71);
                     GiveUpButton.Anchors = Anchors.None;
                     GiveUpButton.Visible = true;
 
-                    PauseMenu.SetPosition(105, 227);
-                    PauseMenu.SetSize(750, 100);
+                    PauseMenu.SetPosition(43, 227);
+                    PauseMenu.SetSize(850, 100);
                     PauseMenu.Anchors = Anchors.None;
                     PauseMenu.Visible = false;
 
-                    NextLevelButton.SetPosition(746, 488);
-                    NextLevelButton.SetSize(214, 56);
+                    NextLevelButton.SetPosition(671, 474);
+                    NextLevelButton.SetSize(289, 71);
                     NextLevelButton.Anchors = Anchors.None;
                     NextLevelButton.Visible = true;
 
@@ -269,13 +331,13 @@ namespace Crystallography.UI
 
             TimerMinutesText.Text = "000";
 
-            PauseMenuText.Text = "pause.";
+            PauseMenuText.Text = "pause";
 
-            ResumeButton.Text = "Resume";
+            ResumeButton.Text = "resume";
 
-            GiveUpButton.Text = "Give Up";
+            GiveUpButton.Text = "give up";
 
-            NextLevelButton.Text = "Next Level";
+            NextLevelButton.Text = "next level";
         }
 
         private void onShowing(object sender, EventArgs e)
@@ -283,9 +345,11 @@ namespace Crystallography.UI
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
+                    NextLevelButton.Visible = false;
                     break;
 
                 default:
+                    NextLevelButton.Visible = false;
                     break;
             }
         }
@@ -295,9 +359,19 @@ namespace Crystallography.UI
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
+                    new SlideInEffect()
+                    {
+                        Widget = NextLevelButton,
+                        MoveDirection = FourWayDirection.Up,
+                    }.Start();
                     break;
 
                 default:
+                    new SlideInEffect()
+                    {
+                        Widget = NextLevelButton,
+                        MoveDirection = FourWayDirection.Up,
+                    }.Start();
                     break;
             }
         }

@@ -27,7 +27,7 @@ namespace Preview
             TouchToStartText.Name = "TouchToStartText";
 
             // TitleImage
-            TitleImage.Image = new ImageAsset("/Application/assets/header.png");
+            TitleImage.Image = new ImageAsset("/Application/assets/images/UI/header.png");
             TitleImage.ImageScaleType = ImageScaleType.Center;
 
             // TouchToStartText
@@ -39,6 +39,8 @@ namespace Preview
             // TitleScene
             this.RootWidget.AddChildLast(TitleImage);
             this.RootWidget.AddChildLast(TouchToStartText);
+            this.Showing += new EventHandler(onShowing);
+            this.Shown += new EventHandler(onShown);
 
             SetWidgetLayout(orientation);
 
@@ -95,9 +97,11 @@ namespace Preview
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
+                    TitleImage.Visible = false;
                     break;
 
                 default:
+                    TitleImage.Visible = false;
                     break;
             }
         }
@@ -107,9 +111,17 @@ namespace Preview
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
+                    new FadeInEffect()
+                    {
+                        Widget = TitleImage,
+                    }.Start();
                     break;
 
                 default:
+                    new FadeInEffect()
+                    {
+                        Widget = TitleImage,
+                    }.Start();
                     break;
             }
         }

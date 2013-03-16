@@ -11,6 +11,7 @@ namespace Crystallography.UI
 {
     partial class Instructions2
     {
+        ImageBox ImageBox_1;
 
         private void InitializeWidget()
         {
@@ -19,10 +20,17 @@ namespace Crystallography.UI
 
         private void InitializeWidget(LayoutOrientation orientation)
         {
+            ImageBox_1 = new ImageBox();
+            ImageBox_1.Name = "ImageBox_1";
+
+            // ImageBox_1
+            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/instructions2.png");
+            ImageBox_1.ImageScaleType = ImageScaleType.Center;
 
             // Instructions2
-            this.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             this.Clip = true;
+            this.AddChildLast(ImageBox_1);
 
             SetWidgetLayout(orientation);
 
@@ -38,11 +46,21 @@ namespace Crystallography.UI
                     this.SetSize(544, 960);
                     this.Anchors = Anchors.None;
 
+                    ImageBox_1.SetPosition(328, 169);
+                    ImageBox_1.SetSize(200, 200);
+                    ImageBox_1.Anchors = Anchors.None;
+                    ImageBox_1.Visible = true;
+
                     break;
 
                 default:
                     this.SetSize(960, 544);
                     this.Anchors = Anchors.None;
+
+                    ImageBox_1.SetPosition(130, 29);
+                    ImageBox_1.SetSize(699, 486);
+                    ImageBox_1.Anchors = Anchors.None;
+                    ImageBox_1.Visible = true;
 
                     break;
             }

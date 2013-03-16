@@ -47,7 +47,7 @@ namespace Crystallography.UI
             Label_1.LineBreak = LineBreak.Character;
 
             // ThanksPanel
-            this.BackgroundColor = new UIColor(34f / 255f, 34f / 255f, 34f / 255f, 255f / 255f);
+            this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             this.Clip = true;
             this.AddChildLast(ThanksText);
             this.AddChildLast(ThanksNamesText);
