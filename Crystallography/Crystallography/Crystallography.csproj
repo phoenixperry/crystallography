@@ -107,6 +107,8 @@
     <Compile Include="AnimationGlitchSpriteSingleton.cs" />
     <Compile Include="GlitchAnimation.cs" />
     <Compile Include="LevelManager.cs" />
+    <Compile Include="ui\LevelEndPanel.composer.cs" />
+    <Compile Include="ui\LevelEndPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

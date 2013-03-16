@@ -37,7 +37,6 @@ namespace Crystallography
 		
 		public static bool paused { get; private set; }
 		
-		public GlitchAnimation ga; 
 		// CONSTRUCTOR ----------------------------------------------------------------------------------
 		
         public GameScene ( int pCurrentLevel )
@@ -200,7 +199,7 @@ namespace Crystallography
 			}
 		}
 		
-		public void QuitToTitle() {
+		public static void QuitToTitle() {
 			Director.Instance.ReplaceScene( new MenuSystemScene(false) );
 
 		}
