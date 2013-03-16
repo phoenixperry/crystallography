@@ -42,7 +42,7 @@ namespace Crystallography
 		/// Initializes a new instance of the <see cref="Crystallography.CardManager"/> class.
 		/// </summary>
 		protected CardManager () {
-			MaxPopulation = 15;
+			MaxPopulation = 30;
 			NextId = 0;
 			availableCards = new List<CardCrystallonEntity>();
 			_scene = Director.Instance.CurrentScene;
@@ -52,9 +52,19 @@ namespace Crystallography
 		
 		// EVENT HANDLERS ------------------------------------------------------------------
 		
+		/// <summary>
+		/// Make the cards in the cube unavailable. Repopulate if possible. If no possible matches remain, allow level transition.
+		/// </summary>
+		/// <param name='sender'>
+		/// Sender.
+		/// </param>
+		/// <param name='e'>
+		/// E.
+		/// </param>
 		void HandleSelectionGroupInstanceCubeCompleteDetected (object sender, CubeCompleteEventArgs e)
 		{
 			MakeUnavailable( e.members );
+			Populate();
 			if ( MatchesPossible() == false ) {
 				EventHandler handler = NoMatchesPossibleDetected;
 				if (handler != null) {
@@ -132,8 +142,11 @@ namespace Crystallography
 			return false;
 		}
 		
+		/// <summary>
+		/// Spawn cards until we run out of cards to spawn, or hit the population cap.
+		/// </summary>
 		public void Populate () {
-			while ( availableCards.Count < MaxPopulation && availableCards.Count < TotalCardsInDeck ) {
+			while ( availableCards.Count < MaxPopulation && TotalCardsInDeck > 0) {
 				spawn();
 			}
 		}
@@ -183,6 +196,7 @@ namespace Crystallography
 			CardCrystallonEntity card = new CardCrystallonEntity(_scene, _physics, NextId, ss.Get("TopSolid").TextureInfo, ss.Get ("TopSolid").TileIndex2D, 
 			                                _physics.SceneShapes[0]);
 			NextId++;
+			TotalCardsInDeck--;
 			QualityManager.Instance.ApplyQualitiesToEntity( card );
 			card.setPosition( pX, pY );
 			card.addToScene();

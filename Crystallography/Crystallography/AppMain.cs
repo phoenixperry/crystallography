@@ -57,7 +57,7 @@ namespace Crystallography
 		{
 			Director.Initialize();
 			UISystem.Initialize(Director.Instance.GL.Context);
-			Director.Instance.RunWithScene( new MenuSystemScene(false), true );
+			Director.Instance.RunWithScene( new MenuSystemScene(true), true );
 			
 			while( true ){
 				SystemEvents.CheckEvents();
