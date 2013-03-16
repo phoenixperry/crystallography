@@ -103,12 +103,13 @@
     <Compile Include="Layer.cs" />
     <Compile Include="bg\CrystallonBackground.cs" />
     <Compile Include="ui\ScorePopup.cs" />
-    <Compile Include="AnimationFallSpriteSinleton.cs" />
     <Compile Include="AnimationGlitchSpriteSingleton.cs" />
     <Compile Include="GlitchAnimation.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="ui\LevelEndPanel.composer.cs" />
     <Compile Include="ui\LevelEndPanel.cs" />
+    <Compile Include="AnimationFallSpriteSingleton.cs" />
+    <Compile Include="AnimationFall.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -128,6 +129,7 @@
     <Folder Include="assets\images\bg\" />
     <Folder Include="bg\" />
     <Folder Include="assets\animation\" />
+    <Folder Include="assets\animation\leftFall\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\sounds\music_ingame.mp3" />
@@ -207,6 +209,8 @@
     <Content Include="assets\levels\level_22.xml" />
     <Content Include="assets\levels\level_23.xml" />
     <Content Include="assets\levels\level_24.xml" />
+    <Content Include="assets\animation\leftFall\leftFall.png" />
+    <Content Include="assets\animation\leftFall\leftFall.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Board.cs" />
