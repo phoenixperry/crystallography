@@ -205,7 +205,6 @@ namespace Crystallography
 		}
 
         ~GameScene(){
-           // _pongBlipSoundPlayer.Dispose();
         }
 
 	}

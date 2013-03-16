@@ -10,7 +10,6 @@ namespace Crystallography
 	public class SelectionGroup : GroupCrystallonEntity {
 		
 		protected static SelectionGroup _instance;
-//		protected static System.Type _selectionType;
 		
 		public static readonly int MAX_CAPACITY = 3;
 		protected static readonly float SNAP_DISTANCE = 50.0f;
