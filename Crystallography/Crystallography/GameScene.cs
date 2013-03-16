@@ -37,20 +37,19 @@ namespace Crystallography
 		
 		public static bool paused { get; private set; }
 		
-		public GlitchAnimation ga; 
 		// CONSTRUCTOR ----------------------------------------------------------------------------------
 		
         public GameScene ( int pCurrentLevel )
 		{
-			ga = new GlitchAnimation(); 
-			this.AddChild(ga); 
-			
 			Touch.GetData(0).Clear();
+			
+			UISystem.SetScene( new Crystallography.UI.ScoreScene() );
+			
+			LevelManager.Instance.LoadGameData();
+			LevelManager.Instance.GetLevelSettings( pCurrentLevel );
 			
 			background = new Crystallography.BG.CrystallonBackground();
 			this.AddChild(background);
-			
-			UISystem.SetScene( new Crystallography.UI.ScoreScene() );
 			
 			currentLevel = pCurrentLevel;
             this.Camera.SetViewFromViewport();
@@ -185,16 +184,22 @@ namespace Crystallography
 			currentLevel++;
 			if (currentLevel < TOTAL_LEVELS) {
 				Console.WriteLine( "Resetting to start level " + currentLevel );
+				LevelManager.Instance.GetLevelSettings( currentLevel );
+				QColor.Instance.setPalette();
 				CardManager.Instance.Reset( this );
 				GroupManager.Instance.Reset( this );
 				QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
+				EventHandler handler = LevelChangeDetected;
+				if (handler != null) {
+					handler( this, null );
+				}
 			} else {
 				Console.WriteLine( "All known levels (" + TOTAL_LEVELS + ") complete. Returning to TitleScene." );
 				QuitToTitle();
 			}
 		}
 		
-		public void QuitToTitle() {
+		public static void QuitToTitle() {
 			Director.Instance.ReplaceScene( new MenuSystemScene(false) );
 
 		}

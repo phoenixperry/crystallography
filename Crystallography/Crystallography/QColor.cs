@@ -37,9 +37,11 @@ namespace Crystallography
 //			Instance = this;
 			_name = "QColor";
 			Instance = this;
-			setPalette( new Vector4(0.96f,0.88f,0.88f,1.0f), // pink
-			           new Vector4(0.90f,0.075f,0.075f,1.0f), // red
-			           new Vector4(0.16f,0.88f,0.88f,1.0f) ); // teal
+			setPalette();
+			           
+			           //new Vector4(0.96f,0.88f,0.88f,1.0f), // pink
+//			           new Vector4(0.90f,0.075f,0.075f,1.0f), // red
+//			           new Vector4(0.16f,0.88f,0.88f,1.0f) ); // teal
 		}
 		
 		// OVERRIDES --------------------------------------------------------------------
@@ -53,6 +55,10 @@ namespace Crystallography
 //		}
 		
 		// METHODS ----------------------------------------------------------------------
+		
+		public void setPalette () {
+			setPalette( LevelManager.Instance.Palette[0], LevelManager.Instance.Palette[1], LevelManager.Instance.Palette[2] );
+		}
 		
 		public void setPalette( Vector4 pColor1, Vector4 pColor2, Vector4 pColor3 ) {
 			palette[0] = pColor1;

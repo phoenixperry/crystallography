@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Sce.PlayStation.Core;
 using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
@@ -18,10 +19,18 @@ namespace Crystallography.BG
 		public Node n1;
 		public Node n2;
 		
+		private List<SpriteBase> Color0Objects;
+		private List<SpriteBase> Color1Objects;
+		private List<SpriteBase> Color2Objects;
+		
 		public CrystallonBackground () : base ()
 		{
 			_screenWidth = Director.Instance.GL.Context.GetViewport().Width;
             _screenHeight = Director.Instance.GL.Context.GetViewport().Height;
+			
+			Color0Objects = new List<SpriteBase>();
+			Color1Objects = new List<SpriteBase>();
+			Color2Objects = new List<SpriteBase>();
 			
 			RED_BASE = new Vector2(0.5f*_screenWidth, 0.32f*_screenHeight);
 			RED_RANGE = new Vector2(0.0f, 0.13f*_screenHeight);
@@ -37,51 +46,53 @@ namespace Crystallography.BG
 			
 			var s = new SpriteUV();
 			s.TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftSolidWhite.png");
-			s.Color = Colors.Red;
+			s.Color = LevelManager.Instance.Palette[1];
 			s.Scale = s.CalcSizeInPixels();
 			s.Pivot = new Vector2(1.0f, 0.5f);
-//			s.Position = new Vector2( 0.5f*_screenWidth, 0.35f*_screenHeight);
+			Color1Objects.Add(s);
 			n1.AddChild(s);
 			
 			s = new SpriteUV();
 			s.TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightSolidWhite.png");
-			s.Color = Colors.Red;
+			s.Color = LevelManager.Instance.Palette[1];
 			s.Scale = s.CalcSizeInPixels();
 			s.Pivot = new Vector2(0.0f, 0.5f);
-//			s.Position = new Vector2( 0.5f*_screenWidth, 0.35f*_screenHeight);
+			Color1Objects.Add(s);
 			n1.AddChild(s);
 			
 			s = new SpriteUV();
 			s.TextureInfo = new TextureInfo("/Application/assets/images/bg/1/topSolidChevron.png");
-			s.Color = Colors.Red;
+			s.Color = LevelManager.Instance.Palette[1];
 			s.Scale = s.CalcSizeInPixels();
 			s.Pivot = new Vector2(0.5f, 0.04f);
-//			s.Position = new Vector2( 0.5f*_screenWidth, 0.35f*_screenHeight);
+			Color1Objects.Add(s);
 			n1.AddChild(s);
 			
 			s = new SpriteUV();
 			s.TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftHollowWhite.png");
-			s.Color = Colors.Cyan;
+			s.Color = LevelManager.Instance.Palette[2];
 			s.Scale = s.CalcSizeInPixels();
 			s.Pivot = new Vector2(1.0f, 0.5f);
-//			s.Position = new Vector2( 0.5f*_screenWidth, 0.5f*_screenHeight);
+			Color2Objects.Add(s);
 			n2.AddChild(s);
 			
 			s = new SpriteUV();
 			s.TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightHollowWhite.png");
-			s.Color = Colors.Cyan;
+			s.Color = LevelManager.Instance.Palette[2];
 			s.Scale = s.CalcSizeInPixels();
 			s.Pivot = new Vector2(0.0f, 0.5f);
-//			s.Position = new Vector2( 0.5f*_screenWidth, 0.5f*_screenHeight);
+			Color2Objects.Add(s);
 			n2.AddChild(s);
 			
 			s = new SpriteUV();
 			s.TextureInfo = new TextureInfo("/Application/assets/images/bg/1/topSolidChevron.png");
-			s.Color = Colors.White;
+			s.Color = LevelManager.Instance.Palette[0];
 			s.Scale = s.CalcSizeInPixels();
 			s.Pivot = new Vector2(0.5f, 0.04f);
-//			s.Position = new Vector2( 0.5f*_screenWidth, 0.5f*_screenHeight);
+			Color0Objects.Add(s);
 			n2.AddChild(s);
+			
+			GameScene.LevelChangeDetected += (sender, e) => { SetPalette(); };
 			
 			Start();
 		}
@@ -95,6 +106,18 @@ namespace Crystallography.BG
 		
 		
 		// METHODS -----------------------------------------------------------------------------
+		
+		public void OnMoveComplete( Node pNode ) {
+			Sequence sequence = new Sequence();
+			sequence.Add ( new DelayTime( GameScene.Random.NextFloat() * 1.0f ) );
+			if (pNode == n1) {
+				sequence.Add( new MoveTo( RED_BASE + GameScene.Random.NextFloat() * RED_RANGE, 10.0f + 10.0f * GameScene.Random.NextFloat() ) );
+			} else {
+				sequence.Add( new MoveTo( BLUE_BASE + GameScene.Random.NextFloat() * BLUE_RANGE, 10.0f + 10.0f * GameScene.Random.NextFloat() ) );
+			}
+			sequence.Add( new CallFunc( () => {OnMoveComplete( pNode );} ) );
+			pNode.RunAction( sequence );
+		}
 		
 		public void Start() {
 			
@@ -111,16 +134,16 @@ namespace Crystallography.BG
 
 		}
 		
-		public void OnMoveComplete( Node pNode ) {
-			Sequence sequence = new Sequence();
-			sequence.Add ( new DelayTime( GameScene.Random.NextFloat() * 1.0f ) );
-			if (pNode == n1) {
-				sequence.Add( new MoveTo( RED_BASE + GameScene.Random.NextFloat() * RED_RANGE, 10.0f + 10.0f * GameScene.Random.NextFloat() ) );
-			} else {
-				sequence.Add( new MoveTo( BLUE_BASE + GameScene.Random.NextFloat() * BLUE_RANGE, 10.0f + 10.0f * GameScene.Random.NextFloat() ) );
+		public void SetPalette() {
+			foreach ( SpriteBase s in Color0Objects ) {
+				s.RunAction( new TintTo( LevelManager.Instance.Palette[0], 1.0f ) );
 			}
-			sequence.Add( new CallFunc( () => {OnMoveComplete( pNode );} ) );
-			pNode.RunAction( sequence );
+			foreach ( SpriteBase s in Color1Objects ) {
+				s.RunAction( new TintTo( LevelManager.Instance.Palette[1], 1.0f ) );
+			}
+			foreach ( SpriteBase s in Color2Objects ) {
+				s.RunAction( new TintTo( LevelManager.Instance.Palette[2], 1.0f ) );
+			}
 		}
 	}
 }

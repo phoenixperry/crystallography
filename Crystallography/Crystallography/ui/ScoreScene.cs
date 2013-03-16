@@ -80,8 +80,9 @@ namespace Crystallography.UI
         {
 			TouchEvent v = e.TouchEvents[0];
 			if (v.Type == TouchEventType.Up) {
-				(Director.Instance.CurrentScene as GameScene).goToNextLevel();
+//				(Director.Instance.CurrentScene as GameScene).goToNextLevel();
 				NextLevelButton.Visible = false;
+				this.RootWidget.AddChildLast( new LevelEndPanel( _score, _displayTimer ) );
 			}
         }
 		
