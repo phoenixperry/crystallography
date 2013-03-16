@@ -15,7 +15,6 @@ namespace Crystallography
 		public event EventHandler NoMatchesPossibleDetected;
 		
 		// GET & SET -----------------------------------------------------------------------
-		
 
 		public static CardManager Instance { 
 			get {
@@ -29,12 +28,22 @@ namespace Crystallography
 			}
 		}
 		
+		public int MaxPopulation { get; set; }
+		
+		public int TotalCardsInDeck { get; set; }
+		
+		public int NextId { get; private set; }
+		
+		public bool PickRandomly {get; set; }
+		
 		// CONSTRUCTOR ---------------------------------------------------------------------
 		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Crystallography.CardManager"/> class.
 		/// </summary>
 		protected CardManager () {
+			MaxPopulation = 15;
+			NextId = 0;
 			availableCards = new List<CardCrystallonEntity>();
 			_scene = Director.Instance.CurrentScene;
 			_physics = GamePhysics.Instance;
@@ -68,6 +77,15 @@ namespace Crystallography
 			}
 			return pCard;
 			
+		}
+		
+		public CardCrystallonEntity getCardById( int pId ) {
+			foreach ( CardCrystallonEntity c in availableCards ) {
+				if ( c.id == pId ) {
+					return c;
+				}
+			}
+			return null;
 		}
 		
 		/// <summary>
@@ -114,6 +132,12 @@ namespace Crystallography
 			return false;
 		}
 		
+		public void Populate () {
+			while ( availableCards.Count < MaxPopulation && availableCards.Count < TotalCardsInDeck ) {
+				spawn();
+			}
+		}
+		
 		/// <summary>
 		/// Reset the <c>CardManager</c>. Probably want to call this before starting a new level.
 		/// </summary>
@@ -156,8 +180,10 @@ namespace Crystallography
 		/// </param>
 		public CardCrystallonEntity spawn( float pX, float pY ) {
 			var ss = SpriteSingleton.getInstance();
-			CardCrystallonEntity card = new CardCrystallonEntity(_scene, _physics, ss.Get("TopSolid").TextureInfo, ss.Get ("TopSolid").TileIndex2D, 
+			CardCrystallonEntity card = new CardCrystallonEntity(_scene, _physics, NextId, ss.Get("TopSolid").TextureInfo, ss.Get ("TopSolid").TileIndex2D, 
 			                                _physics.SceneShapes[0]);
+			NextId++;
+			QualityManager.Instance.ApplyQualitiesToEntity( card );
 			card.setPosition( pX, pY );
 			card.addToScene();
 			availableCards.Add(card);

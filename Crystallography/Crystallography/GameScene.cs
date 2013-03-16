@@ -41,8 +41,8 @@ namespace Crystallography
 		
         public GameScene ( int pCurrentLevel )
 		{
-			var ga = new GlitchAnimation(); 
-			this.AddChild(ga); 
+//			var ga = new GlitchAnimation(); 
+//			this.AddChild(ga); 
 			Touch.GetData(0).Clear();
 			
 			UISystem.SetScene( new Crystallography.UI.ScoreScene() );
@@ -65,6 +65,8 @@ namespace Crystallography
 			sg.addToScene();
 			
 			QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
+			
+			CardManager.Instance.Populate();
 	
             // This is debug routine that will draw the physics bounding box around all physics bodies
             if(DEBUG_BOUNDINGBOXS)
@@ -191,6 +193,7 @@ namespace Crystallography
 				CardManager.Instance.Reset( this );
 				GroupManager.Instance.Reset( this );
 				QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
+				CardManager.Instance.Populate();
 				EventHandler handler = LevelChangeDetected;
 				if (handler != null) {
 					handler( this, null );

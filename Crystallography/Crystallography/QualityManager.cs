@@ -20,7 +20,7 @@ namespace Crystallography
 		/// qualityDict[ "QualityClassName" ]	:	Array of Length == number of possible variations for QualityClassName (usually 3)
 		/// qualityDict[ "QualityClassName" ][0]	:	List of all CardCrystallonEntities with variation 0 of QualityClassName
 		/// </summary>
-		public Dictionary<string, List<ICrystallonEntity>[]> qualityDict;
+		public Dictionary<string, List<int>[]> qualityDict;
 		
 		/// <summary>
 		/// XML data describing qualities for all the cards in this level.
@@ -50,7 +50,7 @@ namespace Crystallography
 		/// </summary>
 		protected QualityManager() {
 			Instance = this;
-			qualityDict = new Dictionary<string, List<ICrystallonEntity>[]>();
+			qualityDict = new Dictionary<string, List<int>[]>();
 		}
 		
 		// METHODS ---------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ namespace Crystallography
 		/// <c>int</c> Index of the variant. Probs 0, 1, or 2.
 		/// </param>
 		private void Add( AbstractCrystallonEntity pEntity, string pQualityName, int pVariant ) {
-			qualityDict[pQualityName][pVariant].Add( pEntity );
+			qualityDict[pQualityName][pVariant].Add( pEntity.id );
 		}
 		
 		/// <summary>
@@ -87,11 +87,38 @@ namespace Crystallography
 				for ( int i=0; i<variations.Length; i++ ) {
 					var cardList = variations[i];
 					if ( cardList != null ) {
-						foreach ( var card in cardList ) {
-							quality.Apply(card, i);
+						foreach ( var id in cardList ) {
+							quality.Apply(CardManager.Instance.getCardById(id), i);
 						}
 					}
 				}	
+			}
+		}
+		
+		/// <summary>
+		/// Applies the qualities to a specific card, based on its ID.
+		/// </summary>
+		/// <param name='pEntity'>
+		/// The specified Card
+		/// </param>
+		public void ApplyQualitiesToEntity( CardCrystallonEntity pEntity ) {
+			//TODO would be nice to support entities other than cards...
+			foreach ( string key in qualityDict.Keys ) {
+#if !ORIENTATION_MATTERS
+				if ( key == "QOrientation" ) {
+					continue;
+				}
+#endif
+				var type = Type.GetType( "Crystallography." + key );
+				var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
+				var variations = qualityDict[key];
+				for ( int i=0; i<variations.Length; i++ ) {
+					if ( variations[i] == null ) { continue; }
+					if ( (variations[i] as IList<int>).Contains (pEntity.id) ) {
+						quality.Apply( pEntity , i );
+						break;
+					}
+				}
 			}
 		}
 		
@@ -109,24 +136,28 @@ namespace Crystallography
 				in doc.Descendants("Card")
 				select new { AllQualities = data.Elements() };
 			// --------------------------------------------------------------------- STEP 2: Make as many cards as the level data says
+			int id = pCardManagerInstance.NextId;
+			int count = 0;
 			foreach ( var card in cards ) {
-				CardCrystallonEntity cardEntity = pCardManagerInstance.spawn();
 				// ----------------------------------------------------------------- STEP 3: Gather the qualities of the card
 				foreach (XElement singleQuality in card.AllQualities) {
 					string name = singleQuality.Attribute("Name").Value;
 					int val = (int)singleQuality.Attribute("Value");
 					if( qualityDict.ContainsKey(name) == false ) {	// ------------- New quality type discovered; add dict entry
-						qualityDict.Add( name, new List<ICrystallonEntity>[3] );
+						qualityDict.Add( name, new List<int>[3] );
 					}
 					if ( qualityDict[name][val] == null ) {	// --------------------- New quality variation discovered; add list entity
-						qualityDict[name][val] = new List<ICrystallonEntity>();
+						qualityDict[name][val] = new List<int>();
 					}
-					qualityDict[name][val].Add(cardEntity);	// --------------------- STEP 4: Note which variation of this quality the card has
+					qualityDict[name][val].Add(id);	// --------------------- STEP 4: Note which variation of this quality the card has
 					// TEST
 //					Console.WriteLine ("Name: " + name + " Value: " + val);
 					// END TEST
 				}
+				count++;
+				id++;
 			}	// ----------------------------------------------------------------- STEP 5: Done.
+			CardManager.Instance.TotalCardsInDeck = count;
 
 			// TEST
 //			foreach (string key in qualityDict.Keys) {
@@ -143,8 +174,8 @@ namespace Crystallography
 		/// Clears <c>qualityDict</c> correctly.
 		/// </summary>
 		private void ClearQualityDictionary() {
-			foreach( List<ICrystallonEntity>[] quality in qualityDict.Values ) {
-				foreach (  List<ICrystallonEntity> variant in quality ) {
+			foreach( List<int>[] quality in qualityDict.Values ) {
+				foreach (  List<int> variant in quality ) {
 					if (variant != null) {
 						variant.Clear();
 					}
@@ -165,7 +196,6 @@ namespace Crystallography
 		public bool EvaluateMatch( ICrystallonEntity[] pEntities, bool pForScore = false ) {
 			// TODO this whole function is inefficient... revisit later.
 			
-//			bool valid = true;
 			int score;
 			Dictionary<AbstractQuality, bool> qDict = new Dictionary<AbstractQuality, bool>();
 			foreach ( string key in qualityDict.Keys ) {
@@ -242,8 +272,8 @@ namespace Crystallography
 		/// <c>string</c> Class name for this quality.
 		/// </param>
 		private void Remove( AbstractCrystallonEntity pEntity, string pQualityName ) {
-			foreach ( List<ICrystallonEntity> list in qualityDict[pQualityName] ) {
-				if( list.Remove(pEntity) ) {
+			foreach ( List<int> list in qualityDict[pQualityName] ) {
+				if( list.Remove(pEntity.id) ) {
 					return;
 				}
 			}
@@ -263,7 +293,7 @@ namespace Crystallography
 			ClearQualityDictionary();
 			LoadLevelQualities( pLevelNum );
 			BuildQualityDictionary( pCardManagerInstance );
-			ApplyQualities();
+//			ApplyQualities();
 		}
 		
 		/// <summary>

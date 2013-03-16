@@ -33,6 +33,8 @@ namespace Crystallography
 			return POSITION_OFFSETS[position];
 		}
 		
+		public int id { get; private set; }
+		
 		// CONSTRUCTORS -------------------------------------------------------------
 		
 		/// <summary>
@@ -53,9 +55,10 @@ namespace Crystallography
 		/// <param name='pShape'>
 		/// <see cref="Sce.PlayStation.HighLevel.Physics2D.PhysicsShape"/>
 		/// </param>
-		public CardCrystallonEntity (Scene pScene, GamePhysics pGamePhysics, 
+		public CardCrystallonEntity (Scene pScene, GamePhysics pGamePhysics, int pId,
 		                             TextureInfo pTextureInfo, Vector2i pTileIndex2D, PhysicsShape pShape)
 													: base(pScene, pGamePhysics, pTextureInfo, pTileIndex2D, pShape) {
+			id = pId;
 			_sprite.Scale/=3f;
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 		}

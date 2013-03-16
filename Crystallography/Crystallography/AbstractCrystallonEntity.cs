@@ -12,11 +12,14 @@ namespace Crystallography
 		protected  Scene _scene;
 		protected Vector2 _offset;
 		protected string _sound;
+		public int id;
 		public Vector2 pickupLocation;
 		
 		// GET & SET ---------------------------------------------------------
 		
 		public System.Collections.Generic.List<Node> Children { get { return getNode ().Children; } }
+		
+//		public int id { get; set; }
 		
 		public Node Parent { get { return getNode ().Parent; } }
 		
@@ -95,7 +98,7 @@ namespace Crystallography
 		/// </param>
 		public int getQualityVariant( string pQualityName ) {
 			for ( int i=0; i<QualityManager.Instance.qualityDict[pQualityName].Length; i++ ) {
-				if (QualityManager.Instance.qualityDict[pQualityName][i].Contains(this) ) {
+				if (QualityManager.Instance.qualityDict[pQualityName][i].Contains(this.id) ) {
 					return i;
 				}
 			}
