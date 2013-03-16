@@ -2,14 +2,14 @@
 	<Card>
 		<Quality Name="QSound" Value="2" />
 		<Quality Name="QOrientation" Value="0" />
-		<Quality Name="QColor" Value="1" />
-		<Quality Name="QPattern" Value="0" />
+		<Quality Name="QColor" Value="2" />
+		<Quality Name="QPattern" Value="1" />
 		<Quality Name="QAnimation" Value="0" />
 	</Card>
 	<Card>
 		<Quality Name="QSound" Value="2" />
 		<Quality Name="QOrientation" Value="1" />
-		<Quality Name="QColor" Value="1" />
+		<Quality Name="QColor" Value="0" />
 		<Quality Name="QPattern" Value="0" />
 		<Quality Name="QAnimation" Value="1" />
 	</Card>
@@ -17,8 +17,71 @@
 		<Quality Name="QSound" Value="2" />
 		<Quality Name="QOrientation" Value="2" />
 		<Quality Name="QColor" Value="1" />
+		<Quality Name="QPattern" Value="2" />
+		<Quality Name="QAnimation" Value="2" />
+	</Card>
+	<Card>
+		<Quality Name="QSound" Value="2" />
+		<Quality Name="QOrientation" Value="0" />
+		<Quality Name="QColor" Value="1" />
+		<Quality Name="QPattern" Value="1" />
+		<Quality Name="QAnimation" Value="2" />
+	</Card>
+	<Card>
+		<Quality Name="QSound" Value="2" />
+		<Quality Name="QOrientation" Value="1" />
+		<Quality Name="QColor" Value="2" />
+		<Quality Name="QPattern" Value="0" />
+		<Quality Name="QAnimation" Value="1" />
+	</Card>
+	<Card>
+		<Quality Name="QSound" Value="2" />
+		<Quality Name="QOrientation" Value="2" />
+		<Quality Name="QColor" Value="0" />
+		<Quality Name="QPattern" Value="2" />
+		<Quality Name="QAnimation" Value="0" />
+	</Card>
+	<Card>
+		<Quality Name="QSound" Value="2" />
+		<Quality Name="QOrientation" Value="0" />
+		<Quality Name="QColor" Value="0" />
+		<Quality Name="QPattern" Value="1" />
+		<Quality Name="QAnimation" Value="2" />
+	</Card>
+	<Card>
+		<Quality Name="QSound" Value="2" />
+		<Quality Name="QOrientation" Value="1" />
+		<Quality Name="QColor" Value="1" />
 		<Quality Name="QPattern" Value="0" />
 		<Quality Name="QAnimation" Value="2" />
+	</Card>
+	<Card>
+		<Quality Name="QSound" Value="2" />
+		<Quality Name="QOrientation" Value="2" />
+		<Quality Name="QColor" Value="2" />
+		<Quality Name="QPattern" Value="2" />
+		<Quality Name="QAnimation" Value="2" />
+	</Card>
+	<Card>
+		<Quality Name="QSound" Value="2" />
+		<Quality Name="QOrientation" Value="0" />
+		<Quality Name="QColor" Value="0" />
+		<Quality Name="QPattern" Value="1" />
+		<Quality Name="QAnimation" Value="0" />
+	</Card>
+	<Card>
+		<Quality Name="QSound" Value="2" />
+		<Quality Name="QOrientation" Value="1" />
+		<Quality Name="QColor" Value="0" />
+		<Quality Name="QPattern" Value="0" />
+		<Quality Name="QAnimation" Value="0" />
+	</Card>
+	<Card>
+		<Quality Name="QSound" Value="2" />
+		<Quality Name="QOrientation" Value="2" />
+		<Quality Name="QColor" Value="0" />
+		<Quality Name="QPattern" Value="2" />
+		<Quality Name="QAnimation" Value="0" />
 	</Card>
 	<Card>
 		<Quality Name="QSound" Value="2" />
@@ -30,78 +93,43 @@
 	<Card>
 		<Quality Name="QSound" Value="2" />
 		<Quality Name="QOrientation" Value="1" />
-		<Quality Name="QColor" Value="1" />
-		<Quality Name="QPattern" Value="0" />
-		<Quality Name="QAnimation" Value="2" />
-	</Card>
-	<Card>
-		<Quality Name="QSound" Value="2" />
-		<Quality Name="QOrientation" Value="2" />
-		<Quality Name="QColor" Value="1" />
-		<Quality Name="QPattern" Value="0" />
-		<Quality Name="QAnimation" Value="0" />
-	</Card>
-	<Card>
-		<Quality Name="QSound" Value="2" />
-		<Quality Name="QOrientation" Value="0" />
-		<Quality Name="QColor" Value="1" />
-		<Quality Name="QPattern" Value="0" />
-		<Quality Name="QAnimation" Value="2" />
-	</Card>
-	<Card>
-		<Quality Name="QSound" Value="2" />
-		<Quality Name="QOrientation" Value="1" />
-		<Quality Name="QColor" Value="1" />
-		<Quality Name="QPattern" Value="0" />
-		<Quality Name="QAnimation" Value="0" />
-	</Card>
-	<Card>
-		<Quality Name="QSound" Value="2" />
-		<Quality Name="QOrientation" Value="2" />
-		<Quality Name="QColor" Value="1" />
-		<Quality Name="QPattern" Value="0" />
-		<Quality Name="QAnimation" Value="1" />
-	</Card>
-	<Card>
-		<Quality Name="QSound" Value="2" />
-		<Quality Name="QOrientation" Value="0" />
-		<Quality Name="QColor" Value="1" />
-		<Quality Name="QPattern" Value="0" />
-		<Quality Name="QAnimation" Value="0" />
-	</Card>
-	<Card>
-		<Quality Name="QSound" Value="2" />
-		<Quality Name="QOrientation" Value="1" />
-		<Quality Name="QColor" Value="1" />
-		<Quality Name="QPattern" Value="0" />
+		<Quality Name="QColor" Value="0" />
+		<Quality Name="QPattern" Value="2" />
 		<Quality Name="QAnimation" Value="1" />
 	</Card>
 	<Card>
 		<Quality Name="QSound" Value="2" />
 		<Quality Name="QOrientation" Value="2" />
-		<Quality Name="QColor" Value="1" />
-		<Quality Name="QPattern" Value="0" />
-		<Quality Name="QAnimation" Value="2" />
+		<Quality Name="QColor" Value="2" />
+		<Quality Name="QPattern" Value="1" />
+		<Quality Name="QAnimation" Value="1" />
 	</Card>
 	<Card>
 		<Quality Name="QSound" Value="2" />
 		<Quality Name="QOrientation" Value="0" />
-		<Quality Name="QColor" Value="1" />
-		<Quality Name="QPattern" Value="0" />
+		<Quality Name="QColor" Value="0" />
+		<Quality Name="QPattern" Value="1" />
 		<Quality Name="QAnimation" Value="2" />
 	</Card>
 	<Card>
 		<Quality Name="QSound" Value="2" />
 		<Quality Name="QOrientation" Value="1" />
 		<Quality Name="QColor" Value="1" />
-		<Quality Name="QPattern" Value="0" />
+		<Quality Name="QPattern" Value="1" />
 		<Quality Name="QAnimation" Value="2" />
 	</Card>
 	<Card>
 		<Quality Name="QSound" Value="2" />
 		<Quality Name="QOrientation" Value="2" />
-		<Quality Name="QColor" Value="1" />
-		<Quality Name="QPattern" Value="0" />
+		<Quality Name="QColor" Value="2" />
+		<Quality Name="QPattern" Value="1" />
+		<Quality Name="QAnimation" Value="2" />
+	</Card>
+	<Card>
+		<Quality Name="QSound" Value="2" />
+		<Quality Name="QOrientation" Value="2" />
+		<Quality Name="QColor" Value="2" />
+		<Quality Name="QPattern" Value="2" />
 		<Quality Name="QAnimation" Value="2" />
 	</Card>
 </Level>

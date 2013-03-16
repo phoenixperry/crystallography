@@ -193,6 +193,20 @@
     <Content Include="assets\animation\topGlitch\sprites.png" />
     <Content Include="assets\animation\leftGlitch\leftOneLine.png" />
     <Content Include="assets\animation\leftGlitch\leftOneLine.xml" />
+    <Content Include="assets\levels\level_11.xml" />
+    <Content Include="assets\levels\level_12.xml" />
+    <Content Include="assets\levels\level_13.xml" />
+    <Content Include="assets\levels\level_14.xml" />
+    <Content Include="assets\levels\level_15.xml" />
+    <Content Include="assets\levels\level_16.xml" />
+    <Content Include="assets\levels\level_17.xml" />
+    <Content Include="assets\levels\level_18.xml" />
+    <Content Include="assets\levels\level_19.xml" />
+    <Content Include="assets\levels\level_20.xml" />
+    <Content Include="assets\levels\level_21.xml" />
+    <Content Include="assets\levels\level_22.xml" />
+    <Content Include="assets\levels\level_23.xml" />
+    <Content Include="assets\levels\level_24.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Board.cs" />
