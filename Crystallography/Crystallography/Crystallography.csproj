@@ -130,6 +130,7 @@
     <Folder Include="bg\" />
     <Folder Include="assets\animation\" />
     <Folder Include="assets\animation\leftFall\" />
+    <Folder Include="assets\images\UI\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\sounds\music_ingame.mp3" />
@@ -211,6 +212,49 @@
     <Content Include="assets\levels\level_24.xml" />
     <Content Include="assets\animation\leftFall\leftFall.png" />
     <Content Include="assets\animation\leftFall\leftFall.xml" />
+    <Content Include="assets\images\UI\back.png" />
+    <Content Include="assets\images\UI\backOver.png" />
+    <Content Include="assets\images\UI\back_2.png" />
+    <Content Include="assets\images\UI\blueBtn.png" />
+    <Content Include="assets\images\UI\blueBtnOver.png" />
+    <Content Include="assets\images\UI\credits.png" />
+    <Content Include="assets\images\UI\cubeUI.png" />
+    <Content Include="assets\images\UI\cubeUIRoll.png" />
+    <Content Include="assets\images\UI\greyBar.png" />
+    <Content Include="assets\images\UI\header.png" />
+    <Content Include="assets\images\UI\instructions.png" />
+    <Content Include="assets\images\UI\instructions1.png" />
+    <Content Include="assets\images\UI\instructions2.png" />
+    <Content Include="assets\images\UI\instructions3.png" />
+    <Content Include="assets\images\UI\instructions4.png" />
+    <Content Include="assets\images\UI\instructions5.png" />
+    <Content Include="assets\images\UI\instructions6.png" />
+    <Content Include="assets\images\UI\instructions7.png" />
+    <Content Include="assets\images\UI\instructions8.png" />
+    <Content Include="assets\images\UI\instructionsOver.png" />
+    <Content Include="assets\images\UI\lockIcon.png" />
+    <Content Include="assets\images\UI\makeShapes.png" />
+    <Content Include="assets\images\UI\menuButtonBackground.png" />
+    <Content Include="assets\images\UI\play.png" />
+    <Content Include="assets\images\UI\playOVer.png" />
+    <Content Include="assets\images\UI\quit.png" />
+    <Content Include="assets\images\UI\quitOver.png" />
+    <Content Include="assets\images\UI\redBtn.png" />
+    <Content Include="assets\images\UI\redBtnOver.png" />
+    <Content Include="assets\images\UI\redPageIcon.png" />
+    <Content Include="assets\images\UI\score.png" />
+    <Content Include="assets\images\UI\selectlevel.png" />
+    <Content Include="assets\images\UI\selectLevelOver.png" />
+    <Content Include="assets\images\UI\start.png" />
+    <Content Include="assets\images\UI\startOver.png" />
+    <Content Include="assets\images\UI\statsBox.png" />
+    <Content Include="assets\images\UI\timer.png" />
+    <Content Include="assets\images\UI\triBtnGraphics.png" />
+    <Content Include="assets\images\UI\Untitled-5.png" />
+    <Content Include="assets\images\UI\whitePageIcon.png" />
+    <Content Include="assets\images\UI\icons\glasses.png" />
+    <Content Include="assets\images\UI\icons\journal.png" />
+    <Content Include="assets\images\UI\icons\tie.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Board.cs" />
