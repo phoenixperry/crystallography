@@ -39,7 +39,9 @@ namespace Crystallography
 		
 		public LevelManager (){
 			Instance = this;
-			Palette = new Vector4[] { Vector4.Zero, Vector4.Zero, Vector4.Zero };
+			Palette = new Vector4[] { new Vector4(0.956863f, 0.917647f, 0.956863f, 1.0f), 
+										new Vector4(0.898039f, 0.074510f, 0.074510f, 1.0f), 
+										new Vector4(0.160784f, 0.886274f, 0.886274f, 1.0f) };
 		}
 		
 		// METHODS ----------------------------------------------------------------

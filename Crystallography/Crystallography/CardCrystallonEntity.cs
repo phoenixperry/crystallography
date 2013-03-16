@@ -12,9 +12,9 @@ namespace Crystallography
 		/// <summary>
 		/// Offsets used by different pieces to form a cube.
 		/// </summary>
-		static readonly Vector2[] POSITION_OFFSETS = { 	new Vector2(0f,10.0f),
-														new Vector2(-10.5f,-8.0f),
-														new Vector2(10.5f,-8.0f) };
+		static readonly Vector2[] POSITION_OFFSETS = { 	new Vector2(0f,13.0f),
+														new Vector2(-13.5f,-10.5f),
+														new Vector2(13.5f,-10.5f) };
 		protected readonly static float DEFAULT_SPEED = 1.0f;
 		
 		// GET & SET ----------------------------------------------------------------
