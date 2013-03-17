@@ -56,7 +56,7 @@ namespace Crystallography
 				//where 9 is the num of rows minus 1 to reverse the order :/ 
 	   			}
    				_texture = new Texture2D("/Application/assets/animation/leftFall/leftFall.png", false);
-   				_textureInfo = new TextureInfo(_texture,new Vector2i(11,2));
+   				_textureInfo = new TextureInfo(_texture,new Vector2i(6,2));
 			
 			}
 			var num =_sprites.Count; 
