@@ -46,7 +46,7 @@ namespace Crystallography.UI
                     this.SetSize(544, 960);
                     this.Anchors = Anchors.None;
 
-                    ImageBox_1.SetPosition(263, 94);
+                    ImageBox_1.SetPosition(380, 110);
                     ImageBox_1.SetSize(200, 200);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
@@ -57,8 +57,8 @@ namespace Crystallography.UI
                     this.SetSize(960, 544);
                     this.Anchors = Anchors.None;
 
-                    ImageBox_1.SetPosition(25, -182);
-                    ImageBox_1.SetSize(909, 909);
+                    ImageBox_1.SetPosition(-28, -235);
+                    ImageBox_1.SetSize(1017, 849);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 

@@ -11,6 +11,7 @@ namespace Crystallography.UI
 {
     partial class LevelSelectPanel
     {
+        Button Button_1;
         Panel Panel_1;
         Panel Panel_2;
         Panel Panel_3;
@@ -31,6 +32,8 @@ namespace Crystallography.UI
 
         private void InitializeWidget(LayoutOrientation orientation)
         {
+            Button_1 = new Button();
+            Button_1.Name = "Button_1";
             Panel_1 = new Panel();
             Panel_1.Name = "Panel_1";
             Panel_2 = new Panel();
@@ -56,9 +59,22 @@ namespace Crystallography.UI
             Panel_12 = new Panel();
             Panel_12.Name = "Panel_12";
 
+            // Button_1
+            Button_1.IconImage = null;
+            Button_1.Style = ButtonStyle.Custom;
+            Button_1.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/cubeUI6.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/cubeUIRollOver6.png"),
+                BackgroundDisabledImage = null,
+                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
+            };
+            Button_1.BackgroundFilterColor = new UIColor(229f / 255f, 19f / 255f, 19f / 255f, 255f / 255f);
+
             // Panel_1
             Panel_1.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_1.Clip = true;
+            Panel_1.AddChildLast(Button_1);
 
             // Panel_2
             Panel_2.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -105,7 +121,7 @@ namespace Crystallography.UI
             Panel_12.Clip = true;
 
             // LevelSelectPanel
-            this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            this.BackgroundColor = new UIColor(40f / 255f, 40f / 255f, 40f / 255f, 255f / 255f);
             this.Clip = true;
             this.AddChildLast(Panel_1);
             this.AddChildLast(Panel_2);
@@ -133,6 +149,11 @@ namespace Crystallography.UI
                 case LayoutOrientation.Vertical:
                     this.SetSize(396, 567);
                     this.Anchors = Anchors.None;
+
+                    Button_1.SetPosition(-68, 21);
+                    Button_1.SetSize(214, 56);
+                    Button_1.Anchors = Anchors.None;
+                    Button_1.Visible = true;
 
                     Panel_1.SetPosition(372, 124);
                     Panel_1.SetSize(100, 100);
@@ -200,7 +221,12 @@ namespace Crystallography.UI
                     this.SetSize(567, 396);
                     this.Anchors = Anchors.None;
 
-                    Panel_1.SetPosition(33, 24);
+                    Button_1.SetPosition(13, 5);
+                    Button_1.SetSize(76, 88);
+                    Button_1.Anchors = Anchors.Top;
+                    Button_1.Visible = true;
+
+                    Panel_1.SetPosition(40, 24);
                     Panel_1.SetSize(100, 100);
                     Panel_1.Anchors = Anchors.None;
                     Panel_1.Visible = true;

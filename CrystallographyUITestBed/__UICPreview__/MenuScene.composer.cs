@@ -52,7 +52,7 @@ namespace Preview
             {
                 BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/play.png"),
                 BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/playOVer.png"),
-                BackgroundDisabledImage = new ImageAsset("/Application/assets/system_assets/button_9patch_disable.png"),
+                BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
             };
 
@@ -63,7 +63,7 @@ namespace Preview
             {
                 BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/selectlevel.png"),
                 BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/selectLevelOver.png"),
-                BackgroundDisabledImage = new ImageAsset("/Application/assets/system_assets/button_9patch_disable.png"),
+                BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
             };
 

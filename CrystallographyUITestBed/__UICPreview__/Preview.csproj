@@ -31,8 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="__DummyProgram.cs" />
-    <Compile Include="LevelSelectScene.composer.cs" />
-    <Compile Include="LevelSelectScene.cs" />
+    <Compile Include="__DummyScene.cs" />
     <Compile Include="LevelSelectPanel.composer.cs" />
     <Compile Include="LevelSelectPanel.cs" />
     <Compile Include="UIStringTable.cs" />
@@ -74,11 +73,47 @@
     <Content Include="..\\assets\images\UI\credits.png" >
       <Link>assets\images\UI\credits.png</Link>
     </Content>
+    <Content Include="..\\assets\images\UI\cube6RollOver.png" >
+      <Link>assets\images\UI\cube6RollOver.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\cubeRoll3.png" >
+      <Link>assets\images\UI\cubeRoll3.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\cubeRollOver5.png" >
+      <Link>assets\images\UI\cubeRollOver5.png</Link>
+    </Content>
     <Content Include="..\\assets\images\UI\cubeUI.png" >
       <Link>assets\images\UI\cubeUI.png</Link>
     </Content>
+    <Content Include="..\\assets\images\UI\cubeUI2.png" >
+      <Link>assets\images\UI\cubeUI2.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\cubeUI3.png" >
+      <Link>assets\images\UI\cubeUI3.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\cubeUI4.png" >
+      <Link>assets\images\UI\cubeUI4.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\cubeUI5.png" >
+      <Link>assets\images\UI\cubeUI5.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\cubeUI6.png" >
+      <Link>assets\images\UI\cubeUI6.png</Link>
+    </Content>
     <Content Include="..\\assets\images\UI\cubeUIRoll.png" >
       <Link>assets\images\UI\cubeUIRoll.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\cubeUIRollOver.png" >
+      <Link>assets\images\UI\cubeUIRollOver.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\cubeUIRollOver4.png" >
+      <Link>assets\images\UI\cubeUIRollOver4.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\cubeUIRollOver5.png" >
+      <Link>assets\images\UI\cubeUIRollOver5.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\cubeUIRollOver6.png" >
+      <Link>assets\images\UI\cubeUIRollOver6.png</Link>
     </Content>
     <Content Include="..\\assets\images\UI\greyBar.png" >
       <Link>assets\images\UI\greyBar.png</Link>
@@ -169,6 +204,9 @@
     </Content>
     <Content Include="..\\assets\images\UI\triBtnGraphics.png" >
       <Link>assets\images\UI\triBtnGraphics.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\Untitled-1.png" >
+      <Link>assets\images\UI\Untitled-1.png</Link>
     </Content>
     <Content Include="..\\assets\images\UI\Untitled-5.png" >
       <Link>assets\images\UI\Untitled-5.png</Link>

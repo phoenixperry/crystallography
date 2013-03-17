@@ -60,7 +60,7 @@ namespace Crystallography.UI
             NextLevelButton.Name = "NextLevelButton";
 
             // ImageBox_2
-            ImageBox_2.Image = new ImageAsset("/Application/assets/images/UI/score.png");
+            ImageBox_2.Image = new ImageAsset("/Application/assets/images/UI/redBtn.png");
             ImageBox_2.ImageScaleType = ImageScaleType.Center;
 
             // ScoreLabelText
@@ -193,7 +193,7 @@ namespace Crystallography.UI
                     ScoreText.Anchors = Anchors.None;
                     ScoreText.Visible = true;
 
-                    ImageBox_1.SetPosition(396, 430);
+                    ImageBox_1.SetPosition(379, 16);
                     ImageBox_1.SetSize(200, 200);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
@@ -249,37 +249,37 @@ namespace Crystallography.UI
                     this.DesignWidth = 960;
                     this.DesignHeight = 544;
 
-                    ImageBox_2.SetPosition(-18, -92);
+                    ImageBox_2.SetPosition(-64, -64);
                     ImageBox_2.SetSize(265, 200);
                     ImageBox_2.Anchors = Anchors.None;
                     ImageBox_2.Visible = true;
 
-                    ScoreLabelText.SetPosition(19, -4);
+                    ScoreLabelText.SetPosition(19, -1);
                     ScoreLabelText.SetSize(74, 36);
                     ScoreLabelText.Anchors = Anchors.None;
                     ScoreLabelText.Visible = true;
 
-                    ScoreText.SetPosition(87, -2);
+                    ScoreText.SetPosition(93, 1);
                     ScoreText.SetSize(145, 36);
                     ScoreText.Anchors = Anchors.None;
                     ScoreText.Visible = true;
 
-                    ImageBox_1.SetPosition(366, -1);
-                    ImageBox_1.SetSize(261, 36);
+                    ImageBox_1.SetPosition(385, -82);
+                    ImageBox_1.SetSize(200, 200);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    TimerSeparatorText.SetPosition(476, -1);
+                    TimerSeparatorText.SetPosition(479, -3);
                     TimerSeparatorText.SetSize(26, 36);
                     TimerSeparatorText.Anchors = Anchors.None;
                     TimerSeparatorText.Visible = true;
 
-                    TimerSecondsText.SetPosition(490, 1);
+                    TimerSecondsText.SetPosition(497, -1);
                     TimerSecondsText.SetSize(65, 36);
                     TimerSecondsText.Anchors = Anchors.None;
                     TimerSecondsText.Visible = true;
 
-                    TimerMinutesText.SetPosition(352, 2);
+                    TimerMinutesText.SetPosition(352, -1);
                     TimerMinutesText.SetSize(135, 36);
                     TimerMinutesText.Anchors = Anchors.None;
                     TimerMinutesText.Visible = true;
