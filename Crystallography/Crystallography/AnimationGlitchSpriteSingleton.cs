@@ -83,7 +83,7 @@ namespace Crystallography
 		public SpriteTile Get(int x, int y) {
 			var spriteTile = new SpriteTile(_textureInfo);
 		   	spriteTile.TileIndex2D = new Vector2i(x,y);
-		   	spriteTile.Quad.S = new Sce.PlayStation.Core.Vector2 (86,146);
+		   	spriteTile.Quad.S = new Sce.PlayStation.Core.Vector2 (168,146);
 		   	return spriteTile;
 		}
 

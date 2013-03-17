@@ -15,11 +15,7 @@ namespace Crystallography
 		public TextureInfo _textureInfo;
 		public Texture2D _texture;
 		
-		public TextureInfo _glitchInfo; 
-		public Texture2D _glitchTexture; 
-		
-		public TextureInfo _fallInfo; 
-		public TextureInfo _fallTexture; 
+
 		
 		
 		
@@ -60,14 +56,15 @@ namespace Crystallography
 				//where 9 is the num of rows minus 1 to reverse the order :/ 
 	   			}
    				_texture = new Texture2D("/Application/assets/animation/leftFall/leftFall.png", false);
-   				_textureInfo = new TextureInfo(_texture,new Vector2i(1,2));
+   				_textureInfo = new TextureInfo(_texture,new Vector2i(11,2));
 			
 			}
-				var num =_sprites.Count; 
-					Console.WriteLine(num +"num of lines" ); 
+			var num =_sprites.Count; 
+			Console.WriteLine(num +"num of lines" ); 
 	  		if(!isOkToCreate) {
 				Console.WriteLine("this is a singleton. access via get Instance"); 
 			}
+			printDic(); 
 		}	
 		
 		// METHODS ----------------------------------------------------------------------------------------------
@@ -82,22 +79,29 @@ namespace Crystallography
 			}
 			return instance; 
 		}
-		
+		public void printDic() {
+			foreach (KeyValuePair<string, Vector2i>pair in _sprites){
+				Console.WriteLine("{0}, {1}", pair.Key, pair.Value); 
+			}
+		} 
 		public Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile Get(int x, int y) {
 			var spriteTile = new SpriteTile(_textureInfo);
 		   	spriteTile.TileIndex2D = new Vector2i(x,y);
-		   	spriteTile.Quad.S = new Sce.PlayStation.Core.Vector2 (148, 168);
-			
+			Console.WriteLine(spriteTile.TileIndex2D.X + "this is x" + spriteTile.TileIndex2D.Y +"this is y"); 
+		   //there's the right number of slots! :) 
+			spriteTile.Quad.S = new Sce.PlayStation.Core.Vector2 (148, 168);
+			Console.WriteLine(_texture.Height + "What the hell is this?"); 
 		   	return spriteTile;
 		}
 
 		public Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile Get(string name) {
-			Console.WriteLine(name); 
+	
 			return Get (_sprites[name].X, _sprites[name].Y);
+				
 		}
 		
 		// DESRUCTOR ------------------------------------------------------------------------------------------
-		
+	
 		~AnimationFallSpriteSingleton() {
 //   			_texture.Dispose();
 //   			_textureInfo.Dispose ();
