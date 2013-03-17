@@ -41,11 +41,6 @@ namespace Crystallography
 		
         public GameScene ( int pCurrentLevel )
 		{
-//			var ga = new GlitchAnimation(); 
-//			this.AddChild(ga); 
-//			var fa = new AnimationFall(); 
-//			this.AddChild(fa); 
-			
 			Touch.GetData(0).Clear();
 			
 			UISystem.SetScene( new Crystallography.UI.ScoreScene() );
@@ -119,14 +114,11 @@ namespace Crystallography
 		
         public override void Update ( float dt )
         {
-//			UISystem.Update( Touch.GetData(0) );
-            base.Update (dt);
-            
-			//INPUT UPDATE CALL
-			
-			
-			
+
 			InputManager.Instance.Update(dt);
+            base.Update (dt);			
+			
+			
 			
             //We don't need these, but sadly, the Simulate call does.
             Vector2 dummy1 = new Vector2();

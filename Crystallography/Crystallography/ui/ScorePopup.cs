@@ -15,16 +15,16 @@ namespace Crystallography.UI
 		public ScorePopup (ICrystallonEntity pParent, int pPoints) : base(pPoints.ToString(), map)
 		{
 			if (pPoints < 10) {
-				Position = new Vector2(-7.0f, 10.0f);
+				Position = new Vector2(-7.0f, 25.0f);
 			} else {
-				Position = new Vector2(-12.0f, 10.0f);
+				Position = new Vector2(-12.0f, 25.0f);
 			}
 			Color = Colors.White;
 			Pivot = new Vector2(0.5f, 0.5f);
 			HeightScale = 1.0f;
 			Sequence sequence = new Sequence();
 			sequence.Add( new DelayTime( 0.1f ) );
-			sequence.Add( new CallFunc( () => { pParent.getNode().Parent.AddChild(this); } ) );
+			sequence.Add( new CallFunc( () => { pParent.getNode().Parent.Parent.AddChild(this); } ) );
 			sequence.Add( new CallFunc( () => { Scheduler.Instance.ScheduleUpdateForTarget(this,0,false); } ) );
 			this.RunAction(sequence);
 		}

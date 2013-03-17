@@ -397,6 +397,8 @@ namespace Crystallography
 		public virtual AbstractCrystallonEntity Release ( AbstractCrystallonEntity e, bool pForceBreak = false) {
 			if ( e is SpriteTileCrystallonEntity ) {
 				return ReleaseSingle (e as SpriteTileCrystallonEntity );
+			} else if ( e is CubeCrystallonEntity ) { 
+				return ReleaseSingle( e as CubeCrystallonEntity );
 			} else {
 				return null;
 			}

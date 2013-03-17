@@ -73,7 +73,16 @@ namespace Crystallography
 		void HandleInputManagerInstanceDragDetected (object sender, SustainedTouchEventArgs e)
 		{
 //			var entity = GetEntityAtPosition( e.touchPosition );
-			MemberType = (lastEntityReleased!=null) ? lastEntityReleased.GetType() : null;	// -------------- Cards or Cubes?
+			if (lastEntityReleased!=null) {
+				if (lastEntityReleased.GetType().ToString() == "Crystallography.GroupCrystallonEntity") {
+					GroupCrystallonEntity g = lastEntityReleased as GroupCrystallonEntity;
+					MemberType = g.MemberType;
+				} else {
+					MemberType = lastEntityReleased.GetType ();
+				}
+			} else {
+				MemberType = null;
+			}
 			if(MemberType != null) {
 				Console.WriteLine(MemberType);
 			}
