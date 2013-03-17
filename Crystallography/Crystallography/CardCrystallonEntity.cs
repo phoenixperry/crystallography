@@ -42,9 +42,9 @@ namespace Crystallography
 				if (pOrientation == "Left") {
 					_anim.Rotation = new Vector2(1f,0f);
 				} else if (pOrientation == "Right") {
-					_anim.Rotation = new Vector2(0.5f, -0.8660254f);
+					_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
 				} else {
-					_anim.Rotation = new Vector2(0.5f, 0.8660254f);
+					_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
 				}
 			}
 		}
@@ -114,21 +114,23 @@ namespace Crystallography
 			_anim = new SpriteTile( anim.TextureInfo, anim.TileIndex2D );
 			_anim = new SpriteTile( anim.TextureInfo, anim.TileIndex2D );
 			_anim.Pivot = this.getNode().Pivot;
+			_anim.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.ReverseSubtract, BlendFuncFactor.One, BlendFuncFactor.OneMinusSrcColor);
+			_anim.BlendMode.Enabled = true;
 			if (pStart == pEnd) {
-				Support.SetTile(_anim, pStart);
+				_anim = null;
 			} else {
 				_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 1.0f, true) );
 			}
-			if (_orientationString == "Left") {
-				_anim.Rotation = new Vector2(1f,0f);
-			} else if (_orientationString == "Right") {
-				_anim.Rotation = new Vector2(-0.9524198f,0.30481062f);
-			} else {
-				_anim.Rotation = new Vector2(0.5f, 0.8660254f);
+			if (_anim != null) {
+				if (_orientationString == "Left") {
+					_anim.Rotation = new Vector2(1f,0f);
+				} else if (_orientationString == "Right") {
+					_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
+				} else {
+					_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
+				}
+				this.getNode().AddChild(_anim);
 			}
-			
-			this.getNode().AddChild(_anim);
-			
 		}
 		
 	}
