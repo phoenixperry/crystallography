@@ -51,7 +51,7 @@ namespace Crystallography
 		
 		public CardCrystallonEntity Left { 
 			get{ 
-				if (_top != null) {
+				if (_left != null) {
 					return _left;
 				} else {
 					return _left = GetSideEntity(1);
