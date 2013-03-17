@@ -9,7 +9,7 @@ using Sce.PlayStation.HighLevel.UI;
 
 namespace Preview
 {
-    partial class LevelSelectPanel
+    partial class LevelSelectPanel3
     {
         Button Button_1;
         Panel Panel_1;
@@ -102,7 +102,7 @@ namespace Preview
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
-            Button_1.BackgroundFilterColor = new UIColor(229f / 255f, 19f / 255f, 19f / 255f, 255f / 255f);
+            Button_1.BackgroundFilterColor = new UIColor(226f / 255f, 20f / 255f, 20f / 255f, 255f / 255f);
 
             // Panel_1
             Panel_1.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -119,7 +119,7 @@ namespace Preview
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
-            Button_2.BackgroundFilterColor = new UIColor(41f / 255f, 226f / 255f, 226f / 255f, 255f / 255f);
+            Button_2.BackgroundFilterColor = new UIColor(206f / 255f, 255f / 255f, 0f / 255f, 255f / 255f);
 
             // Panel_2
             Panel_2.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -136,7 +136,7 @@ namespace Preview
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
-            Button_3.BackgroundFilterColor = new UIColor(244f / 255f, 234f / 255f, 244f / 255f, 255f / 255f);
+            Button_3.BackgroundFilterColor = new UIColor(206f / 255f, 244f / 255f, 226f / 255f, 255f / 255f);
 
             // Panel_3
             Panel_3.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -153,7 +153,7 @@ namespace Preview
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
-            Button_4.BackgroundFilterColor = new UIColor(229f / 255f, 19f / 255f, 19f / 255f, 255f / 255f);
+            Button_4.BackgroundFilterColor = new UIColor(226f / 255f, 20f / 255f, 20f / 255f, 255f / 255f);
 
             // Panel_4
             Panel_4.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -170,7 +170,7 @@ namespace Preview
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
-            Button_5.BackgroundFilterColor = new UIColor(41f / 255f, 226f / 255f, 226f / 255f, 255f / 255f);
+            Button_5.BackgroundFilterColor = new UIColor(206f / 255f, 255f / 255f, 0f / 255f, 255f / 255f);
 
             // Panel_5
             Panel_5.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -187,7 +187,7 @@ namespace Preview
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
-            Button_6.BackgroundFilterColor = new UIColor(244f / 255f, 234f / 255f, 244f / 255f, 255f / 255f);
+            Button_6.BackgroundFilterColor = new UIColor(206f / 255f, 244f / 255f, 226f / 255f, 255f / 255f);
 
             // Panel_6
             Panel_6.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -204,7 +204,7 @@ namespace Preview
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
-            Button_7.BackgroundFilterColor = new UIColor(229f / 255f, 19f / 255f, 19f / 255f, 255f / 255f);
+            Button_7.BackgroundFilterColor = new UIColor(226f / 255f, 20f / 255f, 20f / 255f, 255f / 255f);
 
             // Panel_7
             Panel_7.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -221,7 +221,7 @@ namespace Preview
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
-            Button_8.BackgroundFilterColor = new UIColor(41f / 255f, 226f / 255f, 226f / 255f, 255f / 255f);
+            Button_8.BackgroundFilterColor = new UIColor(206f / 255f, 255f / 255f, 0f / 255f, 255f / 255f);
 
             // Panel_8
             Panel_8.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -238,7 +238,7 @@ namespace Preview
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
-            Button_9.BackgroundFilterColor = new UIColor(244f / 255f, 234f / 255f, 244f / 255f, 255f / 255f);
+            Button_9.BackgroundFilterColor = new UIColor(206f / 255f, 244f / 255f, 226f / 255f, 255f / 255f);
 
             // Panel_9
             Panel_9.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -255,7 +255,7 @@ namespace Preview
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
-            Button_10.BackgroundFilterColor = new UIColor(229f / 255f, 19f / 255f, 19f / 255f, 255f / 255f);
+            Button_10.BackgroundFilterColor = new UIColor(226f / 255f, 20f / 255f, 20f / 255f, 255f / 255f);
 
             // Panel_10
             Panel_10.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -272,7 +272,7 @@ namespace Preview
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
-            Button_11.BackgroundFilterColor = new UIColor(41f / 255f, 226f / 255f, 226f / 255f, 255f / 255f);
+            Button_11.BackgroundFilterColor = new UIColor(206f / 255f, 255f / 255f, 0f / 255f, 255f / 255f);
 
             // Panel_11
             Panel_11.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -289,14 +289,14 @@ namespace Preview
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
-            Button_12.BackgroundFilterColor = new UIColor(244f / 255f, 234f / 255f, 244f / 255f, 255f / 255f);
+            Button_12.BackgroundFilterColor = new UIColor(206f / 255f, 244f / 255f, 226f / 255f, 255f / 255f);
 
             // Panel_12
             Panel_12.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             Panel_12.Clip = true;
             Panel_12.AddChildLast(Button_12);
 
-            // LevelSelectPanel
+            // LevelSelectPanel3
             this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             this.Clip = true;
             this.AddChildLast(Panel_1);
@@ -341,7 +341,7 @@ namespace Preview
                     Button_2.Anchors = Anchors.None;
                     Button_2.Visible = true;
 
-                    Panel_2.SetPosition(372, 124);
+                    Panel_2.SetPosition(727, 221);
                     Panel_2.SetSize(100, 100);
                     Panel_2.Anchors = Anchors.None;
                     Panel_2.Visible = true;
@@ -351,7 +351,7 @@ namespace Preview
                     Button_3.Anchors = Anchors.None;
                     Button_3.Visible = true;
 
-                    Panel_3.SetPosition(372, 124);
+                    Panel_3.SetPosition(727, 221);
                     Panel_3.SetSize(100, 100);
                     Panel_3.Anchors = Anchors.None;
                     Panel_3.Visible = true;
@@ -361,7 +361,7 @@ namespace Preview
                     Button_4.Anchors = Anchors.None;
                     Button_4.Visible = true;
 
-                    Panel_4.SetPosition(372, 124);
+                    Panel_4.SetPosition(727, 221);
                     Panel_4.SetSize(100, 100);
                     Panel_4.Anchors = Anchors.None;
                     Panel_4.Visible = true;
@@ -371,7 +371,7 @@ namespace Preview
                     Button_5.Anchors = Anchors.None;
                     Button_5.Visible = true;
 
-                    Panel_5.SetPosition(372, 124);
+                    Panel_5.SetPosition(727, 221);
                     Panel_5.SetSize(100, 100);
                     Panel_5.Anchors = Anchors.None;
                     Panel_5.Visible = true;
@@ -381,7 +381,7 @@ namespace Preview
                     Button_6.Anchors = Anchors.None;
                     Button_6.Visible = true;
 
-                    Panel_6.SetPosition(372, 124);
+                    Panel_6.SetPosition(727, 221);
                     Panel_6.SetSize(100, 100);
                     Panel_6.Anchors = Anchors.None;
                     Panel_6.Visible = true;
@@ -391,7 +391,7 @@ namespace Preview
                     Button_7.Anchors = Anchors.None;
                     Button_7.Visible = true;
 
-                    Panel_7.SetPosition(372, 124);
+                    Panel_7.SetPosition(727, 221);
                     Panel_7.SetSize(100, 100);
                     Panel_7.Anchors = Anchors.None;
                     Panel_7.Visible = true;
@@ -401,7 +401,7 @@ namespace Preview
                     Button_8.Anchors = Anchors.None;
                     Button_8.Visible = true;
 
-                    Panel_8.SetPosition(372, 124);
+                    Panel_8.SetPosition(727, 221);
                     Panel_8.SetSize(100, 100);
                     Panel_8.Anchors = Anchors.None;
                     Panel_8.Visible = true;
@@ -411,7 +411,7 @@ namespace Preview
                     Button_9.Anchors = Anchors.None;
                     Button_9.Visible = true;
 
-                    Panel_9.SetPosition(372, 124);
+                    Panel_9.SetPosition(727, 221);
                     Panel_9.SetSize(100, 100);
                     Panel_9.Anchors = Anchors.None;
                     Panel_9.Visible = true;
@@ -421,7 +421,7 @@ namespace Preview
                     Button_10.Anchors = Anchors.None;
                     Button_10.Visible = true;
 
-                    Panel_10.SetPosition(372, 124);
+                    Panel_10.SetPosition(727, 221);
                     Panel_10.SetSize(100, 100);
                     Panel_10.Anchors = Anchors.None;
                     Panel_10.Visible = true;
@@ -431,7 +431,7 @@ namespace Preview
                     Button_11.Anchors = Anchors.None;
                     Button_11.Visible = true;
 
-                    Panel_11.SetPosition(372, 124);
+                    Panel_11.SetPosition(727, 221);
                     Panel_11.SetSize(100, 100);
                     Panel_11.Anchors = Anchors.None;
                     Panel_11.Visible = true;
@@ -441,7 +441,7 @@ namespace Preview
                     Button_12.Anchors = Anchors.None;
                     Button_12.Visible = true;
 
-                    Panel_12.SetPosition(372, 124);
+                    Panel_12.SetPosition(727, 221);
                     Panel_12.SetSize(100, 100);
                     Panel_12.Anchors = Anchors.None;
                     Panel_12.Visible = true;
@@ -452,7 +452,7 @@ namespace Preview
                     this.SetSize(567, 396);
                     this.Anchors = Anchors.None;
 
-                    Button_1.SetPosition(11, 6);
+                    Button_1.SetPosition(10, 6);
                     Button_1.SetSize(76, 88);
                     Button_1.Anchors = Anchors.Top;
                     Button_1.Visible = true;
@@ -462,7 +462,7 @@ namespace Preview
                     Panel_1.Anchors = Anchors.None;
                     Panel_1.Visible = true;
 
-                    Button_2.SetPosition(11, 6);
+                    Button_2.SetPosition(10, 5);
                     Button_2.SetSize(76, 88);
                     Button_2.Anchors = Anchors.None;
                     Button_2.Visible = true;
@@ -472,7 +472,7 @@ namespace Preview
                     Panel_2.Anchors = Anchors.None;
                     Panel_2.Visible = true;
 
-                    Button_3.SetPosition(11, 5);
+                    Button_3.SetPosition(10, 4);
                     Button_3.SetSize(76, 88);
                     Button_3.Anchors = Anchors.None;
                     Button_3.Visible = true;
@@ -482,7 +482,7 @@ namespace Preview
                     Panel_3.Anchors = Anchors.None;
                     Panel_3.Visible = true;
 
-                    Button_4.SetPosition(11, 5);
+                    Button_4.SetPosition(9, 4);
                     Button_4.SetSize(76, 88);
                     Button_4.Anchors = Anchors.None;
                     Button_4.Visible = true;
@@ -492,7 +492,7 @@ namespace Preview
                     Panel_4.Anchors = Anchors.None;
                     Panel_4.Visible = true;
 
-                    Button_5.SetPosition(11, 5);
+                    Button_5.SetPosition(10, 4);
                     Button_5.SetSize(76, 88);
                     Button_5.Anchors = Anchors.None;
                     Button_5.Visible = true;
@@ -502,7 +502,7 @@ namespace Preview
                     Panel_5.Anchors = Anchors.None;
                     Panel_5.Visible = true;
 
-                    Button_6.SetPosition(11, 5);
+                    Button_6.SetPosition(10, 4);
                     Button_6.SetSize(76, 88);
                     Button_6.Anchors = Anchors.None;
                     Button_6.Visible = true;
@@ -512,7 +512,7 @@ namespace Preview
                     Panel_6.Anchors = Anchors.None;
                     Panel_6.Visible = true;
 
-                    Button_7.SetPosition(11, 5);
+                    Button_7.SetPosition(10, 4);
                     Button_7.SetSize(76, 88);
                     Button_7.Anchors = Anchors.None;
                     Button_7.Visible = true;
@@ -522,7 +522,7 @@ namespace Preview
                     Panel_7.Anchors = Anchors.None;
                     Panel_7.Visible = true;
 
-                    Button_8.SetPosition(11, 5);
+                    Button_8.SetPosition(10, 4);
                     Button_8.SetSize(76, 88);
                     Button_8.Anchors = Anchors.None;
                     Button_8.Visible = true;
@@ -532,7 +532,7 @@ namespace Preview
                     Panel_8.Anchors = Anchors.None;
                     Panel_8.Visible = true;
 
-                    Button_9.SetPosition(11, 5);
+                    Button_9.SetPosition(10, 4);
                     Button_9.SetSize(76, 88);
                     Button_9.Anchors = Anchors.None;
                     Button_9.Visible = true;
@@ -542,7 +542,7 @@ namespace Preview
                     Panel_9.Anchors = Anchors.None;
                     Panel_9.Visible = true;
 
-                    Button_10.SetPosition(11, 5);
+                    Button_10.SetPosition(10, 4);
                     Button_10.SetSize(76, 88);
                     Button_10.Anchors = Anchors.None;
                     Button_10.Visible = true;
@@ -552,7 +552,7 @@ namespace Preview
                     Panel_10.Anchors = Anchors.None;
                     Panel_10.Visible = true;
 
-                    Button_11.SetPosition(11, 5);
+                    Button_11.SetPosition(10, 4);
                     Button_11.SetSize(76, 88);
                     Button_11.Anchors = Anchors.None;
                     Button_11.Visible = true;
@@ -562,7 +562,7 @@ namespace Preview
                     Panel_11.Anchors = Anchors.None;
                     Panel_11.Visible = true;
 
-                    Button_12.SetPosition(11, 5);
+                    Button_12.SetPosition(10, 4);
                     Button_12.SetSize(76, 88);
                     Button_12.Anchors = Anchors.None;
                     Button_12.Visible = true;

@@ -70,7 +70,7 @@ namespace Crystallography.UI
 
             // ScoreText
             ScoreText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            ScoreText.Font = new UIFont(FontAlias.System, 18, FontStyle.Regular);
+            ScoreText.Font = new UIFont(FontAlias.System, 18, FontStyle.Bold);
             ScoreText.LineBreak = LineBreak.Character;
 
             // ImageBox_1
@@ -79,20 +79,20 @@ namespace Crystallography.UI
 
             // TimerSeparatorText
             TimerSeparatorText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            TimerSeparatorText.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            TimerSeparatorText.Font = new UIFont(FontAlias.System, 18, FontStyle.Bold);
             TimerSeparatorText.TextTrimming = TextTrimming.None;
             TimerSeparatorText.LineBreak = LineBreak.Character;
             TimerSeparatorText.HorizontalAlignment = HorizontalAlignment.Center;
 
             // TimerSecondsText
             TimerSecondsText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            TimerSecondsText.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            TimerSecondsText.Font = new UIFont(FontAlias.System, 18, FontStyle.Bold);
             TimerSecondsText.TextTrimming = TextTrimming.None;
             TimerSecondsText.LineBreak = LineBreak.Character;
 
             // TimerMinutesText
             TimerMinutesText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            TimerMinutesText.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            TimerMinutesText.Font = new UIFont(FontAlias.System, 18, FontStyle.Bold);
             TimerMinutesText.LineBreak = LineBreak.Character;
             TimerMinutesText.HorizontalAlignment = HorizontalAlignment.Right;
 
@@ -249,37 +249,37 @@ namespace Crystallography.UI
                     this.DesignWidth = 960;
                     this.DesignHeight = 544;
 
-                    ImageBox_2.SetPosition(-64, -64);
+                    ImageBox_2.SetPosition(-64, -65);
                     ImageBox_2.SetSize(265, 200);
                     ImageBox_2.Anchors = Anchors.None;
                     ImageBox_2.Visible = true;
 
-                    ScoreLabelText.SetPosition(19, -1);
+                    ScoreLabelText.SetPosition(13, -1);
                     ScoreLabelText.SetSize(74, 36);
                     ScoreLabelText.Anchors = Anchors.None;
                     ScoreLabelText.Visible = true;
 
-                    ScoreText.SetPosition(93, 1);
+                    ScoreText.SetPosition(77, 1);
                     ScoreText.SetSize(145, 36);
                     ScoreText.Anchors = Anchors.None;
                     ScoreText.Visible = true;
 
-                    ImageBox_1.SetPosition(385, -82);
+                    ImageBox_1.SetPosition(383, -83);
                     ImageBox_1.SetSize(200, 200);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    TimerSeparatorText.SetPosition(479, -3);
+                    TimerSeparatorText.SetPosition(478, 0);
                     TimerSeparatorText.SetSize(26, 36);
                     TimerSeparatorText.Anchors = Anchors.None;
                     TimerSeparatorText.Visible = true;
 
-                    TimerSecondsText.SetPosition(497, -1);
-                    TimerSecondsText.SetSize(65, 36);
+                    TimerSecondsText.SetPosition(495, 2);
+                    TimerSecondsText.SetSize(65, 34);
                     TimerSecondsText.Anchors = Anchors.None;
                     TimerSecondsText.Visible = true;
 
-                    TimerMinutesText.SetPosition(352, -1);
+                    TimerMinutesText.SetPosition(351, 2);
                     TimerMinutesText.SetSize(135, 36);
                     TimerMinutesText.Anchors = Anchors.None;
                     TimerMinutesText.Visible = true;
@@ -289,17 +289,17 @@ namespace Crystallography.UI
                     Panel_1.Anchors = Anchors.None;
                     Panel_1.Visible = true;
 
-                    PauseMenuText.SetPosition(7, 24);
+                    PauseMenuText.SetPosition(26, 14);
                     PauseMenuText.SetSize(242, 62);
                     PauseMenuText.Anchors = Anchors.None;
                     PauseMenuText.Visible = true;
 
-                    ResumeButton.SetPosition(262, 14);
+                    ResumeButton.SetPosition(269, 13);
                     ResumeButton.SetSize(289, 71);
                     ResumeButton.Anchors = Anchors.None;
                     ResumeButton.Visible = true;
 
-                    GiveUpButton.SetPosition(562, 15);
+                    GiveUpButton.SetPosition(550, 13);
                     GiveUpButton.SetSize(289, 71);
                     GiveUpButton.Anchors = Anchors.None;
                     GiveUpButton.Visible = true;

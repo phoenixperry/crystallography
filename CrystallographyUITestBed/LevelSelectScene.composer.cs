@@ -58,13 +58,13 @@ namespace Crystallography.UI
 
             // LevelSelectTitleText
             LevelSelectTitleText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            LevelSelectTitleText.Font = new UIFont(FontAlias.System, 40, FontStyle.Regular);
+            LevelSelectTitleText.Font = new UIFont(FontAlias.System, 36, FontStyle.Regular);
             LevelSelectTitleText.LineBreak = LineBreak.Character;
 
             // PagePanel_1
             PagePanel_1.AddPage(new LevelSelectPanel());
-            PagePanel_1.AddPage(new LevelSelectPanel());
-            PagePanel_1.AddPage(new LevelSelectPanel());
+            PagePanel_1.AddPage(new LevelSelectPanel2());
+            PagePanel_1.AddPage(new LevelSelectPanel3());
 
             // ImageBox_1
             ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/statsBox.png");
@@ -89,13 +89,13 @@ namespace Crystallography.UI
 
             // LevelTimeText
             LevelTimeText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            LevelTimeText.Font = new UIFont(FontAlias.System, 32, FontStyle.Regular);
+            LevelTimeText.Font = new UIFont(FontAlias.System, 24, FontStyle.Regular);
             LevelTimeText.LineBreak = LineBreak.Character;
             LevelTimeText.HorizontalAlignment = HorizontalAlignment.Right;
 
             // GradeText
             GradeText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            GradeText.Font = new UIFont(FontAlias.System, 32, FontStyle.Regular);
+            GradeText.Font = new UIFont(FontAlias.System, 72, FontStyle.Regular);
             GradeText.LineBreak = LineBreak.Character;
             GradeText.HorizontalAlignment = HorizontalAlignment.Right;
 
@@ -215,52 +215,52 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    LevelSelectTitleText.SetPosition(44, 41);
+                    LevelSelectTitleText.SetPosition(73, 39);
                     LevelSelectTitleText.SetSize(329, 62);
                     LevelSelectTitleText.Anchors = Anchors.None;
                     LevelSelectTitleText.Visible = true;
 
-                    PagePanel_1.SetPosition(40, 101);
+                    PagePanel_1.SetPosition(17, 89);
                     PagePanel_1.SetSize(567, 396);
                     PagePanel_1.Anchors = Anchors.None;
                     PagePanel_1.Visible = true;
 
-                    ImageBox_1.SetPosition(587, 25);
+                    ImageBox_1.SetPosition(554, 14);
                     ImageBox_1.SetSize(418, 418);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    StartButton.SetPosition(794, 419);
+                    StartButton.SetPosition(761, 408);
                     StartButton.SetSize(125, 82);
                     StartButton.Anchors = Anchors.None;
                     StartButton.Visible = true;
 
-                    LevelNumberText.SetPosition(681, 167);
+                    LevelNumberText.SetPosition(656, 159);
                     LevelNumberText.SetSize(214, 36);
                     LevelNumberText.Anchors = Anchors.None;
                     LevelNumberText.Visible = true;
 
-                    LevelTimeText.SetPosition(681, 310);
+                    LevelTimeText.SetPosition(656, 302);
                     LevelTimeText.SetSize(214, 36);
                     LevelTimeText.Anchors = Anchors.None;
                     LevelTimeText.Visible = true;
 
-                    GradeText.SetPosition(681, 274);
-                    GradeText.SetSize(214, 36);
+                    GradeText.SetPosition(656, 227);
+                    GradeText.SetSize(214, 76);
                     GradeText.Anchors = Anchors.None;
                     GradeText.Visible = true;
 
-                    ScoreText.SetPosition(681, 109);
+                    ScoreText.SetPosition(656, 101);
                     ScoreText.SetSize(214, 36);
                     ScoreText.Anchors = Anchors.None;
                     ScoreText.Visible = true;
 
-                    BackButton.SetPosition(670, 375);
+                    BackButton.SetPosition(637, 364);
                     BackButton.SetSize(163, 81);
                     BackButton.Anchors = Anchors.None;
                     BackButton.Visible = true;
 
-                    stats.SetPosition(704, 62);
+                    stats.SetPosition(671, 49);
                     stats.SetSize(214, 36);
                     stats.Anchors = Anchors.None;
                     stats.Visible = true;
@@ -272,7 +272,7 @@ namespace Crystallography.UI
 
         public void UpdateLanguage()
         {
-            LevelSelectTitleText.Text = "Select Level";
+            LevelSelectTitleText.Text = "select a level";
 
             LevelNumberText.Text = "000";
 

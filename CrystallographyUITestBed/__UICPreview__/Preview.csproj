@@ -31,9 +31,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="__DummyProgram.cs" />
-    <Compile Include="__DummyScene.cs" />
-    <Compile Include="LevelSelectPanel.composer.cs" />
-    <Compile Include="LevelSelectPanel.cs" />
+    <Compile Include="InstructionsScene.composer.cs" />
+    <Compile Include="InstructionsScene.cs" />
+    <Compile Include="InstructionsPanel.composer.cs" />
+    <Compile Include="InstructionsPanel.cs" />
+    <Compile Include="Instructions2.composer.cs" />
+    <Compile Include="Instructions2.cs" />
+    <Compile Include="Insructions3.composer.cs" />
+    <Compile Include="Insructions3.cs" />
+    <Compile Include="Instructions4.composer.cs" />
+    <Compile Include="Instructions4.cs" />
+    <Compile Include="instruction5Panel.composer.cs" />
+    <Compile Include="instruction5Panel.cs" />
+    <Compile Include="Instructions6Panel.composer.cs" />
+    <Compile Include="Instructions6Panel.cs" />
+    <Compile Include="Instructions7Panel.composer.cs" />
+    <Compile Include="Instructions7Panel.cs" />
+    <Compile Include="Instructions8Panel.composer.cs" />
+    <Compile Include="Instructions8Panel.cs" />
     <Compile Include="UIStringTable.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,8 +235,20 @@
     <Content Include="..\\assets\images\UI\icons\journal.png" >
       <Link>assets\images\UI\icons\journal.png</Link>
     </Content>
+    <Content Include="..\\assets\images\UI\icons\lock.png" >
+      <Link>assets\images\UI\icons\lock.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\icons\phones.gif" >
+      <Link>assets\images\UI\icons\phones.gif</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\icons\phones.png" >
+      <Link>assets\images\UI\icons\phones.png</Link>
+    </Content>
     <Content Include="..\\assets\images\UI\icons\tie.png" >
       <Link>assets\images\UI\icons\tie.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\icons\Untitled-1.png" >
+      <Link>assets\images\UI\icons\Untitled-1.png</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>

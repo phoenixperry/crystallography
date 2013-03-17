@@ -9,7 +9,7 @@ using Sce.PlayStation.HighLevel.UI;
 
 namespace Preview
 {
-    partial class Insructions3
+    partial class instruction5Panel
     {
         ImageBox ImageBox_1;
 
@@ -24,10 +24,10 @@ namespace Preview
             ImageBox_1.Name = "ImageBox_1";
 
             // ImageBox_1
-            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/instructions3.png");
+            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/instructions5.png");
             ImageBox_1.ImageScaleType = ImageScaleType.Center;
 
-            // Insructions3
+            // instruction5Panel
             this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             this.Clip = true;
             this.AddChildLast(ImageBox_1);
@@ -46,7 +46,7 @@ namespace Preview
                     this.SetSize(544, 960);
                     this.Anchors = Anchors.None;
 
-                    ImageBox_1.SetPosition(385, 176);
+                    ImageBox_1.SetPosition(364, 123);
                     ImageBox_1.SetSize(200, 200);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
@@ -54,11 +54,11 @@ namespace Preview
                     break;
 
                 default:
-                    this.SetSize(924, 511);
+                    this.SetSize(925, 511);
                     this.Anchors = Anchors.None;
 
-                    ImageBox_1.SetPosition(105, -41);
-                    ImageBox_1.SetSize(713, 594);
+                    ImageBox_1.SetPosition(19, 12);
+                    ImageBox_1.SetSize(886, 486);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 

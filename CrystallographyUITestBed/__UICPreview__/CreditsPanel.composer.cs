@@ -19,6 +19,7 @@ namespace Preview
         ImageBox ImageBox_1;
         ImageBox ImageBox_2;
         Label Label_5;
+        ImageBox ImageBox_3;
 
         private void InitializeWidget()
         {
@@ -43,6 +44,8 @@ namespace Preview
             ImageBox_2.Name = "ImageBox_2";
             Label_5 = new Label();
             Label_5.Name = "Label_5";
+            ImageBox_3 = new ImageBox();
+            ImageBox_3.Name = "ImageBox_3";
 
             // Label_1
             Label_1.TextColor = new UIColor(229f / 255f, 19f / 255f, 19f / 255f, 255f / 255f);
@@ -61,12 +64,12 @@ namespace Preview
 
             // Label_4
             Label_4.TextColor = new UIColor(229f / 255f, 19f / 255f, 19f / 255f, 255f / 255f);
-            Label_4.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            Label_4.Font = new UIFont(FontAlias.System, 30, FontStyle.Regular);
             Label_4.LineBreak = LineBreak.Character;
 
             // PhoenixText
             PhoenixText.TextColor = new UIColor(41f / 255f, 226f / 255f, 226f / 255f, 255f / 255f);
-            PhoenixText.Font = new UIFont(FontAlias.System, 26, FontStyle.Regular);
+            PhoenixText.Font = new UIFont(FontAlias.System, 30, FontStyle.Regular);
             PhoenixText.LineBreak = LineBreak.Character;
             PhoenixText.VerticalAlignment = VerticalAlignment.Top;
 
@@ -80,8 +83,12 @@ namespace Preview
 
             // Label_5
             Label_5.TextColor = new UIColor(244f / 255f, 234f / 255f, 244f / 255f, 255f / 255f);
-            Label_5.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            Label_5.Font = new UIFont(FontAlias.System, 30, FontStyle.Regular);
             Label_5.LineBreak = LineBreak.Character;
+
+            // ImageBox_3
+            ImageBox_3.Image = new ImageAsset("/Application/assets/images/UI/icons/phones.png");
+            ImageBox_3.ImageScaleType = ImageScaleType.Center;
 
             // CreditsPanel
             this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -94,6 +101,7 @@ namespace Preview
             this.AddChildLast(ImageBox_1);
             this.AddChildLast(ImageBox_2);
             this.AddChildLast(Label_5);
+            this.AddChildLast(ImageBox_3);
 
             SetWidgetLayout(orientation);
 
@@ -149,13 +157,18 @@ namespace Preview
                     Label_5.Anchors = Anchors.None;
                     Label_5.Visible = true;
 
+                    ImageBox_3.SetPosition(211, 144);
+                    ImageBox_3.SetSize(200, 200);
+                    ImageBox_3.Anchors = Anchors.None;
+                    ImageBox_3.Visible = true;
+
                     break;
 
                 default:
                     this.SetSize(885, 344);
                     this.Anchors = Anchors.None;
 
-                    Label_1.SetPosition(16, 67);
+                    Label_1.SetPosition(16, 68);
                     Label_1.SetSize(876, 36);
                     Label_1.Anchors = Anchors.None;
                     Label_1.Visible = true;
@@ -165,35 +178,40 @@ namespace Preview
                     Label_2.Anchors = Anchors.None;
                     Label_2.Visible = true;
 
-                    Label_3.SetPosition(16, 269);
+                    Label_3.SetPosition(16, 276);
                     Label_3.SetSize(433, 36);
                     Label_3.Anchors = Anchors.None;
                     Label_3.Visible = true;
 
-                    Label_4.SetPosition(16, 41);
+                    Label_4.SetPosition(16, 34);
                     Label_4.SetSize(214, 36);
                     Label_4.Anchors = Anchors.None;
                     Label_4.Visible = true;
 
-                    PhoenixText.SetPosition(16, 146);
+                    PhoenixText.SetPosition(16, 140);
                     PhoenixText.SetSize(392, 37);
                     PhoenixText.Anchors = Anchors.None;
                     PhoenixText.Visible = true;
 
-                    ImageBox_1.SetPosition(169, 41);
+                    ImageBox_1.SetPosition(200, 41);
                     ImageBox_1.SetSize(73, 31);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    ImageBox_2.SetPosition(186, 114);
+                    ImageBox_2.SetPosition(211, 117);
                     ImageBox_2.SetSize(197, 62);
                     ImageBox_2.Anchors = Anchors.None;
                     ImageBox_2.Visible = true;
 
-                    Label_5.SetPosition(16, 244);
+                    Label_5.SetPosition(16, 239);
                     Label_5.SetSize(301, 36);
                     Label_5.Anchors = Anchors.None;
                     Label_5.Visible = true;
+
+                    ImageBox_3.SetPosition(247, 206);
+                    ImageBox_3.SetSize(106, 76);
+                    ImageBox_3.Anchors = Anchors.None;
+                    ImageBox_3.Visible = true;
 
                     break;
             }
@@ -202,9 +220,9 @@ namespace Preview
 
         public void UpdateLanguage()
         {
-            Label_1.Text = "Game Designer, System Design, Level Design, Lead Engineer  ";
+            Label_1.Text = "Game Designer, System Design, Lead Engineer  ";
 
-            Label_2.Text = "Game Designer, Creative Director, Developer, User Interface Design, User Testing";
+            Label_2.Text = "Game Designer, Creative Director, Developer, User Testing";
 
             Label_3.Text = "Game Designer, Audio design, Level Design";
 

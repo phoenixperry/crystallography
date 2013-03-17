@@ -11,7 +11,7 @@ namespace Preview
 {
     class __DummyScene : Scene
     {
-        LevelSelectPanel item = new LevelSelectPanel();
+        InstructionsPanel item = new InstructionsPanel();
 
         public __DummyScene()
         {

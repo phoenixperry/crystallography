@@ -54,11 +54,11 @@ namespace Preview
                     break;
 
                 default:
-                    this.SetSize(924, 425);
+                    this.SetSize(924, 511);
                     this.Anchors = Anchors.None;
 
-                    ImageBox_1.SetPosition(78, -25);
-                    ImageBox_1.SetSize(767, 475);
+                    ImageBox_1.SetPosition(0, 74);
+                    ImageBox_1.SetSize(921, 362);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 

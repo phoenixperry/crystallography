@@ -54,10 +54,10 @@ namespace Crystallography.UI
                     break;
 
                 default:
-                    this.SetSize(960, 544);
+                    this.SetSize(924, 511);
                     this.Anchors = Anchors.None;
 
-                    ImageBox_1.SetPosition(123, -100);
+                    ImageBox_1.SetPosition(105, -41);
                     ImageBox_1.SetSize(713, 594);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;

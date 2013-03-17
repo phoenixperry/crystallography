@@ -7,9 +7,9 @@ using Sce.PlayStation.Core.Imaging;
 using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.HighLevel.UI;
 
-namespace Preview
+namespace Crystallography.UI
 {
-    partial class Insructions3
+    partial class Instructions8Panel
     {
         ImageBox ImageBox_1;
 
@@ -24,10 +24,10 @@ namespace Preview
             ImageBox_1.Name = "ImageBox_1";
 
             // ImageBox_1
-            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/instructions3.png");
+            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/instructions8.png");
             ImageBox_1.ImageScaleType = ImageScaleType.Center;
 
-            // Insructions3
+            // Instructions8Panel
             this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             this.Clip = true;
             this.AddChildLast(ImageBox_1);
@@ -46,7 +46,7 @@ namespace Preview
                     this.SetSize(544, 960);
                     this.Anchors = Anchors.None;
 
-                    ImageBox_1.SetPosition(385, 176);
+                    ImageBox_1.SetPosition(354, 107);
                     ImageBox_1.SetSize(200, 200);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
@@ -57,8 +57,8 @@ namespace Preview
                     this.SetSize(924, 511);
                     this.Anchors = Anchors.None;
 
-                    ImageBox_1.SetPosition(105, -41);
-                    ImageBox_1.SetSize(713, 594);
+                    ImageBox_1.SetPosition(18, 16);
+                    ImageBox_1.SetSize(887, 478);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
