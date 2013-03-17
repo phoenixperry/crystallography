@@ -1965,7 +1965,7 @@
           <LayoutProperty>
             <LayoutProperty>
               <X>351</X>
-              <Y>109.3709548795452</Y>
+              <Y>107.69363451665782</Y>
               <Width>258</Width>
               <Height>63</Height>
               <Visible>true</Visible>
@@ -1985,12 +1985,12 @@
             <OwnerNode z:Ref="i35" />
             <VariableName>NewGameButton</VariableName>
             <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
-              <d7p1:BackgroundDisablelImage>system_assets/button_9patch_disable.png</d7p1:BackgroundDisablelImage>
+              <d7p1:BackgroundDisablelImage i:nil="true" />
               <d7p1:BackgroundNormalImage>images\UI\play.png</d7p1:BackgroundNormalImage>
               <d7p1:BackgroundPressImage>images\UI\playOVer.png</d7p1:BackgroundPressImage>
             </BackgroundButtonImage>
             <BackgroundType>Custom</BackgroundType>
-            <ButtonImage></ButtonImage>
+            <ButtonImage i:nil="true" />
             <ButtonType>ImageButton</ButtonType>
             <FilterColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
               <d7p1:A>255</d7p1:A>
@@ -2069,7 +2069,7 @@
             <OwnerNode z:Ref="i36" />
             <VariableName>LevelSelectButton</VariableName>
             <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
-              <d7p1:BackgroundDisablelImage>system_assets/button_9patch_disable.png</d7p1:BackgroundDisablelImage>
+              <d7p1:BackgroundDisablelImage i:nil="true" />
               <d7p1:BackgroundNormalImage>images\UI\selectlevel.png</d7p1:BackgroundNormalImage>
               <d7p1:BackgroundPressImage>images\UI\selectLevelOver.png</d7p1:BackgroundPressImage>
             </BackgroundButtonImage>
@@ -4985,7 +4985,7 @@
               <Anchors>None</Anchors>
             </LayoutProperty>
             <LayoutProperty>
-              <X>219.73578780947832</X>
+              <X>219.73578780947833</X>
               <Y>227.29730603016094</Y>
               <Width>200</Width>
               <Height>200</Height>
