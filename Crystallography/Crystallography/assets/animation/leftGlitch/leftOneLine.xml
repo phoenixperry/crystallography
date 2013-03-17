@@ -14,9 +14,9 @@ oH => sprite's original height (only available if trimmed)
 r => 'y' only set if sprite is rotated
 -->
 <TextureAtlas imagePath="leftOneLine.png" width="512" height="256">
-    <sprite n="1" x="354" y="2" w="86" h="146"/>
-    <sprite n="2" x="266" y="2" w="86" h="146"/>
-    <sprite n="3" x="178" y="2" w="86" h="146"/>
-    <sprite n="4" x="2" y="2" w="86" h="134"/>
-    <sprite n="5" x="90" y="2" w="86" h="146"/>
+    <sprite n="1" x="352" y="0" w="88" h="146"/>
+    <sprite n="2" x="264" y="0" w="88" h="146"/>
+    <sprite n="3" x="176" y="0" w="88" h="146"/>
+    <sprite n="4" x="0" y="0" w="88" h="146"/>
+    <sprite n="5" x="88" y="0" w="88" h="146"/>
 </TextureAtlas>

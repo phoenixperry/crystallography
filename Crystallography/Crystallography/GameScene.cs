@@ -43,8 +43,8 @@ namespace Crystallography
 		{
 //			var ga = new GlitchAnimation(); 
 //			this.AddChild(ga); 
-			var fa = new AnimationFall(); 
-			this.AddChild(fa); 
+//			var fa = new AnimationFall(); 
+//			this.AddChild(fa); 
 			
 			Touch.GetData(0).Clear();
 			

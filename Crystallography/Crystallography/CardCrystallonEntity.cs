@@ -17,6 +17,8 @@ namespace Crystallography
 														new Vector2(13.5f,-10.5f) };
 		protected readonly static float DEFAULT_SPEED = 1.0f;
 		
+		protected SpriteTile _anim;
+		
 		// GET & SET ----------------------------------------------------------------
 		
 		/// <summary>
@@ -33,7 +35,21 @@ namespace Crystallography
 			return POSITION_OFFSETS[position];
 		}
 		
-		public int id { get; private set; }
+		public override void setOrientation (string pOrientation)
+		{
+			base.setOrientation (pOrientation);
+			if(_anim != null) {
+				if (pOrientation == "Left") {
+					_anim.Rotation = new Vector2(1f,0f);
+				} else if (pOrientation == "Right") {
+					_anim.Rotation = new Vector2(0.5f, -0.8660254f);
+				} else {
+					_anim.Rotation = new Vector2(0.5f, 0.8660254f);
+				}
+			}
+		}
+		
+//		public int id { get; set; }
 		
 		// CONSTRUCTORS -------------------------------------------------------------
 		
@@ -59,6 +75,7 @@ namespace Crystallography
 		                             TextureInfo pTextureInfo, Vector2i pTileIndex2D, PhysicsShape pShape)
 													: base(pScene, pGamePhysics, pTextureInfo, pTileIndex2D, pShape) {
 			id = pId;
+			_anim = null;
 			_sprite.Scale/=3f;
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 		}
@@ -90,6 +107,28 @@ namespace Crystallography
 			setVelocity(1.0f, GameScene.Random.NextAngle());
 			addToScene();
 			return this;
+		}
+		
+		public void setAnim( SpriteTile anim, int pStart, int pEnd ) {
+			
+			_anim = new SpriteTile( anim.TextureInfo, anim.TileIndex2D );
+			_anim = new SpriteTile( anim.TextureInfo, anim.TileIndex2D );
+			_anim.Pivot = this.getNode().Pivot;
+			if (pStart == pEnd) {
+				Support.SetTile(_anim, pStart);
+			} else {
+				_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 1.0f, true) );
+			}
+			if (_orientationString == "Left") {
+				_anim.Rotation = new Vector2(1f,0f);
+			} else if (_orientationString == "Right") {
+				_anim.Rotation = new Vector2(-0.9524198f,0.30481062f);
+			} else {
+				_anim.Rotation = new Vector2(0.5f, 0.8660254f);
+			}
+			
+			this.getNode().AddChild(_anim);
+			
 		}
 		
 	}

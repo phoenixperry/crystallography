@@ -40,11 +40,11 @@ namespace Crystallography
 			_sprite = node as SpriteTile;
 		}
 		
-		public void setOrientation ( string pOrientation ) {
+		public virtual void setOrientation ( string pOrientation ) {
 			_orientationString = pOrientation;
 		}
 		
-		public void setPattern ( string pPattern ) {
+		public virtual void setPattern ( string pPattern ) {
 			_patternString = pPattern;
 		}
 		

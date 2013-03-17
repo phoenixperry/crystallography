@@ -1,9 +1,14 @@
 using System;
+//using Sce.PlayStation.Core.Graphics;
+using Sce.PlayStation.HighLevel.GameEngine2D;
 
 namespace Crystallography
 {
 	public class QAnimation : AbstractQuality
 	{
+		public static int[,] palette = new int[3,2];
+		public static SpriteTile animTiles;
+		
 		protected static AbstractQuality _instance;
 		
 		// GET & SET --------------------------------------------------------------
@@ -30,32 +35,15 @@ namespace Crystallography
 		
 		public QAnimation () : base() {
 			_name = "QAnimation";
+			setPalette();
 		}
 		
 		// OVERRIDES -------------------------------------------------------------
 		
 		public override void Apply ( ICrystallonEntity pEntity, int pVariant)
 		{
-			SpriteTileCrystallonEntity e = pEntity as SpriteTileCrystallonEntity;
-			
-			switch(pVariant)
-			{
-			case (0):
-//				e.setPattern("Solid");
-				break;
-			case (1):
-//				e.setPattern("Stripe");
-				break;
-			case (2):
-//				e.setPattern("Dot");
-				break;
-			default:
-				throw new NotImplementedException("QAnimation.Apply : pVariant must be 0,1,2");
-				break;
-			}
-//			var ss = SpriteSingleton.getInstance();
-//			(e.getNode() as SpriteTile).TileIndex2D = ss.Get( e.getOrientation() + e.getPattern() ).TileIndex2D;
-			
+			CardCrystallonEntity e = pEntity as CardCrystallonEntity;
+			e.setAnim(animTiles, palette[pVariant, 0], palette[pVariant, 1]);			
 		}
 		
 		/// <summary>
@@ -67,8 +55,22 @@ namespace Crystallography
 		public override int Match (ICrystallonEntity[] pEntities, bool pForScore)
 		{
 			//HACK Temporary override while we wait for Animations to be fully integrated!!!
-			return allSameScore;
-//			base.Match(pEntities pForScore );
+//			return allSameScore;
+			return base.Match(pEntities, pForScore );
+		}
+		
+		public void setPalette () {
+			setPalette( "Application/assets/animation/leftFall/leftFall.png", 6, 3, 16, 16, 0, 4, 6, 16);
+		}
+		
+		public void setPalette( string path, int columns, int rows, int start1, int end1, int start2, int end2, int start3, int end3 ) {
+			animTiles = Support.TiledSpriteFromFile( path, columns, rows );
+			palette[0,0] = start1;
+			palette[0,1] = end1;
+			palette[1,0] = start2;
+			palette[1,1] = end2;
+			palette[2,0] = start3;
+			palette[2,1] = end3;
 		}
 	}
 }
