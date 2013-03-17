@@ -31,24 +31,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="__DummyProgram.cs" />
-    <Compile Include="InstructionsScene.composer.cs" />
-    <Compile Include="InstructionsScene.cs" />
-    <Compile Include="InstructionsPanel.composer.cs" />
-    <Compile Include="InstructionsPanel.cs" />
-    <Compile Include="Instructions2.composer.cs" />
-    <Compile Include="Instructions2.cs" />
-    <Compile Include="Insructions3.composer.cs" />
-    <Compile Include="Insructions3.cs" />
-    <Compile Include="Instructions4.composer.cs" />
-    <Compile Include="Instructions4.cs" />
-    <Compile Include="instruction5Panel.composer.cs" />
-    <Compile Include="instruction5Panel.cs" />
-    <Compile Include="Instructions6Panel.composer.cs" />
-    <Compile Include="Instructions6Panel.cs" />
-    <Compile Include="Instructions7Panel.composer.cs" />
-    <Compile Include="Instructions7Panel.cs" />
-    <Compile Include="Instructions8Panel.composer.cs" />
-    <Compile Include="Instructions8Panel.cs" />
+    <Compile Include="__DummyScene.cs" />
+    <Compile Include="LevelEndPanel.composer.cs" />
+    <Compile Include="LevelEndPanel.cs" />
     <Compile Include="UIStringTable.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +151,15 @@
     <Content Include="..\\assets\images\UI\instructionsOver.png" >
       <Link>assets\images\UI\instructionsOver.png</Link>
     </Content>
+    <Content Include="..\\assets\images\UI\levelComplete.png" >
+      <Link>assets\images\UI\levelComplete.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\levelSelectBtn.png" >
+      <Link>assets\images\UI\levelSelectBtn.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\levelSelectBtnRoll.png" >
+      <Link>assets\images\UI\levelSelectBtnRoll.png</Link>
+    </Content>
     <Content Include="..\\assets\images\UI\lockIcon.png" >
       <Link>assets\images\UI\lockIcon.png</Link>
     </Content>
@@ -174,6 +168,12 @@
     </Content>
     <Content Include="..\\assets\images\UI\menuButtonBackground.png" >
       <Link>assets\images\UI\menuButtonBackground.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\nextLevel.png" >
+      <Link>assets\images\UI\nextLevel.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\nextLevelOver.png" >
+      <Link>assets\images\UI\nextLevelOver.png</Link>
     </Content>
     <Content Include="..\\assets\images\UI\play.png" >
       <Link>assets\images\UI\play.png</Link>
@@ -187,6 +187,12 @@
     <Content Include="..\\assets\images\UI\quitOver.png" >
       <Link>assets\images\UI\quitOver.png</Link>
     </Content>
+    <Content Include="..\\assets\images\UI\quit_game.png" >
+      <Link>assets\images\UI\quit_game.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\quit_game_Roll.png" >
+      <Link>assets\images\UI\quit_game_Roll.png</Link>
+    </Content>
     <Content Include="..\\assets\images\UI\redBtn.png" >
       <Link>assets\images\UI\redBtn.png</Link>
     </Content>
@@ -198,6 +204,9 @@
     </Content>
     <Content Include="..\\assets\images\UI\score.png" >
       <Link>assets\images\UI\score.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\score_now.png" >
+      <Link>assets\images\UI\score_now.png</Link>
     </Content>
     <Content Include="..\\assets\images\UI\selectlevel.png" >
       <Link>assets\images\UI\selectlevel.png</Link>
@@ -216,6 +225,9 @@
     </Content>
     <Content Include="..\\assets\images\UI\timer.png" >
       <Link>assets\images\UI\timer.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\time_now.png" >
+      <Link>assets\images\UI\time_now.png</Link>
     </Content>
     <Content Include="..\\assets\images\UI\triBtnGraphics.png" >
       <Link>assets\images\UI\triBtnGraphics.png</Link>

@@ -33,7 +33,6 @@ namespace Crystallography.UI
             // Button_1
             Button_1.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
             Button_1.TextFont = new UIFont(FontAlias.System, 48, FontStyle.Regular);
-            Button_1.TextTrimming = TextTrimming.None;
             Button_1.Style = ButtonStyle.Custom;
             Button_1.CustomImage = new CustomButtonImageSettings()
             {

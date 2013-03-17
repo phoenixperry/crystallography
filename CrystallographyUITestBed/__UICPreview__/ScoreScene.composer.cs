@@ -12,7 +12,6 @@ namespace Preview
     partial class ScoreScene
     {
         ImageBox ImageBox_2;
-        Label ScoreLabelText;
         Label ScoreText;
         ImageBox ImageBox_1;
         Label TimerSeparatorText;
@@ -34,8 +33,6 @@ namespace Preview
         {
             ImageBox_2 = new ImageBox();
             ImageBox_2.Name = "ImageBox_2";
-            ScoreLabelText = new Label();
-            ScoreLabelText.Name = "ScoreLabelText";
             ScoreText = new Label();
             ScoreText.Name = "ScoreText";
             ImageBox_1 = new ImageBox();
@@ -60,13 +57,8 @@ namespace Preview
             NextLevelButton.Name = "NextLevelButton";
 
             // ImageBox_2
-            ImageBox_2.Image = new ImageAsset("/Application/assets/images/UI/redBtn.png");
+            ImageBox_2.Image = new ImageAsset("/Application/assets/images/UI/score_now.png");
             ImageBox_2.ImageScaleType = ImageScaleType.Center;
-
-            // ScoreLabelText
-            ScoreLabelText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            ScoreLabelText.Font = new UIFont(FontAlias.System, 22, FontStyle.Regular);
-            ScoreLabelText.LineBreak = LineBreak.Character;
 
             // ScoreText
             ScoreText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
@@ -74,7 +66,7 @@ namespace Preview
             ScoreText.LineBreak = LineBreak.Character;
 
             // ImageBox_1
-            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/timer.png");
+            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/time_now.png");
             ImageBox_1.ImageScaleType = ImageScaleType.Center;
 
             // TimerSeparatorText
@@ -100,7 +92,6 @@ namespace Preview
             Panel_1.BackgroundColor = new UIColor(40f / 255f, 40f / 255f, 40f / 255f, 255f / 255f);
             Panel_1.Clip = true;
             Panel_1.AddChildLast(ImageBox_2);
-            Panel_1.AddChildLast(ScoreLabelText);
             Panel_1.AddChildLast(ScoreText);
             Panel_1.AddChildLast(ImageBox_1);
             Panel_1.AddChildLast(TimerSeparatorText);
@@ -146,15 +137,14 @@ namespace Preview
             PauseMenu.AddChildLast(GiveUpButton);
 
             // NextLevelButton
-            NextLevelButton.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            NextLevelButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            NextLevelButton.IconImage = null;
             NextLevelButton.Style = ButtonStyle.Custom;
             NextLevelButton.CustomImage = new CustomButtonImageSettings()
             {
-                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/redBtn.png"),
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/nextLevel.png"),
                 BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/redBtnOver.png"),
                 BackgroundDisabledImage = null,
-                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
 
             // ScoreScene
@@ -182,11 +172,6 @@ namespace Preview
                     ImageBox_2.SetSize(200, 200);
                     ImageBox_2.Anchors = Anchors.None;
                     ImageBox_2.Visible = true;
-
-                    ScoreLabelText.SetPosition(0, -12);
-                    ScoreLabelText.SetSize(214, 36);
-                    ScoreLabelText.Anchors = Anchors.None;
-                    ScoreLabelText.Visible = true;
 
                     ScoreText.SetPosition(0, -12);
                     ScoreText.SetSize(214, 36);
@@ -249,38 +234,33 @@ namespace Preview
                     this.DesignWidth = 960;
                     this.DesignHeight = 544;
 
-                    ImageBox_2.SetPosition(-64, -65);
-                    ImageBox_2.SetSize(265, 200);
+                    ImageBox_2.SetPosition(0, -1);
+                    ImageBox_2.SetSize(200, 36);
                     ImageBox_2.Anchors = Anchors.None;
                     ImageBox_2.Visible = true;
 
-                    ScoreLabelText.SetPosition(13, -1);
-                    ScoreLabelText.SetSize(74, 36);
-                    ScoreLabelText.Anchors = Anchors.None;
-                    ScoreLabelText.Visible = true;
-
-                    ScoreText.SetPosition(77, 1);
-                    ScoreText.SetSize(145, 36);
+                    ScoreText.SetPosition(83, 1);
+                    ScoreText.SetSize(145, 34);
                     ScoreText.Anchors = Anchors.None;
                     ScoreText.Visible = true;
 
-                    ImageBox_1.SetPosition(383, -83);
-                    ImageBox_1.SetSize(200, 200);
+                    ImageBox_1.SetPosition(214, 0);
+                    ImageBox_1.SetSize(200, 36);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    TimerSeparatorText.SetPosition(478, 0);
-                    TimerSeparatorText.SetSize(26, 36);
+                    TimerSeparatorText.SetPosition(329, 1);
+                    TimerSeparatorText.SetSize(12, 34);
                     TimerSeparatorText.Anchors = Anchors.None;
                     TimerSeparatorText.Visible = true;
 
-                    TimerSecondsText.SetPosition(495, 2);
-                    TimerSecondsText.SetSize(65, 34);
+                    TimerSecondsText.SetPosition(341, 1);
+                    TimerSecondsText.SetSize(46, 34);
                     TimerSecondsText.Anchors = Anchors.None;
                     TimerSecondsText.Visible = true;
 
-                    TimerMinutesText.SetPosition(351, 2);
-                    TimerMinutesText.SetSize(135, 36);
+                    TimerMinutesText.SetPosition(283, 1);
+                    TimerMinutesText.SetSize(46, 34);
                     TimerMinutesText.Anchors = Anchors.None;
                     TimerMinutesText.Visible = true;
 
@@ -309,8 +289,8 @@ namespace Preview
                     PauseMenu.Anchors = Anchors.None;
                     PauseMenu.Visible = false;
 
-                    NextLevelButton.SetPosition(671, 474);
-                    NextLevelButton.SetSize(289, 71);
+                    NextLevelButton.SetPosition(648, 449);
+                    NextLevelButton.SetSize(312, 95);
                     NextLevelButton.Anchors = Anchors.None;
                     NextLevelButton.Visible = true;
 
@@ -321,8 +301,6 @@ namespace Preview
 
         public void UpdateLanguage()
         {
-            ScoreLabelText.Text = "score:";
-
             ScoreText.Text = "0123456789";
 
             TimerSeparatorText.Text = ":";
@@ -336,8 +314,6 @@ namespace Preview
             ResumeButton.Text = "resume";
 
             GiveUpButton.Text = "give up";
-
-            NextLevelButton.Text = "next level";
         }
 
         private void onShowing(object sender, EventArgs e)

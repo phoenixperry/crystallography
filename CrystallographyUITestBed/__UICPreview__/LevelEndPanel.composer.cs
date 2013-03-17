@@ -7,7 +7,7 @@ using Sce.PlayStation.Core.Imaging;
 using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.HighLevel.UI;
 
-namespace Crystallography.UI
+namespace Preview
 {
     partial class LevelEndPanel
     {

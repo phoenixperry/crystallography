@@ -36,8 +36,8 @@ namespace Preview
             PagePanel_1.AddPage(new Instructions4());
             PagePanel_1.AddPage(new instruction5Panel());
             PagePanel_1.AddPage(new Instructions6Panel());
-            PagePanel_1.AddPage(new Instructions7Panel());
             PagePanel_1.AddPage(new Instructions8Panel());
+            PagePanel_1.AddPage(new Instructions7Panel());
 
             // InstructionsScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
