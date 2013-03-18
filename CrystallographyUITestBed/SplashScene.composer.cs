@@ -12,7 +12,7 @@ namespace Crystallography.UI
     partial class SplashScene
     {
         Panel sceneBackgroundPanel;
-        Label SplashText;
+        ImageBox ImageBox_1;
 
         private void InitializeWidget()
         {
@@ -23,21 +23,19 @@ namespace Crystallography.UI
         {
             sceneBackgroundPanel = new Panel();
             sceneBackgroundPanel.Name = "sceneBackgroundPanel";
-            SplashText = new Label();
-            SplashText.Name = "SplashText";
+            ImageBox_1 = new ImageBox();
+            ImageBox_1.Name = "ImageBox_1";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
 
-            // SplashText
-            SplashText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            SplashText.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
-            SplashText.LineBreak = LineBreak.Character;
-            SplashText.HorizontalAlignment = HorizontalAlignment.Center;
+            // ImageBox_1
+            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/eyes.png");
+            ImageBox_1.ImageScaleType = ImageScaleType.Center;
 
             // SplashScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
-            this.RootWidget.AddChildLast(SplashText);
+            this.RootWidget.AddChildLast(ImageBox_1);
 
             SetWidgetLayout(orientation);
 
@@ -58,10 +56,10 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    SplashText.SetPosition(201, 255);
-                    SplashText.SetSize(214, 36);
-                    SplashText.Anchors = Anchors.None;
-                    SplashText.Visible = true;
+                    ImageBox_1.SetPosition(352, 63);
+                    ImageBox_1.SetSize(200, 200);
+                    ImageBox_1.Anchors = Anchors.None;
+                    ImageBox_1.Visible = true;
 
                     break;
 
@@ -74,10 +72,10 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    SplashText.SetPosition(373, 254);
-                    SplashText.SetSize(214, 36);
-                    SplashText.Anchors = Anchors.None;
-                    SplashText.Visible = true;
+                    ImageBox_1.SetPosition(0, 0);
+                    ImageBox_1.SetSize(960, 544);
+                    ImageBox_1.Anchors = Anchors.None;
+                    ImageBox_1.Visible = true;
 
                     break;
             }
@@ -86,7 +84,6 @@ namespace Crystallography.UI
 
         public void UpdateLanguage()
         {
-            SplashText.Text = "12 eyes";
         }
 
         private void onShowing(object sender, EventArgs e)
