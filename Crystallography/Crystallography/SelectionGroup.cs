@@ -247,7 +247,7 @@ namespace Crystallography
 			
 			sequence = new Sequence();
 			if ( MemberType.ToString() == "Crystallography.CardCrystallonEntity") { 
-				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE, 20.5f), 0.2f)
+				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE-10.0f, 20.5f), 0.2f)
 				            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
 			} else {
 				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
@@ -257,7 +257,7 @@ namespace Crystallography
 			
 			sequence = new Sequence();
 			if ( MemberType.ToString() == "Crystallography.CardCrystallonEntity") { 
-				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE, 20.5f), 0.2f)
+				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE+10.0f, 20.5f), 0.2f)
 			           	 	{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
 			} else {
 				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)

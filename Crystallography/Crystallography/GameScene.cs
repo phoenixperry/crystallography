@@ -17,7 +17,7 @@ namespace Crystallography
 		public static readonly int TOTAL_LEVELS = 25;
 		
 		// Change the following value to true if you want bounding boxes to be rendered
-        private static bool DEBUG_BOUNDINGBOXS = true;
+        private static bool DEBUG_BOUNDINGBOXS = false;
 		
 		public static Random Random = new Random();
 		
