@@ -72,10 +72,10 @@ namespace Preview
             CreditsButton.Style = ButtonStyle.Custom;
             CreditsButton.CustomImage = new CustomButtonImageSettings()
             {
-                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/quit.png"),
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/credits_btn.png"),
                 BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/quitOver.png"),
                 BackgroundDisabledImage = null,
-                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
 
             // OptionsButton

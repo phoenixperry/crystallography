@@ -142,7 +142,7 @@ namespace Crystallography.UI
             NextLevelButton.CustomImage = new CustomButtonImageSettings()
             {
                 BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/nextLevel.png"),
-                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/redBtnOver.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/nextLevelOver.png"),
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
@@ -289,9 +289,9 @@ namespace Crystallography.UI
                     PauseMenu.Anchors = Anchors.None;
                     PauseMenu.Visible = false;
 
-                    NextLevelButton.SetPosition(648, 449);
-                    NextLevelButton.SetSize(312, 95);
-                    NextLevelButton.Anchors = Anchors.None;
+                    NextLevelButton.SetPosition(713, 477);
+                    NextLevelButton.SetSize(247, 68);
+                    NextLevelButton.Anchors = Anchors.Top;
                     NextLevelButton.Visible = true;
 
                     break;

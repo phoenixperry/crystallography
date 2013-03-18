@@ -326,6 +326,12 @@
     <Content Include="assets\audio\sfx\stack1threetiles.wav" />
     <Content Include="assets\audio\sfx\stack3levelcomplete.wav" />
     <Content Include="assets\audio\sfx\stack1levelcomplete.wav" />
+    <Content Include="assets\images\UI\credits_btn.png" />
+    <Content Include="assets\images\UI\credits_btnRoll.png" />
+    <Content Include="assets\images\UI\icons\lock.png" />
+    <Content Include="assets\images\UI\back_2Roll.png" />
+    <Content Include="assets\images\nextLevel.png" />
+    <Content Include="assets\images\nextLevelOver.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
@@ -342,5 +348,6 @@
     <None Include="deprecated\InstructionsScene.cs" />
     <None Include="deprecated\MenuScene.cs" />
     <None Include="deprecated\TitleScene.cs" />
+    <None Include="assets\images\UI\icons\phones.gif" />
   </ItemGroup>
 </Project>

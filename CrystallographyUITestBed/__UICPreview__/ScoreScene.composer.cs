@@ -289,8 +289,8 @@ namespace Preview
                     PauseMenu.Anchors = Anchors.None;
                     PauseMenu.Visible = false;
 
-                    NextLevelButton.SetPosition(648, 449);
-                    NextLevelButton.SetSize(312, 95);
+                    NextLevelButton.SetPosition(635, 476);
+                    NextLevelButton.SetSize(247, 68);
                     NextLevelButton.Anchors = Anchors.None;
                     NextLevelButton.Visible = true;
 

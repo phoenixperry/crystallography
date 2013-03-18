@@ -17,7 +17,7 @@ namespace Preview
         Button QuitButton;
         Label YourScoreText;
         Label BestScoreText;
-        Label YourTime;
+        Label YourTimeText;
         Label BestTimeText;
 
         private void InitializeWidget()
@@ -39,8 +39,8 @@ namespace Preview
             YourScoreText.Name = "YourScoreText";
             BestScoreText = new Label();
             BestScoreText.Name = "BestScoreText";
-            YourTime = new Label();
-            YourTime.Name = "YourTime";
+            YourTimeText = new Label();
+            YourTimeText.Name = "YourTimeText";
             BestTimeText = new Label();
             BestTimeText.Name = "BestTimeText";
 
@@ -56,7 +56,7 @@ namespace Preview
                 BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/nextLevel.png"),
                 BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/nextLevelOver.png"),
                 BackgroundDisabledImage = null,
-                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
 
             // LevelSelectButton
@@ -91,10 +91,10 @@ namespace Preview
             BestScoreText.Font = new UIFont(FontAlias.System, 28, FontStyle.Regular);
             BestScoreText.LineBreak = LineBreak.Character;
 
-            // YourTime
-            YourTime.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            YourTime.Font = new UIFont(FontAlias.System, 28, FontStyle.Regular);
-            YourTime.LineBreak = LineBreak.Character;
+            // YourTimeText
+            YourTimeText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+            YourTimeText.Font = new UIFont(FontAlias.System, 28, FontStyle.Regular);
+            YourTimeText.LineBreak = LineBreak.Character;
 
             // BestTimeText
             BestTimeText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
@@ -110,7 +110,7 @@ namespace Preview
             this.AddChildLast(QuitButton);
             this.AddChildLast(YourScoreText);
             this.AddChildLast(BestScoreText);
-            this.AddChildLast(YourTime);
+            this.AddChildLast(YourTimeText);
             this.AddChildLast(BestTimeText);
 
             SetWidgetLayout(orientation);
@@ -157,10 +157,10 @@ namespace Preview
                     BestScoreText.Anchors = Anchors.None;
                     BestScoreText.Visible = true;
 
-                    YourTime.SetPosition(60, 340);
-                    YourTime.SetSize(214, 36);
-                    YourTime.Anchors = Anchors.None;
-                    YourTime.Visible = true;
+                    YourTimeText.SetPosition(60, 340);
+                    YourTimeText.SetSize(214, 36);
+                    YourTimeText.Anchors = Anchors.None;
+                    YourTimeText.Visible = true;
 
                     BestTimeText.SetPosition(40, 406);
                     BestTimeText.SetSize(214, 36);
@@ -203,10 +203,10 @@ namespace Preview
                     BestScoreText.Anchors = Anchors.None;
                     BestScoreText.Visible = true;
 
-                    YourTime.SetPosition(276, 314);
-                    YourTime.SetSize(159, 36);
-                    YourTime.Anchors = Anchors.None;
-                    YourTime.Visible = true;
+                    YourTimeText.SetPosition(276, 314);
+                    YourTimeText.SetSize(159, 36);
+                    YourTimeText.Anchors = Anchors.None;
+                    YourTimeText.Visible = true;
 
                     BestTimeText.SetPosition(656, 314);
                     BestTimeText.SetSize(163, 36);
@@ -224,7 +224,7 @@ namespace Preview
 
             BestScoreText.Text = "00:00.0";
 
-            YourTime.Text = "1234567890";
+            YourTimeText.Text = "1234567890";
 
             BestTimeText.Text = "12345678789";
         }

@@ -112,7 +112,7 @@ namespace Preview
         {
             ThanksText.Text = "thanks to";
 
-            ThanksNamesText.Text = "Indiecade, Matt Parker, Nicolas Fortugno, Jim Wallace and the PSM team. ";
+            ThanksNamesText.Text = "indiecade, matt parker, nicolas fortugno, jim wallace and the PSM team. ";
 
             Label_1.Text = "open source fonts by ismael gonzález gonzález & raúl garcía del pomar";
         }

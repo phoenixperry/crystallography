@@ -113,7 +113,7 @@ namespace Preview
                 BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/back.png"),
                 BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/backOver.png"),
                 BackgroundDisabledImage = null,
-                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
 
             // stats
@@ -215,52 +215,52 @@ namespace Preview
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    LevelSelectTitleText.SetPosition(73, 39);
+                    LevelSelectTitleText.SetPosition(74, 24);
                     LevelSelectTitleText.SetSize(329, 62);
                     LevelSelectTitleText.Anchors = Anchors.None;
                     LevelSelectTitleText.Visible = true;
 
-                    PagePanel_1.SetPosition(17, 89);
+                    PagePanel_1.SetPosition(18, 86);
                     PagePanel_1.SetSize(567, 396);
                     PagePanel_1.Anchors = Anchors.None;
                     PagePanel_1.Visible = true;
 
-                    ImageBox_1.SetPosition(554, 14);
+                    ImageBox_1.SetPosition(555, -5);
                     ImageBox_1.SetSize(418, 418);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    StartButton.SetPosition(761, 408);
+                    StartButton.SetPosition(762, 388);
                     StartButton.SetSize(125, 82);
                     StartButton.Anchors = Anchors.None;
                     StartButton.Visible = true;
 
-                    LevelNumberText.SetPosition(656, 159);
+                    LevelNumberText.SetPosition(657, 139);
                     LevelNumberText.SetSize(214, 36);
                     LevelNumberText.Anchors = Anchors.None;
                     LevelNumberText.Visible = true;
 
-                    LevelTimeText.SetPosition(656, 302);
+                    LevelTimeText.SetPosition(657, 282);
                     LevelTimeText.SetSize(214, 36);
                     LevelTimeText.Anchors = Anchors.None;
                     LevelTimeText.Visible = true;
 
-                    GradeText.SetPosition(656, 227);
+                    GradeText.SetPosition(657, 207);
                     GradeText.SetSize(214, 76);
                     GradeText.Anchors = Anchors.None;
                     GradeText.Visible = true;
 
-                    ScoreText.SetPosition(656, 101);
+                    ScoreText.SetPosition(657, 81);
                     ScoreText.SetSize(214, 36);
                     ScoreText.Anchors = Anchors.None;
                     ScoreText.Visible = true;
 
-                    BackButton.SetPosition(637, 364);
+                    BackButton.SetPosition(638, 344);
                     BackButton.SetSize(163, 81);
                     BackButton.Anchors = Anchors.None;
                     BackButton.Visible = true;
 
-                    stats.SetPosition(671, 49);
+                    stats.SetPosition(672, 37);
                     stats.SetSize(214, 36);
                     stats.Anchors = Anchors.None;
                     stats.Visible = true;

@@ -50,9 +50,9 @@ namespace Crystallography.UI
             BackButton.CustomImage = new CustomButtonImageSettings()
             {
                 BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/back_2.png"),
-                BackgroundPressedImage = null,
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/back_2Roll.png"),
                 BackgroundDisabledImage = null,
-                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
 
             // CreditsScene
@@ -118,8 +118,8 @@ namespace Crystallography.UI
                     CreditsTitleText.Anchors = Anchors.None;
                     CreditsTitleText.Visible = true;
 
-                    BackButton.SetPosition(763, 396);
-                    BackButton.SetSize(166, 109);
+                    BackButton.SetPosition(794, 437);
+                    BackButton.SetSize(104, 68);
                     BackButton.Anchors = Anchors.None;
                     BackButton.Visible = true;
 

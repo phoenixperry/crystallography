@@ -78,6 +78,12 @@
     <Content Include="..\\assets\images\UI\credits.png" >
       <Link>assets\images\UI\credits.png</Link>
     </Content>
+    <Content Include="..\\assets\images\UI\credits_btn.png" >
+      <Link>assets\images\UI\credits_btn.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\credits_btnRoll.png" >
+      <Link>assets\images\UI\credits_btnRoll.png</Link>
+    </Content>
     <Content Include="..\\assets\images\UI\cube6RollOver.png" >
       <Link>assets\images\UI\cube6RollOver.png</Link>
     </Content>

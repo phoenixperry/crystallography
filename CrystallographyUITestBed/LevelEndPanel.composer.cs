@@ -56,7 +56,7 @@ namespace Crystallography.UI
                 BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/nextLevel.png"),
                 BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/nextLevelOver.png"),
                 BackgroundDisabledImage = null,
-                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
 
             // LevelSelectButton
@@ -178,8 +178,8 @@ namespace Crystallography.UI
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    NextLevelButton.SetPosition(550, 448);
-                    NextLevelButton.SetSize(312, 95);
+                    NextLevelButton.SetPosition(610, 476);
+                    NextLevelButton.SetSize(247, 68);
                     NextLevelButton.Anchors = Anchors.None;
                     NextLevelButton.Visible = true;
 
