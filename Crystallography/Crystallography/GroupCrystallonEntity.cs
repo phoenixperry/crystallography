@@ -73,18 +73,18 @@ namespace Crystallography
 		public override void playSound ()
 		{
 			//TODO This doesn't work, but it needs to. At least it doesn't crash for some reason...
-			Sequence sequence = new Sequence();
+//			Sequence sequence = new Sequence();
 			foreach ( var member in members ) {
 				if (member == null) {
 					continue;
 				}
-				sequence.Add( new CallFunc( () => ( member as AbstractCrystallonEntity ).playSound() ) );
-				sequence.Add ( new DelayTime( 0.5f ) );
+//				sequence.Add( new CallFunc( () => ( member as AbstractCrystallonEntity ).playSound() ) );
+//				sequence.Add ( new DelayTime( 0.5f ) );
 			}
 //			sequence.Add( new CallFunc( () => ( members[1] as AbstractCrystallonEntity ).playSound() ) );
 //			sequence.Add ( new DelayTime( 0.5f ) );
 //			sequence.Add( new CallFunc( () => ( members[2] as AbstractCrystallonEntity ).playSound() ) );
-			getNode().RunAction( sequence );
+//			_scene.RunAction( sequence );
 		}
 		
 		/// <summary>

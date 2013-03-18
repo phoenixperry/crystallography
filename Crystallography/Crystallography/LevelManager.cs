@@ -33,8 +33,9 @@ namespace Crystallography
 			}
 		}
 		
-		public Vector4[] Palette { get; set; }
+		public Vector4[] Palette  { get; set; }
 		public string PatternPath { get; set; }
+		public string SoundPrefix { get; set; }
 		
 		// CONSTRUCTORS -----------------------------------------------------------
 		
@@ -44,6 +45,7 @@ namespace Crystallography
 										new Vector4(0.898039f, 0.074510f, 0.074510f, 1.0f), 
 										new Vector4(0.160784f, 0.886274f, 0.886274f, 1.0f) };
 			PatternPath = "Application/assets/images/set1/gamePieces.png";
+			SoundPrefix = "stack1";
 		}
 		
 		// METHODS ----------------------------------------------------------------
@@ -66,8 +68,9 @@ namespace Crystallography
 								i++;
 							} else if (line.Name.LocalName == "Pattern") {
 								PatternPath = line.Attribute("Path").Value;
+							} else if (line.Name.LocalName == "Sound") {
+								SoundPrefix = line.Attribute("Prefix").Value;
 							}
-							
 						}
 						return;
 					}

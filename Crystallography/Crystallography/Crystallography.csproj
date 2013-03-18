@@ -43,13 +43,9 @@
   <ItemGroup>
     <Compile Include="AppMain.cs" />
     <Compile Include="Support.cs" />
-    <Compile Include="TitleScene.cs" />
-    <Compile Include="MenuScene.cs" />
     <Compile Include="GameScene.cs" />
     <Compile Include="GamePhysics.cs" />
     <Compile Include="SpriteSingleton.cs" />
-    <Compile Include="InstructionsScene.cs" />
-    <Compile Include="InstructionScene2.cs" />
     <Compile Include="QColor.cs" />
     <Compile Include="QPattern.cs" />
     <Compile Include="AbstractCrystallonEntity.cs" />
@@ -103,13 +99,9 @@
     <Compile Include="Layer.cs" />
     <Compile Include="bg\CrystallonBackground.cs" />
     <Compile Include="ui\ScorePopup.cs" />
-    <Compile Include="AnimationGlitchSpriteSingleton.cs" />
-    <Compile Include="GlitchAnimation.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="ui\LevelEndPanel.composer.cs" />
     <Compile Include="ui\LevelEndPanel.cs" />
-    <Compile Include="AnimationFallSpriteSingleton.cs" />
-    <Compile Include="AnimationFall.cs" />
     <Compile Include="ui\instruction5Panel.cs" />
     <Compile Include="ui\instructions8.cs" />
     <Compile Include="ui\Instructions2.composer.cs" />
@@ -158,6 +150,8 @@
     <Folder Include="assets\images\set1\" />
     <Folder Include="assets\images\set2\" />
     <Folder Include="assets\images\set3\" />
+    <Folder Include="assets\audio\" />
+    <Folder Include="assets\audio\bgm\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\sounds\music_ingame.mp3" />
@@ -308,15 +302,56 @@
     <Content Include="assets\images\set1\gamePieces.png" />
     <Content Include="assets\images\set2\gamePieces.png" />
     <Content Include="assets\images\set3\gamePieces.png" />
+    <Content Include="assets\audio\bgm\intromusic.mp3" />
+    <Content Include="assets\audio\bgm\stack1music.mp3" />
+    <Content Include="assets\audio\bgm\stack2music.mp3" />
+    <Content Include="assets\audio\sfx\click1.wav" />
+    <Content Include="assets\audio\sfx\click2.wav" />
+    <Content Include="assets\audio\sfx\click3.wav" />
+    <Content Include="assets\audio\sfx\gameoverbad.wav" />
+    <Content Include="assets\audio\sfx\menu.wav" />
+    <Content Include="assets\audio\sfx\stack1break.wav" />
+    <Content Include="assets\audio\sfx\stack1high.wav" />
+    <Content Include="assets\audio\sfx\Stack1levelcomplete.wav" />
+    <Content Include="assets\audio\sfx\stack1low.wav" />
+    <Content Include="assets\audio\sfx\stack1mid.wav" />
+    <Content Include="assets\audio\sfx\stack1onetile.wav" />
+    <Content Include="assets\audio\sfx\stack1twotiles.wav" />
+    <Content Include="assets\audio\sfx\stack1wrong.wav" />
+    <Content Include="assets\audio\sfx\stack2break.wav" />
+    <Content Include="assets\audio\sfx\stack2high.wav" />
+    <Content Include="assets\audio\sfx\stack2levelcomplete.wav" />
+    <Content Include="assets\audio\sfx\stack2low.wav" />
+    <Content Include="assets\audio\sfx\stack2mid.wav" />
+    <Content Include="assets\audio\sfx\stack2onetile.wav" />
+    <Content Include="assets\audio\sfx\stack2threetiles.wav" />
+    <Content Include="assets\audio\sfx\stack2twotiles.wav" />
+    <Content Include="assets\audio\sfx\stack2wrong.wav" />
+    <Content Include="assets\audio\sfx\stack3break.wav" />
+    <Content Include="assets\audio\sfx\stack3high.wav" />
+    <Content Include="assets\audio\sfx\stack3low.wav" />
+    <Content Include="assets\audio\sfx\stack3mid.wav" />
+    <Content Include="assets\audio\sfx\stack3onetile.wav" />
+    <Content Include="assets\audio\sfx\stack3threetiles.wav" />
+    <Content Include="assets\audio\sfx\stack3twotiles.wav" />
+    <Content Include="assets\audio\sfx\stack3wrong.wav" />
+    <Content Include="assets\audio\sfx\stack1threetiles.wav" />
+    <Content Include="assets\audio\sfx\stack3levelcomplete.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="deprecated\Board.cs" />
     <None Include="deprecated\Card.cs" />
     <None Include="deprecated\Cube.cs" />
-    <None Include="deprecated\Game.cs" />
     <None Include="deprecated\Group.cs" />
     <None Include="deprecated\LevelData.cs" />
     <None Include="assets\animation\rightGlitch\right.xml" />
     <None Include="assets\animation\topGlitch\sprites.xml" />
+    <None Include="deprecated\AnimationFall.cs" />
+    <None Include="deprecated\AnimationFallSpriteSingleton.cs" />
+    <None Include="deprecated\AnimationGlitchSpriteSingleton.cs" />
+    <None Include="deprecated\GlitchAnimation.cs" />
+    <None Include="deprecated\InstructionScene2.cs" />
+    <None Include="deprecated\InstructionsScene.cs" />
+    <None Include="deprecated\MenuScene.cs" />
+    <None Include="deprecated\TitleScene.cs" />
   </ItemGroup>
 </Project>

@@ -250,7 +250,7 @@ namespace Crystallography
 
 		public class SoundSystem
 		{
-			public static SoundSystem Instance = new SoundSystem("/Application/assets/sounds/");
+			public static SoundSystem Instance = new SoundSystem("/Application/assets/audio/sfx/");
 
 			public string AssetsPrefix;
 			public Dictionary<string, SoundPlayer> SoundDatabase;
@@ -281,7 +281,7 @@ namespace Crystallography
 				// replace any playing instance
 				SoundDatabase[name].Stop();
 				SoundDatabase[name].Play();
-				SoundDatabase[name].Volume = 0.5f;
+				SoundDatabase[name].Volume = 0.7f;
 			}
 
 			public void Stop(string name)
@@ -299,13 +299,13 @@ namespace Crystallography
 				}
 
 				SoundDatabase[name].Play();
-				SoundDatabase[name].Volume = 0.5f;
+				SoundDatabase[name].Volume = 0.7f;
 			}
 		}
 
 		public class MusicSystem
 		{
-			public static MusicSystem Instance = new MusicSystem("/Application/assets/sounds/");
+			public static MusicSystem Instance = new MusicSystem("/Application/assets/audio/bgm/");
 
 			public string AssetsPrefix;
 			public Dictionary<string, BgmPlayer> MusicDatabase;
@@ -337,6 +337,7 @@ namespace Crystallography
 					MusicDatabase[name] = player;
 	
 					MusicDatabase[name].Play();
+					MusicDatabase[name].Loop = true;
 					MusicDatabase[name].Volume = 0.5f;
 				}
 			}

@@ -107,6 +107,7 @@ namespace Crystallography
 				EaseIn ( true );
 			}
 			if (lastEntityReleased is GroupCrystallonEntity) {
+				Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "break.wav");
 				(lastEntityReleased as GroupCrystallonEntity).Break ();
 			} 
 		}
@@ -140,6 +141,9 @@ namespace Crystallography
 		{
 			var entity = GetEntityAtPosition( e.touchPosition );
 			lastEntityReleased = entity as AbstractCrystallonEntity;
+			if (lastEntityReleased is AbstractCrystallonEntity) {
+				lastEntityReleased.playSound();
+			}
 //			MemberType = (entity!=null) ? entity.GetType() : null;	// -------------- Cards or Cubes?
 //			if (entity != null) {
 //				Add (entity);
@@ -170,9 +174,6 @@ namespace Crystallography
 		
 		public override GroupCrystallonEntity Add (ICrystallonEntity pEntity)
 		{
-			if (pEntity is AbstractCrystallonEntity) {
-				(pEntity as AbstractCrystallonEntity).playSound();
-			}
 			return base.Add (pEntity);
 		}
 		
@@ -303,7 +304,7 @@ namespace Crystallography
 		/// Called if the three group members form a successful match. If there are no possible matches left, end the current level
 		/// </summary>
 		public void GroupComplete() {
-			Support.SoundSystem.Instance.Play("cubed.wav");
+			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "threetiles.wav");
 			if ( MemberType == typeof(CardCrystallonEntity) ) {
 				EventHandler<CubeCompleteEventArgs> handler = CubeCompleteDetected;
 				if ( handler != null ) {
@@ -332,7 +333,7 @@ namespace Crystallography
 		/// Called if three group members do not form a successful match. Breaks them up.
 		/// </summary>
 		public void GroupFailed() {
-			Support.SoundSystem.Instance.Play("wrong.wav");
+			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "wrong.wav");
 			EventHandler handler = CubeFailedDetected;
 			if ( handler != null ) {
 				handler( this, null );
@@ -503,6 +504,7 @@ namespace Crystallography
 				
 				if ( closestDistance < SNAP_DISTANCE ) {
 					( closest as AbstractCrystallonEntity ).pickupLocation = closest.getPosition();
+					( closest as AbstractCrystallonEntity).playSound();
 					Add (closest);
 				}
 			}

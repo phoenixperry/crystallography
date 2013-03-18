@@ -105,11 +105,17 @@ namespace Crystallography
 		public override void OnEnter ()
         {
 			base.OnEnter();
+			if( Random.NextBool()) {
+				Support.MusicSystem.Instance.Play("stack1music.mp3");
+			} else {
+				Support.MusicSystem.Instance.Play("stack2music.mp3");
+			}
         }
 		
         public override void OnExit ()
         {
 			base.OnExit();
+			Support.MusicSystem.Instance.StopAll();
         }
 		
         public override void Update ( float dt )

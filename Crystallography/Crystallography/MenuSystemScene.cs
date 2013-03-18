@@ -16,6 +16,18 @@ namespace Crystallography
 			Scheduler.Instance.ScheduleUpdateForTarget(this, 0, false );
 		}
 		
+		public override void OnEnter ()
+		{
+			base.OnEnter ();
+			Support.MusicSystem.Instance.Play("intromusic.mp3");
+		}
+		
+		public override void OnExit ()
+		{
+			base.OnExit ();
+			Support.MusicSystem.Instance.StopAll();
+		}
+		
 		public override void Update (float dt)
 		{
 			UISystem.Update( Touch.GetData(0) );

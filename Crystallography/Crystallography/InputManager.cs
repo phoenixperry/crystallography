@@ -122,7 +122,7 @@ namespace Crystallography
 		/// <see cref="Crystallography.InputManager.BaseTouchEventArgs"/>
 		/// </param>
 		protected void OnDoubleTap( BaseTouchEventArgs e ) {
-			Console.WriteLine("DoubleTap!");
+//			Console.WriteLine("DoubleTap!");
 			EventHandler<BaseTouchEventArgs> handler = DoubleTapDetected;
 			if ( handler != null ) {
 				handler( this, e );

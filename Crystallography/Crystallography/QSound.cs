@@ -42,13 +42,13 @@ namespace Crystallography
 			switch(pVariant)
 			{
 			case (0):
-				e.setSound("sound1.wav");
+				e.setSound(LevelManager.Instance.SoundPrefix + "low.wav");
 				break;
 			case (1):
-				e.setSound("sound2.wav");
+				e.setSound(LevelManager.Instance.SoundPrefix + "mid.wav");
 				break;
 			case (2):
-				e.setSound("sound3.wav");
+				e.setSound(LevelManager.Instance.SoundPrefix + "high.wav");
 				break;
 			default:
 				throw new NotImplementedException("QSound.Apply : pVariant must be 0,1,2");

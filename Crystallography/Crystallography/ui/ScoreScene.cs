@@ -37,6 +37,7 @@ namespace Crystallography.UI
 			ResumeButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
 			GiveUpButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
 			NextLevelButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
+			NextLevelButton.Visible = false;
 			
 			// Assign Event Handlers
 			InputManager.Instance.StartJustUpDetected += (sender, e) => { PauseToggle(); };
@@ -44,7 +45,10 @@ namespace Crystallography.UI
 			GiveUpButton.TouchEventReceived += HandleGiveUpButtonTouchEventReceived;
 			NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
 			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
-			CardManager.Instance.NoMatchesPossibleDetected += (sender, e) => {NextLevelButton.Visible = true;};
+			CardManager.Instance.NoMatchesPossibleDetected += (sender, e) => {
+				Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
+				NextLevelButton.Visible = true;
+			};
 			
 			Reset();
 		}
@@ -114,11 +118,11 @@ namespace Crystallography.UI
 					} else {
 						mod = sign;
 					}
-					if (sign > 0) {
-						Support.SoundSystem.Instance.Play("score_up.wav");
-					} else {
-						Support.SoundSystem.Instance.Play("score_down.wav");
-					}
+//					if (sign > 0) {
+//						Support.SoundSystem.Instance.Play("score_up.wav");
+//					} else {
+//						Support.SoundSystem.Instance.Play("score_down.wav");
+//					}
 					_displayScore += mod;
 					ScoreText.Text = _displayScore.ToString();
 					_updateTimer = 0.0f;
