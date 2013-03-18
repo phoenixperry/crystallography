@@ -42,6 +42,18 @@ namespace Crystallography.UI
 			
 			InputManager.Instance.TouchJustDownDetected += HandleInputManagerInstanceTouchJustDownDetected;
 			InputManager.Instance.TouchJustUpDetected += HandleInputManagerInstanceTouchJustUpDetected;
+			InputManager.Instance.CircleJustUpDetected += HandleInputManagerInstanceCircleJustUpDetected;
+			InputManager.Instance.CrossJustUpDetected += HandleInputManagerInstanceCrossJustUpDetected;
+        }
+
+        void HandleInputManagerInstanceCrossJustUpDetected (object sender, EventArgs e)
+        {
+        	QuitButtonReleased();
+        }
+
+        void HandleInputManagerInstanceCircleJustUpDetected (object sender, EventArgs e)
+        {
+        	NextLevelButtonReleased();
         }
 
        
@@ -53,11 +65,12 @@ namespace Crystallography.UI
         	if ( e.touchPosition.X > NextLevelButton.X && e.touchPosition.X < NextLevelButton.X + NextLevelButton.Width ) {
 				int height = Director.Instance.GL.Context.GetViewport().Height;
 				if ( height - e.touchPosition.Y > NextLevelButton.Y && height - e.touchPosition.Y < NextLevelButton.Y + NextLevelButton.Height ) {
-					NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundNormalImage;
-					(Director.Instance.CurrentScene as GameScene).goToNextLevel();
-					InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
-					InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
-					this.Dispose();
+					NextLevelButtonReleased();
+//					NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundNormalImage;
+//					(Director.Instance.CurrentScene as GameScene).goToNextLevel();
+//					InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
+//					InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
+//					this.Dispose();
 					return;
 				}
 			}
@@ -68,6 +81,8 @@ namespace Crystallography.UI
 					GameScene.QuitToLevelSelect();
 					InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
 					InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
+					InputManager.Instance.CircleJustUpDetected -= HandleInputManagerInstanceCircleJustUpDetected;
+					InputManager.Instance.CrossJustUpDetected -= HandleInputManagerInstanceCrossJustUpDetected;
 					this.Dispose();
 					return;
 				}
@@ -75,11 +90,12 @@ namespace Crystallography.UI
 			if ( e.touchPosition.X > QuitButton.X && e.touchPosition.X < QuitButton.X + QuitButton.Width ) {
 				int height = Director.Instance.GL.Context.GetViewport().Height;
 				if ( height - e.touchPosition.Y > QuitButton.Y && height - e.touchPosition.Y < QuitButton.Y + QuitButton.Height ) {
-					QuitButton.IconImage = QuitButton.CustomImage.BackgroundNormalImage;
-					GameScene.QuitToTitle();
-					InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
-					InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
-					this.Dispose();
+					QuitButtonReleased();
+//					QuitButton.IconImage = QuitButton.CustomImage.BackgroundNormalImage;
+//					GameScene.QuitToTitle();
+//					InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
+//					InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
+//					this.Dispose();
 					return;
 				}
 			}
@@ -132,5 +148,28 @@ namespace Crystallography.UI
 				this.Dispose();
 			}
         }
+		
+		// METHODS ------------------------------------------------------------------------------------
+		
+		public void NextLevelButtonReleased() {
+			NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundNormalImage;
+			(Director.Instance.CurrentScene as GameScene).goToNextLevel();
+			InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
+			InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
+			InputManager.Instance.CircleJustUpDetected -= HandleInputManagerInstanceCircleJustUpDetected;
+			InputManager.Instance.CrossJustUpDetected -= HandleInputManagerInstanceCrossJustUpDetected;
+			this.Dispose();
+		}
+		
+		public void QuitButtonReleased() {
+			QuitButton.IconImage = QuitButton.CustomImage.BackgroundNormalImage;
+			GameScene.QuitToTitle();
+			InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
+			InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
+			InputManager.Instance.CircleJustUpDetected -= HandleInputManagerInstanceCircleJustUpDetected;
+			InputManager.Instance.CrossJustUpDetected -= HandleInputManagerInstanceCrossJustUpDetected;
+			this.Dispose();
+		}
+		
     }
 }

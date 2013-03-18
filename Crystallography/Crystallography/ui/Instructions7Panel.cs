@@ -14,6 +14,7 @@ namespace Crystallography.UI
             InitializeWidget();
 			
 			Button_1.TouchEventReceived += HandleNewGameButtonTouchEventReceived;
+			Button_2.TouchEventReceived += (sender, e) => { Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.ReplaceScene( new MenuSystemScene("Menu") ); };
         }
 		
 		void HandleNewGameButtonTouchEventReceived (object sender, TouchEventArgs e)
