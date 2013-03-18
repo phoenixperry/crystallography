@@ -11,7 +11,7 @@ namespace Preview
 {
     class __DummyScene : Scene
     {
-        CreditsPanel item = new CreditsPanel();
+        LevelEndPanel item = new LevelEndPanel();
 
         public __DummyScene()
         {

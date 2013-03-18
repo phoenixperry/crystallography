@@ -298,7 +298,7 @@ namespace Preview
                     howToSelect.Anchors = Anchors.None;
                     howToSelect.Visible = true;
 
-                    cubeNumber.SetPosition(730, 139);
+                    cubeNumber.SetPosition(761, 139);
                     cubeNumber.SetSize(88, 36);
                     cubeNumber.Anchors = Anchors.None;
                     cubeNumber.Visible = true;
@@ -312,13 +312,13 @@ namespace Preview
         {
             LevelSelectTitleText.Text = "select a level";
 
-            LevelNumberText.Text = "000";
+            LevelNumberText.Text = "00";
 
             LevelTimeText.Text = "00:00:00.0";
 
             GradeText.Text = "A+";
 
-            ScoreText.Text = "999999";
+            ScoreText.Text = "0";
 
             stats.Text = "stats";
 

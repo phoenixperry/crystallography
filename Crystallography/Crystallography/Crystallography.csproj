@@ -335,6 +335,7 @@
     <Content Include="assets\images\UI\next_level_sm.png" />
     <Content Include="assets\images\UI\next_level_smRoll.png" />
     <Content Include="assets\levels\level_999.xml" />
+    <Content Include="assets\images\UI\eyes.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

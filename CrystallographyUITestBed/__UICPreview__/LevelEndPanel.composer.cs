@@ -178,17 +178,17 @@ namespace Preview
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    NextLevelButton.SetPosition(610, 476);
-                    NextLevelButton.SetSize(247, 68);
+                    NextLevelButton.SetPosition(491, 477);
+                    NextLevelButton.SetSize(366, 68);
                     NextLevelButton.Anchors = Anchors.None;
                     NextLevelButton.Visible = true;
 
-                    LevelSelectButton.SetPosition(258, 475);
+                    LevelSelectButton.SetPosition(260, 477);
                     LevelSelectButton.SetSize(225, 68);
                     LevelSelectButton.Anchors = Anchors.None;
                     LevelSelectButton.Visible = true;
 
-                    QuitButton.SetPosition(107, 475);
+                    QuitButton.SetPosition(107, 477);
                     QuitButton.SetSize(148, 68);
                     QuitButton.Anchors = Anchors.None;
                     QuitButton.Visible = true;

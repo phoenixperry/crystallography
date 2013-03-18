@@ -31,14 +31,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="__DummyProgram.cs" />
-    <Compile Include="LevelSelectScene.composer.cs" />
-    <Compile Include="LevelSelectScene.cs" />
-    <Compile Include="LevelSelectPanel.composer.cs" />
-    <Compile Include="LevelSelectPanel.cs" />
-    <Compile Include="LevelSelectPanel2.composer.cs" />
-    <Compile Include="LevelSelectPanel2.cs" />
-    <Compile Include="LevelSelectPanel3.composer.cs" />
-    <Compile Include="LevelSelectPanel3.cs" />
+    <Compile Include="__DummyScene.cs" />
+    <Compile Include="LevelEndPanel.composer.cs" />
+    <Compile Include="LevelEndPanel.cs" />
     <Compile Include="UIStringTable.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +121,9 @@
     <Content Include="..\\assets\images\UI\cubeUIRollOver6.png" >
       <Link>assets\images\UI\cubeUIRollOver6.png</Link>
     </Content>
+    <Content Include="..\\assets\images\UI\eyes.png" >
+      <Link>assets\images\UI\eyes.png</Link>
+    </Content>
     <Content Include="..\\assets\images\UI\greyBar.png" >
       <Link>assets\images\UI\greyBar.png</Link>
     </Content>
@@ -171,6 +169,9 @@
     <Content Include="..\\assets\images\UI\levelSelectBtnRoll.png" >
       <Link>assets\images\UI\levelSelectBtnRoll.png</Link>
     </Content>
+    <Content Include="..\\assets\images\UI\loading.png" >
+      <Link>assets\images\UI\loading.png</Link>
+    </Content>
     <Content Include="..\\assets\images\UI\lockIcon.png" >
       <Link>assets\images\UI\lockIcon.png</Link>
     </Content>
@@ -185,6 +186,12 @@
     </Content>
     <Content Include="..\\assets\images\UI\nextLevelOver.png" >
       <Link>assets\images\UI\nextLevelOver.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\next_level_sm.png" >
+      <Link>assets\images\UI\next_level_sm.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\next_level_smRoll.png" >
+      <Link>assets\images\UI\next_level_smRoll.png</Link>
     </Content>
     <Content Include="..\\assets\images\UI\play.png" >
       <Link>assets\images\UI\play.png</Link>
