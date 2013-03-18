@@ -710,7 +710,7 @@
             </LayoutProperty>
           </LayoutProperty>
           <Property i:type="ButtonProperty">
-            <Effect>SlideInFromTheBottom</Effect>
+            <Effect>None</Effect>
             <OwnerNode z:Ref="i14" />
             <VariableName>NextLevelButton</VariableName>
             <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">

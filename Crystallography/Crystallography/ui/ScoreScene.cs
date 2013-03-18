@@ -45,16 +45,37 @@ namespace Crystallography.UI
 			GiveUpButton.TouchEventReceived += HandleGiveUpButtonTouchEventReceived;
 			NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
 			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
-			CardManager.Instance.NoMatchesPossibleDetected += (sender, e) => {
-				Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
-				NextLevelButton.Visible = true;
-			};
+			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected; //+= (sender, e) => {
 			
 			Reset();
 		}
 
         // EVENT HANDLERS -------------------------------------------------------------------
 		
+		void HandleCardManagerInstanceNoMatchesPossibleDetected (object sender, EventArgs e)
+        {
+        	switch (_currentLayoutOrientation){
+          		case LayoutOrientation.Vertical:
+            		new SlideInEffect()
+                	    {
+                	        Widget = NextLevelButton,
+                	        MoveDirection = FourWayDirection.Up,
+                	    }.Start();
+                    	break;
+
+                default:
+                   	new SlideInEffect()
+                   	{
+                   	    Widget = NextLevelButton,
+                   	    MoveDirection = FourWayDirection.Up,
+                   	}.Start();
+                   	break;
+            }
+				Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
+				NextLevelButton.Visible = true;
+//			}
+        }
+	
 		void HandleNextLevelButtonButtonAction (object sender, TouchEventArgs e)
         {
 			foreach (TouchEvent v in e.TouchEvents){

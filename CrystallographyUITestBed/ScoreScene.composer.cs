@@ -151,8 +151,6 @@ namespace Crystallography.UI
             this.RootWidget.AddChildLast(Panel_1);
             this.RootWidget.AddChildLast(PauseMenu);
             this.RootWidget.AddChildLast(NextLevelButton);
-            this.Showing += new EventHandler(onShowing);
-            this.Shown += new EventHandler(onShown);
 
             SetWidgetLayout(orientation);
 
@@ -321,11 +319,9 @@ namespace Crystallography.UI
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
-                    NextLevelButton.Visible = false;
                     break;
 
                 default:
-                    NextLevelButton.Visible = false;
                     break;
             }
         }
@@ -335,19 +331,9 @@ namespace Crystallography.UI
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
-                    new SlideInEffect()
-                    {
-                        Widget = NextLevelButton,
-                        MoveDirection = FourWayDirection.Up,
-                    }.Start();
                     break;
 
                 default:
-                    new SlideInEffect()
-                    {
-                        Widget = NextLevelButton,
-                        MoveDirection = FourWayDirection.Up,
-                    }.Start();
                     break;
             }
         }
