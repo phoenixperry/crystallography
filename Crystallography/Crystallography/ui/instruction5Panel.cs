@@ -11,7 +11,7 @@ namespace Crystallography.UI
     {
         public instruction5Panel()
         {
-            //InitializeWidget();
+            InitializeWidget();
         }
     }
 }

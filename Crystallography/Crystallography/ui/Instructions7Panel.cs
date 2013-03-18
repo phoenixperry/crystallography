@@ -12,6 +12,13 @@ namespace Crystallography.UI
         public Instructions7Panel()
         {
             InitializeWidget();
+			
+			Button_1.TouchEventReceived += HandleNewGameButtonTouchEventReceived;
+        }
+		
+		void HandleNewGameButtonTouchEventReceived (object sender, TouchEventArgs e)
+        {
+			Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.ReplaceScene( new GameScene(0) );
         }
     }
 }

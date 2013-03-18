@@ -26,7 +26,7 @@ namespace Crystallography.UI
 			
 			NewGameButton.TouchEventReceived += HandleNewGameButtonTouchEventReceived;
 			LevelSelectButton.TouchEventReceived += (sender, e) => { UISystem.SetScene( new LevelSelectScene() ); };
-//			OptionsButton.TouchEventReceived += (sender, e) => { UISystem.SetScene( new OptionsScene() ); };
+			OptionsButton.TouchEventReceived += (sender, e) => { UISystem.SetScene( new InstructionsScene() ); };
 			CreditsButton.TouchEventReceived += (sender, e) => { UISystem.SetScene( new CreditsScene() ); };
         }
 

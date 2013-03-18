@@ -3072,7 +3072,7 @@
                       </LayoutProperty>
                       <LayoutProperty>
                         <X>364.71857437498977</X>
-                        <Y>123.03606161785387</Y>
+                        <Y>123.03606161785388</Y>
                         <Width>200</Width>
                         <Height>200</Height>
                         <Visible>true</Visible>
@@ -3414,8 +3414,8 @@
                     <Nodes />
                     <LayoutProperty>
                       <LayoutProperty>
-                        <X>317.5</X>
-                        <Y>440</Y>
+                        <X>317.49999999999989</X>
+                        <Y>388.68175107686886</Y>
                         <Width>289</Width>
                         <Height>71</Height>
                         <Visible>true</Visible>
