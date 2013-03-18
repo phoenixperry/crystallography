@@ -127,6 +127,8 @@
     <Compile Include="ui\Instructions5.cs" />
     <Compile Include="ui\LoadingPanel.composer.cs" />
     <Compile Include="ui\LoadingPanel.cs" />
+    <Compile Include="ui\LoadingScene.composer.cs" />
+    <Compile Include="ui\LoadingScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

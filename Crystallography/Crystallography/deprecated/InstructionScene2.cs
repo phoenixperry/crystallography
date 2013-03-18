@@ -2,6 +2,7 @@ using System;
 using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Audio;
+using Sce.PlayStation.HighLevel.UI;
 using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 using Sce.PlayStation.Core.Input;
@@ -56,7 +57,8 @@ namespace Crystallography
             var touches = Touch.GetData(0).ToArray();
             if((touches.Length >0 && touches[0].Status == TouchStatus.Down) || Input2.GamePad0.Cross.Press)
             {
-                Director.Instance.ReplaceScene(new GameScene( 0 )); // TODO Add support for starting at other levels.
+				UISystem.SetScene( new LoadingScene( 0 ) );
+//                Director.Instance.ReplaceScene(new GameScene( 0 )); // TODO Add support for starting at other levels.
             }
         }
     

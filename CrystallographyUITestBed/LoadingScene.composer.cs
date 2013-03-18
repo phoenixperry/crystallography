@@ -12,7 +12,10 @@ namespace Crystallography.UI
     partial class LoadingScene
     {
         Panel sceneBackgroundPanel;
+<<<<<<< HEAD
         ImageBox ImageBox_1;
+=======
+>>>>>>> 2d632e4f4f50d13fc3dcd25a9ba4a63af7696396
         BusyIndicator BusyIndicator_1;
 
         private void InitializeWidget()
@@ -24,14 +27,18 @@ namespace Crystallography.UI
         {
             sceneBackgroundPanel = new Panel();
             sceneBackgroundPanel.Name = "sceneBackgroundPanel";
+<<<<<<< HEAD
             ImageBox_1 = new ImageBox();
             ImageBox_1.Name = "ImageBox_1";
+=======
+>>>>>>> 2d632e4f4f50d13fc3dcd25a9ba4a63af7696396
             BusyIndicator_1 = new BusyIndicator(true);
             BusyIndicator_1.Name = "BusyIndicator_1";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
 
+<<<<<<< HEAD
             // ImageBox_1
             ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/loading.png");
             ImageBox_1.ImageScaleType = ImageScaleType.Center;
@@ -39,6 +46,10 @@ namespace Crystallography.UI
             // LoadingScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
             this.RootWidget.AddChildLast(ImageBox_1);
+=======
+            // LoadingScene
+            this.RootWidget.AddChildLast(sceneBackgroundPanel);
+>>>>>>> 2d632e4f4f50d13fc3dcd25a9ba4a63af7696396
             this.RootWidget.AddChildLast(BusyIndicator_1);
 
             SetWidgetLayout(orientation);
@@ -60,11 +71,14 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
+<<<<<<< HEAD
                     ImageBox_1.SetPosition(363, 164);
                     ImageBox_1.SetSize(200, 200);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
+=======
+>>>>>>> 2d632e4f4f50d13fc3dcd25a9ba4a63af7696396
                     BusyIndicator_1.SetPosition(912, 496);
                     BusyIndicator_1.SetSize(48, 48);
                     BusyIndicator_1.Anchors = Anchors.Height | Anchors.Width;
@@ -81,12 +95,16 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
+<<<<<<< HEAD
                     ImageBox_1.SetPosition(581, 240);
                     ImageBox_1.SetSize(435, 305);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
                     BusyIndicator_1.SetPosition(763, 367);
+=======
+                    BusyIndicator_1.SetPosition(912, 496);
+>>>>>>> 2d632e4f4f50d13fc3dcd25a9ba4a63af7696396
                     BusyIndicator_1.SetSize(48, 48);
                     BusyIndicator_1.Anchors = Anchors.Height | Anchors.Width;
                     BusyIndicator_1.Visible = true;

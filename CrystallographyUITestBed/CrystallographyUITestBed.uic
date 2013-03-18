@@ -2868,7 +2868,7 @@
                       </LayoutProperty>
                       <LayoutProperty>
                         <X>364.71857437498977</X>
-                        <Y>123.03606161785387</Y>
+                        <Y>123.03606161785388</Y>
                         <Width>200</Width>
                         <Height>200</Height>
                         <Visible>true</Visible>
@@ -9695,7 +9695,7 @@
           <LayoutProperty>
             <LayoutProperty>
               <X>491</X>
-              <Y>477</Y>
+              <Y>474</Y>
               <Width>366</Width>
               <Height>68</Height>
               <Visible>true</Visible>
@@ -9779,7 +9779,7 @@
           <LayoutProperty>
             <LayoutProperty>
               <X>260</X>
-              <Y>477</Y>
+              <Y>474</Y>
               <Width>225</Width>
               <Height>68</Height>
               <Visible>true</Visible>
@@ -9863,7 +9863,7 @@
           <LayoutProperty>
             <LayoutProperty>
               <X>107</X>
-              <Y>477</Y>
+              <Y>474</Y>
               <Width>148</Width>
               <Height>68</Height>
               <Visible>true</Visible>
@@ -10262,56 +10262,8 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>581.075757575757</X>
-              <Y>240</Y>
-              <Width>435</Width>
-              <Height>305</Height>
-              <Visible>true</Visible>
-              <Anchors>None</Anchors>
-            </LayoutProperty>
-            <LayoutProperty>
-              <X>363.17492405637279</X>
-              <Y>164.29715239908217</Y>
-              <Width>200</Width>
-              <Height>200</Height>
-              <Visible>true</Visible>
-              <Anchors>None</Anchors>
-            </LayoutProperty>
-          </LayoutProperty>
-          <Property i:type="ImageBoxProperty">
-            <Effect>None</Effect>
-            <OwnerNode z:Ref="i163" />
-            <VariableName>ImageBox_1</VariableName>
-            <Image>images\UI\loading.png</Image>
-            <NinePatchMargin xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
-              <d7p1:ButtomRowHeight>0</d7p1:ButtomRowHeight>
-              <d7p1:LeftColumnWidth>0</d7p1:LeftColumnWidth>
-              <d7p1:RightColumnWidth>0</d7p1:RightColumnWidth>
-              <d7p1:TopRowHeight>0</d7p1:TopRowHeight>
-            </NinePatchMargin>
-            <ScaleType>Center</ScaleType>
-          </Property>
-          <IsRoot>false</IsRoot>
-          <PivotPos>LeftTop</PivotPos>
-          <WidgetType>ImageBox</WidgetType>
-          <ID>641525076</ID>
-          <ZIndex>1</ZIndex>
-          <LayoutAssistInfo>
-            <SnapGuidesList>
-              <ArrayOfSnapGuide />
-              <ArrayOfSnapGuide />
-            </SnapGuidesList>
-          </LayoutAssistInfo>
-          <IsHideInLayout>false</IsHideInLayout>
-          <IsLockInLayout>false</IsLockInLayout>
-        </UICNode>
-        <UICNode z:Id="i164" i:type="ObjectTreeNode">
-          <Parent z:Ref="i162" />
-          <Nodes />
-          <LayoutProperty>
-            <LayoutProperty>
-              <X>763.575757575757</X>
-              <Y>367.5</Y>
+              <X>912</X>
+              <Y>496</Y>
               <Width>48</Width>
               <Height>48</Height>
               <Visible>true</Visible>
@@ -10328,7 +10280,7 @@
           </LayoutProperty>
           <Property i:type="BusyIndicatorProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i164" />
+            <OwnerNode z:Ref="i163" />
             <VariableName>BusyIndicator_1</VariableName>
             <Animating>true</Animating>
           </Property>
@@ -10336,7 +10288,7 @@
           <PivotPos>LeftTop</PivotPos>
           <WidgetType>BusyIndicator</WidgetType>
           <ID>1631264378</ID>
-          <ZIndex>2</ZIndex>
+          <ZIndex>0</ZIndex>
           <LayoutAssistInfo>
             <SnapGuidesList>
               <ArrayOfSnapGuide />

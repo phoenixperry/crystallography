@@ -18,10 +18,10 @@ namespace Crystallography.UI
         {
             InitializeWidget();
 			_timer = -100.0f;
-			SplashText.Font = FontManager.Instance.Get( "Bariol", 18 );
+//			SplashText.Font = FontManager.Instance.Get( "Bariol", 18 );
 			
-			FadeInEffect fadeInEffect = new FadeInEffect( SplashText, 300, new FadeInEffectInterpolator() );
-			fadeOutEffect = new FadeOutEffect( SplashText, 300, new FadeOutEffectInterpolator() );
+			FadeInEffect fadeInEffect = new FadeInEffect( ImageBox_1, 300, new FadeInEffectInterpolator() );
+			fadeOutEffect = new FadeOutEffect( ImageBox_1, 300, new FadeOutEffectInterpolator() );
 			
 			fadeInEffect.EffectStopped += (sender, e) => { _timer = 1.0f; };
 			fadeOutEffect.EffectStopped += (sender, e) => { fadeOutEffect = null; UISystem.SetScene( new TitleScene() ); };
