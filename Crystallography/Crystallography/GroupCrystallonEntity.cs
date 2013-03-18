@@ -316,21 +316,22 @@ namespace Crystallography
 					return population;
 				}
 			}
-			string orientation = ( pEntity as SpriteTileCrystallonEntity ).getOrientation();
+			int orientation = ( pEntity as SpriteTileCrystallonEntity ).getOrientation();
 			int attachPosition = -1;
-			switch (orientation) {
-			case ("Top"):
-					attachPosition = 0;
-				break;
-			case ("Left"):
-					attachPosition = 1;
-				break;
-			case ("Right"):
-					attachPosition = 2;
-				break;
-			default:
-				break;
-			}
+			attachPosition = orientation;
+//			switch (orientation) {
+//			case ("Top"):
+//					attachPosition = 0;
+//				break;
+//			case ("Left"):
+//					attachPosition = 1;
+//				break;
+//			case ("Right"):
+//					attachPosition = 2;
+//				break;
+//			default:
+//				break;
+//			}
 			return attachPosition;
 		}
 		

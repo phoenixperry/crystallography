@@ -17,7 +17,7 @@ namespace Crystallography
 		private static readonly int TOTAL_LEVELS = 25;
 		
 		// Change the following value to true if you want bounding boxes to be rendered
-        private static bool DEBUG_BOUNDINGBOXS = true;
+        private static bool DEBUG_BOUNDINGBOXS = false;
 		
 		public static Random Random = new Random();
 		
@@ -184,7 +184,7 @@ namespace Crystallography
 			if (currentLevel < TOTAL_LEVELS) {
 				Console.WriteLine( "Resetting to start level " + currentLevel );
 				LevelManager.Instance.GetLevelSettings( currentLevel );
-				QColor.Instance.setPalette();
+//				QColor.Instance.setPalette();
 				CardManager.Instance.Reset( this );
 				GroupManager.Instance.Reset( this );
 				QualityManager.Instance.Reset( CardManager.Instance, currentLevel );

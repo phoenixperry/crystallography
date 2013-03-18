@@ -131,6 +131,9 @@
     <Folder Include="assets\animation\" />
     <Folder Include="assets\animation\leftFall\" />
     <Folder Include="assets\images\UI\" />
+    <Folder Include="assets\images\set1\" />
+    <Folder Include="assets\images\set2\" />
+    <Folder Include="assets\images\set3\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\sounds\music_ingame.mp3" />
@@ -255,6 +258,9 @@
     <Content Include="assets\images\UI\icons\glasses.png" />
     <Content Include="assets\images\UI\icons\journal.png" />
     <Content Include="assets\images\UI\icons\tie.png" />
+    <Content Include="assets\images\set1\gamePieces.png" />
+    <Content Include="assets\images\set2\gamePieces.png" />
+    <Content Include="assets\images\set3\gamePieces.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Board.cs" />
