@@ -22,6 +22,8 @@ namespace Crystallography.UI
         Label ScoreText;
         Button BackButton;
         Label stats;
+        Label howToSelect;
+        Label cubeNumber;
 
         private void InitializeWidget()
         {
@@ -52,6 +54,10 @@ namespace Crystallography.UI
             BackButton.Name = "BackButton";
             stats = new Label();
             stats.Name = "stats";
+            howToSelect = new Label();
+            howToSelect.Name = "howToSelect";
+            cubeNumber = new Label();
+            cubeNumber.Name = "cubeNumber";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -122,6 +128,16 @@ namespace Crystallography.UI
             stats.LineBreak = LineBreak.Character;
             stats.HorizontalAlignment = HorizontalAlignment.Right;
 
+            // howToSelect
+            howToSelect.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+            howToSelect.Font = new UIFont(FontAlias.System, 24, FontStyle.Regular);
+            howToSelect.LineBreak = LineBreak.Character;
+
+            // cubeNumber
+            cubeNumber.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+            cubeNumber.Font = new UIFont(FontAlias.System, 32, FontStyle.Regular);
+            cubeNumber.LineBreak = LineBreak.Character;
+
             // LevelSelectScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
             this.RootWidget.AddChildLast(LevelSelectTitleText);
@@ -134,6 +150,8 @@ namespace Crystallography.UI
             this.RootWidget.AddChildLast(ScoreText);
             this.RootWidget.AddChildLast(BackButton);
             this.RootWidget.AddChildLast(stats);
+            this.RootWidget.AddChildLast(howToSelect);
+            this.RootWidget.AddChildLast(cubeNumber);
 
             SetWidgetLayout(orientation);
 
@@ -204,6 +222,16 @@ namespace Crystallography.UI
                     stats.Anchors = Anchors.None;
                     stats.Visible = true;
 
+                    howToSelect.SetPosition(74, 81);
+                    howToSelect.SetSize(214, 36);
+                    howToSelect.Anchors = Anchors.None;
+                    howToSelect.Visible = true;
+
+                    cubeNumber.SetPosition(657, 132);
+                    cubeNumber.SetSize(214, 36);
+                    cubeNumber.Anchors = Anchors.None;
+                    cubeNumber.Visible = true;
+
                     break;
 
                 default:
@@ -220,7 +248,7 @@ namespace Crystallography.UI
                     LevelSelectTitleText.Anchors = Anchors.None;
                     LevelSelectTitleText.Visible = true;
 
-                    PagePanel_1.SetPosition(18, 86);
+                    PagePanel_1.SetPosition(18, 102);
                     PagePanel_1.SetSize(567, 396);
                     PagePanel_1.Anchors = Anchors.None;
                     PagePanel_1.Visible = true;
@@ -265,6 +293,16 @@ namespace Crystallography.UI
                     stats.Anchors = Anchors.None;
                     stats.Visible = true;
 
+                    howToSelect.SetPosition(76, 73);
+                    howToSelect.SetSize(511, 36);
+                    howToSelect.Anchors = Anchors.None;
+                    howToSelect.Visible = true;
+
+                    cubeNumber.SetPosition(761, 139);
+                    cubeNumber.SetSize(88, 36);
+                    cubeNumber.Anchors = Anchors.None;
+                    cubeNumber.Visible = true;
+
                     break;
             }
             _currentLayoutOrientation = orientation;
@@ -274,15 +312,19 @@ namespace Crystallography.UI
         {
             LevelSelectTitleText.Text = "select a level";
 
-            LevelNumberText.Text = "000";
+            LevelNumberText.Text = "00";
 
             LevelTimeText.Text = "00:00:00.0";
 
             GradeText.Text = "A+";
 
-            ScoreText.Text = "999999";
+            ScoreText.Text = "0";
 
             stats.Text = "stats";
+
+            howToSelect.Text = "select a cube and then press start";
+
+            cubeNumber.Text = "cube:";
 
             this.Title = "LevelSelectScene";
         }

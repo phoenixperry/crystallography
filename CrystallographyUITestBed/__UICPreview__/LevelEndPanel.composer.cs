@@ -178,8 +178,8 @@ namespace Preview
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    NextLevelButton.SetPosition(550, 448);
-                    NextLevelButton.SetSize(312, 95);
+                    NextLevelButton.SetPosition(610, 476);
+                    NextLevelButton.SetSize(247, 68);
                     NextLevelButton.Anchors = Anchors.None;
                     NextLevelButton.Visible = true;
 

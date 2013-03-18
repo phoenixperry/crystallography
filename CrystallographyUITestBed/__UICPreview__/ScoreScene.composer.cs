@@ -142,7 +142,7 @@ namespace Preview
             NextLevelButton.CustomImage = new CustomButtonImageSettings()
             {
                 BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/nextLevel.png"),
-                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/redBtnOver.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/nextLevelOver.png"),
                 BackgroundDisabledImage = null,
                 BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
             };
@@ -151,8 +151,6 @@ namespace Preview
             this.RootWidget.AddChildLast(Panel_1);
             this.RootWidget.AddChildLast(PauseMenu);
             this.RootWidget.AddChildLast(NextLevelButton);
-            this.Showing += new EventHandler(onShowing);
-            this.Shown += new EventHandler(onShown);
 
             SetWidgetLayout(orientation);
 
@@ -289,9 +287,9 @@ namespace Preview
                     PauseMenu.Anchors = Anchors.None;
                     PauseMenu.Visible = false;
 
-                    NextLevelButton.SetPosition(635, 476);
+                    NextLevelButton.SetPosition(713, 477);
                     NextLevelButton.SetSize(247, 68);
-                    NextLevelButton.Anchors = Anchors.None;
+                    NextLevelButton.Anchors = Anchors.Top;
                     NextLevelButton.Visible = true;
 
                     break;
@@ -321,11 +319,9 @@ namespace Preview
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
-                    NextLevelButton.Visible = false;
                     break;
 
                 default:
-                    NextLevelButton.Visible = false;
                     break;
             }
         }
@@ -335,19 +331,9 @@ namespace Preview
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
-                    new SlideInEffect()
-                    {
-                        Widget = NextLevelButton,
-                        MoveDirection = FourWayDirection.Up,
-                    }.Start();
                     break;
 
                 default:
-                    new SlideInEffect()
-                    {
-                        Widget = NextLevelButton,
-                        MoveDirection = FourWayDirection.Up,
-                    }.Start();
                     break;
             }
         }

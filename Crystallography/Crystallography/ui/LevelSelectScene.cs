@@ -17,12 +17,15 @@ namespace Crystallography.UI
 			selectedLevel = 0;
 			
             InitializeWidget();
+			cubeNumber.Font = FontManager.Instance.Get("Bariol", 32); 				
+			howToSelect.Font = FontManager.Instance.Get("Bariol", 32); 			
+			ScoreText.Font = FontManager.Instance.Get("Bariol", 32); 			
+			LevelNumberText.Font = FontManager.Instance.Get("Bariol", 32);
+			
 			LevelSelectTitleText.Font = FontManager.Instance.Get("Bariol", 60);
 			
-			LevelNumberText.Font = FontManager.Instance.Get("Bariol", 25);
 			LevelTimeText.Font = FontManager.Instance.Get ("Bariol", 25);
-			GradeText.Font = FontManager.Instance.Get ("Bariol", 25);
-			ScoreText.Font = FontManager.Instance.Get ("Bariol", 25);
+			GradeText.Font = FontManager.Instance.Get ("Bariol", 72);
 			
 			StartButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
 			BackButton.TextFont = FontManager.Instance.Get ("Bariol", 25);

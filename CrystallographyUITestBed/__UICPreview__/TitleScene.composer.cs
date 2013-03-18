@@ -77,7 +77,7 @@ namespace Preview
                     TitleImage.Anchors = Anchors.None;
                     TitleImage.Visible = true;
 
-                    TouchToStartText.SetPosition(56, 488);
+                    TouchToStartText.SetPosition(255, 466);
                     TouchToStartText.SetSize(214, 36);
                     TouchToStartText.Anchors = Anchors.None;
                     TouchToStartText.Visible = false;

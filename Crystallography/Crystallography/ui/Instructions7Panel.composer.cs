@@ -13,6 +13,7 @@ namespace Crystallography.UI
     {
         ImageBox ImageBox_1;
         Button Button_1;
+        Button Button_2;
 
         private void InitializeWidget()
         {
@@ -25,6 +26,8 @@ namespace Crystallography.UI
             ImageBox_1.Name = "ImageBox_1";
             Button_1 = new Button();
             Button_1.Name = "Button_1";
+            Button_2 = new Button();
+            Button_2.Name = "Button_2";
 
             // ImageBox_1
             ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/instructions7.png");
@@ -42,11 +45,24 @@ namespace Crystallography.UI
                 BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
             };
 
+            // Button_2
+            Button_2.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            Button_2.TextFont = new UIFont(FontAlias.System, 48, FontStyle.Regular);
+            Button_2.Style = ButtonStyle.Custom;
+            Button_2.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/blueBtn.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/blueBtnOver.png"),
+                BackgroundDisabledImage = null,
+                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+            };
+
             // Instructions7Panel
             this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             this.Clip = true;
             this.AddChildLast(ImageBox_1);
             this.AddChildLast(Button_1);
+            this.AddChildLast(Button_2);
 
             SetWidgetLayout(orientation);
 
@@ -72,6 +88,11 @@ namespace Crystallography.UI
                     Button_1.Anchors = Anchors.None;
                     Button_1.Visible = true;
 
+                    Button_2.SetPosition(158, 402);
+                    Button_2.SetSize(214, 56);
+                    Button_2.Anchors = Anchors.None;
+                    Button_2.Visible = true;
+
                     break;
 
                 default:
@@ -83,10 +104,15 @@ namespace Crystallography.UI
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    Button_1.SetPosition(317, 388);
+                    Button_1.SetPosition(524, 388);
                     Button_1.SetSize(289, 71);
                     Button_1.Anchors = Anchors.None;
                     Button_1.Visible = true;
+
+                    Button_2.SetPosition(108, 388);
+                    Button_2.SetSize(289, 71);
+                    Button_2.Anchors = Anchors.None;
+                    Button_2.Visible = true;
 
                     break;
             }
@@ -96,6 +122,8 @@ namespace Crystallography.UI
         public void UpdateLanguage()
         {
             Button_1.Text = "play";
+
+            Button_2.Text = "back";
         }
 
         public void InitializeDefaultEffect()

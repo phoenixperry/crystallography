@@ -83,7 +83,7 @@ namespace Preview
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    Button_1.SetPosition(317, 440);
+                    Button_1.SetPosition(317, 388);
                     Button_1.SetSize(289, 71);
                     Button_1.Anchors = Anchors.None;
                     Button_1.Visible = true;

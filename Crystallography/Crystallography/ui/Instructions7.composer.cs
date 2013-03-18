@@ -9,10 +9,10 @@ using Sce.PlayStation.HighLevel.UI;
 
 namespace Crystallography.UI
 {
-    partial class Instructions7
+    partial class Instructions7Panel
     {
-        Panel sceneBackgroundPanel;
         ImageBox ImageBox_1;
+        Button Button_1;
 
         private void InitializeWidget()
         {
@@ -21,21 +21,32 @@ namespace Crystallography.UI
 
         private void InitializeWidget(LayoutOrientation orientation)
         {
-            sceneBackgroundPanel = new Panel();
-            sceneBackgroundPanel.Name = "sceneBackgroundPanel";
             ImageBox_1 = new ImageBox();
             ImageBox_1.Name = "ImageBox_1";
-
-            // sceneBackgroundPanel
-            sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            Button_1 = new Button();
+            Button_1.Name = "Button_1";
 
             // ImageBox_1
             ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/instructions7.png");
             ImageBox_1.ImageScaleType = ImageScaleType.Center;
 
-            // Instructions7
-            this.RootWidget.AddChildLast(sceneBackgroundPanel);
-            this.RootWidget.AddChildLast(ImageBox_1);
+            // Button_1
+            Button_1.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+            Button_1.TextFont = new UIFont(FontAlias.System, 48, FontStyle.Regular);
+            Button_1.Style = ButtonStyle.Custom;
+            Button_1.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/redBtn.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/redBtnOver.png"),
+                BackgroundDisabledImage = null,
+                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+            };
+
+            // Instructions7Panel
+            this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            this.Clip = true;
+            this.AddChildLast(ImageBox_1);
+            this.AddChildLast(Button_1);
 
             SetWidgetLayout(orientation);
 
@@ -48,34 +59,34 @@ namespace Crystallography.UI
             switch (orientation)
             {
                 case LayoutOrientation.Vertical:
-                    this.DesignWidth = 544;
-                    this.DesignHeight = 960;
+                    this.SetSize(544, 960);
+                    this.Anchors = Anchors.None;
 
-                    sceneBackgroundPanel.SetPosition(0, 0);
-                    sceneBackgroundPanel.SetSize(544, 960);
-                    sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
-                    sceneBackgroundPanel.Visible = true;
-
-                    ImageBox_1.SetPosition(330, 161);
+                    ImageBox_1.SetPosition(336, 115);
                     ImageBox_1.SetSize(200, 200);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
+                    Button_1.SetPosition(306, 455);
+                    Button_1.SetSize(214, 56);
+                    Button_1.Anchors = Anchors.None;
+                    Button_1.Visible = true;
+
                     break;
 
                 default:
-                    this.DesignWidth = 960;
-                    this.DesignHeight = 544;
+                    this.SetSize(924, 511);
+                    this.Anchors = Anchors.None;
 
-                    sceneBackgroundPanel.SetPosition(0, 0);
-                    sceneBackgroundPanel.SetSize(960, 544);
-                    sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
-                    sceneBackgroundPanel.Visible = true;
-
-                    ImageBox_1.SetPosition(72, -136);
-                    ImageBox_1.SetSize(816, 816);
+                    ImageBox_1.SetPosition(72, 39);
+                    ImageBox_1.SetSize(779, 432);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
+
+                    Button_1.SetPosition(316, 439);
+                    Button_1.SetSize(289, 71);
+                    Button_1.Anchors = Anchors.None;
+                    Button_1.Visible = true;
 
                     break;
             }
@@ -84,29 +95,41 @@ namespace Crystallography.UI
 
         public void UpdateLanguage()
         {
-            this.Title = "Instructions7";
+            Button_1.Text = "play";
         }
 
-        private void onShowing(object sender, EventArgs e)
+        public void InitializeDefaultEffect()
         {
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
+                    Button_1.Visible = false;
                     break;
 
                 default:
+                    Button_1.Visible = false;
                     break;
             }
         }
 
-        private void onShown(object sender, EventArgs e)
+        public void StartDefaultEffect()
         {
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
+                    new SlideInEffect()
+                    {
+                        Widget = Button_1,
+                        MoveDirection = FourWayDirection.Up,
+                    }.Start();
                     break;
 
                 default:
+                    new SlideInEffect()
+                    {
+                        Widget = Button_1,
+                        MoveDirection = FourWayDirection.Up,
+                    }.Start();
                     break;
             }
         }

@@ -32,7 +32,8 @@ namespace Crystallography.UI
 
             // TouchToStartText
             TouchToStartText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            TouchToStartText.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+			TouchToStartText.Font = FontManager.Instance.Get("Bariol", 32); 			
+         
             TouchToStartText.LineBreak = LineBreak.Character;
             TouchToStartText.HorizontalAlignment = HorizontalAlignment.Center;
 
@@ -77,8 +78,8 @@ namespace Crystallography.UI
                     TitleImage.Anchors = Anchors.None;
                     TitleImage.Visible = true;
 
-                    TouchToStartText.SetPosition(56, 488);
-                    TouchToStartText.SetSize(214, 36);
+                    TouchToStartText.SetPosition(229, 455);
+                    TouchToStartText.SetSize(370, 36);
                     TouchToStartText.Anchors = Anchors.None;
                     TouchToStartText.Visible = false;
 
@@ -89,7 +90,7 @@ namespace Crystallography.UI
 
         public void UpdateLanguage()
         {
-            TouchToStartText.Text = "(Touch To Start)";
+            TouchToStartText.Text = "touch to start";
         }
 
         private void onShowing(object sender, EventArgs e)

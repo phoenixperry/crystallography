@@ -63,11 +63,11 @@
     <Content Include="..\\assets\images\UI\back.png" >
       <Link>assets\images\UI\back.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\backOver.png" >
-      <Link>assets\images\UI\backOver.png</Link>
-    </Content>
     <Content Include="..\\assets\images\UI\back_2.png" >
       <Link>assets\images\UI\back_2.png</Link>
+    </Content>
+    <Content Include="..\\assets\images\UI\back_2Roll.png" >
+      <Link>assets\images\UI\back_2Roll.png</Link>
     </Content>
     <Content Include="..\\assets\images\UI\blueBtn.png" >
       <Link>assets\images\UI\blueBtn.png</Link>

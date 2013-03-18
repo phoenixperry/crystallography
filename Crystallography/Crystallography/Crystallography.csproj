@@ -107,7 +107,6 @@
     <Compile Include="ui\instructions8.cs" />
     <Compile Include="ui\Instructions2.composer.cs" />
     <Compile Include="ui\Instructions7Panel.cs" />
-    <Compile Include="ui\Instructions7.cs" />
     <Compile Include="ui\Insructions3.cs" />
     <Compile Include="ui\Instructions6Panel.cs" />
     <Compile Include="ui\Instructions8Panel.cs" />
@@ -125,7 +124,6 @@
     <Compile Include="ui\Insructions3.composer.cs" />
     <Compile Include="ui\LevelSelectPanel2.composer.cs" />
     <Compile Include="ui\LevelSelectPanel3.composer.cs" />
-    <Compile Include="ui\Instructions7.composer.cs" />
     <Compile Include="ui\Instructions5.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -332,6 +330,8 @@
     <Content Include="assets\images\UI\back_2Roll.png" />
     <Content Include="assets\images\nextLevel.png" />
     <Content Include="assets\images\nextLevelOver.png" />
+    <Content Include="assets\images\UI\next_level_sm.png" />
+    <Content Include="assets\images\UI\next_level_smRoll.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

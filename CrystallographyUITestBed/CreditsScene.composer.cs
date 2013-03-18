@@ -45,14 +45,15 @@ namespace Crystallography.UI
             CreditsTitleText.LineBreak = LineBreak.Character;
 
             // BackButton
-            BackButton.IconImage = null;
+            BackButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            BackButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
             BackButton.Style = ButtonStyle.Custom;
             BackButton.CustomImage = new CustomButtonImageSettings()
             {
-                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/back_2.png"),
-                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/back_2Roll.png"),
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/blueBtn.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/blueBtnOver.png"),
                 BackgroundDisabledImage = null,
-                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
+                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
             };
 
             // CreditsScene
@@ -92,7 +93,7 @@ namespace Crystallography.UI
                     CreditsTitleText.Anchors = Anchors.None;
                     CreditsTitleText.Visible = true;
 
-                    BackButton.SetPosition(689, 473);
+                    BackButton.SetPosition(744, 488);
                     BackButton.SetSize(214, 56);
                     BackButton.Anchors = Anchors.None;
                     BackButton.Visible = true;
@@ -118,8 +119,8 @@ namespace Crystallography.UI
                     CreditsTitleText.Anchors = Anchors.None;
                     CreditsTitleText.Visible = true;
 
-                    BackButton.SetPosition(794, 437);
-                    BackButton.SetSize(104, 68);
+                    BackButton.SetPosition(671, 473);
+                    BackButton.SetSize(289, 71);
                     BackButton.Anchors = Anchors.None;
                     BackButton.Visible = true;
 
@@ -132,7 +133,9 @@ namespace Crystallography.UI
         {
             CreditsTitleText.Text = "credits";
 
-            this.Title = "CreditsScene";
+            BackButton.Text = "back";
+
+            this.Title = "BackButton";
         }
 
         private void onShowing(object sender, EventArgs e)
