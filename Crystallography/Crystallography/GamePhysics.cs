@@ -11,8 +11,9 @@ namespace Crystallography
 		protected static GamePhysics _instance;
 		
 		//pixels to meters 
-		public static readonly float PtoM = 50.0f; 
-		private const float BALLRADIUS = 35.0f/2f; 
+		public static readonly float PtoM = 50.0f;
+		private const float BALLRADIUS = 45.0f/2f;
+		private const float CUBERADIUS = 60.0f/2f;
 		private const float PADDLEWIDHT = 125.0f; 
 		private const float PADDLEHEIGHT = 38.0f; 
 		private float _screenWidth;
@@ -70,6 +71,9 @@ namespace Crystallography
 			//HORIZ. BUMPERS
 			this.SceneShapes[this.NumShape] = new PhysicsShape((new Vector2(_screenWidth,1.0f)) / PtoM);
 			this.NumShape++;
+			//CUBE!
+			this.SceneShapes[this.NumShape] = new PhysicsShape(GamePhysics.CUBERADIUS/PtoM);
+				this.NumShape++;
 			
 			
                 //create the ball physics object
@@ -136,6 +140,8 @@ namespace Crystallography
 				this.sceneBodies[this.NumBody].Rotation = 0;
 				this.SceneBodies[this.NumBody].SetBodyStatic();
 				this.NumBody++;
+			
+				
             }
 		
 		// METHODS ------------------------------------------------------------------------------------------------

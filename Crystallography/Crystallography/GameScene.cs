@@ -17,7 +17,7 @@ namespace Crystallography
 		public static readonly int TOTAL_LEVELS = 25;
 		
 		// Change the following value to true if you want bounding boxes to be rendered
-        private static bool DEBUG_BOUNDINGBOXS = false;
+        private static bool DEBUG_BOUNDINGBOXS = true;
 		
 		public static Random Random = new Random();
 		
@@ -41,6 +41,7 @@ namespace Crystallography
 		
         public GameScene ( int pCurrentLevel )
 		{
+			
 			Touch.GetData(0).Clear();
 			
 			UISystem.SetScene( new Crystallography.UI.ScoreScene() );

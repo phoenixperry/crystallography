@@ -55,6 +55,8 @@ namespace Crystallography.UI
 				if ( height - e.touchPosition.Y > NextLevelButton.Y && height - e.touchPosition.Y < NextLevelButton.Y + NextLevelButton.Height ) {
 					NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundNormalImage;
 					(Director.Instance.CurrentScene as GameScene).goToNextLevel();
+					InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
+					InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
 					this.Dispose();
 					return;
 				}
@@ -64,6 +66,8 @@ namespace Crystallography.UI
 				if ( height - e.touchPosition.Y > LevelSelectButton.Y && height - e.touchPosition.Y < LevelSelectButton.Y + LevelSelectButton.Height ) {
 					LevelSelectButton.IconImage = LevelSelectButton.CustomImage.BackgroundNormalImage;
 					GameScene.QuitToLevelSelect();
+					InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
+					InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
 					this.Dispose();
 					return;
 				}
@@ -73,6 +77,8 @@ namespace Crystallography.UI
 				if ( height - e.touchPosition.Y > QuitButton.Y && height - e.touchPosition.Y < QuitButton.Y + QuitButton.Height ) {
 					QuitButton.IconImage = QuitButton.CustomImage.BackgroundNormalImage;
 					GameScene.QuitToTitle();
+					InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
+					InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
 					this.Dispose();
 					return;
 				}

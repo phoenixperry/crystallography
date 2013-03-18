@@ -36,6 +36,8 @@ namespace Crystallography
 		
 		public bool PickRandomly {get; set; }
 		
+		protected List<int> ids;
+		
 		// CONSTRUCTOR ---------------------------------------------------------------------
 		
 		/// <summary>
@@ -48,6 +50,7 @@ namespace Crystallography
 			_scene = Director.Instance.CurrentScene;
 			_physics = GamePhysics.Instance;
 			SelectionGroup.Instance.CubeCompleteDetected += HandleSelectionGroupInstanceCubeCompleteDetected;
+			Reset (_scene);
 		}
 		
 		// EVENT HANDLERS ------------------------------------------------------------------
@@ -146,8 +149,20 @@ namespace Crystallography
 		/// Spawn cards until we run out of cards to spawn, or hit the population cap.
 		/// </summary>
 		public void Populate () {
-			while ( availableCards.Count < MaxPopulation && TotalCardsInDeck > 0) {
-				spawn();
+			if (GameScene.currentLevel == 999) {
+				ids = new List<int>();
+				for (int i = 0; i < TotalCardsInDeck; i++) {
+					ids.Add(i+NextId);
+				}
+				while ( availableCards.Count <= 15 && TotalCardsInDeck > 0) {
+					int index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
+					spawn(ids[index]);
+					ids.RemoveAt(index);
+				}
+			} else {
+				while ( availableCards.Count < MaxPopulation && TotalCardsInDeck > 0) {
+					spawn();
+				}
 			}
 		}
 		
@@ -160,6 +175,7 @@ namespace Crystallography
 			}
 			availableCards.Clear();
 			_scene = pScene;
+			ids = null;
 		}
 		
 		/// <summary>
@@ -175,11 +191,11 @@ namespace Crystallography
 		/// <summary>
 		/// Creates a new <c>CardCrystallonEntity</c>, adds it to the current scene at a random location.
 		/// </summary>
-		public CardCrystallonEntity spawn() {
+		public CardCrystallonEntity spawn( int pId = -1) {
 			var _screenWidth = Director.Instance.GL.Context.GetViewport().Width;
             var _screenHeight = Director.Instance.GL.Context.GetViewport().Height;
 			return spawn( 50f + 0.75f * _screenWidth * GameScene.Random.NextFloat(),
-			       50f + 0.75f * _screenHeight * GameScene.Random.NextFloat());
+			       50f + 0.75f * _screenHeight * GameScene.Random.NextFloat(), pId);
 		}
 		
 		/// <summary>
@@ -191,11 +207,16 @@ namespace Crystallography
 		/// <param name='pY'>
 		/// <c>float</c> Y coordinate in pixels.
 		/// </param>
-		public CardCrystallonEntity spawn( float pX, float pY ) {
-			var ss = SpriteSingleton.getInstance();
-			CardCrystallonEntity card = new CardCrystallonEntity(_scene, _physics, NextId, 
+		public CardCrystallonEntity spawn( float pX, float pY, int pId=-1 ) {
+//			var ss = SpriteSingleton.getInstance();
+			
+			if (pId == -1){
+				pId = NextId;
+			}
+			CardCrystallonEntity card = new CardCrystallonEntity(_scene, _physics, pId, 
 			                                QPattern.Instance.patternTiles.TextureInfo, QPattern.Instance.patternTiles.TileIndex2D, 
 			                                _physics.SceneShapes[0]);
+			
 			NextId++;
 			TotalCardsInDeck--;
 			QualityManager.Instance.ApplyQualitiesToEntity( card );

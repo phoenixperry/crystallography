@@ -11,11 +11,11 @@ namespace Crystallography.UI
 {
     public partial class MenuScene : Sce.PlayStation.HighLevel.UI.Scene
     {
-		private bool _acceptTouch;
+//		private bool _acceptTouch;
 		
         public MenuScene()
         {
-			_acceptTouch = false;
+//			_acceptTouch = false;
 			Touch.GetData(0).Clear();
             InitializeWidget();
 			

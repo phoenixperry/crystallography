@@ -68,6 +68,9 @@ namespace Crystallography
 		/// <c>int</c> Index of the variant. Probs 0, 1, or 2.
 		/// </param>
 		private void Add( AbstractCrystallonEntity pEntity, string pQualityName, int pVariant ) {
+			if (qualityDict[pQualityName][pVariant] == null) {
+				qualityDict[pQualityName][pVariant] = new List<int>();
+			}
 			qualityDict[pQualityName][pVariant].Add( pEntity.id );
 		}
 		
@@ -76,11 +79,11 @@ namespace Crystallography
 		/// </summary>
 		private void ApplyQualities() {
 			foreach ( string key in qualityDict.Keys ) {
-#if !ORIENTATION_MATTERS
-				if ( key == "QOrientation" ) {
-					continue;
+				if ( !AppMain.ORIENTATION_MATTERS) {
+					if ( key == "QOrientation" ) {
+						continue;
+					}
 				}
-#endif
 				var type = Type.GetType( "Crystallography." + key );
 				var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
 				var variations = qualityDict[key];
@@ -104,11 +107,11 @@ namespace Crystallography
 		public void ApplyQualitiesToEntity( CardCrystallonEntity pEntity ) {
 			//TODO would be nice to support entities other than cards...
 			foreach ( string key in qualityDict.Keys ) {
-#if !ORIENTATION_MATTERS
-				if ( key == "QOrientation" ) {
-					continue;
+				if ( !AppMain.ORIENTATION_MATTERS ) {
+					if ( key == "QOrientation" ) {
+						continue;
+					}
 				}
-#endif
 				var type = Type.GetType( "Crystallography." + key );
 				var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
 				var variations = qualityDict[key];
@@ -199,11 +202,11 @@ namespace Crystallography
 			int score;
 			Dictionary<AbstractQuality, bool> qDict = new Dictionary<AbstractQuality, bool>();
 			foreach ( string key in qualityDict.Keys ) {
-#if !ORIENTATION_MATTERS
-				if ( key == "QOrientation" ) {
-					continue;	// -------------------------------- Orientation is ALWAYS all different. Don't bother.
+				if ( !AppMain.ORIENTATION_MATTERS) {
+					if ( key == "QOrientation" ) {
+						continue;	// -------------------------------- Orientation is ALWAYS all different. Don't bother.
+					}
 				}
-#endif
 //				Console.WriteLine( "Evaluating: " + key );
 				var variations = qualityDict[key];
 				var type = Type.GetType( "Crystallography." + key );
@@ -225,11 +228,11 @@ namespace Crystallography
 			if (pForScore) {
 				int s = 0;
 				foreach ( AbstractQuality key in qDict.Keys ) {
-#if ORIENTATION_MATTERS
-					if ( key is QOrientation) {	// we need to match orientation to ensure valid sets exist, but don't score points for it.
-						continue;
+					if (AppMain.ORIENTATION_MATTERS) {
+						if ( key is QOrientation) {	// we need to match orientation to ensure valid sets exist, but don't score points for it.
+							continue;
+						}
 					}
-#endif
 					s += key.Score( qDict[key] ); //pEntities[0].getNode().Parent.Parent.Position );
 				}
 				MatchScoreEventArgs args = new MatchScoreEventArgs{ 

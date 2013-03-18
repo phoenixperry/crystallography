@@ -16,7 +16,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;ORIENTATION_MATTERS</DefineConstants>
+    <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -332,6 +332,7 @@
     <Content Include="assets\images\UI\back_2Roll.png" />
     <Content Include="assets\images\nextLevel.png" />
     <Content Include="assets\images\nextLevelOver.png" />
+    <Content Include="assets\levels\level_999.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
