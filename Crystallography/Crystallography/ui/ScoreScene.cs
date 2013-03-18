@@ -28,7 +28,7 @@ namespace Crystallography.UI
             InitializeWidget();
 			
 			// Set fonts to non-system font
-			ScoreLabelText.Font = FontManager.Instance.Get("Bariol", 25);
+			//ScoreLabelText.Font = FontManager.Instance.Get("Bariol", 25);
 			ScoreText.Font = FontManager.Instance.Get ("Bariol", 20, "Bold");
 			TimerSecondsText.Font = FontManager.Instance.Get ("Bariol", 20, "Bold");
 			TimerMinutesText.Font = FontManager.Instance.Get ("Bariol", 20, "Bold");

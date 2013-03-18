@@ -13,6 +13,7 @@ namespace Crystallography.UI
     {
         Label ThanksText;
         Label ThanksNamesText;
+        Label Label_1;
 
         private void InitializeWidget()
         {
@@ -25,24 +26,32 @@ namespace Crystallography.UI
             ThanksText.Name = "ThanksText";
             ThanksNamesText = new Label();
             ThanksNamesText.Name = "ThanksNamesText";
+            Label_1 = new Label();
+            Label_1.Name = "Label_1";
 
             // ThanksText
-            ThanksText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+            ThanksText.TextColor = new UIColor(229f / 255f, 19f / 255f, 19f / 255f, 255f / 255f);
             ThanksText.Font = new UIFont(FontAlias.System, 36, FontStyle.Regular);
             ThanksText.LineBreak = LineBreak.Character;
             ThanksText.VerticalAlignment = VerticalAlignment.Top;
 
             // ThanksNamesText
-            ThanksNamesText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+            ThanksNamesText.TextColor = new UIColor(244f / 255f, 234f / 255f, 244f / 255f, 255f / 255f);
             ThanksNamesText.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
             ThanksNamesText.LineBreak = LineBreak.Character;
             ThanksNamesText.VerticalAlignment = VerticalAlignment.Top;
 
+            // Label_1
+            Label_1.TextColor = new UIColor(250f / 255f, 234f / 255f, 250f / 255f, 255f / 255f);
+            Label_1.Font = new UIFont(FontAlias.System, 14, FontStyle.Regular);
+            Label_1.LineBreak = LineBreak.Character;
+
             // ThanksPanel
-            this.BackgroundColor = new UIColor(34f / 255f, 34f / 255f, 34f / 255f, 255f / 255f);
+            this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             this.Clip = true;
             this.AddChildLast(ThanksText);
             this.AddChildLast(ThanksNamesText);
+            this.AddChildLast(Label_1);
 
             SetWidgetLayout(orientation);
 
@@ -68,6 +77,11 @@ namespace Crystallography.UI
                     ThanksNamesText.Anchors = Anchors.None;
                     ThanksNamesText.Visible = true;
 
+                    Label_1.SetPosition(32, 154);
+                    Label_1.SetSize(214, 36);
+                    Label_1.Anchors = Anchors.None;
+                    Label_1.Visible = true;
+
                     break;
 
                 default:
@@ -79,10 +93,15 @@ namespace Crystallography.UI
                     ThanksText.Anchors = Anchors.None;
                     ThanksText.Visible = true;
 
-                    ThanksNamesText.SetPosition(32, 129);
-                    ThanksNamesText.SetSize(821, 184);
+                    ThanksNamesText.SetPosition(32, 99);
+                    ThanksNamesText.SetSize(821, 40);
                     ThanksNamesText.Anchors = Anchors.None;
                     ThanksNamesText.Visible = true;
+
+                    Label_1.SetPosition(32, 154);
+                    Label_1.SetSize(801, 53);
+                    Label_1.Anchors = Anchors.None;
+                    Label_1.Visible = true;
 
                     break;
             }
@@ -93,7 +112,9 @@ namespace Crystallography.UI
         {
             ThanksText.Text = "thanks to";
 
-            ThanksNamesText.Text = "Indiecade, Matt Parker, Nicolas Fortuna, Jim Wallace and the PSM team";
+            ThanksNamesText.Text = "Indiecade, Matt Parker, Nicolas Fortugno, Jim Wallace and the PSM team. ";
+
+            Label_1.Text = "open source fonts by ismael gonzález gonzález & raúl garcía del pomar";
         }
 
         public void InitializeDefaultEffect()
@@ -101,9 +122,13 @@ namespace Crystallography.UI
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
+                    ThanksNamesText.Visible = false;
+                    Label_1.Visible = false;
                     break;
 
                 default:
+                    ThanksNamesText.Visible = false;
+                    Label_1.Visible = false;
                     break;
             }
         }
@@ -113,9 +138,25 @@ namespace Crystallography.UI
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
+                    new FadeInEffect()
+                    {
+                        Widget = ThanksNamesText,
+                    }.Start();
+                    new FadeInEffect()
+                    {
+                        Widget = Label_1,
+                    }.Start();
                     break;
 
                 default:
+                    new FadeInEffect()
+                    {
+                        Widget = ThanksNamesText,
+                    }.Start();
+                    new FadeInEffect()
+                    {
+                        Widget = Label_1,
+                    }.Start();
                     break;
             }
         }

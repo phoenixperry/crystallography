@@ -12,7 +12,6 @@ namespace Crystallography.UI
     partial class InstructionsScene
     {
         Panel sceneBackgroundPanel;
-        Label InstructionsTitleText;
         PagePanel PagePanel_1;
 
         private void InitializeWidget()
@@ -24,25 +23,24 @@ namespace Crystallography.UI
         {
             sceneBackgroundPanel = new Panel();
             sceneBackgroundPanel.Name = "sceneBackgroundPanel";
-            InstructionsTitleText = new Label();
-            InstructionsTitleText.Name = "InstructionsTitleText";
             PagePanel_1 = new PagePanel();
             PagePanel_1.Name = "PagePanel_1";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
 
-            // InstructionsTitleText
-            InstructionsTitleText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            InstructionsTitleText.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
-            InstructionsTitleText.LineBreak = LineBreak.Character;
-
             // PagePanel_1
             PagePanel_1.AddPage(new InstructionsPanel());
+            PagePanel_1.AddPage(new Instructions2());
+            PagePanel_1.AddPage(new Insructions3());
+            PagePanel_1.AddPage(new Instructions4());
+            PagePanel_1.AddPage(new instruction5Panel());
+            PagePanel_1.AddPage(new Instructions6Panel());
+            PagePanel_1.AddPage(new Instructions8Panel());
+            PagePanel_1.AddPage(new Instructions7Panel());
 
             // InstructionsScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
-            this.RootWidget.AddChildLast(InstructionsTitleText);
             this.RootWidget.AddChildLast(PagePanel_1);
 
             SetWidgetLayout(orientation);
@@ -64,11 +62,6 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    InstructionsTitleText.SetPosition(19, 29);
-                    InstructionsTitleText.SetSize(214, 36);
-                    InstructionsTitleText.Anchors = Anchors.None;
-                    InstructionsTitleText.Visible = true;
-
                     PagePanel_1.SetPosition(206, 201);
                     PagePanel_1.SetSize(100, 50);
                     PagePanel_1.Anchors = Anchors.None;
@@ -85,13 +78,8 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    InstructionsTitleText.SetPosition(19, 29);
-                    InstructionsTitleText.SetSize(214, 36);
-                    InstructionsTitleText.Anchors = Anchors.None;
-                    InstructionsTitleText.Visible = true;
-
-                    PagePanel_1.SetPosition(19, 88);
-                    PagePanel_1.SetSize(924, 425);
+                    PagePanel_1.SetPosition(16, 10);
+                    PagePanel_1.SetSize(924, 511);
                     PagePanel_1.Anchors = Anchors.None;
                     PagePanel_1.Visible = true;
 
@@ -102,8 +90,6 @@ namespace Crystallography.UI
 
         public void UpdateLanguage()
         {
-            InstructionsTitleText.Text = "instructions";
-
             this.Title = "Instructions";
         }
 

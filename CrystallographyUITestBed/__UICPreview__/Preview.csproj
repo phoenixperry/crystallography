@@ -31,9 +31,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="__DummyProgram.cs" />
-    <Compile Include="__DummyScene.cs" />
-    <Compile Include="LevelEndPanel.composer.cs" />
-    <Compile Include="LevelEndPanel.cs" />
+    <Compile Include="LevelSelectScene.composer.cs" />
+    <Compile Include="LevelSelectScene.cs" />
+    <Compile Include="LevelSelectPanel.composer.cs" />
+    <Compile Include="LevelSelectPanel.cs" />
+    <Compile Include="LevelSelectPanel2.composer.cs" />
+    <Compile Include="LevelSelectPanel2.cs" />
+    <Compile Include="LevelSelectPanel3.composer.cs" />
+    <Compile Include="LevelSelectPanel3.cs" />
     <Compile Include="UIStringTable.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,8 +11,7 @@ namespace Crystallography.UI
 {
     partial class InstructionsPanel
     {
-        Label InstructionsText;
-        Button StartButton;
+        ImageBox ImageBox_1;
 
         private void InitializeWidget()
         {
@@ -21,25 +20,17 @@ namespace Crystallography.UI
 
         private void InitializeWidget(LayoutOrientation orientation)
         {
-            InstructionsText = new Label();
-            InstructionsText.Name = "InstructionsText";
-            StartButton = new Button();
-            StartButton.Name = "StartButton";
+            ImageBox_1 = new ImageBox();
+            ImageBox_1.Name = "ImageBox_1";
 
-            // InstructionsText
-            InstructionsText.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            InstructionsText.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
-            InstructionsText.LineBreak = LineBreak.Character;
-
-            // StartButton
-            StartButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            StartButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            // ImageBox_1
+            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/instructions1.png");
+            ImageBox_1.ImageScaleType = ImageScaleType.Center;
 
             // InstructionsPanel
-            this.BackgroundColor = new UIColor(153f / 255f, 153f / 255f, 153f / 255f, 255f / 255f);
+            this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             this.Clip = true;
-            this.AddChildLast(InstructionsText);
-            this.AddChildLast(StartButton);
+            this.AddChildLast(ImageBox_1);
 
             SetWidgetLayout(orientation);
 
@@ -55,31 +46,21 @@ namespace Crystallography.UI
                     this.SetSize(425, 924);
                     this.Anchors = Anchors.None;
 
-                    InstructionsText.SetPosition(19, 34);
-                    InstructionsText.SetSize(214, 36);
-                    InstructionsText.Anchors = Anchors.None;
-                    InstructionsText.Visible = true;
-
-                    StartButton.SetPosition(688, 346);
-                    StartButton.SetSize(214, 56);
-                    StartButton.Anchors = Anchors.None;
-                    StartButton.Visible = true;
+                    ImageBox_1.SetPosition(320, 75);
+                    ImageBox_1.SetSize(200, 200);
+                    ImageBox_1.Anchors = Anchors.None;
+                    ImageBox_1.Visible = true;
 
                     break;
 
                 default:
-                    this.SetSize(924, 425);
+                    this.SetSize(924, 511);
                     this.Anchors = Anchors.None;
 
-                    InstructionsText.SetPosition(19, 34);
-                    InstructionsText.SetSize(214, 36);
-                    InstructionsText.Anchors = Anchors.None;
-                    InstructionsText.Visible = true;
-
-                    StartButton.SetPosition(688, 346);
-                    StartButton.SetSize(214, 56);
-                    StartButton.Anchors = Anchors.None;
-                    StartButton.Visible = true;
+                    ImageBox_1.SetPosition(0, 74);
+                    ImageBox_1.SetSize(921, 362);
+                    ImageBox_1.Anchors = Anchors.None;
+                    ImageBox_1.Visible = true;
 
                     break;
             }
@@ -88,9 +69,6 @@ namespace Crystallography.UI
 
         public void UpdateLanguage()
         {
-            InstructionsText.Text = "blah blah blah";
-
-            StartButton.Text = "Start";
         }
 
         public void InitializeDefaultEffect()

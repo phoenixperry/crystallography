@@ -12,8 +12,8 @@ namespace Crystallography.UI
     partial class CreditsScene
     {
         Panel sceneBackgroundPanel;
-        Label CreditsTitleText;
         PagePanel PagePanel_1;
+        Label CreditsTitleText;
         Button BackButton;
 
         private void InitializeWidget()
@@ -25,34 +25,43 @@ namespace Crystallography.UI
         {
             sceneBackgroundPanel = new Panel();
             sceneBackgroundPanel.Name = "sceneBackgroundPanel";
-            CreditsTitleText = new Label();
-            CreditsTitleText.Name = "CreditsTitleText";
             PagePanel_1 = new PagePanel();
             PagePanel_1.Name = "PagePanel_1";
+            CreditsTitleText = new Label();
+            CreditsTitleText.Name = "CreditsTitleText";
             BackButton = new Button();
             BackButton.Name = "BackButton";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
 
+            // PagePanel_1
+            PagePanel_1.AddPage(new CreditsPanel());
+            PagePanel_1.AddPage(new ThanksPanel());
+
             // CreditsTitleText
             CreditsTitleText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
             CreditsTitleText.Font = new UIFont(FontAlias.System, 72, FontStyle.Regular);
             CreditsTitleText.LineBreak = LineBreak.Character;
 
-            // PagePanel_1
-            PagePanel_1.AddPage(new CreditsPanel());
-            PagePanel_1.AddPage(new ThanksPanel());
-
             // BackButton
-            BackButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            BackButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            BackButton.IconImage = null;
+            BackButton.Style = ButtonStyle.Custom;
+            BackButton.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/back_2.png"),
+                BackgroundPressedImage = null,
+                BackgroundDisabledImage = null,
+                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+            };
 
             // CreditsScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
-            this.RootWidget.AddChildLast(CreditsTitleText);
             this.RootWidget.AddChildLast(PagePanel_1);
+            this.RootWidget.AddChildLast(CreditsTitleText);
             this.RootWidget.AddChildLast(BackButton);
+            this.Showing += new EventHandler(onShowing);
+            this.Shown += new EventHandler(onShown);
 
             SetWidgetLayout(orientation);
 
@@ -73,15 +82,15 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    CreditsTitleText.SetPosition(20, 27);
-                    CreditsTitleText.SetSize(214, 36);
-                    CreditsTitleText.Anchors = Anchors.None;
-                    CreditsTitleText.Visible = true;
-
                     PagePanel_1.SetPosition(36, 154);
                     PagePanel_1.SetSize(100, 50);
                     PagePanel_1.Anchors = Anchors.None;
                     PagePanel_1.Visible = true;
+
+                    CreditsTitleText.SetPosition(20, 27);
+                    CreditsTitleText.SetSize(214, 36);
+                    CreditsTitleText.Anchors = Anchors.None;
+                    CreditsTitleText.Visible = true;
 
                     BackButton.SetPosition(689, 473);
                     BackButton.SetSize(214, 56);
@@ -99,18 +108,18 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
+                    PagePanel_1.SetPosition(44, 112);
+                    PagePanel_1.SetSize(885, 344);
+                    PagePanel_1.Anchors = Anchors.None;
+                    PagePanel_1.Visible = true;
+
                     CreditsTitleText.SetPosition(36, 28);
                     CreditsTitleText.SetSize(327, 72);
                     CreditsTitleText.Anchors = Anchors.None;
                     CreditsTitleText.Visible = true;
 
-                    PagePanel_1.SetPosition(44, 114);
-                    PagePanel_1.SetSize(885, 344);
-                    PagePanel_1.Anchors = Anchors.None;
-                    PagePanel_1.Visible = true;
-
-                    BackButton.SetPosition(707, 475);
-                    BackButton.SetSize(214, 56);
+                    BackButton.SetPosition(763, 396);
+                    BackButton.SetSize(166, 109);
                     BackButton.Anchors = Anchors.None;
                     BackButton.Visible = true;
 
@@ -123,8 +132,6 @@ namespace Crystallography.UI
         {
             CreditsTitleText.Text = "credits";
 
-            BackButton.Text = "Back";
-
             this.Title = "CreditsScene";
         }
 
@@ -133,9 +140,11 @@ namespace Crystallography.UI
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
+                    PagePanel_1.Visible = false;
                     break;
 
                 default:
+                    PagePanel_1.Visible = false;
                     break;
             }
         }
@@ -145,9 +154,17 @@ namespace Crystallography.UI
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
+                    new FadeInEffect()
+                    {
+                        Widget = PagePanel_1,
+                    }.Start();
                     break;
 
                 default:
+                    new FadeInEffect()
+                    {
+                        Widget = PagePanel_1,
+                    }.Start();
                     break;
             }
         }

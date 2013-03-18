@@ -14,11 +14,11 @@ namespace Crystallography.UI
         Label Label_1;
         Label Label_2;
         Label Label_3;
-        Label Label_4;
+        Label BenText;
         Label PhoenixText;
         ImageBox ImageBox_1;
         ImageBox ImageBox_2;
-        Label Label_5;
+        Label MargaretText;
         ImageBox ImageBox_3;
 
         private void InitializeWidget()
@@ -34,16 +34,16 @@ namespace Crystallography.UI
             Label_2.Name = "Label_2";
             Label_3 = new Label();
             Label_3.Name = "Label_3";
-            Label_4 = new Label();
-            Label_4.Name = "Label_4";
+            BenText = new Label();
+            BenText.Name = "BenText";
             PhoenixText = new Label();
             PhoenixText.Name = "PhoenixText";
             ImageBox_1 = new ImageBox();
             ImageBox_1.Name = "ImageBox_1";
             ImageBox_2 = new ImageBox();
             ImageBox_2.Name = "ImageBox_2";
-            Label_5 = new Label();
-            Label_5.Name = "Label_5";
+            MargaretText = new Label();
+            MargaretText.Name = "MargaretText";
             ImageBox_3 = new ImageBox();
             ImageBox_3.Name = "ImageBox_3";
 
@@ -62,10 +62,10 @@ namespace Crystallography.UI
             Label_3.Font = new UIFont(FontAlias.System, 16, FontStyle.Regular);
             Label_3.LineBreak = LineBreak.Character;
 
-            // Label_4
-            Label_4.TextColor = new UIColor(229f / 255f, 19f / 255f, 19f / 255f, 255f / 255f);
-            Label_4.Font = new UIFont(FontAlias.System, 30, FontStyle.Regular);
-            Label_4.LineBreak = LineBreak.Character;
+            // BenText
+            BenText.TextColor = new UIColor(229f / 255f, 19f / 255f, 19f / 255f, 255f / 255f);
+            BenText.Font = new UIFont(FontAlias.System, 30, FontStyle.Regular);
+            BenText.LineBreak = LineBreak.Character;
 
             // PhoenixText
             PhoenixText.TextColor = new UIColor(41f / 255f, 226f / 255f, 226f / 255f, 255f / 255f);
@@ -81,10 +81,10 @@ namespace Crystallography.UI
             ImageBox_2.Image = new ImageAsset("/Application/assets/images/UI/icons/glasses.png");
             ImageBox_2.ImageScaleType = ImageScaleType.Center;
 
-            // Label_5
-            Label_5.TextColor = new UIColor(244f / 255f, 234f / 255f, 244f / 255f, 255f / 255f);
-            Label_5.Font = new UIFont(FontAlias.System, 30, FontStyle.Regular);
-            Label_5.LineBreak = LineBreak.Character;
+            // MargaretText
+            MargaretText.TextColor = new UIColor(244f / 255f, 234f / 255f, 244f / 255f, 255f / 255f);
+            MargaretText.Font = new UIFont(FontAlias.System, 30, FontStyle.Regular);
+            MargaretText.LineBreak = LineBreak.Character;
 
             // ImageBox_3
             ImageBox_3.Image = new ImageAsset("/Application/assets/images/UI/icons/phones.png");
@@ -96,11 +96,11 @@ namespace Crystallography.UI
             this.AddChildLast(Label_1);
             this.AddChildLast(Label_2);
             this.AddChildLast(Label_3);
-            this.AddChildLast(Label_4);
+            this.AddChildLast(BenText);
             this.AddChildLast(PhoenixText);
             this.AddChildLast(ImageBox_1);
             this.AddChildLast(ImageBox_2);
-            this.AddChildLast(Label_5);
+            this.AddChildLast(MargaretText);
             this.AddChildLast(ImageBox_3);
 
             SetWidgetLayout(orientation);
@@ -132,10 +132,10 @@ namespace Crystallography.UI
                     Label_3.Anchors = Anchors.None;
                     Label_3.Visible = true;
 
-                    Label_4.SetPosition(32, 49);
-                    Label_4.SetSize(214, 36);
-                    Label_4.Anchors = Anchors.None;
-                    Label_4.Visible = true;
+                    BenText.SetPosition(32, 49);
+                    BenText.SetSize(214, 36);
+                    BenText.Anchors = Anchors.None;
+                    BenText.Visible = true;
 
                     PhoenixText.SetPosition(20, 188);
                     PhoenixText.SetSize(214, 36);
@@ -152,10 +152,10 @@ namespace Crystallography.UI
                     ImageBox_2.Anchors = Anchors.None;
                     ImageBox_2.Visible = true;
 
-                    Label_5.SetPosition(17, 242);
-                    Label_5.SetSize(214, 36);
-                    Label_5.Anchors = Anchors.None;
-                    Label_5.Visible = true;
+                    MargaretText.SetPosition(17, 242);
+                    MargaretText.SetSize(214, 36);
+                    MargaretText.Anchors = Anchors.None;
+                    MargaretText.Visible = true;
 
                     ImageBox_3.SetPosition(211, 144);
                     ImageBox_3.SetSize(200, 200);
@@ -183,12 +183,12 @@ namespace Crystallography.UI
                     Label_3.Anchors = Anchors.None;
                     Label_3.Visible = true;
 
-                    Label_4.SetPosition(16, 34);
-                    Label_4.SetSize(214, 36);
-                    Label_4.Anchors = Anchors.None;
-                    Label_4.Visible = true;
+                    BenText.SetPosition(16, 34);
+                    BenText.SetSize(214, 36);
+                    BenText.Anchors = Anchors.None;
+                    BenText.Visible = true;
 
-                    PhoenixText.SetPosition(16, 140);
+                    PhoenixText.SetPosition(16, 142);
                     PhoenixText.SetSize(392, 37);
                     PhoenixText.Anchors = Anchors.None;
                     PhoenixText.Visible = true;
@@ -203,10 +203,10 @@ namespace Crystallography.UI
                     ImageBox_2.Anchors = Anchors.None;
                     ImageBox_2.Visible = true;
 
-                    Label_5.SetPosition(16, 239);
-                    Label_5.SetSize(301, 36);
-                    Label_5.Anchors = Anchors.None;
-                    Label_5.Visible = true;
+                    MargaretText.SetPosition(16, 239);
+                    MargaretText.SetSize(301, 36);
+                    MargaretText.Anchors = Anchors.None;
+                    MargaretText.Visible = true;
 
                     ImageBox_3.SetPosition(247, 206);
                     ImageBox_3.SetSize(106, 76);
@@ -226,11 +226,11 @@ namespace Crystallography.UI
 
             Label_3.Text = "Game Designer, Audio design, Level Design";
 
-            Label_4.Text = "ben johnson";
+            BenText.Text = "ben johnson";
 
             PhoenixText.Text = "phoenix perry";
 
-            Label_5.Text = "margaret schedel";
+            MargaretText.Text = "margaret schedel";
         }
 
         public void InitializeDefaultEffect()

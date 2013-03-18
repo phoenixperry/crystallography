@@ -14,11 +14,11 @@ namespace Crystallography.UI
         {
             InitializeWidget();
 			
-			SequenceCompleteText.Font = FontManager.Instance.Get("Bariol", 72);
-			ScoreText.Font = FontManager.Instance.Get("Bariol", 48);
-			TimeText.Font = FontManager.Instance.Get("Bariol", 48);
-			YoursText.Font = FontManager.Instance.Get("Bariol", 48);
-			BestText.Font = FontManager.Instance.Get("Bariol", 48);
+		//	SequenceCompleteText.Font = FontManager.Instance.Get("Bariol", 72);
+			//ScoreText.Font = FontManager.Instance.Get("Bariol", 48);
+			//TimeText.Font = FontManager.Instance.Get("Bariol", 48);
+			//YoursText.Font = FontManager.Instance.Get("Bariol", 48);
+			//BestText.Font = FontManager.Instance.Get("Bariol", 48);
 			YourScoreText.Font = FontManager.Instance.Get("Bariol", 48);
 			BestScoreText.Font = FontManager.Instance.Get("Bariol", 48);
 			YourTimeText.Font = FontManager.Instance.Get("Bariol", 48);

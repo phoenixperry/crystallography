@@ -86,7 +86,7 @@ namespace Crystallography.UI
 
         public void UpdateLanguage()
         {
-            SplashText.Text = "12 Eyes Games presents";
+            SplashText.Text = "12 eyes";
         }
 
         private void onShowing(object sender, EventArgs e)

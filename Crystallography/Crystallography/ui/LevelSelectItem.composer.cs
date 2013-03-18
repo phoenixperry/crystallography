@@ -25,6 +25,14 @@ namespace Crystallography.UI
 
             // Button_1
             Button_1.IconImage = null;
+            Button_1.Style = ButtonStyle.Custom;
+            Button_1.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/cubeUI6.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/cubeUIRollOver6.png"),
+                BackgroundDisabledImage = null,
+                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
+            };
 
             // LevelSelectItem
             this.BackgroundColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 0f / 255f);
@@ -45,7 +53,7 @@ namespace Crystallography.UI
                     this.SetSize(100, 100);
                     this.Anchors = Anchors.None;
 
-                    Button_1.SetPosition(-45, 14);
+                    Button_1.SetPosition(-68, 21);
                     Button_1.SetSize(214, 56);
                     Button_1.Anchors = Anchors.None;
                     Button_1.Visible = true;
@@ -56,9 +64,9 @@ namespace Crystallography.UI
                     this.SetSize(100, 100);
                     this.Anchors = Anchors.None;
 
-                    Button_1.SetPosition(0, 0);
-                    Button_1.SetSize(100, 100);
-                    Button_1.Anchors = Anchors.None;
+                    Button_1.SetPosition(12, 6);
+                    Button_1.SetSize(76, 88);
+                    Button_1.Anchors = Anchors.Top;
                     Button_1.Visible = true;
 
                     break;
