@@ -193,7 +193,8 @@ namespace Crystallography
 		/// </param>
 		public CardCrystallonEntity spawn( float pX, float pY ) {
 			var ss = SpriteSingleton.getInstance();
-			CardCrystallonEntity card = new CardCrystallonEntity(_scene, _physics, NextId, ss.Get("TopSolid").TextureInfo, ss.Get ("TopSolid").TileIndex2D, 
+			CardCrystallonEntity card = new CardCrystallonEntity(_scene, _physics, NextId, 
+			                                QPattern.Instance.patternTiles.TextureInfo, QPattern.Instance.patternTiles.TileIndex2D, 
 			                                _physics.SceneShapes[0]);
 			NextId++;
 			TotalCardsInDeck--;

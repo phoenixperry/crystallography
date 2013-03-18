@@ -35,13 +35,13 @@ namespace Crystallography
 			return POSITION_OFFSETS[position];
 		}
 		
-		public override void setOrientation (string pOrientation)
+		public override void setOrientation (int pOrientation)
 		{
 			base.setOrientation (pOrientation);
 			if(_anim != null) {
-				if (pOrientation == "Left") {
+				if (pOrientation == 1) {
 					_anim.Rotation = new Vector2(1f,0f);
-				} else if (pOrientation == "Right") {
+				} else if (pOrientation == 2) {
 					_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
 				} else {
 					_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
@@ -122,9 +122,9 @@ namespace Crystallography
 				_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 1.0f, true) );
 			}
 			if (_anim != null) {
-				if (_orientationString == "Left") {
+				if (getOrientation() == 1) {
 					_anim.Rotation = new Vector2(1f,0f);
-				} else if (_orientationString == "Right") {
+				} else if (getOrientation() == 2) {
 					_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
 				} else {
 					_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);

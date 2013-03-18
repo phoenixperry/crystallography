@@ -292,6 +292,8 @@ namespace Crystallography
 			//TODO Keep this from being called both BEFORE and AFTER level transition. Pick ONE.
 			ClearQualityDictionary();
 			LoadLevelQualities( pLevelNum );
+			QColor.Instance.setPalette();
+			QPattern.Instance.setPalette();
 			BuildQualityDictionary( pCardManagerInstance );
 //			ApplyQualities();
 		}

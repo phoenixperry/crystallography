@@ -11,8 +11,8 @@ namespace Crystallography
 		protected PhysicsBody _body;
 		protected float _width;
 		protected float _height;
-		protected string _orientationString;
-		protected string _patternString;
+		protected int _orientationIndex;
+		protected int _patternIndex;
 		
 		// GET & SET---------------------------------
 		
@@ -24,12 +24,12 @@ namespace Crystallography
 			return _body;
 		}
 		
-		public string getOrientation() {
-			return _orientationString;
+		public int getOrientation() {
+			return _orientationIndex;
 		}
 		
-		public string getPattern() {
-			return _patternString;
+		public int getPattern() {
+			return _patternIndex;
 		}
 		
 		public override void setBody (PhysicsBody body) {
@@ -40,12 +40,12 @@ namespace Crystallography
 			_sprite = node as SpriteTile;
 		}
 		
-		public virtual void setOrientation ( string pOrientation ) {
-			_orientationString = pOrientation;
+		public virtual void setOrientation ( int pOrientation ) {
+			_orientationIndex = pOrientation;
 		}
 		
-		public virtual void setPattern ( string pPattern ) {
-			_patternString = pPattern;
+		public virtual void setPattern ( int pPattern ) {
+			_patternIndex = pPattern;
 		}
 		
 		public override Vector2 getAttachOffset (int position)
@@ -72,8 +72,8 @@ namespace Crystallography
 												: base(pScene, pGamePhysics) {
 			
 			// SPRITE STUFF
-			_orientationString = "Top";
-			_patternString = "Solid";
+			_orientationIndex = 0;
+			_patternIndex = 0;
 			_sprite = new SpriteTile(pTextureInfo, pTileIndex2D);
 			_sprite.Scale = _sprite.CalcSizeInPixels();
 			_sprite.Pivot = new Vector2(0.5f, 0.5f);

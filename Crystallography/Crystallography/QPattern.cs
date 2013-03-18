@@ -1,11 +1,15 @@
 using System;
 using Sce.PlayStation.Core;
 using Sce.PlayStation.HighLevel.GameEngine2D;
+using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
 namespace Crystallography
 {
 	public class QPattern : AbstractQuality
 	{
+		
+		public SpriteTile patternTiles;
+		
 		protected static AbstractQuality _instance;
 		
 		// GET & SET --------------------------------------------------------------
@@ -33,6 +37,7 @@ namespace Crystallography
 		{
 //			Instance = this;
 			_name = "QPattern";
+			setPalette();
 		}
 		
 		// OVERRIDES -------------------------------------------------------------
@@ -41,31 +46,36 @@ namespace Crystallography
 		{
 			SpriteTileCrystallonEntity e = pEntity as SpriteTileCrystallonEntity;
 			
-			switch(pVariant)
-			{
-			case (0):
-				e.setPattern("Solid");
-				break;
-			case (1):
-				e.setPattern("Stripe");
-				break;
-			case (2):
-				e.setPattern("Dot");
-				break;
-			default:
-				throw new NotImplementedException("QPattern.Apply : pVariant must be 0,1,2");
-				break;
-			}
-			var ss = SpriteSingleton.getInstance();
-			(e.getNode() as SpriteTile).TileIndex2D = ss.Get( e.getOrientation() + e.getPattern() ).TileIndex2D;
+			e.setPattern(pVariant);
+			
+//			switch(pVariant)
+//			{
+//			case (0):
+//				e.setPattern(0);
+//				break;
+//			case (1):
+//				e.setPattern(1);
+//				break;
+//			case (2):
+//				e.setPattern(2);
+//				break;
+//			default:
+//				throw new NotImplementedException("QPattern.Apply : pVariant must be 0,1,2");
+//				break;
+//			}
+//			var ss = SpriteSingleton.getInstance();
+			(e.getNode() as SpriteTile).TileIndex2D = new Vector2i( e.getOrientation(), e.getPattern() ); //ss.Get( e.getOrientation() + e.getPattern() ).TileIndex2D;
 			
 			
 			
 		}
 		
-//		public override bool Match (ICrystallonEntity[] pEntities)
-//		{
-//			return base.Match(pEntities);
-//		}
+		public void setPalette () {
+			setPalette( LevelManager.Instance.PatternPath, 3, 3);
+		}
+		
+		public void setPalette( string path, int columns, int rows) {
+			patternTiles = Support.TiledSpriteFromFile( path, columns, rows );
+		}
 	}
 }

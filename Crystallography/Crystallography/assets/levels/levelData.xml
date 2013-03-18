@@ -3,6 +3,7 @@
         <Color Red="0.956863" Green="0.917647" Blue="0.956863" />
         <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
         <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
     </Level>
     <Level Value="1"> 
         <Color Red="0.011765" Green="1.0" Blue="0.741176" />
@@ -13,5 +14,11 @@
         <Color Red="0.807843" Green="1.0" Blue="0.0" />
         <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
         <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+    </Level>
+    <Level Value="6">
+		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
+    </Level>
+	<Level Value="7">
+		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
     </Level>
 </GameData>

@@ -34,6 +34,7 @@ namespace Crystallography
 		}
 		
 		public Vector4[] Palette { get; set; }
+		public string PatternPath { get; set; }
 		
 		// CONSTRUCTORS -----------------------------------------------------------
 		
@@ -42,6 +43,7 @@ namespace Crystallography
 			Palette = new Vector4[] { new Vector4(0.956863f, 0.917647f, 0.956863f, 1.0f), 
 										new Vector4(0.898039f, 0.074510f, 0.074510f, 1.0f), 
 										new Vector4(0.160784f, 0.886274f, 0.886274f, 1.0f) };
+			PatternPath = "Application/assets/images/set1/gamePieces.png";
 		}
 		
 		// METHODS ----------------------------------------------------------------
@@ -55,12 +57,17 @@ namespace Crystallography
 				foreach( XElement element in level.AllElements ) {
 					if ( (int)element.Attribute("Value") == pLevelNumber ) {
 						int i = 0;
-						foreach (XElement color in element.Nodes()) {
-							Palette[i].X = (float)color.Attribute("Red");
-							Palette[i].Y = (float)color.Attribute("Green");
-							Palette[i].Z = (float)color.Attribute("Blue");
-							Palette[i].W = 1.0f;
-							i++;
+						foreach (XElement line in element.Nodes()) {
+							if (line.Name.LocalName == "Color") {
+								Palette[i].X = (float)line.Attribute("Red");
+								Palette[i].Y = (float)line.Attribute("Green");
+								Palette[i].Z = (float)line.Attribute("Blue");
+								Palette[i].W = 1.0f;
+								i++;
+							} else if (line.Name.LocalName == "Pattern") {
+								PatternPath = line.Attribute("Path").Value;
+							}
+							
 						}
 						return;
 					}
