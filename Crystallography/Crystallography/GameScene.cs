@@ -14,7 +14,7 @@ namespace Crystallography
 {
     public class GameScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
     {
-		private static readonly int TOTAL_LEVELS = 25;
+		public static readonly int TOTAL_LEVELS = 25;
 		
 		// Change the following value to true if you want bounding boxes to be rendered
         private static bool DEBUG_BOUNDINGBOXS = false;

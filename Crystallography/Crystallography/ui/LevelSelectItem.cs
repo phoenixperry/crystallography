@@ -12,6 +12,9 @@ namespace Crystallography.UI
 		public int levelID { get; set; }
 		public static event EventHandler<LevelSelectionEventArgs> LevelSelectionDetected;		
 		
+		public UIColor Color { get{ return Button_1.BackgroundFilterColor; } set{ Button_1.BackgroundFilterColor = value; } }
+		public Button Button { get{ return Button_1; } }
+		
         public LevelSelectItem()
         {
             InitializeWidget();
@@ -21,8 +24,8 @@ namespace Crystallography.UI
 					handler( this, new LevelSelectionEventArgs() { LevelID = levelID });
 				}
 			};
-			
         }
+		
     }
 	
 	public class LevelSelectionEventArgs : EventArgs {
