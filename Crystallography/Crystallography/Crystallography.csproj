@@ -127,6 +127,8 @@
     <Compile Include="ui\Instructions5.cs" />
     <Compile Include="ui\LoadingPanel.composer.cs" />
     <Compile Include="ui\LoadingPanel.cs" />
+    <Compile Include="ui\LoadingScene.composer.cs" />
+    <Compile Include="ui\LoadingScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -335,6 +337,7 @@
     <Content Include="assets\images\UI\next_level_sm.png" />
     <Content Include="assets\images\UI\next_level_smRoll.png" />
     <Content Include="assets\levels\level_999.xml" />
+    <Content Include="assets\images\UI\eyes.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

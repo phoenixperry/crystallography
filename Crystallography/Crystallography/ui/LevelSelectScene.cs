@@ -41,7 +41,8 @@ namespace Crystallography.UI
         void HandleStartButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
 			Console.WriteLine( selectedLevel );
-			Director.Instance.ReplaceScene( new GameScene( selectedLevel ) );
+			UISystem.SetScene( new LoadingScene( selectedLevel ) );
+//			Director.Instance.ReplaceScene( new GameScene( selectedLevel ) );
         }
     }
 }

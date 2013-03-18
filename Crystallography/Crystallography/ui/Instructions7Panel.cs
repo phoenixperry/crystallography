@@ -19,7 +19,8 @@ namespace Crystallography.UI
 		
 		void HandleNewGameButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
-			Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.ReplaceScene( new GameScene(0) );
+			UISystem.SetScene( new LoadingScene( 0 ) );
+//			Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.ReplaceScene( new GameScene(0) );
         }
     }
 }
