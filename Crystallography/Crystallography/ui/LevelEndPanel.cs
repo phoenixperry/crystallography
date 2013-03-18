@@ -36,19 +36,76 @@ namespace Crystallography.UI
 			YourTimeText.Text = minutes + ":" + seconds.ToString("00.0");
 			BestTimeText.Text = minutes + ":" + seconds.ToString("00.0");
 			
-			NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
-			LevelSelectButton.TouchEventReceived += HandleLevelSelectButtonTouchEventReceived;
-			QuitButton.TouchEventReceived += HandleQuitButtonTouchEventReceived;
+//			NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
+//			LevelSelectButton.TouchEventReceived += HandleLevelSelectButtonTouchEventReceived;
+//			QuitButton.TouchEventReceived += HandleQuitButtonTouchEventReceived;
+			
+			InputManager.Instance.TouchJustDownDetected += HandleInputManagerInstanceTouchJustDownDetected;
+			InputManager.Instance.TouchJustUpDetected += HandleInputManagerInstanceTouchJustUpDetected;
         }
+
+       
 		
 		// EVENT HANDLERS ------------------------------------------------------------------------
+		
+		 void HandleInputManagerInstanceTouchJustUpDetected (object sender, BaseTouchEventArgs e)
+        {
+        	if ( e.touchPosition.X > NextLevelButton.X && e.touchPosition.X < NextLevelButton.X + NextLevelButton.Width ) {
+				int height = Director.Instance.GL.Context.GetViewport().Height;
+				if ( height - e.touchPosition.Y > NextLevelButton.Y && height - e.touchPosition.Y < NextLevelButton.Y + NextLevelButton.Height ) {
+					NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundNormalImage;
+					(Director.Instance.CurrentScene as GameScene).goToNextLevel();
+					this.Dispose();
+					return;
+				}
+			}
+			if ( e.touchPosition.X > LevelSelectButton.X && e.touchPosition.X < LevelSelectButton.X + LevelSelectButton.Width ) {
+				int height = Director.Instance.GL.Context.GetViewport().Height;
+				if ( height - e.touchPosition.Y > LevelSelectButton.Y && height - e.touchPosition.Y < LevelSelectButton.Y + LevelSelectButton.Height ) {
+					LevelSelectButton.IconImage = LevelSelectButton.CustomImage.BackgroundNormalImage;
+					GameScene.QuitToLevelSelect();
+					this.Dispose();
+					return;
+				}
+			}
+			if ( e.touchPosition.X > QuitButton.X && e.touchPosition.X < QuitButton.X + QuitButton.Width ) {
+				int height = Director.Instance.GL.Context.GetViewport().Height;
+				if ( height - e.touchPosition.Y > QuitButton.Y && height - e.touchPosition.Y < QuitButton.Y + QuitButton.Height ) {
+					QuitButton.IconImage = QuitButton.CustomImage.BackgroundNormalImage;
+					GameScene.QuitToTitle();
+					this.Dispose();
+					return;
+				}
+			}
+        }
+
+        void HandleInputManagerInstanceTouchJustDownDetected (object sender, BaseTouchEventArgs e)
+        {
+        	if ( e.touchPosition.X > NextLevelButton.X && e.touchPosition.X < NextLevelButton.X + NextLevelButton.Width ) {
+				int height = Director.Instance.GL.Context.GetViewport().Height;
+				if ( height - e.touchPosition.Y > NextLevelButton.Y && height - e.touchPosition.Y < NextLevelButton.Y + NextLevelButton.Height ) {
+					NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundPressedImage;
+				}
+			}
+			if ( e.touchPosition.X > LevelSelectButton.X && e.touchPosition.X < LevelSelectButton.X + LevelSelectButton.Width ) {
+				int height = Director.Instance.GL.Context.GetViewport().Height;
+				if ( height - e.touchPosition.Y > LevelSelectButton.Y && height - e.touchPosition.Y < LevelSelectButton.Y + LevelSelectButton.Height ) {
+					LevelSelectButton.IconImage = LevelSelectButton.CustomImage.BackgroundPressedImage;
+				}
+			}
+			if ( e.touchPosition.X > QuitButton.X && e.touchPosition.X < QuitButton.X + QuitButton.Width ) {
+				int height = Director.Instance.GL.Context.GetViewport().Height;
+				if ( height - e.touchPosition.Y > QuitButton.Y && height - e.touchPosition.Y < QuitButton.Y + QuitButton.Height ) {
+					QuitButton.IconImage = QuitButton.CustomImage.BackgroundPressedImage;
+				}
+			}
+        }
 		
         void HandleNextLevelButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
 			TouchEvent v = e.TouchEvents[0];
 			if (v.Type == TouchEventType.Up) {
-	        	(Director.Instance.CurrentScene as GameScene).goToNextLevel();
-				this.Dispose();
+	        	
 			}
         }
 		
@@ -56,7 +113,7 @@ namespace Crystallography.UI
         {
 			TouchEvent v = e.TouchEvents[0];
 			if (v.Type == TouchEventType.Up) {
-    	    	GameScene.QuitToTitle();
+    	    	GameScene.QuitToLevelSelect();
 				this.Dispose();
 			}
         }

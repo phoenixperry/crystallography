@@ -206,8 +206,12 @@ namespace Crystallography
 		}
 		
 		public static void QuitToTitle() {
-			Director.Instance.ReplaceScene( new MenuSystemScene(false) );
-
+			Director.Instance.ReplaceScene( new MenuSystemScene("Menu") );
+		}
+		
+		public static void QuitToLevelSelect() {
+			Director.Instance.ReplaceScene( new MenuSystemScene("LevelSelect") );
+			UISystem.SetScene( new Crystallography.UI.LevelSelectScene() );
 		}
 
         ~GameScene(){

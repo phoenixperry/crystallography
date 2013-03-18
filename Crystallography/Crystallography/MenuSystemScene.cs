@@ -7,12 +7,27 @@ namespace Crystallography
 {
 	public class MenuSystemScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
 	{
-		public MenuSystemScene (bool pFromSplash ) {
-			if (pFromSplash) {
+		public MenuSystemScene ( string pDestinationScene ) {
+			
+			switch (pDestinationScene) {
+			case ("Splash"):
 				UISystem.SetScene( new Crystallography.UI.SplashScene() );
-			} else {
+				break;
+			case ("Menu"):
 				UISystem.SetScene ( new Crystallography.UI.MenuScene() );
-			}
+				break;
+			case ("LevelSelect"):
+				UISystem.SetScene ( new Crystallography.UI.LevelSelectScene() );
+				break;
+			default:
+				UISystem.SetScene ( new Crystallography.UI.SplashScene() );
+				break;
+			}	
+//			if (pFromSplash) {
+//				UISystem.SetScene( new Crystallography.UI.SplashScene() );
+//			} else {
+//				UISystem.SetScene ( new Crystallography.UI.MenuScene() );
+//			}
 			Scheduler.Instance.ScheduleUpdateForTarget(this, 0, false );
 		}
 		

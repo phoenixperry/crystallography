@@ -43,7 +43,7 @@ namespace Crystallography.UI
 			InputManager.Instance.StartJustUpDetected += (sender, e) => { PauseToggle(); };
 			ResumeButton.TouchEventReceived += HandleResumeButtonTouchEventReceived;
 			GiveUpButton.TouchEventReceived += HandleGiveUpButtonTouchEventReceived;
-			NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
+//			NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
 			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
 			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected; //+= (sender, e) => {
 			
@@ -71,10 +71,40 @@ namespace Crystallography.UI
                    	}.Start();
                    	break;
             }
-				Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
-				NextLevelButton.Visible = true;
-//			}
+			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
+			NextLevelButton.Visible = true;
+			
+			InputManager.Instance.TouchJustDownDetected += HandleInputManagerInstanceTouchJustDownDetected;
+			InputManager.Instance.TouchJustUpDetected += HandleInputManagerInstanceTouchJustUpDetected;
         }
+
+		void HandleInputManagerInstanceTouchJustUpDetected (object sender, BaseTouchEventArgs e)
+		{
+			if (NextLevelButton.Visible) {
+				if ( e.touchPosition.X > NextLevelButton.X && e.touchPosition.X < NextLevelButton.X + NextLevelButton.Width ) {
+					int height = Director.Instance.GL.Context.GetViewport().Height;
+					if ( height - e.touchPosition.Y > NextLevelButton.Y && height - e.touchPosition.Y < NextLevelButton.Y + NextLevelButton.Height ) {
+						NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundNormalImage;
+						NextLevelButton.Visible = false;
+						this.RootWidget.AddChildLast( new LevelEndPanel( _score, _displayTimer ) );
+						InputManager.Instance.TouchDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
+						InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
+					}
+				}
+			}
+		}
+
+		void HandleInputManagerInstanceTouchJustDownDetected (object sender, BaseTouchEventArgs e)
+		{
+			if (NextLevelButton.Visible) {
+				if ( e.touchPosition.X > NextLevelButton.X && e.touchPosition.X < NextLevelButton.X + NextLevelButton.Width ) {
+					int height = Director.Instance.GL.Context.GetViewport().Height;
+					if ( height - e.touchPosition.Y > NextLevelButton.Y && height - e.touchPosition.Y < NextLevelButton.Y + NextLevelButton.Height ) {
+						NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundPressedImage;
+					}
+				}
+			}
+		}
 	
 		void HandleNextLevelButtonButtonAction (object sender, TouchEventArgs e)
         {
@@ -82,6 +112,8 @@ namespace Crystallography.UI
 				Console.WriteLine(v.Type.ToString());
 				if (v.Type == TouchEventType.None) {
 					(Director.Instance.CurrentScene as GameScene).goToNextLevel();
+					InputManager.Instance.TouchDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
+					InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
 				}
 			}
         }
