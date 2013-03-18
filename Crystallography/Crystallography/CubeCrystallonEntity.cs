@@ -84,6 +84,24 @@ namespace Crystallography
 			
 		// OVERRIDES -----------------------------------------------------------
 		
+		/// <summary>
+		/// Reattaches this group to the scene.
+		/// </summary>
+		/// <returns>
+		/// This group.
+		/// </returns>
+		/// <param name='position'>
+		/// Position.
+		/// </param>
+		public override AbstractCrystallonEntity BeReleased( Vector2 pPosition ) {
+			GroupManager.Instance.Add( this );
+			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[4], 0.1f, 0.01f, pPosition));
+			setVelocity(1.0f, GameScene.Random.NextAngle());
+
+			addToScene();
+			return this;
+		}
+		
 		// METHODS -------------------------------------------------------------
 		
 		public void Rotate ( bool pClockwise ) {

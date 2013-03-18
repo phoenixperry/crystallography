@@ -13,7 +13,7 @@ namespace Crystallography
 		
 		public static readonly int MAX_CAPACITY = 3;
 		protected static readonly float SNAP_DISTANCE = 50.0f;
-		protected static readonly float EASE_DISTANCE = 50.0f;
+		protected static readonly float EASE_DISTANCE = 60.0f;
 		protected static readonly float MAXIMUM_PICKUP_VELOCITY = 500.0f;
 		
 		private AbstractCrystallonEntity lastEntityReleased;
@@ -247,7 +247,7 @@ namespace Crystallography
 			
 			sequence = new Sequence();
 			if ( MemberType.ToString() == "Crystallography.CardCrystallonEntity") { 
-				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE, 20.5f), 0.2f)
+				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE-10.0f, 20.5f), 0.2f)
 				            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
 			} else {
 				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
@@ -257,7 +257,7 @@ namespace Crystallography
 			
 			sequence = new Sequence();
 			if ( MemberType.ToString() == "Crystallography.CardCrystallonEntity") { 
-				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE, 20.5f), 0.2f)
+				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE+10.0f, 20.5f), 0.2f)
 			           	 	{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
 			} else {
 				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
@@ -473,28 +473,28 @@ namespace Crystallography
 //					if ( e.GetType() != this.MemberType ){
 //						continue;
 //					}
-#if ORIENTATION_MATTERS 
-					if ( e is GroupCrystallonEntity ) {
-						if ( !(e is CubeCrystallonEntity) ) {
-							bool collision = false;
-							var g = e as GroupCrystallonEntity;
-							for (int i=0; i<g.pucks.Length; i++) {
-								if( g.pucks[i].Children.Count > 0 && this.pucks[i].Children.Count > 0) {
-									collision = true;
-									break;	// ----------------- found an overlapping group member...
+					if ( AppMain.ORIENTATION_MATTERS ) {
+						if ( e is GroupCrystallonEntity ) {
+							if ( !(e is CubeCrystallonEntity) ) {
+								bool collision = false;
+								var g = e as GroupCrystallonEntity;
+								for (int i=0; i<g.pucks.Length; i++) {
+									if( g.pucks[i].Children.Count > 0 && this.pucks[i].Children.Count > 0) {
+										collision = true;
+										break;	// ----------------- found an overlapping group member...
+									}
+								}
+								if (collision) {
+									continue;	// ----------------- e IS A GROUP WITH MEMBERS THAT OVERLAP WITH SELECTION GROUP -- IGNORE
 								}
 							}
-							if (collision) {
-								continue;	// ----------------- e IS A GROUP WITH MEMBERS THAT OVERLAP WITH SELECTION GROUP -- IGNORE
+						} else {
+							int orientation = e.getQualityVariant( "QOrientation" );
+							if ( _pucks[orientation].Children.Count != 0 ) {
+								continue;	// --------------------------- e IS OF AN ORIENTATION THAT IS ALREADY IN THE GROUP
 							}
 						}
-					} else {
-						int orientation = e.getQualityVariant( "QOrientation" );
-						if ( _pucks[orientation].Children.Count != 0 ) {
-							continue;	// --------------------------- e IS OF AN ORIENTATION THAT IS ALREADY IN THE GROUP
-						}
 					}
-#endif
 					distance = Vector2.Distance( getPosition(), e.getPosition() );
 					if (closestDistance > distance) {
 						closestDistance = distance;

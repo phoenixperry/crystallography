@@ -338,7 +338,7 @@ namespace Crystallography
 	
 					MusicDatabase[name].Play();
 					MusicDatabase[name].Loop = true;
-					MusicDatabase[name].Volume = 0.5f;
+					MusicDatabase[name].Volume = 0.4f;
 				}
 			}
 

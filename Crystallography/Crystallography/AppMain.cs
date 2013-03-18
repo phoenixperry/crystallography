@@ -52,7 +52,10 @@ namespace Crystallography
 	
 	public class AppMain
 	{
+		private static readonly bool _ORIENTATION_MATTERS = true;
 		
+		public static bool ORIENTATION_MATTERS { get { return _ORIENTATION_MATTERS && GameScene.currentLevel != 999; } }
+			
 		public static void Main (string[] args)
 		{
 			Director.Initialize();
@@ -63,6 +66,7 @@ namespace Crystallography
 				SystemEvents.CheckEvents();
 				UISystem.Update( Touch.GetData(0) );
 				Director.Instance.Update();
+//				Touch.GetData(0).Clear();
 				
 				Director.Instance.Render();
 				UISystem.Render();

@@ -142,7 +142,10 @@ namespace Crystallography
 		public virtual GroupCrystallonEntity Add(ICrystallonEntity pEntity) {
 			
 			if ( population == 0 && !(this is SelectionGroup) ) {
-				MemberType = pEntity.GetType();
+				//HACK honestly, this should never be null, I think...
+				if (pEntity != null) {
+					MemberType = pEntity.GetType();
+				}
 			}
 			
 			if (pEntity is SpriteTileCrystallonEntity) {
@@ -234,11 +237,11 @@ namespace Crystallography
 			Node puck = _pucks[index];
 			pEntity.attachTo(puck);
 			pEntity.getNode().Position *= 0;
-#if( !ORIENTATION_MATTERS )
-			if ((pEntity is CubeCrystallonEntity) == false ) {
-				QualityManager.Instance.SetQuality( pEntity, "QOrientation", index );
+			if ( !AppMain.ORIENTATION_MATTERS ) {
+				if ((pEntity is CubeCrystallonEntity) == false ) {
+					QualityManager.Instance.SetQuality( pEntity, "QOrientation", index );
+				}
 			}
-#endif
 			_numMembers++;
 			if ( this is SelectionGroup  == false ) {	// SelectionGroup has its own positioning code -- HACK This implementation is just sort of inelegant. Maybe abstract some of this out later?
 				if ( population  > 1 ) {
@@ -265,7 +268,7 @@ namespace Crystallography
 		/// </param>
 		public override AbstractCrystallonEntity BeReleased( Vector2 pPosition ) {
 			GroupManager.Instance.Add( this );
-			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[0], 0.1f, 0.01f, pPosition));
+			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[4], 0.1f, 0.01f, pPosition));
 			setVelocity(1.0f, GameScene.Random.NextAngle());
 
 			addToScene();
@@ -308,9 +311,9 @@ namespace Crystallography
 		/// <see cref="Crystallography.AbstractCrystallonEntity"/>
 		/// </param>
 		private int GetOrientationIndex( AbstractCrystallonEntity pEntity ) {
-#if (!ORIENTATION_MATTERS)
+			if (!AppMain.ORIENTATION_MATTERS) {
 				return population;
-#endif
+			}
 			if ( pEntity is GroupCrystallonEntity ) {
 				if ( (pEntity as GroupCrystallonEntity).complete) {
 					return population;
@@ -422,11 +425,11 @@ namespace Crystallography
 		protected virtual AbstractCrystallonEntity ReleaseSingle( AbstractCrystallonEntity pEntity ) {
 			Remove (pEntity);
 			return pEntity.BeReleased( this.getPosition() );
-//#if !ORIENTATION_MATTERS
-//			if ( pEntity is CardCrystallonEntity ) {
-//				QOrientation.Instance.Apply(pEntity,0);
+//			if (!AppMain.ORIENTATION_MATTERS) {
+//				if ( pEntity is CardCrystallonEntity ) {
+//					QOrientation.Instance.Apply(pEntity,0);
+//				}
 //			}
-//#endif
 //			if(complete) {
 //				if ( pEntity is CardCrystallonEntity ) {
 //					CardManager.Instance.Add( pEntity as CardCrystallonEntity );

@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<application project_name="*" version="1.00" default_locale="en-US">
-  <name />
-  <short_name />
+<application project_name="*" version="1.00" runtime_version="1.00" sdk_version="1.00.02" default_locale="en-US">
+  <name>
+    <localized_item locale="en-US" value="Crystallon" />
+    <localized_item locale="en-GB" value="Crystallon" />
+    <localized_item locale="ja-JP" value="Crystallon" />
+    <localized_item locale="fr-FR" value="Crystallon" />
+    <localized_item locale="es-ES" value="Crystallon" />
+    <localized_item locale="de-DE" value="Crystallon" />
+    <localized_item locale="it-IT" value="Crystallon" />
+    <localized_item locale="nl-NL" value="Crystallon" />
+    <localized_item locale="pt-PT" value="Crystallon" />
+    <localized_item locale="pt-BR" value="Crystallon" />
+    <localized_item locale="ru-RU" value="Crystallon" />
+    <localized_item locale="ko-KR" value="Crystallon" />
+    <localized_item locale="zh-Hans" value="Crystallon" />
+    <localized_item locale="zh-Hant" value="Crystallon" />
+    <localized_item locale="fi-FI" value="Crystallon" />
+    <localized_item locale="sv-SE" value="Crystallon" />
+    <localized_item locale="da-DK" value="Crystallon" />
+    <localized_item locale="nb-NO" value="Crystallon" />
+    <localized_item locale="pl-PL" value="Crystallon" />
+  </name>
+  <short_name>
+    <localized_item locale="en-US" value="Crystallon" />
+    <localized_item locale="en-GB" value="Crystallon" />
+    <localized_item locale="ja-JP" value="Crystallon" />
+    <localized_item locale="fr-FR" value="Crystallon" />
+    <localized_item locale="es-ES" value="Crystallon" />
+    <localized_item locale="de-DE" value="Crystallon" />
+    <localized_item locale="it-IT" value="Crystallon" />
+    <localized_item locale="nl-NL" value="Crystallon" />
+    <localized_item locale="pt-PT" value="Crystallon" />
+    <localized_item locale="pt-BR" value="Crystallon" />
+    <localized_item locale="ru-RU" value="Crystallon" />
+    <localized_item locale="ko-KR" value="Crystallon" />
+    <localized_item locale="zh-Hans" value="Crystallon" />
+    <localized_item locale="zh-Hant" value="Crystallon" />
+    <localized_item locale="fi-FI" value="Crystallon" />
+    <localized_item locale="sv-SE" value="Crystallon" />
+    <localized_item locale="da-DK" value="Crystallon" />
+    <localized_item locale="nb-NO" value="Crystallon" />
+    <localized_item locale="pl-PL" value="Crystallon" />
+  </short_name>
   <parental_control lock_level="2" />
   <rating_list highest_age_limit="3" has_online_features="false">
     <online_features chat="false" personal_info="false" user_location="false" exchange_content="false" />
     <rating type="ESRB" value="3" age="3" code="" />
     <rating type="PEGIEX" value="3" age="3" code="" />
   </rating_list>
-  <images />
+  <images icon_128x128="..\icons\VitaIcons_128.png" icon_256x256="..\icons\VitaIcons256.png" icon_512x512="..\icons\VitaIcons.png" splash_854x480="..\icons\splash.png" />
   <genre_list />
   <developer>
     <name value="" />
