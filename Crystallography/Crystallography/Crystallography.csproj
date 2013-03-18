@@ -28,6 +28,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <DefineConstants>ORIENTATION_MATTERS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -137,7 +138,6 @@
   <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
   <ItemGroup>
     <Folder Include="assets\" />
-    <Folder Include="assets\sounds\" />
     <Folder Include="assets\images\" />
     <Folder Include="assets\levels\" />
     <Folder Include="deprecated\" />
@@ -154,7 +154,6 @@
     <Folder Include="assets\audio\bgm\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\sounds\music_ingame.mp3" />
     <Content Include="assets\images\title.png" />
     <Content Include="assets\images\gamePieces.png" />
     <Content Include="assets\images\gamePieces.xml" />
@@ -165,14 +164,6 @@
     <Content Include="assets\images\instructionsOver.png" />
     <Content Include="assets\images\allSame.png" />
     <Content Include="assets\images\allDiff.png" />
-    <Content Include="assets\sounds\side1.wav" />
-    <Content Include="assets\sounds\play.mp3" />
-    <Content Include="assets\sounds\cubed.wav" />
-    <Content Include="assets\sounds\side2.wav" />
-    <Content Include="assets\sounds\sound1.wav" />
-    <Content Include="assets\sounds\sound2.wav" />
-    <Content Include="assets\sounds\sound3.wav" />
-    <Content Include="assets\sounds\wrong.wav" />
     <Content Include="assets\levels\levelData.xml" />
     <Content Include="assets\levels\level_0.xml" />
     <Content Include="assets\levels\level_1.xml" />
@@ -195,8 +186,6 @@
     <Content Include="assets\levels\level_9.xml" />
     <Content Include="assets\levels\level_10.xml" />
     <Content Include="assets\fonts\Bariol_Regular.otf" />
-    <Content Include="assets\sounds\score_down.wav" />
-    <Content Include="assets\sounds\score_up.wav" />
     <Content Include="assets\fonts\Bariol_Bold.otf" />
     <Content Include="assets\images\bg\1\leftHollowWhite.png" />
     <Content Include="assets\images\bg\1\leftSolidWhite.png" />
@@ -312,7 +301,6 @@
     <Content Include="assets\audio\sfx\menu.wav" />
     <Content Include="assets\audio\sfx\stack1break.wav" />
     <Content Include="assets\audio\sfx\stack1high.wav" />
-    <Content Include="assets\audio\sfx\Stack1levelcomplete.wav" />
     <Content Include="assets\audio\sfx\stack1low.wav" />
     <Content Include="assets\audio\sfx\stack1mid.wav" />
     <Content Include="assets\audio\sfx\stack1onetile.wav" />
@@ -337,6 +325,7 @@
     <Content Include="assets\audio\sfx\stack3wrong.wav" />
     <Content Include="assets\audio\sfx\stack1threetiles.wav" />
     <Content Include="assets\audio\sfx\stack3levelcomplete.wav" />
+    <Content Include="assets\audio\sfx\stack1levelcomplete.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
