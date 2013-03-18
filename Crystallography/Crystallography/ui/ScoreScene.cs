@@ -76,7 +76,15 @@ namespace Crystallography.UI
 			
 			InputManager.Instance.TouchJustDownDetected += HandleInputManagerInstanceTouchJustDownDetected;
 			InputManager.Instance.TouchJustUpDetected += HandleInputManagerInstanceTouchJustUpDetected;
+			InputManager.Instance.CircleJustUpDetected += HandleInputManagerInstanceCircleJustUpDetected;
         }
+
+		void HandleInputManagerInstanceCircleJustUpDetected (object sender, EventArgs e)
+		{
+			if (NextLevelButton.Visible) {
+				NextLevelButtonReleased();
+			}
+		}
 
 		void HandleInputManagerInstanceTouchJustUpDetected (object sender, BaseTouchEventArgs e)
 		{
@@ -84,11 +92,12 @@ namespace Crystallography.UI
 				if ( e.touchPosition.X > NextLevelButton.X && e.touchPosition.X < NextLevelButton.X + NextLevelButton.Width ) {
 					int height = Director.Instance.GL.Context.GetViewport().Height;
 					if ( height - e.touchPosition.Y > NextLevelButton.Y && height - e.touchPosition.Y < NextLevelButton.Y + NextLevelButton.Height ) {
-						NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundNormalImage;
-						NextLevelButton.Visible = false;
-						this.RootWidget.AddChildLast( new LevelEndPanel( _score, _displayTimer ) );
-						InputManager.Instance.TouchDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
-						InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
+						NextLevelButtonReleased();
+//						NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundNormalImage;
+//						NextLevelButton.Visible = false;
+//						this.RootWidget.AddChildLast( new LevelEndPanel( _score, _displayTimer ) );
+//						InputManager.Instance.TouchDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
+//						InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
 					}
 				}
 			}
@@ -191,6 +200,15 @@ namespace Crystallography.UI
 			var seconds = _displayTimer - (60.0f * minutes);
 			TimerMinutesText.Text = minutes.ToString();
 			TimerSecondsText.Text = seconds.ToString("00.0");
+		}
+		
+		public void NextLevelButtonReleased() {
+			NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundNormalImage;
+			NextLevelButton.Visible = false;
+			this.RootWidget.AddChildLast( new LevelEndPanel( _score, _displayTimer ) );
+			InputManager.Instance.TouchDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
+			InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
+			InputManager.Instance.CircleJustUpDetected -= HandleInputManagerInstanceCircleJustUpDetected;
 		}
 		
 		public void Pause( bool pOn ) {

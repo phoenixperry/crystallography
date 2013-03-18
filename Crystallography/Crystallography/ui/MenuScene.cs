@@ -32,6 +32,7 @@ namespace Crystallography.UI
 
         void HandleNewGameButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
+//			this.RootWidget.AddChildLast( new LoadingPanel() );
 			Director.Instance.ReplaceScene( new GameScene(0) );
         }
 		
