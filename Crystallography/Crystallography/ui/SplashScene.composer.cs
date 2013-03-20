@@ -23,12 +23,16 @@ namespace Crystallography.UI
         {
             sceneBackgroundPanel = new Panel();
             sceneBackgroundPanel.Name = "sceneBackgroundPanel";
-        ImageBox ImageBox_1;
+            ImageBox_1 = new ImageBox();
             ImageBox_1.Name = "ImageBox_1";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-            ImageBox_1 = new ImageBox();
+
+            // ImageBox_1
+            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/eyes.png");
+            ImageBox_1.ImageScaleType = ImageScaleType.Center;
+
             // SplashScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
             this.RootWidget.AddChildLast(ImageBox_1);
@@ -52,11 +56,7 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-
-            // ImageBox_1
-            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/eyes.png");
-            ImageBox_1.ImageScaleType = ImageScaleType.Center;
-
+                    ImageBox_1.SetPosition(352, 63);
                     ImageBox_1.SetSize(200, 200);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
@@ -71,7 +71,8 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.SetSize(960, 544);
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
-                    ImageBox_1.SetPosition(352, 63);
+
+                    ImageBox_1.SetPosition(0, 0);
                     ImageBox_1.SetSize(960, 544);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
@@ -83,8 +84,6 @@ namespace Crystallography.UI
 
         public void UpdateLanguage()
         {
-
-                    ImageBox_1.SetPosition(0, 0);
         }
 
         private void onShowing(object sender, EventArgs e)

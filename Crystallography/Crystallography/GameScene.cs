@@ -85,8 +85,7 @@ namespace Crystallography
 			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
 			
 //			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected;
-			Crystallography.UI.ScoreScene.QuitButtonPressDetected += (sender, e) => { QuitToTitle(); };
-			Crystallography.UI.ScoreScene.PauseDetected += (sender, e) => { Pause(e.isPaused); };
+			
 			
 			Pause (false);
         }
@@ -111,12 +110,16 @@ namespace Crystallography
 			} else {
 				Support.MusicSystem.Instance.Play("stack2music.mp3");
 			}
+			Crystallography.UI.ScoreScene.QuitButtonPressDetected += (sender, e) => { QuitToTitle(); };
+			Crystallography.UI.ScoreScene.PauseDetected += (sender, e) => { Pause(e.isPaused); };
         }
 		
         public override void OnExit ()
         {
 			base.OnExit();
 			Support.MusicSystem.Instance.StopAll();
+//			Crystallography.UI.ScoreScene.QuitButtonPressDetected += (sender, e) => { QuitToTitle(); };
+//			Crystallography.UI.ScoreScene.PauseDetected += (sender, e) => { Pause(e.isPaused); };
         }
 		
         public override void Update ( float dt )
