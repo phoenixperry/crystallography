@@ -22,7 +22,7 @@ namespace Crystallography
 		public static Random Random = new Random();
 		
     	public static GamePhysics _physics;
-		public static Layer background;
+		public static Crystallography.BG.CrystallonBackground background;
 		protected static List<ICrystallonEntity> _allEntites = new List<ICrystallonEntity>();
 		
 		public static event EventHandler LevelChangeDetected;
@@ -195,6 +195,7 @@ namespace Crystallography
 				Console.WriteLine( "Resetting to start level " + currentLevel );
 				LevelManager.Instance.GetLevelSettings( currentLevel );
 //				QColor.Instance.setPalette();
+				background.PickBackground();
 				CardManager.Instance.Reset( this );
 				GroupManager.Instance.Reset( this );
 				QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
