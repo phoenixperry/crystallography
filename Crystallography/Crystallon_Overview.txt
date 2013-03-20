@@ -1,0 +1,6 @@
+Crystallon is a touch-controlled match-3 game, where players are challenged to create isometric cubes out of floating pieces. To form a cube, each face must have All-The-Same or All-Different qualities with the other faces of the cube.
+
+
+Crystallon can be played entirely with touch controls. Drag your finger to combine pieces into groups. Pieces have different qualities: Color, pattern, animation, and sound. In order to successfully create a group, the three pieces must be all the same or all different for each quality. Pieces also have a fixed orientation. Left, Right and Top. You can only use one of each orientation per matched set. When pieces are succesffully combined, they create cubes. Cubes may also be combined together into sets of three for extra points. You can advance to the next level only when there are no remaining possible sets in the current level.
+
+Crystallon was created in New York City by Ben Johnson, Phoenix Perry and Margaret Schedel.
