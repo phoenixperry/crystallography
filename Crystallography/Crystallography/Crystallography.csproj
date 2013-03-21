@@ -130,10 +130,13 @@
     <Compile Include="ui\LoadingScene.composer.cs" />
     <Compile Include="ui\LoadingScene.cs" />
     <Compile Include="bg\CrystallonBackgroundObject.cs" />
+    <Compile Include="QParticle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
     <ShaderProgram Include="shaders\Simple.vcg" />
+    <ShaderProgram Include="shaders\pfx.fcg" />
+    <ShaderProgram Include="shaders\pfx.vcg" />
   </ItemGroup>
   <ItemGroup>
     <PsmMetadata Include="app.xml" />
@@ -348,6 +351,7 @@
     <Content Include="assets\images\bg\3\rightSolid.png" />
     <Content Include="assets\images\bg\3\smallCube.png" />
     <Content Include="assets\images\bg\3\zigTotal.png" />
+    <Content Include="assets\images\particles.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

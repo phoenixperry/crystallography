@@ -24,7 +24,7 @@ namespace Crystallography
 		
 		void setNode( Node node );
 		
-		void addToScene();
+		void addToScene(int pLayerIndex);
 		
 		void attachTo( Node pNewParent );
 		

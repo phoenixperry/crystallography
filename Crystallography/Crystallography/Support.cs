@@ -380,17 +380,19 @@ namespace Crystallography
 		public class ParticleEffectsManager
 			: Sce.PlayStation.HighLevel.GameEngine2D.Node
 		{
+			public static ParticleEffectsManager Instance = new ParticleEffectsManager();
+			
 			public class Particle
 			{
+				public SpriteTileCrystallonEntity parent;
+				public float variant;
 				public Vector2 position;
-				public Vector2 velocity;
-				public Vector2 friction;
+				public Vector2 offset;
 				public Vector4 color;
 				public float time;
 				public float lifetime;
 				public Vector2 size;
 				public Vector2 size_delta;
-				public float gravity;
 			};
 
 			public struct VertexData
@@ -418,7 +420,7 @@ namespace Crystallography
 				}
 
 				ShaderProgram = new ShaderProgram("/Application/shaders/pfx.cgx");
-				ParticleDotTexture = new Texture2D("/Application/assets/particle_dot.png", false);
+				ParticleDotTexture = new Texture2D("/Application/assets/images/particles.png", false);
 				Sce.PlayStation.HighLevel.GameEngine2D.Scheduler.Instance.Schedule(this, Tick, 0.0f, false);
 
 				AdHocDraw += this.DrawParticles;
@@ -434,12 +436,11 @@ namespace Crystallography
 				for (int i = 0; i < ActiveParticles; ++i)
 				{
 					Particle p = Particles[i];
-					p.position += p.velocity;
-					p.velocity += new Vector2(0.0f, p.gravity * -0.5f);
-					p.velocity *= p.friction;
+					p.position = p.parent.getNode().LocalToWorld(p.parent.getNode().Pivot/2) + p.offset;
 					p.time += dt;
 					p.time += dt * fullness;
 					p.size += p.size_delta;
+					p.color.W -= dt/p.lifetime;
 				}
 
 				for (int i = 0; i < ActiveParticles; ++i)
@@ -487,10 +488,10 @@ namespace Crystallography
 				{
 					Particle p = Particles[i];
 					imm_quads.ImmAddQuad( 
-					new VertexData() { position = p.position + new Vector2(0, 0), uv = new Vector2(0, 0), color = p.color },
-					new VertexData() { position = p.position + new Vector2(p.size.X, 0), uv = new Vector2(1, 0), color = p.color },
-					new VertexData() { position = p.position + new Vector2(0, p.size.Y), uv = new Vector2(0, 1), color = p.color },
-					new VertexData() { position = p.position + new Vector2(p.size.X, p.size.Y), uv = new Vector2(1, 1), color = p.color } );
+					new VertexData() { position = p.position + new Vector2(0, 0), uv = new Vector2(p.variant/2, 0), color = p.color },
+					new VertexData() { position = p.position + new Vector2(p.size.X, 0), uv = new Vector2((p.variant+1)/2, 0), color = p.color },
+					new VertexData() { position = p.position + new Vector2(0, p.size.Y), uv = new Vector2(p.variant/2, 1), color = p.color },
+					new VertexData() { position = p.position + new Vector2(p.size.X, p.size.Y), uv = new Vector2((p.variant+1)/2, 1), color = p.color } );
 				}
 
 				imm_quads.ImmEndQuads();
@@ -520,7 +521,7 @@ namespace Crystallography
 //				}
 //			}
 
-			public void AddParticle(Vector2 position, Vector2 velocity, Vector4 color, float scale_multiplier)
+			public void AddParticle( int pVariant, SpriteTileCrystallonEntity pParent, Vector4 color, float scale_multiplier)
 			{
 				if (ActiveParticles >= Particles.Count)
 				{
@@ -528,37 +529,40 @@ namespace Crystallography
 				}
 
 				Particle p = Particles[ActiveParticles];
-				p.position = position;
-				p.velocity = velocity;
-				p.friction = Vector2.One;
+				p.variant = pVariant;
+				p.parent = pParent;
+				p.offset = new Vector2( GameScene.Random.NextSignedFloat() * pParent.Width/4,
+				                       GameScene.Random.NextSignedFloat() * pParent.Height/4);
+				p.position = pParent.getNode().LocalToWorld(p.parent.getNode().Pivot/2) + p.offset;
+//				p.velocity = GameScene.Random.NextVector2();
 				p.color = color;
 				p.time = 0.0f;
-				p.lifetime = 1.5f;
-				p.size = Vector2.One * 12.0f * scale_multiplier;
-				p.size_delta = new Vector2(-0.75f);
-				p.gravity = 0.75f;
+				p.lifetime = 0.3f;
+				p.size = Vector2.One * scale_multiplier;
+				p.size_delta = new Vector2(0.75f);
+//				p.gravity = 0.75f;
 				ActiveParticles++;
 			}
 
-			public void AddParticleWater(Vector2 position, Vector2 velocity, Vector4 color, float scale_multiplier)
-			{
-				if (ActiveParticles >= Particles.Count)
-				{
-					return;
-				}
-				
-				Particle p = Particles[ActiveParticles];
-				p.position = position;
-				p.velocity = velocity;
-				p.friction = Vector2.One;
-				p.color = color;
-				p.time = 0.0f;
-				p.lifetime = 1.0f;
-				p.size = Vector2.One * 8.0f * scale_multiplier;
-				p.size_delta = new Vector2(-0.1f);
-				p.gravity = -0.025f;
-				ActiveParticles++;
-			}
+//			public void AddParticleWater(Vector2 position, Vector2 velocity, Vector4 color, float scale_multiplier)
+//			{
+//				if (ActiveParticles >= Particles.Count)
+//				{
+//					return;
+//				}
+//				
+//				Particle p = Particles[ActiveParticles];
+//				p.position = position;
+//				p.velocity = velocity;
+//				p.friction = Vector2.One;
+//				p.color = color;
+//				p.time = 0.0f;
+//				p.lifetime = 1.0f;
+//				p.size = Vector2.One * 8.0f * scale_multiplier;
+//				p.size_delta = new Vector2(-0.1f);
+//				p.gravity = -0.025f;
+//				ActiveParticles++;
+//			}
 		}
 
 		public class TextureTileMapManager

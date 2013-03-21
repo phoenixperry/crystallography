@@ -9,10 +9,11 @@ namespace Crystallography
 	public abstract class SpriteTileCrystallonEntity : AbstractCrystallonEntity {
 		protected SpriteTile _sprite;
 		protected PhysicsBody _body;
-		protected float _width;
-		protected float _height;
+//		protected float _width;
+//		protected float _height;
 		protected int _orientationIndex;
 		protected int _patternIndex;
+		protected int _particleIndex;
 		
 		// GET & SET---------------------------------
 		
@@ -54,16 +55,10 @@ namespace Crystallography
 		}
 		
 		public float Height {
-			get {
-				return _height;
-			}
-		}
+			get { return _sprite.Scale.Y; } }
 		
 		public float Width {
-			get {
-				return _width;
-			}
-		}
+			get { return _sprite.Scale.X; } }
 		
 		// CONSTRUCTORS----------------------------------------------------------------------------
 		
@@ -77,8 +72,8 @@ namespace Crystallography
 			_sprite = new SpriteTile(pTextureInfo, pTileIndex2D);
 			_sprite.Scale = _sprite.CalcSizeInPixels();
 			_sprite.Pivot = new Vector2(0.5f, 0.5f);
-			_width = _sprite.Scale.X;
-			_height = _sprite.Scale.Y;
+//			_width = _sprite.Scale.X;
+//			_height = ref _sprite.Scale.Y;
 			
 			// PHYSICS STUFF
 			if (pShape != null) {
@@ -97,10 +92,25 @@ namespace Crystallography
 			//empty
 		}
 		
-		// METHODS -------------------------------------------------------------------------------
-		
 		public override AbstractCrystallonEntity BeReleased ( Vector2 position ) {
 			return this;
+		}
+		
+		// METHODS -------------------------------------------------------------------------------
+		
+		public void setParticle( int pVariant ) {
+			_particleIndex = pVariant;
+			if (pVariant != 0) {
+				Scheduler.Instance.Schedule(_sprite, spawnParticle, 0.2f, false);
+				Support.ParticleEffectsManager.Instance.AddParticle(pVariant-1, this, QColor.palette[0], 12.0f);
+			} else {
+				Scheduler.Instance.Unschedule(_sprite, spawnParticle);
+			}
+		}
+		
+		protected void spawnParticle(float dt) {
+			Support.ParticleEffectsManager.Instance.AddParticle(_particleIndex-1, this, 
+				                     QColor.palette[0], 12.0f);
 		}
 	}
 }
