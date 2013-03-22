@@ -178,17 +178,17 @@ namespace Crystallography.UI
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    NextLevelButton.SetPosition(491, 477);
+                    NextLevelButton.SetPosition(491, 474);
                     NextLevelButton.SetSize(366, 68);
                     NextLevelButton.Anchors = Anchors.None;
                     NextLevelButton.Visible = true;
 
-                    LevelSelectButton.SetPosition(260, 477);
+                    LevelSelectButton.SetPosition(260, 474);
                     LevelSelectButton.SetSize(225, 68);
                     LevelSelectButton.Anchors = Anchors.None;
                     LevelSelectButton.Visible = true;
 
-                    QuitButton.SetPosition(107, 477);
+                    QuitButton.SetPosition(107, 474);
                     QuitButton.SetSize(148, 68);
                     QuitButton.Anchors = Anchors.None;
                     QuitButton.Visible = true;

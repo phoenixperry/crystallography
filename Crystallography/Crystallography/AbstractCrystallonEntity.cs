@@ -98,6 +98,10 @@ namespace Crystallography
 		/// </param>
 		public int getQualityVariant( string pQualityName ) {
 			for ( int i=0; i<QualityManager.Instance.qualityDict[pQualityName].Length; i++ ) {
+				var variantList = QualityManager.Instance.qualityDict[pQualityName][i];
+				if (variantList == null) {
+					continue;
+				}
 				if (QualityManager.Instance.qualityDict[pQualityName][i].Contains(this.id) ) {
 					return i;
 				}
@@ -139,14 +143,14 @@ namespace Crystallography
 		/// <summary>
 		/// Attaches this entity to the current <c>Scene</c> after removing it from it's current <c>Parent</c>.
 		/// </summary>
-		public void addToScene() {
+		public void addToScene(int pLayerIndex=1) {
 			Node node = getNode();
-			if (node.Parent == _scene) { // ALREADY ATTACHED TO SCENE -- DONE
+			if (node.Parent == (_scene as GameScene).Layers[pLayerIndex]) { // ALREADY ATTACHED TO SCENE -- DONE
 				return;
 			} else if (node.Parent != null) {
 				node.Parent.RemoveChild(node, false);
 			}
-			(_scene as GameScene).AddChildEntity(this);
+			(_scene as GameScene).AddChildEntity(this, pLayerIndex);
 		}
 		
 		/// <summary>
@@ -180,9 +184,11 @@ namespace Crystallography
 		/// Do cleanup?
 		/// </param>
 		public  virtual void removeFromScene(bool doCleanup=false) {
-			Node node = getNode();
-			removePhysicsBody();
-			(_scene as GameScene).RemoveChildEntity( this, doCleanup );
+			if (Parent is Layer) {
+				Node node = getNode();
+				removePhysicsBody();
+				(_scene as GameScene).RemoveChildEntity( this, doCleanup );
+			}
 		}
 		
 		/// <summary>

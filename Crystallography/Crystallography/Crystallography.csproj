@@ -129,10 +129,14 @@
     <Compile Include="ui\LoadingPanel.cs" />
     <Compile Include="ui\LoadingScene.composer.cs" />
     <Compile Include="ui\LoadingScene.cs" />
+    <Compile Include="bg\CrystallonBackgroundObject.cs" />
+    <Compile Include="QParticle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
     <ShaderProgram Include="shaders\Simple.vcg" />
+    <ShaderProgram Include="shaders\pfx.fcg" />
+    <ShaderProgram Include="shaders\pfx.vcg" />
   </ItemGroup>
   <ItemGroup>
     <PsmMetadata Include="app.xml" />
@@ -154,6 +158,8 @@
     <Folder Include="assets\images\set3\" />
     <Folder Include="assets\audio\" />
     <Folder Include="assets\audio\bgm\" />
+    <Folder Include="assets\images\bg\2\" />
+    <Folder Include="assets\images\bg\3\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\images\title.png" />
@@ -338,6 +344,14 @@
     <Content Include="assets\images\UI\next_level_smRoll.png" />
     <Content Include="assets\levels\level_999.xml" />
     <Content Include="assets\images\UI\eyes.png" />
+    <Content Include="assets\images\bg\2\whiteHollowChevron.png" />
+    <Content Include="assets\images\bg\2\whiteSolidChevron.png" />
+    <Content Include="assets\images\bg\3\leftHollow.png" />
+    <Content Include="assets\images\bg\3\rightHollow.png" />
+    <Content Include="assets\images\bg\3\rightSolid.png" />
+    <Content Include="assets\images\bg\3\smallCube.png" />
+    <Content Include="assets\images\bg\3\zigTotal.png" />
+    <Content Include="assets\images\particles.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

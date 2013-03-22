@@ -22,10 +22,23 @@ namespace Crystallography
 		public static Random Random = new Random();
 		
     	public static GamePhysics _physics;
-		public static Layer background;
+		public static Crystallography.BG.CrystallonBackground background;
 		protected static List<ICrystallonEntity> _allEntites = new List<ICrystallonEntity>();
 		
 		public static event EventHandler LevelChangeDetected;
+		
+		public Layer BackgroundLayer;
+		public Layer GameplayLayer;
+		public Layer ForegroundLayer;
+		public Layer[] Layers;
+		
+		
+		// TEST +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		
+//		public Support.ParticleEffectsManager pManager;
+//		public float particleTimer = 0.0f;
+		
+		// END TEST +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
 		// GET & SET -----------------------------------------------------------------------------------
 		
@@ -40,17 +53,20 @@ namespace Crystallography
 		// CONSTRUCTOR ----------------------------------------------------------------------------------
 		
         public GameScene ( int pCurrentLevel )
-		{
-			
+		{	
 			Touch.GetData(0).Clear();
-			
 			UISystem.SetScene( new Crystallography.UI.ScoreScene() );
 			
+			this.AddChild( BackgroundLayer = new Layer() );
+			this.AddChild( GameplayLayer = new Layer() );
+			this.AddChild( ForegroundLayer = new Layer() );
+			Layers = new Layer[] {BackgroundLayer, GameplayLayer, ForegroundLayer};
+						
 			LevelManager.Instance.LoadGameData();
 			LevelManager.Instance.GetLevelSettings( pCurrentLevel );
 			
 			background = new Crystallography.BG.CrystallonBackground();
-			this.AddChild(background);
+			BackgroundLayer.AddChild(background);
 			
 			currentLevel = pCurrentLevel;
             this.Camera.SetViewFromViewport();
@@ -81,12 +97,9 @@ namespace Crystallography
 					}
                 };
             }
+			ForegroundLayer.AddChild( Support.ParticleEffectsManager.Instance );
 			
 			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
-			
-//			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected;
-			
-			
 			Pause (false);
         }
 		
@@ -128,8 +141,6 @@ namespace Crystallography
 			InputManager.Instance.Update(dt);
             base.Update (dt);			
 			
-			
-			
             //We don't need these, but sadly, the Simulate call does.
             Vector2 dummy1 = new Vector2();
             Vector2 dummy2 = new Vector2();
@@ -140,17 +151,31 @@ namespace Crystallography
 			}
         }
 		
-		public override void Draw ()
-		{
-			base.Draw ();
-//			UISystem.Render();
-		}
+//		public override void Draw ()
+//		{
+//			base.Draw ();
+//		}
 		
 		// METHODS -------------------------------------------------------------------------------------------------
 		
-		public void AddChildEntity( ICrystallonEntity pEntity ) {
+		public void AddChildEntity( ICrystallonEntity pEntity, int pLayerIndex=1 ) {
 			_allEntites.Add(pEntity);
-			AddChild(pEntity.getNode());
+			Layers[pLayerIndex].AddChild(pEntity.getNode());
+//			switch(pLayerIndex) {
+//			case(1):
+//				BackgroundLayer.AddChild(pEntity.getNode());
+//				break;
+//			case(0):
+//				BackgroundLayer.AddChild(pEntity.getNode());
+//				break;
+//			case(2):
+//				ForegroundLayer.AddChild(pEntity.getNode());
+//				break;
+//			default:
+//				GameplayLayer.AddChild(pEntity.getNode());
+//				break;
+//			}
+			
 		}
 		
 		private void Pause( bool pOn ) {
@@ -159,10 +184,10 @@ namespace Crystallography
 		
 		public void RemoveChildEntity( ICrystallonEntity pEntity, bool doCleanup ) {
 			_allEntites.Remove( pEntity );
-			RemoveChild( pEntity.getNode(), doCleanup );
+			pEntity.Parent.RemoveChild( pEntity.getNode(), doCleanup );
 		}
 		
-		public void UpdateInput ( float dt ) {
+//		public void UpdateInput ( float dt ) {
 			// OBJECT SELECTION, DRAGGING, ETC.
 			
 //			if ( Input2.Touch00.Press ) {
@@ -184,7 +209,7 @@ namespace Crystallography
 //			}
 			
 //			SelectionGroup.Instance.setTouch();
-		}
+//		}
 		
 		/// <summary>
 		/// Restarts GameScene at next level OR Goes to TitleScene if there are no more levels.
@@ -194,7 +219,7 @@ namespace Crystallography
 			if (currentLevel < TOTAL_LEVELS) {
 				Console.WriteLine( "Resetting to start level " + currentLevel );
 				LevelManager.Instance.GetLevelSettings( currentLevel );
-//				QColor.Instance.setPalette();
+				background.PickBackground();
 				CardManager.Instance.Reset( this );
 				GroupManager.Instance.Reset( this );
 				QualityManager.Instance.Reset( CardManager.Instance, currentLevel );

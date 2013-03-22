@@ -35,7 +35,6 @@ namespace Crystallography
 		
 		protected QPattern() : base()
 		{
-//			Instance = this;
 			_name = "QPattern";
 			setPalette();
 		}
@@ -48,23 +47,7 @@ namespace Crystallography
 			
 			e.setPattern(pVariant);
 			
-//			switch(pVariant)
-//			{
-//			case (0):
-//				e.setPattern(0);
-//				break;
-//			case (1):
-//				e.setPattern(1);
-//				break;
-//			case (2):
-//				e.setPattern(2);
-//				break;
-//			default:
-//				throw new NotImplementedException("QPattern.Apply : pVariant must be 0,1,2");
-//				break;
-//			}
-//			var ss = SpriteSingleton.getInstance();
-			(e.getNode() as SpriteTile).TileIndex2D = new Vector2i( e.getOrientation(), e.getPattern() ); //ss.Get( e.getOrientation() + e.getPattern() ).TileIndex2D;
+			(e.getNode() as SpriteTile).TileIndex2D = new Vector2i( e.getOrientation(), e.getPattern() );
 			
 			
 			

@@ -33,7 +33,6 @@ namespace Crystallography.UI
         void HandleNewGameButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
 			UISystem.SetScene( new LoadingScene(0) );
-//			Director.Instance.ReplaceScene( new GameScene(0) );
         }
 		
 		protected override void OnUpdate (float elapsedTime)
