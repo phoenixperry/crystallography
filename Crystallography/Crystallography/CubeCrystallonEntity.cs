@@ -95,7 +95,7 @@ namespace Crystallography
 		/// </param>
 		public override AbstractCrystallonEntity BeReleased( Vector2 pPosition ) {
 			GroupManager.Instance.Add( this );
-			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[4], 0.1f, 0.01f, pPosition));
+			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Cube], 0.1f, 0.01f, pPosition));
 			setVelocity(1.0f, GameScene.Random.NextAngle());
 
 			addToScene();

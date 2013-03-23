@@ -268,7 +268,7 @@ namespace Crystallography
 		/// </param>
 		public override AbstractCrystallonEntity BeReleased( Vector2 pPosition ) {
 			GroupManager.Instance.Add( this );
-			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[4], 0.1f, 0.01f, pPosition));
+			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Cube], 0.1f, 0.01f, pPosition));
 			setVelocity(1.0f, GameScene.Random.NextAngle());
 
 			addToScene();
@@ -287,13 +287,17 @@ namespace Crystallography
 					var launchVelocity = puck.Position.Normalize();
 					Release( e, true );
 					e.setVelocity( launchVelocity );
+					e.setPosition( e.getPosition() + launchVelocity*10);
+					
 				}
 			}
+			
 //			RemoveAll();
-			EventHandler handler = BreakDetected;
-			if ( handler != null ) {
-				handler( this, null );
-			}
+//			EventHandler handler = BreakDetected;
+//			if ( handler != null ) {
+//				handler( this, null );
+//			}
+			
 			if (this is SelectionGroup == false) { 
 				GroupManager.Instance.Remove(this, true);
 			} else {
@@ -424,7 +428,10 @@ namespace Crystallography
 		/// </returns>
 		protected virtual AbstractCrystallonEntity ReleaseSingle( AbstractCrystallonEntity pEntity ) {
 			Remove (pEntity);
+//			return null;
 			return pEntity.BeReleased( this.getPosition() );
+			
+//			return null;
 //			if (!AppMain.ORIENTATION_MATTERS) {
 //				if ( pEntity is CardCrystallonEntity ) {
 //					QOrientation.Instance.Apply(pEntity,0);

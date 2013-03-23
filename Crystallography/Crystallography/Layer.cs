@@ -7,6 +7,7 @@ namespace Crystallography
 	{
 		public Layer () : base()
 		{
+			Scheduler.Instance.ScheduleUpdateForTarget(this, 0, false);
 		}
 	}
 }

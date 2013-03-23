@@ -32,14 +32,6 @@ namespace Crystallography
 		public Layer ForegroundLayer;
 		public Layer[] Layers;
 		
-		
-		// TEST +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		
-//		public Support.ParticleEffectsManager pManager;
-//		public float particleTimer = 0.0f;
-		
-		// END TEST +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		
 		// GET & SET -----------------------------------------------------------------------------------
 		
 		public static int currentLevel { get; private set; }
@@ -77,11 +69,14 @@ namespace Crystallography
 			
 			var sg = SelectionGroup.Instance;
 			sg.Reset( this );
-			sg.addToScene();
+			this.AddChild(sg.getNode());
+//			sg.addToScene();
 			
 			QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
 			
 			CardManager.Instance.Populate();
+			
+//			ForegroundLayer.AddChild( Support.ParticleEffectsManager.Instance );
 	
             // This is debug routine that will draw the physics bounding box around all physics bodies
             if(DEBUG_BOUNDINGBOXS)
@@ -97,7 +92,6 @@ namespace Crystallography
 					}
                 };
             }
-			ForegroundLayer.AddChild( Support.ParticleEffectsManager.Instance );
 			
 			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
 			Pause (false);
@@ -142,12 +136,13 @@ namespace Crystallography
             base.Update (dt);			
 			
             //We don't need these, but sadly, the Simulate call does.
-            Vector2 dummy1 = new Vector2();
-            Vector2 dummy2 = new Vector2();
+            Vector2 dummy1 = Vector2.Zero;
+            Vector2 dummy2 = Vector2.Zero;
 			
 			if( paused == false ) {
 				//PHYSICS UPDATE CALL
-	            _physics.Simulate(-1,ref dummy1,ref dummy2);
+//	            _physics.Simulate(-1, dummy1, dummy2);
+//				_physics.Simulate();
 			}
         }
 		
@@ -159,7 +154,9 @@ namespace Crystallography
 		// METHODS -------------------------------------------------------------------------------------------------
 		
 		public void AddChildEntity( ICrystallonEntity pEntity, int pLayerIndex=1 ) {
-			_allEntites.Add(pEntity);
+			if (_allEntites.Contains(pEntity) == false) {
+				_allEntites.Add(pEntity);
+			}
 			Layers[pLayerIndex].AddChild(pEntity.getNode());
 //			switch(pLayerIndex) {
 //			case(1):
@@ -183,6 +180,9 @@ namespace Crystallography
 		}
 		
 		public void RemoveChildEntity( ICrystallonEntity pEntity, bool doCleanup ) {
+			if (doCleanup) {
+				var i = 0;
+			}
 			_allEntites.Remove( pEntity );
 			pEntity.Parent.RemoveChild( pEntity.getNode(), doCleanup );
 		}

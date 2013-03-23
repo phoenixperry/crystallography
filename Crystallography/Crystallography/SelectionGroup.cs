@@ -489,7 +489,7 @@ namespace Crystallography
 								}
 							}
 						} else {
-							int orientation = e.getQualityVariant( "QOrientation" );
+							int orientation = (e as SpriteTileCrystallonEntity).getOrientation(); //e.getQualityVariant( "QOrientation" );
 							if ( _pucks[orientation].Children.Count != 0 ) {
 								continue;	// --------------------------- e IS OF AN ORIENTATION THAT IS ALREADY IN THE GROUP
 							}

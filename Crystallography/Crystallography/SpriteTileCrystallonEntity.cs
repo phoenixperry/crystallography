@@ -72,8 +72,6 @@ namespace Crystallography
 			_sprite = new SpriteTile(pTextureInfo, pTileIndex2D);
 			_sprite.Scale = _sprite.CalcSizeInPixels();
 			_sprite.Pivot = new Vector2(0.5f, 0.5f);
-//			_width = _sprite.Scale.X;
-//			_height = ref _sprite.Scale.Y;
 			
 			// PHYSICS STUFF
 			if (pShape != null) {

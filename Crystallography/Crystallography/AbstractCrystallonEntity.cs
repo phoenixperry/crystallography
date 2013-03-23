@@ -168,7 +168,7 @@ namespace Crystallography
 				removePhysicsBody();
 			}
 			if (node.Parent != null) {
-				if (node.Parent == _scene) {
+				if (node.Parent is Layer) {
 					removeFromScene(false);
 				} else {
 					node.Parent.RemoveChild(node, false);
