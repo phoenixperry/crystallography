@@ -26,7 +26,7 @@ namespace Crystallography
 		}
 		
 		public void testAnimation(){
-			a = Support.TiledSpriteFromFile( "Application/assets/animation/leftGlitch/leftOneLine.png", 5, 1 );
+			a = Support.TiledSpriteFromFile( "Application/assets/animation/leftGlitch/leftOneLine.png", 15, 1 );
 //			a = AnimationGlitchSpriteSingleton.getInstance().Get("1"); 
 	 		a.Position = new Vector2(100,100); 
 			a.CenterSprite(); 
