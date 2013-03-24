@@ -70,6 +70,11 @@ namespace Crystallography.UI
 			InputManager.Instance.TouchJustUpDetected += HandleInputManagerInstanceTouchJustUpDetected;
 			InputManager.Instance.CircleJustUpDetected += HandleInputManagerInstanceCircleJustUpDetected;
         }
+		
+		void HandleGameSceneLevelChangeDetected (object sender, EventArgs e)
+		{
+			Reset();
+		}
 
 		void HandleInputManagerInstanceCircleJustUpDetected (object sender, EventArgs e)
 		{
@@ -157,6 +162,7 @@ namespace Crystallography.UI
 			
 			// Assign Event Handlers
 			InputManager.Instance.StartJustUpDetected -= HandleInputManagerInstanceStartJustUpDetected;
+			GameScene.LevelChangeDetected -= HandleGameSceneLevelChangeDetected;
 			ResumeButton.TouchEventReceived -= HandleResumeButtonTouchEventReceived;
 			GiveUpButton.TouchEventReceived -= HandleGiveUpButtonTouchEventReceived;
 //			NextLevelButton.TouchEventReceived -= HandleNextLevelButtonTouchEventReceived;
@@ -169,6 +175,7 @@ namespace Crystallography.UI
 			
 			// Assign Event Handlers
 			InputManager.Instance.StartJustUpDetected += HandleInputManagerInstanceStartJustUpDetected;
+			GameScene.LevelChangeDetected += HandleGameSceneLevelChangeDetected;
 			ResumeButton.TouchEventReceived += HandleResumeButtonTouchEventReceived;
 			GiveUpButton.TouchEventReceived += HandleGiveUpButtonTouchEventReceived;
 //			NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
