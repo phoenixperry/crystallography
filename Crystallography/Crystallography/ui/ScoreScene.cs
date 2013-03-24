@@ -165,7 +165,6 @@ namespace Crystallography.UI
 			GameScene.LevelChangeDetected -= HandleGameSceneLevelChangeDetected;
 			ResumeButton.TouchEventReceived -= HandleResumeButtonTouchEventReceived;
 			GiveUpButton.TouchEventReceived -= HandleGiveUpButtonTouchEventReceived;
-//			NextLevelButton.TouchEventReceived -= HandleNextLevelButtonTouchEventReceived;
 			QualityManager.MatchScoreDetected -= HandleQualityManagerMatchScoreDetected;
 			CardManager.Instance.NoMatchesPossibleDetected -= HandleCardManagerInstanceNoMatchesPossibleDetected;
 		}
@@ -178,7 +177,6 @@ namespace Crystallography.UI
 			GameScene.LevelChangeDetected += HandleGameSceneLevelChangeDetected;
 			ResumeButton.TouchEventReceived += HandleResumeButtonTouchEventReceived;
 			GiveUpButton.TouchEventReceived += HandleGiveUpButtonTouchEventReceived;
-//			NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
 			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
 			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected;
 		}
