@@ -64,7 +64,7 @@ namespace Crystallography
 			
 			while( true ){
 				SystemEvents.CheckEvents();
-				GamePhysics.Instance.Simulate();
+//				GamePhysics.Instance.Simulate();
 				UISystem.Update( Touch.GetData(0) );
 				Director.Instance.Update();
 //				Touch.GetData(0).Clear();

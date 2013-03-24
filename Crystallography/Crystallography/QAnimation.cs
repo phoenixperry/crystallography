@@ -60,7 +60,7 @@ namespace Crystallography
 		}
 		
 		public void setPalette () {
-			setPalette( "Application/assets/animation/leftFall/leftFall.png", 6, 3, 16, 16, 0, 4, 6, 16);
+			setPalette( "Application/assets/animation/leftFall/leftFall.png", 6, 3, 15, 15, 0, 4, 6, 17);
 		}
 		
 		public void setPalette( string path, int columns, int rows, int start1, int end1, int start2, int end2, int start3, int end3 ) {

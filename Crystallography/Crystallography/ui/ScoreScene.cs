@@ -39,14 +39,6 @@ namespace Crystallography.UI
 			NextLevelButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
 			NextLevelButton.Visible = false;
 			
-			// Assign Event Handlers
-			InputManager.Instance.StartJustUpDetected += (sender, e) => { PauseToggle(); };
-			ResumeButton.TouchEventReceived += HandleResumeButtonTouchEventReceived;
-			GiveUpButton.TouchEventReceived += HandleGiveUpButtonTouchEventReceived;
-//			NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
-			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
-			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected; //+= (sender, e) => {
-			
 			Reset();
 		}
 
@@ -85,7 +77,12 @@ namespace Crystallography.UI
 				NextLevelButtonReleased();
 			}
 		}
-
+		
+		void HandleInputManagerInstanceStartJustUpDetected (object sender, EventArgs e)
+		{
+			PauseToggle();
+		}
+		
 		void HandleInputManagerInstanceTouchJustUpDetected (object sender, BaseTouchEventArgs e)
 		{
 			if (NextLevelButton.Visible) {
@@ -93,11 +90,6 @@ namespace Crystallography.UI
 					int height = Director.Instance.GL.Context.GetViewport().Height;
 					if ( height - e.touchPosition.Y > NextLevelButton.Y && height - e.touchPosition.Y < NextLevelButton.Y + NextLevelButton.Height ) {
 						NextLevelButtonReleased();
-//						NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundNormalImage;
-//						NextLevelButton.Visible = false;
-//						this.RootWidget.AddChildLast( new LevelEndPanel( _score, _displayTimer ) );
-//						InputManager.Instance.TouchDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
-//						InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
 					}
 				}
 			}
@@ -160,6 +152,30 @@ namespace Crystallography.UI
 		
 		// OVERRIDES ------------------------------------------------------------------------
 		
+		protected override void OnHiding () {
+			base.OnHiding ();
+			
+			// Assign Event Handlers
+			InputManager.Instance.StartJustUpDetected -= HandleInputManagerInstanceStartJustUpDetected;
+			ResumeButton.TouchEventReceived -= HandleResumeButtonTouchEventReceived;
+			GiveUpButton.TouchEventReceived -= HandleGiveUpButtonTouchEventReceived;
+//			NextLevelButton.TouchEventReceived -= HandleNextLevelButtonTouchEventReceived;
+			QualityManager.MatchScoreDetected -= HandleQualityManagerMatchScoreDetected;
+			CardManager.Instance.NoMatchesPossibleDetected -= HandleCardManagerInstanceNoMatchesPossibleDetected;
+		}
+		
+		protected override void OnShown () {
+			base.OnShown ();
+			
+			// Assign Event Handlers
+			InputManager.Instance.StartJustUpDetected += HandleInputManagerInstanceStartJustUpDetected;
+			ResumeButton.TouchEventReceived += HandleResumeButtonTouchEventReceived;
+			GiveUpButton.TouchEventReceived += HandleGiveUpButtonTouchEventReceived;
+//			NextLevelButton.TouchEventReceived += HandleNextLevelButtonTouchEventReceived;
+			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
+			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected;
+		}
+		
 		protected override void OnUpdate (float elapsedTime)
 		{
 //			float dt = elapsedTime - _lastFrame;
@@ -212,7 +228,6 @@ namespace Crystallography.UI
 		}
 		
 		public void Pause( bool pOn ) {
-//			paused = pOn;
 			PauseMenu.Visible = pOn;
 			EventHandler<PauseEventArgs> handler = PauseDetected;
 			if (handler != null) {
@@ -221,6 +236,7 @@ namespace Crystallography.UI
 		}
 		
 		public void PauseToggle() {
+			Console.WriteLine( (!GameScene.paused).ToString() );
 			Pause( !GameScene.paused );
 		}
 		

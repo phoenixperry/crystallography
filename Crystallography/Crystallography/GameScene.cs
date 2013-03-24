@@ -70,7 +70,6 @@ namespace Crystallography
 			var sg = SelectionGroup.Instance;
 			sg.Reset( this );
 			this.AddChild(sg.getNode());
-//			sg.addToScene();
 			
 			QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
 			
@@ -123,10 +122,11 @@ namespace Crystallography
 		
         public override void OnExit ()
         {
+			SelectionGroup.Instance.Parent.RemoveChild(SelectionGroup.Instance.getNode(), false);
 			base.OnExit();
 			Support.MusicSystem.Instance.StopAll();
-//			Crystallography.UI.ScoreScene.QuitButtonPressDetected += (sender, e) => { QuitToTitle(); };
-//			Crystallography.UI.ScoreScene.PauseDetected += (sender, e) => { Pause(e.isPaused); };
+			Crystallography.UI.ScoreScene.QuitButtonPressDetected -= (sender, e) => { QuitToTitle(); };
+			Crystallography.UI.ScoreScene.PauseDetected -= (sender, e) => { Pause(e.isPaused); };
         }
 		
         public override void Update ( float dt )
@@ -142,7 +142,7 @@ namespace Crystallography
 			if( paused == false ) {
 				//PHYSICS UPDATE CALL
 //	            _physics.Simulate(-1, dummy1, dummy2);
-//				_physics.Simulate();
+				_physics.Simulate();
 			}
         }
 		
@@ -153,26 +153,20 @@ namespace Crystallography
 		
 		// METHODS -------------------------------------------------------------------------------------------------
 		
+		/// <summary>
+		/// Adds an entity to the specified layer. 0 = Background. 1 = Gameplay. 2 = Foreground. Defaults to 1.
+		/// </summary>
+		/// <param name='pEntity'>
+		/// entity.
+		/// </param>
+		/// <param name='pLayerIndex'>
+		/// layer index.
+		/// </param>
 		public void AddChildEntity( ICrystallonEntity pEntity, int pLayerIndex=1 ) {
 			if (_allEntites.Contains(pEntity) == false) {
 				_allEntites.Add(pEntity);
 			}
 			Layers[pLayerIndex].AddChild(pEntity.getNode());
-//			switch(pLayerIndex) {
-//			case(1):
-//				BackgroundLayer.AddChild(pEntity.getNode());
-//				break;
-//			case(0):
-//				BackgroundLayer.AddChild(pEntity.getNode());
-//				break;
-//			case(2):
-//				ForegroundLayer.AddChild(pEntity.getNode());
-//				break;
-//			default:
-//				GameplayLayer.AddChild(pEntity.getNode());
-//				break;
-//			}
-			
 		}
 		
 		private void Pause( bool pOn ) {
@@ -180,36 +174,9 @@ namespace Crystallography
 		}
 		
 		public void RemoveChildEntity( ICrystallonEntity pEntity, bool doCleanup ) {
-			if (doCleanup) {
-				var i = 0;
-			}
 			_allEntites.Remove( pEntity );
 			pEntity.Parent.RemoveChild( pEntity.getNode(), doCleanup );
 		}
-		
-//		public void UpdateInput ( float dt ) {
-			// OBJECT SELECTION, DRAGGING, ETC.
-			
-//			if ( Input2.Touch00.Press ) {
-//				pressDuration = 0.0f;
-//				
-//			} else if (Input2.Touch00.On) {
-//				pressDuration += dt;
-//			} else if (Input2.Touch00.Release) {
-//				Console.WriteLine ("Press: " + pressDuration);
-//				Console.WriteLine ("Release: " + releaseDuration);
-//				if (pressDuration < MAX_PRESS_DURATION && lastPressDuration < MAX_PRESS_DURATION 
-//				    && releaseDuration < MAX_RELEASE_DURATION) {
-//					Console.WriteLine("Double Tap Detected!");
-//				}
-//				lastPressDuration = pressDuration;
-//				releaseDuration = 0.0f;
-//			} else {
-//				releaseDuration += dt;
-//			}
-			
-//			SelectionGroup.Instance.setTouch();
-//		}
 		
 		/// <summary>
 		/// Restarts GameScene at next level OR Goes to TitleScene if there are no more levels.
