@@ -13,5 +13,13 @@ namespace Crystallography.UI
         {
             InitializeWidget();
         }
+		
+		// DESTRUCTOR ------------------------------------------------------------------
+		
+#if DEBUG
+		~InstructionsScene(){
+			Console.WriteLine(GetType().ToString() + " " + "Deleted");
+		}
+#endif
     }
 }

@@ -23,12 +23,10 @@ namespace Crystallography
 				UISystem.SetScene ( new Crystallography.UI.SplashScene() );
 				break;
 			}	
-//			if (pFromSplash) {
-//				UISystem.SetScene( new Crystallography.UI.SplashScene() );
-//			} else {
-//				UISystem.SetScene ( new Crystallography.UI.MenuScene() );
-//			}
 			Scheduler.Instance.ScheduleUpdateForTarget(this, 0, false );
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		public override void OnEnter ()
@@ -41,6 +39,7 @@ namespace Crystallography
 		{
 			base.OnExit ();
 			Support.MusicSystem.Instance.StopAll();
+			System.GC.Collect();
 		}
 		
 		public override void Update (float dt)
@@ -54,6 +53,13 @@ namespace Crystallography
 			base.Draw ();
 			UISystem.Render();
 		}
+		
+		// DESTRUCTOR ------------------------------------------------------------------------
+#if DEBUG
+		~MenuSystemScene() {
+			Console.WriteLine(GetType().ToString() + " deleted");
+		}
+#endif
 	}
 }
 

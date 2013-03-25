@@ -49,8 +49,6 @@ namespace Crystallography
 			}
 		}
 		
-//		public int id { get; set; }
-		
 		// CONSTRUCTORS -------------------------------------------------------------
 		
 		/// <summary>
@@ -82,6 +80,31 @@ namespace Crystallography
 		
 		// OVERRIDES -----------------------------------------------------------------
 		
+		public override AbstractCrystallonEntity BeReleased(Vector2 pPosition) {
+			if (!AppMain.ORIENTATION_MATTERS) {
+				QOrientation.Instance.Apply(this,0);
+			}
+			CardManager.Instance.Add( this as CardCrystallonEntity );
+			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Card], 0.1f, 0.01f, pPosition));
+//			_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Card], 0.1f, 0.01f, new Vector2(100f,100f + GameScene.Random.NextFloat()*100));
+			_sprite.Position = _body.Position * GamePhysics.PtoM;
+//			_sprite.Position = new Vector2(100f, 100f);
+			setVelocity(1.0f, GameScene.Random.NextAngle());
+			addToScene();
+			return this;
+		}
+		
+		public override void removeFromScene (bool doCleanup)
+		{
+			if (doCleanup) {
+				if ( _anim != null ) {
+					_anim.Cleanup();
+					_anim = null;
+				}
+			}
+			base.removeFromScene (doCleanup);
+		}
+		
 		/// <summary>
 		/// The once-per-frame update method.
 		/// </summary>
@@ -101,19 +124,7 @@ namespace Crystallography
 		
 		// METHODS -------------------------------------------------------------------
 		
-		public override AbstractCrystallonEntity BeReleased(Vector2 pPosition) {
-			if (!AppMain.ORIENTATION_MATTERS) {
-				QOrientation.Instance.Apply(this,0);
-			}
-			CardManager.Instance.Add( this as CardCrystallonEntity );
-			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Card], 0.1f, 0.01f, pPosition));
-//			_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Card], 0.1f, 0.01f, new Vector2(100f,100f + GameScene.Random.NextFloat()*100));
-			_sprite.Position = _body.Position * GamePhysics.PtoM;
-//			_sprite.Position = new Vector2(100f, 100f);
-			setVelocity(1.0f, GameScene.Random.NextAngle());
-			addToScene();
-			return this;
-		}
+
 		
 		public void setAnim( SpriteTile anim, int pStart, int pEnd ) {
 			
@@ -139,5 +150,11 @@ namespace Crystallography
 			}
 		}
 		
+		// DESTRUCTOR -----------------------------------------------------------------------------------
+#if DEBUG
+		~CardCrystallonEntity() {
+			Console.WriteLine(GetType().ToString() + " deleted");
+		}
+#endif
 	}
 }

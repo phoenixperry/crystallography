@@ -51,6 +51,9 @@ namespace Crystallography
 		protected QualityManager() {
 			Instance = this;
 			qualityDict = new Dictionary<string, List<int>[]>();
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		// METHODS ---------------------------------------------------------------------------------------------------
@@ -322,13 +325,15 @@ namespace Crystallography
 		}
 		
 		// DESTRUCTOR -------------------------------------------------------------------------------------------------
-		
+#if DEBUG
 		~QualityManager() {
-			Instance = null;
-			ClearQualityDictionary();
-			qualityDict = null;
-			doc = null;
+			Console.WriteLine(GetType().ToString() + " deleted");
+//			Instance = null;
+//			ClearQualityDictionary();
+//			qualityDict = null;
+//			doc = null;
 		}
+#endif
 	}
 	
 	// HELPER CLASSES ------------------------------------------------------------------------------------------------

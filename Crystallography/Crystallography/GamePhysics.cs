@@ -111,9 +111,9 @@ namespace Crystallography
 			
 //            System.Random rand = new System.Random();
             
-            
-			
-			
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		// METHODS ------------------------------------------------------------------------------------------------
@@ -179,9 +179,10 @@ namespace Crystallography
 //		}
 		
 		// DESTRUCTOR -------------------------------------------------------------------------------------------
-		
+#if DEBUG
 		~GamePhysics() {
-			Instance = null;
+			Console.WriteLine(GetType().ToString() + " deleted" );
 		}
+#endif
     }
 }	

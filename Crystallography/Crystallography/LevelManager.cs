@@ -46,6 +46,9 @@ namespace Crystallography
 										new Vector4(0.160784f, 0.886274f, 0.886274f, 1.0f) };
 			PatternPath = "Application/assets/images/set1/gamePieces.png";
 			SoundPrefix = "stack1";
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		// METHODS ----------------------------------------------------------------
@@ -87,6 +90,12 @@ namespace Crystallography
 			doc = XDocument.Parse( xml );
 		}
 		
+		// DESTRUCTOR ----------------------------------------------------------------------------------
+#if DEBUG
+		~LevelManager(){
+			Console.WriteLine(GetType().ToString() + " deleted");
+		}
+#endif
 	}
 }
 

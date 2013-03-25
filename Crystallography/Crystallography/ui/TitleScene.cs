@@ -40,9 +40,17 @@ namespace Crystallography.UI
 				if ( Input2.Touch00.Down ) {
 //					Director.Instance.ReplaceScene( new MenuScene() );
 					UISystem.SetScene( new MenuScene() );
+					this.RootWidget.Dispose();
 				}
 			}
 			base.OnUpdate (elapsedTime);
 		}
+		
+		// DESTRUCTOR -----------------------------------------------------------------------------
+#if DEBUG
+		~TitleScene() {
+			Console.WriteLine(GetType().ToString() + " " + "Deleted");
+		}
+#endif
     }
 }

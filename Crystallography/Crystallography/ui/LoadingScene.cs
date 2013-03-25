@@ -18,15 +18,15 @@ namespace Crystallography.UI
 			_levelNumber = pLevelNumber;
             InitializeWidget();
 			BusyIndicator_1.Visible = false;
-			fadeInEffect = new FadeInEffect( BusyIndicator_1, 1.0f, new FadeInEffectInterpolator() );
-			fadeInEffect.EffectStopped += HandleFadeInEffectEffectStopped;
+			fadeInEffect = new FadeInEffect( BusyIndicator_1, 500.0f, new FadeInEffectInterpolator() );
+//			fadeInEffect.EffectStopped += HandleFadeInEffectEffectStopped;
 			fadeInEffect.Start();
         }
 
-        void HandleFadeInEffectEffectStopped (object sender, EventArgs e)
-        {
+//        void HandleFadeInEffectEffectStopped (object sender, EventArgs e)
+//        {
 //        	Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.ReplaceScene( new GameScene(_levelNumber) );
-        }
+//        }
 		
 		protected override void OnUpdate (float elapsedTime) {
 			_timer += elapsedTime;
@@ -34,5 +34,12 @@ namespace Crystallography.UI
 				Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.ReplaceScene( new GameScene(_levelNumber) );
 			}
 		}
+		
+		// DESTRUCTOR --------------------------------------------------------------------------------
+#if DEBUG
+		~LoadingScene() {
+			Console.WriteLine(GetType().ToString() + " deleted");
+		}
+#endif
     }
 }

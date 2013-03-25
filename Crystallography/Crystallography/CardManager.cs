@@ -51,6 +51,9 @@ namespace Crystallography
 			_physics = GamePhysics.Instance;
 			SelectionGroup.Instance.CubeCompleteDetected += HandleSelectionGroupInstanceCubeCompleteDetected;
 			Reset (_scene);
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		// EVENT HANDLERS ------------------------------------------------------------------
@@ -90,6 +93,14 @@ namespace Crystallography
 			}
 			return pCard;
 			
+		}
+		
+		public void Destroy() {
+			availableCards.Clear ();
+			availableCards = null;
+			_instance = null;
+			_scene = null;
+			_physics = null;
 		}
 		
 		public CardCrystallonEntity getCardById( int pId ) {
@@ -171,7 +182,7 @@ namespace Crystallography
 		/// </summary>
 		public void Reset ( Scene pScene ) {
 			foreach( var card in availableCards ) {
-				card.removeFromScene();
+				card.removeFromScene( true );
 			}
 			availableCards.Clear();
 			_scene = pScene;
@@ -227,14 +238,11 @@ namespace Crystallography
 		}
 		
 		// DESTRUCTOR ----------------------------------------------------------------------------------------
-		
+#if DEBUG
 		~CardManager() {
-			availableCards.Clear ();
-			availableCards = null;
-			Instance = null;
-			_scene = null;
-			_physics = null;
+			Console.WriteLine(GetType().ToString() + " deleted" );
 		}
+#endif
 	}
 }
 

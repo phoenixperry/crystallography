@@ -65,6 +65,9 @@ namespace Crystallography
 		/// </summary>
 		protected InputManager () {
 			Reset ();
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		// METHODS ----------------------------------------------------------
@@ -246,10 +249,11 @@ namespace Crystallography
 		}
 		
 		// DESTRUCTOR ------------------------------------------------------------------
-		
+#if DEBUG
 		~InputManager() {
-			Instance = null;
+			Console.WriteLine(GetType().ToString() + " deleted");
 		}
+#endif
 	}
 	
 	// HELPER CLASSES -------------------------------------------------------------------

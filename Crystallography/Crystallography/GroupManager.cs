@@ -28,14 +28,14 @@ namespace Crystallography
 		
 		// CONSTRUCTOR ---------------------------------------------------------------------
 		
-		protected GroupManager ()// Scene pScene, GamePhysics pPhysics )
+		protected GroupManager ()
 		{
-//			if(Instance == null) {
-//				Instance = this;
 				availableGroups = new List<GroupCrystallonEntity>();
 				_scene = Director.Instance.CurrentScene;
 				_physics = GamePhysics.Instance;
-//			}
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		// METHODS -------------------------------------------------------------------------
@@ -127,5 +127,12 @@ namespace Crystallography
 			g.addToScene();
 			return Add(g);
 		}
+		
+		// DESTRUCTOR --------------------------------------------------------------------
+#if DEBUG
+		~GroupManager() {
+			Console.WriteLine(GetType().ToString() + " deleted");
+		}
+#endif
 	}
 }

@@ -17,6 +17,20 @@ namespace Crystallography.BG
 		public CrystallonBackgroundObject ( Vector2 pBase, Vector2 pRange ) : base() {
 			Position = BASE = pBase;
 			RANGE = pRange;
+#if DEBUG
+			Console.WriteLine("CrystallonBackgroundObject created");
+#endif
+		}
+		
+		// OVERRIDES ---------------------------------------------------------------------------------------
+		
+		public override void Cleanup ()
+		{
+			foreach (SpriteBase s in Children){
+				s.TextureInfo = null;
+			}
+			
+			base.Cleanup ();
 		}
 		
 		// METHODS -----------------------------------------------------------------------------------------
@@ -33,11 +47,14 @@ namespace Crystallography.BG
 			OnMoveComplete();
 		}
 		
-//		public void Tint( Sce.PlayStation.Core.Vector4 pColor ) {
-//			foreach ( SpriteBase s in Objects ) {
-//				s.RunAction( new TintTo( LevelManager.Instance.Palette[0], 1.0f ) );
-//			}
-//		}
+		// DESTRUCTOR --------------------------------------------------------------------------------------
+
+#if DEBUG		
+		~CrystallonBackgroundObject() {
+			Console.WriteLine("CrystallonBackgroundObject deleted");
+		}
+#endif
+
 	}
 }
 

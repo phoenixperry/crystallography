@@ -25,19 +25,36 @@ namespace Crystallography.UI
 			CreditsButton.TextFont = FontManager.Instance.Get("Bariol", 25);
 			
 			NewGameButton.TouchEventReceived += HandleNewGameButtonTouchEventReceived;
-			LevelSelectButton.TouchEventReceived += (sender, e) => { UISystem.SetScene( new LevelSelectScene() ); };
-			OptionsButton.TouchEventReceived += (sender, e) => { UISystem.SetScene( new InstructionsScene() ); };
-			CreditsButton.TouchEventReceived += (sender, e) => { UISystem.SetScene( new CreditsScene() ); };
+			LevelSelectButton.TouchEventReceived += (sender, e) => { 
+				this.RootWidget.Dispose();
+				UISystem.SetScene( new LevelSelectScene() ); 
+			};
+			OptionsButton.TouchEventReceived += (sender, e) => {
+				this.RootWidget.Dispose();
+				UISystem.SetScene( new InstructionsScene() ); 
+			};
+			CreditsButton.TouchEventReceived += (sender, e) => { 
+				this.RootWidget.Dispose();
+				UISystem.SetScene( new CreditsScene() ); 
+			};
         }
 
         void HandleNewGameButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
+			this.RootWidget.Dispose();
 			UISystem.SetScene( new LoadingScene(0) );
         }
 		
-		protected override void OnUpdate (float elapsedTime)
-		{
-			base.OnUpdate (elapsedTime);
+//		protected override void OnUpdate (float elapsedTime)
+//		{
+//			base.OnUpdate (elapsedTime);
+//		}
+		
+		// DESTRUCTOR -------------------------------------------------------------------------
+#if DEBUG
+		~MenuScene() {
+			Console.WriteLine(GetType().ToString() + " " + "Deleted");
 		}
+#endif
     }
 }

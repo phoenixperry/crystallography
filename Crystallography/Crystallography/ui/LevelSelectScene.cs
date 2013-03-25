@@ -31,7 +31,10 @@ namespace Crystallography.UI
 			BackButton.TextFont = FontManager.Instance.Get ("Bariol", 25);
 			
 			StartButton.TouchEventReceived += HandleStartButtonTouchEventReceived;
-			BackButton.TouchEventReceived += (sender, e) => { UISystem.SetScene( new MenuScene() ); };
+			BackButton.TouchEventReceived += (sender, e) => { 
+				this.RootWidget.Dispose();
+				UISystem.SetScene( new MenuScene() ); 
+			};
 			LevelSelectItem.LevelSelectionDetected += (sender, e) => { 
 				selectedLevel = e.LevelID;
 				LevelNumberText.Text = e.LevelID.ToString();
@@ -41,8 +44,16 @@ namespace Crystallography.UI
         void HandleStartButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
 			Console.WriteLine( selectedLevel );
+			this.RootWidget.Dispose();
 			UISystem.SetScene( new LoadingScene( selectedLevel ) );
 //			Director.Instance.ReplaceScene( new GameScene( selectedLevel ) );
         }
+		
+		// DESTRUCTOR --------------------------------------------------------------------------------
+#if DEBUG
+		~LevelSelectScene() {
+			Console.WriteLine(GetType().ToString() + " " + "Deleted");
+		}
+#endif
     }
 }

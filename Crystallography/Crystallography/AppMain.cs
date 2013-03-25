@@ -68,6 +68,7 @@ namespace Crystallography
 				UISystem.Update( Touch.GetData(0) );
 				Touch.GetData(0).Clear();
 				Director.Instance.Update();
+				Touch.GetData(0).Clear();
 				
 				
 				Director.Instance.Render();

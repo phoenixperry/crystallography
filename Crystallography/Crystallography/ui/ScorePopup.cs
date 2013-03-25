@@ -41,6 +41,13 @@ namespace Crystallography.UI
 				this.UnscheduleAll();
 			}
 		}
+		
+		// DESTRUCTOR ------------------------------------------------------------------------------
+#if DEBUG
+		~ScorePopup() {
+			Console.WriteLine(GetType().ToString() + " " + "Deleted");
+		}
+#endif
 	}
 }
 

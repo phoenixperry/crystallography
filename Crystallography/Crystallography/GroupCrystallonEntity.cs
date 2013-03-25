@@ -15,7 +15,7 @@ namespace Crystallography
 		private int _numMembers;
 		
 		
-		public static event EventHandler BreakDetected;
+//		public static event EventHandler BreakDetected;
 		
 		// GET & SET -------------------------------------------------------------
 		
@@ -484,5 +484,11 @@ namespace Crystallography
 				}
 			}
 		}
+		
+#if DEBUG
+		~GroupCrystallonEntity() {
+			Console.WriteLine(GetType().ToString() + " deleted");
+		}
+#endif
 	}
 }

@@ -14,13 +14,17 @@ namespace Crystallography.UI
             InitializeWidget();
 			
 			Button_1.TouchEventReceived += HandleNewGameButtonTouchEventReceived;
-			Button_2.TouchEventReceived += (sender, e) => { Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.ReplaceScene( new MenuSystemScene("Menu") ); };
+			Button_2.TouchEventReceived += (sender, e) => { 
+				UISystem.CurrentScene.RootWidget.Dispose();
+				Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.ReplaceScene( new MenuSystemScene("Menu") ); 
+				
+			};
         }
 		
 		void HandleNewGameButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
+			UISystem.CurrentScene.RootWidget.Dispose();
 			UISystem.SetScene( new LoadingScene( 0 ) );
-//			Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.ReplaceScene( new GameScene(0) );
         }
     }
 }

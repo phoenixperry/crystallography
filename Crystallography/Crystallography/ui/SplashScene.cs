@@ -24,7 +24,11 @@ namespace Crystallography.UI
 			fadeOutEffect = new FadeOutEffect( ImageBox_1, 300, new FadeOutEffectInterpolator() );
 			
 			fadeInEffect.EffectStopped += (sender, e) => { _timer = 1.0f; };
-			fadeOutEffect.EffectStopped += (sender, e) => { fadeOutEffect = null; UISystem.SetScene( new TitleScene() ); };
+			fadeOutEffect.EffectStopped += (sender, e) => { 
+				fadeOutEffect = null;
+				this.RootWidget.Dispose();
+				UISystem.SetScene( new TitleScene() );
+			};
 			fadeInEffect.Start();
         }
 		
@@ -40,5 +44,11 @@ namespace Crystallography.UI
 			
 			base.OnUpdate (elapsedTime);
 		}
+		
+#if DEBUG
+		~SplashScene() {
+			Console.WriteLine(GetType().ToString() + " " + "Deleted");
+		}
+#endif
     }
 }

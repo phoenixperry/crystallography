@@ -184,6 +184,7 @@ namespace Crystallography
 		public void goToNextLevel( ) {
 			currentLevel++;
 			if (currentLevel < TOTAL_LEVELS) {
+				ForceGarbageCollection();
 				Console.WriteLine( "Resetting to start level " + currentLevel );
 				LevelManager.Instance.GetLevelSettings( currentLevel );
 				background.PickBackground();
@@ -202,16 +203,30 @@ namespace Crystallography
 		}
 		
 		public static void QuitToTitle() {
+			ForceGarbageCollection();
+			UISystem.CurrentScene.RootWidget.Dispose();
 			Director.Instance.ReplaceScene( new MenuSystemScene("Menu") );
 		}
 		
 		public static void QuitToLevelSelect() {
+			ForceGarbageCollection();
+			UISystem.CurrentScene.RootWidget.Dispose();
 			Director.Instance.ReplaceScene( new MenuSystemScene("LevelSelect") );
 			UISystem.SetScene( new Crystallography.UI.LevelSelectScene() );
 		}
-
+		
+		private static void ForceGarbageCollection() {
+#if DEBUG
+				Console.WriteLine("Force Garbage Collecion.");
+#endif
+				System.GC.Collect();
+		}
+		
+		// DESTRUCTOR -------------------------------------------------------------------------------------
+#if DEBUG
         ~GameScene(){
+			Console.WriteLine("GameScene deleted.");
         }
-
+#endif
 	}
 }

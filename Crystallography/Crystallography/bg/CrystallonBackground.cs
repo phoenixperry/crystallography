@@ -39,14 +39,15 @@ namespace Crystallography.BG
 			GameScene.LevelChangeDetected += (sender, e) => { SetPalette(); };
 			
 			SetPalette();
+#if DEBUG
+			Console.WriteLine("CrystallonBackground created");
+#endif
 		}
 		
 		// OVERRIDES ---------------------------------------------------------------------------
 		
 		
 		// METHODS -----------------------------------------------------------------------------
-		
-		
 		
 		public void BG1() {
 			BASES.Add ( new Vector2(0.5f*_screenWidth, 0.32f*_screenHeight) );
@@ -59,7 +60,9 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[1], RANGES[1]) );
 			
 			var s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftSolidWhite.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/leftSolidWhite.png").TextureInfo,
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftSolidWhite.png"),
+//			var s = Support.SpriteUVFromFile("/Application/assets/images/bg/1/leftSolidWhite.png");
 				Pivot = new Vector2(1.0f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -67,7 +70,9 @@ namespace Crystallography.BG
 			BackgroundObjects[0].AddChild(s);
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightSolidWhite.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightSolidWhite.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/rightSolidWhite.png").TextureInfo,
+//			s = Support.SpriteUVFromFile("/Application/assets/images/bg/1/rightSolidWhite.png");
 				Pivot = new Vector2(0.0f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -75,7 +80,9 @@ namespace Crystallography.BG
 			BackgroundObjects[0].AddChild(s);
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/topSolidChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/topSolidChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/topSolidChevron.png").TextureInfo,
+//			s = Support.SpriteUVFromFile( "/Application/assets/images/bg/1/topSolidChevron.png" );
 				Pivot = new Vector2(0.5f, 0.04f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -83,7 +90,9 @@ namespace Crystallography.BG
 			BackgroundObjects[0].AddChild(s);
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftHollowWhite.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftHollowWhite.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/leftHollowWhite.png").TextureInfo,
+//			s = Support.SpriteUVFromFile( "/Application/assets/images/bg/1/leftHollowWhite.png" );
 				Pivot = new Vector2(1.0f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -91,7 +100,9 @@ namespace Crystallography.BG
 			BackgroundObjects[1].AddChild(s);
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightHollowWhite.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightHollowWhite.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/rightHollowWhite.png").TextureInfo,
+//			s = Support.SpriteUVFromFile( "/Application/assets/images/bg/1/rightHollowWhite.png" );
 				Pivot = new Vector2(0.0f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -99,7 +110,9 @@ namespace Crystallography.BG
 			BackgroundObjects[1].AddChild(s);
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/topSolidChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/topSolidChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/topSolidChevron.png").TextureInfo,
+//			s = Support.SpriteUVFromFile( "/Application/assets/images/bg/1/topSolidChevron.png" );
 				Pivot = new Vector2(0.5f, 0.04f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -116,7 +129,9 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[0], RANGES[0]) );
 			
 			var s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
+//			var s = Support.SpriteUVFromFile( "/Application/assets/images/bg/2/whiteHollowChevron.png" );
 				Pivot = new Vector2(0.5f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -129,7 +144,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[1], RANGES[1]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -142,7 +158,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[2], RANGES[2]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.4f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -155,7 +172,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[3], RANGES[3]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.3f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -168,7 +186,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[4], RANGES[4]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels() * new Vector2(1f,-1f);
@@ -181,7 +200,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[5], RANGES[5]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.4f)
 			};
 			s.Scale = s.CalcSizeInPixels() * new Vector2(1f,-1f);
@@ -194,7 +214,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[6], RANGES[6]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.3f)
 			};
 			s.Scale = s.CalcSizeInPixels() * new Vector2(1f,-1f);
@@ -208,7 +229,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[7], RANGES[7]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -221,7 +243,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[8], RANGES[8]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -234,7 +257,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[9], RANGES[9]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.4f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -247,7 +271,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[10], RANGES[10]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.3f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -260,7 +285,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[11], RANGES[11]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels() * new Vector2(1f,-1f);
@@ -273,7 +299,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[12], RANGES[12]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.4f)
 			};
 			s.Scale = s.CalcSizeInPixels() * new Vector2(1f,-1f);
@@ -286,7 +313,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[13], RANGES[13]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.3f)
 			};
 			s.Scale = s.CalcSizeInPixels() * new Vector2(1f,-1f);
@@ -300,7 +328,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[14], RANGES[14]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -313,7 +342,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[15], RANGES[15]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -326,7 +356,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[16], RANGES[16]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.4f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -339,7 +370,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[17], RANGES[17]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.3f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -352,7 +384,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[18], RANGES[18]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels() * new Vector2(1f,-1f);
@@ -365,7 +398,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[19], RANGES[19]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.4f)
 			};
 			s.Scale = s.CalcSizeInPixels() * new Vector2(1f,-1f);
@@ -378,7 +412,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[20], RANGES[20]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/2/whiteHollowChevron.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/2/whiteHollowChevron.png").TextureInfo,
 				Pivot = new Vector2(0.5f, 0.3f)
 			};
 			s.Scale = s.CalcSizeInPixels() * new Vector2(1f,-1f);
@@ -394,7 +429,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[0], RANGES[0]) );
 			
 			var s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/3/zigTotal.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/3/zigTotal.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/3/zigTotal.png").TextureInfo,
 				Pivot = new Vector2(0.69f, -0.2f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -407,7 +443,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[1], RANGES[1]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftHollowWhite.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftHollowWhite.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/leftHollowWhite.png").TextureInfo,
 				Pivot = new Vector2(1.0f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -415,7 +452,8 @@ namespace Crystallography.BG
 			BackgroundObjects[1].AddChild(s);
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightHollowWhite.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightHollowWhite.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/rightHollowWhite.png").TextureInfo,
 				Pivot = new Vector2(0.0f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -423,7 +461,8 @@ namespace Crystallography.BG
 			BackgroundObjects[1].AddChild(s);
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftHollowWhite.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftHollowWhite.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/leftHollowWhite.png").TextureInfo,
 				Pivot = new Vector2(0.0f, 0.0f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -431,7 +470,8 @@ namespace Crystallography.BG
 			BackgroundObjects[1].AddChild(s);
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightHollowWhite.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightHollowWhite.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/rightHollowWhite.png").TextureInfo,
 				Pivot = new Vector2(1.0f, 0.0f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -444,7 +484,8 @@ namespace Crystallography.BG
 			BackgroundObjects.Add( new CrystallonBackgroundObject(BASES[2], RANGES[2]) );
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftHollowWhite.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftHollowWhite.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/leftHollowWhite.png").TextureInfo,
 				Pivot = new Vector2(1.0f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -452,7 +493,8 @@ namespace Crystallography.BG
 			BackgroundObjects[2].AddChild(s);
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightHollowWhite.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightHollowWhite.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/rightHollowWhite.png").TextureInfo,
 				Pivot = new Vector2(0.0f, 0.5f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -460,7 +502,8 @@ namespace Crystallography.BG
 			BackgroundObjects[2].AddChild(s);
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftHollowWhite.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/leftHollowWhite.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/leftHollowWhite.png").TextureInfo,
 				Pivot = new Vector2(0.0f, 0.0f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -468,7 +511,8 @@ namespace Crystallography.BG
 			BackgroundObjects[2].AddChild(s);
 			
 			s = new SpriteUV() {
-				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightHollowWhite.png"),
+//				TextureInfo = new TextureInfo("/Application/assets/images/bg/1/rightHollowWhite.png"),
+				TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/bg/1/rightHollowWhite.png").TextureInfo,
 				Pivot = new Vector2(1.0f, 0.0f)
 			};
 			s.Scale = s.CalcSizeInPixels();
@@ -500,10 +544,23 @@ namespace Crystallography.BG
 			}
 		}
 		
+		public override void Cleanup ()
+		{
+			Reset ();
+			BASES = null;
+			RANGES = null;
+			Color0Objects = null;
+			Color1Objects = null;
+			Color2Objects = null;
+			BackgroundObjects = null;
+			
+			base.Cleanup ();
+		}
+		
 		public void Reset() {
 			foreach ( CrystallonBackgroundObject o in BackgroundObjects ) {
 				o.RemoveAllChildren( true );
-				RemoveChild(o, true);
+				this.RemoveChild(o, true);
 			}
 			BASES.Clear();
 			RANGES.Clear();
@@ -524,6 +581,13 @@ namespace Crystallography.BG
 				s.RunAction( new TintTo( LevelManager.Instance.Palette[2], 1.0f ) );
 			}
 		}
+		
+		// DESTRUCTOR ---------------------------------------------------------------------------
+#if DEBUG		
+		~CrystallonBackground() {
+			Console.WriteLine("CrystallonBackground deleted");
+		}
+#endif
 	}
 }
 

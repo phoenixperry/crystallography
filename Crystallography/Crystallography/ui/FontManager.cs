@@ -24,6 +24,9 @@ namespace Crystallography.UI
 		protected FontManager (string pAssetRoot) {
 			assetRoot = pAssetRoot;
 			fontDict = new Dictionary<string, UIFont>();
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " Created");
+#endif
 		}
 		
 		// METHODS -------------------------------------------------------------------------------
@@ -47,6 +50,9 @@ namespace Crystallography.UI
 			} else {
 				var font = new UIFont( assetRoot + pName + "_" + pStyle + ".otf", pSize, FontStyle.Regular );
 				fontDict.Add( key, font );
+#if DEBUG
+				Console.WriteLine ( "UIFont: " + pName + "_" + pStyle + "_" + pSize + " created" );
+#endif
 			}
 		}
 		

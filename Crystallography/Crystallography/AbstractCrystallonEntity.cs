@@ -41,6 +41,9 @@ namespace Crystallography
 			_physics = pGamePhysics;
 			_offset = Vector2.Zero;
 			pickupLocation = Vector2.Zero;
+#if DEBUG
+			Console.WriteLine(this.GetType().ToString() + " " + id.ToString() + " created");
+#endif
 		}
 		
 		// METHODS--------------------------
@@ -315,6 +318,14 @@ namespace Crystallography
 					body.Velocity = new Vector2(0.0f, pPixelsPerSecond).Rotate(pRadians);
 				}
 			}
+		}
+		
+		// DESTRUCTOR ----------------------------------------------------------------------------
+		
+		~AbstractCrystallonEntity() {
+#if DEBUG
+			Console.WriteLine(this.GetType().ToString() + " " + id.ToString() + " deleted");
+#endif
 		}
 	}
 }

@@ -16,7 +16,16 @@ namespace Crystallography.UI
 			CreditsTitleText.Font = FontManager.Instance.Get("Bariol", 72);
 			BackButton.TextFont = FontManager.Instance.Get ("Bariol",25);
 			
-			BackButton.TouchEventReceived += (sender, e) => { UISystem.SetScene( new MenuScene() ); };
+			BackButton.TouchEventReceived += (sender, e) => { 
+				this.RootWidget.Dispose();
+				UISystem.SetScene( new MenuScene() ); 
+			};
         }
+		
+#if DEBUG
+		~CreditsScene() {
+			Console.WriteLine(GetType().ToString() + " " + "Deleted");
+		}
+#endif
     }
 }
