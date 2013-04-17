@@ -87,7 +87,12 @@ namespace Crystallography
 		
 		public override void Update (float dt)
 		{
-			//empty
+			if(getBody() != null) {
+				if (_body.Velocity.Length() != 1.0f) {
+					_body.Velocity = _body.Velocity.Normalize();
+				}
+				_sprite.Position = _body.Position * GamePhysics.PtoM;
+			}
 		}
 		
 		public override AbstractCrystallonEntity BeReleased ( Vector2 position ) {

@@ -114,9 +114,6 @@ namespace Crystallography
 		public override void Update (float dt)
 		{
 			base.Update(dt);
-			if(getBody() != null) {
-				_sprite.Position = _body.Position * GamePhysics.PtoM;
-			}
 //			if (_sprite.Position.X == float.NaN) {
 //				int i = 0;
 //			}
