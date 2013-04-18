@@ -14,9 +14,9 @@
               <LayoutProperty>
                 <LayoutProperty>
                   <X>0</X>
-                  <Y>-1</Y>
+                  <Y>0</Y>
                   <Width>200</Width>
-                  <Height>36</Height>
+                  <Height>34</Height>
                   <Visible>true</Visible>
                   <Anchors>None</Anchors>
                 </LayoutProperty>
@@ -127,7 +127,7 @@
                   <X>214</X>
                   <Y>0</Y>
                   <Width>200</Width>
-                  <Height>36</Height>
+                  <Height>34</Height>
                   <Visible>true</Visible>
                   <Anchors>None</Anchors>
                 </LayoutProperty>
@@ -360,7 +360,7 @@
           <LayoutProperty>
             <LayoutProperty>
               <X>0</X>
-              <Y>510</Y>
+              <Y>0</Y>
               <Width>960</Width>
               <Height>34</Height>
               <Visible>true</Visible>
@@ -694,7 +694,7 @@
           <LayoutProperty>
             <LayoutProperty>
               <X>729</X>
-              <Y>501</Y>
+              <Y>0</Y>
               <Width>231</Width>
               <Height>43</Height>
               <Visible>true</Visible>
@@ -2868,7 +2868,7 @@
                       </LayoutProperty>
                       <LayoutProperty>
                         <X>364.71857437498977</X>
-                        <Y>123.03606161785388</Y>
+                        <Y>123.03606161785387</Y>
                         <Width>200</Width>
                         <Height>200</Height>
                         <Visible>true</Visible>

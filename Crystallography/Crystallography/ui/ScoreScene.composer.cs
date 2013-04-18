@@ -232,8 +232,8 @@ namespace Crystallography.UI
                     this.DesignWidth = 960;
                     this.DesignHeight = 544;
 
-                    ImageBox_2.SetPosition(0, -1);
-                    ImageBox_2.SetSize(200, 36);
+                    ImageBox_2.SetPosition(0, 0);
+                    ImageBox_2.SetSize(200, 34);
                     ImageBox_2.Anchors = Anchors.None;
                     ImageBox_2.Visible = true;
 
@@ -243,7 +243,7 @@ namespace Crystallography.UI
                     ScoreText.Visible = true;
 
                     ImageBox_1.SetPosition(214, 0);
-                    ImageBox_1.SetSize(200, 36);
+                    ImageBox_1.SetSize(200, 34);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
@@ -262,7 +262,7 @@ namespace Crystallography.UI
                     TimerMinutesText.Anchors = Anchors.None;
                     TimerMinutesText.Visible = true;
 
-                    Panel_1.SetPosition(0, 510);
+                    Panel_1.SetPosition(0, 0);
                     Panel_1.SetSize(960, 34);
                     Panel_1.Anchors = Anchors.None;
                     Panel_1.Visible = true;
@@ -287,7 +287,7 @@ namespace Crystallography.UI
                     PauseMenu.Anchors = Anchors.None;
                     PauseMenu.Visible = false;
 
-                    NextLevelButton.SetPosition(729, 501);
+                    NextLevelButton.SetPosition(729, 0);
                     NextLevelButton.SetSize(231, 43);
                     NextLevelButton.Anchors = Anchors.Top;
                     NextLevelButton.Visible = true;

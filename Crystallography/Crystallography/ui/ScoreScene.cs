@@ -51,7 +51,7 @@ namespace Crystallography.UI
             		new SlideInEffect()
                 	    {
                 	        Widget = NextLevelButton,
-                	        MoveDirection = FourWayDirection.Up,
+                	        MoveDirection = FourWayDirection.Down,
                 	    }.Start();
                     	break;
 
@@ -59,7 +59,7 @@ namespace Crystallography.UI
                    	new SlideInEffect()
                    	{
                    	    Widget = NextLevelButton,
-                   	    MoveDirection = FourWayDirection.Up,
+                   	    MoveDirection = FourWayDirection.Down,
                    	}.Start();
                    	break;
             }

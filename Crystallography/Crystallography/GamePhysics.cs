@@ -93,17 +93,17 @@ namespace Crystallography
 			this.SceneShapes[this.NumShape] = new PhysicsShape((new Vector2(_screenWidth,1.0f)) / PtoM);
 			this.NumShape++;
 			
-			//Top bumper
+			//Bottom bumper
 			this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[(NumShape-1)],PhysicsUtility.FltMax);
-			this.SceneBodies[this.NumBody].Position = new Vector2(_screenWidth/2f,34) / PtoM;
+			this.SceneBodies[this.NumBody].Position = new Vector2(_screenWidth/2f,0) / PtoM;
 			this.sceneBodies[this.NumBody].ShapeIndex = (uint)(NumShape-1);
 			this.sceneBodies[this.NumBody].Rotation = 0;
 			this.SceneBodies[this.NumBody].SetBodyStatic();
 			this.NumBody++;
 			
-			//Bottom bumper
+			//Top bumper
 			this.SceneBodies[this.NumBody] = new PhysicsBody(SceneShapes[(NumShape-1)],PhysicsUtility.FltMax);
-			this.SceneBodies[this.NumBody].Position = new Vector2(_screenWidth/2f,_screenHeight) / PtoM;
+			this.SceneBodies[this.NumBody].Position = new Vector2(_screenWidth/2f,_screenHeight-34) / PtoM;
 			this.sceneBodies[this.NumBody].ShapeIndex = (uint)(NumShape-1);
 			this.sceneBodies[this.NumBody].Rotation = 0;
 			this.SceneBodies[this.NumBody].SetBodyStatic();

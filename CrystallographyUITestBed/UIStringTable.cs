@@ -1,4 +1,4 @@
-// AUTOMATICALLY GENERATED CODE
+﻿// AUTOMATICALLY GENERATED CODE
 
 using System;
 using System.Collections.Generic;
