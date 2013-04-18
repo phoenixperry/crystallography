@@ -9,9 +9,17 @@ namespace Crystallography.UI
 {
     public partial class LevelSelectPanel : Panel
     {
-        public LevelSelectPanel()
+        public LevelSelectPanel(int pageNumber)
         {
             InitializeWidget();
+			
+			int baseIndex = pageNumber * 12;
+			
+//			Button[] buttons;
+			
+//			for ( int i=0; i < 12; i++ ) {
+//				
+//			}
 			
 			Panel[] panels = { Panel_1,
 						       Panel_2,
@@ -25,23 +33,16 @@ namespace Crystallography.UI
 						       Panel_10,
 						       Panel_11,
 						       Panel_12 };
-			Button[] buttons = { Button_1,
-						       Button_2,
-						       Button_3,
-						       Button_4,
-						       Button_5,
-						       Button_6,
-						       Button_7,
-						       Button_8,
-						       Button_9,
-						       Button_10,
-						       Button_11,
-						       Button_12 };
-			for ( int i=0; i < panels.Length; i++ ) {
-				buttons[i].Visible = false;
+			int buttonCount = panels.Length;
+			if ( GameScene.TOTAL_LEVELS < baseIndex + 11 ) {
+				buttonCount = GameScene.TOTAL_LEVELS - baseIndex;
+				Console.WriteLine(baseIndex + "/" + GameScene.TOTAL_LEVELS);
+			}
+			for ( int i=0; i < buttonCount; i++ ) {
+//				buttons[i].Visible = false;
 				LevelSelectItem item = new LevelSelectItem();
-				item.Color = buttons[i].BackgroundFilterColor;
-				item.levelID = i;
+//				item.Color = buttons[i].BackgroundFilterColor;
+				item.levelID = i + baseIndex;
 				panels[i].AddChildLast( item );
 			}
         }

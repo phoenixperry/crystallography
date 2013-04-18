@@ -13,8 +13,8 @@ namespace Crystallography.UI
     {
         Panel sceneBackgroundPanel;
         Label LevelSelectTitleText;
-        PagePanel PagePanel_1;
         ImageBox ImageBox_1;
+        PagePanel PagePanel_1;
         Button StartButton;
         Label LevelNumberText;
         Label LevelTimeText;
@@ -36,10 +36,10 @@ namespace Crystallography.UI
             sceneBackgroundPanel.Name = "sceneBackgroundPanel";
             LevelSelectTitleText = new Label();
             LevelSelectTitleText.Name = "LevelSelectTitleText";
-            PagePanel_1 = new PagePanel();
-            PagePanel_1.Name = "PagePanel_1";
             ImageBox_1 = new ImageBox();
             ImageBox_1.Name = "ImageBox_1";
+            PagePanel_1 = new PagePanel();
+            PagePanel_1.Name = "PagePanel_1";
             StartButton = new Button();
             StartButton.Name = "StartButton";
             LevelNumberText = new Label();
@@ -66,11 +66,6 @@ namespace Crystallography.UI
             LevelSelectTitleText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
             LevelSelectTitleText.Font = new UIFont(FontAlias.System, 36, FontStyle.Regular);
             LevelSelectTitleText.LineBreak = LineBreak.Character;
-
-            // PagePanel_1
-            PagePanel_1.AddPage(new LevelSelectPanel());
-            PagePanel_1.AddPage(new LevelSelectPanel2());
-            PagePanel_1.AddPage(new LevelSelectPanel3());
 
             // ImageBox_1
             ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/statsBox.png");
@@ -141,8 +136,8 @@ namespace Crystallography.UI
             // LevelSelectScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
             this.RootWidget.AddChildLast(LevelSelectTitleText);
-            this.RootWidget.AddChildLast(PagePanel_1);
             this.RootWidget.AddChildLast(ImageBox_1);
+            this.RootWidget.AddChildLast(PagePanel_1);
             this.RootWidget.AddChildLast(StartButton);
             this.RootWidget.AddChildLast(LevelNumberText);
             this.RootWidget.AddChildLast(LevelTimeText);
@@ -177,15 +172,15 @@ namespace Crystallography.UI
                     LevelSelectTitleText.Anchors = Anchors.None;
                     LevelSelectTitleText.Visible = true;
 
-                    PagePanel_1.SetPosition(173, 99);
-                    PagePanel_1.SetSize(100, 50);
-                    PagePanel_1.Anchors = Anchors.None;
-                    PagePanel_1.Visible = true;
-
                     ImageBox_1.SetPosition(682, 73);
                     ImageBox_1.SetSize(200, 200);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
+
+                    PagePanel_1.SetPosition(339, 157);
+                    PagePanel_1.SetSize(100, 50);
+                    PagePanel_1.Anchors = Anchors.None;
+                    PagePanel_1.Visible = true;
 
                     StartButton.SetPosition(61, 441);
                     StartButton.SetSize(214, 56);
@@ -248,15 +243,15 @@ namespace Crystallography.UI
                     LevelSelectTitleText.Anchors = Anchors.None;
                     LevelSelectTitleText.Visible = true;
 
-                    PagePanel_1.SetPosition(18, 102);
-                    PagePanel_1.SetSize(567, 396);
-                    PagePanel_1.Anchors = Anchors.None;
-                    PagePanel_1.Visible = true;
-
                     ImageBox_1.SetPosition(555, -5);
                     ImageBox_1.SetSize(418, 418);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
+
+                    PagePanel_1.SetPosition(18, 102);
+                    PagePanel_1.SetSize(567, 396);
+                    PagePanel_1.Anchors = Anchors.None;
+                    PagePanel_1.Visible = true;
 
                     StartButton.SetPosition(762, 388);
                     StartButton.SetSize(125, 82);

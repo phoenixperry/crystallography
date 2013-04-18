@@ -17,6 +17,17 @@ namespace Crystallography.UI
 			selectedLevel = 0;
 			
             InitializeWidget();
+			
+			float requiredPages = (float)(Math.Ceiling(((float)GameScene.TOTAL_LEVELS) / 12.0f));
+			
+			for (int i=0; i < requiredPages; i++ ) {
+				PagePanel_1.AddPage(new LevelSelectPanel(i));
+			}
+			
+//			PagePanel_1.AddPage(new LevelSelectPanel(0));
+//            PagePanel_1.AddPage(new LevelSelectPanel(1));
+//            PagePanel_1.AddPage(new LevelSelectPanel(2));
+			
 			cubeNumber.Font = FontManager.Instance.Get("Bariol", 32); 				
 			howToSelect.Font = FontManager.Instance.Get("Bariol", 32); 			
 			ScoreText.Font = FontManager.Instance.Get("Bariol", 32); 			
