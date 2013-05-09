@@ -22,6 +22,8 @@ namespace Crystallography
 		/// </summary>
 		public Dictionary<string, List<int>[]> qualityDict;
 		
+		public Dictionary<int,int> countdownDict;
+		
 		/// <summary>
 		/// XML data describing qualities for all the cards in this level.
 		/// </summary>
@@ -51,6 +53,13 @@ namespace Crystallography
 		protected QualityManager() {
 			Instance = this;
 			qualityDict = new Dictionary<string, List<int>[]>();
+			countdownDict = new Dictionary<int, int>();
+			
+			InputManager.Instance.CrossJustUpDetected += delegate {
+//				CountdownTick();
+				ScrambleQuality( "QColor" );
+			};
+			
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
 #endif
@@ -101,6 +110,21 @@ namespace Crystallography
 			}
 		}
 		
+		public void ApplySingleQualityToEntity( string pQualityName, CardCrystallonEntity pEntity ) {
+			if (qualityDict.ContainsKey(pQualityName) == false) return;
+			
+			var type = Type.GetType( "Crystallography." + pQualityName );
+			var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
+			var variations = qualityDict[pQualityName];
+			for ( int i=0; i<variations.Length; i++ ) {
+				if ( variations[i] == null ) { continue; }
+				if ( (variations[i] as IList<int>).Contains (pEntity.id) ) {
+					quality.Apply( pEntity , i );
+					break;
+				}
+			}
+		}
+		
 		/// <summary>
 		/// Applies the qualities to a specific card, based on its ID.
 		/// </summary>
@@ -115,15 +139,23 @@ namespace Crystallography
 						continue;
 					}
 				}
-				var type = Type.GetType( "Crystallography." + key );
-				var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
-				var variations = qualityDict[key];
-				for ( int i=0; i<variations.Length; i++ ) {
-					if ( variations[i] == null ) { continue; }
-					if ( (variations[i] as IList<int>).Contains (pEntity.id) ) {
-						quality.Apply( pEntity , i );
-						break;
-					}
+				ApplySingleQualityToEntity( key, pEntity );
+//				var type = Type.GetType( "Crystallography." + key );
+//				var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
+//				var variations = qualityDict[key];
+//				for ( int i=0; i<variations.Length; i++ ) {
+//					if ( variations[i] == null ) { continue; }
+//					if ( (variations[i] as IList<int>).Contains (pEntity.id) ) {
+//						quality.Apply( pEntity , i );
+//						break;
+//					}
+//				}
+			}
+			// the countdown quality is formatted differently and needs to be iterated on its own.
+			if ( countdownDict.Keys.Count > 0 ) {
+				var c = countdownDict[pEntity.id];
+				if ( c != 0 ) {
+					QCountdown.Instance.Apply(pEntity, c);
 				}
 			}
 		}
@@ -149,13 +181,19 @@ namespace Crystallography
 				foreach (XElement singleQuality in card.AllQualities) {
 					string name = singleQuality.Attribute("Name").Value;
 					int val = (int)singleQuality.Attribute("Value");
-					if( qualityDict.ContainsKey(name) == false ) {	// ------------- New quality type discovered; add dict entry
-						qualityDict.Add( name, new List<int>[3] );
+					if (name == "QCountdown") {
+						if ( val != 0 ) {
+							countdownDict[id] = val;
+						}
+					} else {
+						if( qualityDict.ContainsKey(name) == false ) {	// ------------- New quality type discovered; add dict entry
+							qualityDict.Add( name, new List<int>[3] );
+						}
+						if ( qualityDict[name][val] == null ) {	// --------------------- New quality variation discovered; add list entity
+							qualityDict[name][val] = new List<int>();
+						}
+						qualityDict[name][val].Add(id);	// --------------------- STEP 4: Note which variation of this quality the card has
 					}
-					if ( qualityDict[name][val] == null ) {	// --------------------- New quality variation discovered; add list entity
-						qualityDict[name][val] = new List<int>();
-					}
-					qualityDict[name][val].Add(id);	// --------------------- STEP 4: Note which variation of this quality the card has
 					// TEST
 //					Console.WriteLine ("Name: " + name + " Value: " + val);
 					// END TEST
@@ -176,6 +214,13 @@ namespace Crystallography
 			// END TEST
 		}
 		
+		private void CountdownTick() {
+			foreach (int id in countdownDict.Keys) {
+				CardCrystallonEntity c = CardManager.Instance.getCardById(id);
+				QCountdown.Instance.Tick(c);
+			}
+		}
+		
 		/// <summary>
 		/// Clears <c>qualityDict</c> correctly.
 		/// </summary>
@@ -188,6 +233,7 @@ namespace Crystallography
 				}
 			}
 			qualityDict.Clear();
+			countdownDict.Clear();
 		}
 		
 		/// <summary>
@@ -279,6 +325,9 @@ namespace Crystallography
 		/// </param>
 		private void Remove( AbstractCrystallonEntity pEntity, string pQualityName ) {
 			foreach ( List<int> list in qualityDict[pQualityName] ) {
+				if ( list == null ) {
+					continue;
+				}
 				if( list.Remove(pEntity.id) ) {
 					return;
 				}
@@ -302,6 +351,18 @@ namespace Crystallography
 			QPattern.Instance.setPalette();
 			BuildQualityDictionary( pCardManagerInstance );
 //			ApplyQualities();
+		}
+		
+		public void ScrambleQuality( string pQualityName ) {
+			//take a particular quality and randomly reassign entities within the quality
+			var type = Type.GetType( "Crystallography." + pQualityName );
+			var quality = (IQuality)type.GetProperty("Instance").GetValue(null,null);
+			foreach ( CardCrystallonEntity c in CardManager.availableCards ) {
+				Remove (c, pQualityName);
+				int index = (int)Math.Floor( GameScene.Random.NextFloat() * 3 );
+				Add ( c, pQualityName, index);
+				quality.Apply( c, index );
+			}
 		}
 		
 		/// <summary>

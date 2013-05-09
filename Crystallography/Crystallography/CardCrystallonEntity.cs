@@ -19,6 +19,10 @@ namespace Crystallography
 		
 		protected SpriteTile _anim;
 		
+		protected int countdownMax;
+		protected Label countdownText;
+		public int countdown;
+		
 		// GET & SET ----------------------------------------------------------------
 		
 		/// <summary>
@@ -145,6 +149,30 @@ namespace Crystallography
 				}
 				this.getNode().AddChild(_anim);
 			}
+		}
+		
+		public void resetCountdown() {
+			countdown = countdownMax;
+		}
+		
+		public void setCountdown( int pCount ) {
+			countdown = countdownMax = pCount;
+			
+			countdownText = new Label(pCount.ToString(), QCountdown.map);
+			countdownText.Color = Colors.White;
+			countdownText.HeightScale /=70f;
+			countdownText.Pivot = new Vector2(0.5f, 0.5f);
+			countdownText.Position = new Vector2(0.5f, 0.4f);
+			this.getNode().AddChild(countdownText);
+//			(_scene as GameScene).AddChild(countdownText);
+		}
+		
+		public void advanceCountdown() {
+			countdown--;
+			if (countdown < 0) {
+				countdown = countdownMax;
+			}
+			countdownText.Text = countdown.ToString();
 		}
 		
 		// DESTRUCTOR -----------------------------------------------------------------------------------

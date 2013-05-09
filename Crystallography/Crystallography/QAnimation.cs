@@ -59,11 +59,16 @@ namespace Crystallography
 			return base.Match(pEntities, pForScore );
 		}
 		
+		/// <summary>
+		/// Sets the palette to a default palette.
+		/// </summary>
 		public void setPalette () {
-//			setPalette( "Application/assets/animation/leftFall/leftFall.png", 6, 3, 15, 15, 0, 4, 6, 17);
 			setPalette( "Application/assets/animation/leftFall/leftFall.png", 6, 5, 16, 16, 0, 15, 16, 25);
 		}
 		
+		/// <summary>
+		/// Sets the palette to a specified palette.
+		/// </summary>
 		public void setPalette( string path, int columns, int rows, int start1, int end1, int start2, int end2, int start3, int end3 ) {
 			animTiles = Support.TiledSpriteFromFile( path, columns, rows );
 			palette[0,0] = start1;

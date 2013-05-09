@@ -19,7 +19,7 @@ namespace Crystallography
 		protected static InputManager _instance;
 		
 		public event EventHandler<BaseTouchEventArgs> 		DoubleTapDetected;
-		public event EventHandler<SustainedTouchEventArgs> 		DragDetected;
+		public event EventHandler<SustainedTouchEventArgs> 	DragDetected;
 		public event EventHandler<BaseTouchEventArgs> 		DragReleaseDetected;
 		
 		public event EventHandler							StartJustUpDetected;

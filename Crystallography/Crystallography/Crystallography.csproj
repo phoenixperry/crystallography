@@ -131,6 +131,7 @@
     <Compile Include="ui\LoadingScene.cs" />
     <Compile Include="bg\CrystallonBackgroundObject.cs" />
     <Compile Include="QParticle.cs" />
+    <Compile Include="QCountdown.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
