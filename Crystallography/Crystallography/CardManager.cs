@@ -7,6 +7,8 @@ namespace Crystallography
 {
 	public class CardManager
 	{
+		public static int MAX_CARD_POPULATION = 15;
+		
 		public static List<CardCrystallonEntity> availableCards;
 		protected static CardManager _instance;
 		protected Scene _scene;
@@ -165,15 +167,24 @@ namespace Crystallography
 				for (int i = 0; i < TotalCardsInDeck; i++) {
 					ids.Add(i+NextId);
 				}
-				while ( availableCards.Count <= 15 && TotalCardsInDeck > 0) {
+				while ( availableCards.Count <= MAX_CARD_POPULATION && TotalCardsInDeck > 0) {
 					int index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
 					spawn(ids[index]);
 					ids.RemoveAt(index);
 				}
 			} else {
-				while ( availableCards.Count < MaxPopulation && TotalCardsInDeck > 0) {
-					spawn();
+				ids = new List<int>();
+				for (int i = 0; i < TotalCardsInDeck; i++) {
+					ids.Add(i+NextId);
 				}
+				while ( availableCards.Count <= MAX_CARD_POPULATION && TotalCardsInDeck > 0) {
+					int index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
+					spawn(ids[index]);
+					ids.RemoveAt(index);
+				}
+//				while ( availableCards.Count < MaxPopulation && TotalCardsInDeck > 0) {
+//					spawn();
+//				}
 			}
 		}
 		

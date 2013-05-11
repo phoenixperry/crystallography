@@ -132,6 +132,8 @@
     <Compile Include="bg\CrystallonBackgroundObject.cs" />
     <Compile Include="QParticle.cs" />
     <Compile Include="QCountdown.cs" />
+    <Compile Include="ui\LevelTitle.composer.cs" />
+    <Compile Include="ui\LevelTitle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

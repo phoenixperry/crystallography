@@ -11,6 +11,8 @@ namespace Crystallography.UI
 {
     public partial class ScoreScene : Sce.PlayStation.HighLevel.UI.Scene
     {
+		LevelTitle LevelTitle_1;
+		
 		private const float SCORE_UPDATE_DELAY = 200.0f;
 		private const float INITIAL_SCORE_UPDATE_DELAY = 800.0f;
 		private int _score;
@@ -26,6 +28,11 @@ namespace Crystallography.UI
 		
         public ScoreScene() {
             InitializeWidget();
+			
+			LevelTitle_1 = new LevelTitle();
+			LevelTitle_1.Y = 200;
+			this.RootWidget.AddChildLast(LevelTitle_1);
+			LevelTitle_1.Visible = false;
 			
 			// Set fonts to non-system font
 			//ScoreLabelText.Font = FontManager.Instance.Get("Bariol", 25);
@@ -74,6 +81,7 @@ namespace Crystallography.UI
 		void HandleGameSceneLevelChangeDetected (object sender, EventArgs e)
 		{
 			Reset();
+			ShowLevelTitle();
 		}
 
 		void HandleInputManagerInstanceCircleJustUpDetected (object sender, EventArgs e)
@@ -259,6 +267,44 @@ namespace Crystallography.UI
 				_updateTimer = -INITIAL_SCORE_UPDATE_DELAY;
 			}
 			_score += pHowMuch;
+		}
+		
+		void ShowLevelTitle() {
+			LevelTitle_1.SetLevelText(GameScene.currentLevel);
+//			string[] variables = new string[] {"Color", "Pattern"};
+			List<string> variables = new List<string>();
+			foreach (string key in QualityManager.Instance.qualityDict.Keys) {
+				if ( key == "QOrientation") continue;
+				var variations = QualityManager.Instance.qualityDict[key];
+				if( variations[0] != null && variations[1] != null && variations[2] != null ) {
+					variables.Add(key.Substring(1));
+				}
+			}
+//			.CopyTo(variables,0);
+			LevelTitle_1.SetVariableNames( variables.ToArray() );
+			
+			switch (_currentLayoutOrientation){
+          		case LayoutOrientation.Vertical:
+            		new SlideInEffect()
+                	    {
+                	        Widget = LevelTitle_1,
+                	        MoveDirection = FourWayDirection.Left,
+                	    }.Start();
+                    	break;
+
+                default:
+                   	new SlideInEffect()
+                   		{
+                   	    	Widget = LevelTitle_1,
+                   	    	MoveDirection = FourWayDirection.Left,
+                   		}.Start();
+                   		break;
+            }
+			
+			Sequence sequence = new Sequence();
+			sequence.Add( new DelayTime(1.5f) );
+			sequence.Add (new CallFunc( () => LevelTitle_1.SetVisible(false) ) );
+			Director.Instance.CurrentScene.RunAction( sequence );
 		}
     }
 	
