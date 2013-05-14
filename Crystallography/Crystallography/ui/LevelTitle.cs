@@ -42,7 +42,7 @@ namespace Crystallography.UI
 				n.LineBreak = LineBreak.Character;
 				n.Text = name;
 				n.Y = 180;
-				n.X = (VariableNames.Count-1)*80;
+				n.X = 50 + (VariableNames.Count-1)*80;
 				this.AddChildLast(n);
 			}
 		}

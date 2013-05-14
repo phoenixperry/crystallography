@@ -303,7 +303,8 @@ namespace Crystallography.UI
 			
 			Sequence sequence = new Sequence();
 			sequence.Add( new DelayTime(1.5f) );
-			sequence.Add (new CallFunc( () => LevelTitle_1.SetVisible(false) ) );
+			sequence.Add( new CallFunc( () => new SlideOutEffect{ Widget = LevelTitle_1, MoveDirection = FourWayDirection.Left }.Start() ));
+//			sequence.Add (new CallFunc( () => LevelTitle_1.SetVisible(false) ) );
 			Director.Instance.CurrentScene.RunAction( sequence );
 		}
     }

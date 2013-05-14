@@ -73,12 +73,12 @@ namespace Crystallography.UI
                     this.SetSize(960, 200);
                     this.Anchors = Anchors.None;
 
-                    NextLevelText.SetPosition(0, 0);
+                    NextLevelText.SetPosition(50, 0);
                     NextLevelText.SetSize(121, 36);
                     NextLevelText.Anchors = Anchors.None;
                     NextLevelText.Visible = true;
 
-                    LevelNumberText.SetPosition(0, 58);
+                    LevelNumberText.SetPosition(50, 56);
                     LevelNumberText.SetSize(147, 83);
                     LevelNumberText.Anchors = Anchors.None;
                     LevelNumberText.Visible = true;
