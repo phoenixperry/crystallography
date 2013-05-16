@@ -4,7 +4,7 @@
 		<Quality Name="QOrientation" Value="0" />
 		<Quality Name="QColor" Value="1" />
 		<Quality Name="QPattern" Value="0" />
-		<Quality Name="QCountdown" Value="3" />
+		<Quality Name="QParticle" Value="0" />
 		<Quality Name="QAnimation" Value="0" />
 	</Card>
 	<Card>
@@ -12,7 +12,7 @@
 		<Quality Name="QOrientation" Value="1" />
 		<Quality Name="QColor" Value="1" />
 		<Quality Name="QPattern" Value="0" />
-		<Quality Name="QCountdown" Value="4" />
+		<Quality Name="QParticle" Value="1" />
 		<Quality Name="QAnimation" Value="0" />
 	</Card>
 	<Card>
@@ -20,7 +20,7 @@
 		<Quality Name="QOrientation" Value="2" />
 		<Quality Name="QColor" Value="1" />
 		<Quality Name="QPattern" Value="0" />
-		<Quality Name="QCountdown" Value="5" />
+		<Quality Name="QParticle" Value="2" />
 		<Quality Name="QAnimation" Value="0" />
 	</Card>
 </Level>

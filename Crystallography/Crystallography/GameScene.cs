@@ -75,7 +75,7 @@ namespace Crystallography
 			
 			CardManager.Instance.Populate();
 			
-//			ForegroundLayer.AddChild( Support.ParticleEffectsManager.Instance );
+			ForegroundLayer.AddChild( Support.ParticleEffectsManager.Instance );
 	
             // This is debug routine that will draw the physics bounding box around all physics bodies
             if(DEBUG_BOUNDINGBOXS)
