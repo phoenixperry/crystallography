@@ -9,8 +9,6 @@ namespace Crystallography
 	public abstract class SpriteTileCrystallonEntity : AbstractCrystallonEntity {
 		protected SpriteTile _sprite;
 		protected PhysicsBody _body;
-//		protected float _width;
-//		protected float _height;
 		protected int _orientationIndex;
 		protected int _patternIndex;
 		protected int _particleIndex;
@@ -88,8 +86,8 @@ namespace Crystallography
 		public override void Update (float dt)
 		{
 			if(getBody() != null) {
-				if (_body.Velocity.Length() != 1.0f) {
-					_body.Velocity = _body.Velocity.Normalize();
+				if (_body.Velocity.Length() != 0.3f) {
+					_body.Velocity = _body.Velocity.Normalize() * 0.3f;
 				}
 				_sprite.Position = _body.Position * GamePhysics.PtoM;
 			}

@@ -25,6 +25,7 @@ namespace Crystallography.UI
 			CreditsButton.TextFont = FontManager.Instance.Get("Bariol", 25);
 			
 			NewGameButton.TouchEventReceived += HandleNewGameButtonTouchEventReceived;
+			InfiniteModeButton.TouchEventReceived += HandleInfiniteModeButtonTouchEventReceived;
 			LevelSelectButton.TouchEventReceived += (sender, e) => { 
 				this.RootWidget.Dispose();
 				UISystem.SetScene( new LevelSelectScene() ); 
@@ -37,6 +38,12 @@ namespace Crystallography.UI
 				this.RootWidget.Dispose();
 				UISystem.SetScene( new CreditsScene() ); 
 			};
+        }
+
+        void HandleInfiniteModeButtonTouchEventReceived (object sender, TouchEventArgs e)
+        {
+        	this.RootWidget.Dispose();
+			UISystem.SetScene( new LoadingScene(999) );
         }
 
         void HandleNewGameButtonTouchEventReceived (object sender, TouchEventArgs e)

@@ -17,6 +17,8 @@ namespace Crystallography.UI
         Button LevelSelectButton;
         Button CreditsButton;
         Button OptionsButton;
+        Button InfiniteModeButton;
+        Button TimedModeButton;
 
         private void InitializeWidget()
         {
@@ -37,6 +39,10 @@ namespace Crystallography.UI
             CreditsButton.Name = "CreditsButton";
             OptionsButton = new Button();
             OptionsButton.Name = "OptionsButton";
+            InfiniteModeButton = new Button();
+            InfiniteModeButton.Name = "InfiniteModeButton";
+            TimedModeButton = new Button();
+            TimedModeButton.Name = "TimedModeButton";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -89,6 +95,14 @@ namespace Crystallography.UI
                 BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
             };
 
+            // InfiniteModeButton
+            InfiniteModeButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            InfiniteModeButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+
+            // TimedModeButton
+            TimedModeButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            TimedModeButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+
             // MenuScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
             this.RootWidget.AddChildLast(ImageBox_1);
@@ -96,6 +110,8 @@ namespace Crystallography.UI
             this.RootWidget.AddChildLast(LevelSelectButton);
             this.RootWidget.AddChildLast(CreditsButton);
             this.RootWidget.AddChildLast(OptionsButton);
+            this.RootWidget.AddChildLast(InfiniteModeButton);
+            this.RootWidget.AddChildLast(TimedModeButton);
 
             SetWidgetLayout(orientation);
 
@@ -141,6 +157,16 @@ namespace Crystallography.UI
                     OptionsButton.Anchors = Anchors.None;
                     OptionsButton.Visible = true;
 
+                    InfiniteModeButton.SetPosition(674, 109);
+                    InfiniteModeButton.SetSize(214, 56);
+                    InfiniteModeButton.Anchors = Anchors.None;
+                    InfiniteModeButton.Visible = true;
+
+                    TimedModeButton.SetPosition(63, 109);
+                    TimedModeButton.SetSize(214, 56);
+                    TimedModeButton.Anchors = Anchors.None;
+                    TimedModeButton.Visible = true;
+
                     break;
 
                 default:
@@ -177,6 +203,16 @@ namespace Crystallography.UI
                     OptionsButton.Anchors = Anchors.None;
                     OptionsButton.Visible = true;
 
+                    InfiniteModeButton.SetPosition(674, 109);
+                    InfiniteModeButton.SetSize(214, 56);
+                    InfiniteModeButton.Anchors = Anchors.None;
+                    InfiniteModeButton.Visible = true;
+
+                    TimedModeButton.SetPosition(63, 109);
+                    TimedModeButton.SetSize(214, 56);
+                    TimedModeButton.Anchors = Anchors.None;
+                    TimedModeButton.Visible = true;
+
                     break;
             }
             _currentLayoutOrientation = orientation;
@@ -184,6 +220,10 @@ namespace Crystallography.UI
 
         public void UpdateLanguage()
         {
+            InfiniteModeButton.Text = "Infinite Mode";
+
+            TimedModeButton.Text = "Timed Mode";
+
             this.Title = "MenuScene";
         }
 

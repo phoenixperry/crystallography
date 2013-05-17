@@ -57,8 +57,8 @@ namespace Crystallography
 			LevelManager.Instance.LoadGameData();
 			LevelManager.Instance.GetLevelSettings( pCurrentLevel );
 			
-			background = new Crystallography.BG.CrystallonBackground();
-			BackgroundLayer.AddChild(background);
+//			background = new Crystallography.BG.CrystallonBackground();
+//			BackgroundLayer.AddChild(background);
 			
 			currentLevel = pCurrentLevel;
             this.Camera.SetViewFromViewport();
@@ -187,7 +187,7 @@ namespace Crystallography
 				ForceGarbageCollection();
 				Console.WriteLine( "Resetting to start level " + currentLevel );
 				LevelManager.Instance.GetLevelSettings( currentLevel );
-				background.PickBackground();
+//				background.PickBackground();
 				CardManager.Instance.Reset( this );
 				GroupManager.Instance.Reset( this );
 				QualityManager.Instance.Reset( CardManager.Instance, currentLevel );

@@ -12,8 +12,8 @@ namespace Crystallography
 		
 		//pixels to meters 
 		public static readonly float PtoM = 50.0f;
-		private const float BALLRADIUS = 45.0f/2f;
-		private const float CUBERADIUS = 60.0f/2f;
+		private const float BALLRADIUS = 45.0f; //45.0f/2f;
+		private const float CUBERADIUS = 60.0f; //60.0f/2f;
 		private const float PADDLEWIDHT = 125.0f; 
 		private const float PADDLEHEIGHT = 38.0f; 
 		private float _screenWidth;

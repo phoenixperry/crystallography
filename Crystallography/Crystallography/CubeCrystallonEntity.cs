@@ -14,7 +14,7 @@ namespace Crystallography
 		static readonly Vector2[] POSITION_OFFSETS = { 	new Vector2(0f,-23.5f),
 														new Vector2(-27.0f,23.5f),
 														new Vector2(27.0f,23.5f) };
-		protected readonly static float DEFAULT_SPEED = 1.0f;
+		protected readonly static float DEFAULT_SPEED = 0.3f;
 		
 		// GET & SET -----------------------------------------------------------
 		

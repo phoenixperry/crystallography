@@ -9,13 +9,14 @@ namespace Crystallography
 {
 	public class CardCrystallonEntity : SpriteTileCrystallonEntity
     {
+		static readonly float CARD_SCALAR = 0.7f;
 		/// <summary>
 		/// Offsets used by different pieces to form a cube.
 		/// </summary>
-		static readonly Vector2[] POSITION_OFFSETS = { 	new Vector2(0f,13.0f),
-														new Vector2(-13.5f,-10.5f),
-														new Vector2(13.5f,-10.5f) };
-		protected readonly static float DEFAULT_SPEED = 1.0f;
+		static readonly Vector2[] POSITION_OFFSETS = { 	new Vector2(0f,39.0f*CARD_SCALAR),
+														new Vector2(-40.5f*CARD_SCALAR,-31.5f*CARD_SCALAR),
+														new Vector2(40.5f*CARD_SCALAR,-31.5f*CARD_SCALAR) };
+		protected readonly static float DEFAULT_SPEED = 0.3f;
 		
 		protected SpriteTile _anim;
 		
@@ -78,7 +79,7 @@ namespace Crystallography
 													: base(pScene, pGamePhysics, pTextureInfo, pTileIndex2D, pShape) {
 			id = pId;
 			_anim = null;
-			_sprite.Scale/=3f;
+			_sprite.Scale*=0.7f;
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 		}
 		
@@ -93,7 +94,7 @@ namespace Crystallography
 //			_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Card], 0.1f, 0.01f, new Vector2(100f,100f + GameScene.Random.NextFloat()*100));
 			_sprite.Position = _body.Position * GamePhysics.PtoM;
 //			_sprite.Position = new Vector2(100f, 100f);
-			setVelocity(1.0f, GameScene.Random.NextAngle());
+			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 			addToScene();
 			return this;
 		}
