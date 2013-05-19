@@ -43,6 +43,11 @@ xmlFile = xmlFilePrefix + str(levelNum) + ".xml"
 xmlData = open(xmlFile, 'w')
 xmlData.write("<Level>\n")
 
+
+# the order they need to end up in
+qualities = ['Sound', 'Orientation', 'Color', 'Pattern', 'Particle',
+             'Animation']
+
 for row in rows:
     if ( row['Level'] != str(levelNum) ): # end current level description and start another
         xmlData.write("</Level>")
@@ -52,13 +57,14 @@ for row in rows:
         xmlData = open(xmlFile, 'w')
         xmlData.write("<Level>\n")
     xmlData.write("\t<Card>\n")
-    for entry in row: # add qualities to a card
-        if ( entry != 'Level' and row[entry] != '' ):
-            numQualities += 1
-            xmlData.write('\t\t<Quality Name="Q' + entry + '" Value="' + str(row[entry][-1]) +'" />\n')
+    for quality in qualities:
+        if row[quality] == '':
+            continue
+        numQualities += 1
+        xmlData.write('\t\t<Quality Name="Q' + quality + '" Value="' + str(row[quality][-1]) + '" />\n')
     xmlData.write("\t</Card>\n")
     numCards += 1
-    
+
 xmlData.write("</Level>") # finish the very last level description
 xmlData.close()
 
