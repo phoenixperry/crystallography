@@ -31,8 +31,9 @@ if not os.path.exists('./levels/'):
 rows = []
 csvData = csv.DictReader(open(csvFile, 'rb'))
 for row in csvData:
+    # delete the "notes" column
+    del row['']
     rows.append(row)
-##    print row
 
 levelNum = 0
 numCards = 0
