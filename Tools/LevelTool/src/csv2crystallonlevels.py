@@ -58,6 +58,8 @@ for row in rows:
         xmlData.write("<Level>\n")
     xmlData.write("\t<Card>\n")
     for quality in qualities:
+        if quality == 'Particle' and row[quality] == '':
+            row[quality] = "NONE 0"
         if row[quality] == '':
             continue
         numQualities += 1
