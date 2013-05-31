@@ -368,6 +368,7 @@
     <Content Include="assets\images\redBtn.png" />
     <Content Include="assets\images\levelSelectBtn.png" />
     <Content Include="assets\images\quit_game.png" />
+    <Content Include="assets\images\UI\loading.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
