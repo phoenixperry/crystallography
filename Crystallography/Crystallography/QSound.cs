@@ -54,6 +54,10 @@ namespace Crystallography
 				throw new NotImplementedException("QSound.Apply : pVariant must be 0,1,2");
 				break;
 			}
+			
+			if (LevelManager.Instance.SoundGlow == true) {
+				QGlow.Instance.Apply(pEntity, pVariant);
+			}
 		}
 		
 //		public override bool Match (ICrystallonEntity[] pEntities)

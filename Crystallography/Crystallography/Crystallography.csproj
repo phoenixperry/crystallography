@@ -46,7 +46,6 @@
     <Compile Include="Support.cs" />
     <Compile Include="GameScene.cs" />
     <Compile Include="GamePhysics.cs" />
-    <Compile Include="SpriteSingleton.cs" />
     <Compile Include="QColor.cs" />
     <Compile Include="QPattern.cs" />
     <Compile Include="AbstractCrystallonEntity.cs" />
@@ -139,6 +138,7 @@
     <Compile Include="GameSceneHud.cs" />
     <Compile Include="PausePanel.cs" />
     <Compile Include="LevelTitle.cs" />
+    <Compile Include="QGlow.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -369,6 +369,7 @@
     <Content Include="assets\images\levelSelectBtn.png" />
     <Content Include="assets\images\quit_game.png" />
     <Content Include="assets\images\UI\loading.png" />
+    <Content Include="assets\images\glow.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
@@ -386,5 +387,6 @@
     <None Include="deprecated\MenuScene.cs" />
     <None Include="deprecated\TitleScene.cs" />
     <None Include="assets\images\UI\icons\phones.gif" />
+    <None Include="deprecated\SpriteSingleton.cs" />
   </ItemGroup>
 </Project>

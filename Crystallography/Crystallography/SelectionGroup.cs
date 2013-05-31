@@ -132,6 +132,12 @@ namespace Crystallography
 			if ( population >0 ) {
 				EaseIn();
 			}
+			// HACK this is a little hacky, because CardCrystallonEntites do this in their BeReleased() method
+			// this covers the case where the player just taps on the piece, instead of pressing and holding,
+			// to make sure the glow shuts off correctly
+			if (lastEntityReleased is CardCrystallonEntity) {
+				(lastEntityReleased as CardCrystallonEntity).HideGlow();
+			}
 		}
 		
 		/// <summary>
@@ -152,6 +158,10 @@ namespace Crystallography
 			if (lastEntityReleased is AbstractCrystallonEntity) {
 				lastEntityReleased.playSound();
 			}
+			if (lastEntityReleased is CardCrystallonEntity) {
+				(lastEntityReleased as CardCrystallonEntity).ShowGlow();
+			}
+			    
 //			MemberType = (entity!=null) ? entity.GetType() : null;	// -------------- Cards or Cubes?
 //			if (entity != null) {
 //				Add (entity);
@@ -414,11 +424,12 @@ namespace Crystallography
 		/// </returns>
 		protected GroupCrystallonEntity ReleaseGroup( bool pComplete, bool pForceBreak = false ) {
 			var spawnPos = this.getPosition();
-			var g = GroupManager.Instance.spawn(spawnPos.X, spawnPos.Y, pComplete);
+//			var g = GroupManager.Instance.spawn(spawnPos.X, spawnPos.Y, pComplete);
+			var g = GroupManager.Instance.spawn(spawnPos.X, spawnPos.Y, members, pComplete);
 			g.complete = pComplete;
-			foreach (AbstractCrystallonEntity e in members) {
-				g.Add(e);
-			}
+//			foreach (AbstractCrystallonEntity e in members) {
+//				g.Add(e);
+//			}
 			RemoveAll();
 			Array.Clear(members,0,MAX_CAPACITY);
 			g.Update(0); //HACK prevents group images from being at origin for 1 frame.
@@ -515,6 +526,9 @@ namespace Crystallography
 				if ( closestDistance < SNAP_DISTANCE ) {
 					( closest as AbstractCrystallonEntity ).pickupLocation = closest.getPosition();
 					( closest as AbstractCrystallonEntity).playSound();
+					if ( closest is CardCrystallonEntity ) {
+						( closest as CardCrystallonEntity ).ShowGlow();
+					}
 					Add (closest);
 				}
 			}

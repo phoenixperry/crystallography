@@ -36,6 +36,7 @@ namespace Crystallography
 		public Vector4[] Palette  { get; set; }
 		public string PatternPath { get; set; }
 		public string SoundPrefix { get; set; }
+		public bool SoundGlow     { get; set; }
 		
 		// CONSTRUCTORS -----------------------------------------------------------
 		
@@ -73,6 +74,11 @@ namespace Crystallography
 								PatternPath = line.Attribute("Path").Value;
 							} else if (line.Name.LocalName == "Sound") {
 								SoundPrefix = line.Attribute("Prefix").Value;
+								if (line.Attribute("Glow") != null) {
+									SoundGlow = line.Attribute ("Glow").Value == "true";
+								} else {
+									SoundGlow = false;
+								}
 							}
 						}
 						return;

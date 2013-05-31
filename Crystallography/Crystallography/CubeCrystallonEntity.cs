@@ -97,7 +97,11 @@ namespace Crystallography
 			GroupManager.Instance.Add( this );
 			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Cube], 0.1f, 0.01f, pPosition));
 			setVelocity(1.0f, GameScene.Random.NextAngle());
-
+			foreach( ICrystallonEntity e in members ) {
+				if (e is CardCrystallonEntity) {
+					(e as CardCrystallonEntity).HideGlow();
+				}
+			}
 			addToScene();
 			return this;
 		}

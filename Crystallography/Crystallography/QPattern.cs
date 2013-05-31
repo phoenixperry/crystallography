@@ -48,9 +48,6 @@ namespace Crystallography
 			e.setPattern(pVariant);
 			
 			(e.getNode() as SpriteTile).TileIndex2D = new Vector2i( e.getOrientation(), e.getPattern() );
-			
-			
-			
 		}
 		
 		public void setPalette () {

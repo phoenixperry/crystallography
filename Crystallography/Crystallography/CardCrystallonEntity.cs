@@ -19,12 +19,16 @@ namespace Crystallography
 		protected readonly static float DEFAULT_SPEED = 0.3f;
 		
 		protected SpriteTile _anim;
+//		protected SpriteTile _glowSprite;
+		protected int _glowIndex;
 		
 		protected int countdownMax;
 		protected Label countdownText;
 		public int countdown;
 		
 		// GET & SET ----------------------------------------------------------------
+		
+		public SpriteTile GlowSprite { get; protected set;}
 		
 		/// <summary>
 		/// Gets the attach offset.
@@ -40,6 +44,13 @@ namespace Crystallography
 			return POSITION_OFFSETS[position];
 		}
 		
+		public virtual void setGlow(int pGlow) {
+			_glowIndex = pGlow;
+			GlowSprite = new SpriteTile(QGlow.Instance.GlowTiles.TextureInfo, _orientationIndex);
+			HideGlow();
+			this.getNode().AddChild(GlowSprite);
+		}
+		
 		public override void setOrientation (int pOrientation)
 		{
 			base.setOrientation (pOrientation);
@@ -51,6 +62,9 @@ namespace Crystallography
 				} else {
 					_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
 				}
+			}
+			if(GlowSprite != null) {
+				GlowSprite.TileIndex1D = _orientationIndex;
 			}
 		}
 		
@@ -79,6 +93,7 @@ namespace Crystallography
 													: base(pScene, pGamePhysics, pTextureInfo, pTileIndex2D, pShape) {
 			id = pId;
 			_anim = null;
+			GlowSprite = null;
 			_sprite.Scale*=0.7f;
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 #if DEBUG
@@ -99,6 +114,7 @@ namespace Crystallography
 //			_sprite.Position = new Vector2(100f, 100f);
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 			addToScene();
+			HideGlow();
 			return this;
 		}
 		
@@ -129,7 +145,15 @@ namespace Crystallography
 		
 		// METHODS -------------------------------------------------------------------
 		
-
+		public void ShowGlow() {
+			if (GlowSprite==null) return;
+			GlowSprite.Visible = true;
+		}
+		
+		public void HideGlow() {
+			if (GlowSprite==null) return;
+			GlowSprite.Visible = false;
+		}
 		
 		public void setAnim( SpriteTile anim, int pStart, int pEnd ) {
 			

@@ -92,11 +92,12 @@ namespace Crystallography
 		/// <summary>
 		/// Spawn a new group at a random location.
 		/// </summary>
-		public GroupCrystallonEntity spawn() {
+		public GroupCrystallonEntity spawn(ICrystallonEntity[] pMembers) {
 			var _screenWidth = Director.Instance.GL.Context.GetViewport().Width;
             var _screenHeight = Director.Instance.GL.Context.GetViewport().Height;
 			return spawn( 50f + 0.75f * _screenWidth * GameScene.Random.NextFloat(),
-			       50f + 0.75f * _screenHeight * GameScene.Random.NextFloat());
+			       50f + 0.75f * _screenHeight * GameScene.Random.NextFloat(),
+			             pMembers);
 		}
 		
 		/// <summary>
@@ -108,11 +109,11 @@ namespace Crystallography
 		/// <param name='pY'>
 		/// Y coordinate
 		/// </param>
-		public GroupCrystallonEntity spawn( float pX, float pY, bool pComplete = false ) {
-			var ss = SpriteSingleton.getInstance();
+		public GroupCrystallonEntity spawn( float pX, float pY, ICrystallonEntity[] pMembers, bool pComplete = false ) {
+//			var ss = SpriteSingleton.getInstance();
 			GroupCrystallonEntity g;
 			if (pComplete) {
-				g = new CubeCrystallonEntity(_scene, _physics, _physics.SceneShapes[(int)GamePhysics.BODIES.Cube]);
+				g = new CubeCrystallonEntity(_scene, _physics, null); //_physics.SceneShapes[(int)GamePhysics.BODIES.Cube]);
 //				if ( GameScene.currentLevel == 999 ) {
 //					Sequence sequence = new Sequence();
 //					sequence.Add( new TintTo( new Sce.PlayStation.Core.Vector4( 1.0f, 1.0f, 1.0f, 0.0f ), 2.0f) );
@@ -120,12 +121,17 @@ namespace Crystallography
 //					g.pucks[0].Children[0].RunAction(sequence);
 //				}
 			} else {
-				g = new GroupCrystallonEntity(_scene, _physics, _physics.SceneShapes[(int)GamePhysics.BODIES.Cube], 
+				g = new GroupCrystallonEntity(_scene, _physics, null, //_physics.SceneShapes[(int)GamePhysics.BODIES.Cube], 
 			                                                    SelectionGroup.MAX_CAPACITY, pComplete);
 			}
+			foreach (AbstractCrystallonEntity e in pMembers) {
+				g.Add(e);
+			}
 			g.setPosition( pX, pY );
-			g.addToScene();
-			return Add(g);
+			g.BeReleased(g.getPosition());
+			return g;
+//			g.addToScene();
+//			return Add(g);
 		}
 		
 		// DESTRUCTOR --------------------------------------------------------------------
