@@ -134,6 +134,11 @@
     <Compile Include="QCountdown.cs" />
     <Compile Include="ui\LevelTitle.composer.cs" />
     <Compile Include="ui\LevelTitle.cs" />
+    <Compile Include="ButtonEntity.cs" />
+    <Compile Include="LevelEndPanel.cs" />
+    <Compile Include="GameSceneHud.cs" />
+    <Compile Include="PausePanel.cs" />
+    <Compile Include="LevelTitle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -355,6 +360,14 @@
     <Content Include="assets\images\bg\3\smallCube.png" />
     <Content Include="assets\images\bg\3\zigTotal.png" />
     <Content Include="assets\images\particles.png" />
+    <Content Include="assets\images\button_85x56.png" />
+    <Content Include="assets\images\GameHudBar.png" />
+    <Content Include="assets\images\PausePanelBG.png" />
+    <Content Include="assets\images\next_level_sm.png" />
+    <Content Include="assets\images\blueBtn.png" />
+    <Content Include="assets\images\redBtn.png" />
+    <Content Include="assets\images\levelSelectBtn.png" />
+    <Content Include="assets\images\quit_game.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

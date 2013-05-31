@@ -81,6 +81,9 @@ namespace Crystallography
 			_anim = null;
 			_sprite.Scale*=0.7f;
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
+#if DEBUG
+			Console.WriteLine(this.GetType().ToString() + " " + id.ToString() + " created");
+#endif
 		}
 		
 		// OVERRIDES -----------------------------------------------------------------

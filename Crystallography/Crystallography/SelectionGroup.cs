@@ -72,6 +72,8 @@ namespace Crystallography
 		
 		void HandleInputManagerInstanceDragDetected (object sender, SustainedTouchEventArgs e)
 		{
+			if( GameScene.paused ) return;
+			
 //			var entity = GetEntityAtPosition( e.touchPosition );
 			if (lastEntityReleased!=null) {
 				if (lastEntityReleased.GetType().ToString() == "Crystallography.GroupCrystallonEntity") {
@@ -84,7 +86,7 @@ namespace Crystallography
 				MemberType = null;
 			}
 			if(MemberType != null) {
-				Console.WriteLine(MemberType);
+				Console.WriteLine(MemberType + " " + lastEntityReleased.id + " selected");
 			}
 			if (lastEntityReleased != null) {
 				Add (lastEntityReleased);
@@ -103,6 +105,8 @@ namespace Crystallography
 		/// </param>
 		void HandleInputManagerInstanceDoubleTapDetected (object sender, EventArgs e)
 		{
+			if( GameScene.paused ) return;
+			
 			if( population > 1 ) {
 				EaseIn ( true );
 			}
@@ -123,6 +127,8 @@ namespace Crystallography
 		/// </param>
 		void HandleInputManagerInstanceTouchJustUpDetected (object sender, BaseTouchEventArgs e)
 		{
+			if ( GameScene.paused ) return;
+			
 			if ( population >0 ) {
 				EaseIn();
 			}
@@ -139,6 +145,8 @@ namespace Crystallography
 		/// </param>
 		void HandleInputManagerInstanceTouchJustDownDetected (object sender, BaseTouchEventArgs e)
 		{
+			if ( GameScene.paused ) return;
+			
 			var entity = GetEntityAtPosition( e.touchPosition );
 			lastEntityReleased = entity as AbstractCrystallonEntity;
 			if (lastEntityReleased is AbstractCrystallonEntity) {
@@ -162,6 +170,7 @@ namespace Crystallography
 		/// </param>
 		void HandleInputManagerInstanceTouchDownDetected (object sender, SustainedTouchEventArgs e)
 		{
+			if ( GameScene.paused ) return;
 			setPosition( e.touchPosition );
 			if ( population > 0 ) {
 				if (velocity < MAXIMUM_PICKUP_VELOCITY) {
@@ -280,6 +289,7 @@ namespace Crystallography
 			var upperRight = Vector2.Zero;
 			System.Collections.ObjectModel.ReadOnlyCollection<ICrystallonEntity> allEntities = GameScene.getAllEntities();
 			foreach (ICrystallonEntity e in allEntities) {
+				if (e is ButtonEntity) continue; // HACK this should probably be done more intelligently
 				if (e == null) continue;	// e IS NOT ACTUALLY A THING -- IGNORE (BUT IF THIS EVER HAPPENS, IT'S PROBS A BUG)
 				if ( e is NodeCrystallonEntity ) { // ----------------------------- e DESCENDS FROM NodeCrystallonEntity, LIKE GROUPS DO
 					PhysicsBody body = e.getBody();

@@ -63,6 +63,9 @@ namespace Crystallography
 				AddPuck(i);
 			}
 			complete = pComplete;
+#if DEBUG
+			Console.WriteLine(this.GetType().ToString() + " " + id.ToString() + " created");
+#endif
 		}
 		
 		// OVERRIDES -------------------------------------------------------------

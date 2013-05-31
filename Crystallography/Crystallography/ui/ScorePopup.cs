@@ -8,16 +8,15 @@ namespace Crystallography.UI
 {
 	public class ScorePopup : Label
 	{
-		private static readonly Font font = new Font("Application/assets/fonts/Bariol_Regular.otf", 25, FontStyle.Regular);
-		private static readonly FontMap map = new FontMap(font);
-//		private ICrystallonEntity _parent;
+		private static readonly Font font = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25);
+		private static readonly FontMap map = Crystallography.UI.FontManager.Instance.GetMap( font );
 		
 		public ScorePopup (ICrystallonEntity pParent, int pPoints) : base(pPoints.ToString(), map)
 		{
 			if (pPoints < 10) {
-				Position = new Vector2(-7.0f, 25.0f);
+				Position = new Vector2(-7.0f, 60.0f);
 			} else {
-				Position = new Vector2(-12.0f, 25.0f);
+				Position = new Vector2(-12.0f, 60.0f);
 			}
 			Color = Colors.White;
 			Pivot = new Vector2(0.5f, 0.5f);
@@ -39,6 +38,7 @@ namespace Crystallography.UI
 			
 			if ( Color.A < 0) {
 				this.UnscheduleAll();
+				Parent.RemoveChild(this, true);
 			}
 		}
 		

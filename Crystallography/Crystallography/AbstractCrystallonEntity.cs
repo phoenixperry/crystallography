@@ -23,7 +23,10 @@ namespace Crystallography
 		
 		public Node Parent { get { return getNode ().Parent; } }
 		
-		public bool Visible { get { return getNode ().Visible; } set { getNode ().Visible = value; } }
+		public bool Visible { 
+			get { return getNode ().Visible; } 
+			set { getNode ().Visible = value; } 
+		}
 		
 		// CONSTRUCTORS--------------------
 		
@@ -41,9 +44,6 @@ namespace Crystallography
 			_physics = pGamePhysics;
 			_offset = Vector2.Zero;
 			pickupLocation = Vector2.Zero;
-#if DEBUG
-			Console.WriteLine(this.GetType().ToString() + " " + id.ToString() + " created");
-#endif
 		}
 		
 		// METHODS--------------------------
@@ -148,10 +148,12 @@ namespace Crystallography
 		/// </summary>
 		public void addToScene(int pLayerIndex=1) {
 			Node node = getNode();
-			if (node.Parent == (_scene as GameScene).Layers[pLayerIndex]) { // ALREADY ATTACHED TO SCENE -- DONE
-				return;
-			} else if (node.Parent != null) {
-				node.Parent.RemoveChild(node, false);
+			if (node.Parent != null) {
+				if (node.Parent == (_scene as GameScene).Layers[pLayerIndex]) { // ALREADY ATTACHED TO SCENE -- DONE
+					return;
+				} else {
+					node.Parent.RemoveChild(node, false);
+				}
 			}
 			(_scene as GameScene).AddChildEntity(this, pLayerIndex);
 		}
@@ -282,7 +284,9 @@ namespace Crystallography
 		/// Tells the <c>SoundSystem</c> to play this entity's interaction sound.
 		/// </summary>
 		public virtual void playSound() {
-			Support.SoundSystem.Instance.Play(_sound);
+			if (_sound != null) {
+				Support.SoundSystem.Instance.Play(_sound);
+			}
 		}
 		
 		/// <summary>

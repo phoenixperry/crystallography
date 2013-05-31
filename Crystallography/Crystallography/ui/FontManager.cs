@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using Sce.PlayStation.Core.Imaging;
 using Sce.PlayStation.HighLevel.UI;
+using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
 namespace Crystallography.UI
 {
 	public class FontManager
 	{
 		protected Dictionary<string, UIFont> fontDict;
+//		protected Dictionary<string, Font> inGameFontDict;
+		protected Dictionary<Font, FontMap> fontMapDict;
 		
 		public string assetRoot;
 		
@@ -24,6 +27,8 @@ namespace Crystallography.UI
 		protected FontManager (string pAssetRoot) {
 			assetRoot = pAssetRoot;
 			fontDict = new Dictionary<string, UIFont>();
+//			inGameFontDict = new Dictionary<string, Font>();
+			fontMapDict = new Dictionary<Font, FontMap>();
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " Created");
 #endif
@@ -56,6 +61,16 @@ namespace Crystallography.UI
 			}
 		}
 		
+		protected void CheckMapCache( Font font ) {
+//			string key = font.Name + font.Style.ToString() + font.Size.ToString();
+			if (fontMapDict.ContainsKey( font ) ) {
+				return;
+			} else {
+				var map = new FontMap( font );
+				fontMapDict.Add( font, map );
+			}
+		}
+		
 		/// <summary>
 		/// Get the specified UIFont object..
 		/// </summary>
@@ -71,6 +86,16 @@ namespace Crystallography.UI
 		public UIFont Get( string pName, int pSize, string pStyle = "Regular" ) {
 			CheckCache( pName, pSize, pStyle );
 			return fontDict[ pName + pStyle + pSize ];
+		}
+		
+		public Font GetInGame( string pName, int pSize, string pStyle = "Regular" ) {
+			CheckCache( pName, pSize, pStyle );
+			return fontDict[ pName + pStyle + pSize ].GetFont();
+		}
+		
+		public FontMap GetMap( Font font ) {
+			CheckMapCache( font );
+			return fontMapDict[ font ];
 		}
 	}
 }

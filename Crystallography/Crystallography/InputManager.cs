@@ -8,6 +8,8 @@ namespace Crystallography
 {
 	public class InputManager
 	{
+		public bool enabled = true;
+		
 		// DOUBLE TAP CONSTANTS
 		private static readonly float MAX_PRESS_DURATION = 0.15f;
 		private static readonly float MAX_RELEASE_DURATION = 0.3f;
@@ -92,7 +94,9 @@ namespace Crystallography
 		/// </param>
 		public void Update( float dt ) {
 			
-			if( !GameScene.paused ) {	// ---------------------------------------- touch controls for UI are handled elsewhere.
+			if( !enabled ) return;
+			
+//			if( !GameScene.paused ) {	// ---------------------------------------- touch controls for UI are handled elsewhere.
 				if ( Input2.Touch00.Press ) {	// -------------------------------- on new touch
 					OnTouchJustDown( new BaseTouchEventArgs {
 						touchPosition = Director.Instance.CurrentScene.Camera.NormalizedToWorld( Input2.Touch00.Pos )
@@ -113,7 +117,7 @@ namespace Crystallography
 //				if ( (Touch01 as Input2.TouchData).Press ) {
 //					OnTouchDown
 //				}
-			}
+//			}
 			
 			if ( Input2.GamePad0.Start.Release ) {
 				OnStartJustUp();

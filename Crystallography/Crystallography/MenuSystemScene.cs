@@ -40,6 +40,7 @@ namespace Crystallography
 			base.OnExit ();
 			Support.MusicSystem.Instance.StopAll();
 			System.GC.Collect();
+			AppMain.UI_INPUT_ENABLED = false;
 		}
 		
 		public override void Update (float dt)

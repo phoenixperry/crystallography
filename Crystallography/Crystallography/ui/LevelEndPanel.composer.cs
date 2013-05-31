@@ -12,9 +12,9 @@ namespace Crystallography.UI
     partial class LevelEndPanel
     {
         ImageBox ImageBox_1;
-        Button NextLevelButton;
-        Button LevelSelectButton;
-        Button QuitButton;
+//        Button NextLevelButton;
+//        Button LevelSelectButton;
+//        Button QuitButton;
         Label YourScoreText;
         Label BestScoreText;
         Label YourTimeText;
@@ -29,12 +29,12 @@ namespace Crystallography.UI
         {
             ImageBox_1 = new ImageBox();
             ImageBox_1.Name = "ImageBox_1";
-            NextLevelButton = new Button();
-            NextLevelButton.Name = "NextLevelButton";
-            LevelSelectButton = new Button();
-            LevelSelectButton.Name = "LevelSelectButton";
-            QuitButton = new Button();
-            QuitButton.Name = "QuitButton";
+//            NextLevelButton = new Button();
+//            NextLevelButton.Name = "NextLevelButton";
+//            LevelSelectButton = new Button();
+//            LevelSelectButton.Name = "LevelSelectButton";
+//            QuitButton = new Button();
+//            QuitButton.Name = "QuitButton";
             YourScoreText = new Label();
             YourScoreText.Name = "YourScoreText";
             BestScoreText = new Label();
@@ -49,37 +49,37 @@ namespace Crystallography.UI
             ImageBox_1.ImageScaleType = ImageScaleType.Center;
 
             // NextLevelButton
-            NextLevelButton.IconImage = null;
-            NextLevelButton.Style = ButtonStyle.Custom;
-            NextLevelButton.CustomImage = new CustomButtonImageSettings()
-            {
-                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/nextLevel.png"),
-                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/nextLevelOver.png"),
-                BackgroundDisabledImage = null,
-                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
-            };
+//            NextLevelButton.IconImage = null;
+//            NextLevelButton.Style = ButtonStyle.Custom;
+//            NextLevelButton.CustomImage = new CustomButtonImageSettings()
+//            {
+//                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/nextLevel.png"),
+//                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/nextLevelOver.png"),
+//                BackgroundDisabledImage = null,
+//                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
+//            };
 
             // LevelSelectButton
-            LevelSelectButton.IconImage = null;
-            LevelSelectButton.Style = ButtonStyle.Custom;
-            LevelSelectButton.CustomImage = new CustomButtonImageSettings()
-            {
-                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/levelSelectBtn.png"),
-                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/levelSelectBtnRoll.png"),
-                BackgroundDisabledImage = null,
-                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
-            };
+//            LevelSelectButton.IconImage = null;
+//            LevelSelectButton.Style = ButtonStyle.Custom;
+//            LevelSelectButton.CustomImage = new CustomButtonImageSettings()
+//            {
+//                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/levelSelectBtn.png"),
+//                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/levelSelectBtnRoll.png"),
+//                BackgroundDisabledImage = null,
+//                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+//            };
 
             // QuitButton
-            QuitButton.IconImage = null;
-            QuitButton.Style = ButtonStyle.Custom;
-            QuitButton.CustomImage = new CustomButtonImageSettings()
-            {
-                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/quit_game.png"),
-                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/quit_game_Roll.png"),
-                BackgroundDisabledImage = null,
-                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
-            };
+//            QuitButton.IconImage = null;
+//            QuitButton.Style = ButtonStyle.Custom;
+//            QuitButton.CustomImage = new CustomButtonImageSettings()
+//            {
+//                BackgroundNormalImage = new ImageAsset("/Application/assets/images/UI/quit_game.png"),
+//                BackgroundPressedImage = new ImageAsset("/Application/assets/images/UI/quit_game_Roll.png"),
+//                BackgroundDisabledImage = null,
+//                BackgroundNinePatchMargin = new NinePatchMargin(0, 0, 0, 0),
+//            };
 
             // YourScoreText
             YourScoreText.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
@@ -105,9 +105,9 @@ namespace Crystallography.UI
             this.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             this.Clip = true;
             this.AddChildLast(ImageBox_1);
-            this.AddChildLast(NextLevelButton);
-            this.AddChildLast(LevelSelectButton);
-            this.AddChildLast(QuitButton);
+//            this.AddChildLast(NextLevelButton);
+//            this.AddChildLast(LevelSelectButton);
+//            this.AddChildLast(QuitButton);
             this.AddChildLast(YourScoreText);
             this.AddChildLast(BestScoreText);
             this.AddChildLast(YourTimeText);
@@ -132,20 +132,20 @@ namespace Crystallography.UI
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    NextLevelButton.SetPosition(392, 180);
-                    NextLevelButton.SetSize(214, 56);
-                    NextLevelButton.Anchors = Anchors.None;
-                    NextLevelButton.Visible = true;
+//                    NextLevelButton.SetPosition(392, 180);
+//                    NextLevelButton.SetSize(214, 56);
+//                    NextLevelButton.Anchors = Anchors.None;
+//                    NextLevelButton.Visible = true;
 
-                    LevelSelectButton.SetPosition(356, 376);
-                    LevelSelectButton.SetSize(214, 56);
-                    LevelSelectButton.Anchors = Anchors.None;
-                    LevelSelectButton.Visible = true;
+//                    LevelSelectButton.SetPosition(356, 376);
+//                    LevelSelectButton.SetSize(214, 56);
+//                    LevelSelectButton.Anchors = Anchors.None;
+//                    LevelSelectButton.Visible = true;
 
-                    QuitButton.SetPosition(672, 332);
-                    QuitButton.SetSize(214, 56);
-                    QuitButton.Anchors = Anchors.None;
-                    QuitButton.Visible = true;
+//                    QuitButton.SetPosition(672, 332);
+//                    QuitButton.SetSize(214, 56);
+//                    QuitButton.Anchors = Anchors.None;
+//                    QuitButton.Visible = true;
 
                     YourScoreText.SetPosition(476, 66);
                     YourScoreText.SetSize(214, 36);
@@ -170,7 +170,7 @@ namespace Crystallography.UI
                     break;
 
                 default:
-                    this.SetSize(960, 544);
+                    this.SetSize(960, 474);//544);
                     this.Anchors = Anchors.None;
 
                     ImageBox_1.SetPosition(90, 8);
@@ -178,20 +178,20 @@ namespace Crystallography.UI
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    NextLevelButton.SetPosition(491, 477);
-                    NextLevelButton.SetSize(366, 68);
-                    NextLevelButton.Anchors = Anchors.None;
-                    NextLevelButton.Visible = true;
+//                    NextLevelButton.SetPosition(491, 477);
+//                    NextLevelButton.SetSize(366, 68);
+//                    NextLevelButton.Anchors = Anchors.None;
+//                    NextLevelButton.Visible = true;
 
-                    LevelSelectButton.SetPosition(260, 477);
-                    LevelSelectButton.SetSize(225, 68);
-                    LevelSelectButton.Anchors = Anchors.None;
-                    LevelSelectButton.Visible = true;
+//                    LevelSelectButton.SetPosition(260, 477);
+//                    LevelSelectButton.SetSize(225, 68);
+//                    LevelSelectButton.Anchors = Anchors.None;
+//                    LevelSelectButton.Visible = true;
 
-                    QuitButton.SetPosition(107, 477);
-                    QuitButton.SetSize(148, 68);
-                    QuitButton.Anchors = Anchors.None;
-                    QuitButton.Visible = true;
+//                    QuitButton.SetPosition(107, 477);
+//                    QuitButton.SetSize(148, 68);
+//                    QuitButton.Anchors = Anchors.None;
+//                    QuitButton.Visible = true;
 
                     YourScoreText.SetPosition(276, 254);
                     YourScoreText.SetSize(115, 36);
@@ -250,7 +250,7 @@ namespace Crystallography.UI
                 case LayoutOrientation.Vertical:
                     new SlideInEffect()
                     {
-                        Widget = NextLevelButton,
+//                        Widget = NextLevelButton,
                         MoveDirection = FourWayDirection.Up,
                     }.Start();
                     break;
@@ -258,7 +258,7 @@ namespace Crystallography.UI
                 default:
                     new SlideInEffect()
                     {
-                        Widget = NextLevelButton,
+//                        Widget = NextLevelButton,
                         MoveDirection = FourWayDirection.Up,
                     }.Start();
                     break;

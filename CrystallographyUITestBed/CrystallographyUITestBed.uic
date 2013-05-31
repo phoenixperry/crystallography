@@ -8926,7 +8926,7 @@
             <TextTrimming>EllipsisCharacter</TextTrimming>
           </Property>
           <IsRoot>false</IsRoot>
-          <PivotPos>LeftTop</PivotPos>
+          <PivotPos>MiddleMiddle</PivotPos>
           <WidgetType>Button</WidgetType>
           <ID>952855180</ID>
           <ZIndex>2</ZIndex>
@@ -9010,7 +9010,7 @@
             <TextTrimming>EllipsisCharacter</TextTrimming>
           </Property>
           <IsRoot>false</IsRoot>
-          <PivotPos>LeftTop</PivotPos>
+          <PivotPos>MiddleMiddle</PivotPos>
           <WidgetType>Button</WidgetType>
           <ID>1153946272</ID>
           <ZIndex>3</ZIndex>
@@ -9094,7 +9094,7 @@
             <TextTrimming>EllipsisCharacter</TextTrimming>
           </Property>
           <IsRoot>false</IsRoot>
-          <PivotPos>LeftTop</PivotPos>
+          <PivotPos>MiddleMiddle</PivotPos>
           <WidgetType>Button</WidgetType>
           <ID>1379617864</ID>
           <ZIndex>4</ZIndex>
