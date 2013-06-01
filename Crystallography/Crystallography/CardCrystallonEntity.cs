@@ -108,7 +108,7 @@ namespace Crystallography
 				QOrientation.Instance.Apply(this,0);
 			}
 			CardManager.Instance.Add( this as CardCrystallonEntity );
-			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Card], 0.1f, 0.01f, pPosition));
+			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Card], 0.02f, 0.008f, pPosition));
 //			_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Card], 0.1f, 0.01f, new Vector2(100f,100f + GameScene.Random.NextFloat()*100));
 			_sprite.Position = _body.Position * GamePhysics.PtoM;
 //			_sprite.Position = new Vector2(100f, 100f);

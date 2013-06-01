@@ -456,8 +456,6 @@ namespace Preview
             this.RootWidget.AddChildLast(ImageBox_20);
             this.RootWidget.AddChildLast(ImageBox_21);
             this.RootWidget.AddChildLast(PagePanel_1);
-            this.Showing += new EventHandler(onShowing);
-            this.Shown += new EventHandler(onShown);
 
             SetWidgetLayout(orientation);
 
@@ -1043,17 +1041,9 @@ namespace Preview
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
-                    ImageBox_1.Visible = false;
-                    ImageBox_6.Visible = false;
-                    ImageBox_11.Visible = false;
-                    ImageBox_16.Visible = false;
                     break;
 
                 default:
-                    ImageBox_1.Visible = false;
-                    ImageBox_6.Visible = false;
-                    ImageBox_11.Visible = false;
-                    ImageBox_16.Visible = false;
                     break;
             }
         }
@@ -1063,41 +1053,9 @@ namespace Preview
             switch (_currentLayoutOrientation)
             {
                 case LayoutOrientation.Vertical:
-                    new BunjeeJumpEffect()
-                    {
-                        Widget = ImageBox_1,
-                    }.Start();
-                    new BunjeeJumpEffect()
-                    {
-                        Widget = ImageBox_6,
-                    }.Start();
-                    new BunjeeJumpEffect()
-                    {
-                        Widget = ImageBox_11,
-                    }.Start();
-                    new BunjeeJumpEffect()
-                    {
-                        Widget = ImageBox_16,
-                    }.Start();
                     break;
 
                 default:
-                    new BunjeeJumpEffect()
-                    {
-                        Widget = ImageBox_1,
-                    }.Start();
-                    new BunjeeJumpEffect()
-                    {
-                        Widget = ImageBox_6,
-                    }.Start();
-                    new BunjeeJumpEffect()
-                    {
-                        Widget = ImageBox_11,
-                    }.Start();
-                    new BunjeeJumpEffect()
-                    {
-                        Widget = ImageBox_16,
-                    }.Start();
                     break;
             }
         }

@@ -2,7 +2,7 @@
 [Microsoft .NET Framework, version 4.0.30319.18034]
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 6/1/2013 12:29:10 AM.
+Build started 6/1/2013 9:25:50 AM.
 Project "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\Preview.csproj" on node 1 (Rebuild target(s)).
 CoreClean:
   Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\app.exe".
@@ -169,7 +169,7 @@ Skipping target "_CompileEmbeddedShaderPrograms" because it has no outputs.
 GenerateTargetFrameworkMonikerAttribute:
 Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
 CoreCompile:
-  c:\windows\Microsoft.NET\Framework\v4.0.30319\Csc.exe /noconfig /nostdlib+ /errorreport:prompt /warn:4 /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\mscorlib.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\Sce.PlayStation.Core.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\Sce.PlayStation.HighLevel.UI.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\System.dll" /debug- /optimize- /out:obj\Release\app.exe /target:exe /utf8output __DummyProgram.cs levelSection.composer.cs levelSection.cs UIStringTable.cs "C:\Users\phoenix\AppData\Local\Temp\Psm,Version=v1.0.AssemblyAttributes.cs"
+  c:\windows\Microsoft.NET\Framework\v4.0.30319\Csc.exe /noconfig /nostdlib+ /errorreport:prompt /warn:4 /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\mscorlib.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\Sce.PlayStation.Core.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\Sce.PlayStation.HighLevel.UI.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\System.dll" /debug- /optimize- /out:obj\Release\app.exe /target:exe /utf8output __DummyProgram.cs InfinityMode.composer.cs InfinityMode.cs UIStringTable.cs "C:\Users\phoenix\AppData\Local\Temp\Psm,Version=v1.0.AssemblyAttributes.cs"
 _CopyFilesToBundle:
   Copying file from "obj\Release\app.exe" to "bin\Release\Preview-unsigned\Application\app.exe".
   Copying file from "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\Sce.PlayStation.HighLevel.UI.dll" to "bin\Release\Preview-unsigned\Application\Sce.PlayStation.HighLevel.UI.dll".
@@ -314,6 +314,10 @@ _CopyFilesToBundle:
   Copying file from "..\\assets\new/newUI/bigger images/\goal.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/bigger images/\goal.png".
   Copying file from "..\\assets\new/newUI/bigger images/\hitMe.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/bigger images/\hitMe.png".
   Copying file from "..\\assets\new/newUI/bigger images/\score.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/bigger images/\score.png".
+  Creating directory "bin\Release\Preview-unsigned\Application\assets\new\newUI\hud".
+  Copying file from "..\\assets\new/newUI/hud/\goal.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/hud/\goal.png".
+  Copying file from "..\\assets\new/newUI/hud/\hitMe.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/hud/\hitMe.png".
+  Copying file from "..\\assets\new/newUI/hud/\score.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/hud/\score.png".
 _CreatePackage:
   Since the Publisher Key and App Key corresponding to this app did not exist, -signed directory was not made.
   File not found. "C:\Users\phoenix\AppData\Roaming\SCE\PSM Publishing Utility\HostAppsKey\Preview.khapp"
@@ -324,4 +328,4 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.31
+Time Elapsed 00:00:02.62

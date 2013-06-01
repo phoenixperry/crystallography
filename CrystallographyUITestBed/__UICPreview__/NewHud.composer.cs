@@ -63,15 +63,15 @@ namespace Preview
             Panel_2.Name = "Panel_2";
 
             // ImageBox_1
-            ImageBox_1.Image = new ImageAsset("/Application/assets/new/newUI/bigger images/score.png");
+            ImageBox_1.Image = new ImageAsset("/Application/assets/new/newUI/hud/score.png");
             ImageBox_1.ImageScaleType = ImageScaleType.Center;
 
             // ImageBox_2
-            ImageBox_2.Image = new ImageAsset("/Application/assets/new/newUI/bigger images/goal.png");
+            ImageBox_2.Image = new ImageAsset("/Application/assets/new/newUI/hud/goal.png");
             ImageBox_2.ImageScaleType = ImageScaleType.Center;
 
             // ImageBox_3
-            ImageBox_3.Image = new ImageAsset("/Application/assets/new/newUI/bigger images/hitMe.png");
+            ImageBox_3.Image = new ImageAsset("/Application/assets/new/newUI/hud/hitMe.png");
             ImageBox_3.ImageScaleType = ImageScaleType.Center;
 
             // ImageBox_4
@@ -232,7 +232,7 @@ namespace Preview
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    ImageBox_2.SetPosition(226, 0);
+                    ImageBox_2.SetPosition(226, -2);
                     ImageBox_2.SetSize(103, 69);
                     ImageBox_2.Anchors = Anchors.None;
                     ImageBox_2.Visible = true;

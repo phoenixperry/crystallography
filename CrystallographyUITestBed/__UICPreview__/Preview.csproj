@@ -31,8 +31,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="__DummyProgram.cs" />
-    <Compile Include="levelSection.composer.cs" />
-    <Compile Include="levelSection.cs" />
+    <Compile Include="InfinityMode.composer.cs" />
+    <Compile Include="InfinityMode.cs" />
     <Compile Include="UIStringTable.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -458,6 +458,15 @@
     </Content>
     <Content Include="..\\assets\new/newUI/bigger%20images/\score.png" >
       <Link>assets\new/newUI/bigger%20images/\score.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/hud/\goal.png" >
+      <Link>assets\new/newUI/hud/\goal.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/hud/\hitMe.png" >
+      <Link>assets\new/newUI/hud/\hitMe.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/hud/\score.png" >
+      <Link>assets\new/newUI/hud/\score.png</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>
