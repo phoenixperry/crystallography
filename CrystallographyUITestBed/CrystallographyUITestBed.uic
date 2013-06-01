@@ -10046,7 +10046,7 @@
                 <Effect>None</Effect>
                 <OwnerNode z:Ref="i163" />
                 <VariableName>ImageBox_1</VariableName>
-                <Image>new/newUI/bigger images/score.png</Image>
+                <Image>new/newUI/hud/score.png</Image>
                 <NinePatchMargin xmlns:d9p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
                   <d9p1:ButtomRowHeight>0</d9p1:ButtomRowHeight>
                   <d9p1:LeftColumnWidth>0</d9p1:LeftColumnWidth>
@@ -10075,7 +10075,7 @@
               <LayoutProperty>
                 <LayoutProperty>
                   <X>226.69696969696986</X>
-                  <Y>0</Y>
+                  <Y>-2.5</Y>
                   <Width>103</Width>
                   <Height>69</Height>
                   <Visible>true</Visible>
@@ -10094,7 +10094,7 @@
                 <Effect>None</Effect>
                 <OwnerNode z:Ref="i164" />
                 <VariableName>ImageBox_2</VariableName>
-                <Image>new/newUI/bigger images/goal.png</Image>
+                <Image>new/newUI/hud/goal.png</Image>
                 <NinePatchMargin xmlns:d9p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
                   <d9p1:ButtomRowHeight>0</d9p1:ButtomRowHeight>
                   <d9p1:LeftColumnWidth>0</d9p1:LeftColumnWidth>
@@ -10142,7 +10142,7 @@
                 <Effect>None</Effect>
                 <OwnerNode z:Ref="i165" />
                 <VariableName>ImageBox_3</VariableName>
-                <Image>new/newUI/bigger images/hitMe.png</Image>
+                <Image>new/newUI/hud/hitMe.png</Image>
                 <NinePatchMargin xmlns:d9p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
                   <d9p1:ButtomRowHeight>0</d9p1:ButtomRowHeight>
                   <d9p1:LeftColumnWidth>0</d9p1:LeftColumnWidth>
