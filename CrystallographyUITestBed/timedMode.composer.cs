@@ -218,62 +218,62 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    ImageBox_1.SetPosition(36, -26);
+                    ImageBox_1.SetPosition(76, -23);
                     ImageBox_1.SetSize(359, 200);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    ImageBox_3.SetPosition(497, 280);
+                    ImageBox_3.SetPosition(497, 276);
                     ImageBox_3.SetSize(355, 200);
                     ImageBox_3.Anchors = Anchors.None;
                     ImageBox_3.Visible = true;
 
-                    Label_1.SetPosition(217, 363);
+                    Label_1.SetPosition(217, 366);
                     Label_1.SetSize(84, 60);
                     Label_1.Anchors = Anchors.None;
                     Label_1.Visible = true;
 
-                    Button_1.SetPosition(74, 138);
+                    Button_1.SetPosition(73, 130);
                     Button_1.SetSize(162, 162);
                     Button_1.Anchors = Anchors.None;
                     Button_1.Visible = true;
 
-                    ImageBox_7.SetPosition(200, 110);
+                    ImageBox_7.SetPosition(200, 102);
                     ImageBox_7.SetSize(219, 218);
                     ImageBox_7.Anchors = Anchors.None;
                     ImageBox_7.Visible = true;
 
-                    ImageBox_8.SetPosition(356, 110);
+                    ImageBox_8.SetPosition(355, 102);
                     ImageBox_8.SetSize(219, 218);
                     ImageBox_8.Anchors = Anchors.None;
                     ImageBox_8.Visible = true;
 
-                    ImageBox_9.SetPosition(511, 110);
+                    ImageBox_9.SetPosition(511, 102);
                     ImageBox_9.SetSize(219, 218);
                     ImageBox_9.Anchors = Anchors.None;
                     ImageBox_9.Visible = true;
 
-                    ImageBox_10.SetPosition(667, 110);
+                    ImageBox_10.SetPosition(667, 102);
                     ImageBox_10.SetSize(219, 218);
                     ImageBox_10.Anchors = Anchors.None;
                     ImageBox_10.Visible = true;
 
-                    Label_2.SetPosition(633, 366);
+                    Label_2.SetPosition(633, 364);
                     Label_2.SetSize(84, 60);
                     Label_2.Anchors = Anchors.None;
                     Label_2.Visible = true;
 
-                    ImageBox_2.SetPosition(76, 280);
+                    ImageBox_2.SetPosition(76, 276);
                     ImageBox_2.SetSize(343, 200);
                     ImageBox_2.Anchors = Anchors.None;
                     ImageBox_2.Visible = true;
 
-                    ImageBox_4.SetPosition(789, 405);
+                    ImageBox_4.SetPosition(789, 406);
                     ImageBox_4.SetSize(200, 200);
                     ImageBox_4.Anchors = Anchors.None;
                     ImageBox_4.Visible = true;
 
-                    Label_3.SetPosition(207, 368);
+                    Label_3.SetPosition(207, 364);
                     Label_3.SetSize(84, 60);
                     Label_3.Anchors = Anchors.None;
                     Label_3.Visible = true;

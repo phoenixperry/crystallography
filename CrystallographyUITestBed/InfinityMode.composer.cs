@@ -18,8 +18,7 @@ namespace Crystallography.UI
         ImageBox ImageBox_8;
         ImageBox ImageBox_9;
         ImageBox ImageBox_10;
-        ImageBox ImageBox_2;
-        Label Label_1;
+        ImageBox ImageBox_4;
 
         private void InitializeWidget()
         {
@@ -42,10 +41,8 @@ namespace Crystallography.UI
             ImageBox_9.Name = "ImageBox_9";
             ImageBox_10 = new ImageBox();
             ImageBox_10.Name = "ImageBox_10";
-            ImageBox_2 = new ImageBox();
-            ImageBox_2.Name = "ImageBox_2";
-            Label_1 = new Label();
-            Label_1.Name = "Label_1";
+            ImageBox_4 = new ImageBox();
+            ImageBox_4.Name = "ImageBox_4";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -56,6 +53,14 @@ namespace Crystallography.UI
 
             // Button_1
             Button_1.IconImage = new ImageAsset("/Application/assets/new/featureBtns/colorRed.png");
+            Button_1.Style = ButtonStyle.Custom;
+            Button_1.CustomImage = new CustomButtonImageSettings()
+            {
+                BackgroundNormalImage = new ImageAsset("/Application/assets/new/featureBtns/colorRed.png"),
+                BackgroundPressedImage = new ImageAsset("/Application/assets/new/featureBtns/colorBlue.png"),
+                BackgroundDisabledImage = null,
+                BackgroundNinePatchMargin = new NinePatchMargin(42, 27, 42, 27),
+            };
             Button_1.BackgroundFilterColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 0f / 255f);
 
             // ImageBox_7
@@ -74,14 +79,9 @@ namespace Crystallography.UI
             ImageBox_10.Image = new ImageAsset("/Application/assets/new/featureBtns/particleRed.png");
             ImageBox_10.ImageScaleType = ImageScaleType.Center;
 
-            // ImageBox_2
-            ImageBox_2.Image = new ImageAsset("/Application/assets/images/UI/redBtn.png");
-            ImageBox_2.ImageScaleType = ImageScaleType.Center;
-
-            // Label_1
-            Label_1.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            Label_1.Font = new UIFont(FontAlias.System, 44, FontStyle.Regular);
-            Label_1.LineBreak = LineBreak.Character;
+            // ImageBox_4
+            ImageBox_4.Image = new ImageAsset("/Application/assets/new/newUI/play.png");
+            ImageBox_4.ImageScaleType = ImageScaleType.Center;
 
             // InfinityMode
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
@@ -91,8 +91,7 @@ namespace Crystallography.UI
             this.RootWidget.AddChildLast(ImageBox_8);
             this.RootWidget.AddChildLast(ImageBox_9);
             this.RootWidget.AddChildLast(ImageBox_10);
-            this.RootWidget.AddChildLast(ImageBox_2);
-            this.RootWidget.AddChildLast(Label_1);
+            this.RootWidget.AddChildLast(ImageBox_4);
 
             SetWidgetLayout(orientation);
 
@@ -143,15 +142,10 @@ namespace Crystallography.UI
                     ImageBox_10.Anchors = Anchors.None;
                     ImageBox_10.Visible = true;
 
-                    ImageBox_2.SetPosition(760, 409);
-                    ImageBox_2.SetSize(200, 200);
-                    ImageBox_2.Anchors = Anchors.None;
-                    ImageBox_2.Visible = true;
-
-                    Label_1.SetPosition(760, 491);
-                    Label_1.SetSize(214, 36);
-                    Label_1.Anchors = Anchors.None;
-                    Label_1.Visible = true;
+                    ImageBox_4.SetPosition(678, 350);
+                    ImageBox_4.SetSize(200, 200);
+                    ImageBox_4.Anchors = Anchors.None;
+                    ImageBox_4.Visible = true;
 
                     break;
 
@@ -164,45 +158,40 @@ namespace Crystallography.UI
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    ImageBox_1.SetPosition(32, 54);
+                    ImageBox_1.SetPosition(52, 47);
                     ImageBox_1.SetSize(854, 191);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    Button_1.SetPosition(42, 271);
+                    Button_1.SetPosition(52, 271);
                     Button_1.SetSize(162, 162);
                     Button_1.Anchors = Anchors.None;
                     Button_1.Visible = true;
 
-                    ImageBox_7.SetPosition(179, 243);
+                    ImageBox_7.SetPosition(189, 243);
                     ImageBox_7.SetSize(219, 218);
                     ImageBox_7.Anchors = Anchors.None;
                     ImageBox_7.Visible = true;
 
-                    ImageBox_8.SetPosition(345, 243);
+                    ImageBox_8.SetPosition(355, 243);
                     ImageBox_8.SetSize(219, 218);
                     ImageBox_8.Anchors = Anchors.None;
                     ImageBox_8.Visible = true;
 
-                    ImageBox_9.SetPosition(512, 243);
+                    ImageBox_9.SetPosition(522, 243);
                     ImageBox_9.SetSize(219, 218);
                     ImageBox_9.Anchors = Anchors.None;
                     ImageBox_9.Visible = true;
 
-                    ImageBox_10.SetPosition(678, 243);
+                    ImageBox_10.SetPosition(688, 243);
                     ImageBox_10.SetSize(219, 218);
                     ImageBox_10.Anchors = Anchors.None;
                     ImageBox_10.Visible = true;
 
-                    ImageBox_2.SetPosition(760, 410);
-                    ImageBox_2.SetSize(200, 200);
-                    ImageBox_2.Anchors = Anchors.None;
-                    ImageBox_2.Visible = true;
-
-                    Label_1.SetPosition(814, 467);
-                    Label_1.SetSize(92, 88);
-                    Label_1.Anchors = Anchors.None;
-                    Label_1.Visible = true;
+                    ImageBox_4.SetPosition(788, 404);
+                    ImageBox_4.SetSize(200, 200);
+                    ImageBox_4.Anchors = Anchors.None;
+                    ImageBox_4.Visible = true;
 
                     break;
             }
@@ -211,7 +200,6 @@ namespace Crystallography.UI
 
         public void UpdateLanguage()
         {
-            Label_1.Text = "play";
         }
 
         private void onShowing(object sender, EventArgs e)

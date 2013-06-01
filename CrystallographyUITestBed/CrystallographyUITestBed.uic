@@ -11108,8 +11108,8 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>36.799767079070307</X>
-              <Y>47.945179275265446</Y>
+              <X>52.5</X>
+              <Y>47</Y>
               <Width>854</Width>
               <Height>191</Height>
               <Visible>true</Visible>
@@ -11156,7 +11156,7 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>42</X>
+              <X>52.5</X>
               <Y>271</Y>
               <Width>162</Width>
               <Height>162</Height>
@@ -11254,7 +11254,7 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>179</X>
+              <X>189.5</X>
               <Y>243</Y>
               <Width>219</Width>
               <Height>218</Height>
@@ -11302,7 +11302,7 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>345</X>
+              <X>355.5</X>
               <Y>243</Y>
               <Width>219</Width>
               <Height>218</Height>
@@ -11350,7 +11350,7 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>512</X>
+              <X>522.5</X>
               <Y>243</Y>
               <Width>219</Width>
               <Height>218</Height>
@@ -11398,7 +11398,7 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>678</X>
+              <X>688.5</X>
               <Y>243</Y>
               <Width>219</Width>
               <Height>218</Height>
@@ -11550,8 +11550,8 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>36.777131906265879</X>
-              <Y>-26.273939917293205</Y>
+              <X>76.777131906265822</X>
+              <Y>-23.273939917293205</Y>
               <Width>359</Width>
               <Height>200</Height>
               <Visible>true</Visible>
@@ -11598,8 +11598,8 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>497.69672825186069</X>
-              <Y>273.12791685427123</Y>
+              <X>497.69672825186058</X>
+              <Y>276.12791685427123</Y>
               <Width>355</Width>
               <Height>200</Height>
               <Visible>true</Visible>
@@ -11647,7 +11647,7 @@
           <LayoutProperty>
             <LayoutProperty>
               <X>217.27713190626582</X>
-              <Y>363.33697126703225</Y>
+              <Y>366.33697126703225</Y>
               <Width>84</Width>
               <Height>60</Height>
               <Visible>true</Visible>
@@ -11723,8 +11723,8 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>74.000000000000057</X>
-              <Y>127.51515151515162</Y>
+              <X>73.999999999999943</X>
+              <Y>130.51515151515162</Y>
               <Width>162</Width>
               <Height>162</Height>
               <Visible>true</Visible>
@@ -11817,8 +11817,8 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>200.77713190626594</X>
-              <Y>99.515151515151615</Y>
+              <X>200.77713190626582</X>
+              <Y>102.51515151515162</Y>
               <Width>219</Width>
               <Height>218</Height>
               <Visible>true</Visible>
@@ -11865,8 +11865,8 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>356.00000000000006</X>
-              <Y>99.515151515151615</Y>
+              <X>355.99999999999994</X>
+              <Y>102.51515151515162</Y>
               <Width>219</Width>
               <Height>218</Height>
               <Visible>true</Visible>
@@ -11913,8 +11913,8 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>511.82820372982519</X>
-              <Y>99.515151515151615</Y>
+              <X>511.828203729825</X>
+              <Y>102.51515151515162</Y>
               <Width>219</Width>
               <Height>218</Height>
               <Visible>true</Visible>
@@ -11962,7 +11962,7 @@
           <LayoutProperty>
             <LayoutProperty>
               <X>667.00000000000011</X>
-              <Y>99.515151515151615</Y>
+              <Y>102.51515151515162</Y>
               <Width>219</Width>
               <Height>218</Height>
               <Visible>true</Visible>
@@ -12009,8 +12009,8 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>633.19672825186069</X>
-              <Y>361.33697126703225</Y>
+              <X>633.19672825186058</X>
+              <Y>364.33697126703225</Y>
               <Width>84</Width>
               <Height>60</Height>
               <Visible>true</Visible>
@@ -12086,8 +12086,8 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>76.777131906265936</X>
-              <Y>273.12791685427123</Y>
+              <X>76.777131906265822</X>
+              <Y>276.12791685427123</Y>
               <Width>343</Width>
               <Height>200</Height>
               <Visible>true</Visible>
@@ -12135,7 +12135,7 @@
           <LayoutProperty>
             <LayoutProperty>
               <X>789.0655531824649</X>
-              <Y>405.21067127218248</Y>
+              <Y>406.21067127218248</Y>
               <Width>200</Width>
               <Height>200</Height>
               <Visible>true</Visible>
@@ -12182,8 +12182,8 @@
           <Nodes />
           <LayoutProperty>
             <LayoutProperty>
-              <X>207.27713190626594</X>
-              <Y>361.33697126703225</Y>
+              <X>207.27713190626582</X>
+              <Y>364.33697126703225</Y>
               <Width>84</Width>
               <Height>60</Height>
               <Visible>true</Visible>
@@ -12316,19 +12316,217 @@
       <Nodes>
         <UICNode z:Id="i202" i:type="ObjectTreeNode">
           <Parent z:Ref="i201" />
-          <Nodes />
+          <Nodes>
+            <UICNode z:Id="i203" i:type="ObjectTreeNode">
+              <Parent z:Ref="i202" />
+              <Nodes />
+              <LayoutProperty>
+                <LayoutProperty>
+                  <X>61</X>
+                  <Y>10</Y>
+                  <Width>493</Width>
+                  <Height>205</Height>
+                  <Visible>true</Visible>
+                  <Anchors>None</Anchors>
+                </LayoutProperty>
+                <LayoutProperty>
+                  <X>375.85952922247526</X>
+                  <Y>90.03830386766947</Y>
+                  <Width>200</Width>
+                  <Height>200</Height>
+                  <Visible>true</Visible>
+                  <Anchors>None</Anchors>
+                </LayoutProperty>
+              </LayoutProperty>
+              <Property i:type="ImageBoxProperty">
+                <Effect>None</Effect>
+                <OwnerNode z:Ref="i203" />
+                <VariableName>ImageBox_1</VariableName>
+                <Image>new/newUI/bestTimevsCurrentTime.png</Image>
+                <NinePatchMargin xmlns:d9p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+                  <d9p1:ButtomRowHeight>0</d9p1:ButtomRowHeight>
+                  <d9p1:LeftColumnWidth>0</d9p1:LeftColumnWidth>
+                  <d9p1:RightColumnWidth>0</d9p1:RightColumnWidth>
+                  <d9p1:TopRowHeight>0</d9p1:TopRowHeight>
+                </NinePatchMargin>
+                <ScaleType>Center</ScaleType>
+              </Property>
+              <IsRoot>false</IsRoot>
+              <PivotPos>LeftTop</PivotPos>
+              <WidgetType>ImageBox</WidgetType>
+              <ID>429733715</ID>
+              <ZIndex>2</ZIndex>
+              <LayoutAssistInfo>
+                <SnapGuidesList>
+                  <ArrayOfSnapGuide />
+                  <ArrayOfSnapGuide />
+                </SnapGuidesList>
+              </LayoutAssistInfo>
+              <IsHideInLayout>false</IsHideInLayout>
+              <IsLockInLayout>false</IsLockInLayout>
+            </UICNode>
+          </Nodes>
           <LayoutProperty>
             <LayoutProperty>
-              <X>156.10795649072509</X>
-              <Y>141.5287279007523</Y>
-              <Width>647</Width>
-              <Height>264</Height>
+              <X>166</X>
+              <Y>90</Y>
+              <Width>616</Width>
+              <Height>310</Height>
               <Visible>true</Visible>
               <Anchors>None</Anchors>
             </LayoutProperty>
             <LayoutProperty>
-              <X>312.13463467118197</X>
-              <Y>110.69414019298182</Y>
+              <X>357.107956490725</X>
+              <Y>225.03830386766947</Y>
+              <Width>100</Width>
+              <Height>100</Height>
+              <Visible>true</Visible>
+              <Anchors>None</Anchors>
+            </LayoutProperty>
+          </LayoutProperty>
+          <Property i:type="PanelProperty">
+            <Effect>None</Effect>
+            <OwnerNode z:Ref="i202" />
+            <VariableName>Panel_1</VariableName>
+            <BackgroundAlpha>100</BackgroundAlpha>
+            <BackgroundColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+              <d7p1:A>255</d7p1:A>
+              <d7p1:B>30</d7p1:B>
+              <d7p1:G>30</d7p1:G>
+              <d7p1:R>30</d7p1:R>
+              <d7p1:ScA>1</d7p1:ScA>
+              <d7p1:ScB>0.0129830325</d7p1:ScB>
+              <d7p1:ScG>0.0129830325</d7p1:ScG>
+              <d7p1:ScR>0.0129830325</d7p1:ScR>
+            </BackgroundColor>
+          </Property>
+          <IsRoot>false</IsRoot>
+          <PivotPos>LeftTop</PivotPos>
+          <WidgetType>Panel</WidgetType>
+          <ID>1853763930</ID>
+          <ZIndex>1</ZIndex>
+          <LayoutAssistInfo>
+            <SnapGuidesList>
+              <ArrayOfSnapGuide />
+              <ArrayOfSnapGuide />
+            </SnapGuidesList>
+          </LayoutAssistInfo>
+          <IsHideInLayout>false</IsHideInLayout>
+          <IsLockInLayout>false</IsLockInLayout>
+        </UICNode>
+        <UICNode z:Id="i204" i:type="ObjectTreeNode">
+          <Parent z:Ref="i201" />
+          <Nodes />
+          <LayoutProperty>
+            <LayoutProperty>
+              <X>164.10795649072509</X>
+              <Y>325.03830386766947</Y>
+              <Width>162</Width>
+              <Height>75</Height>
+              <Visible>true</Visible>
+              <Anchors>None</Anchors>
+            </LayoutProperty>
+            <LayoutProperty>
+              <X>180.77131906265947</X>
+              <Y>326.32501174085286</Y>
+              <Width>214</Width>
+              <Height>56</Height>
+              <Visible>true</Visible>
+              <Anchors>None</Anchors>
+            </LayoutProperty>
+          </LayoutProperty>
+          <Property i:type="ButtonProperty">
+            <Effect>None</Effect>
+            <OwnerNode z:Ref="i204" />
+            <VariableName>Button_1</VariableName>
+            <BackgroundButtonImage xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+              <d7p1:BackgroundDisablelImage>system_assets/button_9patch_disable.png</d7p1:BackgroundDisablelImage>
+              <d7p1:BackgroundNormalImage>system_assets/button_9patch_normal.png</d7p1:BackgroundNormalImage>
+              <d7p1:BackgroundPressImage>system_assets/button_9patch_press.png</d7p1:BackgroundPressImage>
+            </BackgroundButtonImage>
+            <BackgroundType>Default</BackgroundType>
+            <ButtonImage>new/newUI/quit.png</ButtonImage>
+            <ButtonType>ImageButton</ButtonType>
+            <FilterColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+              <d7p1:A>0</d7p1:A>
+              <d7p1:B>255</d7p1:B>
+              <d7p1:G>255</d7p1:G>
+              <d7p1:R>255</d7p1:R>
+              <d7p1:ScA>0</d7p1:ScA>
+              <d7p1:ScB>1</d7p1:ScB>
+              <d7p1:ScG>1</d7p1:ScG>
+              <d7p1:ScR>1</d7p1:ScR>
+            </FilterColor>
+            <HasTextShadow>false</HasTextShadow>
+            <NinePatchMargin xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+              <d7p1:ButtomRowHeight>27</d7p1:ButtomRowHeight>
+              <d7p1:LeftColumnWidth>42</d7p1:LeftColumnWidth>
+              <d7p1:RightColumnWidth>42</d7p1:RightColumnWidth>
+              <d7p1:TopRowHeight>27</d7p1:TopRowHeight>
+            </NinePatchMargin>
+            <Text>Button</Text>
+            <TextAlpha>100</TextAlpha>
+            <TextColor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+              <d7p1:A>255</d7p1:A>
+              <d7p1:B>0</d7p1:B>
+              <d7p1:G>0</d7p1:G>
+              <d7p1:R>0</d7p1:R>
+              <d7p1:ScA>1</d7p1:ScA>
+              <d7p1:ScB>0</d7p1:ScB>
+              <d7p1:ScG>0</d7p1:ScG>
+              <d7p1:ScR>0</d7p1:ScR>
+            </TextColor>
+            <TextFont xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+              <d7p1:FontFamily>System</d7p1:FontFamily>
+              <d7p1:FontSize>25</d7p1:FontSize>
+              <d7p1:FontStyle>Regular</d7p1:FontStyle>
+            </TextFont>
+            <TextShadow xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+              <d7p1:Alpha>50</d7p1:Alpha>
+              <d7p1:Color xmlns:d8p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+                <d8p1:A>255</d8p1:A>
+                <d8p1:B>128</d8p1:B>
+                <d8p1:G>128</d8p1:G>
+                <d8p1:R>128</d8p1:R>
+                <d8p1:ScA>1</d8p1:ScA>
+                <d8p1:ScB>0.215860531</d8p1:ScB>
+                <d8p1:ScG>0.215860531</d8p1:ScG>
+                <d8p1:ScR>0.215860531</d8p1:ScR>
+              </d7p1:Color>
+              <d7p1:OffsetX>2</d7p1:OffsetX>
+              <d7p1:OffsetY>2</d7p1:OffsetY>
+            </TextShadow>
+            <TextTrimming>EllipsisCharacter</TextTrimming>
+          </Property>
+          <IsRoot>false</IsRoot>
+          <PivotPos>LeftTop</PivotPos>
+          <WidgetType>Button</WidgetType>
+          <ID>1054006832</ID>
+          <ZIndex>3</ZIndex>
+          <LayoutAssistInfo>
+            <SnapGuidesList>
+              <ArrayOfSnapGuide />
+              <ArrayOfSnapGuide />
+            </SnapGuidesList>
+          </LayoutAssistInfo>
+          <IsHideInLayout>false</IsHideInLayout>
+          <IsLockInLayout>false</IsLockInLayout>
+        </UICNode>
+        <UICNode z:Id="i205" i:type="ObjectTreeNode">
+          <Parent z:Ref="i201" />
+          <Nodes />
+          <LayoutProperty>
+            <LayoutProperty>
+              <X>328.153786605017</X>
+              <Y>325.03830386766947</Y>
+              <Width>232</Width>
+              <Height>75</Height>
+              <Visible>true</Visible>
+              <Anchors>None</Anchors>
+            </LayoutProperty>
+            <LayoutProperty>
+              <X>299.87346270977832</X>
+              <Y>256.07660773533911</Y>
               <Width>200</Width>
               <Height>200</Height>
               <Visible>true</Visible>
@@ -12337,9 +12535,9 @@
           </LayoutProperty>
           <Property i:type="ImageBoxProperty">
             <Effect>None</Effect>
-            <OwnerNode z:Ref="i202" />
-            <VariableName>ImageBox_1</VariableName>
-            <Image>new/newUI/winningBox.png</Image>
+            <OwnerNode z:Ref="i205" />
+            <VariableName>ImageBox_2</VariableName>
+            <Image>new/newUI/mainMenu.png</Image>
             <NinePatchMargin xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
               <d7p1:ButtomRowHeight>0</d7p1:ButtomRowHeight>
               <d7p1:LeftColumnWidth>0</d7p1:LeftColumnWidth>
@@ -12351,8 +12549,56 @@
           <IsRoot>false</IsRoot>
           <PivotPos>LeftTop</PivotPos>
           <WidgetType>ImageBox</WidgetType>
-          <ID>919209318</ID>
-          <ZIndex>0</ZIndex>
+          <ID>537697575</ID>
+          <ZIndex>4</ZIndex>
+          <LayoutAssistInfo>
+            <SnapGuidesList>
+              <ArrayOfSnapGuide />
+              <ArrayOfSnapGuide />
+            </SnapGuidesList>
+          </LayoutAssistInfo>
+          <IsHideInLayout>false</IsHideInLayout>
+          <IsLockInLayout>false</IsLockInLayout>
+        </UICNode>
+        <UICNode z:Id="i206" i:type="ObjectTreeNode">
+          <Parent z:Ref="i201" />
+          <Nodes />
+          <LayoutProperty>
+            <LayoutProperty>
+              <X>562.153786605017</X>
+              <Y>325.03830386766947</Y>
+              <Width>220</Width>
+              <Height>75</Height>
+              <Visible>true</Visible>
+              <Anchors>None</Anchors>
+            </LayoutProperty>
+            <LayoutProperty>
+              <X>578.37722583308937</X>
+              <Y>257.82820372982536</Y>
+              <Width>200</Width>
+              <Height>200</Height>
+              <Visible>true</Visible>
+              <Anchors>None</Anchors>
+            </LayoutProperty>
+          </LayoutProperty>
+          <Property i:type="ImageBoxProperty">
+            <Effect>None</Effect>
+            <OwnerNode z:Ref="i206" />
+            <VariableName>ImageBox_3</VariableName>
+            <Image>new/newUI/newsetup.png</Image>
+            <NinePatchMargin xmlns:d7p1="http://schemas.datacontract.org/2004/07/UIComposer.ModelData">
+              <d7p1:ButtomRowHeight>0</d7p1:ButtomRowHeight>
+              <d7p1:LeftColumnWidth>0</d7p1:LeftColumnWidth>
+              <d7p1:RightColumnWidth>0</d7p1:RightColumnWidth>
+              <d7p1:TopRowHeight>0</d7p1:TopRowHeight>
+            </NinePatchMargin>
+            <ScaleType>Center</ScaleType>
+          </Property>
+          <IsRoot>false</IsRoot>
+          <PivotPos>LeftTop</PivotPos>
+          <WidgetType>ImageBox</WidgetType>
+          <ID>2101041693</ID>
+          <ZIndex>5</ZIndex>
           <LayoutAssistInfo>
             <SnapGuidesList>
               <ArrayOfSnapGuide />
