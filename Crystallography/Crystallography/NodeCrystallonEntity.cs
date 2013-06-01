@@ -49,7 +49,11 @@ namespace Crystallography
 		
 		public override void Update (float dt)
 		{
-			//empty
+			if (_body != null) {
+				if (_body.Velocity.Length() != 0.3f) {
+						_body.Velocity = _body.Velocity.Normalize() * 0.3f;
+					}
+			}
 		}
 		
 		// METHODS----------------------------------
