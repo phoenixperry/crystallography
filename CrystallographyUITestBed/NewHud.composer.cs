@@ -292,7 +292,7 @@ namespace Crystallography.UI
                     ImageBox_9.Anchors = Anchors.None;
                     ImageBox_9.Visible = true;
 
-                    Panel_2.SetPosition(0, 63);
+                    Panel_2.SetPosition(0, 66);
                     Panel_2.SetSize(445, 241);
                     Panel_2.Anchors = Anchors.None;
                     Panel_2.Visible = true;

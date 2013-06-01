@@ -158,32 +158,32 @@ namespace Preview
                     sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
                     sceneBackgroundPanel.Visible = true;
 
-                    ImageBox_1.SetPosition(36, 47);
+                    ImageBox_1.SetPosition(52, 47);
                     ImageBox_1.SetSize(854, 191);
                     ImageBox_1.Anchors = Anchors.None;
                     ImageBox_1.Visible = true;
 
-                    Button_1.SetPosition(42, 271);
+                    Button_1.SetPosition(52, 271);
                     Button_1.SetSize(162, 162);
                     Button_1.Anchors = Anchors.None;
                     Button_1.Visible = true;
 
-                    ImageBox_7.SetPosition(179, 243);
+                    ImageBox_7.SetPosition(189, 243);
                     ImageBox_7.SetSize(219, 218);
                     ImageBox_7.Anchors = Anchors.None;
                     ImageBox_7.Visible = true;
 
-                    ImageBox_8.SetPosition(345, 243);
+                    ImageBox_8.SetPosition(355, 243);
                     ImageBox_8.SetSize(219, 218);
                     ImageBox_8.Anchors = Anchors.None;
                     ImageBox_8.Visible = true;
 
-                    ImageBox_9.SetPosition(512, 243);
+                    ImageBox_9.SetPosition(522, 243);
                     ImageBox_9.SetSize(219, 218);
                     ImageBox_9.Anchors = Anchors.None;
                     ImageBox_9.Visible = true;
 
-                    ImageBox_10.SetPosition(678, 243);
+                    ImageBox_10.SetPosition(688, 243);
                     ImageBox_10.SetSize(219, 218);
                     ImageBox_10.Anchors = Anchors.None;
                     ImageBox_10.Visible = true;

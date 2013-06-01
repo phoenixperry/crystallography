@@ -31,8 +31,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="__DummyProgram.cs" />
-    <Compile Include="timedMode.composer.cs" />
-    <Compile Include="timedMode.cs" />
+    <Compile Include="levelSection.composer.cs" />
+    <Compile Include="levelSection.cs" />
     <Compile Include="UIStringTable.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -327,17 +327,32 @@
     <Content Include="..\\assets\new/featureIcons/\animation.png" >
       <Link>assets\new/featureIcons/\animation.png</Link>
     </Content>
+    <Content Include="..\\assets\new/featureIcons/\animation2.png" >
+      <Link>assets\new/featureIcons/\animation2.png</Link>
+    </Content>
     <Content Include="..\\assets\new/featureIcons/\color.png" >
       <Link>assets\new/featureIcons/\color.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureIcons/\color2.png" >
+      <Link>assets\new/featureIcons/\color2.png</Link>
     </Content>
     <Content Include="..\\assets\new/featureIcons/\particle.png" >
       <Link>assets\new/featureIcons/\particle.png</Link>
     </Content>
+    <Content Include="..\\assets\new/featureIcons/\particle2.png" >
+      <Link>assets\new/featureIcons/\particle2.png</Link>
+    </Content>
     <Content Include="..\\assets\new/featureIcons/\pattern.png" >
       <Link>assets\new/featureIcons/\pattern.png</Link>
     </Content>
+    <Content Include="..\\assets\new/featureIcons/\pattern2.png" >
+      <Link>assets\new/featureIcons/\pattern2.png</Link>
+    </Content>
     <Content Include="..\\assets\new/featureIcons/\sound.png" >
       <Link>assets\new/featureIcons/\sound.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureIcons/\sound2.png" >
+      <Link>assets\new/featureIcons/\sound2.png</Link>
     </Content>
     <Content Include="..\\assets\new/newUI/\arrowIcon.png" >
       <Link>assets\new/newUI/\arrowIcon.png</Link>
@@ -345,8 +360,17 @@
     <Content Include="..\\assets\new/newUI/\authoredHeader.png" >
       <Link>assets\new/newUI/\authoredHeader.png</Link>
     </Content>
+    <Content Include="..\\assets\new/newUI/\authoredMode.png" >
+      <Link>assets\new/newUI/\authoredMode.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\bestTimevsCurrentTime.png" >
+      <Link>assets\new/newUI/\bestTimevsCurrentTime.png</Link>
+    </Content>
     <Content Include="..\\assets\new/newUI/\blueBox.png" >
       <Link>assets\new/newUI/\blueBox.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\creditsBtn.png" >
+      <Link>assets\new/newUI/\creditsBtn.png</Link>
     </Content>
     <Content Include="..\\assets\new/newUI/\cubeIcon.png" >
       <Link>assets\new/newUI/\cubeIcon.png</Link>
@@ -372,11 +396,17 @@
     <Content Include="..\\assets\new/newUI/\lockIcon.png" >
       <Link>assets\new/newUI/\lockIcon.png</Link>
     </Content>
+    <Content Include="..\\assets\new/newUI/\mainMenu.png" >
+      <Link>assets\new/newUI/\mainMenu.png</Link>
+    </Content>
     <Content Include="..\\assets\new/newUI/\minChallenge.png" >
       <Link>assets\new/newUI/\minChallenge.png</Link>
     </Content>
     <Content Include="..\\assets\new/newUI/\minutesForChallenge.png" >
       <Link>assets\new/newUI/\minutesForChallenge.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\newsetup.png" >
+      <Link>assets\new/newUI/\newsetup.png</Link>
     </Content>
     <Content Include="..\\assets\new/newUI/\nextLevel.png" >
       <Link>assets\new/newUI/\nextLevel.png</Link>
@@ -392,6 +422,9 @@
     </Content>
     <Content Include="..\\assets\new/newUI/\puzzleIcon.png" >
       <Link>assets\new/newUI/\puzzleIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\quit.png" >
+      <Link>assets\new/newUI/\quit.png</Link>
     </Content>
     <Content Include="..\\assets\new/newUI/\quitBtn.png" >
       <Link>assets\new/newUI/\quitBtn.png</Link>
@@ -410,6 +443,9 @@
     </Content>
     <Content Include="..\\assets\new/newUI/\whiteCube.png" >
       <Link>assets\new/newUI/\whiteCube.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\winningBox.png" >
+      <Link>assets\new/newUI/\winningBox.png</Link>
     </Content>
     <Content Include="..\\assets\new/newUI/\xIcon.png" >
       <Link>assets\new/newUI/\xIcon.png</Link>
