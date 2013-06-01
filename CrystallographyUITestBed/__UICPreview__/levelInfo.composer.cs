@@ -9,11 +9,11 @@ using Sce.PlayStation.HighLevel.UI;
 
 namespace Preview
 {
-    partial class LoadingScene
+    partial class levelInfo
     {
-        Panel sceneBackgroundPanel;
-        ImageBox ImageBox_1;
         Label Label_1;
+        Label Label_2;
+        Panel Panel_1;
 
         private void InitializeWidget()
         {
@@ -22,30 +22,31 @@ namespace Preview
 
         private void InitializeWidget(LayoutOrientation orientation)
         {
-            sceneBackgroundPanel = new Panel();
-            sceneBackgroundPanel.Name = "sceneBackgroundPanel";
-            ImageBox_1 = new ImageBox();
-            ImageBox_1.Name = "ImageBox_1";
             Label_1 = new Label();
             Label_1.Name = "Label_1";
-
-            // sceneBackgroundPanel
-            sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
-
-            // ImageBox_1
-            ImageBox_1.Image = new ImageAsset("/Application/assets/images/UI/loading.png");
-            ImageBox_1.ImageScaleType = ImageScaleType.AspectInside;
+            Label_2 = new Label();
+            Label_2.Name = "Label_2";
+            Panel_1 = new Panel();
+            Panel_1.Name = "Panel_1";
 
             // Label_1
             Label_1.TextColor = new UIColor(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            Label_1.Font = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+            Label_1.Font = new UIFont(FontAlias.System, 72, FontStyle.Regular);
             Label_1.LineBreak = LineBreak.Character;
-            Label_1.HorizontalAlignment = HorizontalAlignment.Center;
 
-            // LoadingScene
-            this.RootWidget.AddChildLast(sceneBackgroundPanel);
-            this.RootWidget.AddChildLast(ImageBox_1);
-            this.RootWidget.AddChildLast(Label_1);
+            // Label_2
+            Label_2.TextColor = new UIColor(41f / 255f, 226f / 255f, 226f / 255f, 255f / 255f);
+            Label_2.Font = new UIFont(FontAlias.System, 72, FontStyle.Bold);
+            Label_2.LineBreak = LineBreak.Character;
+
+            // Panel_1
+            Panel_1.BackgroundColor = new UIColor(30f / 255f, 30f / 255f, 30f / 255f, 255f / 255f);
+            Panel_1.Clip = true;
+            Panel_1.AddChildLast(Label_1);
+            Panel_1.AddChildLast(Label_2);
+
+            // levelInfo
+            this.RootWidget.AddChildLast(Panel_1);
 
             SetWidgetLayout(orientation);
 
@@ -61,20 +62,20 @@ namespace Preview
                     this.DesignWidth = 544;
                     this.DesignHeight = 960;
 
-                    sceneBackgroundPanel.SetPosition(0, 0);
-                    sceneBackgroundPanel.SetSize(544, 960);
-                    sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
-                    sceneBackgroundPanel.Visible = true;
-
-                    ImageBox_1.SetPosition(357, 173);
-                    ImageBox_1.SetSize(200, 200);
-                    ImageBox_1.Anchors = Anchors.None;
-                    ImageBox_1.Visible = true;
-
-                    Label_1.SetPosition(381, 246);
+                    Label_1.SetPosition(0, 192);
                     Label_1.SetSize(214, 36);
                     Label_1.Anchors = Anchors.None;
                     Label_1.Visible = true;
+
+                    Label_2.SetPosition(0, 298);
+                    Label_2.SetSize(214, 36);
+                    Label_2.Anchors = Anchors.None;
+                    Label_2.Visible = true;
+
+                    Panel_1.SetPosition(24, 82);
+                    Panel_1.SetSize(100, 100);
+                    Panel_1.Anchors = Anchors.None;
+                    Panel_1.Visible = true;
 
                     break;
 
@@ -82,20 +83,20 @@ namespace Preview
                     this.DesignWidth = 960;
                     this.DesignHeight = 544;
 
-                    sceneBackgroundPanel.SetPosition(0, 0);
-                    sceneBackgroundPanel.SetSize(960, 544);
-                    sceneBackgroundPanel.Anchors = Anchors.Top | Anchors.Bottom | Anchors.Left | Anchors.Right;
-                    sceneBackgroundPanel.Visible = true;
-
-                    ImageBox_1.SetPosition(355, 142);
-                    ImageBox_1.SetSize(291, 238);
-                    ImageBox_1.Anchors = Anchors.None;
-                    ImageBox_1.Visible = true;
-
-                    Label_1.SetPosition(393, 251);
-                    Label_1.SetSize(214, 36);
+                    Label_1.SetPosition(37, 36);
+                    Label_1.SetSize(156, 105);
                     Label_1.Anchors = Anchors.None;
                     Label_1.Visible = true;
+
+                    Label_2.SetPosition(62, 124);
+                    Label_2.SetSize(106, 73);
+                    Label_2.Anchors = Anchors.None;
+                    Label_2.Visible = true;
+
+                    Panel_1.SetPosition(3, 93);
+                    Panel_1.SetSize(230, 422);
+                    Panel_1.Anchors = Anchors.None;
+                    Panel_1.Visible = true;
 
                     break;
             }
@@ -104,9 +105,9 @@ namespace Preview
 
         public void UpdateLanguage()
         {
-            Label_1.Text = "loading";
+            Label_1.Text = "level";
 
-            this.Title = "LoadingScene";
+            Label_2.Text = "25";
         }
 
         private void onShowing(object sender, EventArgs e)

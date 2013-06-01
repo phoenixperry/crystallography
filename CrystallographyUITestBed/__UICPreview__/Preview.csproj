@@ -31,260 +31,406 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="__DummyProgram.cs" />
-    <Compile Include="__DummyScene.cs" />
-    <Compile Include="LevelEndPanel.composer.cs" />
-    <Compile Include="LevelEndPanel.cs" />
+    <Compile Include="timedMode.composer.cs" />
+    <Compile Include="timedMode.cs" />
     <Compile Include="UIStringTable.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\\assets\header.png" >
-      <Link>assets\header.png</Link>
+    <Content Include="..\\assets\/\header.png" >
+      <Link>assets\/\header.png</Link>
     </Content>
-    <Content Include="..\\assets\instructions.png" >
-      <Link>assets\instructions.png</Link>
+    <Content Include="..\\assets\/\instructions.png" >
+      <Link>assets\/\instructions.png</Link>
     </Content>
-    <Content Include="..\\assets\instructionsOver.png" >
-      <Link>assets\instructionsOver.png</Link>
+    <Content Include="..\\assets\/\instructionsOver.png" >
+      <Link>assets\/\instructionsOver.png</Link>
     </Content>
-    <Content Include="..\\assets\play.png" >
-      <Link>assets\play.png</Link>
+    <Content Include="..\\assets\/\play.png" >
+      <Link>assets\/\play.png</Link>
     </Content>
-    <Content Include="..\\assets\playOver.png" >
-      <Link>assets\playOver.png</Link>
+    <Content Include="..\\assets\/\playOver.png" >
+      <Link>assets\/\playOver.png</Link>
     </Content>
-    <Content Include="..\\assets\fonts\Bariol_Regular.otf" >
-      <Link>assets\fonts\Bariol_Regular.otf</Link>
+    <Content Include="..\\assets\featureIcons/\animation.png" >
+      <Link>assets\featureIcons/\animation.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\back.png" >
-      <Link>assets\images\UI\back.png</Link>
+    <Content Include="..\\assets\featureIcons/\color.png" >
+      <Link>assets\featureIcons/\color.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\back_2.png" >
-      <Link>assets\images\UI\back_2.png</Link>
+    <Content Include="..\\assets\featureIcons/\particle.png" >
+      <Link>assets\featureIcons/\particle.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\back_2Roll.png" >
-      <Link>assets\images\UI\back_2Roll.png</Link>
+    <Content Include="..\\assets\featureIcons/\pattern.png" >
+      <Link>assets\featureIcons/\pattern.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\blueBtn.png" >
-      <Link>assets\images\UI\blueBtn.png</Link>
+    <Content Include="..\\assets\featureIcons/\sound.png" >
+      <Link>assets\featureIcons/\sound.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\blueBtnOver.png" >
-      <Link>assets\images\UI\blueBtnOver.png</Link>
+    <Content Include="..\\assets\fonts/\Bariol_Regular.otf" >
+      <Link>assets\fonts/\Bariol_Regular.otf</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\credits.png" >
-      <Link>assets\images\UI\credits.png</Link>
+    <Content Include="..\\assets\images/UI/\back.png" >
+      <Link>assets\images/UI/\back.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\credits_btn.png" >
-      <Link>assets\images\UI\credits_btn.png</Link>
+    <Content Include="..\\assets\images/UI/\back_2.png" >
+      <Link>assets\images/UI/\back_2.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\credits_btnRoll.png" >
-      <Link>assets\images\UI\credits_btnRoll.png</Link>
+    <Content Include="..\\assets\images/UI/\back_2Roll.png" >
+      <Link>assets\images/UI/\back_2Roll.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cube6RollOver.png" >
-      <Link>assets\images\UI\cube6RollOver.png</Link>
+    <Content Include="..\\assets\images/UI/\blueBtn.png" >
+      <Link>assets\images/UI/\blueBtn.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeRoll3.png" >
-      <Link>assets\images\UI\cubeRoll3.png</Link>
+    <Content Include="..\\assets\images/UI/\blueBtnOver.png" >
+      <Link>assets\images/UI/\blueBtnOver.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeRollOver5.png" >
-      <Link>assets\images\UI\cubeRollOver5.png</Link>
+    <Content Include="..\\assets\images/UI/\credits.png" >
+      <Link>assets\images/UI/\credits.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeUI.png" >
-      <Link>assets\images\UI\cubeUI.png</Link>
+    <Content Include="..\\assets\images/UI/\credits_btn.png" >
+      <Link>assets\images/UI/\credits_btn.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeUI2.png" >
-      <Link>assets\images\UI\cubeUI2.png</Link>
+    <Content Include="..\\assets\images/UI/\credits_btnRoll.png" >
+      <Link>assets\images/UI/\credits_btnRoll.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeUI3.png" >
-      <Link>assets\images\UI\cubeUI3.png</Link>
+    <Content Include="..\\assets\images/UI/\cube6RollOver.png" >
+      <Link>assets\images/UI/\cube6RollOver.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeUI4.png" >
-      <Link>assets\images\UI\cubeUI4.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeRoll3.png" >
+      <Link>assets\images/UI/\cubeRoll3.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeUI5.png" >
-      <Link>assets\images\UI\cubeUI5.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeRollOver5.png" >
+      <Link>assets\images/UI/\cubeRollOver5.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeUI6.png" >
-      <Link>assets\images\UI\cubeUI6.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeUI.png" >
+      <Link>assets\images/UI/\cubeUI.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeUIRoll.png" >
-      <Link>assets\images\UI\cubeUIRoll.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeUI2.png" >
+      <Link>assets\images/UI/\cubeUI2.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeUIRollOver.png" >
-      <Link>assets\images\UI\cubeUIRollOver.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeUI3.png" >
+      <Link>assets\images/UI/\cubeUI3.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeUIRollOver4.png" >
-      <Link>assets\images\UI\cubeUIRollOver4.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeUI4.png" >
+      <Link>assets\images/UI/\cubeUI4.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeUIRollOver5.png" >
-      <Link>assets\images\UI\cubeUIRollOver5.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeUI5.png" >
+      <Link>assets\images/UI/\cubeUI5.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\cubeUIRollOver6.png" >
-      <Link>assets\images\UI\cubeUIRollOver6.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeUI6.png" >
+      <Link>assets\images/UI/\cubeUI6.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\eyes.png" >
-      <Link>assets\images\UI\eyes.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeUIRoll.png" >
+      <Link>assets\images/UI/\cubeUIRoll.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\greyBar.png" >
-      <Link>assets\images\UI\greyBar.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeUIRollOver.png" >
+      <Link>assets\images/UI/\cubeUIRollOver.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\header.png" >
-      <Link>assets\images\UI\header.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeUIRollOver4.png" >
+      <Link>assets\images/UI/\cubeUIRollOver4.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\instructions.png" >
-      <Link>assets\images\UI\instructions.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeUIRollOver5.png" >
+      <Link>assets\images/UI/\cubeUIRollOver5.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\instructions1.png" >
-      <Link>assets\images\UI\instructions1.png</Link>
+    <Content Include="..\\assets\images/UI/\cubeUIRollOver6.png" >
+      <Link>assets\images/UI/\cubeUIRollOver6.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\instructions2.png" >
-      <Link>assets\images\UI\instructions2.png</Link>
+    <Content Include="..\\assets\images/UI/\eyes.png" >
+      <Link>assets\images/UI/\eyes.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\instructions3.png" >
-      <Link>assets\images\UI\instructions3.png</Link>
+    <Content Include="..\\assets\images/UI/\greyBar.png" >
+      <Link>assets\images/UI/\greyBar.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\instructions4.png" >
-      <Link>assets\images\UI\instructions4.png</Link>
+    <Content Include="..\\assets\images/UI/\header.png" >
+      <Link>assets\images/UI/\header.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\instructions5.png" >
-      <Link>assets\images\UI\instructions5.png</Link>
+    <Content Include="..\\assets\images/UI/\instructions.png" >
+      <Link>assets\images/UI/\instructions.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\instructions6.png" >
-      <Link>assets\images\UI\instructions6.png</Link>
+    <Content Include="..\\assets\images/UI/\instructions1.png" >
+      <Link>assets\images/UI/\instructions1.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\instructions7.png" >
-      <Link>assets\images\UI\instructions7.png</Link>
+    <Content Include="..\\assets\images/UI/\instructions2.png" >
+      <Link>assets\images/UI/\instructions2.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\instructions8.png" >
-      <Link>assets\images\UI\instructions8.png</Link>
+    <Content Include="..\\assets\images/UI/\instructions3.png" >
+      <Link>assets\images/UI/\instructions3.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\instructionsOver.png" >
-      <Link>assets\images\UI\instructionsOver.png</Link>
+    <Content Include="..\\assets\images/UI/\instructions4.png" >
+      <Link>assets\images/UI/\instructions4.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\levelComplete.png" >
-      <Link>assets\images\UI\levelComplete.png</Link>
+    <Content Include="..\\assets\images/UI/\instructions5.png" >
+      <Link>assets\images/UI/\instructions5.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\levelSelectBtn.png" >
-      <Link>assets\images\UI\levelSelectBtn.png</Link>
+    <Content Include="..\\assets\images/UI/\instructions6.png" >
+      <Link>assets\images/UI/\instructions6.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\levelSelectBtnRoll.png" >
-      <Link>assets\images\UI\levelSelectBtnRoll.png</Link>
+    <Content Include="..\\assets\images/UI/\instructions7.png" >
+      <Link>assets\images/UI/\instructions7.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\loading.png" >
-      <Link>assets\images\UI\loading.png</Link>
+    <Content Include="..\\assets\images/UI/\instructions8.png" >
+      <Link>assets\images/UI/\instructions8.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\lockIcon.png" >
-      <Link>assets\images\UI\lockIcon.png</Link>
+    <Content Include="..\\assets\images/UI/\instructionsOver.png" >
+      <Link>assets\images/UI/\instructionsOver.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\makeShapes.png" >
-      <Link>assets\images\UI\makeShapes.png</Link>
+    <Content Include="..\\assets\images/UI/\levelComplete.png" >
+      <Link>assets\images/UI/\levelComplete.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\menuButtonBackground.png" >
-      <Link>assets\images\UI\menuButtonBackground.png</Link>
+    <Content Include="..\\assets\images/UI/\levelSelectBtn.png" >
+      <Link>assets\images/UI/\levelSelectBtn.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\nextLevel.png" >
-      <Link>assets\images\UI\nextLevel.png</Link>
+    <Content Include="..\\assets\images/UI/\levelSelectBtnRoll.png" >
+      <Link>assets\images/UI/\levelSelectBtnRoll.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\nextLevelOver.png" >
-      <Link>assets\images\UI\nextLevelOver.png</Link>
+    <Content Include="..\\assets\images/UI/\loading.png" >
+      <Link>assets\images/UI/\loading.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\next_level_sm.png" >
-      <Link>assets\images\UI\next_level_sm.png</Link>
+    <Content Include="..\\assets\images/UI/\lockIcon.png" >
+      <Link>assets\images/UI/\lockIcon.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\next_level_smRoll.png" >
-      <Link>assets\images\UI\next_level_smRoll.png</Link>
+    <Content Include="..\\assets\images/UI/\makeShapes.png" >
+      <Link>assets\images/UI/\makeShapes.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\play.png" >
-      <Link>assets\images\UI\play.png</Link>
+    <Content Include="..\\assets\images/UI/\menuButtonBackground.png" >
+      <Link>assets\images/UI/\menuButtonBackground.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\playOVer.png" >
-      <Link>assets\images\UI\playOVer.png</Link>
+    <Content Include="..\\assets\images/UI/\nextLevel.png" >
+      <Link>assets\images/UI/\nextLevel.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\quit.png" >
-      <Link>assets\images\UI\quit.png</Link>
+    <Content Include="..\\assets\images/UI/\nextLevelOver.png" >
+      <Link>assets\images/UI/\nextLevelOver.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\quitOver.png" >
-      <Link>assets\images\UI\quitOver.png</Link>
+    <Content Include="..\\assets\images/UI/\next_level_sm.png" >
+      <Link>assets\images/UI/\next_level_sm.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\quit_game.png" >
-      <Link>assets\images\UI\quit_game.png</Link>
+    <Content Include="..\\assets\images/UI/\next_level_smRoll.png" >
+      <Link>assets\images/UI/\next_level_smRoll.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\quit_game_Roll.png" >
-      <Link>assets\images\UI\quit_game_Roll.png</Link>
+    <Content Include="..\\assets\images/UI/\play.png" >
+      <Link>assets\images/UI/\play.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\redBtn.png" >
-      <Link>assets\images\UI\redBtn.png</Link>
+    <Content Include="..\\assets\images/UI/\playOVer.png" >
+      <Link>assets\images/UI/\playOVer.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\redBtnOver.png" >
-      <Link>assets\images\UI\redBtnOver.png</Link>
+    <Content Include="..\\assets\images/UI/\quit.png" >
+      <Link>assets\images/UI/\quit.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\redPageIcon.png" >
-      <Link>assets\images\UI\redPageIcon.png</Link>
+    <Content Include="..\\assets\images/UI/\quitOver.png" >
+      <Link>assets\images/UI/\quitOver.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\score.png" >
-      <Link>assets\images\UI\score.png</Link>
+    <Content Include="..\\assets\images/UI/\quit_game.png" >
+      <Link>assets\images/UI/\quit_game.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\score_now.png" >
-      <Link>assets\images\UI\score_now.png</Link>
+    <Content Include="..\\assets\images/UI/\quit_game_Roll.png" >
+      <Link>assets\images/UI/\quit_game_Roll.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\selectlevel.png" >
-      <Link>assets\images\UI\selectlevel.png</Link>
+    <Content Include="..\\assets\images/UI/\redBtn.png" >
+      <Link>assets\images/UI/\redBtn.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\selectLevelOver.png" >
-      <Link>assets\images\UI\selectLevelOver.png</Link>
+    <Content Include="..\\assets\images/UI/\redBtnOver.png" >
+      <Link>assets\images/UI/\redBtnOver.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\start.png" >
-      <Link>assets\images\UI\start.png</Link>
+    <Content Include="..\\assets\images/UI/\redPageIcon.png" >
+      <Link>assets\images/UI/\redPageIcon.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\startOver.png" >
-      <Link>assets\images\UI\startOver.png</Link>
+    <Content Include="..\\assets\images/UI/\score.png" >
+      <Link>assets\images/UI/\score.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\statsBox.png" >
-      <Link>assets\images\UI\statsBox.png</Link>
+    <Content Include="..\\assets\images/UI/\score_now.png" >
+      <Link>assets\images/UI/\score_now.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\timer.png" >
-      <Link>assets\images\UI\timer.png</Link>
+    <Content Include="..\\assets\images/UI/\selectlevel.png" >
+      <Link>assets\images/UI/\selectlevel.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\time_now.png" >
-      <Link>assets\images\UI\time_now.png</Link>
+    <Content Include="..\\assets\images/UI/\selectLevelOver.png" >
+      <Link>assets\images/UI/\selectLevelOver.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\triBtnGraphics.png" >
-      <Link>assets\images\UI\triBtnGraphics.png</Link>
+    <Content Include="..\\assets\images/UI/\start.png" >
+      <Link>assets\images/UI/\start.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\Untitled-1.png" >
-      <Link>assets\images\UI\Untitled-1.png</Link>
+    <Content Include="..\\assets\images/UI/\startOver.png" >
+      <Link>assets\images/UI/\startOver.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\Untitled-5.png" >
-      <Link>assets\images\UI\Untitled-5.png</Link>
+    <Content Include="..\\assets\images/UI/\statsBox.png" >
+      <Link>assets\images/UI/\statsBox.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\whitePageIcon.png" >
-      <Link>assets\images\UI\whitePageIcon.png</Link>
+    <Content Include="..\\assets\images/UI/\timer.png" >
+      <Link>assets\images/UI/\timer.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\icons\glasses.png" >
-      <Link>assets\images\UI\icons\glasses.png</Link>
+    <Content Include="..\\assets\images/UI/\time_now.png" >
+      <Link>assets\images/UI/\time_now.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\icons\journal.png" >
-      <Link>assets\images\UI\icons\journal.png</Link>
+    <Content Include="..\\assets\images/UI/\triBtnGraphics.png" >
+      <Link>assets\images/UI/\triBtnGraphics.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\icons\lock.png" >
-      <Link>assets\images\UI\icons\lock.png</Link>
+    <Content Include="..\\assets\images/UI/\Untitled-1.png" >
+      <Link>assets\images/UI/\Untitled-1.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\icons\phones.gif" >
-      <Link>assets\images\UI\icons\phones.gif</Link>
+    <Content Include="..\\assets\images/UI/\Untitled-5.png" >
+      <Link>assets\images/UI/\Untitled-5.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\icons\phones.png" >
-      <Link>assets\images\UI\icons\phones.png</Link>
+    <Content Include="..\\assets\images/UI/\whitePageIcon.png" >
+      <Link>assets\images/UI/\whitePageIcon.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\icons\tie.png" >
-      <Link>assets\images\UI\icons\tie.png</Link>
+    <Content Include="..\\assets\images/UI/icons/\glasses.png" >
+      <Link>assets\images/UI/icons/\glasses.png</Link>
     </Content>
-    <Content Include="..\\assets\images\UI\icons\Untitled-1.png" >
-      <Link>assets\images\UI\icons\Untitled-1.png</Link>
+    <Content Include="..\\assets\images/UI/icons/\journal.png" >
+      <Link>assets\images/UI/icons/\journal.png</Link>
+    </Content>
+    <Content Include="..\\assets\images/UI/icons/\lock.png" >
+      <Link>assets\images/UI/icons/\lock.png</Link>
+    </Content>
+    <Content Include="..\\assets\images/UI/icons/\phones.gif" >
+      <Link>assets\images/UI/icons/\phones.gif</Link>
+    </Content>
+    <Content Include="..\\assets\images/UI/icons/\phones.png" >
+      <Link>assets\images/UI/icons/\phones.png</Link>
+    </Content>
+    <Content Include="..\\assets\images/UI/icons/\tie.png" >
+      <Link>assets\images/UI/icons/\tie.png</Link>
+    </Content>
+    <Content Include="..\\assets\images/UI/icons/\Untitled-1.png" >
+      <Link>assets\images/UI/icons/\Untitled-1.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureBtns/\animationBlue.png" >
+      <Link>assets\new/featureBtns/\animationBlue.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureBtns/\animationRed.png" >
+      <Link>assets\new/featureBtns/\animationRed.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureBtns/\colorBlue.png" >
+      <Link>assets\new/featureBtns/\colorBlue.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureBtns/\colorRed.png" >
+      <Link>assets\new/featureBtns/\colorRed.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureBtns/\particleBlue.png" >
+      <Link>assets\new/featureBtns/\particleBlue.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureBtns/\particleRed.png" >
+      <Link>assets\new/featureBtns/\particleRed.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureBtns/\patternBlue.png" >
+      <Link>assets\new/featureBtns/\patternBlue.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureBtns/\patternRed.png" >
+      <Link>assets\new/featureBtns/\patternRed.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureBtns/\soundBlue.png" >
+      <Link>assets\new/featureBtns/\soundBlue.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureBtns/\soundRed.png" >
+      <Link>assets\new/featureBtns/\soundRed.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureIcons/\animation.png" >
+      <Link>assets\new/featureIcons/\animation.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureIcons/\color.png" >
+      <Link>assets\new/featureIcons/\color.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureIcons/\particle.png" >
+      <Link>assets\new/featureIcons/\particle.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureIcons/\pattern.png" >
+      <Link>assets\new/featureIcons/\pattern.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/featureIcons/\sound.png" >
+      <Link>assets\new/featureIcons/\sound.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\arrowIcon.png" >
+      <Link>assets\new/newUI/\arrowIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\authoredHeader.png" >
+      <Link>assets\new/newUI/\authoredHeader.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\blueBox.png" >
+      <Link>assets\new/newUI/\blueBox.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\cubeIcon.png" >
+      <Link>assets\new/newUI/\cubeIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\equalSizes.png" >
+      <Link>assets\new/newUI/\equalSizes.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\gotIt.png" >
+      <Link>assets\new/newUI/\gotIt.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\handIcon.png" >
+      <Link>assets\new/newUI/\handIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\hitMeIcon.png" >
+      <Link>assets\new/newUI/\hitMeIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\infinityIcon.png" >
+      <Link>assets\new/newUI/\infinityIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\levelSelect.png" >
+      <Link>assets\new/newUI/\levelSelect.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\lockIcon.png" >
+      <Link>assets\new/newUI/\lockIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\minChallenge.png" >
+      <Link>assets\new/newUI/\minChallenge.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\minutesForChallenge.png" >
+      <Link>assets\new/newUI/\minutesForChallenge.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\nextLevel.png" >
+      <Link>assets\new/newUI/\nextLevel.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\numberOfCubes.png" >
+      <Link>assets\new/newUI/\numberOfCubes.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\numCubes.png" >
+      <Link>assets\new/newUI/\numCubes.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\play.png" >
+      <Link>assets\new/newUI/\play.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\puzzleIcon.png" >
+      <Link>assets\new/newUI/\puzzleIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\quitBtn.png" >
+      <Link>assets\new/newUI/\quitBtn.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\redBox.png" >
+      <Link>assets\new/newUI/\redBox.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\stopIcon.png" >
+      <Link>assets\new/newUI/\stopIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\timeModeHeadline.png" >
+      <Link>assets\new/newUI/\timeModeHeadline.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\timerIcon.png" >
+      <Link>assets\new/newUI/\timerIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\whiteCube.png" >
+      <Link>assets\new/newUI/\whiteCube.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/\xIcon.png" >
+      <Link>assets\new/newUI/\xIcon.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/bigger%20images/\goal.png" >
+      <Link>assets\new/newUI/bigger%20images/\goal.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/bigger%20images/\hitMe.png" >
+      <Link>assets\new/newUI/bigger%20images/\hitMe.png</Link>
+    </Content>
+    <Content Include="..\\assets\new/newUI/bigger%20images/\score.png" >
+      <Link>assets\new/newUI/bigger%20images/\score.png</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Sce.PlayStation.Core" />
     <Reference Include="Sce.PlayStation.HighLevel.UI" />
+  </ItemGroup>
+  <ItemGroup>
+    <PsmMetadata Include="app.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
 </Project>

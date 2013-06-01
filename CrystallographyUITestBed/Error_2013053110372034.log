@@ -1,0 +1,15 @@
+﻿-----------------------------------------
+Exception Type: System.NullReferenceException
+Exception Message: Object reference not set to an instance of an object.
+Stack trace:
+   at UIComposer.UITools.WidgetPropertyControlViewModel..ctor(ICObjectTreeNode targetProperty)
+   at UIComposer.PropertyListWidgetControl.UserControl_Loaded(Object sender, RoutedEventArgs e)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at MS.Internal.FrameworkObject.OnLoaded(RoutedEventArgs args)
+   at System.Windows.BroadcastEventHelper.BroadcastEvent(DependencyObject root, RoutedEvent routedEvent)
+   at System.Windows.BroadcastEventHelper.BroadcastLoadedEvent(Object root)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at MS.Internal.Threading.ExceptionFilterHelper.TryCatchWhen(Object source, Delegate method, Object args, Int32 numArgs, Delegate catchHandler)
+-----------------------------------------
+

@@ -1,0 +1,303 @@
+﻿Microsoft (R) Build Engine version 4.0.30319.17929
+[Microsoft .NET Framework, version 4.0.30319.18034]
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 5/31/2013 11:02:23 PM.
+Project "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\Preview.csproj" on node 1 (Rebuild target(s)).
+CoreClean:
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\app.exe".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\Sce.PlayStation.HighLevel.UI.dll".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\header.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\instructions.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\instructionsOver.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\play.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\playOver.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\fonts\Bariol_Regular.otf".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\back.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\back_2.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\blueBtn.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\blueBtnOver.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\credits.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeUI.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeUIRoll.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\header.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\instructions.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\instructions1.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\instructions2.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\instructions3.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\instructions4.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\instructions5.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\instructions6.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\instructions7.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\instructions8.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\instructionsOver.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\lockIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\makeShapes.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\menuButtonBackground.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\play.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\playOVer.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\quit.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\quitOver.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\redBtn.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\redBtnOver.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\redPageIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\score.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\selectlevel.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\selectLevelOver.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\start.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\startOver.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\statsBox.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\timer.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\triBtnGraphics.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\Untitled-5.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\whitePageIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\icons\glasses.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\icons\journal.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\icons\tie.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\greyBar.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cube6RollOver.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeRoll3.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeRollOver5.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeUI2.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeUI3.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeUI4.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeUI5.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeUI6.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeUIRollOver.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeUIRollOver4.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeUIRollOver5.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\cubeUIRollOver6.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\Untitled-1.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\icons\phones.gif".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\icons\phones.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\icons\Untitled-1.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\icons\lock.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\levelComplete.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\levelSelectBtn.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\levelSelectBtnRoll.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\nextLevel.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\nextLevelOver.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\quit_game.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\quit_game_Roll.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\score_now.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\time_now.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\credits_btn.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\credits_btnRoll.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\back_2Roll.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\eyes.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\loading.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\next_level_sm.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\images\UI\next_level_smRoll.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\featureIcons\animation.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\featureIcons\color.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\featureIcons\particle.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\featureIcons\pattern.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\featureIcons\sound.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureBtns\animationBlue.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureBtns\animationRed.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureBtns\colorBlue.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureBtns\colorRed.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureBtns\particleBlue.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureBtns\particleRed.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureBtns\patternBlue.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureBtns\patternRed.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureBtns\soundBlue.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureBtns\soundRed.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureIcons\animation.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureIcons\color.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureIcons\particle.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureIcons\pattern.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\featureIcons\sound.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\arrowIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\authoredHeader.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\blueBox.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\cubeIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\equalSizes.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\handIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\hitMeIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\infinityIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\lockIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\puzzleIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\redBox.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\stopIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\timerIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\whiteCube.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\xIcon.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\bigger images\goal.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\bigger images\hitMe.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\bigger images\score.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\gotIt.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\levelSelect.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\nextLevel.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\quitBtn.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\minutesForChallenge.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\numberOfCubes.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\timeModeHeadline.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\play.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\minChallenge.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\bin\Release\Preview-unsigned\Application\assets\new\newUI\numCubes.png".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\obj\Release\Preview.csprojResolveAssemblyReference.cache".
+  Deleting file "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\obj\Release\app.exe".
+_CompileMetadata:
+  C:\Program Files (x86)\SCE\PSM\tools\PublishingUtility\PublishingUtility.exe --compile app.xml bin\Release\Preview-unsigned\Application\app.info 
+  C:\PYTHON27\LIB\site.py:153: Warning: 'with' will become a reserved keyword in Python 2.6
+  'import site' failed; use -v for traceback
+  C:\PYTHON27\LIB\linecache.py:127: Warning: 'with' will become a reserved keyword in Python 2.6
+  Traceback (most recent call last):
+    File "C:\Program Files (x86)\SCE\PSM/tools/PublishingUtility/cxml/appinfo/appinfo_compiler.py", line 15, in <module>
+      import os
+    File "C:\PYTHON27\LIB\os.py", line 754
+      bs = b""
+             ^
+  SyntaxError: invalid syntax
+_CompileShaderPrograms:
+Skipping target "_CompileShaderPrograms" because it has no outputs.
+_CompileEmbeddedShaderPrograms:
+Skipping target "_CompileEmbeddedShaderPrograms" because it has no outputs.
+GenerateTargetFrameworkMonikerAttribute:
+Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+CoreCompile:
+  c:\windows\Microsoft.NET\Framework\v4.0.30319\Csc.exe /noconfig /nostdlib+ /errorreport:prompt /warn:4 /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\mscorlib.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\Sce.PlayStation.Core.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\Sce.PlayStation.HighLevel.UI.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\System.dll" /debug- /optimize- /out:obj\Release\app.exe /target:exe /utf8output __DummyProgram.cs timedMode.composer.cs timedMode.cs UIStringTable.cs "C:\Users\phoenix\AppData\Local\Temp\Psm,Version=v1.0.AssemblyAttributes.cs"
+_CopyFilesToBundle:
+  Copying file from "obj\Release\app.exe" to "bin\Release\Preview-unsigned\Application\app.exe".
+  Copying file from "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Psm\v1.0\Sce.PlayStation.HighLevel.UI.dll" to "bin\Release\Preview-unsigned\Application\Sce.PlayStation.HighLevel.UI.dll".
+  Copying file from "..\\assets\/\header.png" to "bin\Release\Preview-unsigned\Application\assets\/\header.png".
+  Copying file from "..\\assets\/\instructions.png" to "bin\Release\Preview-unsigned\Application\assets\/\instructions.png".
+  Copying file from "..\\assets\/\instructionsOver.png" to "bin\Release\Preview-unsigned\Application\assets\/\instructionsOver.png".
+  Copying file from "..\\assets\/\play.png" to "bin\Release\Preview-unsigned\Application\assets\/\play.png".
+  Copying file from "..\\assets\/\playOver.png" to "bin\Release\Preview-unsigned\Application\assets\/\playOver.png".
+  Copying file from "..\\assets\featureIcons/\animation.png" to "bin\Release\Preview-unsigned\Application\assets\featureIcons/\animation.png".
+  Copying file from "..\\assets\featureIcons/\color.png" to "bin\Release\Preview-unsigned\Application\assets\featureIcons/\color.png".
+  Copying file from "..\\assets\featureIcons/\particle.png" to "bin\Release\Preview-unsigned\Application\assets\featureIcons/\particle.png".
+  Copying file from "..\\assets\featureIcons/\pattern.png" to "bin\Release\Preview-unsigned\Application\assets\featureIcons/\pattern.png".
+  Copying file from "..\\assets\featureIcons/\sound.png" to "bin\Release\Preview-unsigned\Application\assets\featureIcons/\sound.png".
+  Copying file from "..\\assets\fonts/\Bariol_Regular.otf" to "bin\Release\Preview-unsigned\Application\assets\fonts/\Bariol_Regular.otf".
+  Copying file from "..\\assets\images/UI/\back.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\back.png".
+  Copying file from "..\\assets\images/UI/\back_2.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\back_2.png".
+  Copying file from "..\\assets\images/UI/\back_2Roll.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\back_2Roll.png".
+  Copying file from "..\\assets\images/UI/\blueBtn.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\blueBtn.png".
+  Copying file from "..\\assets\images/UI/\blueBtnOver.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\blueBtnOver.png".
+  Copying file from "..\\assets\images/UI/\credits.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\credits.png".
+  Copying file from "..\\assets\images/UI/\credits_btn.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\credits_btn.png".
+  Copying file from "..\\assets\images/UI/\credits_btnRoll.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\credits_btnRoll.png".
+  Copying file from "..\\assets\images/UI/\cube6RollOver.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cube6RollOver.png".
+  Copying file from "..\\assets\images/UI/\cubeRoll3.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeRoll3.png".
+  Copying file from "..\\assets\images/UI/\cubeRollOver5.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeRollOver5.png".
+  Copying file from "..\\assets\images/UI/\cubeUI.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeUI.png".
+  Copying file from "..\\assets\images/UI/\cubeUI2.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeUI2.png".
+  Copying file from "..\\assets\images/UI/\cubeUI3.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeUI3.png".
+  Copying file from "..\\assets\images/UI/\cubeUI4.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeUI4.png".
+  Copying file from "..\\assets\images/UI/\cubeUI5.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeUI5.png".
+  Copying file from "..\\assets\images/UI/\cubeUI6.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeUI6.png".
+  Copying file from "..\\assets\images/UI/\cubeUIRoll.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeUIRoll.png".
+  Copying file from "..\\assets\images/UI/\cubeUIRollOver.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeUIRollOver.png".
+  Copying file from "..\\assets\images/UI/\cubeUIRollOver4.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeUIRollOver4.png".
+  Copying file from "..\\assets\images/UI/\cubeUIRollOver5.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeUIRollOver5.png".
+  Copying file from "..\\assets\images/UI/\cubeUIRollOver6.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\cubeUIRollOver6.png".
+  Copying file from "..\\assets\images/UI/\eyes.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\eyes.png".
+  Copying file from "..\\assets\images/UI/\greyBar.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\greyBar.png".
+  Copying file from "..\\assets\images/UI/\header.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\header.png".
+  Copying file from "..\\assets\images/UI/\instructions.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\instructions.png".
+  Copying file from "..\\assets\images/UI/\instructions1.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\instructions1.png".
+  Copying file from "..\\assets\images/UI/\instructions2.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\instructions2.png".
+  Copying file from "..\\assets\images/UI/\instructions3.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\instructions3.png".
+  Copying file from "..\\assets\images/UI/\instructions4.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\instructions4.png".
+  Copying file from "..\\assets\images/UI/\instructions5.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\instructions5.png".
+  Copying file from "..\\assets\images/UI/\instructions6.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\instructions6.png".
+  Copying file from "..\\assets\images/UI/\instructions7.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\instructions7.png".
+  Copying file from "..\\assets\images/UI/\instructions8.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\instructions8.png".
+  Copying file from "..\\assets\images/UI/\instructionsOver.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\instructionsOver.png".
+  Copying file from "..\\assets\images/UI/\levelComplete.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\levelComplete.png".
+  Copying file from "..\\assets\images/UI/\levelSelectBtn.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\levelSelectBtn.png".
+  Copying file from "..\\assets\images/UI/\levelSelectBtnRoll.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\levelSelectBtnRoll.png".
+  Copying file from "..\\assets\images/UI/\loading.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\loading.png".
+  Copying file from "..\\assets\images/UI/\lockIcon.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\lockIcon.png".
+  Copying file from "..\\assets\images/UI/\makeShapes.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\makeShapes.png".
+  Copying file from "..\\assets\images/UI/\menuButtonBackground.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\menuButtonBackground.png".
+  Copying file from "..\\assets\images/UI/\nextLevel.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\nextLevel.png".
+  Copying file from "..\\assets\images/UI/\nextLevelOver.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\nextLevelOver.png".
+  Copying file from "..\\assets\images/UI/\next_level_sm.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\next_level_sm.png".
+  Copying file from "..\\assets\images/UI/\next_level_smRoll.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\next_level_smRoll.png".
+  Copying file from "..\\assets\images/UI/\play.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\play.png".
+  Copying file from "..\\assets\images/UI/\playOVer.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\playOVer.png".
+  Copying file from "..\\assets\images/UI/\quit.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\quit.png".
+  Copying file from "..\\assets\images/UI/\quitOver.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\quitOver.png".
+  Copying file from "..\\assets\images/UI/\quit_game.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\quit_game.png".
+  Copying file from "..\\assets\images/UI/\quit_game_Roll.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\quit_game_Roll.png".
+  Copying file from "..\\assets\images/UI/\redBtn.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\redBtn.png".
+  Copying file from "..\\assets\images/UI/\redBtnOver.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\redBtnOver.png".
+  Copying file from "..\\assets\images/UI/\redPageIcon.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\redPageIcon.png".
+  Copying file from "..\\assets\images/UI/\score.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\score.png".
+  Copying file from "..\\assets\images/UI/\score_now.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\score_now.png".
+  Copying file from "..\\assets\images/UI/\selectlevel.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\selectlevel.png".
+  Copying file from "..\\assets\images/UI/\selectLevelOver.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\selectLevelOver.png".
+  Copying file from "..\\assets\images/UI/\start.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\start.png".
+  Copying file from "..\\assets\images/UI/\startOver.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\startOver.png".
+  Copying file from "..\\assets\images/UI/\statsBox.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\statsBox.png".
+  Copying file from "..\\assets\images/UI/\timer.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\timer.png".
+  Copying file from "..\\assets\images/UI/\time_now.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\time_now.png".
+  Copying file from "..\\assets\images/UI/\triBtnGraphics.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\triBtnGraphics.png".
+  Copying file from "..\\assets\images/UI/\Untitled-1.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\Untitled-1.png".
+  Copying file from "..\\assets\images/UI/\Untitled-5.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\Untitled-5.png".
+  Copying file from "..\\assets\images/UI/\whitePageIcon.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/\whitePageIcon.png".
+  Copying file from "..\\assets\images/UI/icons/\glasses.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/icons/\glasses.png".
+  Copying file from "..\\assets\images/UI/icons/\journal.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/icons/\journal.png".
+  Copying file from "..\\assets\images/UI/icons/\lock.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/icons/\lock.png".
+  Copying file from "..\\assets\images/UI/icons/\phones.gif" to "bin\Release\Preview-unsigned\Application\assets\images/UI/icons/\phones.gif".
+  Copying file from "..\\assets\images/UI/icons/\phones.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/icons/\phones.png".
+  Copying file from "..\\assets\images/UI/icons/\tie.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/icons/\tie.png".
+  Copying file from "..\\assets\images/UI/icons/\Untitled-1.png" to "bin\Release\Preview-unsigned\Application\assets\images/UI/icons/\Untitled-1.png".
+  Copying file from "..\\assets\new/featureBtns/\animationBlue.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureBtns/\animationBlue.png".
+  Copying file from "..\\assets\new/featureBtns/\animationRed.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureBtns/\animationRed.png".
+  Copying file from "..\\assets\new/featureBtns/\colorBlue.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureBtns/\colorBlue.png".
+  Copying file from "..\\assets\new/featureBtns/\colorRed.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureBtns/\colorRed.png".
+  Copying file from "..\\assets\new/featureBtns/\particleBlue.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureBtns/\particleBlue.png".
+  Copying file from "..\\assets\new/featureBtns/\particleRed.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureBtns/\particleRed.png".
+  Copying file from "..\\assets\new/featureBtns/\patternBlue.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureBtns/\patternBlue.png".
+  Copying file from "..\\assets\new/featureBtns/\patternRed.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureBtns/\patternRed.png".
+  Copying file from "..\\assets\new/featureBtns/\soundBlue.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureBtns/\soundBlue.png".
+  Copying file from "..\\assets\new/featureBtns/\soundRed.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureBtns/\soundRed.png".
+  Copying file from "..\\assets\new/featureIcons/\animation.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureIcons/\animation.png".
+  Copying file from "..\\assets\new/featureIcons/\color.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureIcons/\color.png".
+  Copying file from "..\\assets\new/featureIcons/\particle.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureIcons/\particle.png".
+  Copying file from "..\\assets\new/featureIcons/\pattern.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureIcons/\pattern.png".
+  Copying file from "..\\assets\new/featureIcons/\sound.png" to "bin\Release\Preview-unsigned\Application\assets\new/featureIcons/\sound.png".
+  Copying file from "..\\assets\new/newUI/\arrowIcon.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\arrowIcon.png".
+  Copying file from "..\\assets\new/newUI/\authoredHeader.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\authoredHeader.png".
+  Copying file from "..\\assets\new/newUI/\blueBox.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\blueBox.png".
+  Copying file from "..\\assets\new/newUI/\cubeIcon.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\cubeIcon.png".
+  Copying file from "..\\assets\new/newUI/\equalSizes.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\equalSizes.png".
+  Copying file from "..\\assets\new/newUI/\gotIt.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\gotIt.png".
+  Copying file from "..\\assets\new/newUI/\handIcon.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\handIcon.png".
+  Copying file from "..\\assets\new/newUI/\hitMeIcon.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\hitMeIcon.png".
+  Copying file from "..\\assets\new/newUI/\infinityIcon.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\infinityIcon.png".
+  Copying file from "..\\assets\new/newUI/\levelSelect.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\levelSelect.png".
+  Copying file from "..\\assets\new/newUI/\lockIcon.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\lockIcon.png".
+  Copying file from "..\\assets\new/newUI/\minChallenge.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\minChallenge.png".
+  Copying file from "..\\assets\new/newUI/\minutesForChallenge.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\minutesForChallenge.png".
+  Copying file from "..\\assets\new/newUI/\nextLevel.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\nextLevel.png".
+  Copying file from "..\\assets\new/newUI/\numberOfCubes.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\numberOfCubes.png".
+  Copying file from "..\\assets\new/newUI/\numCubes.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\numCubes.png".
+  Copying file from "..\\assets\new/newUI/\play.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\play.png".
+  Copying file from "..\\assets\new/newUI/\puzzleIcon.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\puzzleIcon.png".
+  Copying file from "..\\assets\new/newUI/\quitBtn.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\quitBtn.png".
+  Copying file from "..\\assets\new/newUI/\redBox.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\redBox.png".
+  Copying file from "..\\assets\new/newUI/\stopIcon.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\stopIcon.png".
+  Copying file from "..\\assets\new/newUI/\timeModeHeadline.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\timeModeHeadline.png".
+  Copying file from "..\\assets\new/newUI/\timerIcon.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\timerIcon.png".
+  Copying file from "..\\assets\new/newUI/\whiteCube.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\whiteCube.png".
+  Copying file from "..\\assets\new/newUI/\xIcon.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/\xIcon.png".
+  Copying file from "..\\assets\new/newUI/bigger images/\goal.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/bigger images/\goal.png".
+  Copying file from "..\\assets\new/newUI/bigger images/\hitMe.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/bigger images/\hitMe.png".
+  Copying file from "..\\assets\new/newUI/bigger images/\score.png" to "bin\Release\Preview-unsigned\Application\assets\new/newUI/bigger images/\score.png".
+_CreatePackage:
+  Since the Publisher Key and App Key corresponding to this app did not exist, -signed directory was not made.
+  File not found. "C:\Users\phoenix\AppData\Roaming\SCE\PSM Publishing Utility\HostAppsKey\Preview.khapp"
+  
+Done Building Project "C:\Users\phoenix\Documents\GitHub\crystallography\CrystallographyUITestBed\__UICPreview__\Preview.csproj" (Rebuild target(s)).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.52

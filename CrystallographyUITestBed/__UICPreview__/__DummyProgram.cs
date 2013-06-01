@@ -25,7 +25,7 @@ namespace Preview
             graphics = new GraphicsContext(960,544,PixelFormat.Rgba,PixelFormat.Depth16,MultiSampleMode.None);
             UISystem.Initialize(graphics);
 
-            __DummyScene scene = new __DummyScene();
+            timedMode scene = new timedMode();
             SetupListNum(scene.RootWidget);
             scene.SetWidgetLayout(LayoutOrientation.Horizontal);
             UISystem.SetScene(scene);
@@ -36,13 +36,18 @@ namespace Preview
                 // update
                 {
                     List<TouchData> touchDataList = Touch.GetData(0);
-                    UISystem.Update(touchDataList);
+                    var gamePad = GamePad.GetData (0);
+                    UISystem.Update(touchDataList, ref gamePad);
                 }
 
                 // draw
                 {
                     graphics.SetViewport(0, 0, graphics.Screen.Width, graphics.Screen.Height);
-                    graphics.SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+                    graphics.SetClearColor(
+                        0xFF, 
+                        0xFF, 
+                        0xFF, 
+                        0xff);
                     graphics.Clear();
 
                     UISystem.Render();
@@ -76,6 +81,20 @@ namespace Preview
                 {
                     SetupListNum(child as ContainerWidget);
                 }
+                else if (child is PagePanel)
+				{
+					var pagePanel = (PagePanel)child;
+					for (int i = 0; i < pagePanel.PageCount; i++) {
+						SetupListNum (pagePanel.GetPage (i));
+					}
+				}
+				else if (child is LiveFlipPanel)
+				{
+					var liveFlip = (LiveFlipPanel)child;
+					SetupListNum(liveFlip.FrontPanel);
+					SetupListNum(liveFlip.BackPanel);
+				}
+
             }
         }
 
