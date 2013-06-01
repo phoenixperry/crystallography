@@ -159,7 +159,6 @@
     <Folder Include="assets\images\bg\" />
     <Folder Include="bg\" />
     <Folder Include="assets\animation\" />
-    <Folder Include="assets\animation\leftFall\" />
     <Folder Include="assets\images\UI\" />
     <Folder Include="assets\images\set1\" />
     <Folder Include="assets\images\set2\" />
@@ -208,20 +207,6 @@
     <Content Include="assets\images\bg\1\rightHollowWhite.png" />
     <Content Include="assets\images\bg\1\rightSolidWhite.png" />
     <Content Include="assets\images\bg\1\topSolidChevron.png" />
-    <Content Include="assets\animation\rightGlitch\1.png" />
-    <Content Include="assets\animation\rightGlitch\2.png" />
-    <Content Include="assets\animation\rightGlitch\3.png" />
-    <Content Include="assets\animation\rightGlitch\4.png" />
-    <Content Include="assets\animation\rightGlitch\5.png" />
-    <Content Include="assets\animation\rightGlitch\right.png" />
-    <Content Include="assets\animation\topGlitch\1.png" />
-    <Content Include="assets\animation\topGlitch\2.png" />
-    <Content Include="assets\animation\topGlitch\3.png" />
-    <Content Include="assets\animation\topGlitch\4.png" />
-    <Content Include="assets\animation\topGlitch\5.png" />
-    <Content Include="assets\animation\topGlitch\sprites.png" />
-    <Content Include="assets\animation\leftGlitch\leftOneLine.png" />
-    <Content Include="assets\animation\leftGlitch\leftOneLine.xml" />
     <Content Include="assets\levels\level_11.xml" />
     <Content Include="assets\levels\level_12.xml" />
     <Content Include="assets\levels\level_13.xml" />
@@ -236,8 +221,6 @@
     <Content Include="assets\levels\level_22.xml" />
     <Content Include="assets\levels\level_23.xml" />
     <Content Include="assets\levels\level_24.xml" />
-    <Content Include="assets\animation\leftFall\leftFall.png" />
-    <Content Include="assets\animation\leftFall\leftFall.xml" />
     <Content Include="assets\images\UI\back.png" />
     <Content Include="assets\images\UI\backOver.png" />
     <Content Include="assets\images\UI\back_2.png" />
@@ -370,14 +353,13 @@
     <Content Include="assets\images\quit_game.png" />
     <Content Include="assets\images\UI\loading.png" />
     <Content Include="assets\images\glow.png" />
+    <Content Include="assets\animation\char_anims.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
     <None Include="deprecated\Cube.cs" />
     <None Include="deprecated\Group.cs" />
     <None Include="deprecated\LevelData.cs" />
-    <None Include="assets\animation\rightGlitch\right.xml" />
-    <None Include="assets\animation\topGlitch\sprites.xml" />
     <None Include="deprecated\AnimationFall.cs" />
     <None Include="deprecated\AnimationFallSpriteSingleton.cs" />
     <None Include="deprecated\AnimationGlitchSpriteSingleton.cs" />

@@ -159,6 +159,7 @@ namespace Crystallography
 			
 			_anim = new SpriteTile( anim.TextureInfo, anim.TileIndex2D );
 			_anim = new SpriteTile( anim.TextureInfo, anim.TileIndex2D );
+			_anim.Scale /= 3.0f;
 			_anim.Pivot = this.getNode().Pivot;
 			_anim.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.ReverseSubtract, BlendFuncFactor.One, BlendFuncFactor.OneMinusSrcColor);
 			_anim.BlendMode.Enabled = true;
@@ -168,13 +169,13 @@ namespace Crystallography
 				_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 1.0f, true) );
 			}
 			if (_anim != null) {
-				if (getOrientation() == 1) {
-					_anim.Rotation = new Vector2(1f,0f);
-				} else if (getOrientation() == 2) {
-					_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
-				} else {
-					_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
-				}
+//				if (getOrientation() == 1) {
+//					_anim.Rotation = new Vector2(1f,0f);
+//				} else if (getOrientation() == 2) {
+//					_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
+//				} else {
+//					_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
+//				}
 				this.getNode().AddChild(_anim);
 			}
 		}
