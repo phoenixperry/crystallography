@@ -385,6 +385,7 @@
     <Content Include="assets\images\icons\pattern.png" />
     <Content Include="assets\images\icons\sound.png" />
     <Content Include="assets\images\icons\tie.png" />
+    <Content Include="assets\animation\leftFall\leftFall.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
