@@ -19,7 +19,7 @@ namespace Crystallography
 		protected readonly static float DEFAULT_SPEED = 0.3f;
 		
 //		protected readonly static BlendFunc animBlend = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstColor, BlendFuncFactor.SrcAlpha);
-		protected readonly static BlendFunc animBlend = new BlendFunc(BlendFuncMode.ReverseSubtract, BlendFuncFactor.One, BlendFuncFactor.OneMinusSrcColor);
+		protected readonly static BlendFunc animBlend = new BlendFunc(BlendFuncMode.ReverseSubtract, BlendFuncFactor.Zero, BlendFuncFactor.SrcColor);
 		
 		
 		protected SpriteTile _anim;
@@ -175,7 +175,7 @@ namespace Crystallography
 //			_anim.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstAlpha, BlendFuncFactor.OneMinusSrcAlpha);
 			_anim.BlendMode.BlendFunc = animBlend;
 			_anim.BlendMode.Enabled = true;
-			_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 1.0f, true) );
+			_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 0.083f*(1+pEnd-pStart), true) );
 
 			if (getOrientation() == 1) {
 				_anim.Rotation = new Vector2(1f,0f);
