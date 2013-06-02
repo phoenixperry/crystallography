@@ -167,6 +167,7 @@
     <Folder Include="assets\audio\bgm\" />
     <Folder Include="assets\images\bg\2\" />
     <Folder Include="assets\images\bg\3\" />
+    <Folder Include="assets\images\icons\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\images\title.png" />
@@ -371,6 +372,19 @@
     <Content Include="assets\levels\level_37.xml" />
     <Content Include="assets\levels\level_38.xml" />
     <Content Include="assets\levels\level_39.xml" />
+    <Content Include="assets\images\blueBox.png" />
+    <Content Include="assets\images\redbox.png" />
+    <Content Include="assets\images\handIcon.png" />
+    <Content Include="assets\images\stopIcon.png" />
+    <Content Include="assets\images\LevelTitleBG.png" />
+    <Content Include="assets\images\icons\animation.png" />
+    <Content Include="assets\images\icons\color.png" />
+    <Content Include="assets\images\icons\glasses.png" />
+    <Content Include="assets\images\icons\journal.png" />
+    <Content Include="assets\images\icons\particle.png" />
+    <Content Include="assets\images\icons\pattern.png" />
+    <Content Include="assets\images\icons\sound.png" />
+    <Content Include="assets\images\icons\tie.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

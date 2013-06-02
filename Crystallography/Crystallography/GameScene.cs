@@ -71,6 +71,7 @@ namespace Crystallography
 			
 			Touch.GetData(0).Clear();
 			UISystem.SetScene( new Crystallography.UI.ScoreScene() );
+			InputManager.Instance.Reset();
 						
 //			background = new Crystallography.BG.CrystallonBackground();
 //			BackgroundLayer.AddChild(background);
