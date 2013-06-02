@@ -76,6 +76,7 @@ namespace Crystallography
 			
 //			var entity = GetEntityAtPosition( e.touchPosition );
 			if (lastEntityReleased!=null) {
+				if (lastEntityReleased is CubeCrystallonEntity) return;
 				if (lastEntityReleased.GetType().ToString() == "Crystallography.GroupCrystallonEntity") {
 					GroupCrystallonEntity g = lastEntityReleased as GroupCrystallonEntity;
 					MemberType = g.MemberType;
@@ -111,7 +112,6 @@ namespace Crystallography
 				EaseIn ( true );
 			}
 			if (lastEntityReleased is GroupCrystallonEntity) {
-				Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "break.wav");
 				(lastEntityReleased as GroupCrystallonEntity).Break ();
 			} 
 		}

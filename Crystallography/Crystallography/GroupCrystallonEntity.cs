@@ -281,7 +281,8 @@ namespace Crystallography
 		/// <summary>
 		/// Break this group into its component objects.
 		/// </summary>
-		public void Break() {
+		public virtual void Break() {
+			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "break.wav");
 			Node puck;
 			for (int i=members.Length-1; i>=0; i--) {
 				if ( members[i] != null ) {
@@ -291,7 +292,6 @@ namespace Crystallography
 					Release( e, true );
 					e.setVelocity( launchVelocity );
 					e.setPosition( e.getPosition() + launchVelocity*10);
-					
 				}
 			}
 			

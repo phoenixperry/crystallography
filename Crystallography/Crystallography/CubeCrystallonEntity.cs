@@ -97,14 +97,33 @@ namespace Crystallography
 			GroupManager.Instance.Add( this );
 			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Cube], 0.1f, 0.01f, pPosition));
 			setVelocity(1.0f, GameScene.Random.NextAngle());
+			Sequence sequence = new Sequence();
+			sequence.Add( new DelayTime(1.0f));
+			sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 3.0f));
+			sequence.Add( new CallFunc( () => Finish() ) );
 			foreach( ICrystallonEntity e in members ) {
 				if (e is CardCrystallonEntity) {
 					(e as CardCrystallonEntity).HideGlow();
+					(e as CardCrystallonEntity).getNode().RunAction( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 3.0f));
 				}
 			}
 			addToScene();
 			return this;
 		}
+		
+		public override void Break ()
+		{
+			// DO NOTHING.
+		}
+		
+//		public override void Update (float dt)
+//		{
+//			base.Update(dt);
+//			
+//			foreach( CardCrystallonEntity c in members ) {
+//				c.getNode().RunAction( 
+//			}
+//		}
 		
 		// METHODS -------------------------------------------------------------
 		
@@ -123,6 +142,12 @@ namespace Crystallography
 			Left = GetSideEntity(1);
 		}
 		
+		protected void Finish() {
+			Visible = false;
+			_physics.removePhysicsBody(_body);
+			setBody(null);
+		}
+			
 		private CardCrystallonEntity GetSideEntity(int pIndex) {
 			Node n = pucks[pIndex].Children[0];
 				foreach (var member in members) {
