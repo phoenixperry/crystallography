@@ -94,7 +94,7 @@ namespace Crystallography
 		/// </param>
 		public void Update( float dt ) {
 			
-			if( !enabled ) return;
+			if( !enabled  || AppMain.UI_INPUT_ENABLED ) return;
 			
 //			if( !GameScene.paused ) {	// ---------------------------------------- touch controls for UI are handled elsewhere.
 				if ( Input2.Touch00.Press ) {	// -------------------------------- on new touch

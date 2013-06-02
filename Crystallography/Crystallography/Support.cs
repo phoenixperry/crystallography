@@ -533,7 +533,7 @@ namespace Crystallography
 				p.parent = pParent;
 				p.offset = new Vector2( GameScene.Random.NextSignedFloat() * pParent.Width/4,
 				                       GameScene.Random.NextSignedFloat() * pParent.Height/4);
-				p.position = pParent.getNode().LocalToWorld(p.parent.getNode().Pivot/2) + p.offset;
+				p.position = pParent.getNode().LocalToWorld(p.parent.getNode().Pivot/1) + p.offset;
 //				p.velocity = GameScene.Random.NextVector2();
 				p.color = color;
 				p.time = 0.0f;

@@ -14,7 +14,7 @@ namespace Crystallography
 {
     public class GameScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
     {
-		public static readonly int TOTAL_LEVELS = 25;
+		public static readonly int TOTAL_LEVELS = 40;
 		
 		// Change the following value to true if you want bounding boxes to be rendered
         private static bool DEBUG_BOUNDINGBOXS = false;
@@ -90,7 +90,7 @@ namespace Crystallography
 			
 //			CardManager.Instance.Populate();
 			
-			ForegroundLayer.AddChild( Support.ParticleEffectsManager.Instance );
+			
 			Hud = new GameSceneHud(this);
 			ForegroundLayer.AddChild(Hud);
 	
@@ -115,6 +115,8 @@ namespace Crystallography
 			sequence.Add( new DelayTime(0.1f) );
 			sequence.Add( new CallFunc( () => resetToLevel() ) );
 			this.RunAction(sequence);
+			
+			ForegroundLayer.AddChild( Support.ParticleEffectsManager.Instance );
 			
 //			TestButton = new ButtonEntity("Button", this, _physics, Support.TiledSpriteFromFile("Application/assets/images/button_85x56.png", 1, 3).TextureInfo, new Vector2i(0,0));
 //			TestButton.setPosition( 100f, 100f );

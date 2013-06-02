@@ -4,7 +4,7 @@
         <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
         <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack1" Glow="true" />
+		<Sound Prefix="stack1" Glow="false" />
     </Level>
     <Level Value="1"> 
         <Color Red="0.011765" Green="1.0" Blue="0.741176" />
@@ -56,28 +56,28 @@
         <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
         <Color Red="1.0" Green="0.952941" Blue="0.043137" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack2" />
+		<Sound Prefix="stack2" Glow="true" />
     </Level>
 	<Level Value="9">
 		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
         <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
         <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
-		<Sound Prefix="stack1" />
+		<Sound Prefix="stack1" Glow="true" />
     </Level>
 	<Level Value="10">
 		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
         <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
         <Color Red="1.0" Green="0.952941" Blue="0.043137" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack3" />
+		<Sound Prefix="stack3" Glow="true" />
     </Level>
 	<Level Value="11">
 		<Color Red="0.807843" Green="1.0" Blue="0.0" />
         <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
         <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack1" />
+		<Sound Prefix="stack1" Glow="true" />
 	</Level>
 	<Level Value="12">
 		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
@@ -91,77 +91,77 @@
         <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
         <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack3" Glow="true" />
+		<Sound Prefix="stack3" />
     </Level>
 	<Level Value="14">
 		<Color Red="0.807843" Green="1.0" Blue="0.0" />
         <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
         <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack1" Glow="true" />
+		<Sound Prefix="stack1"  />
 	</Level>
 	<Level Value="15">
 		<Color Red="0.807843" Green="1.0" Blue="0.0" />
         <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
         <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack1" Glow="true" />
+		<Sound Prefix="stack1" />
 	</Level>
 	<Level Value="16">
 		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
         <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
         <Color Red="1.0" Green="0.952941" Blue="0.043137" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack2" Glow="true" />
+		<Sound Prefix="stack2" />
     </Level>
 	<Level Value="17">
 		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
         <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
         <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack3" Glow="true" />
+		<Sound Prefix="stack3" />
     </Level>
 	<Level Value="18">
 		<Color Red="0.807843" Green="1.0" Blue="0.0" />
         <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
         <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack1" Glow="true" />
+		<Sound Prefix="stack1" />
 	</Level>
 	<Level Value="19">
 		<Color Red="0.807843" Green="1.0" Blue="0.0" />
         <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
         <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack1" Glow="true" />
+		<Sound Prefix="stack1" />
 	</Level>
 	<Level Value="20">
 		<Color Red="0.807843" Green="1.0" Blue="0.0" />
         <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
         <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack1" Glow="true" />
+		<Sound Prefix="stack1" />
 	</Level>
 	<Level Value="21">
 		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
         <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
         <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack3" Glow="true" />
+		<Sound Prefix="stack3" />
     </Level>
 	<Level Value="22">
 		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
         <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
         <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack3" Glow="true" />
+		<Sound Prefix="stack3" />
     </Level>
 	<Level Value="23">
 		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
         <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
         <Color Red="1.0" Green="0.952941" Blue="0.043137" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack2" Glow="true" />
+		<Sound Prefix="stack2" />
     </Level>
 	<Level Value="24">
 		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
@@ -174,7 +174,105 @@
 		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
         <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
         <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
+		<Sound Prefix="stack2" Glow="true" />
+    </Level>
+	<Level Value="26">
+		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
+        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
+        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
+		<Sound Prefix="stack3" Glow="true" />
+    </Level>
+	<Level Value="27">
+		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
+        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
+        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
+		<Sound Prefix="stack2" Glow="true" />
+    </Level>
+	<Level Value="28">
+		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
+        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
+        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
+		<Sound Prefix="stack2" Glow="true" />
+    </Level>
+	<Level Value="29">
+		<Color Red="0.807843" Green="1.0" Blue="0.0" />
+        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
+        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
+		<Sound Prefix="stack1" Glow="true" />
+	</Level>
+	<Level Value="30">
+		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
+        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
+        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
+		<Sound Prefix="stack3" Glow="true" />
+    </Level>
+	<Level Value="31">
+		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
+        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
+        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
+		<Sound Prefix="stack3" Glow="true" />
+    </Level>
+	<Level Value="32">
+		<Color Red="0.807843" Green="1.0" Blue="0.0" />
+        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
+        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
+		<Sound Prefix="stack1" Glow="true" />
+	</Level>
+	<Level Value="33">
+		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
+        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
+        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
+		<Sound Prefix="stack2" Glow="true" />
+    </Level>
+	<Level Value="34">
+		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
+        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
+        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
+		<Sound Prefix="stack3" Glow="true" />
+    </Level>
+	<Level Value="35">
+		<Color Red="0.807843" Green="1.0" Blue="0.0" />
+        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
+        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
+		<Sound Prefix="stack1" Glow="true" />
+	</Level>
+	<Level Value="36">
+		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
+        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
+        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
+		<Sound Prefix="stack2" Glow="true" />
+    </Level>
+	<Level Value="37">
+		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
+        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
+        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
+		<Sound Prefix="stack3" Glow="true" />
+    </Level>
+	<Level Value="38">
+		<Color Red="0.807843" Green="1.0" Blue="0.0" />
+        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
+        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
+		<Sound Prefix="stack1" Glow="true" />
+	</Level>
+	<Level Value="39">
+		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
+        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
+        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
     </Level>
 </GameData>

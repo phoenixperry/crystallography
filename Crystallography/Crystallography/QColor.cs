@@ -48,6 +48,9 @@ namespace Crystallography
 		
 		public override void Apply ( ICrystallonEntity pEntity, int pVariant ) {
 			pEntity.getNode().RunAction( new TintTo( palette[pVariant], 0.0f ) );
+			if ( pEntity is SpriteTileCrystallonEntity ) {
+				( pEntity as SpriteTileCrystallonEntity ).setColor(pVariant);
+			}
 		}
 		
 //		public override bool Match ( ICrystallonEntity[] pEntities ) {

@@ -11,6 +11,7 @@ namespace Crystallography
 		protected PhysicsBody _body;
 		protected int _orientationIndex;
 		protected int _patternIndex;
+		protected int _colorIndex;
 		protected int _particleIndex;
 		
 		// GET & SET---------------------------------
@@ -21,6 +22,14 @@ namespace Crystallography
 		
 		public override PhysicsBody getBody() {
 			return _body;
+		}
+		
+		public int getColor() {
+			return _colorIndex;
+		}
+		
+		public void setColor(int pIndex) {
+			_colorIndex = pIndex;
 		}
 		
 		public int getOrientation() {
@@ -103,7 +112,7 @@ namespace Crystallography
 			_particleIndex = pVariant;
 			if (pVariant != 0) {
 				Scheduler.Instance.Schedule(_sprite, spawnParticle, 0.2f, false);
-				Support.ParticleEffectsManager.Instance.AddParticle(pVariant-1, this, QColor.palette[0], 12.0f);
+				Support.ParticleEffectsManager.Instance.AddParticle(pVariant-1, this, QColor.palette[(_colorIndex+1)%3], 12.0f);
 			} else {
 				Scheduler.Instance.Unschedule(_sprite, spawnParticle);
 			}
@@ -111,7 +120,7 @@ namespace Crystallography
 		
 		protected void spawnParticle(float dt) {
 			Support.ParticleEffectsManager.Instance.AddParticle(_particleIndex-1, this, 
-				                     QColor.palette[0], 12.0f);
+				                     QColor.palette[(_colorIndex+1)%3], 12.0f);
 		}
 	}
 }

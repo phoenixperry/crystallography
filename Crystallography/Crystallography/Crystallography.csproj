@@ -356,6 +356,21 @@
     <Content Include="assets\animation\char_anims.png" />
     <Content Include="assets\animation\masks.png" />
     <Content Include="assets\animation\ball_anim.png" />
+    <Content Include="assets\levels\level_25.xml" />
+    <Content Include="assets\levels\level_26.xml" />
+    <Content Include="assets\levels\level_27.xml" />
+    <Content Include="assets\levels\level_28.xml" />
+    <Content Include="assets\levels\level_29.xml" />
+    <Content Include="assets\levels\level_30.xml" />
+    <Content Include="assets\levels\level_31.xml" />
+    <Content Include="assets\levels\level_32.xml" />
+    <Content Include="assets\levels\level_33.xml" />
+    <Content Include="assets\levels\level_34.xml" />
+    <Content Include="assets\levels\level_35.xml" />
+    <Content Include="assets\levels\level_36.xml" />
+    <Content Include="assets\levels\level_37.xml" />
+    <Content Include="assets\levels\level_38.xml" />
+    <Content Include="assets\levels\level_39.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
