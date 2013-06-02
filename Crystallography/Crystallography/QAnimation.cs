@@ -8,6 +8,7 @@ namespace Crystallography
 	{
 		public static int[,] palette = new int[3,2];
 		public static SpriteTile animTiles;
+//		public SpriteTile maskTiles;
 		
 		protected static AbstractQuality _instance;
 		
@@ -36,6 +37,7 @@ namespace Crystallography
 		public QAnimation () : base() {
 			_name = "QAnimation";
 			setPalette();
+//			maskTiles = Support.TiledSpriteFromFile("Application/assets/animation/masks.png", 3, 1);
 		}
 		
 		// OVERRIDES -------------------------------------------------------------
@@ -65,6 +67,7 @@ namespace Crystallography
 		public void setPalette () {
 //			setPalette( "Application/assets/animation/leftFall/leftFall.png", 6, 5, 16, 16, 0, 15, 16, 25);
 			setPalette( "Application/assets/animation/char_anims.png", 3, 2, 0, 0, 0, 3, 3, 6);
+//			setPalette( "Application/assets/animation/ball_anim.png", 5, 1, 0, 0, 0, 5, 0, 5);
 		}
 		
 		/// <summary>

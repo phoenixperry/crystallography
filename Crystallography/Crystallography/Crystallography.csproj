@@ -354,6 +354,8 @@
     <Content Include="assets\images\UI\loading.png" />
     <Content Include="assets\images\glow.png" />
     <Content Include="assets\animation\char_anims.png" />
+    <Content Include="assets\animation\masks.png" />
+    <Content Include="assets\animation\ball_anim.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

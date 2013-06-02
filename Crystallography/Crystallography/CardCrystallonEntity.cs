@@ -18,7 +18,11 @@ namespace Crystallography
 														new Vector2(40.5f*CARD_SCALAR,-31.5f*CARD_SCALAR) };
 		protected readonly static float DEFAULT_SPEED = 0.3f;
 		
+		protected readonly static BlendFunc animBlend = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstAlpha, BlendFuncFactor.OneMinusSrcAlpha);
+		
+		
 		protected SpriteTile _anim;
+//		protected SpriteTile _mask;
 //		protected SpriteTile _glowSprite;
 		protected int _glowIndex;
 		
@@ -156,28 +160,32 @@ namespace Crystallography
 		}
 		
 		public void setAnim( SpriteTile anim, int pStart, int pEnd ) {
-			
-			_anim = new SpriteTile( anim.TextureInfo, anim.TileIndex2D );
-			_anim = new SpriteTile( anim.TextureInfo, anim.TileIndex2D );
-			_anim.Scale /= 3.0f;
-			_anim.Pivot = this.getNode().Pivot;
-			_anim.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.ReverseSubtract, BlendFuncFactor.One, BlendFuncFactor.OneMinusSrcColor);
-			_anim.BlendMode.Enabled = true;
 			if (pStart == pEnd) {
 				_anim = null;
-			} else {
-				_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 1.0f, true) );
+				return;
 			}
-			if (_anim != null) {
-//				if (getOrientation() == 1) {
-//					_anim.Rotation = new Vector2(1f,0f);
-//				} else if (getOrientation() == 2) {
-//					_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
-//				} else {
-//					_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
-//				}
-				this.getNode().AddChild(_anim);
-			}
+			_anim = new SpriteTile( anim.TextureInfo, anim.TileIndex2D );
+//			_mask = new SpriteTile( QAnimation.Instance.maskTiles.TextureInfo, _orientationIndex);
+			_anim.Scale /= 4.0f;
+			_anim.Pivot = this.getNode().Pivot;
+//			_mask.Pivot = this.getNode().Pivot;
+//			_mask.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstColor, BlendFuncFactor.One);
+//			_anim.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.ReverseSubtract, BlendFuncFactor.One, BlendFuncFactor.OneMinusSrcColor);
+//			_anim.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstAlpha, BlendFuncFactor.OneMinusSrcAlpha);
+			_anim.BlendMode.BlendFunc = animBlend;
+			_anim.BlendMode.Enabled = true;
+			_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 1.0f, true) );
+
+			//			if (getOrientation() == 1) {
+//				_anim.Rotation = new Vector2(1f,0f);
+//			} else if (getOrientation() == 2) {
+//				_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
+//			} else {
+//				_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
+//			}
+			this.getNode().AddChild(_anim);
+//			this.getNode().AddChild(_mask);
+//			_mask.AddChild(_anim);
 		}
 		
 		public void resetCountdown() {
