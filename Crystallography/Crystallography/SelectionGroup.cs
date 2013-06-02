@@ -64,11 +64,20 @@ namespace Crystallography
 			InputManager.Instance.TouchJustUpDetected += HandleInputManagerInstanceTouchJustUpDetected;
 			InputManager.Instance.TouchDownDetected += HandleInputManagerInstanceTouchDownDetected;
 			InputManager.Instance.DragDetected += HandleInputManagerInstanceDragDetected;
+			InputManager.Instance.TapDetected += HandleInputManagerInstanceTapDetected;
 		}
-
-		
 		
 		// EVENT HANDLERS --------------------------------------------------------
+		
+		void HandleInputManagerInstanceTapDetected (object sender, BaseTouchEventArgs e)
+		{
+			// HACK this is a little hacky, because CardCrystallonEntites do this in their BeReleased() method
+			// this covers the case where the player just taps on the piece, instead of pressing and holding,
+			// to make sure the glow shuts off correctly
+			if (lastEntityReleased is CardCrystallonEntity) {
+				(lastEntityReleased as CardCrystallonEntity).HideGlow();
+			}
+		}
 		
 		void HandleInputManagerInstanceDragDetected (object sender, SustainedTouchEventArgs e)
 		{
@@ -135,9 +144,9 @@ namespace Crystallography
 			// HACK this is a little hacky, because CardCrystallonEntites do this in their BeReleased() method
 			// this covers the case where the player just taps on the piece, instead of pressing and holding,
 			// to make sure the glow shuts off correctly
-			if (lastEntityReleased is CardCrystallonEntity) {
-				(lastEntityReleased as CardCrystallonEntity).HideGlow();
-			}
+//			if (lastEntityReleased is CardCrystallonEntity) {
+//				(lastEntityReleased as CardCrystallonEntity).HideGlow();
+//			}
 		}
 		
 		/// <summary>
