@@ -127,9 +127,9 @@ namespace Crystallography
 			
 			if ( _buttonSlideIn ) {
 				var y = NextLevelButton.getPosition().Y;
-				y -= dt * 50;
-				if (y < 522.0f) {
-					y = 522.0f;
+				y -= dt * 100;
+				if (y < 451.0f) {
+					y = 451.0f;
 					_buttonSlideIn = false;
 					NextLevelButton.ButtonUpAction += HandleNextLevelButtonButtonUpAction;
 					InputManager.Instance.CircleJustUpDetected += HandleNextLevelButtonButtonUpAction;
@@ -183,6 +183,11 @@ namespace Crystallography
 			levelEndPanel = new LevelEndPanel(_scene);
 			_scene.DialogLayer.AddChild(levelEndPanel);
 			levelEndPanel.Hide();
+			
+			NextLevelButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/next_level_sm.png", 1, 3).TextureInfo, new Vector2i(0,0) );
+			NextLevelButton.setPosition(845.0f, 587.0f);
+			this.AddChild(NextLevelButton.getNode());
+			NextLevelButton.Visible = false;
 			
 			FontMap map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold") );
 			FontMap bigMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold") );
@@ -238,10 +243,7 @@ namespace Crystallography
 			TimerMinutesText.Position = new Vector2(291.0f, 7.0f);
 //			RedBox.AddChild(TimerMinutesText);
 			
-			NextLevelButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/next_level_sm.png", 1, 3).TextureInfo, new Vector2i(0,0) );
-			NextLevelButton.setPosition(845.0f, 587.0f);
-			this.AddChild(NextLevelButton.getNode());
-			NextLevelButton.Visible = false;
+			
 		}
 		
 		public void Reset () {
