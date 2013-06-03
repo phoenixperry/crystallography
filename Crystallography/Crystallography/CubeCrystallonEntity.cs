@@ -105,9 +105,11 @@ namespace Crystallography
 				if (e is CardCrystallonEntity) {
 					(e as CardCrystallonEntity).HideGlow();
 					(e as CardCrystallonEntity).getNode().RunAction( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 3.0f));
+					(e as CardCrystallonEntity).setParticle(0);
 				}
 			}
 			addToScene();
+//			getNode().RunAction(sequence);
 			return this;
 		}
 		
