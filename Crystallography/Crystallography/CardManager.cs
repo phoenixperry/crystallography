@@ -7,7 +7,8 @@ namespace Crystallography
 {
 	public class CardManager
 	{
-		public static int MAX_CARD_POPULATION = 15;
+		public static int STD_CARD_POPULATION = 15;
+		public static int MAX_CARD_POPULATION = 18;
 		
 		public static List<CardCrystallonEntity> availableCards;
 		protected static CardManager _instance;
@@ -15,6 +16,7 @@ namespace Crystallography
 		protected GamePhysics _physics;
 		
 		public event EventHandler NoMatchesPossibleDetected;
+		public event EventHandler CardSpawned;
 		
 		// GET & SET -----------------------------------------------------------------------
 
@@ -161,13 +163,14 @@ namespace Crystallography
 		/// <summary>
 		/// Spawn cards until we run out of cards to spawn, or hit the population cap.
 		/// </summary>
-		public void Populate () {
+		public void Populate ( bool pForce = false ) {
+			int fillPop = pForce ? MAX_CARD_POPULATION : STD_CARD_POPULATION;
 			if (GameScene.currentLevel == 999) {
 				ids = new List<int>();
 				for (int i = 0; i < TotalCardsInDeck; i++) {
 					ids.Add(i+NextId);
 				}
-				while ( availableCards.Count <= MAX_CARD_POPULATION && TotalCardsInDeck > 0) {
+				while ( availableCards.Count <= fillPop && TotalCardsInDeck > 0) {
 					int index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
 					spawn(ids[index]);
 					ids.RemoveAt(index);
@@ -177,7 +180,7 @@ namespace Crystallography
 				for (int i = 0; i < TotalCardsInDeck; i++) {
 					ids.Add(i+NextId);
 				}
-				while ( availableCards.Count <= MAX_CARD_POPULATION && TotalCardsInDeck > 0) {
+				while ( availableCards.Count <= fillPop && TotalCardsInDeck > 0) {
 					int index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
 					spawn(ids[index]);
 					ids.RemoveAt(index);
@@ -245,6 +248,12 @@ namespace Crystallography
 			card.setPosition( pX, pY );
 			card.addToScene();
 			availableCards.Add(card);
+			
+			EventHandler handler = CardSpawned;
+				if (handler != null) {
+					handler( this, null );
+				}
+			
 			return card;
 		}
 		

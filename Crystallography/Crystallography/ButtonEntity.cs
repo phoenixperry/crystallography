@@ -30,7 +30,10 @@ namespace Crystallography {
 		
 		public bool on { 
 			get { return _onToggle; }
-			set { _onToggle = value; }
+			set { 
+				_onToggle = value;
+				status = _onToggle ? NORMAL : DISABLED;
+			}
 		}
 		
 		
@@ -108,7 +111,7 @@ namespace Crystallography {
 			preUpdateButton();
 			updateButton();
 			
-			if (label == null) return;
+//			if (label == null) return;
 			
 			switch( _sprite.TileIndex1D ) {
 			case ButtonEntity.PRESSED:
@@ -135,10 +138,10 @@ namespace Crystallography {
 		}
 		
 		public void updateButton() {
-			bool offAll = false;
+//			bool offAll = false;
 			// If there is a touch right now, compare the location to the button's area
 			if ( !_pressed ) {
-				if ( status != NORMAL ) {
+				if ( status != NORMAL && status != DISABLED ) {
 					status = NORMAL;
 				}
 				

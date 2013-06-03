@@ -19,7 +19,7 @@ namespace Crystallography
 		protected readonly static float DEFAULT_SPEED = 0.3f;
 		
 //		protected readonly static BlendFunc animBlend = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstColor, BlendFuncFactor.SrcAlpha);
-		protected readonly static BlendFunc animBlend = new BlendFunc(BlendFuncMode.ReverseSubtract, BlendFuncFactor.Zero, BlendFuncFactor.SrcColor);
+		protected readonly static BlendFunc animBlend = new BlendFunc(BlendFuncMode.Subtract, BlendFuncFactor.DstColor, BlendFuncFactor.Zero);
 		
 		
 		protected SpriteTile _anim;

@@ -14,6 +14,7 @@ namespace Crystallography
 		SpriteUV BlueBox;
 		SpriteUV RedBox;
 		ButtonEntity NextLevelButton;
+		ButtonEntity HitMeButton;
 		
 		Label ScoreTitleText;
 		Label GoalTitleText;
@@ -81,6 +82,10 @@ namespace Crystallography
 			levelTitle.EnterAnim();
 		}
 		
+		void HandleHitMeButtonButtonUpAction (object sender, EventArgs e) {
+			CardManager.Instance.Populate( true );
+		}
+		
 		void HandleNextLevelButtonButtonUpAction (object sender, EventArgs e) {
 			NextLevelButton.Visible = false;
 			CardManager.Instance.Reset( Director.Instance.CurrentScene );
@@ -88,6 +93,10 @@ namespace Crystallography
 			levelEndPanel.UpdateAndShow(_score, _displayTimer);
 			NextLevelButton.ButtonUpAction -= HandleNextLevelButtonButtonUpAction;
 			InputManager.Instance.CircleJustUpDetected -= HandleNextLevelButtonButtonUpAction;
+		}
+		
+		void HandleCardManagerInstanceCardSpawned (object sender, EventArgs e) {
+			HitMeButton.on = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < CardManager.MAX_CARD_POPULATION );
 		}
 		
 		void HandleQualityManagerMatchScoreDetected (object sender, MatchScoreEventArgs e) {
@@ -243,7 +252,12 @@ namespace Crystallography
 			TimerMinutesText.Position = new Vector2(291.0f, 7.0f);
 //			RedBox.AddChild(TimerMinutesText);
 			
+			HitMeButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/hitMe.png", 1, 3).TextureInfo, new Vector2i(0,0));
+			HitMeButton.setPosition(883.0f, 509.0f);
+			this.AddChild(HitMeButton.getNode());
+			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
 			
+			CardManager.Instance.CardSpawned += HandleCardManagerInstanceCardSpawned;
 		}
 		
 		public void Reset () {
