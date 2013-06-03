@@ -65,7 +65,8 @@ namespace Crystallography
 		/// Sets the palette to a default palette.
 		/// </summary>
 		public void setPalette () {
-			setPalette( "Application/assets/animation/leftFall/leftFall.png", 6, 5, 16, 16, 0, 15, 16, 25);
+//			setPalette( "Application/assets/animation/leftFall/leftFall.png", 6, 5, 16, 16, 0, 15, 16, 25);
+			setPalette( "Application/assets/animation/animation2.png", 4, 4, 0, 0, 0, 11, 12, 14);
 //			setPalette( "Application/assets/animation/char_anims.png", 3, 2, 0, 0, 0, 3, 3, 6);
 //			setPalette( "Application/assets/animation/ball_anim.png", 5, 1, 0, 0, 0, 5, 0, 5);
 		}
