@@ -12,7 +12,7 @@ namespace Crystallography
 		
 		SpriteUV Background;
 		SpriteUV[] Icons;
-		Label NextLevelText;
+//		Label NextLevelText;
         Label LevelNumberText;
 		Label TapToDismissText;
 		FontMap map;
@@ -125,17 +125,17 @@ namespace Crystallography
 			this.AddChild(Background);
 			
 			QualityNames = new List<Label>();
-			map = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 72, "Regular"));
+//			map = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 72, "Regular"));
 			LevelNumberText = new Label( "0", Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 102, "Bold")) );
 			LevelNumberText.Position = new Vector2( 44.0f, 250.0f);
 			LevelNumberText.Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f);
 			
 			Background.AddChild(LevelNumberText);
 //			Console.WriteLine( "-------------------WIDTH: " + Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 72, "Bold").GetTextWidth("level"));
-			NextLevelText = new Label("level", map);
-//			map.
-			NextLevelText.Position = new Vector2( 44.0f, 350.0f);
-			Background.AddChild(NextLevelText);
+//			NextLevelText = new Label("level", map);
+
+//			NextLevelText.Position = new Vector2( 44.0f, 350.0f);
+//			Background.AddChild(NextLevelText);
 			
 			TapToDismissText = new Label("tap to dismiss", Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Regular") ) );
 			TapToDismissText.Position = new Vector2( 39.0f, 20.0f);
