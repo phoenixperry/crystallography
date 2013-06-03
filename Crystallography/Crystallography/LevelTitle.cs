@@ -47,7 +47,7 @@ namespace Crystallography
 			}
 		}
 		
-		void HandleInputManagerInstanceTouchJustUpDetected (object sender, BaseTouchEventArgs e)
+		void HandleInputManagerInstanceDragDetected (object sender, SustainedTouchEventArgs e)
 		{
 			if(this.Position.Y < 272.0f){
 				_entering = false;
@@ -199,12 +199,16 @@ namespace Crystallography
 			this.Position = new Vector2(X_OFFSET, 545.0f);
 			Show();
 			InputManager.Instance.TapDetected += HandleInputManagerInstanceTapDetected;
+			InputManager.Instance.DragDetected += HandleInputManagerInstanceDragDetected;
 //			InputManager.Instance.TouchJustUpDetected += HandleInputManagerInstanceTouchJustUpDetected;
 		}
+
+		
 		
 		public void ExitAnim() {
 			this.StopAllActions();
 			InputManager.Instance.TapDetected -= HandleInputManagerInstanceTapDetected;
+			InputManager.Instance.DragDetected -= HandleInputManagerInstanceDragDetected;
 //			InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
 			_exiting = true;
 			_entering = false;

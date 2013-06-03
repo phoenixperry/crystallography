@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<application project_name="*" version="1.00" runtime_version="1.11" sdk_version="1.11.00" default_locale="en-US">
-  <name />
-  <short_name />
+<application project_name="Crystallography" version="1.00" runtime_version="1.11" sdk_version="1.11.01" default_locale="en-US">
+  <name>
+    <localized_item locale="en-US" value="Crystallon" />
+  </name>
+  <short_name>
+    <localized_item locale="en-US" value="Crystallon" />
+  </short_name>
   <parental_control lock_level="2" />
   <rating_list highest_age_limit="3" has_online_features="false">
     <online_features chat="false" personal_info="false" user_location="false" exchange_content="false" />
     <rating type="ESRB" value="3" age="3" code="" />
     <rating type="PEGIEX" value="3" age="3" code="" />
   </rating_list>
-  <images />
-  <genre_list />
+  <images icon_128x128="..\icons\VitaIcons_128.png" icon_256x256="..\icons\VitaIcons256.png" icon_512x512="..\icons\VitaIcons.png" splash_854x480="..\icons\splash.png" />
+  <genre_list>
+    <genre value="Games:Puzzle" />
+  </genre_list>
   <developer>
     <name value="" />
   </developer>
-  <website href="" />
+  <website href="http://playcrystallon.com/" />
   <copyright author="" />
   <purchase>
     <product_list />
