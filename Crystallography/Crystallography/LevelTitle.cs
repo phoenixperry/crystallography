@@ -14,6 +14,7 @@ namespace Crystallography
 		SpriteUV[] Icons;
 		Label NextLevelText;
         Label LevelNumberText;
+		Label TapToDismissText;
 		FontMap map;
 		List<Label> QualityNames;
 		
@@ -135,6 +136,10 @@ namespace Crystallography
 //			map.
 			NextLevelText.Position = new Vector2( 44.0f, 350.0f);
 			Background.AddChild(NextLevelText);
+			
+			TapToDismissText = new Label("tap to dismiss", Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Regular") ) );
+			TapToDismissText.Position = new Vector2( 39.0f, 20.0f);
+			Background.AddChild(TapToDismissText);
 			
 			Icons = new SpriteUV[4];
 			for( int i=0; i < Icons.Length; i++) {
