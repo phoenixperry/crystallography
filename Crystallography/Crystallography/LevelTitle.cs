@@ -76,7 +76,7 @@ namespace Crystallography
 			}
 			
 			else if( _exiting ) {
-				this.StopAllActions();
+//				this.StopAllActions();
 				var y = this.Position.Y;
 				y += dt * 1000.0f;
 				if (y > 545.0f) {
@@ -193,8 +193,9 @@ namespace Crystallography
 		}
 		
 		public void EnterAnim() {
-			
+			this.StopAllActions();
 			_entering = true;
+			_exiting = false;
 			this.Position = new Vector2(X_OFFSET, 545.0f);
 			Show();
 			InputManager.Instance.TapDetected += HandleInputManagerInstanceTapDetected;
@@ -202,9 +203,11 @@ namespace Crystallography
 		}
 		
 		public void ExitAnim() {
+			this.StopAllActions();
 			InputManager.Instance.TapDetected -= HandleInputManagerInstanceTapDetected;
 //			InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
 			_exiting = true;
+			_entering = false;
 			Show();
 		}
 		

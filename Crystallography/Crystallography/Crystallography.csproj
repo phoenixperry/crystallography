@@ -388,6 +388,7 @@
     <Content Include="assets\animation\leftFall\leftFall.png" />
     <Content Include="assets\animation\animation2.png" />
     <Content Include="assets\images\hitMe.png" />
+    <Content Include="assets\images\restartBtn.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

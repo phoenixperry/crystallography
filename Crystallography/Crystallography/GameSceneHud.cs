@@ -15,6 +15,7 @@ namespace Crystallography
 		SpriteUV RedBox;
 		ButtonEntity NextLevelButton;
 		ButtonEntity HitMeButton;
+		ButtonEntity RestartButton;
 		
 		Label ScoreTitleText;
 		Label GoalTitleText;
@@ -63,6 +64,7 @@ namespace Crystallography
 			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
 			NextLevelButton.setPosition(845.0f, 587.0f); //Director.Instance.GL.Context.Screen.Height + NextLevelButton.Height);
 			NextLevelButton.Visible = true;
+			RestartButton.on = false;
 			_buttonSlideIn = true;
 			_pauseTimer = true;
 		}
@@ -80,6 +82,7 @@ namespace Crystallography
 			}
 			levelTitle.SetQualityNames( variables.ToArray() );
 			levelTitle.EnterAnim();
+			RestartButton.on = true;
 		}
 		
 		void HandleHitMeButtonButtonUpAction (object sender, EventArgs e) {
@@ -90,9 +93,10 @@ namespace Crystallography
 			NextLevelButton.Visible = false;
 			CardManager.Instance.Reset( Director.Instance.CurrentScene );
 			GroupManager.Instance.Reset( Director.Instance.CurrentScene );
-			levelEndPanel.UpdateAndShow(_score, _displayTimer);
+//			levelEndPanel.UpdateAndShow(_score, _displayTimer);
 			NextLevelButton.ButtonUpAction -= HandleNextLevelButtonButtonUpAction;
 			InputManager.Instance.CircleJustUpDetected -= HandleNextLevelButtonButtonUpAction;
+			_scene.goToNextLevel();
 		}
 		
 		void HandleCardManagerInstanceCardSpawned (object sender, EventArgs e) {
@@ -252,12 +256,22 @@ namespace Crystallography
 			TimerMinutesText.Position = new Vector2(291.0f, 7.0f);
 //			RedBox.AddChild(TimerMinutesText);
 			
+			RestartButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+			RestartButton.setPosition( 748.0f, 509.0f );
+			this.AddChild(RestartButton.getNode());
+			RestartButton.ButtonUpAction += HandleRestartButtonButtonUpAction;
+			
 			HitMeButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/hitMe.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			HitMeButton.setPosition(883.0f, 509.0f);
 			this.AddChild(HitMeButton.getNode());
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
 			
 			CardManager.Instance.CardSpawned += HandleCardManagerInstanceCardSpawned;
+		}
+
+		void HandleRestartButtonButtonUpAction (object sender, EventArgs e)
+		{
+			_scene.resetToLevel();
 		}
 		
 		public void Reset () {
