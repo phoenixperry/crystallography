@@ -99,17 +99,16 @@ namespace Crystallography
 			setVelocity(1.0f, GameScene.Random.NextAngle());
 			Sequence sequence = new Sequence();
 			sequence.Add( new DelayTime(1.0f));
-			sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 3.0f));
+//			sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 3.0f));
 			sequence.Add( new CallFunc( () => Finish() ) );
 			foreach( ICrystallonEntity e in members ) {
 				if (e is CardCrystallonEntity) {
 					(e as CardCrystallonEntity).HideGlow();
 					(e as CardCrystallonEntity).getNode().RunAction( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 3.0f));
-					(e as CardCrystallonEntity).setParticle(0);
 				}
 			}
 			addToScene();
-//			getNode().RunAction(sequence);
+			getNode().RunAction(sequence);
 			return this;
 		}
 		
@@ -144,10 +143,13 @@ namespace Crystallography
 			Left = GetSideEntity(1);
 		}
 		
-		protected void Finish() {
+		public void Finish() {
 			Visible = false;
 			_physics.removePhysicsBody(_body);
 			setBody(null);
+			foreach( ICrystallonEntity e in members ) {
+				(e as CardCrystallonEntity).setParticle(0);
+			}
 		}
 			
 		private CardCrystallonEntity GetSideEntity(int pIndex) {
