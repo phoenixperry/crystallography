@@ -9,8 +9,9 @@
   <parental_control lock_level="2" />
   <rating_list highest_age_limit="3" has_online_features="false">
     <online_features chat="false" personal_info="false" user_location="false" exchange_content="false" />
-    <rating type="ESRB" value="3" age="3" code="" />
-    <rating type="PEGIEX" value="3" age="3" code="" />
+    <rating type="ESRB" value="3" age="3" code="ESRB_3173" />
+    <rating type="PEGIEX" value="3" age="3" code="PEGI_1066" />
+    <rating type="SELF" value="3" age="3" />
   </rating_list>
   <images icon_128x128="..\icons\VitaIcons_128.png" icon_256x256="..\icons\VitaIcons256.png" icon_512x512="..\icons\VitaIcons.png" splash_854x480="..\icons\splash.png" />
   <genre_list>
@@ -20,7 +21,7 @@
     <name value="" />
   </developer>
   <website href="http://playcrystallon.com/" />
-  <copyright author="" />
+  <copyright author="Copyright Dozen Eyes 2013" text="..\icons\Copyright.txt" />
   <purchase>
     <product_list />
   </purchase>

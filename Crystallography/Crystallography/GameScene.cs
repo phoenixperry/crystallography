@@ -150,7 +150,7 @@ namespace Crystallography
 		public override void OnEnter ()
         {
 			base.OnEnter();
-			if( Random.NextBool()) {
+			if( Random.NextFloat() > 0.5f ) {
 				Support.MusicSystem.Instance.Play("stack1music.mp3");
 			} else {
 				Support.MusicSystem.Instance.Play("stack2music.mp3");
