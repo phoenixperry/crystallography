@@ -248,13 +248,24 @@ namespace Crystallography
 			card.setPosition( pX, pY );
 			card.addToScene();
 			availableCards.Add(card);
-			
+			card.Visible = false;
+//			(card.getNode() as SpriteTile).Color.W = 0.0f;
+			Sequence sequence = new Sequence();
+			sequence.Add( new DelayTime( 0.2f ));
+			sequence.Add( new CallFunc( () => FadeIn(card) ) );
+			card.getNode().RunAction( sequence );
 			EventHandler handler = CardSpawned;
 				if (handler != null) {
 					handler( this, null );
 				}
 			
 			return card;
+		}
+		
+		protected void FadeIn(CardCrystallonEntity card) {
+			card.Visible = true;
+			(card.getNode() as SpriteTile).Color.W = 0.0f;
+			card.getNode().RunAction( new TintBy( Sce.PlayStation.Core.Vector4.UnitW, 2.0f));
 		}
 		
 		// DESTRUCTOR ----------------------------------------------------------------------------------------

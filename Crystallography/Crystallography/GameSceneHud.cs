@@ -225,20 +225,20 @@ namespace Crystallography
 //			TimerBar = Support.SpriteUVFromFile("/Application/assets/images/UI/time_now.png");
 			TimerBar = Support.SpriteUVFromFile("/Application/assets/images/stopIcon.png");
 			TimerBar.Position = new Vector2(244.0f, 16.0f);
-			GameHudBar.AddChild(TimerBar);
+//			GameHudBar.AddChild(TimerBar);
 			
 			GoalTitleText = new Label("goal", map);
 			GoalTitleText.Position = new Vector2(299.0f, 25.0f);
 			GoalTitleText.Color = new Vector4( 0.89803922f, 0.0745098f, 0.0745098f, 1.0f);
-			GameHudBar.AddChild(GoalTitleText);
+//			GameHudBar.AddChild(GoalTitleText);
 			
 			RedBox = Support.SpriteUVFromFile("/Application/assets/images/redbox.png");
 			RedBox.Position = new Vector2(354.0f, 0.0f);
-			GameHudBar.AddChild(RedBox);
+//			GameHudBar.AddChild(RedBox);
 			
 			GoalText = new Label("--", bigMap);
 			GoalText.Position = new Vector2(5.0f, 12.0f);
-			RedBox.AddChild(GoalText);
+//			RedBox.AddChild(GoalText);
 			
 			TimerSeparatorText = new Label(":", map);
 			TimerSeparatorText.Position = new Vector2(329.0f, 9.0f);
