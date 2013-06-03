@@ -237,8 +237,9 @@ namespace Crystallography
 				Console.WriteLine( "Resetting to start level " + currentLevel );
 				LevelManager.Instance.GetLevelSettings( currentLevel );
 //				background.PickBackground();
-				CardManager.Instance.Reset( this );
-				GroupManager.Instance.Reset( this );
+				Clear();
+//				CardManager.Instance.Reset( this );
+//				GroupManager.Instance.Reset( this );
 				QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
 				CardManager.Instance.Populate();
 				EventHandler handler = LevelChangeDetected;
@@ -251,13 +252,20 @@ namespace Crystallography
 			}
 		}
 		
+		protected void Clear() {
+			CardManager.Instance.Reset( this );
+			GroupManager.Instance.Reset( this );
+		}
+		
 		public static void QuitToTitle() {
+			( Director.Instance.CurrentScene as GameScene ).Clear();
 			ForceGarbageCollection();
 			UISystem.CurrentScene.RootWidget.Dispose();
 			Director.Instance.ReplaceScene( new MenuSystemScene("Menu") );
 		}
 		
 		public static void QuitToLevelSelect() {
+			( Director.Instance.CurrentScene as GameScene ).Clear();
 			ForceGarbageCollection();
 			UISystem.CurrentScene.RootWidget.Dispose();
 			Director.Instance.ReplaceScene( new MenuSystemScene("LevelSelect") );

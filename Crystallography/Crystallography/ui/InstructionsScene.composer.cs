@@ -35,7 +35,7 @@ namespace Crystallography.UI
             PagePanel_1.AddPage(new Insructions3());
             PagePanel_1.AddPage(new Instructions4());
             PagePanel_1.AddPage(new instruction5Panel());
-            PagePanel_1.AddPage(new Instructions6Panel());
+//            PagePanel_1.AddPage(new Instructions6Panel());
             PagePanel_1.AddPage(new Instructions8Panel());
             PagePanel_1.AddPage(new Instructions7Panel());
 
