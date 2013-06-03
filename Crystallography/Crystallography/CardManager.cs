@@ -170,7 +170,7 @@ namespace Crystallography
 				for (int i = 0; i < TotalCardsInDeck; i++) {
 					ids.Add(i+NextId);
 				}
-				while ( availableCards.Count <= fillPop && TotalCardsInDeck > 0) {
+				while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
 					int index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
 					spawn(ids[index]);
 					ids.RemoveAt(index);
@@ -180,7 +180,7 @@ namespace Crystallography
 				for (int i = 0; i < TotalCardsInDeck; i++) {
 					ids.Add(i+NextId);
 				}
-				while ( availableCards.Count <= fillPop && TotalCardsInDeck > 0) {
+				while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
 					int index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
 					spawn(ids[index]);
 					ids.RemoveAt(index);
