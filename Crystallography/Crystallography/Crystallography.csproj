@@ -167,6 +167,7 @@
     <Folder Include="assets\images\bg\2\" />
     <Folder Include="assets\images\bg\3\" />
     <Folder Include="assets\images\icons\" />
+    <Folder Include="assets\images\set4\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\images\title.png" />
@@ -388,6 +389,7 @@
     <Content Include="assets\animation\animation2.png" />
     <Content Include="assets\images\hitMe.png" />
     <Content Include="assets\images\restartBtn.png" />
+    <Content Include="assets\images\set4\gamePieces.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
