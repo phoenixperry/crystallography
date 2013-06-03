@@ -125,7 +125,7 @@ namespace Crystallography
 			this.AddChild(Background);
 			
 			QualityNames = new List<Label>();
-//			map = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 72, "Regular"));
+			map = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Regular"));
 			LevelNumberText = new Label( "0", Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 102, "Bold")) );
 			LevelNumberText.Position = new Vector2( 44.0f, 250.0f);
 			LevelNumberText.Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f);
@@ -146,7 +146,7 @@ namespace Crystallography
 //				Icons[i] = new SpriteUV(Support.SpriteUVFromFile("/Application/assets/images/icons/animation.png").TextureInfo);
 				Icons[i] = Support.SpriteUVFromFile("/Application/assets/images/icons/animation.png");
 //				var y = ( i > 1 ) ? 108.0f : 176.0f;
-				float y = 176.0f - 68.0f * (float)System.Math.Floor(i/2.0f);
+				float y = 176.0f - 88.0f * (float)System.Math.Floor(i/2.0f);
 				Icons[i].Position = new Vector2( 44.0f + 68.0f*(i%2), y);
 				Background.AddChild(Icons[i]);
 				Icons[i].Visible = false;
@@ -164,7 +164,7 @@ namespace Crystallography
 				this.RemoveChild(l, true);
 			}
 			QualityNames.Clear();
-//			Label n;
+			Label n;
 			int i = 0;
 			foreach(SpriteUV icon in Icons) {
 				icon.Visible = false;
@@ -172,12 +172,12 @@ namespace Crystallography
 			foreach ( string name in pNames ) {
 				Icons[i].TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/icons/" + name.ToLower() + ".png").TextureInfo;
 				Icons[i].Visible = true;
-//				QualityNames.Add( n = new Label() );
-//				n.Color = Colors.White;
-//				n.FontMap = map;
-//				n.Text = name;
-//				n.Position = new Vector2( (QualityNames.Count-1)*80.0f, -25.0f);
-//				this.AddChild(n);
+				QualityNames.Add( n = new Label() );
+				n.Color = Colors.White;
+				n.FontMap = map;
+				n.Text = name;
+				n.Position = new Vector2( Icons[i].Position.X, Icons[i].Position.Y - 20.0f ); //(QualityNames.Count-1)*80.0f, -25.0f);
+				this.AddChild(n);
 				i++;
 			}
 		}
