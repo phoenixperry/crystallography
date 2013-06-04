@@ -9,8 +9,8 @@ namespace Crystallography
 	public class GameSceneHud : Layer
 	{
 		SpriteUV GameHudBar;
-		SpriteUV ScoreBar;
-		SpriteUV TimerBar;
+		SpriteUV ScoreIcon;
+		SpriteUV GoalIcon;
 		SpriteUV BlueBox;
 		SpriteUV RedBox;
 		ButtonEntity NextLevelButton;
@@ -21,20 +21,22 @@ namespace Crystallography
 		Label GoalTitleText;
 		Label ScoreText;
 		Label GoalText;
-		Label TimerSeparatorText;
-		Label TimerSecondsText;
-		Label TimerMinutesText;
+//		Label TimerSeparatorText;
+//		Label TimerSecondsText;
+//		Label TimerMinutesText;
 		
 		LevelTitle levelTitle;
 		
 		public LevelEndPanel levelEndPanel;
 		public PausePanel pausePanel;
 		
-		private const float SCORE_UPDATE_DELAY = 0.200f;
-		private const float INITIAL_SCORE_UPDATE_DELAY = 0.800f;
+		private const float SCORE_UPDATE_DELAY = 0.100f;
+		private const float INITIAL_SCORE_UPDATE_DELAY = 0.400f;
 		private int _score;
+		private int _goal;
 		private int _displayScore;
 		private float _updateTimer;
+		private bool _metGoal;
 		
 		private float _displayTimer;
 		
@@ -61,11 +63,13 @@ namespace Crystallography
 		// EVENT HANDLERS -----------------------------------------------------------------------------------------
 		
 		void HandleCardManagerInstanceNoMatchesPossibleDetected (object sender, EventArgs e) {
-			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
-			NextLevelButton.setPosition(845.0f, 587.0f); //Director.Instance.GL.Context.Screen.Height + NextLevelButton.Height);
-			NextLevelButton.Visible = true;
-			RestartButton.on = false;
-			_buttonSlideIn = true;
+//			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
+//			NextLevelButton.setPosition(845.0f, 587.0f); //Director.Instance.GL.Context.Screen.Height + NextLevelButton.Height);
+//			NextLevelButton.Visible = true;
+			if (_goal <= _score) {
+				RestartButton.on = false;
+			}
+//			_buttonSlideIn = true;
 			_pauseTimer = true;
 		}
 		
@@ -117,9 +121,9 @@ namespace Crystallography
 			
 			base.Update (dt);
 			
-			if (GameScene.paused == false && _pauseTimer == false ) {
-				calculateTimer( dt );
-			}
+//			if (GameScene.paused == false && _pauseTimer == false ) {
+//				calculateTimer( dt );
+//			}
 			
 			if ( _score != _displayScore ) {
 				_updateTimer += dt;
@@ -134,6 +138,11 @@ namespace Crystallography
 					}
 					_displayScore += mod;
 					ScoreText.Text = _displayScore.ToString();
+					float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
+					ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
+					if(_goal == _displayScore && _metGoal == false) {
+						MetGoal();
+					}
 					_updateTimer = 0.0f;
 				}
 			}
@@ -168,18 +177,18 @@ namespace Crystallography
 		
 		// METHODS ------------------------------------------------------------------------------------------------
 		
-		private void calculateTimer(float elapsedTime) {
-			_displayTimer += elapsedTime;
-			var oldMinutes = TimerMinutesText.Text;
-			var minutes = System.Math.Floor(_displayTimer/60.0f);
-			var seconds = _displayTimer - (60.0f * minutes);
-			TimerMinutesText.Text = minutes.ToString();
-			if (TimerMinutesText.Text != oldMinutes) {
-				var minutesOffset = 329.0f - 3.0f - Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Bold").GetTextWidth(TimerMinutesText.Text);
-				TimerMinutesText.Position = new Vector2(minutesOffset, 7.0f);
-			}
-			TimerSecondsText.Text = seconds.ToString("00.0");
-		}
+//		private void calculateTimer(float elapsedTime) {
+//			_displayTimer += elapsedTime;
+//			var oldMinutes = TimerMinutesText.Text;
+//			var minutes = System.Math.Floor(_displayTimer/60.0f);
+//			var seconds = _displayTimer - (60.0f * minutes);
+//			TimerMinutesText.Text = minutes.ToString();
+//			if (TimerMinutesText.Text != oldMinutes) {
+//				var minutesOffset = 329.0f - 3.0f - Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Bold").GetTextWidth(TimerMinutesText.Text);
+//				TimerMinutesText.Position = new Vector2(minutesOffset, 7.0f);
+//			}
+//			TimerSecondsText.Text = seconds.ToString("00.0");
+//		}
 		
 		private void Initialize() {
 			_initialized = true;
@@ -208,10 +217,10 @@ namespace Crystallography
 			GameHudBar.Position = new Vector2(0.0f, 473.0f);
 			this.AddChild(GameHudBar);
 			
-//			ScoreBar = Support.SpriteUVFromFile("/Application/assets/images/UI/score_now.png");
-			ScoreBar = Support.SpriteUVFromFile("/Application/assets/images/handIcon.png");
-			ScoreBar.Position = new Vector2(20.0f, 16.0f);
-			GameHudBar.AddChild(ScoreBar);
+//			ScoreIcon = Support.SpriteUVFromFile("/Application/assets/images/UI/score_now.png");
+			ScoreIcon = Support.SpriteUVFromFile("/Application/assets/images/handIcon.png");
+			ScoreIcon.Position = new Vector2(20.0f, 16.0f);
+			GameHudBar.AddChild(ScoreIcon);
 			
 			ScoreTitleText = new Label("score", map);
 			ScoreTitleText.Position = new Vector2(54.0f, 25.0f);
@@ -226,34 +235,34 @@ namespace Crystallography
 			ScoreText.Position = new Vector2(5.0f, 12.0f);
 			BlueBox.AddChild(ScoreText);
 			
-//			TimerBar = Support.SpriteUVFromFile("/Application/assets/images/UI/time_now.png");
-			TimerBar = Support.SpriteUVFromFile("/Application/assets/images/stopIcon.png");
-			TimerBar.Position = new Vector2(244.0f, 16.0f);
-//			GameHudBar.AddChild(TimerBar);
+//			GoalIcon = Support.SpriteUVFromFile("/Application/assets/images/UI/time_now.png");
+			GoalIcon = Support.SpriteUVFromFile("/Application/assets/images/stopIcon.png");
+			GoalIcon.Position = new Vector2(244.0f, 16.0f);
+			GameHudBar.AddChild(GoalIcon);
 			
 			GoalTitleText = new Label("goal", map);
 			GoalTitleText.Position = new Vector2(299.0f, 25.0f);
 			GoalTitleText.Color = new Vector4( 0.89803922f, 0.0745098f, 0.0745098f, 1.0f);
-//			GameHudBar.AddChild(GoalTitleText);
+			GameHudBar.AddChild(GoalTitleText);
 			
 			RedBox = Support.SpriteUVFromFile("/Application/assets/images/redbox.png");
 			RedBox.Position = new Vector2(354.0f, 0.0f);
-//			GameHudBar.AddChild(RedBox);
+			GameHudBar.AddChild(RedBox);
 			
 			GoalText = new Label("--", bigMap);
 			GoalText.Position = new Vector2(5.0f, 12.0f);
-//			RedBox.AddChild(GoalText);
+			RedBox.AddChild(GoalText);
 			
-			TimerSeparatorText = new Label(":", map);
-			TimerSeparatorText.Position = new Vector2(329.0f, 9.0f);
+//			TimerSeparatorText = new Label(":", map);
+//			TimerSeparatorText.Position = new Vector2(329.0f, 9.0f);
 //			RedBox.AddChild(TimerSeparatorText);
 			
-			TimerSecondsText = new Label("00.0", map);
-			TimerSecondsText.Position = new Vector2(334.0f, 7.0f);
+//			TimerSecondsText = new Label("00.0", map);
+//			TimerSecondsText.Position = new Vector2(334.0f, 7.0f);
 //			RedBox.AddChild(TimerSecondsText);
 			
-			TimerMinutesText = new Label("000", map);
-			TimerMinutesText.Position = new Vector2(291.0f, 7.0f);
+//			TimerMinutesText = new Label("000", map);
+//			TimerMinutesText.Position = new Vector2(291.0f, 7.0f);
 //			RedBox.AddChild(TimerMinutesText);
 			
 			RestartButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
@@ -279,9 +288,16 @@ namespace Crystallography
 			_displayScore = 0;
 			_displayTimer = 0.0f;
 			_updateTimer = 0.0f;
+			_goal = LevelManager.Instance.Goal;
 			_buttonSlideIn = false;
 			_pauseTimer = false;
+			_metGoal = false;
 			ScoreText.Text = _displayScore.ToString();
+			float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
+			ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
+			GoalText.Text = _goal.ToString();
+			x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(GoalText.Text);
+			GoalText.Position = new Vector2(x, GoalText.Position.Y);
 		}
 		
 		public void ScheduleScoreModifier( int pHowMuch ) {
@@ -289,6 +305,16 @@ namespace Crystallography
 				_updateTimer = -INITIAL_SCORE_UPDATE_DELAY;
 			}
 			_score += pHowMuch;
+		}
+		
+		public void MetGoal() {
+			_metGoal = true;
+			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
+			NextLevelButton.setPosition(845.0f, 587.0f); //Director.Instance.GL.Context.Screen.Height + NextLevelButton.Height);
+			NextLevelButton.Visible = true;
+//			RestartButton.on = false;
+			_buttonSlideIn = true;
+			_pauseTimer = true;
 		}
 		
 		// DESTRUCTOR -------------------------------------------------------------------------------------

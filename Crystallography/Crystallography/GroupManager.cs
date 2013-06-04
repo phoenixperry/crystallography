@@ -113,7 +113,7 @@ namespace Crystallography
 //			var ss = SpriteSingleton.getInstance();
 			GroupCrystallonEntity g;
 			if (pComplete) {
-				g = new CubeCrystallonEntity(_scene, _physics, null); //_physics.SceneShapes[(int)GamePhysics.BODIES.Cube]);
+				g = new CubeCrystallonEntity(_scene, _physics, null);
 //				if ( GameScene.currentLevel == 999 ) {
 //					Sequence sequence = new Sequence();
 //					sequence.Add( new TintTo( new Sce.PlayStation.Core.Vector4( 1.0f, 1.0f, 1.0f, 0.0f ), 2.0f) );
@@ -121,8 +121,7 @@ namespace Crystallography
 //					g.pucks[0].Children[0].RunAction(sequence);
 //				}
 			} else {
-				g = new GroupCrystallonEntity(_scene, _physics, null, //_physics.SceneShapes[(int)GamePhysics.BODIES.Cube], 
-			                                                    SelectionGroup.MAX_CAPACITY, pComplete);
+				g = new GroupCrystallonEntity(_scene, _physics, null, SelectionGroup.MAX_CAPACITY, pComplete);
 			}
 			foreach (AbstractCrystallonEntity e in pMembers) {
 				g.Add(e);

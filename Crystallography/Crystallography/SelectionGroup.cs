@@ -387,16 +387,16 @@ namespace Crystallography
 			bool isComplete = false;
 			if ( !pForceBreak ) {	// --------------------------- don't bother testing if Break forced
 				if ( population  == MAX_CAPACITY ) { // -------------------------------------------------------- EVALUATE CUBES!
-					if ( MemberType == typeof(CubeCrystallonEntity) ) {
-						ICrystallonEntity[] a = { (members[0] as CubeCrystallonEntity).Top,
-													(members[1] as CubeCrystallonEntity).Right,
-													(members[2] as CubeCrystallonEntity).Left };
-						if (!QualityManager.Instance.EvaluateMatch( a, true )) { // TOP:LEFT + LEFT:TOP
-							GroupFailed ();
-							return null;
-						}
-						GroupComplete();
-					} else {
+//					if ( MemberType == typeof(CubeCrystallonEntity) ) {
+//						ICrystallonEntity[] a = { (members[0] as CubeCrystallonEntity).Top,
+//													(members[1] as CubeCrystallonEntity).Right,
+//													(members[2] as CubeCrystallonEntity).Left };
+//						if (!QualityManager.Instance.EvaluateMatch( a, true )) { // TOP:LEFT + LEFT:TOP
+//							GroupFailed ();
+//							return null;
+//						}
+//						GroupComplete();
+//					} else {
 						if (QualityManager.Instance.EvaluateMatch( members, true ) ) {
 							GroupComplete();
 							isComplete = true;
@@ -404,7 +404,7 @@ namespace Crystallography
 							GroupFailed();
 							return null;
 						}
-					}
+//					}
 				}
 			}
 			if ( entity is NodeCrystallonEntity ) {

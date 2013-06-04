@@ -37,16 +37,18 @@ namespace Crystallography
 		public string PatternPath { get; set; }
 		public string SoundPrefix { get; set; }
 		public bool SoundGlow     { get; set; }
+		public int Goal	          { get; set; }
 		
 		// CONSTRUCTORS -----------------------------------------------------------
 		
-		public LevelManager (){
-			Instance = this;
-			Palette = new Vector4[] { new Vector4(0.956863f, 0.917647f, 0.956863f, 1.0f), 
-										new Vector4(0.898039f, 0.074510f, 0.074510f, 1.0f), 
-										new Vector4(0.160784f, 0.886274f, 0.886274f, 1.0f) };
-			PatternPath = "Application/assets/images/set1/gamePieces.png";
-			SoundPrefix = "stack1";
+		protected LevelManager (){
+//			Instance = this;
+//			Palette = new Vector4[] { new Vector4(0.956863f, 0.917647f, 0.956863f, 1.0f), 
+//										new Vector4(0.898039f, 0.074510f, 0.074510f, 1.0f), 
+//										new Vector4(0.160784f, 0.886274f, 0.886274f, 1.0f) };
+//			PatternPath = "Application/assets/images/set1/gamePieces.png";
+//			SoundPrefix = "stack1";
+			SetToDefault();
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
 #endif
@@ -79,6 +81,8 @@ namespace Crystallography
 								} else {
 									SoundGlow = false;
 								}
+							} else if (line.Name.LocalName == "Goal") {
+								Goal = (int)line.Attribute("Value");
 							}
 						}
 						return;
@@ -94,6 +98,15 @@ namespace Crystallography
 			fileStreamReader.Close();
 			fileStream.Close();
 			doc = XDocument.Parse( xml );
+		}
+		
+		public void SetToDefault() {
+			Palette = new Vector4[] { new Vector4(0.956863f, 0.917647f, 0.956863f, 1.0f), 
+										new Vector4(0.898039f, 0.074510f, 0.074510f, 1.0f), 
+										new Vector4(0.160784f, 0.886274f, 0.886274f, 1.0f) };
+			PatternPath = "Application/assets/images/set1/gamePieces.png";
+			SoundPrefix = "stack1";
+			Goal = 1;
 		}
 		
 		// DESTRUCTOR ----------------------------------------------------------------------------------
