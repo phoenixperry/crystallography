@@ -5,7 +5,8 @@
         <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
 		<Pattern Path="Application/assets/images/set4/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
-		<Goal Value="4" />
+		<Goal Value="1" />
+		<Bonus Value="1" />
     </Level>
     <Level Value="1"> 
         <Color Red="0.011765" Green="1.0" Blue="0.741176" />
@@ -13,7 +14,7 @@
         <Color Red="1.0" Green="0.952941" Blue="0.043137" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack2" />
-		<Goal Value="6" />
+		<Goal Value="3" />
     </Level>
     <Level Value="2">
         <Color Red="0.807843" Green="1.0" Blue="0.0" />
@@ -21,7 +22,7 @@
         <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack3" />
-		<Goal Value="6" />
+		<Goal Value="3" />
     </Level>
 	<Level Value="3">
         <Color Red="0.807843" Green="1.0" Blue="0.0" />

@@ -235,6 +235,7 @@ namespace Crystallography
 			if (currentLevel < TOTAL_LEVELS) {
 				ForceGarbageCollection();
 				Console.WriteLine( "Resetting to start level " + currentLevel );
+				LevelManager.Instance.Reset();
 				LevelManager.Instance.GetLevelSettings( currentLevel );
 //				background.PickBackground();
 				Clear();

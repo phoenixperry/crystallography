@@ -261,7 +261,7 @@ namespace Crystallography
 				var type = Type.GetType( "Crystallography." + key );
 				var quality = (AbstractQuality)type.GetProperty("Instance").GetValue(null, null);
 				if ( variations[0] == null || variations[1] == null || variations[2] == null ) {	// no variations of this quality in this level
-					qDict.Add(quality, true);	// --------------------------------------------------- worth All-Same points.
+//					qDict.Add(quality, true);	// --------------------------------------------------- worth All-Same points.
 					continue;
 				} else {
 					score = quality.Match( pEntities, pForScore );
@@ -275,7 +275,7 @@ namespace Crystallography
 				}
 			}
 			if (pForScore) {
-				int s = 0;
+				int s = LevelManager.Instance.Bonus;
 				foreach ( AbstractQuality key in qDict.Keys ) {
 					if (AppMain.ORIENTATION_MATTERS) {
 						if ( key is QOrientation) {	// we need to match orientation to ensure valid sets exist, but don't score points for it.
