@@ -30,6 +30,7 @@ namespace Crystallography
 		private XDocument doc;
 		
 		public static event EventHandler<MatchScoreEventArgs> MatchScoreDetected;
+		public static event EventHandler<FailedMatchEventArgs> FailedMatchDetected;
 		
 		// GET & SET ------------------------------------------------------------------------------------------------
 		
@@ -249,49 +250,75 @@ namespace Crystallography
 			// TODO this whole function is inefficient... revisit later.
 			
 			int score;
+			bool failed = false;
 			Dictionary<AbstractQuality, bool> qDict = new Dictionary<AbstractQuality, bool>();
+			FailedMatchEventArgs failArgs = new FailedMatchEventArgs{ Names = new Dictionary<string,int>()};
+			EventHandler<FailedMatchEventArgs> failHandler;
 			foreach ( string key in qualityDict.Keys ) {
-				if ( !AppMain.ORIENTATION_MATTERS) {
+//				if ( !AppMain.ORIENTATION_MATTERS) {
 					if ( key == "QOrientation" ) {
 						continue;	// -------------------------------- Orientation is ALWAYS all different. Don't bother.
 					}
-				}
+//				}
 //				Console.WriteLine( "Evaluating: " + key );
 				var variations = qualityDict[key];
 				var type = Type.GetType( "Crystallography." + key );
 				var quality = (AbstractQuality)type.GetProperty("Instance").GetValue(null, null);
-				if ( variations[0] == null || variations[1] == null || variations[2] == null ) {	// no variations of this quality in this level
+				if ( (variations[0] == null && variations[1] == null) || (variations[1] == null && variations[2] == null) || ( variations[0] == null && variations[2] == null ) ) {	// no variations of this quality in this level
 //					qDict.Add(quality, true);	// --------------------------------------------------- worth All-Same points.
 					continue;
 				} else {
 					score = quality.Match( pEntities, pForScore );
 					if ( score == 0 ) {	//------------------------------------------------------------ No match. Just quit.
-						qDict.Clear();
-						qDict = null;
-						return false;
+						if (pForScore) { //----------------------------------------------------------- This is a player-triggered Match Evaluation that has failed
+							failArgs.Names.Add(key.ToString().Substring(1),1); //                      as opposed to one from CardManager.MatchesPossible()
+							failed = true;
+						}
 					} else {	// ------------------------------------------------------------------- Is it an All-Same match?
 						qDict.Add ( quality, (score == quality.allSameScore) ) ;
 					}
 				}
 			}
+			if (failed) {
+				failArgs.Entity = pEntities[0];
+				failHandler = FailedMatchDetected;
+				if (failHandler != null) {
+					failHandler( this, failArgs);
+				}
+				qDict.Clear();
+				qDict = null;
+				return false;
+			}
 			if (pForScore) {
 				int s = LevelManager.Instance.Bonus;
+				MatchScoreEventArgs scoreArgs = new MatchScoreEventArgs();
+				scoreArgs.ScoreQualities = new Dictionary<string, int>();
+				EventHandler<MatchScoreEventArgs> handler;
 				foreach ( AbstractQuality key in qDict.Keys ) {
 					if (AppMain.ORIENTATION_MATTERS) {
 						if ( key is QOrientation) {	// we need to match orientation to ensure valid sets exist, but don't score points for it.
 							continue;
 						}
 					}
-					s += key.Score( qDict[key] ); //pEntities[0].getNode().Parent.Parent.Position );
+					var thisQualityScore = key.Score( qDict[key] );
+					scoreArgs.ScoreQualities.Add(key.ToString().Substring(17), thisQualityScore );
+					s+= thisQualityScore;
+//					args = new MatchScoreEventArgs{ 
+//						Points = key.Score( qDict[key] ),
+//						QualityName = key.ToString().Substring(17),
+//						Entity = pEntities[0]
+//					};
+//					handler = MatchScoreDetected;
+//					if ( handler != null ) {
+//						handler( this, args );
+//					}
+//					s += key.Score( qDict[key] ); //pEntities[0].getNode().Parent.Parent.Position );
 				}
-				MatchScoreEventArgs args = new MatchScoreEventArgs{ 
-					Points = s,
-					Entity = pEntities[0]
-				};
-				
-				EventHandler<MatchScoreEventArgs> handler = MatchScoreDetected;
+				scoreArgs.Points = s;
+				scoreArgs.Entity = pEntities[0];
+				handler = MatchScoreDetected;
 				if ( handler != null ) {
-					handler( this, args );
+					handler( this, scoreArgs );
 				}
 			}
 			qDict.Clear();
@@ -401,6 +428,13 @@ namespace Crystallography
 	
 	public class MatchScoreEventArgs : EventArgs {
 		public int Points { get; set; }
+//		public string QualityName {get; set;}
+		public Dictionary<string, int> ScoreQualities {get; set;}
+		public ICrystallonEntity Entity { get; set; }
+	}
+	
+	public class FailedMatchEventArgs : EventArgs {
+		public Dictionary<string,int> Names {get; set;}
 		public ICrystallonEntity Entity { get; set; }
 	}
 }

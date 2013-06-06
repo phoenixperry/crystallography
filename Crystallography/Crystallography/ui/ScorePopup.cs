@@ -21,6 +21,7 @@ namespace Crystallography.UI
 			Color = Colors.White;
 			Pivot = new Vector2(0.5f, 0.5f);
 			HeightScale = 1.0f;
+			
 			Sequence sequence = new Sequence();
 			sequence.Add( new DelayTime( 0.1f ) );
 			sequence.Add( new CallFunc( () => { pParent.getNode().Parent.Parent.AddChild(this); } ) );
@@ -38,6 +39,7 @@ namespace Crystallography.UI
 			
 			if ( Color.A < 0) {
 				this.UnscheduleAll();
+//				this.RemoveChild(icon, false);
 				Parent.RemoveChild(this, true);
 			}
 		}

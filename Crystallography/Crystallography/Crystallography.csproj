@@ -19,6 +19,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -138,6 +139,9 @@
     <Compile Include="PausePanel.cs" />
     <Compile Include="LevelTitle.cs" />
     <Compile Include="QGlow.cs" />
+    <Compile Include="Icons.cs" />
+    <Compile Include="EnumHelper.cs" />
+    <Compile Include="ui\IconPopupManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -390,6 +394,7 @@
     <Content Include="assets\images\hitMe.png" />
     <Content Include="assets\images\restartBtn.png" />
     <Content Include="assets\images\set4\gamePieces.png" />
+    <Content Include="assets\images\icons\icons.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

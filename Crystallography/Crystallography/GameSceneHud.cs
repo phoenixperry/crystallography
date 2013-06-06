@@ -110,6 +110,12 @@ namespace Crystallography
 		void HandleQualityManagerMatchScoreDetected (object sender, MatchScoreEventArgs e) {
 			ScheduleScoreModifier( e.Points );
 			new Crystallography.UI.ScorePopup( e.Entity, e.Points );
+			Crystallography.UI.IconPopupManager.Instance.ScoreIcons( e.Entity, e.ScoreQualities );
+		}
+		
+		void HandleQualityManagerFailedMatchDetected (object sender, FailedMatchEventArgs e)
+		{
+			Crystallography.UI.IconPopupManager.Instance.FailedIcons( e.Entity, e.Names);
 		}
 		
 		// OVERRIDES -----------------------------------------------------------------------------------------------
@@ -163,6 +169,7 @@ namespace Crystallography
 		public override void OnEnter () {
 			base.OnEnter();
 			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
+			QualityManager.FailedMatchDetected += HandleQualityManagerFailedMatchDetected;
 			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected;
 			GameScene.LevelChangeDetected += HandleGameSceneLevelChangeDetected;
 		}

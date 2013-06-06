@@ -385,10 +385,12 @@ namespace Crystallography
 			public class Particle
 			{
 				public SpriteTileCrystallonEntity parent;
+				public int type;
 				public float variant;
 				public Vector2 position;
 				public Vector2 offset;
 				public Vector4 color;
+				public Vector2 velocity;
 				public float time;
 				public float lifetime;
 				public Vector2 size;
@@ -401,12 +403,19 @@ namespace Crystallography
 				public Vector2 uv;
 				public Vector4 color;
 			};
+			
+			public enum ParticleType {
+				QUALITY = 0,
+				SCORE = 1
+			}
 
 			public List<Particle> Particles;
 			public int ActiveParticles;
 			public VertexData[] VertexDataArray;
 			public ShaderProgram ShaderProgram;
 			public Texture2D ParticleDotTexture;
+			public Texture2D ParticleScoreIconTexture;
+			public Vector2 gravity;
 
 			ImmediateModeQuads< VertexData > imm_quads;
 			int max_particles { get { return 768; } }
@@ -414,13 +423,15 @@ namespace Crystallography
 			public ParticleEffectsManager()
 			{
 				Particles = new List<Particle>();
-
+				gravity = new Vector2(0.0f, -800.0f);
+				
 				for (int i = 0; i < max_particles; ++i){
 					Particles.Add(new Particle());
 				}
 
 				ShaderProgram = new ShaderProgram("/Application/shaders/pfx.cgx");
 				ParticleDotTexture = new Texture2D("/Application/assets/images/particles.png", false);
+				ParticleScoreIconTexture = new Texture2D("/Application/assets/images/icons/icons.png", false);
 				Sce.PlayStation.HighLevel.GameEngine2D.Scheduler.Instance.Schedule(this, Tick, 0.0f, false);
 
 				AdHocDraw += this.DrawParticles;
@@ -436,6 +447,10 @@ namespace Crystallography
 				for (int i = 0; i < ActiveParticles; ++i)
 				{
 					Particle p = Particles[i];
+					if (p.type == (int)ParticleType.SCORE) {
+						p.velocity += dt * gravity;
+					}
+					p.offset += dt * p.velocity;
 					p.position = p.parent.getNode().LocalToWorld(p.parent.getNode().Pivot/2) + p.offset;
 					p.time += dt;
 					p.time += dt * fullness;
@@ -477,21 +492,43 @@ namespace Crystallography
 				ShaderProgram.SetAttributeBinding(2, "iColor");
 
 				Director.Instance.GL.Context.SetShaderProgram(ShaderProgram);
-
-				Director.Instance.GL.Context.SetTexture(0, ParticleDotTexture);
-
+				
 				Common.Assert( ActiveParticles <= imm_quads.MaxQuads );
 
 				imm_quads.ImmBeginQuads( (uint)ActiveParticles );
-
+				
+				float x1, x2, y1, y2;
 				for (int i = 0; i < ActiveParticles; ++i)
 				{
 					Particle p = Particles[i];
-					imm_quads.ImmAddQuad( 
-					new VertexData() { position = p.position + new Vector2(0, 0), uv = new Vector2(p.variant/2, 0), color = p.color },
-					new VertexData() { position = p.position + new Vector2(p.size.X, 0), uv = new Vector2((p.variant+1)/2, 0), color = p.color },
-					new VertexData() { position = p.position + new Vector2(0, p.size.Y), uv = new Vector2(p.variant/2, 1), color = p.color },
-					new VertexData() { position = p.position + new Vector2(p.size.X, p.size.Y), uv = new Vector2((p.variant+1)/2, 1), color = p.color } );
+					switch(p.type) {
+						case((int)ParticleType.QUALITY):
+							y1 = 0.0f;
+							y2 = 1.0f;
+							x1 = p.variant/2.0f;
+							x2 = (p.variant+1)/2.0f;
+							Director.Instance.GL.Context.SetTexture(0, ParticleDotTexture);
+							imm_quads.ImmAddQuad( 
+							new VertexData() { position = p.position + new Vector2(0, 0), uv = new Vector2(x1, 1.0f-y1), color = p.color },
+							new VertexData() { position = p.position + new Vector2(p.size.X, 0), uv = new Vector2(x2, 1.0f-y1), color = p.color },
+							new VertexData() { position = p.position + new Vector2(0, p.size.Y), uv = new Vector2(x1, 1.0f-y2), color = p.color },
+							new VertexData() { position = p.position + new Vector2(p.size.X, p.size.Y), uv = new Vector2(x2, 1.0f-y2), color = p.color } );
+							break;
+						case((int)ParticleType.SCORE):
+						default:
+							y1 = (float)System.Math.Floor(p.variant/4.0f);
+							y2 = 1.0f+y1;
+							x1 = (p.variant-y1*4.0f)%4.0f;
+							x2 = 1.0f+x1;
+							Director.Instance.GL.Context.SetTexture(0, ParticleScoreIconTexture);
+							imm_quads.ImmAddQuad( 
+							new VertexData() { position = p.position + new Vector2(0, 0), uv = new Vector2(x1/4.0f, 1.0f-y1/2.0f), color = p.color },
+							new VertexData() { position = p.position + new Vector2(p.size.X, 0), uv = new Vector2(x2/4.0f, 1.0f-y1/2.0f), color = p.color },
+							new VertexData() { position = p.position + new Vector2(0, p.size.Y), uv = new Vector2(x1/4.0f, 1.0f-y2/2.0f), color = p.color },
+							new VertexData() { position = p.position + new Vector2(p.size.X, p.size.Y), uv = new Vector2(x2/4.0f, 1.0f-y2/2.0f), color = p.color } );
+							break;
+					}
+					
 				}
 
 				imm_quads.ImmEndQuads();
@@ -525,22 +562,54 @@ namespace Crystallography
 			{
 				if (ActiveParticles >= Particles.Count)
 				{
+#if DEBUG
+					System.Console.WriteLine("Hit Max Particle Count! Particle not created.");
+#endif
 					return;
 				}
 
 				Particle p = Particles[ActiveParticles];
 				p.variant = pVariant;
 				p.parent = pParent;
-				p.offset = new Vector2( GameScene.Random.NextSignedFloat() * pParent.Width/4,
-				                       GameScene.Random.NextSignedFloat() * pParent.Height/4);
-				p.position = pParent.getNode().LocalToWorld(p.parent.getNode().Pivot/1) + p.offset;
+				p.offset = new Vector2( GameScene.Random.NextSignedFloat() * pParent.Width*0.25f,
+				                       GameScene.Random.NextSignedFloat() * pParent.Height*0.25f);
+				p.position = pParent.getNode().LocalToWorld(pParent.getNode().Pivot) + p.offset;
 //				p.velocity = GameScene.Random.NextVector2();
 				p.color = color;
 				p.time = 0.0f;
 				p.lifetime = 0.3f;
 				p.size = Vector2.One * scale_multiplier;
+				p.velocity = Vector2.Zero;
 				p.size_delta = new Vector2(0.75f);
+				p.type = (int)ParticleType.QUALITY;
 //				p.gravity = 0.75f;
+				ActiveParticles++;
+			}
+			
+			public void AddScoreParticle( string pName, SpriteTileCrystallonEntity pParent, Vector4 pColor) {
+				if (ActiveParticles >= Particles.Count) {
+#if DEBUG
+					System.Console.WriteLine("Hit Max Particle Count(" + Particles.Count.ToString() + "! Particle not created.");
+#endif
+					return;		
+				}
+				if( pName == null) { 
+					return; 
+				}
+				
+				Particle p = Particles[ActiveParticles];
+				p.variant = (float)EnumHelper.FromString<Icons>(pName);
+				p.parent = pParent;
+				
+				p.position = pParent.getNode().LocalToWorld(pParent.getNode().Pivot) + p.offset;
+				p.color = pColor;
+				p.time = 0.0f;
+				p.lifetime = 2.0f;
+				p.size = new Vector2(64.0f, 64.0f);
+				p.offset = new Vector2( p.size.X * 0.5f, pParent.Height * 0.5f);
+				p.size_delta = Vector2.Zero;
+				p.velocity = -0.3f * p.lifetime * gravity + Vector2.UnitX * GameScene.Random.NextSign()*(50.0f + 50.0f * GameScene.Random.NextFloat());
+				p.type = (int)ParticleType.SCORE;
 				ActiveParticles++;
 			}
 

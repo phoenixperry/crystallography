@@ -143,10 +143,10 @@ namespace Crystallography.UI
 			}
         }
 		
-		void HandleQualityManagerMatchScoreDetected (object sender, MatchScoreEventArgs e) {
-			ScheduleScoreModifier( e.Points );
-			new ScorePopup( e.Entity, e.Points );
-        }
+//		void HandleQualityManagerMatchScoreDetected (object sender, MatchScoreEventArgs e) {
+//			ScheduleScoreModifier( e.Points );
+//			new ScorePopup( e.Entity, e.Points );
+//        }
 		
 		void HandleGiveUpButtonTouchEventReceived (object sender, TouchEventArgs e)
         {

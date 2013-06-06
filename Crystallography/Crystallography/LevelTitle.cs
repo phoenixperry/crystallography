@@ -11,7 +11,8 @@ namespace Crystallography
 		static readonly float X_OFFSET = 10.0f;
 		
 		SpriteUV Background;
-		SpriteUV[] Icons;
+//		SpriteUV[] Icons;
+		SpriteTile[] Icons;
 //		Label NextLevelText;
         Label LevelNumberText;
 		Label TapToDismissText;
@@ -141,10 +142,11 @@ namespace Crystallography
 			TapToDismissText.Position = new Vector2( 39.0f, 20.0f);
 			Background.AddChild(TapToDismissText);
 			
-			Icons = new SpriteUV[4];
+			Icons = new SpriteTile[4];
 			for( int i=0; i < Icons.Length; i++) {
 //				Icons[i] = new SpriteUV(Support.SpriteUVFromFile("/Application/assets/images/icons/animation.png").TextureInfo);
-				Icons[i] = Support.SpriteUVFromFile("/Application/assets/images/icons/animation.png");
+//				Icons[i] = Support.SpriteUVFromFile("/Application/assets/images/icons/animation.png");
+				Icons[i] = Support.TiledSpriteFromFile("/Application/assets/images/icons/icons.png", 4, 2);
 //				var y = ( i > 1 ) ? 108.0f : 176.0f;
 				float y = 176.0f - 88.0f * (float)System.Math.Floor(i/2.0f);
 				Icons[i].Position = new Vector2( 44.0f + 68.0f*(i%2), y);
@@ -166,11 +168,11 @@ namespace Crystallography
 			QualityNames.Clear();
 			Label n;
 			int i = 0;
-			foreach(SpriteUV icon in Icons) {
+			foreach(SpriteTile icon in Icons) {
 				icon.Visible = false;
 			}
 			foreach ( string name in pNames ) {
-				Icons[i].TextureInfo = Support.SpriteUVFromFile("/Application/assets/images/icons/" + name.ToLower() + ".png").TextureInfo;
+				Icons[i].TileIndex1D = (int)EnumHelper.FromString<Crystallography.Icons>(name);
 				Icons[i].Visible = true;
 				QualityNames.Add( n = new Label() );
 				n.Color = Colors.White;
