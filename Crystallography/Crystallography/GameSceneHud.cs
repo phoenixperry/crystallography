@@ -21,9 +21,12 @@ namespace Crystallography
 		Label GoalTitleText;
 		Label ScoreText;
 		Label GoalText;
-//		Label TimerSeparatorText;
-//		Label TimerSecondsText;
-//		Label TimerMinutesText;
+		
+		SpriteUV TimeBox;
+		Label TimerSeparatorText;
+		Label TimerSecondsText;
+		Label TimerMinutesText;
+		
 		
 		LevelTitle levelTitle;
 		
@@ -44,6 +47,7 @@ namespace Crystallography
 		protected bool _initialized = false;
 		protected bool _buttonSlideIn;
 		protected bool _pauseTimer;
+//		protected float _elapsedTime;
 		
 		// CONSTRUCTOR -------------------------------------------------------------------------------------------
 		
@@ -128,6 +132,7 @@ namespace Crystallography
 			}
 			
 			base.Update (dt);
+//			_elapsedTime = dt;
 			
 //			if (GameScene.paused == false && _pauseTimer == false ) {
 //				calculateTimer( dt );
@@ -174,6 +179,9 @@ namespace Crystallography
 			QualityManager.FailedMatchDetected += HandleQualityManagerFailedMatchDetected;
 			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected;
 			GameScene.LevelChangeDetected += HandleGameSceneLevelChangeDetected;
+			if(GameScene.currentLevel == 999) {
+				this.Schedule(calculateTimer,1);
+			}
 		}
 		
 		public override void OnExit () {
@@ -181,23 +189,26 @@ namespace Crystallography
 			QualityManager.MatchScoreDetected -= HandleQualityManagerMatchScoreDetected;
 			CardManager.Instance.NoMatchesPossibleDetected -= HandleCardManagerInstanceNoMatchesPossibleDetected;
 			GameScene.LevelChangeDetected -= HandleGameSceneLevelChangeDetected;
+			if(GameScene.currentLevel == 999) {
+				this.Unschedule(calculateTimer);
+			}
 		}
 		
 		
 		// METHODS ------------------------------------------------------------------------------------------------
 		
-//		private void calculateTimer(float elapsedTime) {
-//			_displayTimer += elapsedTime;
-//			var oldMinutes = TimerMinutesText.Text;
-//			var minutes = System.Math.Floor(_displayTimer/60.0f);
-//			var seconds = _displayTimer - (60.0f * minutes);
-//			TimerMinutesText.Text = minutes.ToString();
-//			if (TimerMinutesText.Text != oldMinutes) {
-//				var minutesOffset = 329.0f - 3.0f - Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Bold").GetTextWidth(TimerMinutesText.Text);
-//				TimerMinutesText.Position = new Vector2(minutesOffset, 7.0f);
-//			}
-//			TimerSecondsText.Text = seconds.ToString("00.0");
-//		}
+		private void calculateTimer(float dt) {
+			_displayTimer += dt; //_elapsedTime;
+			var oldMinutes = TimerMinutesText.Text;
+			var minutes = System.Math.Floor(_displayTimer/60.0f);
+			var seconds = _displayTimer - (60.0f * minutes);
+			TimerMinutesText.Text = minutes.ToString("00");
+			if (TimerMinutesText.Text != oldMinutes) {
+				var minutesOffset = 97.0f - 3.0f - Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(TimerMinutesText.Text);
+				TimerMinutesText.Position = new Vector2(minutesOffset, -4.0f);
+			}
+			TimerSecondsText.Text = seconds.ToString("00.0");
+		}
 		
 		private void Initialize() {
 			_initialized = true;
@@ -263,24 +274,30 @@ namespace Crystallography
 				GoalText = new Label("--", bigMap);
 				GoalText.Position = new Vector2(5.0f, 12.0f);
 				RedBox.AddChild(GoalText);
-			
-//			TimerSeparatorText = new Label(":", map);
-//			TimerSeparatorText.Position = new Vector2(329.0f, 9.0f);
-//			RedBox.AddChild(TimerSeparatorText);
-			
-//			TimerSecondsText = new Label("00.0", map);
-//			TimerSecondsText.Position = new Vector2(334.0f, 7.0f);
-//			RedBox.AddChild(TimerSecondsText);
-			
-//			TimerMinutesText = new Label("000", map);
-//			TimerMinutesText.Position = new Vector2(291.0f, 7.0f);
-//			RedBox.AddChild(TimerMinutesText);
-			
-			
+				
 				RestartButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
 				RestartButton.setPosition( 748.0f, 509.0f );
 				this.AddChild(RestartButton.getNode());
 				RestartButton.ButtonUpAction += HandleRestartButtonButtonUpAction;
+			} else {
+				TimeBox = Support.SpriteUVFromFile("/Application/assets/images/timerIcon.png");
+//				TimeBox.Position = new Vector2(454.0f, 16.0f);
+				TimeBox.Position = new Vector2(244.0f, 16.0f);
+				GameHudBar.AddChild(TimeBox);
+				
+				TimerSeparatorText = new Label(":", bigMap);
+				TimerSeparatorText.Position = new Vector2(97.0f, -2.0f);
+				TimeBox.AddChild(TimerSeparatorText);
+			
+				TimerSecondsText = new Label("00.0", bigMap);
+				TimerSecondsText.Position = new Vector2(107.0f, -4.0f);
+				TimeBox.AddChild(TimerSecondsText);
+			
+				TimerMinutesText = new Label("00", bigMap);
+				TimerMinutesText.Position = new Vector2(45.0f, -4.0f);
+				TimeBox.AddChild(TimerMinutesText);
+				
+//				this.Schedule(calculateTimer,1);
 			}
 			
 			HitMeButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/hitMe.png", 1, 3).TextureInfo, new Vector2i(0,0));

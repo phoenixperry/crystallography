@@ -395,6 +395,7 @@
     <Content Include="assets\images\restartBtn.png" />
     <Content Include="assets\images\set4\gamePieces.png" />
     <Content Include="assets\images\icons\icons.png" />
+    <Content Include="assets\images\timerIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
