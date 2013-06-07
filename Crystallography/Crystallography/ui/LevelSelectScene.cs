@@ -56,7 +56,7 @@ namespace Crystallography.UI
         {
 			Console.WriteLine( selectedLevel );
 			this.RootWidget.Dispose();
-			UISystem.SetScene( new LoadingScene( selectedLevel ) );
+			UISystem.SetScene( new LoadingScene( selectedLevel, false ) );
 //			Director.Instance.ReplaceScene( new GameScene( selectedLevel ) );
         }
 		

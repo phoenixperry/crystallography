@@ -27,6 +27,10 @@ namespace Crystallography.UI
 			sequence.Add( new CallFunc( () => { pParent.getNode().Parent.Parent.AddChild(this); } ) );
 			sequence.Add( new CallFunc( () => { Scheduler.Instance.ScheduleUpdateForTarget(this,0,false); } ) );
 			this.RunAction(sequence);
+			
+#if DEBUG
+			Console.WriteLine (GetType().ToString() + " created" );
+#endif
 		}
 		
 		// OVERRIDES ------------------------------------------------------------------

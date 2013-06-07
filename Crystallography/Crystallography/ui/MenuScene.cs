@@ -26,6 +26,8 @@ namespace Crystallography.UI
 			
 			NewGameButton.TouchEventReceived += HandleNewGameButtonTouchEventReceived;
 			InfiniteModeButton.TouchEventReceived += HandleInfiniteModeButtonTouchEventReceived;
+			TimedModeButton.TouchEventReceived += HandleTimedModeButtonTouchEventReceived;
+			
 			LevelSelectButton.TouchEventReceived += (sender, e) => { 
 				this.RootWidget.Dispose();
 				UISystem.SetScene( new LevelSelectScene() ); 
@@ -39,20 +41,26 @@ namespace Crystallography.UI
 				UISystem.SetScene( new CreditsScene() ); 
 			};
 			
-			InfiniteModeButton.Visible = false;
-			TimedModeButton.Visible = false;
+//			InfiniteModeButton.Visible = false;
+//			TimedModeButton.Visible = false;
+        }
+
+        void HandleTimedModeButtonTouchEventReceived (object sender, TouchEventArgs e)
+        {
+        	this.RootWidget.Dispose();
+			UISystem.SetScene( new LoadingScene(999, true) );
         }
 
         void HandleInfiniteModeButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
         	this.RootWidget.Dispose();
-			UISystem.SetScene( new LoadingScene(999) );
+			UISystem.SetScene( new LoadingScene(999, false) );
         }
 
         void HandleNewGameButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
 			this.RootWidget.Dispose();
-			UISystem.SetScene( new LoadingScene(0) );
+			UISystem.SetScene( new LoadingScene(0, false ));
         }
 		
 //		protected override void OnUpdate (float elapsedTime)

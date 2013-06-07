@@ -86,7 +86,9 @@ namespace Crystallography
 			}
 			levelTitle.SetQualityNames( variables.ToArray() );
 			levelTitle.EnterAnim();
-			RestartButton.on = true;
+			if(GameScene.currentLevel != 999) {
+				RestartButton.on = true;
+			}
 		}
 		
 		void HandleHitMeButtonButtonUpAction (object sender, EventArgs e) {
@@ -243,22 +245,24 @@ namespace Crystallography
 			BlueBox.AddChild(ScoreText);
 			
 //			GoalIcon = Support.SpriteUVFromFile("/Application/assets/images/UI/time_now.png");
-			GoalIcon = Support.SpriteUVFromFile("/Application/assets/images/stopIcon.png");
-			GoalIcon.Position = new Vector2(244.0f, 16.0f);
-			GameHudBar.AddChild(GoalIcon);
 			
-			GoalTitleText = new Label("goal", map);
-			GoalTitleText.Position = new Vector2(299.0f, 25.0f);
-			GoalTitleText.Color = new Vector4( 0.89803922f, 0.0745098f, 0.0745098f, 1.0f);
-			GameHudBar.AddChild(GoalTitleText);
+			if(GameScene.currentLevel != 999) {
+				GoalIcon = Support.SpriteUVFromFile("/Application/assets/images/stopIcon.png");
+				GoalIcon.Position = new Vector2(244.0f, 16.0f);
+				GameHudBar.AddChild(GoalIcon);
 			
-			RedBox = Support.SpriteUVFromFile("/Application/assets/images/redbox.png");
-			RedBox.Position = new Vector2(354.0f, 0.0f);
-			GameHudBar.AddChild(RedBox);
+				GoalTitleText = new Label("goal", map);
+				GoalTitleText.Position = new Vector2(299.0f, 25.0f);
+				GoalTitleText.Color = new Vector4( 0.89803922f, 0.0745098f, 0.0745098f, 1.0f);
+				GameHudBar.AddChild(GoalTitleText);
 			
-			GoalText = new Label("--", bigMap);
-			GoalText.Position = new Vector2(5.0f, 12.0f);
-			RedBox.AddChild(GoalText);
+				RedBox = Support.SpriteUVFromFile("/Application/assets/images/redbox.png");
+				RedBox.Position = new Vector2(354.0f, 0.0f);
+				GameHudBar.AddChild(RedBox);
+			
+				GoalText = new Label("--", bigMap);
+				GoalText.Position = new Vector2(5.0f, 12.0f);
+				RedBox.AddChild(GoalText);
 			
 //			TimerSeparatorText = new Label(":", map);
 //			TimerSeparatorText.Position = new Vector2(329.0f, 9.0f);
@@ -272,10 +276,12 @@ namespace Crystallography
 //			TimerMinutesText.Position = new Vector2(291.0f, 7.0f);
 //			RedBox.AddChild(TimerMinutesText);
 			
-			RestartButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			RestartButton.setPosition( 748.0f, 509.0f );
-			this.AddChild(RestartButton.getNode());
-			RestartButton.ButtonUpAction += HandleRestartButtonButtonUpAction;
+			
+				RestartButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+				RestartButton.setPosition( 748.0f, 509.0f );
+				this.AddChild(RestartButton.getNode());
+				RestartButton.ButtonUpAction += HandleRestartButtonButtonUpAction;
+			}
 			
 			HitMeButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/hitMe.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			HitMeButton.setPosition(883.0f, 509.0f);
@@ -295,16 +301,20 @@ namespace Crystallography
 			_displayScore = 0;
 			_displayTimer = 0.0f;
 			_updateTimer = 0.0f;
-			_goal = LevelManager.Instance.Goal;
+			
 			_buttonSlideIn = false;
 			_pauseTimer = false;
 			_metGoal = false;
 			ScoreText.Text = _displayScore.ToString();
 			float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
 			ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
-			GoalText.Text = _goal.ToString();
-			x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(GoalText.Text);
-			GoalText.Position = new Vector2(x, GoalText.Position.Y);
+			
+			if(GameScene.currentLevel != 999) {
+				_goal = LevelManager.Instance.Goal;
+				GoalText.Text = _goal.ToString();
+				x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(GoalText.Text);
+				GoalText.Position = new Vector2(x, GoalText.Position.Y);
+			}
 		}
 		
 		public void ScheduleScoreModifier( int pHowMuch ) {

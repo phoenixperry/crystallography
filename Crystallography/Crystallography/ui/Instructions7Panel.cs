@@ -24,7 +24,7 @@ namespace Crystallography.UI
 		void HandleNewGameButtonTouchEventReceived (object sender, TouchEventArgs e)
         {
 			UISystem.CurrentScene.RootWidget.Dispose();
-			UISystem.SetScene( new LoadingScene( 0 ) );
+			UISystem.SetScene( new LoadingScene( 0, false ) );
         }
     }
 }

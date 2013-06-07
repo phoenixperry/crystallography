@@ -166,6 +166,7 @@ namespace Crystallography
 		public void Populate ( bool pForce = false ) {
 			int fillPop = pForce ? MAX_CARD_POPULATION : STD_CARD_POPULATION;
 			if (GameScene.currentLevel == 999) {
+				fillPop -= 3; // --------------------------------------------------- Lower limits to 12 & 15
 				ids = new List<int>();
 				for (int i = 0; i < TotalCardsInDeck; i++) {
 					ids.Add(i+NextId);

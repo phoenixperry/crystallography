@@ -58,7 +58,7 @@ namespace Crystallography
 		
 		// CONSTRUCTOR ----------------------------------------------------------------------------------
 		
-        public GameScene ( int pCurrentLevel )
+        public GameScene ( int pCurrentLevel, bool pTimed )
 		{	
 			this.AddChild( BackgroundLayer = new Layer() );
 			this.AddChild( GameplayLayer = new Layer() );
@@ -93,6 +93,9 @@ namespace Crystallography
 			
 			
 			Hud = new GameSceneHud(this);
+			if (pTimed) {
+				// Set Up Timer
+			}
 			ForegroundLayer.AddChild(Hud);
 	
             // This is debug routine that will draw the physics bounding box around all physics bodies
@@ -166,6 +169,7 @@ namespace Crystallography
 				l.RemoveAllChildren(true);
 			}
 			Layers = null;
+			Hud = null;
 			SelectionGroup.Instance.Parent.RemoveChild(SelectionGroup.Instance.getNode(), false);
 			base.OnExit();
 			Support.MusicSystem.Instance.StopAll();
@@ -232,7 +236,7 @@ namespace Crystallography
 		}
 		
 		public void resetToLevel() {
-			if (currentLevel < TOTAL_LEVELS) {
+			if (currentLevel < TOTAL_LEVELS || currentLevel == 999) {
 				ForceGarbageCollection();
 				Console.WriteLine( "Resetting to start level " + currentLevel );
 				LevelManager.Instance.Reset();

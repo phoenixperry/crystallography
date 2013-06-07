@@ -13,12 +13,14 @@ namespace Crystallography.UI
 		protected FadeInEffect fadeInEffect;
 		protected float _timer;
 		protected float _angle;
+		protected bool _timed;
 		
-        public LoadingScene(int pLevelNumber)
+        public LoadingScene(int pLevelNumber, bool pTimed=false)
         {
 			_angle = 0.0f;
 			_timer = 0.0f;
 			_levelNumber = pLevelNumber;
+			_timed = pTimed;
             
 			InitializeWidget();
 			
@@ -43,7 +45,7 @@ namespace Crystallography.UI
 			ImageBox_1.SetPosition(500.0f, 261.0f);
 			_timer += elapsedTime;
 			if (_timer > 1000){
-				Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.ReplaceScene( new GameScene(_levelNumber) );
+				Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.ReplaceScene( new GameScene(_levelNumber, _timed) );
 			}
 		}
 		
