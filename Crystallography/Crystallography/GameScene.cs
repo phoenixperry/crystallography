@@ -170,6 +170,7 @@ namespace Crystallography
 			}
 			Layers = null;
 			Hud = null;
+			Support.ParticleEffectsManager.Instance.Destroy();
 			SelectionGroup.Instance.Parent.RemoveChild(SelectionGroup.Instance.getNode(), false);
 			base.OnExit();
 			Support.MusicSystem.Instance.StopAll();
@@ -180,7 +181,6 @@ namespace Crystallography
 		
         public override void Update ( float dt )
         {
-
 			InputManager.Instance.Update(dt);
             base.Update (dt);			
 			

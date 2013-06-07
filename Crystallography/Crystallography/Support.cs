@@ -380,7 +380,21 @@ namespace Crystallography
 		public class ParticleEffectsManager
 			: Sce.PlayStation.HighLevel.GameEngine2D.Node
 		{
-			public static ParticleEffectsManager Instance = new ParticleEffectsManager();
+			protected static ParticleEffectsManager _instance;
+			
+			public static ParticleEffectsManager Instance {
+				get {
+					if (_instance == null) {
+						_instance = new ParticleEffectsManager();
+					}
+					return _instance;
+				}
+				protected set {
+					_instance = value;
+				}
+			}
+			
+//			public static ParticleEffectsManager Instance = new ParticleEffectsManager();
 			
 			public class Particle
 			{
@@ -612,7 +626,29 @@ namespace Crystallography
 				p.type = (int)ParticleType.SCORE;
 				ActiveParticles++;
 			}
-
+			
+			public void Destroy() {
+				imm_quads.Dispose();
+				Sce.PlayStation.HighLevel.GameEngine2D.Scheduler.Instance.Unschedule(this, Tick);
+				AdHocDraw -= this.DrawParticles;
+				ParticleScoreIconTexture.Dispose();
+				ParticleDotTexture.Dispose();
+				foreach (Particle p in Particles) {
+					p.parent = null;
+//					p.position = null;
+//					p.offset = null;
+//					p.color = null;
+//					p.velocity = null;
+//					p.size = null;
+//					p.size_delta = null;
+				}
+				Particles.Clear();
+				Particles = null;
+//				gravity = null;
+				Instance = null;
+			}
+				
+				
 //			public void AddParticleWater(Vector2 position, Vector2 velocity, Vector4 color, float scale_multiplier)
 //			{
 //				if (ActiveParticles >= Particles.Count)
