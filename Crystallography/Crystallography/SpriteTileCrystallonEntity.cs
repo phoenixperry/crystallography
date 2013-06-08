@@ -112,7 +112,8 @@ namespace Crystallography
 			_particleIndex = pVariant;
 			if (pVariant != 0) {
 				Scheduler.Instance.Schedule(_sprite, spawnParticle, 0.2f, false);
-				Support.ParticleEffectsManager.Instance.AddParticle(pVariant-1, this, QColor.palette[(_colorIndex+1)%3], 12.0f);
+//				Support.ParticleEffectsManager.Instance.AddParticle(pVariant-1, this, QColor.palette[(_colorIndex+1)%3], 12.0f);
+//				Support.ParticleEffectsManager.Instance.AddParticle(pVariant-1, this, new Vector4(0.36f, 0.23f, 0.49f, 1.0f), 12.0f);
 			} else {
 				Scheduler.Instance.Unschedule(_sprite, spawnParticle);
 			}
@@ -120,7 +121,8 @@ namespace Crystallography
 		
 		protected void spawnParticle(float dt) {
 			Support.ParticleEffectsManager.Instance.AddParticle(_particleIndex-1, this, 
-				                     QColor.palette[(_colorIndex+1)%3], 12.0f);
+			                         new Vector4(0.8f, 0.56078431f, 1.0f, 1.0f), 12.0f);
+//				                     QColor.palette[(_colorIndex+1)%3], 12.0f);
 		}
 	}
 }

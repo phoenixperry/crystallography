@@ -647,16 +647,16 @@ namespace Crystallography
 				Particle p = QualityParticles[ActiveQualityParticles];
 				p.variant = pVariant;
 				p.parent = pParent;
-				p.offset = new Vector2( GameScene.Random.NextSignedFloat() * pParent.Width*0.25f,
-				                       GameScene.Random.NextSignedFloat() * pParent.Height*0.25f);
-				p.position = pParent.getNode().LocalToWorld(pParent.getNode().Pivot) + p.offset;
+				p.offset = new Vector2( GameScene.Random.NextSignedFloat() * pParent.Width*0.25f + 15.0f,
+				                       GameScene.Random.NextSignedFloat() * pParent.Height*0.35f + 15.0f);
+				p.position = pParent.getNode().LocalToWorld(new Vector2(pParent.Width/2.0f, pParent.Height/2.0f)) + p.offset;
 //				p.velocity = GameScene.Random.NextVector2();
 				p.color = color;
 				p.time = 0.0f;
 				p.lifetime = 0.3f;
 				p.size = Vector2.One * scale_multiplier;
 				p.velocity = Vector2.Zero;
-				p.size_delta = new Vector2(0.75f);
+				p.size_delta = new Vector2(1.5f);
 				p.type = (int)ParticleType.QUALITY;
 //				p.gravity = 0.75f;
 				ActiveQualityParticles++;
