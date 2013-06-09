@@ -80,6 +80,7 @@ namespace Crystallography
 		public CubeCrystallonEntity(Scene pScene, GamePhysics pGamePhysics, PhysicsShape pShape = null ) 
 																			: base( pScene, pGamePhysics, pShape, 3, true ) {
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
+//			_node.AdHocDraw += DrawAnim;
 		}
 			
 		// OVERRIDES -----------------------------------------------------------
@@ -127,6 +128,17 @@ namespace Crystallography
 //		}
 		
 		// METHODS -------------------------------------------------------------
+		
+//		public void DrawAnim() {
+////			Console.WriteLine("Draw");
+//			if ( _body != null ) {
+//				var bottomLeft = Vector2.Zero;
+//				var topRight = getPosition();
+//				Director.Instance.DrawHelpers.DrawCircle(Vector2.Zero,60.0f,32);
+////				Director.Instance.DrawHelpers.DrawBounds2Fill (
+////				new Bounds2(bottomLeft, topRight));
+//			}
+//		}
 		
 		public void Rotate ( bool pClockwise ) {
 			if (pClockwise) {

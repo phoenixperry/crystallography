@@ -86,8 +86,7 @@ namespace Crystallography
 			} else {
 				_body = null;
 			}
-			
-			Scheduler.Instance.Schedule(_sprite, Update, 0, false, 0);
+			Scheduler.Instance.Schedule(_sprite, Update, 0.0f, false);
 		}
 		
 		// OVERRIDES------------------------------------------------------------------------------

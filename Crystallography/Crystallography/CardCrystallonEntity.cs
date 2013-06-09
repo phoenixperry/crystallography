@@ -19,8 +19,12 @@ namespace Crystallography
 		protected readonly static float DEFAULT_SPEED = 0.3f;
 		
 //		protected readonly static BlendFunc animBlend = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstColor, BlendFuncFactor.SrcAlpha);
-		protected readonly static BlendFunc animBlend = new BlendFunc(BlendFuncMode.Subtract, BlendFuncFactor.DstColor, BlendFuncFactor.Zero);
+//		protected readonly static BlendFunc animBlend = new BlendFunc(BlendFuncMode.Subtract, BlendFuncFactor.DstColor, BlendFuncFactor.Zero);
 		
+//		protected ShaderProgram ShaderProgram;
+//		protected Texture2D AnimTexture;
+//		protected ImmediateModeQuads< VertexData > imm_quads;
+//		protected int frame;
 		
 		protected SpriteTile _anim;
 //		protected SpriteTile _mask;
@@ -31,7 +35,7 @@ namespace Crystallography
 		protected Label countdownText;
 		public int countdown;
 		
-		// GET & SET ----------------------------------------------------------------
+		// GET & SET ------------------------------------------------------------------------------------------------------------------------------------------------------
 		
 		public SpriteTile GlowSprite { get; protected set;}
 		
@@ -73,7 +77,7 @@ namespace Crystallography
 			}
 		}
 		
-		// CONSTRUCTORS -------------------------------------------------------------
+		// CONSTRUCTORS --------------------------------------------------------------------------------------------------------------------------------------------------
 		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Crystallography.CardCrystallonEntity"/> class.
@@ -99,14 +103,34 @@ namespace Crystallography
 			id = pId;
 			_anim = null;
 			GlowSprite = null;
-			_sprite.Scale*=0.7f;
+			_sprite.Scale*=CARD_SCALAR;
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
+			
+//			Node dummy = new Node();
+//			dummy.Scale = 1/_sprite.Scale;
+//			_sprite.AddChild(dummy);
+//			dummy.AdHocDraw += DrawAnim;
+			
+//			ShaderProgram = new ShaderProgram("/Application/shaders/rotate.cgx");
+//			AnimTexture  = new Texture2D("/Application/assets/animation/animation2.png", false);
+//			frame = 0;
+//			
+//			dummy.ScheduleInterval( (dt) => {
+//				frame++;
+//				if (frame > 10) {
+//					frame = 0;
+//				}
+//			}, 0.083f, 0);
+//			
+//			imm_quads = new ImmediateModeQuads< VertexData >( Director.Instance.GL, 4, VertexFormat.Float2, VertexFormat.Float2, VertexFormat.Float4 );
+//			_scene.AdHocDraw += DrawAnim;
+			
 #if DEBUG
 			Console.WriteLine(this.GetType().ToString() + " " + id.ToString() + " created");
 #endif
 		}
 		
-		// OVERRIDES -----------------------------------------------------------------
+		// OVERRIDES ----------------------------------------------------------------------------------------------------------------------------------------------------
 		
 		public override AbstractCrystallonEntity BeReleased(Vector2 pPosition) {
 			if (!AppMain.ORIENTATION_MATTERS) {
@@ -148,7 +172,56 @@ namespace Crystallography
 //			}
 		}
 		
-		// METHODS -------------------------------------------------------------------
+		// METHODS ------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+//		public void DrawAnim() {
+//			Director.Instance.DrawHelpers.DrawCircle(new Vector2(Width/2.0f,Height/2.0f),60.0f,32);
+//			float x1, x2, y1, y2;
+//			Matrix4 transform = Director.Instance.GL.GetMVP();
+//				
+//			Director.Instance.GL.ModelMatrix.Push();
+//			Director.Instance.GL.ModelMatrix.SetIdentity();
+//			
+//			ShaderProgram.SetUniformValue(ShaderProgram.FindUniform("MVP"), ref transform);
+////			ShaderProgram.SetUniformValue(ShaderProgram.FindUniform("angle"), ref angle);
+//
+//			ShaderProgram.SetAttributeBinding(0, "iPosition");
+//			ShaderProgram.SetAttributeBinding(1, "iUV");
+//			ShaderProgram.SetAttributeBinding(2, "iColor");
+//
+//			Director.Instance.GL.Context.SetShaderProgram(ShaderProgram);
+//			
+//			imm_quads.ImmBeginQuads( 4 );
+////			imm_quads.ImmBeginQuads( (uint)ActiveQualityParticles );
+//			
+////			int frame = 0;
+//			
+//			Vector4 white = Colors.White;
+//			var column = frame % 4;
+//			var row = (frame - column) / 4;
+//			
+//			y1 = 0.25f * row; //(float)System.Math.Floor((float)frame/4.0f);
+//			y2 = 0.25f + y1;
+//			x1 = 0.25f * column; //((float)frame-y1*4.0f);
+//			x2 = 0.25f + x1;
+//			
+//			Vector2 z = Vector2.Zero;
+//			
+//			Director.Instance.GL.Context.SetTexture(0, AnimTexture);
+//			imm_quads.ImmAddQuad( 
+//				new VertexData() { position = z + new Vector2(0, 0), uv = new Vector2(x1, 1.0f-y1), color = white },
+//				new VertexData() { position = z + new Vector2(Width, 0), uv = new Vector2(x2, 1.0f-y1), color = white },
+//				new VertexData() { position = z + new Vector2(0, Height), uv = new Vector2(x1, 1.0f-y2), color = white },
+//				new VertexData() { position = z + new Vector2(Width, Height), uv = new Vector2(x2, 1.0f-y2), color = white }
+//			);
+//			
+//			imm_quads.ImmEndQuads();
+//			
+//			Director.Instance.GL.Context.SetShaderProgram(null);
+//			Director.Instance.GL.Context.SetVertexBuffer(0, null);
+//			Director.Instance.GL.ModelMatrix.Pop();
+//			
+//		}
 		
 		public void ShowGlow() {
 			if (GlowSprite==null) return;
@@ -173,16 +246,23 @@ namespace Crystallography
 //			_mask.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstColor, BlendFuncFactor.One);
 //			_anim.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.ReverseSubtract, BlendFuncFactor.One, BlendFuncFactor.OneMinusSrcColor);
 //			_anim.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstAlpha, BlendFuncFactor.OneMinusSrcAlpha);
-			_anim.BlendMode.BlendFunc = animBlend;
-			_anim.BlendMode.Enabled = true;
+//			_anim.BlendMode.BlendFunc = animBlend;
+//			_anim.BlendMode.Enabled = true;
 			_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 0.083f*(1+pEnd-pStart), true) );
 
 			if (getOrientation() == 1) {
-				_anim.Rotation = new Vector2(1f,0f);
+//				_anim.Rotation = new Vector2(1f,0f);
 			} else if (getOrientation() == 2) {
-				_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
+				_anim.FlipU = true;
+//				_anim.Rotate(Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Deg2Rad(-60.0f));
+//				_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
+//				_anim.Rotation = new Vector2(0.5f, -0.866025403784439f); //60
 			} else {
-				_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
+//				_anim.Pivot = new Vector2(0.52f,0.54f);
+				_anim.Position = new Vector2(0.00f, 0.015f);
+//				_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
+//				_anim.Rotation = new Vector2(0.5f, 0.866025403784439f);
+				_anim.Rotate(Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Deg2Rad(-120.0f));
 			}
 			this.getNode().AddChild(_anim);
 //			this.getNode().AddChild(_mask);
@@ -213,11 +293,18 @@ namespace Crystallography
 			countdownText.Text = countdown.ToString();
 		}
 		
-		// DESTRUCTOR -----------------------------------------------------------------------------------
+		// DESTRUCTOR ---------------------------------------------------------------------------------------------------------------------------------------------
 #if DEBUG
 		~CardCrystallonEntity() {
 			Console.WriteLine(GetType().ToString() + " deleted");
 		}
 #endif
 	}
+	
+	public struct VertexData
+	{
+		public Vector2 position;
+		public Vector2 uv;
+		public Vector4 color;
+	};
 }

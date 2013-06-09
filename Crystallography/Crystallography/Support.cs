@@ -580,6 +580,7 @@ namespace Crystallography
 				Director.Instance.GL.ModelMatrix.SetIdentity();
 
 				ShaderProgram.SetUniformValue(ShaderProgram.FindUniform("MVP"), ref transform);
+				
 
 				ShaderProgram.SetAttributeBinding(0, "iPosition");
 				ShaderProgram.SetAttributeBinding(1, "iUV");

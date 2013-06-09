@@ -148,6 +148,8 @@
     <ShaderProgram Include="shaders\Simple.vcg" />
     <ShaderProgram Include="shaders\pfx.fcg" />
     <ShaderProgram Include="shaders\pfx.vcg" />
+    <ShaderProgram Include="shaders\rotate.vcg" />
+    <ShaderProgram Include="shaders\rotate.fcg" />
   </ItemGroup>
   <ItemGroup>
     <PsmMetadata Include="app.xml" />
