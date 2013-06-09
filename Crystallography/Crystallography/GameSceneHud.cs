@@ -124,6 +124,11 @@ namespace Crystallography
 			Crystallography.UI.IconPopupManager.Instance.FailedIcons( e.Entity, e.Names);
 		}
 		
+		void HandleRestartButtonButtonUpAction (object sender, EventArgs e)
+		{
+			_scene.resetToLevel();
+		}
+		
 		// OVERRIDES -----------------------------------------------------------------------------------------------
 		
 		public override void Update (float dt) {
@@ -150,14 +155,15 @@ namespace Crystallography
 						mod = sign;
 					}
 					_displayScore += mod;
+					if(_goal <= _displayScore && _metGoal == false) {
+						MetGoal();
+					}
 					ScoreText.Text = _displayScore.ToString();
 					float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
 					ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
-					if(_goal == _displayScore && _metGoal == false) {
-						MetGoal();
-					}
 					_updateTimer = 0.0f;
 				}
+				
 			}
 			
 			if ( _buttonSlideIn ) {
@@ -306,11 +312,6 @@ namespace Crystallography
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
 			
 			CardManager.Instance.CardSpawned += HandleCardManagerInstanceCardSpawned;
-		}
-
-		void HandleRestartButtonButtonUpAction (object sender, EventArgs e)
-		{
-			_scene.resetToLevel();
 		}
 		
 		public void Reset () {

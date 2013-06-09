@@ -14,7 +14,7 @@ namespace Crystallography
 {
     public class GameScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
     {
-		public static readonly int TOTAL_LEVELS = 40;
+		public static readonly int TOTAL_LEVELS = 41;
 		
 		// Change the following value to true if you want bounding boxes to be rendered
         private static bool DEBUG_BOUNDINGBOXS = false;
@@ -83,9 +83,7 @@ namespace Crystallography
 //			CardManager.Instance.Reset( this );
 //			GroupManager.Instance.Reset( this );
 			
-			var sg = SelectionGroup.Instance;
-			sg.Reset( this );
-			this.AddChild(sg.getNode());
+			
 			
 //			QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
 			
@@ -97,6 +95,10 @@ namespace Crystallography
 				// Set Up Timer
 			}
 			ForegroundLayer.AddChild(Hud);
+			
+			var sg = SelectionGroup.Instance;
+			sg.Reset( this );
+			ForegroundLayer.AddChild(sg.getNode());
 	
             // This is debug routine that will draw the physics bounding box around all physics bodies
             if(DEBUG_BOUNDINGBOXS)

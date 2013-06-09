@@ -220,7 +220,8 @@ namespace Crystallography
 		public CardCrystallonEntity spawn( int pId = -1) {
 			var _screenWidth = Director.Instance.GL.Context.GetViewport().Width;
             var _screenHeight = Director.Instance.GL.Context.GetViewport().Height;
-			return spawn( 50f + 0.75f * _screenWidth * GameScene.Random.NextFloat(),
+			return spawn( 220.0f + 0.6f * _screenWidth * GameScene.Random.NextFloat(),
+			             //50f + 0.75f * _screenWidth * GameScene.Random.NextFloat(),
 			       50f + 0.75f * _screenHeight * GameScene.Random.NextFloat(), pId);
 		}
 		

@@ -21,8 +21,11 @@ namespace Crystallography
 		
 		protected GameScene _scene;
 		protected bool _initialized;
-		protected bool _entering;
-		protected bool _exiting;
+		
+		public bool Entering { get; protected set; }
+		public bool Exiting { get; protected set; }
+//		protected bool Entering;
+//		protected bool Exiting;
 		
 		// CONSTRUCTORS -------------------------------------------------------------------------
 		
@@ -43,16 +46,16 @@ namespace Crystallography
 		void HandleInputManagerInstanceTapDetected (object sender, BaseTouchEventArgs e)
 		{
 			if(this.Position.Y < 272.0f){
-				_entering = false;
-				_exiting = true;
+				Entering = false;
+				Exiting = true;
 			}
 		}
 		
 		void HandleInputManagerInstanceDragDetected (object sender, SustainedTouchEventArgs e)
 		{
 			if(this.Position.Y < 272.0f){
-				_entering = false;
-				_exiting = true;
+				Entering = false;
+				Exiting = true;
 			}
 		}
 		
@@ -62,12 +65,12 @@ namespace Crystallography
 		{
 			base.Update (dt);
 			
-			if(_entering) {
+			if(Entering) {
 				var y = this.Position.Y;
 				y -= dt * 1000.0f;
 				if (y < 41.0f) {
 					y = 41.0f;
-					_entering = false;
+					Entering = false;
 					Sequence sequence = new Sequence();
 					sequence.Add( new DelayTime( 4.0f ) );
 					sequence.Add( new CallFunc( () => ExitAnim() ) );
@@ -76,24 +79,24 @@ namespace Crystallography
 				this.Position = new Vector2(X_OFFSET, y);
 			}
 			
-			else if( _exiting ) {
+			else if( Exiting ) {
 //				this.StopAllActions();
 				var y = this.Position.Y;
 				y += dt * 1000.0f;
 				if (y > 545.0f) {
 					y = 545.0f;
-					_exiting = false;
+					Exiting = false;
 					Hide();
 				}
 				this.Position = new Vector2(X_OFFSET, y);
 			}
 			
-//			if(_entering) {
+//			if(Entering) {
 //				var x = this.Position.X;
 //				x -= dt * 1000.0f;
 //				if (x < 100.0f) {
 //					x = 100.0f;
-//					_entering = false;
+//					Entering = false;
 //					Sequence sequence = new Sequence();
 //					sequence.Add( new DelayTime( 2.0f ) );
 //					sequence.Add( new CallFunc( () => ExitAnim() ) );
@@ -102,12 +105,12 @@ namespace Crystallography
 //				this.Position = new Vector2(x, 272.0f);
 //			}
 //			
-//			if( _exiting ) {
+//			if( Exiting ) {
 //				var x = this.Position.X;
 //				x -= dt * 1000.0f;
 //				if (x < -100.0f) {
 //					x = -100.0f;
-//					_exiting = false;
+//					Exiting = false;
 //					Hide();
 //				}
 //				this.Position = new Vector2(x, 272.0f);
@@ -186,8 +189,8 @@ namespace Crystallography
 		
 		public void Hide() {
 			this.Visible = false;
-			_entering = false;
-			_exiting = false;
+			Entering = false;
+			Exiting = false;
 		}
 		
 		public void Show() {
@@ -196,8 +199,8 @@ namespace Crystallography
 		
 		public void EnterAnim() {
 			this.StopAllActions();
-			_entering = true;
-			_exiting = false;
+			Entering = true;
+			Exiting = false;
 			this.Position = new Vector2(X_OFFSET, 545.0f);
 			Show();
 			InputManager.Instance.TapDetected += HandleInputManagerInstanceTapDetected;
@@ -212,8 +215,8 @@ namespace Crystallography
 			InputManager.Instance.TapDetected -= HandleInputManagerInstanceTapDetected;
 			InputManager.Instance.DragDetected -= HandleInputManagerInstanceDragDetected;
 //			InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
-			_exiting = true;
-			_entering = false;
+			Exiting = true;
+			Entering = false;
 			Show();
 		}
 		
