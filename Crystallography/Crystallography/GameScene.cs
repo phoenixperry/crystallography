@@ -31,7 +31,7 @@ namespace Crystallography
 		public Layer GameplayLayer;
 		public Layer ForegroundLayer;
 		public Layer DialogLayer;
-		public Layer[] Layers;
+		public static Layer[] Layers;
 		
 //		public ButtonEntity TestButton;
 		

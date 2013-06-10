@@ -149,7 +149,7 @@ namespace Crystallography
 		public void addToScene(int pLayerIndex=1) {
 			Node node = getNode();
 			if (node.Parent != null) {
-				if (node.Parent == (_scene as GameScene).Layers[pLayerIndex]) { // ALREADY ATTACHED TO SCENE -- DONE
+				if (node.Parent == GameScene.Layers[pLayerIndex]) { // ALREADY ATTACHED TO SCENE -- DONE
 					return;
 				} else {
 					node.Parent.RemoveChild(node, false);

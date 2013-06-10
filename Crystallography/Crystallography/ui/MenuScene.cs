@@ -41,8 +41,8 @@ namespace Crystallography.UI
 				UISystem.SetScene( new CreditsScene() ); 
 			};
 			
-//			InfiniteModeButton.Visible = false;
-//			TimedModeButton.Visible = false;
+			InfiniteModeButton.Visible = false;
+			TimedModeButton.Visible = false;
         }
 
         void HandleTimedModeButtonTouchEventReceived (object sender, TouchEventArgs e)
