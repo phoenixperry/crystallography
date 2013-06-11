@@ -60,10 +60,8 @@ namespace Crystallography
 		public static bool GAMEPLAY_INPUT_ENABLED = false;
 		
 		public static void Main (string[] args)
-		{
-			Director.Initialize();
-			UISystem.Initialize(Director.Instance.GL.Context);
-			Director.Instance.RunWithScene( new MenuSystemScene("Splash"), true );
+		{	
+			Init ();
 			
 			while( true ){
 				SystemEvents.CheckEvents();
@@ -89,6 +87,18 @@ namespace Crystallography
 				Director.Instance.GL.Context.SwapBuffers();
 				Director.Instance.PostSwap();
 			}
+		}
+		
+		protected static bool Init() {
+			Director.Initialize();
+			UISystem.Initialize(Director.Instance.GL.Context);
+			Director.Instance.RunWithScene( new MenuSystemScene("Splash"), true );
+			
+			if ( false == DataStorage.LoadData() ) {
+				DataStorage.Init();
+			}
+			
+			return true;
 		}
 	}
 }

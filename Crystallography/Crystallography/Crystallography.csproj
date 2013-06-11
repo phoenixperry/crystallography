@@ -20,6 +20,11 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <DefineConstants>DEBUG</DefineConstants>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="AfterClean" command="" externalConsole="true" pauseExternalConsole="true" />
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -142,6 +147,7 @@
     <Compile Include="Icons.cs" />
     <Compile Include="EnumHelper.cs" />
     <Compile Include="ui\IconPopupManager.cs" />
+    <Compile Include="DataStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
