@@ -8,16 +8,44 @@ namespace Crystallography
 		static readonly string SAVE_FILE = "/Documents/crystallon.dat";
 		static readonly string TEMP_FILE = "/Documents/crystallon.tmp";
 		
-		static readonly int numPuzzles = 40;
+		static readonly int numPuzzles = 41;
 		static readonly int numTimedHighScores = 3;
 		static readonly int numInfiniteHighScores = 3;
 		
-		static Int32[] puzzleScores = new Int32[numPuzzles];
-		static Int32[] timedScores = new Int32[numTimedHighScores];
-		static Int32[] infiniteScores = new Int32[numInfiniteHighScores];
+		static public Int32[] puzzleScores = new Int32[numPuzzles];
+		static public Int32[] timedScores = new Int32[numTimedHighScores];
+		static public Int32[] infiniteScores = new Int32[numInfiniteHighScores];
 		
-//		public DataStorage (){
-//		}
+		public static void SavePuzzleScore(int pLevel, int pScore) {
+			puzzleScores[pLevel] = pScore;
+			SaveData();
+		}
+		
+		public static void SaveTimedScore(int pScore) {
+			int score = pScore;
+			int scorebuffer;
+			for( int i=0; i<numTimedHighScores; i++) {
+				if (timedScores[i] < pScore) {
+					scorebuffer = timedScores[i];
+					timedScores[i] = score;
+					score = scorebuffer;
+				}
+			}
+			SaveData();
+		}
+		
+		public static void SaveInfiniteScore(int pScore) {
+			int score = pScore;
+			int scorebuffer;
+			for( int i=0; i<numInfiniteHighScores; i++) {
+				if (infiniteScores[i] < pScore) {
+					scorebuffer = infiniteScores[i];
+					infiniteScores[i] = score;
+					score = scorebuffer;
+				}
+			}
+			SaveData();
+		}
 		
 		public static void SaveData() {
 #if DEBUG
@@ -158,6 +186,7 @@ namespace Crystallography
 			
 			SaveData();
 		}
+		
 		
 		public static void Init() {
 			ClearData();

@@ -49,6 +49,7 @@ namespace Crystallography.UI
 			LevelSelectItem.LevelSelectionDetected += (sender, e) => { 
 				selectedLevel = e.LevelID;
 				LevelNumberText.Text = e.LevelID.ToString();
+				ScoreText.Text = DataStorage.puzzleScores[selectedLevel].ToString();
 			};
         }
 
@@ -57,7 +58,6 @@ namespace Crystallography.UI
 			Console.WriteLine( selectedLevel );
 			this.RootWidget.Dispose();
 			UISystem.SetScene( new LoadingScene( selectedLevel, false ) );
-//			Director.Instance.ReplaceScene( new GameScene( selectedLevel ) );
         }
 		
 		// DESTRUCTOR --------------------------------------------------------------------------------

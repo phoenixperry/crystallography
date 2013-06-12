@@ -66,6 +66,9 @@ namespace Crystallography
 		
 		// EVENT HANDLERS -----------------------------------------------------------------------------------------
 		
+		/// <summary>
+		/// Handles the card manager instance no matches possible detected.
+		/// </summary>
 		void HandleCardManagerInstanceNoMatchesPossibleDetected (object sender, EventArgs e) {
 //			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
 //			NextLevelButton.setPosition(845.0f, 587.0f); //Director.Instance.GL.Context.Screen.Height + NextLevelButton.Height);
@@ -77,6 +80,9 @@ namespace Crystallography
 			_pauseTimer = true;
 		}
 		
+		/// <summary>
+		/// On Level Change
+		/// </summary>
 		void HandleGameSceneLevelChangeDetected (object sender, EventArgs e) {
 			Reset ();
 			levelTitle.SetLevelText(GameScene.currentLevel);
@@ -95,35 +101,55 @@ namespace Crystallography
 			}
 		}
 		
+		/// <summary>
+		/// On Hit Me Button Up
+		/// </summary>
 		void HandleHitMeButtonButtonUpAction (object sender, EventArgs e) {
 			CardManager.Instance.Populate( true );
 		}
 		
+		/// <summary>
+		/// On Next Level Button Up
+		/// </summary>
 		void HandleNextLevelButtonButtonUpAction (object sender, EventArgs e) {
 			NextLevelButton.Visible = false;
+			if( GameScene.currentLevel != 999 ) {
+				DataStorage.SavePuzzleScore( GameScene.currentLevel, _score );
+			}
 			CardManager.Instance.Reset( Director.Instance.CurrentScene );
 			GroupManager.Instance.Reset( Director.Instance.CurrentScene );
-//			levelEndPanel.UpdateAndShow(_score, _displayTimer);
 			NextLevelButton.ButtonUpAction -= HandleNextLevelButtonButtonUpAction;
 			InputManager.Instance.CircleJustUpDetected -= HandleNextLevelButtonButtonUpAction;
 			_scene.goToNextLevel();
 		}
 		
+		/// <summary>
+		/// On Card Spawn
+		/// </summary>
 		void HandleCardManagerInstanceCardSpawned (object sender, EventArgs e) {
 			HitMeButton.on = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < CardManager.MAX_CARD_POPULATION );
 		}
 		
+		/// <summary>
+		/// On Match Score Detected
+		/// </summary>
 		void HandleQualityManagerMatchScoreDetected (object sender, MatchScoreEventArgs e) {
 			ScheduleScoreModifier( e.Points );
 			new Crystallography.UI.ScorePopup( e.Entity, e.Points );
 			Crystallography.UI.IconPopupManager.Instance.ScoreIcons( e.Entity, e.ScoreQualities );
 		}
 		
+		/// <summary>
+		/// On Failed Match Detected
+		/// </summary>
 		void HandleQualityManagerFailedMatchDetected (object sender, FailedMatchEventArgs e)
 		{
 			Crystallography.UI.IconPopupManager.Instance.FailedIcons( e.Entity, e.Names);
 		}
 		
+		/// <summary>
+		/// On Restart Button Up
+		/// </summary>
 		void HandleRestartButtonButtonUpAction (object sender, EventArgs e)
 		{
 			_scene.resetToLevel();
