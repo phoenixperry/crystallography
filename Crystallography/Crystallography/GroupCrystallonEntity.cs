@@ -14,6 +14,8 @@ namespace Crystallography
 		protected Node[] _pucks;
 		private int _numMembers;
 		
+		public static event EventHandler BreakDetected;
+		
 		
 //		public static event EventHandler BreakDetected;
 		
@@ -282,7 +284,13 @@ namespace Crystallography
 		/// Break this group into its component objects.
 		/// </summary>
 		public virtual void Break() {
+			EventHandler handler = BreakDetected;
+			if (handler != null ) {
+				handler( this, null );
+			}
+			
 			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "break.wav");
+			
 			Node puck;
 			for (int i=members.Length-1; i>=0; i--) {
 				if ( members[i] != null ) {

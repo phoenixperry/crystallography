@@ -14,6 +14,7 @@ namespace Crystallography
 {
     public class GameScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
     {
+		// TODO make this dynamic or data-driven
 		public static readonly int TOTAL_LEVELS = 41;
 		
 		// Change the following value to true if you want bounding boxes to be rendered
@@ -22,7 +23,6 @@ namespace Crystallography
 		public static Random Random = new Random();
 		public static GameSceneHud Hud;
     	public static GamePhysics _physics;
-//		public static Crystallography.BG.CrystallonBackground background;
 		protected static List<ICrystallonEntity> _allEntites = new List<ICrystallonEntity>();
 		
 		public static event EventHandler LevelChangeDetected;
@@ -32,8 +32,6 @@ namespace Crystallography
 		public Layer ForegroundLayer;
 		public Layer DialogLayer;
 		public static Layer[] Layers;
-		
-//		public ButtonEntity TestButton;
 		
 		// GET & SET -----------------------------------------------------------------------------------
 		
@@ -136,8 +134,9 @@ namespace Crystallography
 //			TestLayer.Hide();
 //			TestLayer.Show();
 			
-			
-			
+#if METRICS
+			DataStorage.AddMetric("Level", () => currentLevel, 1);
+#endif
         }
 		
 		// EVENT HANDLERS --------------------------------------------------------------------------

@@ -33,6 +33,9 @@ namespace Crystallography
 		public event EventHandler<BaseTouchEventArgs> 		TouchJustDownDetected;
 		public event EventHandler<BaseTouchEventArgs> 		TouchJustUpDetected;
 		
+		
+		protected bool metricsRequest = false;
+		
 		// GET & SET --------------------------------------------------------
 		
 		/// <summary>
@@ -124,7 +127,8 @@ namespace Crystallography
 			}
 			if ( Input2.GamePad0.Circle.Release ) {
 				OnCircleJustUp();
-			} else if ( Input2.GamePad0.Cross.Release ) {
+			}
+			if ( Input2.GamePad0.Cross.Release ) {
 				OnCrossJustUp();
 			}
 		}

@@ -66,7 +66,6 @@ namespace Crystallography
 			while( true ){
 				SystemEvents.CheckEvents();
 				GamePhysics.Instance.Simulate();
-//				UISystem.Update( data );
 				if ( UI_INPUT_ENABLED ) {
 					UISystem.Update( Touch.GetData(0) );
 					Director.Instance.Update();
@@ -74,7 +73,6 @@ namespace Crystallography
 					Director.Instance.Render();
 					UISystem.Render();
 				} else {
-//					UISystem.Update( null );
 					Director.Instance.Update();
 					Touch.GetData(0).Clear();
 					Director.Instance.Render();
@@ -97,6 +95,13 @@ namespace Crystallography
 			if ( false == DataStorage.LoadData() ) {
 				DataStorage.Init();
 			}
+			
+#if METRICS
+			if ( false == DataStorage.LoadMetrics() ) {
+				DataStorage.ClearMetrics();
+			}
+//			DataStorage.PrintMetrics();
+#endif
 			
 			return true;
 		}

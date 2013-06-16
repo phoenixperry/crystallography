@@ -12,6 +12,7 @@ namespace Crystallography.UI
     public partial class MenuScene : Sce.PlayStation.HighLevel.UI.Scene
     {
 //		private bool _acceptTouch;
+		private float _holdtimer;
 		
         public MenuScene()
         {
@@ -24,25 +25,33 @@ namespace Crystallography.UI
 			OptionsButton.TextFont = FontManager.Instance.Get("Bariol", 25);
 			CreditsButton.TextFont = FontManager.Instance.Get("Bariol", 25);
 			
-			NewGameButton.TouchEventReceived += HandleNewGameButtonTouchEventReceived;
-			InfiniteModeButton.TouchEventReceived += HandleInfiniteModeButtonTouchEventReceived;
-			TimedModeButton.TouchEventReceived += HandleTimedModeButtonTouchEventReceived;
+			NewGameButton.ButtonAction += HandleNewGameButtonTouchEventReceived;
+			InfiniteModeButton.ButtonAction += HandleInfiniteModeButtonTouchEventReceived;
+			TimedModeButton.ButtonAction += HandleTimedModeButtonTouchEventReceived;
+			PrintAnalyticsButton.ButtonAction += (sender, e) => {
+				DataStorage.PrintMetrics();
+			};
+			ClearAnalyticsButton.ButtonAction += (sender, e) => {
+				DataStorage.ClearMetrics();
+			};
 			
-			LevelSelectButton.TouchEventReceived += (sender, e) => { 
+			LevelSelectButton.ButtonAction += (sender, e) => { 
 				this.RootWidget.Dispose();
 				UISystem.SetScene( new LevelSelectScene() ); 
 			};
-			OptionsButton.TouchEventReceived += (sender, e) => {
+			OptionsButton.ButtonAction += (sender, e) => {
 				this.RootWidget.Dispose();
 				UISystem.SetScene( new InstructionsScene() ); 
 			};
-			CreditsButton.TouchEventReceived += (sender, e) => { 
+			CreditsButton.ButtonAction += (sender, e) => { 
 				this.RootWidget.Dispose();
 				UISystem.SetScene( new CreditsScene() ); 
 			};
 			
 			InfiniteModeButton.Visible = false;
 			TimedModeButton.Visible = false;
+			PrintAnalyticsButton.Visible = false;
+			ClearAnalyticsButton.Visible = false;
         }
 
         void HandleTimedModeButtonTouchEventReceived (object sender, TouchEventArgs e)
@@ -63,10 +72,23 @@ namespace Crystallography.UI
 			UISystem.SetScene( new LoadingScene(0, false ));
         }
 		
-//		protected override void OnUpdate (float elapsedTime)
-//		{
-//			base.OnUpdate (elapsedTime);
-//		}
+#if METRICS
+		protected override void OnUpdate (float elapsedTime)
+		{
+			if ( ( ( GamePad.GetData(0).Buttons & GamePadButtons.L) != 0 ) && 
+			     ( ( GamePad.GetData(0).Buttons & GamePadButtons.R ) != 0 ) ) {
+				_holdtimer += elapsedTime;
+				if (_holdtimer > 2000.0f) {
+					_holdtimer = 0.0f;
+					PrintAnalyticsButton.Visible = !PrintAnalyticsButton.Visible;
+					ClearAnalyticsButton.Visible = !ClearAnalyticsButton.Visible;
+				}
+			} else {
+				_holdtimer = 0.0f;
+			}
+			base.OnUpdate (elapsedTime);
+		}
+#endif
 		
 		// DESTRUCTOR -------------------------------------------------------------------------
 #if DEBUG

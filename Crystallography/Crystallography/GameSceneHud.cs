@@ -35,19 +35,27 @@ namespace Crystallography
 		
 		private const float SCORE_UPDATE_DELAY = 0.100f;
 		private const float INITIAL_SCORE_UPDATE_DELAY = 0.400f;
-		private int _score;
-		private int _goal;
+		
+//		private int Goal;
 		private int _displayScore;
 		private float _updateTimer;
 		private bool _metGoal;
-		
-		private float _displayTimer;
 		
 		protected GameScene _scene;
 		protected bool _initialized = false;
 		protected bool _buttonSlideIn;
 		protected bool _pauseTimer;
-//		protected float _elapsedTime;
+		
+		// GET & SET ---------------------------------------------------------------------------------------------
+		
+		public LevelExitCode ExitCode {get; private set;}
+		public int BreaksDetected {get; private set;}
+		public int HitMesDetected {get; private set;}
+		public float DisplayTimer {get; private set;}
+		public float MetGoalTime {get; private set;}
+		public float NoMatchesPossibleTime {get; private set;}
+		public int Goal {get; private set;}
+		public int Score {get; private set;}
 		
 		// CONSTRUCTOR -------------------------------------------------------------------------------------------
 		
@@ -67,13 +75,19 @@ namespace Crystallography
 		// EVENT HANDLERS -----------------------------------------------------------------------------------------
 		
 		/// <summary>
+		/// On Group broken
+		/// </summary>
+		void HandleGroupCrystallonEntityBreakDetected (object sender, EventArgs e)
+		{
+			BreaksDetected++;
+		}
+		
+		/// <summary>
 		/// Handles the card manager instance no matches possible detected.
 		/// </summary>
 		void HandleCardManagerInstanceNoMatchesPossibleDetected (object sender, EventArgs e) {
-//			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
-//			NextLevelButton.setPosition(845.0f, 587.0f); //Director.Instance.GL.Context.Screen.Height + NextLevelButton.Height);
-//			NextLevelButton.Visible = true;
-			if (_goal <= _score) {
+			NoMatchesPossibleTime = DisplayTimer;
+			if (Goal <= Score) {
 				RestartButton.on = false;
 			}
 //			_buttonSlideIn = true;
@@ -105,6 +119,7 @@ namespace Crystallography
 		/// On Hit Me Button Up
 		/// </summary>
 		void HandleHitMeButtonButtonUpAction (object sender, EventArgs e) {
+			HitMesDetected++;
 			CardManager.Instance.Populate( true );
 		}
 		
@@ -112,9 +127,13 @@ namespace Crystallography
 		/// On Next Level Button Up
 		/// </summary>
 		void HandleNextLevelButtonButtonUpAction (object sender, EventArgs e) {
+			ExitCode = LevelExitCode.NEXT_LEVEL;
+#if METRICS
+			DataStorage.CollectMetrics();
+#endif
 			NextLevelButton.Visible = false;
 			if( GameScene.currentLevel != 999 ) {
-				DataStorage.SavePuzzleScore( GameScene.currentLevel, _score );
+				DataStorage.SavePuzzleScore( GameScene.currentLevel, Score );
 			}
 			CardManager.Instance.Reset( Director.Instance.CurrentScene );
 			GroupManager.Instance.Reset( Director.Instance.CurrentScene );
@@ -152,7 +171,22 @@ namespace Crystallography
 		/// </summary>
 		void HandleRestartButtonButtonUpAction (object sender, EventArgs e)
 		{
+			ExitCode = LevelExitCode.RESET;
+#if METRICS
+			DataStorage.CollectMetrics();
+#endif
 			_scene.resetToLevel();
+		}
+		
+		/// <summary>
+		/// On Quit From Pause Menu
+		/// </summary>
+		void HandlePausePanelQuitButtonPressDetected (object sender, EventArgs e)
+		{
+			ExitCode = LevelExitCode.QUIT_MENU;
+#if METRICS
+			DataStorage.CollectMetrics();
+#endif
 		}
 		
 		// OVERRIDES -----------------------------------------------------------------------------------------------
@@ -163,17 +197,15 @@ namespace Crystallography
 			}
 			
 			base.Update (dt);
-//			_elapsedTime = dt;
+			if (GameScene.paused == false && _pauseTimer == false ) {
+				DisplayTimer += dt;
+			}
 			
-//			if (GameScene.paused == false && _pauseTimer == false ) {
-//				calculateTimer( dt );
-//			}
-			
-			if ( _score != _displayScore ) {
+			if ( Score != _displayScore ) {
 				_updateTimer += dt;
 				if ( _updateTimer > SCORE_UPDATE_DELAY ) {
 					int mod;
-					int difference = _score - _displayScore;
+					int difference = Score - _displayScore;
 					int sign = difference > 0 ? 1 : -1;
 					if ( System.Math.Abs(difference) > 9 ) {
 						mod = sign * 10;
@@ -181,7 +213,7 @@ namespace Crystallography
 						mod = sign;
 					}
 					_displayScore += mod;
-					if(_goal <= _displayScore && _metGoal == false) {
+					if(Goal <= _displayScore && _metGoal == false) {
 						MetGoal();
 					}
 					ScoreText.Text = _displayScore.ToString();
@@ -211,29 +243,56 @@ namespace Crystallography
 			QualityManager.FailedMatchDetected += HandleQualityManagerFailedMatchDetected;
 			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected;
 			GameScene.LevelChangeDetected += HandleGameSceneLevelChangeDetected;
+			GroupCrystallonEntity.BreakDetected += HandleGroupCrystallonEntityBreakDetected;
+			PausePanel.QuitButtonPressDetected += HandlePausePanelQuitButtonPressDetected;
 			if(GameScene.currentLevel == 999) {
 				this.Schedule(calculateTimer,1);
 			}
+#if METRICS
+			DataStorage.AddMetric( "Goal", () => Goal, MetricSort.LAST );
+			DataStorage.AddMetric( "Score", () => Score, MetricSort.LAST );
+			DataStorage.AddMetric( "Time", () => DisplayTimer, MetricSort.LAST );
+			DataStorage.AddMetric( "No-Match Time", () => NoMatchesPossibleTime, MetricSort.LAST );
+			DataStorage.AddMetric( "Met-Goal Time", () => MetGoalTime, MetricSort.LAST);
+			DataStorage.AddMetric( "Breaks", () => BreaksDetected, MetricSort.LAST );
+			DataStorage.AddMetric( "Hit Me", () => HitMesDetected, MetricSort.LAST );
+			DataStorage.AddMetric( "Exit Code", () => ExitCode, MetricSort.LAST );
+#endif
 		}
 		
 		public override void OnExit () {
 			base.OnExit();
 			QualityManager.MatchScoreDetected -= HandleQualityManagerMatchScoreDetected;
+			QualityManager.FailedMatchDetected -= HandleQualityManagerFailedMatchDetected;
 			CardManager.Instance.NoMatchesPossibleDetected -= HandleCardManagerInstanceNoMatchesPossibleDetected;
 			GameScene.LevelChangeDetected -= HandleGameSceneLevelChangeDetected;
+			GroupCrystallonEntity.BreakDetected -= HandleGroupCrystallonEntityBreakDetected;
+			PausePanel.QuitButtonPressDetected -= HandlePausePanelQuitButtonPressDetected;
 			if(GameScene.currentLevel == 999) {
 				this.Unschedule(calculateTimer);
 			}
+#if METRICS
+			if(ExitCode == LevelExitCode.NULL){
+				DataStorage.CollectMetrics();
+			}
+			DataStorage.RemoveMetric("Goal");
+			DataStorage.RemoveMetric("Score");
+			DataStorage.RemoveMetric("Time");
+			DataStorage.RemoveMetric("No-Match Time");
+			DataStorage.RemoveMetric("Met-Goal Time");
+			DataStorage.RemoveMetric("Breaks");
+			DataStorage.RemoveMetric("Hit Me");
+			DataStorage.RemoveMetric("Exit Code");
+#endif
 		}
 		
 		
 		// METHODS ------------------------------------------------------------------------------------------------
 		
 		private void calculateTimer(float dt) {
-			_displayTimer += dt; //_elapsedTime;
 			var oldMinutes = TimerMinutesText.Text;
-			var minutes = System.Math.Floor(_displayTimer/60.0f);
-			var seconds = _displayTimer - (60.0f * minutes);
+			var minutes = System.Math.Floor(DisplayTimer/60.0f);
+			var seconds = DisplayTimer - (60.0f * minutes);
 			TimerMinutesText.Text = minutes.ToString("00");
 			if (TimerMinutesText.Text != oldMinutes) {
 				var minutesOffset = 97.0f - 3.0f - Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(TimerMinutesText.Text);
@@ -341,10 +400,16 @@ namespace Crystallography
 		}
 		
 		public void Reset () {
-			_score = 0;
+			Score = 0;
 			_displayScore = 0;
-			_displayTimer = 0.0f;
+			DisplayTimer = 0.0f;
+			MetGoalTime = 0.0f;
+			NoMatchesPossibleTime = 0.0f;
 			_updateTimer = 0.0f;
+			BreaksDetected = 0;
+			HitMesDetected = 0;
+			
+			ExitCode = LevelExitCode.NULL;
 			
 			_buttonSlideIn = false;
 			_pauseTimer = false;
@@ -354,21 +419,22 @@ namespace Crystallography
 			ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
 			
 			if(GameScene.currentLevel != 999) {
-				_goal = LevelManager.Instance.Goal;
-				GoalText.Text = _goal.ToString();
+				Goal = LevelManager.Instance.Goal;
+				GoalText.Text = Goal.ToString();
 				x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(GoalText.Text);
 				GoalText.Position = new Vector2(x, GoalText.Position.Y);
 			}
 		}
 		
 		public void ScheduleScoreModifier( int pHowMuch ) {
-			if (_score == _displayScore) { // -------------- Throw a little delay on score display update if not currently updating.
+			if (Score == _displayScore) { // -------------- Throw a little delay on score display update if not currently updating.
 				_updateTimer = -INITIAL_SCORE_UPDATE_DELAY;
 			}
-			_score += pHowMuch;
+			Score += pHowMuch;
 		}
 		
 		public void MetGoal() {
+			MetGoalTime = DisplayTimer;
 			_metGoal = true;
 			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
 			NextLevelButton.setPosition(845.0f, 587.0f); //Director.Instance.GL.Context.Screen.Height + NextLevelButton.Height);
@@ -384,6 +450,10 @@ namespace Crystallography
 			Console.WriteLine("GameSceneHud deleted.");
         }
 #endif
+	}
+	
+	public enum LevelExitCode {
+		NULL, NEXT_LEVEL, RESET, QUIT_MENU, QUIT_LEVEL_SELECT
 	}
 }
 

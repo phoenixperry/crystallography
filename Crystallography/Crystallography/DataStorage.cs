@@ -1,12 +1,14 @@
 using System;
 using System.IO;
+using System.Linq.Expressions;
+using System.Collections.Generic;
 
 namespace Crystallography
 {
 	public static class DataStorage
 	{
 		static readonly string SAVE_FILE = "/Documents/crystallon.dat";
-		static readonly string TEMP_FILE = "/Documents/crystallon.tmp";
+		static readonly string SAVE_TEMP = "/Documents/crystallon.tmp";
 		
 		static readonly int numPuzzles = 41;
 		static readonly int numTimedHighScores = 3;
@@ -15,6 +17,13 @@ namespace Crystallography
 		static public Int32[] puzzleScores = new Int32[numPuzzles];
 		static public Int32[] timedScores = new Int32[numTimedHighScores];
 		static public Int32[] infiniteScores = new Int32[numInfiniteHighScores];
+		
+#if METRICS
+		static readonly string METRICS_FILE = "/Documents/metrics.dat";
+		static readonly string METRICS_TEMP = "/Documents/metrics.tmp";
+		static private List<string> metrics = new List<string>();
+		static private LinkedList<Metric> m = new LinkedList<Metric>();
+#endif
 		
 		public static void SavePuzzleScore(int pLevel, int pScore) {
 			puzzleScores[pLevel] = pScore;
@@ -46,6 +55,7 @@ namespace Crystallography
 			}
 			SaveData();
 		}
+		
 		
 		public static void SaveData() {
 #if DEBUG
@@ -88,7 +98,7 @@ namespace Crystallography
 			
 			Buffer.BlockCopy(BitConverter.GetBytes(hash), 0, buffer, count * sizeof(Int32), sizeof(Int32));
 			
-			using ( FileStream hStream = File.Open(@TEMP_FILE, FileMode.Create) ) {
+			using ( FileStream hStream = File.Open(@SAVE_TEMP, FileMode.Create) ) {
 				hStream.SetLength((int)bufferSize);
 				hStream.Write(buffer, 0, (int)bufferSize );
 				hStream.Close();
@@ -98,7 +108,7 @@ namespace Crystallography
 				File.Delete(@SAVE_FILE);
 			}
 			
-			File.Move(@TEMP_FILE, @SAVE_FILE);
+			File.Move(@SAVE_TEMP, @SAVE_FILE);
 #if DEBUG
 			Console.WriteLine("==Save Data Complete==");
 #endif
@@ -109,8 +119,8 @@ namespace Crystallography
 #if DEBUG
 			Console.WriteLine("==Load Data==");
 #endif
-			if ( false == File.Exists(@SAVE_FILE) && true == File.Exists(@TEMP_FILE) ) {
-				File.Move(@TEMP_FILE, @SAVE_FILE);
+			if ( false == File.Exists(@SAVE_FILE) && true == File.Exists(@SAVE_TEMP) ) {
+				File.Move(@SAVE_TEMP, @SAVE_FILE);
 			}
 			
 			if ( true == File.Exists(@SAVE_FILE) ) {
@@ -148,7 +158,7 @@ namespace Crystallography
 						
 						if(sum.GetHashCode() == hash) {
 #if DEBUG
-							Console.WriteLine("==Load Data OKAY==");
+							Console.WriteLine("==Load Data OK==");
 #endif
 							return true;
 						} else {
@@ -161,7 +171,7 @@ namespace Crystallography
 				}
 			}
 #if DEBUG
-			Console.WriteLine("==Load Data DATA DOES NOT EXIST==");
+			Console.WriteLine("==Load Data FILE DOES NOT EXIST==");
 #endif
 			return false;
 		}
@@ -183,7 +193,6 @@ namespace Crystallography
 			for( int i=0; i < numInfiniteHighScores; ++i ) {
 				infiniteScores[i] = 0;
 			}
-			
 			SaveData();
 		}
 		
@@ -191,6 +200,272 @@ namespace Crystallography
 		public static void Init() {
 			ClearData();
 		}
+		
+		
+#if METRICS
+		
+		/// <summary>
+		/// Identifies a field or property for Snapshotting, with an explicit spread sheet position
+		/// </summary>
+		/// <param name='pName'>
+		/// A name used to label the spreadsheet column
+		/// </param>
+		/// <param name='expr'>
+		/// The variable. Use: () => [the variable]
+		/// </param>
+		/// <param name='pPosition'>
+		/// The column number. Duplicates will be added IN FRONT.
+		/// </param>
+		public static void AddMetric<T>( string pName, Expression<Func<T>> expr, int pPosition) {
+			AddMetric(pName, expr, MetricSort.POSITION, pPosition);
+		}
+		
+		/// <summary>
+		/// Identifies a field or property for Snapshotting
+		/// </summary>
+		/// <param name='pName'>
+		/// A name used to label the spreadsheet column
+		/// </param>
+		/// <param name='expr'>
+		/// The variable. Use: () => [the variable]
+		/// </param>
+		/// <param name='pSort'>
+		/// defaults to MetricSort.LAST
+		/// </param>
+		public static void AddMetric<T>( string pName, Expression<Func<T>> expr, MetricSort pSort = MetricSort.LAST) {
+			int position = ( pSort == MetricSort.FIRST ) ? -100 : 100;
+			AddMetric(pName, expr, pSort, position);
+		}
+		
+		/// <summary>
+		/// Identifies a field or property for Snapshotting
+		/// </summary>
+		/// <param name='pName'>
+		/// A name used to label the spreadsheet column
+		/// </param>
+		/// <param name='expr'>
+		/// The variable. Use: () => [the variable]
+		/// </param>
+		/// <param name='pSort'>
+		/// defaults to MetricSort.LAST
+		/// </param>
+		/// <param name='pPosition'>
+		/// The column number. Duplicates will be added IN FRONT.
+		/// </param>
+		private static void AddMetric<T>( string pName, Expression<Func<T>> expr, MetricSort pSort = MetricSort.LAST, int pPosition = -1) {
+			
+			var body = ((MemberExpression)expr.Body);
+			Metric entry = new Metric();
+			entry.Name = pName;
+			entry.Position = pPosition;
+			entry.Value = body;
+			if (m.Count == 0) {
+				m.AddLast(entry);
+				return;
+			}
+			
+//			if (m.Count < 0){
+//				m.AddLast(entry);
+//				return;
+//			}
+			if (pPosition < m.First.Value.Position) {
+				pSort = MetricSort.FIRST;
+			} else if (m.Last.Value.Position > pPosition) {
+				pSort = MetricSort.LAST;
+			}
+			
+			switch(pSort) {
+			case(MetricSort.FIRST):
+				m.AddFirst(entry);
+				break;
+			case(MetricSort.POSITION):
+				foreach( Metric metric in m ) {
+					if (metric.Position >= pPosition) {
+						m.AddBefore(m.Find(metric), entry);
+						break;
+					} else if (metric == m.Last.Value) {
+						m.AddAfter(m.Find(metric), entry);
+						break;
+					}
+				}
+				break;
+			case(MetricSort.LAST):
+			default:
+				m.AddLast(entry);
+				break;
+			}
+			return;
+		}
+		
+		/// <summary>
+		/// Removes a variable from the list we want to Snapshot.
+		/// </summary>
+		/// <param name='pName'>
+		/// Spread sheet column name.
+		/// </param>
+		public static void RemoveMetric( string pName ) {
+			foreach( Metric metric in m ) {
+				if (metric.Name == pName) {
+					m.Remove(metric);
+					return;
+				}
+			}
+			Console.WriteLine("===METRICS: {0} was not a registered metric.===", pName);
+		}
+		
+		
+		public static void CollectMetrics() {
+			string s = "";
+			
+			foreach(Metric entry in m) {
+				// HANDLE FIELDS (MUST BE public)
+				if (System.Reflection.MemberTypes.Field == entry.Value.Member.MemberType) {
+					s += "" + ((System.Reflection.FieldInfo)entry.Value.Member).GetValue(((ConstantExpression)entry.Value.Expression).Value) + ',';
+				}
+				// HANDLE PROPERTIES (GET & SETS, AND STATICS -- GET MUST BE public)
+				else if (System.Reflection.MemberTypes.Property == entry.Value.Member.MemberType) {
+					// STATICS
+					if ( true == ((System.Reflection.PropertyInfo)entry.Value.Member).GetGetMethod().IsStatic ) {
+						s += "" + ((System.Reflection.PropertyInfo)entry.Value.Member).GetGetMethod().Invoke(null,null) + ',';
+					} 
+					// GET & SETS
+					else {
+						s += "" + ((System.Reflection.PropertyInfo)entry.Value.Member).GetValue(((ConstantExpression)entry.Value.Expression).Value,null) + ',';
+					}
+				}
+			}
+			s = s.Substring(0,s.Length-1);
+			s += '\n';
+			
+			if (metrics.Count == 0) {
+				SaveMetricNames();
+			}
+			
+			metrics.Add(s);
+			SaveMetrics();
+		}
+		
+		
+		private static void SaveMetricNames() {
+			string s = "";
+			foreach( Metric entry in m) {
+				s+= entry.Name + ',';
+			}
+			if(s.Length > 0) {
+				s = s.Substring( 0,s.Length-1 );
+				s+='\n';
+			}
+			metrics.Add(s);
+		}
+		
+		public static void SaveMetrics() {
+			Console.WriteLine("===METRICS: save===");
+			string s = "";
+//			foreach( Metric entry in m) {
+//				s+= entry.Name + ',';
+//			}
+//			if(s.Length > 0) {
+//				s = s.Substring( 0,s.Length-1 );
+//				s+='\n';
+//			}
+			
+			foreach( string str in metrics ){
+				s += str;
+//				s += '\n';
+			}
+//			if (s.Length>0) {
+//				s = s.Substring( 0,s.Length-1 );
+//			}
+			
+			int bufferSize = sizeof(Char) * s.ToCharArray().Length;
+			if (bufferSize == 0){
+				return;
+			}
+			
+			byte[] buffer = new byte[bufferSize];
+			Buffer.BlockCopy(s.ToCharArray(), 0, buffer, 0, bufferSize);
+			
+			using ( FileStream hStream = File.Open(@METRICS_TEMP, FileMode.Create) ) {
+				hStream.SetLength((int)bufferSize);
+				hStream.Write(buffer, 0, (int)bufferSize );
+				hStream.Close();
+			}
+			
+			if (File.Exists(@METRICS_FILE)) {
+				File.Delete(@METRICS_FILE);
+			}
+			
+			File.Move(@METRICS_TEMP, @METRICS_FILE);
+			Console.WriteLine("===METRICS: save complete===");
+			LoadMetrics();
+		}
+		
+		
+		public static bool LoadMetrics() {
+			Console.WriteLine("===METRICS: load===");
+			if ( false == File.Exists(@METRICS_FILE) && true == File.Exists(@METRICS_TEMP) ) {
+				File.Move(@METRICS_TEMP, @METRICS_FILE);
+			}
+			if ( true == File.Exists(@METRICS_FILE) ) {
+				metrics.Clear();
+				using ( FileStream hStream = File.Open (@METRICS_FILE, FileMode.Open) ) {
+					if (hStream != null) {
+						long size = hStream.Length;
+						byte[] buffer = new byte[size];
+						hStream.Read(buffer,0, (int)size);
+						var numChars = size / sizeof(Char);
+						Char[] data = new Char[numChars];
+						Buffer.BlockCopy(buffer, 0, data, 0, (int)size);
+						metrics.Add(new String(data));
+						hStream.Close();
+					}
+//					metrics[0] = metrics[0].Substring(metrics[0].IndexOf('\n')+1);
+				}
+				Console.WriteLine("===METRICS: load OK===");
+				return true;
+			}
+			Console.WriteLine("===METRICS: load FILE DOES NOT EXIST===");
+			return false;
+		}
+		
+		
+		public static void ClearMetrics() {
+			Console.WriteLine("===METRICS: clear===");
+			metrics.Clear();
+			SaveMetrics();
+		}
+		
+		
+		public static void PrintMetrics() {
+//			LoadMetrics();
+			Console.WriteLine("==== BEGIN METRICS DUMP ====");
+//			string str = "";
+//			foreach( Metric entry in m) {
+//				str+= entry.Name + ',';
+//			}
+//			if(str.Length > 0) {
+//				str = str.Substring( 0,str.Length-1 );
+//			}
+//			Console.WriteLine(str);
+			foreach (string s in metrics) {
+				Console.WriteLine(s);
+			}
+			Console.WriteLine("==== END METRICS DUMP ====");
+		}
+#endif
+		
 	}
+	
+	public class Metric {
+		public string Name;
+		public MemberExpression Value;
+		public Type Type;
+		public int Position;
+	}
+	
+	public enum MetricSort {
+		FIRST, LAST, POSITION
+	}
+	
 }
 

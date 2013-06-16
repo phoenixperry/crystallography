@@ -19,6 +19,8 @@ namespace Crystallography.UI
         Button OptionsButton;
         Button InfiniteModeButton;
         Button TimedModeButton;
+        Button PrintAnalyticsButton;
+        Button ClearAnalyticsButton;
 
         private void InitializeWidget()
         {
@@ -43,6 +45,10 @@ namespace Crystallography.UI
             InfiniteModeButton.Name = "InfiniteModeButton";
             TimedModeButton = new Button();
             TimedModeButton.Name = "TimedModeButton";
+            PrintAnalyticsButton = new Button();
+            PrintAnalyticsButton.Name = "PrintAnalyticsButton";
+            ClearAnalyticsButton = new Button();
+            ClearAnalyticsButton.Name = "ClearAnalyticsButton";
 
             // sceneBackgroundPanel
             sceneBackgroundPanel.BackgroundColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
@@ -103,6 +109,14 @@ namespace Crystallography.UI
             TimedModeButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
             TimedModeButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
 
+            // PrintAnalyticsButton
+            PrintAnalyticsButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            PrintAnalyticsButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+
+            // ClearAnalyticsButton
+            ClearAnalyticsButton.TextColor = new UIColor(0f / 255f, 0f / 255f, 0f / 255f, 255f / 255f);
+            ClearAnalyticsButton.TextFont = new UIFont(FontAlias.System, 25, FontStyle.Regular);
+
             // MenuScene
             this.RootWidget.AddChildLast(sceneBackgroundPanel);
             this.RootWidget.AddChildLast(ImageBox_1);
@@ -112,6 +126,8 @@ namespace Crystallography.UI
             this.RootWidget.AddChildLast(OptionsButton);
             this.RootWidget.AddChildLast(InfiniteModeButton);
             this.RootWidget.AddChildLast(TimedModeButton);
+            this.RootWidget.AddChildLast(PrintAnalyticsButton);
+            this.RootWidget.AddChildLast(ClearAnalyticsButton);
 
             SetWidgetLayout(orientation);
 
@@ -167,6 +183,16 @@ namespace Crystallography.UI
                     TimedModeButton.Anchors = Anchors.None;
                     TimedModeButton.Visible = true;
 
+                    PrintAnalyticsButton.SetPosition(674, 369);
+                    PrintAnalyticsButton.SetSize(214, 56);
+                    PrintAnalyticsButton.Anchors = Anchors.None;
+                    PrintAnalyticsButton.Visible = true;
+
+                    ClearAnalyticsButton.SetPosition(674, 456);
+                    ClearAnalyticsButton.SetSize(214, 56);
+                    ClearAnalyticsButton.Anchors = Anchors.None;
+                    ClearAnalyticsButton.Visible = true;
+
                     break;
 
                 default:
@@ -213,6 +239,16 @@ namespace Crystallography.UI
                     TimedModeButton.Anchors = Anchors.None;
                     TimedModeButton.Visible = true;
 
+                    PrintAnalyticsButton.SetPosition(674, 369);
+                    PrintAnalyticsButton.SetSize(214, 56);
+                    PrintAnalyticsButton.Anchors = Anchors.None;
+                    PrintAnalyticsButton.Visible = true;
+
+                    ClearAnalyticsButton.SetPosition(63, 369);
+                    ClearAnalyticsButton.SetSize(214, 56);
+                    ClearAnalyticsButton.Anchors = Anchors.None;
+                    ClearAnalyticsButton.Visible = true;
+
                     break;
             }
             _currentLayoutOrientation = orientation;
@@ -223,6 +259,10 @@ namespace Crystallography.UI
             InfiniteModeButton.Text = "Infinite Mode";
 
             TimedModeButton.Text = "Timed Mode";
+
+            PrintAnalyticsButton.Text = "Print Analytics";
+
+            ClearAnalyticsButton.Text = "Clear Analytics";
 
             this.Title = "MenuScene";
         }
