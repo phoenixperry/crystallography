@@ -171,8 +171,8 @@ namespace Crystallography
 			}
 			Layers = null;
 			Hud = null;
+//			SelectionGroup.Instance.Parent.RemoveChild(SelectionGroup.Instance.getNode(), false);
 			Support.ParticleEffectsManager.Instance.Destroy();
-			SelectionGroup.Instance.Parent.RemoveChild(SelectionGroup.Instance.getNode(), false);
 			base.OnExit();
 			Support.MusicSystem.Instance.StopAll();
 			PausePanel.QuitButtonPressDetected -= (sender, e) => { QuitToTitle(); };
