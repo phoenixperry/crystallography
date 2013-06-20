@@ -19,9 +19,9 @@ namespace Crystallography
 		private AbstractCrystallonEntity lastEntityReleased;
 		private Vector2 lastPosition;
 		
-		public event EventHandler<CubeCompleteEventArgs> CubeCompleteDetected;
-		public event EventHandler<CubeGroupCompleteEventArgs> CubeGroupCompleteDetected;
-		public event EventHandler CubeFailedDetected;
+		public event EventHandler<CubeCompleteEventArgs>       CubeCompleteDetected;
+		public event EventHandler<CubeGroupCompleteEventArgs>  CubeGroupCompleteDetected;
+		public event EventHandler                              CubeFailedDetected;
 		
 		// GET & SET -------------------------------------------------------------
 		
@@ -478,22 +478,22 @@ namespace Crystallography
 					if (e == null) {
 						continue; // --------------------------------- e IS NOT A THING -- (IF THIS HAPPENS, IT'S PROBS A BUG)
 					}
-					if (Array.IndexOf(members, e) != -1) {
-						continue; // --------------------------------- e IS ALREADY PART OF THE GROUP -- IGNORE IT
-					}
+//					if (Array.IndexOf(members, e) != -1) {
+//						continue; // --------------------------------- e IS ALREADY PART OF THE GROUP -- IGNORE IT
+//					}
 					if (e == this) {
 						continue; // --------------------------------- e IS THE SELECTION GROUP ITSELF -- FIND A WAY TO FILTER THIS OUT, LATER...
 					}
-					if ( this.MemberType != e.GetType () ) {
-						if (e.GetType().ToString() != "Crystallography.GroupCrystallonEntity") {	// types don't match & not a group
-							continue;
-						} else {
-							var g = e as GroupCrystallonEntity;
-							if ( g.MemberType != this.MemberType ) { // ----------------- type doesn't match group members' type
-								continue;
-							}
-						}
-					}
+//					if ( this.MemberType != e.GetType () ) {
+//						if (e.GetType().ToString() != "Crystallography.GroupCrystallonEntity") {	// types don't match & not a group
+//							continue;
+//						} else {
+//							var g = e as GroupCrystallonEntity;
+//							if ( g.MemberType != this.MemberType ) { // ----------------- type doesn't match group members' type
+//								continue;
+//							}
+//						}
+//					}
 //					if ( e is GroupCrystallonEntity && !(e is CubeCrystallonEntity) ) {
 //						var g = e as GroupCrystallonEntity;
 //						if ( g.MemberType != this.MemberType ) {
@@ -504,26 +504,30 @@ namespace Crystallography
 //						continue;
 //					}
 					if ( AppMain.ORIENTATION_MATTERS ) {
-						if ( e is GroupCrystallonEntity ) {
-							if ( !(e is CubeCrystallonEntity) ) {
-								bool collision = false;
-								var g = e as GroupCrystallonEntity;
-								for (int i=0; i<g.pucks.Length; i++) {
-									if( g.pucks[i].Children.Count > 0 && this.pucks[i].Children.Count > 0) {
-										collision = true;
-										break;	// ----------------- found an overlapping group member...
-									}
-								}
-								if (collision) {
-									continue;	// ----------------- e IS A GROUP WITH MEMBERS THAT OVERLAP WITH SELECTION GROUP -- IGNORE
-								}
-							}
-						} else {
-							int orientation = (e as SpriteTileCrystallonEntity).getOrientation(); //e.getQualityVariant( "QOrientation" );
-							if ( _pucks[orientation].Children.Count != 0 ) {
-								continue;	// --------------------------- e IS OF AN ORIENTATION THAT IS ALREADY IN THE GROUP
-							}
+						bool c = e.CanBeAddedTo(this);
+						if(false == c) {
+							continue;
 						}
+//						if ( e is GroupCrystallonEntity ) {
+//							if ( !(e is CubeCrystallonEntity) ) {
+//								bool collision = false;
+//								var g = e as GroupCrystallonEntity;
+//								for (int i=0; i<g.pucks.Length; i++) {
+//									if( g.pucks[i].Children.Count > 0 && this.pucks[i].Children.Count > 0) {
+//										collision = true;
+//										break;	// ----------------- found an overlapping group member...
+//									}
+//								}
+//								if (collision) {
+//									continue;	// ----------------- e IS A GROUP WITH MEMBERS THAT OVERLAP WITH SELECTION GROUP -- IGNORE
+//								}
+//							}
+//						} else {
+//							int orientation = (e as SpriteTileCrystallonEntity).getOrientation();
+//							if ( _pucks[orientation].Children.Count != 0 ) {
+//								continue;	// --------------------------- e IS OF AN ORIENTATION THAT IS ALREADY IN THE GROUP
+//							}
+//						}
 					}
 					distance = Vector2.Distance( getPosition(), e.getPosition() );
 					if (closestDistance > distance) {

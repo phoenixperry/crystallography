@@ -73,6 +73,40 @@ namespace Crystallography
 		// OVERRIDES -------------------------------------------------------------
 		
 		/// <summary>
+		/// Reattaches this group to the scene.
+		/// </summary>
+		/// <returns>
+		/// This group.
+		/// </returns>
+		/// <param name='position'>
+		/// Position.
+		/// </param>
+		public override AbstractCrystallonEntity BeReleased( Vector2 pPosition ) {
+			GroupManager.Instance.Add( this );
+			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Cube], 0.1f, 0.01f, pPosition));
+			setVelocity(1.0f, GameScene.Random.NextAngle());
+
+			addToScene();
+			return this;
+		}
+		
+		public override bool CanBeAddedTo ( GroupCrystallonEntity pGroup )
+		{
+//			base.BeSnappedTo ( pGroup );
+			if (pGroup.MemberType != this.MemberType) {
+				return false;
+			}
+			bool okToSnap = true;
+			for ( int i=0; i < 3; i++ ) {
+				if (_pucks[i].Children.Count > 0 && pGroup._pucks[i].Children.Count > 0) {
+					okToSnap = false;
+					break;
+				}
+			}
+			return okToSnap;
+		}
+		
+		/// <summary>
 		/// Play the sounds of all group members in sequence: top, left, right.
 		/// </summary>
 		public override void playSound ()
@@ -260,24 +294,6 @@ namespace Crystallography
 					puck.Position *= 0;
 				}
 			}
-		}
-		
-		/// <summary>
-		/// Reattaches this group to the scene.
-		/// </summary>
-		/// <returns>
-		/// This group.
-		/// </returns>
-		/// <param name='position'>
-		/// Position.
-		/// </param>
-		public override AbstractCrystallonEntity BeReleased( Vector2 pPosition ) {
-			GroupManager.Instance.Add( this );
-			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Cube], 0.1f, 0.01f, pPosition));
-			setVelocity(1.0f, GameScene.Random.NextAngle());
-
-			addToScene();
-			return this;
 		}
 		
 		/// <summary>

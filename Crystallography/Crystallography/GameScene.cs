@@ -186,8 +186,8 @@ namespace Crystallography
             base.Update (dt);			
 			
             //We don't need these, but sadly, the Simulate call does.
-            Vector2 dummy1 = Vector2.Zero;
-            Vector2 dummy2 = Vector2.Zero;
+//            Vector2 dummy1 = Vector2.Zero;
+//            Vector2 dummy2 = Vector2.Zero;
 			
 			if( paused == false ) {
 				//PHYSICS UPDATE CALL

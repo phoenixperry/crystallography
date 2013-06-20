@@ -182,6 +182,10 @@ namespace Crystallography
 			pNewParent.AddChild(node);
 		}
 		
+		public virtual bool CanBeAddedTo( GroupCrystallonEntity pGroup ) {
+			return false;
+		}
+		
 		/// <summary>
 		/// Removes this entity from the GameScene & the GamePhysics.
 		/// </summary>

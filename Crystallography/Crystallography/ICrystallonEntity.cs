@@ -29,5 +29,7 @@ namespace Crystallography
 		void attachTo( Node pNewParent );
 		
 		void removeFromScene( bool doCleanup );
+		
+		bool CanBeAddedTo( GroupCrystallonEntity pGroup );
 	}
 }

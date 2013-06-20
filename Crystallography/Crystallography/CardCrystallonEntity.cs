@@ -132,6 +132,18 @@ namespace Crystallography
 		
 		// OVERRIDES ----------------------------------------------------------------------------------------------------------------------------------------------------
 		
+		public override bool CanBeAddedTo (GroupCrystallonEntity pGroup)
+		{
+//			base.BeSnappedTo ();
+			if(pGroup.MemberType != this.GetType()) {
+				return false;
+			}
+			
+			bool okToSnap = ( pGroup.pucks[_orientationIndex].Children.Count == 0 );
+			okToSnap = okToSnap && (Array.IndexOf(pGroup.members, this) == -1);
+			return okToSnap;
+		}
+		
 		public override AbstractCrystallonEntity BeReleased(Vector2 pPosition) {
 			if (!AppMain.ORIENTATION_MATTERS) {
 				QOrientation.Instance.Apply(this,0);
