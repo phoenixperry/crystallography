@@ -138,7 +138,7 @@ namespace Crystallography
 		{
 			if ( GameScene.paused ) return;
 			
-			if ( population >0 ) {
+			if ( population > 0 ) {
 				EaseIn();
 			}
 			// HACK this is a little hacky, because CardCrystallonEntites do this in their BeReleased() method
