@@ -1,32 +1,52 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Sce.PlayStation.HighLevel.GameEngine2D;
 
 namespace Crystallography
 {
 	public class SplashScreen : Layer
 	{
+//		readonly TimeSpan minProcTime = new TimeSpan(0, 0, 0, 0, 30);
+		List<Action> loadProc;
+//		Stopwatch stopwatch;
+		int _loadIndex;
+		
 		SpriteTile SplashImage;
 		MenuSystemScene MenuSystem;
+		float _timer;
 		
 		public SplashScreen (MenuSystemScene pMenuSystem) {
+//			stopwatch = Stopwatch.StartNew();
+			_timer = 0.0f;
 			MenuSystem = pMenuSystem;
 			
-			SplashImage = Support.SpriteFromFile("/Application/assets/images/UI/eyes.png");
-			this.AddChild(SplashImage);
 			
-			Scheduler.Instance.Schedule( this, (dt) => { 
-				MenuSystem.SetScreen("Title"); 
-				this.UnscheduleAll(); 
-			}, 3.0f, false, 0);
+			
+			loadProc = new List<Action>{
+				() => {
+					;//dummy
+				},
+				() => {
+					SplashImage = Support.SpriteFromFile("/Application/assets/images/UI/eyes.png");
+					this.AddChild(SplashImage);
+					var temp = Support.SpriteFromFile("/Application/assets/images/UI/header.png");
+				},
+				() => {
+					Scheduler.Instance.Schedule( this, (dt) => { 
+					_timer += dt;
+						if (_timer > 3.0f) {
+							MenuSystem.SetScreen("Title"); 
+							this.UnscheduleAll(); 
+						}
+					}, 0.0f, false, 0);
+				}
+			};
+			
+			this.ScheduleUpdate(0);
 		}
 		
 		// OVERRIDES -------------------------------------------------------------------------------------------------
-		
-		public override void OnEnter ()
-		{
-			base.OnEnter ();
-			Support.SpriteUVFromFile("/Application/assets/images/UI/header.png");
-		}
 		
 		public override void OnExit ()
 		{
@@ -34,6 +54,15 @@ namespace Crystallography
 			MenuSystem = null;
 			this.RemoveAllChildren(true);
 			Support.RemoveTextureWithFileName("/Application/assets/images/UI/eyes.png");
+		}
+		
+		public override void Update (float dt)
+		{
+			base.Update (dt);
+			
+			if ( _loadIndex < loadProc.Count ) {
+				loadProc[_loadIndex++]();
+			}
 		}
 		
 		// DESTRUCTOR ------------------------------------------------------------------------------

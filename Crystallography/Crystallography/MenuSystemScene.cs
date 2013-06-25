@@ -67,6 +67,11 @@ namespace Crystallography
 			case ("LevelSelect"):
 //				UISystem.SetScene ( new Crystallography.UI.LevelSelectScene() );
 				break;
+			case ("Credits"):
+				Screen = new CreditsScreen(this);
+				break;
+			case ("Instructions"):
+				break;
 			default:
 //				UISystem.SetScene ( new Crystallography.UI.SplashScene() );
 				break;

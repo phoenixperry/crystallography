@@ -27,28 +27,28 @@ namespace Crystallography
 			NewGameButton.setPosition(480.0f, 403.0f);
 //			NewGameButton.setPivot(0.0f, 0.0f);
 			NewGameButton.on = true;
-			NewGameButton.ButtonUpAction += HandleNewGameButtonButtonUpAction;
+//			NewGameButton.ButtonUpAction += HandleNewGameButtonButtonUpAction;
 			this.AddChild(NewGameButton.getNode());
 			
 			LevelSelectButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/LevelSelectButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			LevelSelectButton.setPosition (480.0f, 315.0f);
 //			LevelSelectButton.setPivot(0.0f, 0.0f);
 			LevelSelectButton.on = true;
-			LevelSelectButton.ButtonUpAction += HandleLevelSelectButtonButtonUpAction;
+//			LevelSelectButton.ButtonUpAction += HandleLevelSelectButtonButtonUpAction;
 			this.AddChild(LevelSelectButton.getNode());
 			
 			CreditsButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/CreditsButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			CreditsButton.setPosition(480.0f, 143.0f);
 //			CreditsButton.setPivot(0.0f, 0.0f);
 			CreditsButton.on = true;
-			CreditsButton.ButtonUpAction += HandleCreditsButtonButtonUpAction;
+//			CreditsButton.ButtonUpAction += HandleCreditsButtonButtonUpAction;
 			this.AddChild(CreditsButton.getNode());
 			
 			InstructionsButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/InstructionsButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			InstructionsButton.setPosition(480.0f, 229.0f);
 //			InstructionsButton.setPivot(0.0f, 0.0f);
 			InstructionsButton.on = true;
-			InstructionsButton.ButtonUpAction += HandleInstructionsButtonButtonUpAction;
+//			InstructionsButton.ButtonUpAction += HandleInstructionsButtonButtonUpAction;
 			this.AddChild(InstructionsButton.getNode());
 			
 //			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
@@ -64,14 +64,17 @@ namespace Crystallography
 		
 		void HandleLevelSelectButtonButtonUpAction (object sender, EventArgs e) {
 			Console.WriteLine("Level Select");
+			MenuSystem.SetScreen("Level Select");
 		}
 		
 		void HandleCreditsButtonButtonUpAction (object sender, EventArgs e) {
 			Console.WriteLine("Credits");
+			MenuSystem.SetScreen("Credits");
 		}
 		
 		void HandleInstructionsButtonButtonUpAction (object sender, EventArgs e) {
 			Console.WriteLine("Instructions");
+			MenuSystem.SetScreen("Instructions");
 		}
 		
 		// OVERRIDES --------------------------------------------------------------------------------------------
@@ -79,11 +82,19 @@ namespace Crystallography
 		public override void OnEnter ()
 		{
 			base.OnEnter ();
+			NewGameButton.ButtonUpAction += HandleNewGameButtonButtonUpAction;
+			LevelSelectButton.ButtonUpAction += HandleLevelSelectButtonButtonUpAction;
+			CreditsButton.ButtonUpAction += HandleCreditsButtonButtonUpAction;
+			InstructionsButton.ButtonUpAction += HandleInstructionsButtonButtonUpAction;
 		}
 		
 		public override void OnExit ()
 		{
 			base.OnExit ();
+			NewGameButton.ButtonUpAction -= HandleNewGameButtonButtonUpAction;
+			LevelSelectButton.ButtonUpAction -= HandleLevelSelectButtonButtonUpAction;
+			CreditsButton.ButtonUpAction -= HandleCreditsButtonButtonUpAction;
+			InstructionsButton.ButtonUpAction -= HandleInstructionsButtonButtonUpAction;
 			this.RemoveAllChildren(true);
 			MenuSystem = null;
 			MenuBackground = null;
@@ -92,6 +103,7 @@ namespace Crystallography
 			CreditsButton = null;
 			InstructionsButton = null;
 			RemoveAllAssets();
+			
 		}
 		
 		// METHODS ----------------------------------------------------------------------------------------------

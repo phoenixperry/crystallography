@@ -26,7 +26,7 @@ namespace Crystallography
 			TouchToStartText.Color.A = 0.0f;
 			
 			Scheduler.Instance.Schedule( TouchToStartText, (dt) => {
-				TouchToStartText.Color.A += 0.5f * dt;
+				TouchToStartText.Color.A += 0.25f * dt;
 				if (TouchToStartText.Color.A >= 1.0f) {
 					TouchToStartText.Color.A = 1.0f;
 					TouchToStartText.UnscheduleAll();

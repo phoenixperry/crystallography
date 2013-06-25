@@ -152,6 +152,8 @@
     <Compile Include="SplashScreen.cs" />
     <Compile Include="MainMenuScreen.cs" />
     <Compile Include="LoadingScene.cs" />
+    <Compile Include="CreditsScreen.cs" />
+    <Compile Include="SwipePanels.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
