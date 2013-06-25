@@ -64,11 +64,11 @@ namespace Crystallography
 			this.AddChild( DialogLayer = new Layer() );
 			Layers = new Layer[] {BackgroundLayer, GameplayLayer, ForegroundLayer, DialogLayer};
 						
-			LevelManager.Instance.LoadGameData();
+//			LevelManager.Instance.LoadGameData();
 			LevelManager.Instance.GetLevelSettings( pCurrentLevel );
 			
 			Touch.GetData(0).Clear();
-			UISystem.SetScene( new Crystallography.UI.ScoreScene() );
+//			UISystem.SetScene( new Crystallography.UI.ScoreScene() );
 			InputManager.Instance.Reset();
 						
 //			background = new Crystallography.BG.CrystallonBackground();

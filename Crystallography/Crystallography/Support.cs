@@ -38,6 +38,9 @@ namespace Crystallography
 			{
 				TextureCache[filename] = new Texture2D(filename, false);
 				TextureInfoCache[filename] = new TextureInfo(TextureCache[filename], new Vector2i(1, 1));
+#if DEBUG
+				System.Console.WriteLine("TEXTURE CACHE: {0} ADDED. {1} Texture(s) remain in Cache.", filename, TextureCache.Count);
+#endif
 			}
 			
 			var tex = TextureCache[filename];
@@ -62,6 +65,9 @@ namespace Crystallography
 			{
 				TextureCache[name] = GraphicsContextAlpha.CreateTextureUnicolor(color);
 				TextureInfoCache[name] = new TextureInfo(TextureCache[name], new Vector2i(1, 1));
+#if DEBUG
+				System.Console.WriteLine("TEXTURE CACHE: {0} ADDED. {1} Texture(s) remain in Cache.", name, TextureCache.Count);
+#endif
 			}
 
 			var tex = TextureCache[name];
@@ -81,6 +87,9 @@ namespace Crystallography
 			{
 				TextureCache[filename] = new Texture2D(filename, false);
 				TextureInfoCache[filename] = new TextureInfo(TextureCache[filename]);
+#if DEBUG
+				System.Console.WriteLine("TEXTURE CACHE: {0} ADDED. {1} Texture(s) remain in Cache.", filename, TextureCache.Count);
+#endif
 			}
 
 			var tex = TextureCache[filename];
@@ -93,6 +102,20 @@ namespace Crystallography
 
 			return result;
 		}
+		
+		public static void RemoveTextureWithFileName(string filename) {
+			if (true == TextureCache.ContainsKey(filename)) {
+				Texture2D t = TextureCache[filename];
+				TextureInfo ti = TextureInfoCache[filename];
+				TextureCache.Remove(filename);
+				TextureInfoCache.Remove(filename);
+				t.Dispose();
+				ti.Dispose();
+#if DEBUG
+				System.Console.WriteLine("TEXTURE CACHE: {0} REMOVED. {1} Texture(s) remain in Cache.", filename, TextureCache.Count);
+#endif
+			}
+		}
 
 		public static Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile TiledSpriteFromFile(string filename, int x, int y)
 		{
@@ -100,6 +123,9 @@ namespace Crystallography
 			{
 				TextureCache[filename] = new Texture2D(filename, false);
 				TextureInfoCache[filename] = new TextureInfo(TextureCache[filename], new Vector2i(x, y));
+#if DEBUG
+				System.Console.WriteLine("{0} ADDED. {1} Texture(s) remain in Cache.", filename, TextureCache.Count);
+#endif
 			}
 			
 			var tex = TextureCache[filename];

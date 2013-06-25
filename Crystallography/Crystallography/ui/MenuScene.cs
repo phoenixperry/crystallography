@@ -28,12 +28,14 @@ namespace Crystallography.UI
 			NewGameButton.ButtonAction += HandleNewGameButtonTouchEventReceived;
 			InfiniteModeButton.ButtonAction += HandleInfiniteModeButtonTouchEventReceived;
 			TimedModeButton.ButtonAction += HandleTimedModeButtonTouchEventReceived;
+#if METRICS
 			PrintAnalyticsButton.ButtonAction += (sender, e) => {
 				DataStorage.PrintMetrics();
 			};
 			ClearAnalyticsButton.ButtonAction += (sender, e) => {
 				DataStorage.ClearMetrics();
 			};
+#endif
 			
 			LevelSelectButton.ButtonAction += (sender, e) => { 
 				this.RootWidget.Dispose();

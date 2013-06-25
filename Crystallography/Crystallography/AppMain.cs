@@ -56,8 +56,8 @@ namespace Crystallography
 		
 		public static bool ORIENTATION_MATTERS { get { return _ORIENTATION_MATTERS && GameScene.currentLevel != 999; } }
 		
-		public static bool UI_INPUT_ENABLED = true;
-		public static bool GAMEPLAY_INPUT_ENABLED = false;
+		public static bool UI_INPUT_ENABLED = false;
+		public static bool GAMEPLAY_INPUT_ENABLED = true;
 		
 		public static void Main (string[] args)
 		{	
@@ -67,11 +67,11 @@ namespace Crystallography
 				SystemEvents.CheckEvents();
 				GamePhysics.Instance.Simulate();
 				if ( UI_INPUT_ENABLED ) {
-					UISystem.Update( Touch.GetData(0) );
+//					UISystem.Update( Touch.GetData(0) );
 					Director.Instance.Update();
 					Touch.GetData(0).Clear();
 					Director.Instance.Render();
-					UISystem.Render();
+//					UISystem.Render();
 				} else {
 					Director.Instance.Update();
 					Touch.GetData(0).Clear();
@@ -89,8 +89,9 @@ namespace Crystallography
 		
 		protected static bool Init() {
 			Director.Initialize();
-			UISystem.Initialize(Director.Instance.GL.Context);
+//			UISystem.Initialize(Director.Instance.GL.Context);
 			Director.Instance.RunWithScene( new MenuSystemScene("Splash"), true );
+//			Director.Instance.RunWithScene( new TitleScene(), true );
 			
 			if ( false == DataStorage.LoadData() ) {
 				DataStorage.Init();

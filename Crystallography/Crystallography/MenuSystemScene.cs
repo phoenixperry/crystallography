@@ -1,33 +1,25 @@
 using System;
 using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.HighLevel.GameEngine2D;
-using Sce.PlayStation.HighLevel.UI;
+//using Sce.PlayStation.HighLevel.UI;
 
 namespace Crystallography
 {
 	public class MenuSystemScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
 	{
-		public MenuSystemScene ( string pDestinationScene ) {
-			
-			switch (pDestinationScene) {
-			case ("Splash"):
-				UISystem.SetScene( new Crystallography.UI.SplashScene() );
-				break;
-			case ("Menu"):
-				UISystem.SetScene ( new Crystallography.UI.MenuScene() );
-				break;
-			case ("LevelSelect"):
-				UISystem.SetScene ( new Crystallography.UI.LevelSelectScene() );
-				break;
-			default:
-				UISystem.SetScene ( new Crystallography.UI.SplashScene() );
-				break;
-			}	
+		Layer Screen;
+		Layer OldScreen;
+		
+		public MenuSystemScene ( string pDestinationScreen ) {
+			SetScreen( pDestinationScreen );
+			this.Camera.SetViewFromViewport();
 			Scheduler.Instance.ScheduleUpdateForTarget(this, 0, false );
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
 #endif
 		}
+		
+		// OVERRIDES -----------------------------------------------------------------------------------
 		
 		public override void OnEnter ()
 		{
@@ -45,17 +37,46 @@ namespace Crystallography
 		
 		public override void Update (float dt)
 		{
-			UISystem.Update( Touch.GetData(0) );
+			InputManager.Instance.Update(dt);
+//			UISystem.Update( Touch.GetData(0) );
 			base.Update (dt);
 		}
 		
-		public override void Draw ()
-		{
-			base.Draw ();
-			UISystem.Render();
+//		public override void Draw ()
+//		{
+//			base.Draw ();
+//			UISystem.Render();
+//		}
+		
+		// METHODS ---------------------------------------------------------------------------------
+		
+		public void SetScreen( string pDestinationScreen) {
+			OldScreen = Screen;
+			switch (pDestinationScreen) {
+			case ("Splash"):
+				Screen = new SplashScreen(this);
+				break;
+			case ("Title"):
+				Screen = new TitleScreen(this);
+//				UISystem.SetScene( new Crystallography.UI.SplashScene() );
+				break;
+			case ("Menu"):
+				Screen = new MainMenuScreen(this);
+//				UISystem.SetScene ( new Crystallography.UI.MenuScene() );
+				break;
+			case ("LevelSelect"):
+//				UISystem.SetScene ( new Crystallography.UI.LevelSelectScene() );
+				break;
+			default:
+//				UISystem.SetScene ( new Crystallography.UI.SplashScene() );
+				break;
+			}
+			this.AddChild(Screen);
+			this.RemoveChild(OldScreen, true);
+			OldScreen = null;
 		}
 		
-		// DESTRUCTOR ------------------------------------------------------------------------
+		// DESTRUCTOR ------------------------------------------------------------------------------
 #if DEBUG
 		~MenuSystemScene() {
 			Console.WriteLine(GetType().ToString() + " deleted");

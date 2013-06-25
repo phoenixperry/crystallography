@@ -148,6 +148,10 @@
     <Compile Include="EnumHelper.cs" />
     <Compile Include="ui\IconPopupManager.cs" />
     <Compile Include="DataStorage.cs" />
+    <Compile Include="TitleScreen.cs" />
+    <Compile Include="SplashScreen.cs" />
+    <Compile Include="MainMenuScreen.cs" />
+    <Compile Include="LoadingScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -404,6 +408,10 @@
     <Content Include="assets\images\set4\gamePieces.png" />
     <Content Include="assets\images\icons\icons.png" />
     <Content Include="assets\images\timerIcon.png" />
+    <Content Include="assets\images\UI\NewGameButton.png" />
+    <Content Include="assets\images\UI\LevelSelectButton.png" />
+    <Content Include="assets\images\UI\CreditsButton.png" />
+    <Content Include="assets\images\UI\InstructionsButton.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

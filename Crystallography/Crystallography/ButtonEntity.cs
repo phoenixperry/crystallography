@@ -7,6 +7,8 @@ using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 namespace Crystallography {
 	public class ButtonEntity : SpriteTileCrystallonEntity {
 		
+		public static readonly Vector2i ButtonSpriteTileIndex2D = new Vector2i(0,0);
+		
 		public const int NORMAL = 0;
 		public const int PRESSED = 1;
 		public const int DISABLED = 2;
@@ -153,7 +155,7 @@ namespace Crystallography {
 			if( !this.Visible || (status != NORMAL) ) {
 				return;
 			}
-			Console.WriteLine("ButtonEntity.ButtonDown");
+//			Console.WriteLine("ButtonEntity.ButtonDown");
 			status = PRESSED;
 			//if (onDown != null) {
 			//	onDown();
@@ -164,7 +166,7 @@ namespace Crystallography {
 			if( !this.Visible || (status != PRESSED) ) {
 				return;
 			}
-			Console.WriteLine("ButtonEntity.ButtonUp");
+//			Console.WriteLine("ButtonEntity.ButtonUp");
 			status = NORMAL;
 			//if (onUp != null) {
 			//	onUp();
