@@ -2861,7 +2861,7 @@
                       <ScaleType>Center</ScaleType>
                     </Property>
                     <IsRoot>false</IsRoot>
-                    <PivotPos>LeftTop</PivotPos>
+                    <PivotPos>LeftBottom</PivotPos>
                     <WidgetType>ImageBox</WidgetType>
                     <ID>1444830651</ID>
                     <ZIndex>0</ZIndex>
@@ -2962,7 +2962,7 @@
                       <ScaleType>Center</ScaleType>
                     </Property>
                     <IsRoot>false</IsRoot>
-                    <PivotPos>LeftTop</PivotPos>
+                    <PivotPos>LeftBottom</PivotPos>
                     <WidgetType>ImageBox</WidgetType>
                     <ID>262817529</ID>
                     <ZIndex>0</ZIndex>
@@ -3811,7 +3811,7 @@
             </Panels>
           </Property>
           <IsRoot>false</IsRoot>
-          <PivotPos>LeftTop</PivotPos>
+          <PivotPos>LeftBottom</PivotPos>
           <WidgetType>PagePanel</WidgetType>
           <ID>710460260</ID>
           <ZIndex>2</ZIndex>

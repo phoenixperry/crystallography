@@ -33,6 +33,17 @@ namespace Crystallography
 			Support.MusicSystem.Instance.StopAll();
 			System.GC.Collect();
 			AppMain.UI_INPUT_ENABLED = false;
+			
+			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions1.png");
+			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions2.png");
+			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions3.png");
+			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions4.png");
+			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions5.png");
+			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions8.png");
+			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions7.png");
+			Support.RemoveTextureWithFileName("/Application/assets/images/UI/icons/tie.png");
+			Support.RemoveTextureWithFileName("/Application/assets/images/UI/icons/phones.png");
+			Support.RemoveTextureWithFileName("/Application/assets/images/UI/icons/glasses.png");
 		}
 		
 		public override void Update (float dt)
@@ -71,6 +82,7 @@ namespace Crystallography
 				Screen = new CreditsScreen(this);
 				break;
 			case ("Instructions"):
+				Screen = new InstructionsScreen(this);
 				break;
 			default:
 //				UISystem.SetScene ( new Crystallography.UI.SplashScene() );

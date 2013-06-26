@@ -154,6 +154,7 @@
     <Compile Include="LoadingScene.cs" />
     <Compile Include="CreditsScreen.cs" />
     <Compile Include="SwipePanels.cs" />
+    <Compile Include="InstructionsScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
