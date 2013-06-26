@@ -155,6 +155,7 @@
     <Compile Include="CreditsScreen.cs" />
     <Compile Include="SwipePanels.cs" />
     <Compile Include="InstructionsScreen.cs" />
+    <Compile Include="LevelSelectScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -415,6 +416,8 @@
     <Content Include="assets\images\UI\LevelSelectButton.png" />
     <Content Include="assets\images\UI\CreditsButton.png" />
     <Content Include="assets\images\UI\InstructionsButton.png" />
+    <Content Include="assets\images\UI\LevelSelectItemButton.png" />
+    <Content Include="assets\images\UI\LevelSelectIndicator.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

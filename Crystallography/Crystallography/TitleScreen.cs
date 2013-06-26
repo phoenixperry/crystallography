@@ -43,9 +43,10 @@ namespace Crystallography
 		
 		// EVENT HANDLERS -----------------------------------------------------------------------------------------------------------------------------
 		
-		void HandleInputManagerInstanceTapDetected (object sender, BaseTouchEventArgs e) {
+		void HandleInputManagerInstanceTouchJustUpDetected (object sender, BaseTouchEventArgs e)
+		{
 			MenuSystem.SetScreen("Menu");
-			InputManager.Instance.TapDetected -= HandleInputManagerInstanceTapDetected;
+			InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
 		}
 		
 		// OVERRIDES ----------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +72,7 @@ namespace Crystallography
 			if (_timer < 1.0f) {
 				_timer += dt;
 				if(_timer >= 1.0f) {
-					InputManager.Instance.TapDetected += HandleInputManagerInstanceTapDetected;
+					InputManager.Instance.TouchJustUpDetected += HandleInputManagerInstanceTouchJustUpDetected;
 				}
 			}
 			

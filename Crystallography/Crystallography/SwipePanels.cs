@@ -8,21 +8,22 @@ namespace Crystallography
 {
 	public class SwipePanels : Node
 	{
+		
 		List<AnchorPoint> AnchorPoints;
 		List<Node> Panels;
 		Vector2 TouchStartPosition;
 		Vector2 TouchPosition;
 		float TouchVelocity;
 		
-		// CONSTRUCTOR --------------------------------------------------------------------------------------------------------------
+		public float Width {get; set;}
 		
 		new public Vector2 Position {
 			get {return base.Position;}
 			set {
 				base.Position = value;
-				AnchorPoints[0].Position = value + new Vector2(-960.0f, 0.0f);
+				AnchorPoints[0].Position = value + new Vector2(-Width, 0.0f);
 				AnchorPoints[1].Position = value;
-				AnchorPoints[2].Position = value + new Vector2( 960.0f, 0.0f);
+				AnchorPoints[2].Position = value + new Vector2( Width, 0.0f);
 				foreach(AnchorPoint point in AnchorPoints) {
 					if (point.Node == null) {
 						continue;
@@ -32,14 +33,17 @@ namespace Crystallography
 			}
 		}
 		
+		// CONSTRUCTOR --------------------------------------------------------------------------------------------------------------
+		
 		public SwipePanels (List<Node> pPanels) {
 			TouchVelocity = 0.0f;
+			Width = Director.Instance.GL.Context.GetViewport().Width;
 			Panels = pPanels;
 			
 			AnchorPoints = new List<AnchorPoint> {
 				new AnchorPoint(){
 					Index = -1,
-					Position = new Vector2(-960.0f, 0.0f)
+					Position = new Vector2(-Width, 0.0f)
 				},
 				new AnchorPoint(){
 					Node = Panels[0],
@@ -48,7 +52,7 @@ namespace Crystallography
 				},
 				new AnchorPoint(){
 					Index = 1,
-					Position = new Vector2(960.0f,0.0f)
+					Position = new Vector2(Width, 0.0f)
 				}
 			};
 			
@@ -69,7 +73,7 @@ namespace Crystallography
 			bool AdvancePanel = false;
 			TouchPosition = e.touchPosition;
 			// SWITCH ACTIVE PANELS IF PANEL MIDPOINT IS OFF THE SCREEN
-			if (FMath.Abs(AnchorPoints[1].Node.Position.X - AnchorPoints[1].Position.X) > 480.0f || 
+			if (FMath.Abs(AnchorPoints[1].Node.Position.X - AnchorPoints[1].Position.X) > 0.5f*Width || 
 			    FMath.Abs (TouchVelocity * (TouchPosition.X - TouchStartPosition.X)) > 4000.0f) {
 				// SWIPE TO RIGHT?
 				AdvancePanel = (TouchPosition.X - TouchStartPosition.X) > 0;

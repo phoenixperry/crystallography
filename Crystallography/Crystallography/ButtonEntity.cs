@@ -34,6 +34,7 @@ namespace Crystallography {
 			get { return _onToggle; }
 			set { 
 				_onToggle = value;
+				label.Visible = _onToggle;
 				status = _onToggle ? NORMAL : DISABLED;
 			}
 		}
@@ -48,17 +49,12 @@ namespace Crystallography {
 			labelOffset = new Vector2(0.1f, 0.25f);
 			this.setPivot(0.5f,0.5f);
 			
-//			font = new Font("Application/assets/fonts/Bariol_Regular.otf", 25, FontStyle.Regular);
 			font = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25);
 			map = Crystallography.UI.FontManager.Instance.GetMap( font );	
-//			map = new FontMap( font );
 			if ( pLabel != null ) {
 				label = new Label( pLabel, map );
-//				label.Color = Colors.White;
 				label.Pivot = new Vector2(0.15f, 0.25f );
 				label.Scale = new Vector2(1.0f/this.Width,1.0f/this.Height);
-//				label.HeightScale = 1.0f/this.Height;
-//				label.Position = labelOffset;
 			}
 			
 			this.getNode().AddChild(label);
@@ -69,10 +65,6 @@ namespace Crystallography {
 			_pressed = false;
 			_initialized = false;
 			
-			
-			
-//			InputManager.Instance.TouchJustDownDetected += HandleInputManagerInstanceTouchJustDownDetected;
-			
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
 #endif
@@ -81,27 +73,16 @@ namespace Crystallography {
 		// EVENT HANDLERS -------------------------------------------------------------------------
 		
 		void HandleInputManagerInstanceTouchJustUpDetected (object sender, BaseTouchEventArgs e) {
-			var buttonPos = this.getNode().Position;
-			if (e.touchPosition.X > buttonPos.X - this.halfWidth && e.touchPosition.X < buttonPos.X + this.halfWidth) {
-//				int h = Director.Instance.GL.Context.GetViewport().Height;
-//				if (h - e.touchPosition.Y > buttonPos.Y - this.halfHeight && h - e.touchPosition.Y < buttonPos.Y + this.halfHeight) {
-				if (e.touchPosition.Y > buttonPos.Y - this.halfHeight && e.touchPosition.Y < buttonPos.Y + this.halfHeight) {
-					onButtonUp();
-				}
+			if(this.getNode().IsWorldPointInsideContentLocalBounds(e.touchPosition) ) {
+				onButtonUp();
 			}
 		}
 		
-		void HandleInputManagerInstanceTouchDownDetected (object sender, SustainedTouchEventArgs e)
-		{
-			var buttonPos = this.getNode().Position;
+		void HandleInputManagerInstanceTouchDownDetected (object sender, SustainedTouchEventArgs e) {
 			_pressed = false;
-			if (e.touchPosition.X > buttonPos.X - this.halfWidth && e.touchPosition.X < buttonPos.X + this.halfWidth) {
-//				int h = Director.Instance.GL.Context.GetViewport().Height;
-//				if (h - e.touchPosition.Y > buttonPos.Y - this.halfHeight && h - e.touchPosition.Y < buttonPos.Y + this.halfHeight) {
-				if (e.touchPosition.Y > buttonPos.Y - this.halfHeight && e.touchPosition.Y < buttonPos.Y + this.halfHeight) {
-					onButtonDown();
-					_pressed = true;
-				}
+			if(this.getNode().IsWorldPointInsideContentLocalBounds(e.touchPosition) ) {
+				onButtonDown();
+				_pressed = true;
 			}
 		}
 		
@@ -140,7 +121,6 @@ namespace Crystallography {
 		}
 		
 		public void updateButton() {
-//			bool offAll = false;
 			// If there is a touch right now, compare the location to the button's area
 			if ( !_pressed ) {
 				if ( status != NORMAL && status != DISABLED ) {
@@ -155,22 +135,14 @@ namespace Crystallography {
 			if( !this.Visible || (status != NORMAL) ) {
 				return;
 			}
-//			Console.WriteLine("ButtonEntity.ButtonDown");
 			status = PRESSED;
-			//if (onDown != null) {
-			//	onDown();
-			//}
 		}
 		
 		protected void onButtonUp() {
 			if( !this.Visible || (status != PRESSED) ) {
 				return;
 			}
-//			Console.WriteLine("ButtonEntity.ButtonUp");
 			status = NORMAL;
-			//if (onUp != null) {
-			//	onUp();
-			//}
 			EventHandler handler = ButtonUpAction;
 			if ( handler != null ) {
 				handler( this, null );

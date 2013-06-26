@@ -48,9 +48,8 @@ namespace Crystallography
 		
 		public override void Update (float dt)
 		{
-			InputManager.Instance.Update(dt);
-//			UISystem.Update( Touch.GetData(0) );
 			base.Update (dt);
+			InputManager.Instance.Update(dt);
 		}
 		
 //		public override void Draw ()
@@ -75,8 +74,9 @@ namespace Crystallography
 				Screen = new MainMenuScreen(this);
 //				UISystem.SetScene ( new Crystallography.UI.MenuScene() );
 				break;
-			case ("LevelSelect"):
+			case ("Level Select"):
 //				UISystem.SetScene ( new Crystallography.UI.LevelSelectScene() );
+				Screen = new LevelSelectScreen(this);
 				break;
 			case ("Credits"):
 				Screen = new CreditsScreen(this);

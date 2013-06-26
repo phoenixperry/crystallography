@@ -13,6 +13,11 @@ namespace Crystallography
 		ButtonEntity LevelSelectButton;
 		ButtonEntity CreditsButton;
 		ButtonEntity InstructionsButton;
+#if METRICS
+		ButtonEntity PrintAnalyticsButton;
+		ButtonEntity ClearAnalyticsButton;
+		float HoldTimer;
+#endif
 		
 		// CONSTRUCTORS -----------------------------------------------------------------------------------------
 		
@@ -25,57 +30,81 @@ namespace Crystallography
 			
 			NewGameButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/NewGameButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			NewGameButton.setPosition(480.0f, 403.0f);
-//			NewGameButton.setPivot(0.0f, 0.0f);
 			NewGameButton.on = true;
-//			NewGameButton.ButtonUpAction += HandleNewGameButtonButtonUpAction;
 			this.AddChild(NewGameButton.getNode());
 			
 			LevelSelectButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/LevelSelectButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			LevelSelectButton.setPosition (480.0f, 315.0f);
-//			LevelSelectButton.setPivot(0.0f, 0.0f);
 			LevelSelectButton.on = true;
-//			LevelSelectButton.ButtonUpAction += HandleLevelSelectButtonButtonUpAction;
 			this.AddChild(LevelSelectButton.getNode());
 			
 			CreditsButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/CreditsButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			CreditsButton.setPosition(480.0f, 143.0f);
-//			CreditsButton.setPivot(0.0f, 0.0f);
 			CreditsButton.on = true;
-//			CreditsButton.ButtonUpAction += HandleCreditsButtonButtonUpAction;
 			this.AddChild(CreditsButton.getNode());
 			
 			InstructionsButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/InstructionsButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			InstructionsButton.setPosition(480.0f, 229.0f);
-//			InstructionsButton.setPivot(0.0f, 0.0f);
 			InstructionsButton.on = true;
-//			InstructionsButton.ButtonUpAction += HandleInstructionsButtonButtonUpAction;
 			this.AddChild(InstructionsButton.getNode());
 			
-//			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
+#if METRICS
+			HoldTimer = 0.0f;
+			
+			PrintAnalyticsButton = new ButtonEntity("Print Metrics", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+			PrintAnalyticsButton.setPosition(780.0f, 229.0f);
+			PrintAnalyticsButton.on = false;
+			this.AddChild(PrintAnalyticsButton.getNode());
+			
+			ClearAnalyticsButton = new ButtonEntity("Clear Metrics", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+			ClearAnalyticsButton.setPosition(180.0f, 229.0f);
+			ClearAnalyticsButton.on = false;
+			this.AddChild(ClearAnalyticsButton.getNode());
+#endif	
 		}
 		
 		
 		// EVENT HANDLERS ---------------------------------------------------------------------------------------
 		
 		void HandleNewGameButtonButtonUpAction (object sender, EventArgs e) {
+#if DEBUG
 			Console.WriteLine("New Game");
+#endif
 			Director.Instance.ReplaceScene(new LoadingScene(0, false) );
 		}
 		
 		void HandleLevelSelectButtonButtonUpAction (object sender, EventArgs e) {
+#if DEBUG
 			Console.WriteLine("Level Select");
+#endif
 			MenuSystem.SetScreen("Level Select");
 		}
 		
 		void HandleCreditsButtonButtonUpAction (object sender, EventArgs e) {
+#if DEBUG
 			Console.WriteLine("Credits");
+#endif
 			MenuSystem.SetScreen("Credits");
 		}
 		
 		void HandleInstructionsButtonButtonUpAction (object sender, EventArgs e) {
+#if DEBUG
 			Console.WriteLine("Instructions");
+#endif
 			MenuSystem.SetScreen("Instructions");
 		}
+		
+#if METRICS
+		void HandleClearAnalyticsButtonButtonUpAction (object sender, EventArgs e)
+		{
+			DataStorage.ClearMetrics();
+		}
+
+		void HandlePrintAnalyticsButtonButtonUpAction (object sender, EventArgs e)
+		{
+			DataStorage.PrintMetrics();
+		}
+#endif
 		
 		// OVERRIDES --------------------------------------------------------------------------------------------
 		
@@ -86,7 +115,13 @@ namespace Crystallography
 			LevelSelectButton.ButtonUpAction += HandleLevelSelectButtonButtonUpAction;
 			CreditsButton.ButtonUpAction += HandleCreditsButtonButtonUpAction;
 			InstructionsButton.ButtonUpAction += HandleInstructionsButtonButtonUpAction;
+#if METRICS
+			PrintAnalyticsButton.ButtonUpAction += HandlePrintAnalyticsButtonButtonUpAction;
+			ClearAnalyticsButton.ButtonUpAction += HandleClearAnalyticsButtonButtonUpAction;
+#endif
 		}
+
+		
 		
 		public override void OnExit ()
 		{
@@ -95,6 +130,10 @@ namespace Crystallography
 			LevelSelectButton.ButtonUpAction -= HandleLevelSelectButtonButtonUpAction;
 			CreditsButton.ButtonUpAction -= HandleCreditsButtonButtonUpAction;
 			InstructionsButton.ButtonUpAction -= HandleInstructionsButtonButtonUpAction;
+#if METRICS
+			PrintAnalyticsButton.ButtonUpAction -= HandlePrintAnalyticsButtonButtonUpAction;
+			ClearAnalyticsButton.ButtonUpAction -= HandleClearAnalyticsButtonButtonUpAction;
+#endif
 			this.RemoveAllChildren(true);
 			MenuSystem = null;
 			MenuBackground = null;
@@ -103,8 +142,24 @@ namespace Crystallography
 			CreditsButton = null;
 			InstructionsButton = null;
 			RemoveAllAssets();
-			
 		}
+
+#if METRICS
+		public override void Update (float dt)
+		{
+			base.Update (dt);
+			if (Input2.GamePad0.L.Down && Input2.GamePad0.R.Down) {
+				HoldTimer += dt;
+				if (HoldTimer > 2.0f) {
+					HoldTimer = 0.0f;
+					PrintAnalyticsButton.on = !PrintAnalyticsButton.on;
+					ClearAnalyticsButton.on = !ClearAnalyticsButton.on;
+				}
+			} else {
+				HoldTimer = 0.0f;
+			}
+		}
+#endif
 		
 		// METHODS ----------------------------------------------------------------------------------------------
 		
