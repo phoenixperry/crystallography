@@ -160,7 +160,7 @@ namespace Crystallography
 				Support.MusicSystem.Instance.Play("stack2music.mp3");
 			}
 			
-			PausePanel.QuitButtonPressDetected += (sender, e) => { QuitToTitle(); };
+//			PausePanel.QuitButtonPressDetected += (sender, e) => { QuitToTitle(); };
 			PausePanel.PauseDetected += (sender, e) => { Pause(e.isPaused); };
         }
 		
@@ -266,16 +266,16 @@ namespace Crystallography
 		public static void QuitToTitle() {
 			( Director.Instance.CurrentScene as GameScene ).Clear();
 			ForceGarbageCollection();
-			UISystem.CurrentScene.RootWidget.Dispose();
-			Director.Instance.ReplaceScene( new MenuSystemScene("Menu") );
+//			UISystem.CurrentScene.RootWidget.Dispose();
+			Director.Instance.ReplaceScene( new LoadingScene(0,false,"Menu") );
 		}
 		
 		public static void QuitToLevelSelect() {
 			( Director.Instance.CurrentScene as GameScene ).Clear();
 			ForceGarbageCollection();
-			UISystem.CurrentScene.RootWidget.Dispose();
-			Director.Instance.ReplaceScene( new MenuSystemScene("LevelSelect") );
-			UISystem.SetScene( new Crystallography.UI.LevelSelectScene() );
+//			UISystem.CurrentScene.RootWidget.Dispose();
+			Director.Instance.ReplaceScene( new LoadingScene(0,false,"Level Select") );
+//			UISystem.SetScene( new Crystallography.UI.LevelSelectScene() );
 		}
 		
 		private static void ForceGarbageCollection() {

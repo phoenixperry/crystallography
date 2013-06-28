@@ -156,6 +156,9 @@
     <Compile Include="SwipePanels.cs" />
     <Compile Include="InstructionsScreen.cs" />
     <Compile Include="LevelSelectScreen.cs" />
+    <Compile Include="HudPanel.cs" />
+    <Compile Include="MessagePanel.cs" />
+    <Compile Include="NextLevelPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

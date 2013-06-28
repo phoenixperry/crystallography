@@ -13,7 +13,7 @@ namespace Crystallography
 		Stopwatch stopwatch;
 		int _loadIndex;
 		
-		GameScene _gameScene;
+		Scene _scene;
 		
 		const float TWO_PI = 6.2831853f;
 		
@@ -28,7 +28,7 @@ namespace Crystallography
 		
 		// CONSTRUCTOR ---------------------------------------------------------------------------------------
 		
-		public LoadingScene (int pLevelNumber, bool pTimed=false) {
+		public LoadingScene (int pLevelNumber=0, bool pTimed=false, string pDestination="Game") {
 			this.Camera.SetViewFromViewport();
 			
 			stopwatch = Stopwatch.StartNew();
@@ -57,11 +57,78 @@ namespace Crystallography
 				() => {
 					;//dummy
 				},
+				() => {
+					System.GC.Collect();
+				},
 				// PRE-LOAD LEVEL DATA
 				() => {
 					LevelManager.Instance.LoadGameData();
-				},
-				// PRE-LOAD IMAGES
+				}
+			};
+			
+			switch(pDestination) {
+			case("Level Select"):
+				AddLevelSelectProcs();
+				break;
+			case("Menu"):
+				AddMenuProcs();
+				break;
+			case("Game"):
+			default:
+				AddGameProcs();
+				break;
+			}
+			
+			Scheduler.Instance.ScheduleUpdateForTarget(this, 0, false);
+		}
+		
+		// OVERRIDES ----------------------------------------------------------------------------------------
+		
+		public override void OnExit ()
+		{
+			base.OnExit ();
+			loadProc.Clear();
+			loadProc = null;
+			stopwatch.Stop();
+			stopwatch = null;
+			_scene = null;
+			Hub.RemoveAllChildren(true);
+			Hub = null;
+			LoadingSpinner = null;
+		}
+		
+		public override void Update (float dt)
+		{
+			base.Update (dt);
+			
+			var totalProcTime = new TimeSpan();
+			
+			if( _timer > 0.5f ) {
+				do {
+					var start = stopwatch.Elapsed;
+					loadProc[_loadIndex++]();
+					var procTime = stopwatch.Elapsed - start;
+					totalProcTime += procTime;
+				} while ( totalProcTime < minProcTime && _loadIndex < loadProc.Count );
+			}
+			
+			_angle += dt * -TWO_PI;
+			if (_angle > 360.0) {
+				_angle -= 360.0f;
+			}
+			
+			Hub.Angle = _angle;
+			_timer += dt;
+			if (_loadIndex >= loadProc.Count) {
+				Director.Instance.ReplaceScene( _scene );
+			}
+		}
+		
+		// METHODS ------------------------------------------------------------------------------------------
+		
+		protected void AddGameProcs() {
+			List<Action> proc = new List<Action> {
+			// PRE-LOAD IMAGES
 				() => {
 					var temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Regular");
 					temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold");
@@ -107,57 +174,59 @@ namespace Crystallography
 				},
 				// PREPARE GAME SCENE
 				() => {
-					_gameScene = new GameScene(_levelNumber, _timed);
+					_scene = new GameScene(_levelNumber, _timed);
 				}
-				
 			};
 			
-			Scheduler.Instance.ScheduleUpdateForTarget(this, 0, false);
+			loadProc.AddRange( proc );
+			proc.Clear();
 		}
 		
-		// OVERRIDES ----------------------------------------------------------------------------------------
-		
-		public override void OnExit ()
-		{
-			base.OnExit ();
-			loadProc.Clear();
-			loadProc = null;
-			stopwatch.Stop();
-			stopwatch = null;
-			_gameScene = null;
-			Hub.RemoveAllChildren(true);
-			Hub = null;
-			LoadingSpinner = null;
+		protected void AddMenuProcs() {
+			List<Action> proc = new List<Action> {
+				() => {
+					var temp = Support.SpriteFromFile("/Application/assets/images/UI/menuButtonBackground.png");
+				},
+				() => {
+					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/NewGameButton.png", 1, 3);
+				},
+				() => {
+					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/LevelSelectButton.png", 1, 3);
+				},
+				() => {
+					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/CreditsButton.png", 1, 3);
+				},
+				() => {
+					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/InstructionsButton.png", 1, 3);
+				},
+				() => {
+					_scene = new MenuSystemScene("Menu");
+				}
+			};
+			
+			loadProc.AddRange( proc );
+			proc.Clear();
 		}
 		
-		public override void Update (float dt)
-		{
-			base.Update (dt);
+		protected void AddLevelSelectProcs() {
+			List<Action> proc = new List<Action>{
+				() => {
+					var temp = Support.SpriteFromFile("/Application/assets/images/UI/statsBox.png");
+				},
+				() => {
+					var temp = Support.SpriteFromFile("Application/assets/images/UI/LevelSelectIndicator.png");
+				},
+				() => {
+					var temp = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3);
+				},
+				() => {
+					_scene = new MenuSystemScene("Level Select");
+				}
+			};
 			
-			var totalProcTime = new TimeSpan();
-			
-			if( _timer > 0.5f ) {
-				do {
-					var start = stopwatch.Elapsed;
-					loadProc[_loadIndex++]();
-					var procTime = stopwatch.Elapsed - start;
-					totalProcTime += procTime;
-				} while ( totalProcTime < minProcTime && _loadIndex < loadProc.Count );
-			}
-			
-			_angle += dt * -TWO_PI;
-			if (_angle > 360.0) {
-				_angle -= 360.0f;
-			}
-			
-			Hub.Angle = _angle;
-			_timer += dt;
-			if (_loadIndex >= loadProc.Count) {
-				Director.Instance.ReplaceScene( _gameScene );
-			}
+			loadProc.AddRange( proc );
+			proc.Clear();
 		}
-		
-		// METHODS ------------------------------------------------------------------------------------------
 		
 		// DESTRUCTOR ---------------------------------------------------------------------------------------
 #if DEBUG

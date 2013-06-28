@@ -27,8 +27,13 @@ namespace Crystallography
 		Label TimerSecondsText;
 		Label TimerMinutesText;
 		
+//		Label MessageTitleText;
+//		Label MessageText;
 		
 		LevelTitle levelTitle;
+		MessagePanel _messagePanel;
+//		HudPanel _nextLevelButtonPanel;
+		NextLevelPanel _nextLevelPanel;
 		
 		public LevelEndPanel levelEndPanel;
 		public PausePanel pausePanel;
@@ -43,8 +48,10 @@ namespace Crystallography
 		
 		protected GameScene _scene;
 		protected bool _initialized = false;
-		protected bool _buttonSlideIn;
+//		protected bool _buttonSlideIn;
 		protected bool _pauseTimer;
+		
+		
 		
 		// GET & SET ---------------------------------------------------------------------------------------------
 		
@@ -61,7 +68,7 @@ namespace Crystallography
 		
 		public GameSceneHud( GameScene scene ) {
 			_scene = scene;
-			_buttonSlideIn = false;
+//			_buttonSlideIn = false;
 			
 			if (_initialized == false) {
 				Initialize();
@@ -109,7 +116,8 @@ namespace Crystallography
 				}
 			}
 			levelTitle.SetQualityNames( variables.ToArray() );
-			levelTitle.EnterAnim();
+//			levelTitle.EnterAnim();
+			levelTitle.SlideIn();
 			if(GameScene.currentLevel != 999) {
 				RestartButton.on = true;
 			}
@@ -131,13 +139,14 @@ namespace Crystallography
 #if METRICS
 			DataStorage.CollectMetrics();
 #endif
-			NextLevelButton.Visible = false;
+//			NextLevelButton.Visible = false;
+			_nextLevelPanel.SlideOut();
 			if( GameScene.currentLevel != 999 ) {
 				DataStorage.SavePuzzleScore( GameScene.currentLevel, Score );
 			}
 			CardManager.Instance.Reset( Director.Instance.CurrentScene );
 			GroupManager.Instance.Reset( Director.Instance.CurrentScene );
-			NextLevelButton.ButtonUpAction -= HandleNextLevelButtonButtonUpAction;
+//			NextLevelButton.ButtonUpAction -= HandleNextLevelButtonButtonUpAction;
 			InputManager.Instance.CircleJustUpDetected -= HandleNextLevelButtonButtonUpAction;
 			_scene.goToNextLevel();
 		}
@@ -179,6 +188,18 @@ namespace Crystallography
 		}
 		
 		/// <summary>
+		/// On LevelSelectButton Up
+		/// </summary>
+		void Handle_nextLevelPanelLevelSelectDetected (object sender, EventArgs e)
+		{
+			ExitCode = LevelExitCode.QUIT_LEVEL_SELECT;
+#if METRICS
+			DataStorage.CollectMetrics();
+#endif
+			GameScene.QuitToLevelSelect();
+		}
+		
+		/// <summary>
 		/// On Quit From Pause Menu
 		/// </summary>
 		void HandlePausePanelQuitButtonPressDetected (object sender, EventArgs e)
@@ -187,6 +208,7 @@ namespace Crystallography
 #if METRICS
 			DataStorage.CollectMetrics();
 #endif
+			GameScene.QuitToTitle();
 		}
 		
 		// OVERRIDES -----------------------------------------------------------------------------------------------
@@ -223,22 +245,13 @@ namespace Crystallography
 				}
 				
 			}
-			
-			if ( _buttonSlideIn ) {
-				var y = NextLevelButton.getPosition().Y;
-				y -= dt * 100;
-				if (y < 451.0f) {
-					y = 451.0f;
-					_buttonSlideIn = false;
-					NextLevelButton.ButtonUpAction += HandleNextLevelButtonButtonUpAction;
-					InputManager.Instance.CircleJustUpDetected += HandleNextLevelButtonButtonUpAction;
-				}
-				NextLevelButton.setPosition(845.0f, y);
-			}
 		}
 		
 		public override void OnEnter () {
 			base.OnEnter();
+			_nextLevelPanel.NextLevelDetected += HandleNextLevelButtonButtonUpAction;
+			_nextLevelPanel.QuitDetected += HandlePausePanelQuitButtonPressDetected;
+			_nextLevelPanel.LevelSelectDetected += Handle_nextLevelPanelLevelSelectDetected;
 			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
 			QualityManager.FailedMatchDetected += HandleQualityManagerFailedMatchDetected;
 			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected;
@@ -262,6 +275,9 @@ namespace Crystallography
 		
 		public override void OnExit () {
 			base.OnExit();
+			_nextLevelPanel.NextLevelDetected -= HandleNextLevelButtonButtonUpAction;
+			_nextLevelPanel.QuitDetected -= HandlePausePanelQuitButtonPressDetected;
+			_nextLevelPanel.LevelSelectDetected -= Handle_nextLevelPanelLevelSelectDetected;
 			QualityManager.MatchScoreDetected -= HandleQualityManagerMatchScoreDetected;
 			QualityManager.FailedMatchDetected -= HandleQualityManagerFailedMatchDetected;
 			CardManager.Instance.NoMatchesPossibleDetected -= HandleCardManagerInstanceNoMatchesPossibleDetected;
@@ -304,10 +320,8 @@ namespace Crystallography
 		private void Initialize() {
 			_initialized = true;
 			
-			levelTitle = new LevelTitle(_scene);
-//			_scene.DialogLayer.AddChild(levelTitle);
-			this.AddChild(levelTitle);
-			levelTitle.Hide();
+			FontMap map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold") );
+			FontMap bigMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold") );
 			
 			pausePanel = new PausePanel(_scene);
 			_scene.DialogLayer.AddChild(pausePanel);
@@ -317,16 +331,78 @@ namespace Crystallography
 			_scene.DialogLayer.AddChild(levelEndPanel);
 			levelEndPanel.Hide();
 			
-			NextLevelButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/next_level_sm.png", 1, 3).TextureInfo, new Vector2i(0,0) );
-			NextLevelButton.setPosition(845.0f, 587.0f);
-			this.AddChild(NextLevelButton.getNode());
-			NextLevelButton.Visible = false;
-			
-			FontMap map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold") );
-			FontMap bigMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold") );
 			GameHudBar = Support.SpriteUVFromFile("/Application/assets/images/GameHudBar.png");
 			GameHudBar.Position = new Vector2(0.0f, 473.0f);
 			this.AddChild(GameHudBar);
+			
+			levelTitle = new LevelTitle(_scene){
+				Offset = new Vector2(LevelTitle.X_OFFSET, 0.0f),
+				Lifetime = 4.0f
+			};
+			GameHudBar.AddChild(levelTitle, -1);
+			
+			_nextLevelPanel = new NextLevelPanel(){
+				Offset = new Vector2(510.0f, 0.0f),
+				
+			};
+			GameHudBar.AddChild(_nextLevelPanel, -1);
+			
+//			NextLevelButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/next_level_sm.png", 1, 3).TextureInfo, new Vector2i(0,0) );
+////			NextLevelButton.setPosition(845.0f, 587.0f);
+//			NextLevelButton.setPosition(115.0f,0.0f);
+////			this.AddChild(NextLevelButton.getNode());
+//			NextLevelButton.Visible = true;
+//			
+//			_nextLevelButtonPanel = new HudPanel(){
+//				Height = NextLevelButton.Height*1.5f,
+//				Width = NextLevelButton.Width,
+//				Offset = new Vector2(729.0f, 0.0f),
+//				DismissDelay = 0.0f
+//			};
+//			GameHudBar.AddChild(_nextLevelButtonPanel, -1);
+//			_nextLevelButtonPanel.AddChild(NextLevelButton.getNode());
+			
+			_messagePanel = new MessagePanel(){
+				Offset = new Vector2(480.0f, 0.0f),
+				Position = new Vector2(-400.0f, 0.0f),
+			};
+			
+//			MessageTitleText = new Label() {
+//				Text = "Lorem ipsum dolor sit amet, consectetur",
+//				FontMap = map,
+//				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
+//				Position = new Vector2(40.0f, 135.0f)
+//			};
+//			
+//			MessageText = new Label() {
+//				Text = "Lorem ipsum dolor sit amet, consectetur adipisicing \n" +
+//					"elit, sed do eiusmod tempor incididunt ut labore et \n" +
+//					"dolore magna aliqua. Ut enim ad minim veniam, quis \n"+
+//					"nostrud exercitation ullamco laboris nisi ut aliquip \n" +
+//					"ex ea commodo consequat. Duis aute irure dolor in \n", //+
+////					"reprehenderit in voluptate velit esse cillum dolore eu \n" +
+////					"fugiat nulla pariatur. Excepteur sint occaecat cupidatat \n" +
+////					"non proident, sunt in culpa qui officia deserunt mollit \n" +
+////					"anim id est laborum.",
+//				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18) ),
+//				Position = new Vector2(40.0f, 107.0f)
+//			};
+//			var messageBG = Support.UnicolorSprite("Grey", 40, 40, 40, 200);
+//			messageBG.Scale = new Vector2(30.0f, 11.0f);
+//			var messageBar = Support.UnicolorSprite("LightBlue", 41, 226, 226, 255);
+//			messageBar.Scale = new Vector2(30.0f, 0.25f);
+//			messageBar.Position = new Vector2(0.0f, 172.0f);
+//			_messagePanel.AddChild( messageBG );
+//			_messagePanel.AddChild( messageBar);
+//			_messagePanel.AddChild( MessageTitleText);
+//			_messagePanel.AddChild( MessageText);
+			this.AddChild(_messagePanel);
+			
+			Sequence sequence = new Sequence();
+			sequence.Add( new CallFunc( () => {_messagePanel.SlideIn();} ) );
+			sequence.Add( new DelayTime( 5.0f) );
+			sequence.Add( new CallFunc( () => {_messagePanel.SlideOut();} ) );
+			this.RunAction(sequence);
 			
 //			ScoreIcon = Support.SpriteUVFromFile("/Application/assets/images/UI/score_now.png");
 			ScoreIcon = Support.SpriteUVFromFile("/Application/assets/images/handIcon.png");
@@ -400,6 +476,8 @@ namespace Crystallography
 		}
 		
 		public void Reset () {
+//			_nextLevelButtonPanel.Reset();
+//			_nextLevelPanel.Reset();
 			Score = 0;
 			_displayScore = 0;
 			DisplayTimer = 0.0f;
@@ -411,7 +489,7 @@ namespace Crystallography
 			
 			ExitCode = LevelExitCode.NULL;
 			
-			_buttonSlideIn = false;
+//			_buttonSlideIn = false;
 			_pauseTimer = false;
 			_metGoal = false;
 			ScoreText.Text = _displayScore.ToString();
@@ -437,10 +515,20 @@ namespace Crystallography
 			MetGoalTime = DisplayTimer;
 			_metGoal = true;
 			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
-			NextLevelButton.setPosition(845.0f, 587.0f); //Director.Instance.GL.Context.Screen.Height + NextLevelButton.Height);
-			NextLevelButton.Visible = true;
+//			NextLevelButton.setPosition(845.0f, 587.0f); //Director.Instance.GL.Context.Screen.Height + NextLevelButton.Height);
+//			_nextLevelButtonPanel.SlideIn();
+			_nextLevelPanel.SlideIn();
+//			NextLevelButton.Visible = true;
 //			RestartButton.on = false;
-			_buttonSlideIn = true;
+//			_buttonSlideIn = true;
+//			Sequence sequence = new Sequence();
+//			sequence.Add(new MoveTo (new Vector2(845.0f, 451.0f), 1.0f ) );
+//			sequence.Add(new DelayTime(1.0f));
+//			sequence.Add(new CallFunc( () => { 
+//				NextLevelButton.ButtonUpAction += HandleNextLevelButtonButtonUpAction;
+//				InputManager.Instance.CircleJustUpDetected += HandleNextLevelButtonButtonUpAction;
+//			} ) );
+//			NextLevelButton.getNode().RunAction( sequence );
 			_pauseTimer = true;
 		}
 		
