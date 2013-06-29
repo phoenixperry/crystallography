@@ -62,6 +62,7 @@ namespace Crystallography
 		public static Vector2 firstTapPosition 	{ get; protected set; }
 		
 		public Input2.TouchData Touch01			{ get { return Input2.Touch.GetData(0u)[1]; } }
+		public Vector2 TouchPosition            { get; protected set;}
 		
 		// CONSTRUCTOR ------------------------------------------------------
 		
@@ -97,22 +98,24 @@ namespace Crystallography
 		/// </param>
 		public void Update( float dt ) {
 			
+			TouchPosition = Director.Instance.CurrentScene.Camera.NormalizedToWorld( Input2.Touch00.Pos );
+			
 //			if( !enabled  || AppMain.UI_INPUT_ENABLED ) return;
 			if( !enabled ) return;
 			
 //			if( !GameScene.paused ) {	// ---------------------------------------- touch controls for UI are handled elsewhere.
 				if ( Input2.Touch00.Press ) {	// -------------------------------- on new touch
 					OnTouchJustDown( new BaseTouchEventArgs {
-						touchPosition = Director.Instance.CurrentScene.Camera.NormalizedToWorld( Input2.Touch00.Pos )
+						touchPosition = TouchPosition
 					} );
 				} else if (Input2.Touch00.On) { // -------------------------------- on sustained touch
 					OnTouchDown( new SustainedTouchEventArgs {
-						touchPosition = Director.Instance.CurrentScene.Camera.NormalizedToWorld( Input2.Touch00.Pos ),
+						touchPosition = TouchPosition,
 						elapsed = dt
 					} );
 				} else if (Input2.Touch00.Release) {	// ------------------------ on new release
 					OnTouchJustUp( new BaseTouchEventArgs {
-						touchPosition = Director.Instance.CurrentScene.Camera.NormalizedToWorld( Input2.Touch00.Pos )
+						touchPosition = TouchPosition
 					} );
 				} else {	// ---------------------------------------------------- on sustained release
 					releaseDuration += dt;

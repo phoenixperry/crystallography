@@ -18,6 +18,8 @@ namespace Crystallography
 		
 		private AbstractCrystallonEntity lastEntityReleased;
 		private Vector2 lastPosition;
+		private SpriteTile selectionMarker;
+		
 		
 		public event EventHandler<CubeCompleteEventArgs>       CubeCompleteDetected;
 		public event EventHandler<CubeGroupCompleteEventArgs>  CubeGroupCompleteDetected;
@@ -56,6 +58,11 @@ namespace Crystallography
 		/// </param>
 		protected SelectionGroup() : base( Director.Instance.CurrentScene, GamePhysics.Instance, null, MAX_CAPACITY ) {
 //			potentialMembers = new List<AbstractCrystallonEntity>();
+//			selectionMarker = Support.SpriteFromFile("Application/assets/images/SelectionMarker.png");
+//			selectionMarker.Visible = false;
+//			selectionMarker.Position = -0.5f*selectionMarker.CalcSizeInPixels();
+//			selectionMarker.Position = new Vector2(-400.0f, -400.0f);
+			
 			
 			Reset ( Director.Instance.CurrentScene );
 			
@@ -141,6 +148,11 @@ namespace Crystallography
 			if ( population > 0 ) {
 				EaseIn();
 			}
+			
+//			selectionMarker.Visible = false;
+//			this.getNode().RemoveChild(selectionMarker, false);
+			Scheduler.Instance.Unschedule(this.getNode(), AddParticle);
+			
 			// HACK this is a little hacky, because CardCrystallonEntites do this in their BeReleased() method
 			// this covers the case where the player just taps on the piece, instead of pressing and holding,
 			// to make sure the glow shuts off correctly
@@ -170,6 +182,14 @@ namespace Crystallography
 			if (lastEntityReleased is CardCrystallonEntity) {
 				(lastEntityReleased as CardCrystallonEntity).ShowGlow();
 			}
+			
+			AddParticle(0.0f);
+			Scheduler.Instance.Schedule(this.getNode(), AddParticle, 0.1f, false, 1);
+			
+			
+//			selectionMarker.Position = -0.5f*selectionMarker.CalcSizeInPixels();
+//			this.getNode().AddChild(selectionMarker);
+//			selectionMarker.Visible = true;
 			    
 //			MemberType = (entity!=null) ? entity.GetType() : null;	// -------------- Cards or Cubes?
 //			if (entity != null) {
@@ -226,6 +246,10 @@ namespace Crystallography
 		
 		// METHODS ---------------------------------------------------------------
 		
+		public void AddParticle(float dt) {
+			Support.ParticleEffectsManager.Instance.AddSelectionMarkerParticle( this, Colors.White);
+		}
+			
 		/// <summary>
 		/// Cute li'l animation that runs when player lets go of the SelectionGroup.
 		/// If the group had 3 members, we also test to see whether it was a valid match.
@@ -552,6 +576,9 @@ namespace Crystallography
 		~SelectionGroup() {
 			lastEntityReleased = null;
 			Instance = null;
+#if DEBUG
+			Console.WriteLine("SelectionGroup deleted.");
+#endif
 		}
 		
 	}

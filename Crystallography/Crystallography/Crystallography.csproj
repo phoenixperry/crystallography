@@ -19,7 +19,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <DefineConstants>DEBUG METRICS</DefineConstants>
+    <DefineConstants>DEBUG</DefineConstants>
     <CustomCommands>
       <CustomCommands>
         <Command type="AfterClean" command="" externalConsole="true" pauseExternalConsole="true" />
@@ -178,7 +178,6 @@
     <Folder Include="assets\levels\" />
     <Folder Include="deprecated\" />
     <Folder Include="ui\" />
-    <Folder Include="assets\images\bg\" />
     <Folder Include="bg\" />
     <Folder Include="assets\animation\" />
     <Folder Include="assets\images\UI\" />
@@ -187,8 +186,6 @@
     <Folder Include="assets\images\set3\" />
     <Folder Include="assets\audio\" />
     <Folder Include="assets\audio\bgm\" />
-    <Folder Include="assets\images\bg\2\" />
-    <Folder Include="assets\images\bg\3\" />
     <Folder Include="assets\images\icons\" />
     <Folder Include="assets\images\set4\" />
   </ItemGroup>
@@ -226,11 +223,6 @@
     <Content Include="assets\levels\level_10.xml" />
     <Content Include="assets\fonts\Bariol_Regular.otf" />
     <Content Include="assets\fonts\Bariol_Bold.otf" />
-    <Content Include="assets\images\bg\1\leftHollowWhite.png" />
-    <Content Include="assets\images\bg\1\leftSolidWhite.png" />
-    <Content Include="assets\images\bg\1\rightHollowWhite.png" />
-    <Content Include="assets\images\bg\1\rightSolidWhite.png" />
-    <Content Include="assets\images\bg\1\topSolidChevron.png" />
     <Content Include="assets\levels\level_11.xml" />
     <Content Include="assets\levels\level_12.xml" />
     <Content Include="assets\levels\level_13.xml" />
@@ -359,13 +351,6 @@
     <Content Include="assets\images\UI\next_level_smRoll.png" />
     <Content Include="assets\levels\level_999.xml" />
     <Content Include="assets\images\UI\eyes.png" />
-    <Content Include="assets\images\bg\2\whiteHollowChevron.png" />
-    <Content Include="assets\images\bg\2\whiteSolidChevron.png" />
-    <Content Include="assets\images\bg\3\leftHollow.png" />
-    <Content Include="assets\images\bg\3\rightHollow.png" />
-    <Content Include="assets\images\bg\3\rightSolid.png" />
-    <Content Include="assets\images\bg\3\smallCube.png" />
-    <Content Include="assets\images\bg\3\zigTotal.png" />
     <Content Include="assets\images\particles.png" />
     <Content Include="assets\images\button_85x56.png" />
     <Content Include="assets\images\GameHudBar.png" />
@@ -421,6 +406,7 @@
     <Content Include="assets\images\UI\InstructionsButton.png" />
     <Content Include="assets\images\UI\LevelSelectItemButton.png" />
     <Content Include="assets\images\UI\LevelSelectIndicator.png" />
+    <Content Include="assets\images\SelectionMarker.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

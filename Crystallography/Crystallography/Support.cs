@@ -424,7 +424,7 @@ namespace Crystallography
 			
 			public class Particle
 			{
-				public SpriteTileCrystallonEntity parent;
+				public ICrystallonEntity parent;
 				public int type;
 				public float variant;
 				public Vector2 position;
@@ -446,43 +446,54 @@ namespace Crystallography
 			
 			public enum ParticleType {
 				QUALITY = 0,
-				SCORE = 1
+				SCORE = 1,
+				SELECTION_MARKER = 2
 			}
 
 			public List<Particle> QualityParticles;
 			public List<Particle> ScoreParticles;
+			public List<Particle> SelectionMarkerParticles;
 //			public int ActiveParticles;
 			public int ActiveQualityParticles;
 			public int ActiveScoreParticles;
+			public int ActiveSelectionMarkerParticles;
 			public VertexData[] VertexDataArray;
 			public ShaderProgram ShaderProgram;
 			public Texture2D ParticleDotTexture;
 			public Texture2D ParticleScoreIconTexture;
+			public Texture2D ParticleSelectionMarkerTexture;
 			public Vector2 gravity;
 
 			ImmediateModeQuads< VertexData > imm_quads;
 			int max_particles { get { return 768; } }
-			int max_qualityParticles { get {return 668; } }
+			int max_qualityParticles { get {return 638; } }
 			int max_scoreParticles { get { return 100; } }
+			int max_selectionMarkerParticles { get {return 30;} }
 
 			public ParticleEffectsManager()
 			{
 				QualityParticles = new List<Particle>();
 				ScoreParticles = new List<Particle>();
+				SelectionMarkerParticles = new List<Particle>();
 				ActiveQualityParticles = 0;
 				ActiveScoreParticles = 0;
+				ActiveSelectionMarkerParticles = 0;
 				gravity = new Vector2(0.0f, -800.0f);
 				
 				for (int i = 0; i < max_qualityParticles; ++i){
 					QualityParticles.Add(new Particle());
 				}
-				for (int i=0; i < max_scoreParticles; i++){
+				for (int i=0; i < max_scoreParticles; ++i){
 					ScoreParticles.Add (new Particle());
+				}
+				for (int i=0; i < max_selectionMarkerParticles; ++i){
+					SelectionMarkerParticles.Add(new Particle());
 				}
 
 				ShaderProgram = new ShaderProgram("/Application/shaders/pfx.cgx");
 				ParticleDotTexture = new Texture2D("/Application/assets/images/particles.png", false);
 				ParticleScoreIconTexture = new Texture2D("/Application/assets/images/icons/icons.png", false);
+				ParticleSelectionMarkerTexture = new Texture2D("/Application/assets/images/SelectionMarker.png", false);
 				Sce.PlayStation.HighLevel.GameEngine2D.Scheduler.Instance.Schedule(this, Tick, 0.0f, false);
 
 				AdHocDraw += this.DrawParticles;
@@ -496,8 +507,7 @@ namespace Crystallography
 				float life_speed = fullness;
 				
 				// QUALITY PARTICLES
-				for (int i = 0; i < ActiveQualityParticles; ++i)
-				{
+				for (int i = 0; i < ActiveQualityParticles; ++i) {
 					Particle p = QualityParticles[i];
 					p.offset += dt * p.velocity;
 					p.position = p.parent.getNode().LocalToWorld(p.parent.getNode().Pivot/2) + p.offset;
@@ -507,17 +517,14 @@ namespace Crystallography
 					p.color.W -= dt/p.lifetime;
 				}
 
-				for (int i = 0; i < ActiveQualityParticles; ++i)
-				{
+				for (int i = 0; i < ActiveQualityParticles; ++i) {
 					Particle p = QualityParticles[i];
 
-					if (p.size.X <= 0.0f || p.size.Y <= 0.0f)
-					{
+					if (p.size.X <= 0.0f || p.size.Y <= 0.0f) {
 						p.time = p.lifetime;
 					}
 
-					if (p.time < p.lifetime)
-					{
+					if (p.time < p.lifetime) {
 						continue;
 					}
 
@@ -528,8 +535,7 @@ namespace Crystallography
 				}
 				
 				// SCORE PARTICLES
-				for (int i = 0; i < ActiveScoreParticles; ++i)
-				{
+				for (int i = 0; i < ActiveScoreParticles; ++i) {
 					Particle p = ScoreParticles[i];
 					p.velocity += dt * gravity;
 					p.offset += dt * p.velocity;
@@ -540,23 +546,43 @@ namespace Crystallography
 					p.color.W -= dt/p.lifetime;
 				}
 
-				for (int i = 0; i < ActiveScoreParticles; ++i)
-				{
+				for (int i = 0; i < ActiveScoreParticles; ++i) {
 					Particle p = ScoreParticles[i];
 
-					if (p.size.X <= 0.0f || p.size.Y <= 0.0f)
-					{
+					if (p.size.X <= 0.0f || p.size.Y <= 0.0f) {
 						p.time = p.lifetime;
 					}
 
-					if (p.time < p.lifetime)
-					{
+					if (p.time < p.lifetime) {
 						continue;
 					}
 
 					ScoreParticles[i] = ScoreParticles[ActiveScoreParticles - 1];
 					ScoreParticles[ActiveScoreParticles - 1] = p;
 					ActiveScoreParticles--;
+					i--;
+				}
+				
+				// SELECTION MARKERS
+				for (int i = 0; i < ActiveSelectionMarkerParticles; ++i) {
+					Particle p = SelectionMarkerParticles[i];
+					p.time += dt;
+					p.size += p.size_delta;
+					p.position -= p.size_delta/2.0f;
+					p.color.W -= dt/p.lifetime;
+				}
+				for (int i=0; i < ActiveSelectionMarkerParticles; ++i) {
+					Particle p = SelectionMarkerParticles[i];
+					
+					if (p.size.X <= 0.0f || p.size.Y <= 0.0f) {
+						p.time = p.lifetime;
+					}
+					if (p.time < p.lifetime) {
+						continue;
+					}
+					SelectionMarkerParticles[i] = SelectionMarkerParticles[ActiveSelectionMarkerParticles -1];
+					SelectionMarkerParticles[ActiveSelectionMarkerParticles -1] = p;
+					ActiveSelectionMarkerParticles--;
 					i--;
 				}
 			}
@@ -639,6 +665,44 @@ namespace Crystallography
 				Director.Instance.GL.Context.SetShaderProgram(null);
 				Director.Instance.GL.Context.SetVertexBuffer(0, null);
 				Director.Instance.GL.ModelMatrix.Pop();
+				
+				Director.Instance.GL.ModelMatrix.Push();
+				Director.Instance.GL.ModelMatrix.SetIdentity();
+
+				ShaderProgram.SetUniformValue(ShaderProgram.FindUniform("MVP"), ref transform);
+				
+
+				ShaderProgram.SetAttributeBinding(0, "iPosition");
+				ShaderProgram.SetAttributeBinding(1, "iUV");
+				ShaderProgram.SetAttributeBinding(2, "iColor");
+
+				Director.Instance.GL.Context.SetShaderProgram(ShaderProgram);
+				
+				Common.Assert( ActiveQualityParticles <= imm_quads.MaxQuads );
+
+				imm_quads.ImmBeginQuads( (uint)ActiveSelectionMarkerParticles );
+				
+				for (int i = 0; i < ActiveSelectionMarkerParticles; ++i)
+				{
+					Particle p = SelectionMarkerParticles[i];
+					y1 = 0.0f;
+					y2 = 1.0f;
+					x1 = 0.0f;
+					x2 = 1.0f;
+					Director.Instance.GL.Context.SetTexture(0, ParticleSelectionMarkerTexture);
+					imm_quads.ImmAddQuad( 
+					new VertexData() { position = p.position + new Vector2(0, 0), uv = new Vector2(x1, y1), color = p.color },
+					new VertexData() { position = p.position + new Vector2(p.size.X, 0), uv = new Vector2(x2, y1), color = p.color },
+					new VertexData() { position = p.position + new Vector2(0, p.size.Y), uv = new Vector2(x1, y2), color = p.color },
+					new VertexData() { position = p.position + new Vector2(p.size.X, p.size.Y), uv = new Vector2(x2, y2), color = p.color } );
+					
+				}
+
+				imm_quads.ImmEndQuads();
+
+				Director.Instance.GL.Context.SetShaderProgram(null);
+				Director.Instance.GL.Context.SetVertexBuffer(0, null);
+				Director.Instance.GL.ModelMatrix.Pop();
 			}
 
 //			public void AddParticlesBurst(int count, Vector2 position, Vector2 velocity, Vector4 color, float jitter = 0.0f, float scale_multiplier = 1.0f)
@@ -681,7 +745,7 @@ namespace Crystallography
 				p.color = color;
 				p.time = 0.0f;
 				p.lifetime = 0.3f;
-				p.size = Vector2.One * scale_multiplier;
+				p.size = new Vector2( scale_multiplier, scale_multiplier);
 				p.velocity = Vector2.Zero;
 				p.size_delta = new Vector2(1.5f);
 				p.type = (int)ParticleType.QUALITY;
@@ -716,6 +780,34 @@ namespace Crystallography
 				ActiveScoreParticles++;
 			}
 			
+			public void AddSelectionMarkerParticle( SelectionGroup pParent, Vector4 pColor) {
+				if (ActiveScoreParticles >= ScoreParticles.Count) {
+#if DEBUG
+					System.Console.WriteLine("Hit Max Particle Count(" + ScoreParticles.Count.ToString() + "! Particle not created.");
+#endif
+					return;		
+				}
+				
+				Particle p = SelectionMarkerParticles[ActiveSelectionMarkerParticles];
+				p.variant = 0;
+//				p.parent = pParent;
+				p.size = new Vector2( 32.0f, 32.0f);
+				p.size_delta = new Vector2(3.0f, 3.0f);
+				p.offset = -0.5f*p.size;
+				p.position = InputManager.Instance.TouchPosition + p.offset;
+//				p.position = pParent.getNode().LocalToWorld(pParent.getNode().Pivot) + p.offset;
+				p.color = pColor;
+				p.time = 0.0f;
+				p.lifetime = 1.0f;
+				
+//				p.offset = new Vector2( 0.5f * p.size.X, 0.5f * p.size.Y);
+//				p.size_delta = Vector2.Zero;
+//				p.velocity = -0.3f * p.lifetime * gravity + Vector2.UnitX * GameScene.Random.NextSign()*(50.0f + 50.0f * GameScene.Random.NextFloat());
+				p.velocity = Vector2.Zero;
+				p.type = (int)ParticleType.SELECTION_MARKER;
+				ActiveSelectionMarkerParticles++;
+			}
+			
 			public void Destroy() {
 				imm_quads.Dispose();
 				Sce.PlayStation.HighLevel.GameEngine2D.Scheduler.Instance.Unschedule(this, Tick);
@@ -724,26 +816,19 @@ namespace Crystallography
 				ParticleDotTexture.Dispose();
 				foreach (Particle p in QualityParticles) {
 					p.parent = null;
-//					p.position = null;
-//					p.offset = null;
-//					p.color = null;
-//					p.velocity = null;
-//					p.size = null;
-//					p.size_delta = null;
 				}
 				QualityParticles.Clear();
 				QualityParticles = null;
 				foreach (Particle p in ScoreParticles) {
 					p.parent = null;
-//					p.position = null;
-//					p.offset = null;
-//					p.color = null;
-//					p.velocity = null;
-//					p.size = null;
-//					p.size_delta = null;
 				}
 				ScoreParticles.Clear();
 				ScoreParticles = null;
+				foreach (Particle p in SelectionMarkerParticles) {
+					p.parent = null;
+				}
+				SelectionMarkerParticles.Clear();
+				SelectionMarkerParticles = null;
 //				gravity = null;
 				Instance = null;
 			}
