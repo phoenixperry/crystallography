@@ -191,9 +191,9 @@ namespace Crystallography
 			this.SwipePanels = null;
 			LevelSelectTitleText = null;
 			LevelSelectInstructionsText = null;
-			StatsTitleText = null;
+//			StatsTitleText = null;
 			
-			StatFramesImg = null;
+//			StatFramesImg = null;
 			BlackBlock1 = null;
 			BlackBlock2 = null;
 			
