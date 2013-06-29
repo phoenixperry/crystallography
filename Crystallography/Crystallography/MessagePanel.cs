@@ -33,7 +33,7 @@ namespace Crystallography
 		
 		// CONSTRUCTOR ------------------------------------------------------------------------------------------------------------
 		public MessagePanel (){
-			DismissDelay = 1.67f;
+			DismissDelay = 1.0f;
 			Height = 176.0f;
 			Width = 450.0f;
 			SlideInDirection = SlideDirection.UP;

@@ -162,7 +162,7 @@ namespace Crystallography
 			} ) );
 			sequence.Add( new MoveTo( Destination, 1.0f) );
 			sequence.Add( new CallFunc( () => {
-				Visible=false;
+//				Visible=false;
 				EventHandler handler = OnSlideOutComplete;
 				if ( handler != null ) {
 					handler( this, null );

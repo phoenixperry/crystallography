@@ -7,6 +7,7 @@
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Value="1" />
 		<Bonus Value="1" />
+		<Message Value="drag pieces together to make cubes." />
     </Level>
     <Level Value="1"> 
         <Color Red="0.011765" Green="1.0" Blue="0.741176" />
@@ -15,6 +16,7 @@
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack2" />
 		<Goal Value="3" />
+		<Message Value="all the sides of a cube must be the same or all the &#xA;sides must be different." />
     </Level>
     <Level Value="2">
         <Color Red="0.807843" Green="1.0" Blue="0.0" />
@@ -23,6 +25,7 @@
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack3" />
 		<Goal Value="3" />
+		<Message Value = "the orientation of each side cannot be changed." />
     </Level>
 	<Level Value="3">
         <Color Red="0.807843" Green="1.0" Blue="0.0" />
@@ -31,6 +34,7 @@
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack3" />
 		<Goal Value="6" />
+		<Message Value = "that's all there is to it!" />
     </Level>
 	<Level Value="4"> 
         <Color Red="0.011765" Green="1.0" Blue="0.741176" />
@@ -47,6 +51,7 @@
 		<Pattern Path="Application/assets/images/set4/gamePieces.png" />
 		<Sound Prefix="stack1" />
 		<Goal Value="9" />
+		<Message Value = "color is not the only quality. &#xA;this is pattern." />
     </Level>
     <Level Value="6">
 		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
@@ -55,6 +60,7 @@
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack1" />
 		<Goal Value="16" />
+		<Message Value = "each quality on each piece must obey the &#xA;All Same Or All Different rule" />
     </Level>
 	<Level Value="7">
 		<Color Red="0.807843" Green="1.0" Blue="0.0" />

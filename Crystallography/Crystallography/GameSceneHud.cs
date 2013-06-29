@@ -214,6 +214,7 @@ namespace Crystallography
 		// OVERRIDES -----------------------------------------------------------------------------------------------
 		
 		public override void Update (float dt) {
+			
 			if (_initialized == false) {
 				return;
 			}
@@ -365,6 +366,7 @@ namespace Crystallography
 			_messagePanel = new MessagePanel(){
 				Offset = new Vector2(480.0f, 0.0f),
 				Position = new Vector2(-400.0f, 0.0f),
+				Lifetime = 5.0f
 			};
 			
 //			MessageTitleText = new Label() {
@@ -397,12 +399,6 @@ namespace Crystallography
 //			_messagePanel.AddChild( MessageTitleText);
 //			_messagePanel.AddChild( MessageText);
 			this.AddChild(_messagePanel);
-			
-			Sequence sequence = new Sequence();
-			sequence.Add( new CallFunc( () => {_messagePanel.SlideIn();} ) );
-			sequence.Add( new DelayTime( 5.0f) );
-			sequence.Add( new CallFunc( () => {_messagePanel.SlideOut();} ) );
-			this.RunAction(sequence);
 			
 //			ScoreIcon = Support.SpriteUVFromFile("/Application/assets/images/UI/score_now.png");
 			ScoreIcon = Support.SpriteUVFromFile("/Application/assets/images/handIcon.png");
@@ -501,6 +497,16 @@ namespace Crystallography
 				GoalText.Text = Goal.ToString();
 				x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(GoalText.Text);
 				GoalText.Position = new Vector2(x, GoalText.Position.Y);
+			}
+			
+			_messagePanel.Text = LevelManager.Instance.Message;
+			if (_messagePanel.Text != "") {
+				_messagePanel.SlideIn();
+//				Sequence sequence = new Sequence();
+//				sequence.Add( new CallFunc( () => {_messagePanel.SlideIn();} ) );
+//				sequence.Add( new DelayTime( 5.0f) );
+//				sequence.Add( new CallFunc( () => {_messagePanel.SlideOut();} ) );
+//				this.RunAction(sequence);
 			}
 		}
 		
