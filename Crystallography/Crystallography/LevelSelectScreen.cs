@@ -16,13 +16,13 @@ namespace Crystallography
 		
 		Label LevelSelectTitleText;
 		Label LevelSelectInstructionsText;
-		Label StatsTitleText;
+//		Label StatsTitleText;
 		Label LevelNumberText;
-		Label LevelScoreText;
+//		Label LevelScoreText;
 //		Label LevelTimeText;
 //		Label LevelGradeText;
 		
-		SpriteTile StatFramesImg;
+//		SpriteTile StatFramesImg;
 		SpriteTile BlackBlock1;
 		SpriteTile BlackBlock2;
 		
@@ -74,41 +74,44 @@ namespace Crystallography
 			BlackBlock2.Scale = BlackBlock1.Scale;
 			this.AddChild (BlackBlock2);
 			
-			StatFramesImg = Support.SpriteFromFile("/Application/assets/images/UI/statsBox.png");
-			StatFramesImg.Position = new Vector2(638.0f, 212.0f);
-			this.AddChild(StatFramesImg);
+//			StatFramesImg = Support.SpriteFromFile("/Application/assets/images/UI/statsBox.png");
+//			StatFramesImg.Position = new Vector2(638.0f, 212.0f);
+//			this.AddChild(StatFramesImg);
 			
 			LevelNumberText = new Label(){
-				Text = SelectedLevel.ToString("000"),
-				Position = new Vector2(19.0f, 215.0f),
-				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Regular") )
+				Text = SelectedLevel.ToString("00"),
+				Position = new Vector2(638.0f, 212.0f),
+				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 102, "Bold") ),
+				Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f)
 			};
-			StatFramesImg.AddChild(LevelNumberText);
+			CenterText();
+//			StatFramesImg.AddChild(LevelNumberText);
+			this.AddChild(LevelNumberText);
 			
-			LevelScoreText = new Label(){
-				Text = DataStorage.puzzleScores[SelectedLevel].ToString(),
-				Position = new Vector2(19.0f, 157.0f),
-				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Regular") )
-			};
-			StatFramesImg.AddChild(LevelScoreText);
+//			LevelScoreText = new Label(){
+//				Text = DataStorage.puzzleScores[SelectedLevel].ToString(),
+//				Position = new Vector2(19.0f, 157.0f),
+//				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Regular") )
+//			};
+//			StatFramesImg.AddChild(LevelScoreText);
 			
-			StatsTitleText = new Label(){
-				Text="stats",
-				Position = new Vector2(672.0f, 471.0f),
-				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Regular") )
-			};
-			this.AddChild(StatsTitleText);
+//			StatsTitleText = new Label(){
+//				Text="stats",
+//				Position = new Vector2(672.0f, 471.0f),
+//				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Regular") )
+//			};
+//			this.AddChild(StatsTitleText);
 			
 			LevelSelectTitleText = new Label(){
 				Text="select a level",
-				Position = new Vector2(74.0f, 458.0f),
+				Position = new Vector2(18.0f, 478.0f),
 				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Regular") )
 			};
 			this.AddChild(LevelSelectTitleText);
 			
 			LevelSelectInstructionsText = new Label(){
-				Text="select a cube and then press start",
-				Position = new Vector2(76.0f, 435.0f),
+				Text="select a cube and then press play.",
+				Position = new Vector2(18.0f, 455.0f),
 				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Regular") )
 			};
 			this.AddChild(LevelSelectInstructionsText);
@@ -147,8 +150,9 @@ namespace Crystallography
 			Indicator.Parent.RemoveChild(Indicator, false);
 			(sender as LevelSelectItem).AddChild(Indicator);
 			SelectedLevel = e.ID;
-			LevelNumberText.Text = SelectedLevel.ToString("000");
-			LevelScoreText.Text = DataStorage.puzzleScores[SelectedLevel].ToString();
+			LevelNumberText.Text = SelectedLevel.ToString("00");
+			CenterText();
+//			LevelScoreText.Text = DataStorage.puzzleScores[SelectedLevel].ToString();
 		}
 		
 		// OVERRIDES ----------------------------------------------------------------------------------------------------------------------------
@@ -199,6 +203,11 @@ namespace Crystallography
 		
 		// METHODS ------------------------------------------------------------------------------------------------------------------------------
 		
+		protected void CenterText() {
+			var textWidth = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 102, "Bold").GetTextWidth(LevelNumberText.Text);
+			LevelNumberText.Position = new Vector2(638 + 0.5f * (322 - textWidth), LevelNumberText.Position.Y);
+		}
+		
 		// DESTRUCTOR ---------------------------------------------------------------------------------------------------------------------------
 #if DEBUG
 		~LevelSelectScreen() {
@@ -225,10 +234,13 @@ namespace Crystallography
 				Console.WriteLine(baseIndex + "/" + GameScene.TOTAL_LEVELS);
 #endif
 			}
+			// HACK -- THIS ENSURES THAT QColor HAS BEEN INITIALIZED, BUT IT'S KIND OF DUMB THAT WE HAVE TO DO THAT. MAYBE JUST HARD CODE THE COLORS HERE?
+			var temp = QColor.Instance.allDifferentScore;
 			for ( int i=0; i < buttonCount; i++ ) {
 				LevelSelectItem item = new LevelSelectItem();
 				item.LevelID = i + baseIndex;
 				item.Position = new Vector2(0.125f*Width + 0.25f*Width*(i%4), Height - 0.167f*Height - 0.333f*Height*((i-(i%4))/4));
+				(item.Button.getNode() as SpriteTile).Color = QColor.palette[i%3];
 				Items.Add(item);
 				this.AddChild(item);
 			}
