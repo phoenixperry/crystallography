@@ -19,8 +19,8 @@ namespace Crystallography
 		Label StatsTitleText;
 		Label LevelNumberText;
 		Label LevelScoreText;
-		Label LevelTimeText;
-		Label LevelGradeText;
+//		Label LevelTimeText;
+//		Label LevelGradeText;
 		
 		SpriteTile StatFramesImg;
 		SpriteTile BlackBlock1;
@@ -37,11 +37,19 @@ namespace Crystallography
 			SelectedLevel = 0;
 			MenuSystem = pMenuSystem;
 			
+			var pages = FMath.Ceiling(GameScene.TOTAL_LEVELS / (float)LevelPage.ITEMS_PER_PAGE);
+			
 			Panels = new List<Node>{
-				new LevelPage(0),
-				new LevelPage(1),
-				new LevelPage(2)
+//				new LevelPage(0),
+//				new LevelPage(1),
+//				new LevelPage(2)
 			};
+			
+			for (int i=0; i < pages; i++) {
+				Panels.Add( new LevelPage(i) );
+				(Panels[i] as LevelPage).Disable();
+			}
+			(Panels[0] as LevelPage).Enable();
 			
 			this.SwipePanels = new SwipePanels(Panels) {
 				Width = 567.0f,
@@ -151,6 +159,22 @@ namespace Crystallography
 			LevelSelectItem.LevelSelectionDetected += HandleLevelSelectItemLevelSelectionDetected;
 			BackButton.ButtonUpAction += HandleBackButtonButtonUpAction;
 			PlayButton.ButtonUpAction += HandlePlayButtonButtonUpAction;
+			this.SwipePanels.OnSwipeComplete += HandleSwipePanelshandleOnSwipeComplete;
+//			this.SwipePanels.OnSwipeStart += HandleSwipePanelshandleOnSwipeStart;
+		}
+
+//		void HandleSwipePanelshandleOnSwipeStart (object sender, EventArgs e)
+		
+
+		void HandleSwipePanelshandleOnSwipeComplete (object sender, EventArgs e)
+		{
+			if (this.SwipePanels.LeftPage != null) {
+				(this.SwipePanels.LeftPage as LevelPage).Disable();
+			}
+			if (this.SwipePanels.RightPage != null) {
+				(this.SwipePanels.RightPage as LevelPage).Disable();
+			}
+			(this.SwipePanels.ActivePage as LevelPage).Enable();
 		}
 		
 		public override void OnExit ()
@@ -189,7 +213,7 @@ namespace Crystallography
 	// HELPER CLASSES =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 	
 	public class LevelPage : Node {
-		static readonly int ITEMS_PER_PAGE = 12;
+		public static readonly int ITEMS_PER_PAGE = 12;
 		static float Width = 567.0f;
 		static float Height = 396.0f;
 		public List<LevelSelectItem> Items {get; private set;}
@@ -213,11 +237,29 @@ namespace Crystallography
 			}
 		}
 		
+		// OVERRIDES ------------------------------------------------------------------------------------------------------------------------------
+		
 		public override void OnExit ()
 		{
 			base.OnExit ();
 			Items.Clear();
 		}
+		
+		// METHODS --------------------------------------------------------------------------------------------------------------------------------
+		
+		public void Enable() {
+			foreach (LevelSelectItem item in Items ) {
+				item.Button.on = true;
+			}
+		}
+		
+		public void Disable() {
+			foreach (LevelSelectItem item in Items ) {
+				item.Button.on = false;
+			}
+		}
+		
+		// DESTRUCTOR -----------------------------------------------------------------------------------------------------------------------------
 #if DEBUG
 		~LevelPage() {
 			Console.WriteLine(GetType().ToString() + " " + "Deleted");

@@ -68,14 +68,11 @@ namespace Crystallography
 				break;
 			case ("Title"):
 				Screen = new TitleScreen(this);
-//				UISystem.SetScene( new Crystallography.UI.SplashScene() );
 				break;
 			case ("Menu"):
 				Screen = new MainMenuScreen(this);
-//				UISystem.SetScene ( new Crystallography.UI.MenuScene() );
 				break;
 			case ("Level Select"):
-//				UISystem.SetScene ( new Crystallography.UI.LevelSelectScene() );
 				Screen = new LevelSelectScreen(this);
 				break;
 			case ("Credits"):
@@ -85,7 +82,6 @@ namespace Crystallography
 				Screen = new InstructionsScreen(this);
 				break;
 			default:
-//				UISystem.SetScene ( new Crystallography.UI.SplashScene() );
 				break;
 			}
 			this.AddChild(Screen);

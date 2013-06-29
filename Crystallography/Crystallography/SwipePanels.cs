@@ -17,6 +17,9 @@ namespace Crystallography
 		
 		public float Width {get; set;}
 		
+		public event EventHandler OnSwipeStart;
+		public event EventHandler OnSwipeComplete;
+		
 		new public Vector2 Position {
 			get {return base.Position;}
 			set {
@@ -32,6 +35,10 @@ namespace Crystallography
 				}
 			}
 		}
+		
+		public Node ActivePage {get {return AnchorPoints[1].Node;} }
+		public Node LeftPage   {get {return AnchorPoints[0].Node;} }
+		public Node RightPage  {get {return AnchorPoints[2].Node;} }
 		
 		// CONSTRUCTOR --------------------------------------------------------------------------------------------------------------
 		
@@ -109,6 +116,15 @@ namespace Crystallography
 				} );
 				point.Node.ScheduleUpdate(0);
 			}
+			Sequence sequence = new Sequence();
+			sequence.Add( new DelayTime(0.35f) );
+			sequence.Add ( new CallFunc( () => {
+				EventHandler handler = OnSwipeComplete;
+				if ( handler != null ) {
+					handler( this, null );
+				}
+			} ) );
+			this.RunAction(sequence);
 		}
 		
 		void HandleInputManagerInstanceTouchDownDetected (object sender, SustainedTouchEventArgs e) {
@@ -132,6 +148,7 @@ namespace Crystallography
 		}
 		
 		void HandleInputManagerInstanceTouchJustDownDetected (object sender, BaseTouchEventArgs e) {
+			this.StopAllActions();
 			TouchVelocity = 0.0f;
 			TouchStartPosition = e.touchPosition;
 			TouchPosition = TouchStartPosition.Xy;
@@ -141,6 +158,10 @@ namespace Crystallography
 				}
 				point.Node.StopAllActions();
 			}
+			EventHandler handler = OnSwipeStart;
+				if ( handler != null ) {
+					handler( this, null );
+				}
 		}
 		
 		// OVERRIDES ---------------------------------------------------------------------------------------------------------------------
