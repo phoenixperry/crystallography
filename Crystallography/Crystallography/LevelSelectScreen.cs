@@ -59,7 +59,7 @@ namespace Crystallography
 			// BLACK MASKS TO HIDE MORE LEVELS BEHIND
 			BlackBlock1 = Support.UnicolorSprite("BlackBlock", 0,0,0,255);
 			BlackBlock1.Scale = new Vector2(35.4375f, 24.75f);
-			BlackBlock1.Position = new Vector2(585.0f, 46.0f);
+			BlackBlock1.Position = new Vector2(637.0f, 46.0f);
 			this.AddChild(BlackBlock1);
 			BlackBlock2 = Support.UnicolorSprite("BlackBlock", 0,0,0,255);
 			BlackBlock2.Position = new Vector2(-549.0f, 46.0f);
