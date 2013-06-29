@@ -21,6 +21,7 @@ namespace Crystallography
 			}
 			set {
 				MessageText.Text = value;
+				CenterText();
 			}
 		}
 		
@@ -33,7 +34,7 @@ namespace Crystallography
 		
 		public NextLevelPanel () {
 			DismissDelay = 0.0f;
-			Height = 176.0f;
+//			Height = 176.0f;
 			Width = 448.0f;
 			
 			Background = Support.UnicolorSprite("Grey", 40, 40, 40, 200);
@@ -41,10 +42,11 @@ namespace Crystallography
 			this.AddChild(Background);
 			
 			MessageText = new Label() {
-				Text = "Lorem ipsum dolor sit amet",
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold" ) ),
+//				Text = "Lorem ipsum dolor sit amet",
+				Text = "you clever thing.",
+				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold" ) ),
 				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
-				Position = new Vector2(40.0f, 102.0f)
+//				Position = new Vector2(40.0f, 95.0f)
 			};
 			this.AddChild( MessageText );
 			
@@ -67,7 +69,10 @@ namespace Crystallography
 			NextLevelButton.Visible = true;
 			this.AddChild(NextLevelButton.getNode());
 			
-			
+			var charHeight = MessageText.FontMap.CharPixelHeight;
+			Height = (charHeight * 3.0f) + QuitButton.Height;
+			MessageText.Position = new Vector2(40.0f, QuitButton.Height + charHeight );
+			CenterText();
 		}
 		
 		// EVENT HANDLERS ----------------------------------------------------------------------------------------------------------------------------------------
@@ -127,6 +132,13 @@ namespace Crystallography
 			OnSlideInComplete -= HandleOnSlideInComplete;
 			OnSlideOutStart -= HandleOnSlideOutStart;
 			base.OnExit ();
+		}
+		
+		// METHODS ----------------------------------------------------------------------------------------------------------------------------------------------
+		
+		protected void CenterText() {
+			var textWidth = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold").GetTextWidth(Text);
+			MessageText.Position = new Vector2(0.5f * (Width - textWidth), MessageText.Position.Y);
 		}
 		
 		// DESTRUCTOR -------------------------------------------------------------------------------------------------------------
