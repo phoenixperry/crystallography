@@ -50,7 +50,7 @@ namespace Crystallography
 			
 			MessageTitleText = new Label() {
 				Text = "Lorem ipsum dolor sit amet, consectetur",
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25) ),
+				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold") ),
 				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
 				Position = new Vector2(40.0f, 135.0f)
 			};
@@ -66,7 +66,7 @@ namespace Crystallography
 //					"fugiat nulla pariatur. Excepteur sint occaecat cupidatat \n" +
 //					"non proident, sunt in culpa qui officia deserunt mollit \n" +
 //					"anim id est laborum.",
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18) ),
+				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25) ),
 				Position = new Vector2(40.0f, 107.0f)
 			};
 			this.AddChild(MessageText);

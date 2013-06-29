@@ -499,8 +499,9 @@ namespace Crystallography
 				GoalText.Position = new Vector2(x, GoalText.Position.Y);
 			}
 			
-			_messagePanel.Text = LevelManager.Instance.Message;
-			if (_messagePanel.Text != "") {
+			_messagePanel.Text = LevelManager.Instance.MessageBody;
+			_messagePanel.TitleText = LevelManager.Instance.MessageTitle;
+			if (_messagePanel.Text != "" || _messagePanel.TitleText != "") {
 				_messagePanel.SlideIn();
 //				Sequence sequence = new Sequence();
 //				sequence.Add( new CallFunc( () => {_messagePanel.SlideIn();} ) );

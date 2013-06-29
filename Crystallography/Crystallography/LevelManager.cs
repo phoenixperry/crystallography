@@ -39,7 +39,8 @@ namespace Crystallography
 		public bool SoundGlow     { get; set; }
 		public int Goal	          { get; set; }
 		public int Bonus          { get; set; }
-		public string Message     { get; set; }
+		public string MessageBody { get; set; }
+		public string MessageTitle{ get; set; }
 		
 		// CONSTRUCTORS -----------------------------------------------------------
 		
@@ -89,7 +90,8 @@ namespace Crystallography
 							} else if (line.Name.LocalName == "Bonus") {
 								Bonus = (int)line.Attribute("Value");
 							} else if (line.Name.LocalName == "Message") {
-								Message = (line.Attribute("Value").Value);
+								MessageBody = line.Attribute("Body").Value;
+								MessageTitle = line.Attribute("Title").Value;
 							}
 						}
 						return;
@@ -115,7 +117,8 @@ namespace Crystallography
 			SoundPrefix = "stack1";
 			Goal = 1;
 			Bonus = 0;
-			Message = "";
+			MessageBody = "";
+			MessageTitle = "";
 		}
 		
 		public void Reset() {
