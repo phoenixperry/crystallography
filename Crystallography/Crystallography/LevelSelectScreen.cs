@@ -160,11 +160,7 @@ namespace Crystallography
 			BackButton.ButtonUpAction += HandleBackButtonButtonUpAction;
 			PlayButton.ButtonUpAction += HandlePlayButtonButtonUpAction;
 			this.SwipePanels.OnSwipeComplete += HandleSwipePanelshandleOnSwipeComplete;
-//			this.SwipePanels.OnSwipeStart += HandleSwipePanelshandleOnSwipeStart;
 		}
-
-//		void HandleSwipePanelshandleOnSwipeStart (object sender, EventArgs e)
-		
 
 		void HandleSwipePanelshandleOnSwipeComplete (object sender, EventArgs e)
 		{
@@ -182,6 +178,7 @@ namespace Crystallography
 			LevelSelectItem.LevelSelectionDetected -= HandleLevelSelectItemLevelSelectionDetected;
 			BackButton.ButtonUpAction -= HandleBackButtonButtonUpAction;
 			PlayButton.ButtonUpAction -= HandlePlayButtonButtonUpAction;
+			this.SwipePanels.OnSwipeComplete -= HandleSwipePanelshandleOnSwipeComplete;
 			
 			base.OnExit ();
 			

@@ -16,7 +16,7 @@
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack2" />
 		<Goal Value="3" />
-		<Message Title="the rule." Body="all the sides of a cube must be the same &#xA;                            or &#xA;       all the sides must be different." />
+		<Message Title="the rule." Body="all the sides of a cube must be the same &#xA;or all the sides must be different." />
     </Level>
     <Level Value="2">
         <Color Red="0.807843" Green="1.0" Blue="0.0" />
@@ -43,6 +43,7 @@
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack2" />
 		<Goal Value="9" />
+		<Message  Title="break it up" Body="you can double-tap a group of two to &#xA;break it apart. &#xA;&#xA;use the reset button to start all over." />
     </Level>
 	<Level Value="5">
         <Color Red="0.956863" Green="0.917647" Blue="0.956863" />
@@ -77,7 +78,7 @@
 		<Pattern Path="Application/assets/images/set4/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Value="3" />
-		<Message Title="noise reduction." Body="not every trait is visual. &#xA;touch a piece and listen to the sound it makes." />
+		<Message Title="noise reduction." Body="not every trait is visual. &#xA;&#xA;touch a piece and listen to the sound it &#xA;makes." />
     </Level>
 	<Level Value="9">
 		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
