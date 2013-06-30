@@ -135,9 +135,9 @@ namespace Crystallography
 					temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold");
 					temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 102, "Bold");
 				},
-				() => {
-					var temp = Support.TiledSpriteFromFile("Application/assets/images/next_level_sm.png", 1, 3);
-				},
+//				() => {
+//					var temp = Support.TiledSpriteFromFile("Application/assets/images/next_level_sm.png", 1, 3);
+//				},
 				() => {
 					var temp = Support.SpriteFromFile("/Application/assets/images/GameHudBar.png");
 				},
