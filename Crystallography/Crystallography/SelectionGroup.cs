@@ -18,7 +18,7 @@ namespace Crystallography
 		
 		private AbstractCrystallonEntity lastEntityReleased;
 		private Vector2 lastPosition;
-		private SpriteTile selectionMarker;
+//		private SpriteTile selectionMarker;
 		
 		
 		public event EventHandler<CubeCompleteEventArgs>       CubeCompleteDetected;
@@ -40,6 +40,7 @@ namespace Crystallography
 			}
 		}
 		
+		public EaseState easeState { get; private set; }
 		public float velocity { get; private set; }
 		
 		// CONSTRUCTOR -----------------------------------------------------------
@@ -145,7 +146,7 @@ namespace Crystallography
 		{
 			if ( GameScene.paused ) return;
 			
-			if ( population > 0 ) {
+			if ( population > 0 && (easeState == EaseState.OUT || easeState == EaseState.MOVING_OUT) ) {
 				EaseIn();
 			}
 			
@@ -225,6 +226,12 @@ namespace Crystallography
 			return base.Add (pEntity);
 		}
 		
+		public override AbstractCrystallonEntity BeReleased (Vector2 position)
+		{
+			// SelectionGroup should never be released.
+			return null;
+		}
+		
 		public override void RemoveAll ()
 		{
 			base.RemoveAll ();
@@ -255,6 +262,8 @@ namespace Crystallography
 		/// If the group had 3 members, we also test to see whether it was a valid match.
 		/// </summary>
 		private void EaseIn( bool pForceBreak = false ) {
+			easeState = EaseState.MOVING_IN;
+			
 			for (int i=0; i<MAX_CAPACITY; i++) {
 				_pucks[i].StopAllActions();
 			}
@@ -279,8 +288,16 @@ namespace Crystallography
 				}
 			}
 			Sequence releaseDelay = new Sequence();
-			releaseDelay.Add ( new DelayTime( 0.25f ) );
-			releaseDelay.Add ( new CallFunc( () => Release( this, pForceBreak ) ) );
+			if ( population > 0 ) {
+				releaseDelay.Add ( new DelayTime( 0.25f ) );
+				releaseDelay.Add ( new CallFunc( () => {
+					Release( this, pForceBreak );
+					easeState = EaseState.IN;
+				} ) );
+			}
+//			releaseDelay.Add ( new CallFunc( () => {
+//				easeState = EaseState.IN;
+//			} ) );
 			_scene.RunAction( releaseDelay );
 		}
 		
@@ -289,6 +306,8 @@ namespace Crystallography
 		/// This is to correct for the player's sausage-like fingers obscuring the current selection.
 		/// </summary>
 		private void EaseOut() {
+			easeState = EaseState.MOVING_OUT;
+			
 			for (int i=0; i<MAX_CAPACITY; i++) {
 				_pucks[i].StopAllActions();
 			}
@@ -314,6 +333,7 @@ namespace Crystallography
 			} else {
 				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
 			           	 	{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
+				sequence.Add( new CallFunc( () => {easeState = EaseState.OUT;} ) );
 			}
 			_pucks[2].RunAction( sequence );
 		}
@@ -486,6 +506,7 @@ namespace Crystallography
 			lastPosition = getPosition();
 			lastEntityReleased = null;
 			_scene = pScene;
+			easeState = EaseState.IN;
 		}
 		
 		/// <summary>
@@ -593,5 +614,11 @@ namespace Crystallography
 	}
 	public class CubeGroupCompleteEventArgs : EventArgs {
 		public CubeCrystallonEntity[] members;
+	}
+	public enum EaseState {
+		IN = 0,
+		OUT = 1,
+		MOVING_IN = 2,
+		MOVING_OUT = 3
 	}
 }
