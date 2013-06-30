@@ -439,7 +439,8 @@ namespace Crystallography
 				RedBox.AddChild(GoalText);
 				
 				RestartButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-				RestartButton.setPosition( 748.0f, 509.0f );
+//				RestartButton.setPosition( 748.0f, 509.0f );
+				RestartButton.setPosition( 636.0f, 509.0f );
 				this.AddChild(RestartButton.getNode());
 				RestartButton.ButtonUpAction += HandleRestartButtonButtonUpAction;
 			} else {
@@ -464,7 +465,8 @@ namespace Crystallography
 			}
 			
 			HitMeButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/hitMe.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			HitMeButton.setPosition(883.0f, 509.0f);
+//			HitMeButton.setPosition(883.0f, 509.0f);
+			HitMeButton.setPosition(863.0f, 509.0f);
 			this.AddChild(HitMeButton.getNode());
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
 			

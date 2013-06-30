@@ -338,6 +338,8 @@
     <Content Include="assets\images\SelectionMarker.png" />
     <Content Include="assets\audio\sfx\stack1threetiles.wav" />
     <Content Include="assets\images\UI\header.png" />
+    <Content Include="assets\images\levelBackBtn.png" />
+    <Content Include="assets\images\levelPlayBtn.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

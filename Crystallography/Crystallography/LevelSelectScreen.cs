@@ -52,8 +52,10 @@ namespace Crystallography
 			(Panels[0] as LevelPage).Enable();
 			
 			this.SwipePanels = new SwipePanels(Panels) {
-				Width = 567.0f,
-				Position = new Vector2(18.0f, 46.0f)
+//				Width = 567.0f,
+				Width = 457.0f,
+//				Position = new Vector2(18.0f, 46.0f)
+				Position = new Vector2(95.0f,46.0f)
 			};
 			this.AddChild(this.SwipePanels);
 			
@@ -66,11 +68,13 @@ namespace Crystallography
 			
 			// BLACK MASKS TO HIDE MORE LEVELS BEHIND
 			BlackBlock1 = Support.UnicolorSprite("BlackBlock", 0,0,0,255);
-			BlackBlock1.Scale = new Vector2(35.4375f, 24.75f);
-			BlackBlock1.Position = new Vector2(637.0f, 46.0f);
+			BlackBlock1.Scale = new Vector2(28.5625f, 24.75f);
+//			BlackBlock1.Position = new Vector2(637.0f, 46.0f);
+			BlackBlock1.Position = new Vector2(588.0f, 46.0f);
 			this.AddChild(BlackBlock1);
 			BlackBlock2 = Support.UnicolorSprite("BlackBlock", 0,0,0,255);
-			BlackBlock2.Position = new Vector2(-549.0f, 46.0f);
+//			BlackBlock2.Position = new Vector2(-549.0f, 46.0f);
+			BlackBlock2.Position = new Vector2(-397.0f, 46.0f);
 			BlackBlock2.Scale = BlackBlock1.Scale;
 			this.AddChild (BlackBlock2);
 			
@@ -82,6 +86,7 @@ namespace Crystallography
 				Text = SelectedLevel.ToString("00"),
 				Position = new Vector2(638.0f, 212.0f),
 				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 102, "Bold") ),
+//				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 150, "Bold") ),
 				Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f)
 			};
 			CenterText();
@@ -104,26 +109,28 @@ namespace Crystallography
 			
 			LevelSelectTitleText = new Label(){
 				Text="select a level",
-				Position = new Vector2(18.0f, 478.0f),
+				Position = new Vector2(60.0f, 488.0f),
 				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Regular") )
 			};
 			this.AddChild(LevelSelectTitleText);
 			
 			LevelSelectInstructionsText = new Label(){
 				Text="select a cube and then press play.",
-				Position = new Vector2(18.0f, 455.0f),
+				Position = new Vector2(60.0f, 465.0f),
 				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Regular") )
 			};
 			this.AddChild(LevelSelectInstructionsText);
 			
-			BackButton = new ButtonEntity("       back", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+			BackButton = new ButtonEntity("", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/levelBackBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//			BackButton = new ButtonEntity("       back", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			BackButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
-			BackButton.setPosition(816.0f, 105.0f);
+			BackButton.setPosition(776.0f, 105.0f);
 			this.AddChild(BackButton.getNode());
 			
-			PlayButton = new ButtonEntity("       play", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/redBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+			PlayButton = new ButtonEntity("", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/levelPlayBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//			PlayButton = new ButtonEntity("       play", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/redBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			PlayButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
-			PlayButton.setPosition(816.0f, 35.0f);
+			PlayButton.setPosition(776.0f, 35.0f);
 			this.AddChild(PlayButton.getNode());
 		}
 		
@@ -205,7 +212,7 @@ namespace Crystallography
 		
 		protected void CenterText() {
 			var textWidth = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 102, "Bold").GetTextWidth(LevelNumberText.Text);
-			LevelNumberText.Position = new Vector2(638 + 0.5f * (322 - textWidth), LevelNumberText.Position.Y);
+			LevelNumberText.Position = new Vector2(593 + 0.5f * (367 - textWidth), LevelNumberText.Position.Y);
 		}
 		
 		// DESTRUCTOR ---------------------------------------------------------------------------------------------------------------------------
@@ -220,7 +227,8 @@ namespace Crystallography
 	
 	public class LevelPage : Node {
 		public static readonly int ITEMS_PER_PAGE = 12;
-		static float Width = 567.0f;
+//		static float Width = 567.0f;
+		static float Width = 457.0f;
 		static float Height = 396.0f;
 		public List<LevelSelectItem> Items {get; private set;}
 		
@@ -228,8 +236,8 @@ namespace Crystallography
 			Items = new List<LevelSelectItem>();
 			int baseIndex = pPageNumber * ITEMS_PER_PAGE;
 			int buttonCount = ITEMS_PER_PAGE;
-			if ( GameScene.TOTAL_LEVELS < baseIndex + ITEMS_PER_PAGE - 1 ){
-				buttonCount = GameScene.TOTAL_LEVELS - baseIndex;
+			if ( GameScene.TOTAL_LEVELS - 1 < baseIndex + ITEMS_PER_PAGE - 1 ){
+				buttonCount = GameScene.TOTAL_LEVELS - 1 - baseIndex;
 #if DEBUG
 				Console.WriteLine(baseIndex + "/" + GameScene.TOTAL_LEVELS);
 #endif
