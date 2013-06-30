@@ -56,6 +56,9 @@ namespace Crystallography
 		
 		public override void OnExit ()
 		{
+			ResumeButton.ButtonUpAction -= HandleResumeButtonButtonUpAction;
+			GiveUpButton.ButtonUpAction -= HandleGiveUpButtonButtonUpAction;
+			InputManager.Instance.StartJustUpDetected -= HandleInputManagerInstanceStartJustUpDetected;
 			base.OnExit ();
 			
 			InputManager.Instance.StartJustUpDetected -= HandleInputManagerInstanceStartJustUpDetected;
@@ -78,22 +81,28 @@ namespace Crystallography
 			ResumeButton = new ButtonEntity("    resume", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			ResumeButton.setPosition(413.0f, 277.0f);
 			ResumeButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
+			ResumeButton.on = false;
 			this.AddChild(ResumeButton.getNode());
 			
 			GiveUpButton = new ButtonEntity("      give up", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/redBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			GiveUpButton.setPosition(694.0f, 277.0f);
 			GiveUpButton.label.FontMap = ResumeButton.label.FontMap;
+			GiveUpButton.on = false;
 			this.AddChild(GiveUpButton.getNode());
 		}
 		
 		public void Hide() {
 			this.Visible = false;
+			ResumeButton.on = false;
+			GiveUpButton.on = false;
 			ResumeButton.ButtonUpAction -= HandleResumeButtonButtonUpAction;
 			GiveUpButton.ButtonUpAction -= HandleGiveUpButtonButtonUpAction;
 		}
 		
 		public void Show() {
 			this.Visible = true;
+			ResumeButton.on = true;
+			GiveUpButton.on = true;
 			ResumeButton.ButtonUpAction += HandleResumeButtonButtonUpAction;
 			GiveUpButton.ButtonUpAction += HandleGiveUpButtonButtonUpAction;
 		}

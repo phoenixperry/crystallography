@@ -13,7 +13,7 @@ namespace Crystallography
 		SpriteUV GoalIcon;
 		SpriteUV BlueBox;
 		SpriteUV RedBox;
-		ButtonEntity NextLevelButton;
+//		ButtonEntity NextLevelButton;
 		ButtonEntity HitMeButton;
 		ButtonEntity RestartButton;
 		
@@ -204,7 +204,9 @@ namespace Crystallography
 		/// </summary>
 		void HandlePausePanelQuitButtonPressDetected (object sender, EventArgs e)
 		{
+			PausePanel.QuitButtonPressDetected -= HandlePausePanelQuitButtonPressDetected;
 			ExitCode = LevelExitCode.QUIT_MENU;
+			Console.WriteLine("=====================Pause Quit=====================");
 #if METRICS
 			DataStorage.CollectMetrics();
 #endif
