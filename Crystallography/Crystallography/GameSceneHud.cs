@@ -206,7 +206,6 @@ namespace Crystallography
 		{
 			PausePanel.QuitButtonPressDetected -= HandlePausePanelQuitButtonPressDetected;
 			ExitCode = LevelExitCode.QUIT_MENU;
-			Console.WriteLine("=====================Pause Quit=====================");
 #if METRICS
 			DataStorage.CollectMetrics();
 #endif
@@ -368,7 +367,7 @@ namespace Crystallography
 			_messagePanel = new MessagePanel(){
 				Offset = new Vector2(480.0f, 0.0f),
 				Position = new Vector2(-400.0f, 0.0f),
-				Lifetime = 5.0f
+				Lifetime = 0.0f
 			};
 			
 //			MessageTitleText = new Label() {

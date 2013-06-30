@@ -91,25 +91,25 @@ namespace Crystallography
 		{
 			if( GameScene.paused ) return;
 			
-//			var entity = GetEntityAtPosition( e.touchPosition );
-			if (lastEntityReleased!=null) {
-				if (lastEntityReleased is CubeCrystallonEntity) return;
-				if (lastEntityReleased.GetType().ToString() == "Crystallography.GroupCrystallonEntity") {
-					GroupCrystallonEntity g = lastEntityReleased as GroupCrystallonEntity;
-					MemberType = g.MemberType;
-				} else {
-					MemberType = lastEntityReleased.GetType ();
-				}
-			} else {
-				MemberType = null;
-			}
-			if(MemberType != null) {
-				Console.WriteLine(MemberType + " " + lastEntityReleased.id + " selected");
-			}
-			if (lastEntityReleased != null) {
-				Add (lastEntityReleased);
-				EaseOut();
-			}
+////			var entity = GetEntityAtPosition( e.touchPosition );
+//			if (lastEntityReleased!=null) {
+//				if (lastEntityReleased is CubeCrystallonEntity) return;
+//				if (lastEntityReleased.GetType().ToString() == "Crystallography.GroupCrystallonEntity") {
+//					GroupCrystallonEntity g = lastEntityReleased as GroupCrystallonEntity;
+//					MemberType = g.MemberType;
+//				} else {
+//					MemberType = lastEntityReleased.GetType ();
+//				}
+//			} else {
+//				MemberType = null;
+//			}
+//			if(MemberType != null) {
+//				Console.WriteLine(MemberType + " " + lastEntityReleased.id + " selected");
+//			}
+//			if (lastEntityReleased != null) {
+//				Add (lastEntityReleased);
+//				EaseOut();
+//			}
 		}
 		
 		/// <summary>
@@ -212,9 +212,41 @@ namespace Crystallography
 		{
 			if ( GameScene.paused ) return;
 			setPosition( e.touchPosition );
+			
+			Console.WriteLine("{0}, {1} : {2}", e.touchPosition.X, e.touchPosition.Y, population);
+			
 			if ( population > 0 ) {
 				if (velocity < MAXIMUM_PICKUP_VELOCITY) {
 					SnapTo();
+				}
+			} else if ( InputManager.dragging ) {
+				//			var entity = GetEntityAtPosition( e.touchPosition );
+				var entity = GetEntityAtPosition( e.touchPosition );
+				lastEntityReleased = entity as AbstractCrystallonEntity;
+				if (lastEntityReleased is AbstractCrystallonEntity) {
+					lastEntityReleased.playSound();
+				}
+				if (lastEntityReleased is CardCrystallonEntity) {
+					(lastEntityReleased as CardCrystallonEntity).ShowGlow();
+				}
+				
+				if (lastEntityReleased!=null) {
+					if (lastEntityReleased is CubeCrystallonEntity) return;
+					if (lastEntityReleased.GetType().ToString() == "Crystallography.GroupCrystallonEntity") {
+						GroupCrystallonEntity g = lastEntityReleased as GroupCrystallonEntity;
+						MemberType = g.MemberType;
+					} else {
+						MemberType = lastEntityReleased.GetType ();
+					}
+				} else {
+					MemberType = null;
+				}
+				if(MemberType != null) {
+					Console.WriteLine(MemberType + " " + lastEntityReleased.id + " selected");
+				}
+				if (lastEntityReleased != null) {
+					Add (lastEntityReleased);
+					EaseOut();
 				}
 			}
 		}

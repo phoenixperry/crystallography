@@ -16,7 +16,7 @@ namespace Crystallography
 		private static readonly float MAX_TAP_DISTANCE = 50;
 		
 		private static int tapCount;
-		private static bool dragging;
+//		private static bool dragging;
 		
 		protected static InputManager _instance;
 		
@@ -54,6 +54,7 @@ namespace Crystallography
 			}
 		}
 		
+		public static bool  dragging            { get; protected set; }
 		public static float lastPressDuration	{ get; protected set; }
 		public static float lastReleaseDuration { get; protected set; }
 		public static float pressDuration		{ get; protected set; }
