@@ -179,7 +179,6 @@ namespace Crystallography
 		/// <see cref="Crystallography.ICrystallonEntity"/>
 		/// </param>
 		public virtual GroupCrystallonEntity Add(ICrystallonEntity pEntity) {
-			
 			if ( population == 0 && !(this is SelectionGroup) ) {
 				//HACK honestly, this should never be null, I think...
 				if (pEntity != null) {
@@ -379,7 +378,7 @@ namespace Crystallography
 				}
 			}
 			return -1;
-			Array.FindIndex( members, (obj) => obj == null );
+//			Array.FindIndex( members, (obj) => obj == null );
 		}
 		
 		/// <summary>
