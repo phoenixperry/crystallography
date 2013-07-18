@@ -179,24 +179,30 @@ namespace Crystallography
 		/// <see cref="Crystallography.ICrystallonEntity"/>
 		/// </param>
 		public virtual GroupCrystallonEntity Add(ICrystallonEntity pEntity) {
+			// Idiot check
+			if ( pEntity == null ) {
+				return this;
+			}
+			
 			if ( population == 0 && !(this is SelectionGroup) ) {
-				//HACK honestly, this should never be null, I think...
-				if (pEntity != null) {
-					MemberType = pEntity.GetType();
-				}
+				MemberType = pEntity.GetType();
 			}
 			
 			if (pEntity is SpriteTileCrystallonEntity) {
 				return AddSpriteTile(pEntity as SpriteTileCrystallonEntity);
-			} else if ( pEntity is CubeCrystallonEntity ) { 
-				return AddCube( pEntity as CubeCrystallonEntity );
 			} else if  (pEntity is GroupCrystallonEntity) {
 				return AddGroup (pEntity as GroupCrystallonEntity);
-			}
+			} else if ( pEntity is CubeCrystallonEntity ) { 
+				return AddCube( pEntity as CubeCrystallonEntity );
+			} 
 			return this;
 		}
 		
 		public GroupCrystallonEntity AddCube( CubeCrystallonEntity pEntity ) {
+			// CHECK FOR SPACE IN GROUP
+			if (population + 1 > _maxMembers) {
+				return this;
+			}
 			IncreaseSlots( 1 );
 			members[GetFreeSlot()] = pEntity;
 			Attach (pEntity);
@@ -213,6 +219,10 @@ namespace Crystallography
 		/// <see cref="Crystallography.SpriteTileCrystallonEntity"/>
 		/// </param>
 		public GroupCrystallonEntity AddSpriteTile(SpriteTileCrystallonEntity pEntity) {
+			// CHECK FOR SPACE IN GROUP
+			if (population + 1 > _maxMembers) {
+				return this;
+			}
 			IncreaseSlots( 1 );
 			members[GetFreeSlot()] = pEntity;
 			Attach(pEntity);
@@ -229,6 +239,10 @@ namespace Crystallography
 		/// <see cref="Crystallography.GroupCrystallonEntity"/>
 		/// </param>
 		public GroupCrystallonEntity AddGroup( GroupCrystallonEntity pGroupEntity ) {
+			// CHECK FOR SPACE IN GROUP
+			if (population + pGroupEntity.population > _maxMembers) {
+				return this;
+			}
 			if (pGroupEntity.complete) {
 				IncreaseSlots( 1 );
 				members[GetFreeSlot()] = pGroupEntity;

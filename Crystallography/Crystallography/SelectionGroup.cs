@@ -17,6 +17,7 @@ namespace Crystallography
 		protected static readonly float MAXIMUM_PICKUP_VELOCITY = 400.0f;
 		
 		private AbstractCrystallonEntity lastEntityReleased;
+		private AbstractCrystallonEntity justDownPositionEntity;
 		private Vector2 lastPosition;
 //		private SpriteTile selectionMarker;
 		
@@ -184,19 +185,10 @@ namespace Crystallography
 				(lastEntityReleased as CardCrystallonEntity).ShowGlow();
 			}
 			
+			justDownPositionEntity = lastEntityReleased;
+			
 			AddParticle(0.0f);
 			Scheduler.Instance.Schedule(this.getNode(), AddParticle, 0.1f, false, 1);
-			
-			
-//			selectionMarker.Position = -0.5f*selectionMarker.CalcSizeInPixels();
-//			this.getNode().AddChild(selectionMarker);
-//			selectionMarker.Visible = true;
-			    
-//			MemberType = (entity!=null) ? entity.GetType() : null;	// -------------- Cards or Cubes?
-//			if (entity != null) {
-//				Add (entity);
-//				EaseOut();
-//			}
 		}
 		
 		/// <summary>
@@ -213,7 +205,7 @@ namespace Crystallography
 			if ( GameScene.paused ) return;
 			setPosition( e.touchPosition );
 			
-			Console.WriteLine("{0}, {1} : {2}", e.touchPosition.X, e.touchPosition.Y, population);
+			Console.WriteLine("{0}, {1}", justDownPositionEntity, lastEntityReleased);
 			
 			if ( population > 0 ) {
 				if (velocity < MAXIMUM_PICKUP_VELOCITY) {
@@ -221,14 +213,23 @@ namespace Crystallography
 				}
 			} else if ( InputManager.dragging ) {
 				//			var entity = GetEntityAtPosition( e.touchPosition );
-				var entity = GetEntityAtPosition( e.touchPosition );
-				lastEntityReleased = entity as AbstractCrystallonEntity;
-				if (lastEntityReleased is AbstractCrystallonEntity) {
-					lastEntityReleased.playSound();
-				}
-				if (lastEntityReleased is CardCrystallonEntity) {
-					(lastEntityReleased as CardCrystallonEntity).ShowGlow();
-				}
+				lastEntityReleased = GetEntityAtPosition( e.touchPosition ) as AbstractCrystallonEntity;
+//				if (justDownPositionEntity != null) { // ------------------------------------------------ EDGE CASE: PLAYER TOUCHED DOWN ON A PIECE, BUT DRAGGED OFF OF IT
+					if (justDownPositionEntity != lastEntityReleased ) { // -----------------------------            BEFORE WE ADDED IT TO THE SELECTION GROUP.
+						if (lastEntityReleased != null) {
+							Add (justDownPositionEntity); // -------------------------------------------- RARE:      PLAYER IS TOUCHING A DIFFERENT VALID PIECE BEFORE WE RESOLVED THE FIRST
+							if (lastEntityReleased is AbstractCrystallonEntity) {
+								lastEntityReleased.playSound();
+							}
+							if (lastEntityReleased is CardCrystallonEntity) {
+								(lastEntityReleased as CardCrystallonEntity).ShowGlow();
+							}
+						} else {
+							lastEntityReleased = justDownPositionEntity; // ----------------------------- COMMON:    PLAYER IS TOUCHING EMPTY SPACE
+						}
+					}
+					justDownPositionEntity = null;
+//				}
 				
 				if (lastEntityReleased!=null) {
 					if (lastEntityReleased is CubeCrystallonEntity) return;
