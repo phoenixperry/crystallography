@@ -90,7 +90,7 @@ namespace Crystallography
 		protected static bool Init() {
 			Director.Initialize();
 //			UISystem.Initialize(Director.Instance.GL.Context);
-			Director.Instance.RunWithScene( new MenuSystemScene("Splash"), true );
+			Director.Instance.RunWithScene( new Crystallography.UI.MenuSystemScene("Splash"), true );
 //			Director.Instance.RunWithScene( new TitleScene(), true );
 			
 			if ( false == DataStorage.LoadData() ) {

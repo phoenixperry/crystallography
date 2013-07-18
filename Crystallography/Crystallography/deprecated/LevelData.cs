@@ -1,6 +1,6 @@
 using System;
 
-namespace Crystallography
+namespace Crystallography.Deprecated
 {
 	public class LevelData
 	{

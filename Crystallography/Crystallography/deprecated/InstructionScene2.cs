@@ -6,7 +6,7 @@ using Sce.PlayStation.HighLevel.UI;
 using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 using Sce.PlayStation.Core.Input;
-namespace Crystallography
+namespace Crystallography.Deprecated
 {
 	public class InstructionsScene2 : Sce.PlayStation.HighLevel.GameEngine2D.Scene
 		

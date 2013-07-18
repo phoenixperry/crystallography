@@ -6,7 +6,7 @@
 
 using Sce.PlayStation.HighLevel.GameEngine2D;
 
-namespace Crystallography
+namespace Crystallography.Deprecated
 {
 	public class NoCleanupScene : Scene
 	{

@@ -21,7 +21,7 @@ namespace Crystallography
         private static bool DEBUG_BOUNDINGBOXS = false;
 		
 		public static Random Random = new Random();
-		public static GameSceneHud Hud;
+		public static Crystallography.UI.GameSceneHud Hud;
     	public static GamePhysics _physics;
 		protected static List<ICrystallonEntity> _allEntites = new List<ICrystallonEntity>();
 		
@@ -88,7 +88,7 @@ namespace Crystallography
 //			CardManager.Instance.Populate();
 			
 			
-			Hud = new GameSceneHud(this);
+			Hud = new Crystallography.UI.GameSceneHud(this);
 			if (pTimed) {
 				// Set Up Timer
 			}
@@ -161,7 +161,7 @@ namespace Crystallography
 			}
 			
 //			PausePanel.QuitButtonPressDetected += (sender, e) => { QuitToTitle(); };
-			PausePanel.PauseDetected += (sender, e) => { Pause(e.isPaused); };
+			Crystallography.UI.PausePanel.PauseDetected += (sender, e) => { Pause(e.isPaused); };
         }
 		
         public override void OnExit ()
@@ -175,8 +175,8 @@ namespace Crystallography
 			Support.ParticleEffectsManager.Instance.Destroy();
 			base.OnExit();
 			Support.MusicSystem.Instance.StopAll();
-			PausePanel.QuitButtonPressDetected -= (sender, e) => { QuitToTitle(); };
-			PausePanel.PauseDetected -= (sender, e) => { Pause(e.isPaused); };
+			Crystallography.UI.PausePanel.QuitButtonPressDetected -= (sender, e) => { QuitToTitle(); };
+			Crystallography.UI.PausePanel.PauseDetected -= (sender, e) => { Pause(e.isPaused); };
 			AppMain.UI_INPUT_ENABLED = true;
         }
 		
@@ -267,14 +267,14 @@ namespace Crystallography
 			( Director.Instance.CurrentScene as GameScene ).Clear();
 			ForceGarbageCollection();
 //			UISystem.CurrentScene.RootWidget.Dispose();
-			Director.Instance.ReplaceScene( new LoadingScene(0,false,"Menu") );
+			Director.Instance.ReplaceScene( new Crystallography.UI.LoadingScene(0,false,"Menu") );
 		}
 		
 		public static void QuitToLevelSelect() {
 			( Director.Instance.CurrentScene as GameScene ).Clear();
 			ForceGarbageCollection();
 //			UISystem.CurrentScene.RootWidget.Dispose();
-			Director.Instance.ReplaceScene( new LoadingScene(0,false,"Level Select") );
+			Director.Instance.ReplaceScene( new Crystallography.UI.LoadingScene(0,false,"Level Select") );
 //			UISystem.SetScene( new Crystallography.UI.LevelSelectScene() );
 		}
 		

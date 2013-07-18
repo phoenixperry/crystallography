@@ -384,7 +384,7 @@ namespace Crystallography
 			var upperRight = Vector2.Zero;
 			System.Collections.ObjectModel.ReadOnlyCollection<ICrystallonEntity> allEntities = GameScene.getAllEntities();
 			foreach (ICrystallonEntity e in allEntities) {
-				if (e is ButtonEntity) continue; // HACK this should probably be done more intelligently
+				if (e is Crystallography.UI.ButtonEntity) continue; // HACK this should probably be done more intelligently
 				if (e == null) continue;	// e IS NOT ACTUALLY A THING -- IGNORE (BUT IF THIS EVER HAPPENS, IT'S PROBS A BUG)
 				if ( e is NodeCrystallonEntity ) { // ----------------------------- e DESCENDS FROM NodeCrystallonEntity, LIKE GROUPS DO
 					PhysicsBody body = e.getBody();

@@ -9,7 +9,7 @@ using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base; 
 
 
-namespace Crystallography
+namespace Crystallography.Deprecated
 {
 	public class GlitchAnimation:Node
 	{	

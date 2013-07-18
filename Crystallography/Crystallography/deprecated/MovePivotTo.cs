@@ -1,6 +1,6 @@
 using Sce.PlayStation.Core;
 using System;
-namespace Sce.PlayStation.HighLevel.GameEngine2D
+namespace Sce.PlayStation.HighLevel.GameEngine2D.Deprecated
 {
 	public class MovePivotTo : ActionTweenGenericVector2
 	{

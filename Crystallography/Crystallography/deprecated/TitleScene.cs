@@ -1,73 +1,56 @@
 using System;
+using System.Collections.Generic;
 using Sce.PlayStation.Core;
-using Sce.PlayStation.Core.Graphics;
-using Sce.PlayStation.Core.Audio;
-using Sce.PlayStation.HighLevel.GameEngine2D;
-using Sce.PlayStation.HighLevel.GameEngine2D.Base;
+using Sce.PlayStation.Core.Imaging;
+using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.Core.Input;
- 
-namespace Crystallography
+using Sce.PlayStation.HighLevel.UI;
+using Sce.PlayStation.HighLevel.GameEngine2D.Base;
+
+
+namespace Crystallography.UI.Deprecated
 {
-    public class TitleScene : Scene
+    public partial class TitleScene : Sce.PlayStation.HighLevel.UI.Scene
     {
-        private TextureInfo _ti;
-        private Texture2D _texture;
-        
-        public TitleScene ()
+		private bool _acceptTouch;
+		private float _timer;
+		
+        public TitleScene()
         {
-            this.Camera.SetViewFromViewport();
-
-            _texture = new Texture2D("/Application/assets/images/header.png",false);
-            _ti = new TextureInfo(_texture);
-            SpriteUV titleScreen = new SpriteUV(_ti);
-            titleScreen.Scale = _ti.TextureSizef;
-            titleScreen.Pivot = new Vector2(0.5f,0.5f);
-            titleScreen.Position = new Vector2(Director.Instance.GL.Context.GetViewport().Width/2,
-                                              Director.Instance.GL.Context.GetViewport().Height/2);
-            this.AddChild(titleScreen);
-            
-            Vector4 origColor = titleScreen.Color;
-            titleScreen.Color = new Vector4(0,0,0,0);
-            var tintAction = new TintTo(origColor,10.0f);
-            ActionManager.Instance.AddAction(tintAction,titleScreen);
-            tintAction.Run();
+			_acceptTouch = false;
+			_timer = 0.0f;
 			
-			// MUSIC
-			Support.MusicSystem.Instance.Play("play.mp3");
-            
-            Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
-
-            // Clear any queued clicks so we dont immediately exit if coming in from the menu
-            Touch.GetData(0).Clear();
+			Touch.GetData(0).Clear();
+			
+			InitializeWidget();
+			TouchToStartText.Font = FontManager.Instance.Get("Bariol", 25);
+			FadeInEffect effect = new FadeInEffect(TitleImage, 300, new FadeInEffectInterpolator() );
+			effect.EffectStopped += (sender, e) => { _acceptTouch = true; };
+			effect.Start();
         }
-        
-        public override void OnEnter ()
-        {
-			base.OnEnter();
-        }
-//        public override void OnExit ()
-//        {
-//            base.OnExit ();
-//            _songPlayer.Stop();
-//            _songPlayer.Dispose();
-//            _songPlayer = null;
-//        }
-        
-        public override void Update (float dt)
-        {
-            base.Update (dt);
-            var touches = Touch.GetData(0).ToArray();
-            if((touches.Length >0 && touches[0].Status == TouchStatus.Down) || Input2.GamePad0.Cross.Press)
-            {
-                Director.Instance.ReplaceScene(new MenuScene());
-            }
-        }
-    
-        ~TitleScene()
-        {
-            _texture.Dispose();
-            _ti.Dispose ();
-        }
+		
+		protected override void OnUpdate (float elapsedTime)
+		{
+			if (_acceptTouch) {
+				_timer += elapsedTime;
+				if (_timer > 3000){
+					TouchToStartText.Visible = true;
+				}
+				
+				if ( Input2.Touch00.Down ) {
+//					Director.Instance.ReplaceScene( new MenuScene() );
+					UISystem.SetScene( new MenuScene() );
+					this.RootWidget.Dispose();
+				}
+			}
+			base.OnUpdate (elapsedTime);
+		}
+		
+		// DESTRUCTOR -----------------------------------------------------------------------------
+#if DEBUG
+		~TitleScene() {
+			Console.WriteLine(GetType().ToString() + " " + "Deleted");
+		}
+#endif
     }
 }
- 

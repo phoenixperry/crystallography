@@ -6,7 +6,7 @@ using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 using Sce.PlayStation.HighLevel.Physics2D;
 using Sce.PlayStation.Core.Imaging;
 
-namespace Crystallography
+namespace Crystallography.Deprecated
 {
 	public class Cube : SpriteUV
 	{	
