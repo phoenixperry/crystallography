@@ -30,6 +30,10 @@ namespace Crystallography
 		
 		void removeFromScene( bool doCleanup );
 		
+		AbstractCrystallonEntity BeReleased( Vector2 position );
+		
+		GroupCrystallonEntity BeAddedToGroup( GroupCrystallonEntity pGroup );
+		
 		bool CanBeAddedTo( GroupCrystallonEntity pGroup );
 	}
 }

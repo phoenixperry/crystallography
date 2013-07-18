@@ -259,6 +259,12 @@ namespace Crystallography
 			return base.Add (pEntity);
 		}
 		
+//		public override GroupCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
+//		{
+//			// Selection Group should never be added to any other group.
+//			return this;
+//		}
+		
 		public override AbstractCrystallonEntity BeReleased (Vector2 position)
 		{
 			// SelectionGroup should never be released.

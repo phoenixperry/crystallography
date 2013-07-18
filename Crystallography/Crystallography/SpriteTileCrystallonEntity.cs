@@ -105,6 +105,14 @@ namespace Crystallography
 			return this;
 		}
 		
+		public override GroupCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
+		{
+			if( CanBeAddedTo(pGroup) ) {
+				pGroup.Attach( this, 1 );
+			}
+			return pGroup;
+		}
+		
 		// METHODS -------------------------------------------------------------------------------
 		
 		public void setParticle( int pVariant ) {

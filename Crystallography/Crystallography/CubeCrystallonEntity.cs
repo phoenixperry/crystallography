@@ -113,6 +113,14 @@ namespace Crystallography
 			return this;
 		}
 		
+		public override GroupCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
+		{
+			if( CanBeAddedTo( pGroup ) ) {
+				Attach( this, 1 );
+			}
+			return pGroup;
+		}
+		
 		public override void Break ()
 		{
 			// DO NOTHING.

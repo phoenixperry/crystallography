@@ -72,6 +72,21 @@ namespace Crystallography
 		
 		// OVERRIDES -------------------------------------------------------------
 		
+		public override GroupCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
+		{
+			if ( CanBeAddedTo(pGroup) ) {
+				for ( int i=0; i<members.Length; i++) {
+					AbstractCrystallonEntity e = members[i] as AbstractCrystallonEntity;
+					if ( e != null ) {
+//						int index = GetFreeSlot();
+//						members[index] = e;
+						pGroup.Attach( e, 1 );	// LAZY TYPECASTING... CLEAN UP LATER?
+					}
+				}
+			}
+			return pGroup;
+		}
+		
 		/// <summary>
 		/// Reattaches this group to the scene.
 		/// </summary>
@@ -90,14 +105,22 @@ namespace Crystallography
 			return this;
 		}
 		
+		/// <summary>
+		/// Determines whether this instance can be added to the specified pGroup.
+		/// </summary>
+		/// <returns>
+		/// <c>true</c> if this instance can be added to the specified pGroup; otherwise, <c>false</c>.
+		/// </returns>
+		/// <param name='pGroup'>
+		/// If set to <c>true</c> p group.
+		/// </param>
 		public override bool CanBeAddedTo ( GroupCrystallonEntity pGroup )
 		{
-//			base.BeSnappedTo ( pGroup );
 			if (pGroup.MemberType != this.MemberType) {
 				return false;
 			}
 			bool okToSnap = true;
-			for ( int i=0; i < 3; i++ ) {
+			for ( int i=0; i < _maxMembers; i++ ) {
 				if (_pucks[i].Children.Count > 0 && pGroup._pucks[i].Children.Count > 0) {
 					okToSnap = false;
 					break;
@@ -188,80 +211,80 @@ namespace Crystallography
 				MemberType = pEntity.GetType();
 			}
 			
-			if (pEntity is SpriteTileCrystallonEntity) {
-				return AddSpriteTile(pEntity as SpriteTileCrystallonEntity);
-			} else if  (pEntity is GroupCrystallonEntity) {
-				return AddGroup (pEntity as GroupCrystallonEntity);
-			} else if ( pEntity is CubeCrystallonEntity ) { 
-				return AddCube( pEntity as CubeCrystallonEntity );
-			} 
-			return this;
+//			if (pEntity is SpriteTileCrystallonEntity) {
+//				return AddSpriteTile(pEntity as SpriteTileCrystallonEntity);
+//			} else if  (pEntity is GroupCrystallonEntity) {
+//				return AddGroup (pEntity as GroupCrystallonEntity);
+//			} else if ( pEntity is CubeCrystallonEntity ) { 
+//				return AddCube( pEntity as CubeCrystallonEntity );
+//			} 
+			return pEntity.BeAddedToGroup(this);
 		}
 		
-		public GroupCrystallonEntity AddCube( CubeCrystallonEntity pEntity ) {
-			// CHECK FOR SPACE IN GROUP
-			if (population + 1 > _maxMembers) {
-				return this;
-			}
-			IncreaseSlots( 1 );
-			members[GetFreeSlot()] = pEntity;
-			Attach (pEntity);
-			return this;
-		}
-		
-		/// <summary>
-		/// Add the specified <c>SpriteTileCrystallonEntity</c> to the group.
-		/// </summary>
-		/// <returns>
-		/// This <c>GroupCrystallonEntity</c>
-		/// </returns>
-		/// <param name='pEntity'>
-		/// <see cref="Crystallography.SpriteTileCrystallonEntity"/>
-		/// </param>
-		public GroupCrystallonEntity AddSpriteTile(SpriteTileCrystallonEntity pEntity) {
-			// CHECK FOR SPACE IN GROUP
-			if (population + 1 > _maxMembers) {
-				return this;
-			}
-			IncreaseSlots( 1 );
-			members[GetFreeSlot()] = pEntity;
-			Attach(pEntity);
-			return this;
-		}
-		
-		/// <summary>
-		/// Add all members of a <c>GroupCrystallonEntity</c> to this group.
-		/// </summary>
-		/// <returns>
-		/// This <c>GroupCrystallonEntity</c>
-		/// </returns>
-		/// <param name='pGroupEntity'>
-		/// <see cref="Crystallography.GroupCrystallonEntity"/>
-		/// </param>
-		public GroupCrystallonEntity AddGroup( GroupCrystallonEntity pGroupEntity ) {
-			// CHECK FOR SPACE IN GROUP
-			if (population + pGroupEntity.population > _maxMembers) {
-				return this;
-			}
-			if (pGroupEntity.complete) {
-				IncreaseSlots( 1 );
-				members[GetFreeSlot()] = pGroupEntity;
-				Attach(pGroupEntity);
-				return this;
-			} else {
-				IncreaseSlots(pGroupEntity.members.Length);
-				for ( int i=0; i<pGroupEntity.members.Length; i++) {
-					AbstractCrystallonEntity e = pGroupEntity.members[i] as AbstractCrystallonEntity;
-					if ( e != null ) {
-						int index = GetFreeSlot();
-						members[index] = e;
-						Attach(e);	// LAZY TYPECASTING... CLEAN UP LATER?
-					}
-				}
-				GroupManager.Instance.Remove( pGroupEntity );
-				return this;
-			}
-		}
+//		public GroupCrystallonEntity AddCube( CubeCrystallonEntity pEntity ) {
+//			// CHECK FOR SPACE IN GROUP
+//			if (population + 1 > _maxMembers) {
+//				return this;
+//			}
+//			IncreaseSlots( 1 );
+//			members[GetFreeSlot()] = pEntity;
+//			//Attach (pEntity);
+//			return this;
+//		}
+//		
+//		/// <summary>
+//		/// Add the specified <c>SpriteTileCrystallonEntity</c> to the group.
+//		/// </summary>
+//		/// <returns>
+//		/// This <c>GroupCrystallonEntity</c>
+//		/// </returns>
+//		/// <param name='pEntity'>
+//		/// <see cref="Crystallography.SpriteTileCrystallonEntity"/>
+//		/// </param>
+//		public GroupCrystallonEntity AddSpriteTile(SpriteTileCrystallonEntity pEntity) {
+//			// CHECK FOR SPACE IN GROUP
+//			if (population + 1 > _maxMembers) {
+//				return this;
+//			}
+//			IncreaseSlots( 1 );
+//			members[GetFreeSlot()] = pEntity;
+//			//Attach(pEntity);
+//			return this;
+//		}
+//		
+//		/// <summary>
+//		/// Add all members of a <c>GroupCrystallonEntity</c> to this group.
+//		/// </summary>
+//		/// <returns>
+//		/// This <c>GroupCrystallonEntity</c>
+//		/// </returns>
+//		/// <param name='pGroupEntity'>
+//		/// <see cref="Crystallography.GroupCrystallonEntity"/>
+//		/// </param>
+//		public GroupCrystallonEntity AddGroup( GroupCrystallonEntity pGroupEntity ) {
+//			// CHECK FOR SPACE IN GROUP
+//			if (population + pGroupEntity.population > _maxMembers) {
+//				return this;
+//			}
+//			if (pGroupEntity.complete) {
+//				IncreaseSlots( 1 );
+//				members[GetFreeSlot()] = pGroupEntity;
+//				//Attach(pGroupEntity);
+//				return this;
+//			} else {
+//				IncreaseSlots(pGroupEntity.members.Length);
+//				for ( int i=0; i<pGroupEntity.members.Length; i++) {
+//					AbstractCrystallonEntity e = pGroupEntity.members[i] as AbstractCrystallonEntity;
+//					if ( e != null ) {
+//						int index = GetFreeSlot();
+//						members[index] = e;
+//						//Attach(e);	// LAZY TYPECASTING... CLEAN UP LATER?
+//					}
+//				}
+//				GroupManager.Instance.Remove( pGroupEntity );
+//				return this;
+//			}
+//		}
 		
 		/// <summary>
 		/// Add a puck, i.e. a root node, to help position entities relative to each other in the group.
@@ -280,7 +303,15 @@ namespace Crystallography
 		/// <param name='pEntity'>
 		/// <see cref="Crystallography.AbstractCrystallonEntity"/>
 		/// </param>
-		private void Attach( AbstractCrystallonEntity pEntity ) {
+		public void Attach( AbstractCrystallonEntity pEntity, int pSlotsRequired ) {
+			// CHECK FOR SPACE IN GROUP
+			if( population + pSlotsRequired > _maxMembers ) {
+				return;
+			}
+			
+			IncreaseSlots( pSlotsRequired );
+			members[GetFreeSlot()] = pEntity;
+			
 			//create a child-node, give it a positional offset, make pEntity a child of child-node
 			int index = GetOrientationIndex( pEntity );
 			if ( _pucks[index] == null ) {

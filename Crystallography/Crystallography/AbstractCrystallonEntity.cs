@@ -48,7 +48,27 @@ namespace Crystallography
 		
 		// METHODS--------------------------
 		
+		/// <summary>
+		/// Object-specific code for being released from a GroupCrystallonEntity
+		/// </summary>
+		/// <returns>
+		/// The object
+		/// </returns>
+		/// <param name='position'>
+		/// World position to be released at.
+		/// </param>
 		public abstract AbstractCrystallonEntity BeReleased( Vector2 position );
+		
+		/// <summary>
+		/// Object-specific code for being added to a GroupCrystallonEntity
+		/// </summary>
+		/// <returns>
+		/// The group added to
+		/// </returns>
+		/// <param name='pGroup'>
+		/// The group to be added to
+		/// </param>
+		public abstract GroupCrystallonEntity BeAddedToGroup( GroupCrystallonEntity pGroup );
 		
 		/// <summary>
 		/// Returns this entity's <c>Node</c>-descended object.
