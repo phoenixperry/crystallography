@@ -77,7 +77,14 @@ namespace Crystallography.UI
 		
 		// EVENT HANDLERS ----------------------------------------------------------------------------------------------------------------------------------------
 		
-		void HandleOnSlideInComplete (object sender, EventArgs e)
+//		void HandleOnSlideInComplete (object sender, EventArgs e)
+//		{
+//			NextLevelButton.ButtonUpAction += HandleNextLevelButtonButtonUpAction;
+//			LevelSelectButton.ButtonUpAction += HandleLevelSelectButtonButtonUpAction;
+//			QuitButton.ButtonUpAction += HandleQuitButtonButtonUpAction;
+//		}
+		
+		void HandleOnSlideInStart (object sender, EventArgs e)
 		{
 			NextLevelButton.ButtonUpAction += HandleNextLevelButtonButtonUpAction;
 			LevelSelectButton.ButtonUpAction += HandleLevelSelectButtonButtonUpAction;
@@ -120,17 +127,21 @@ namespace Crystallography.UI
 		public override void OnEnter ()
 		{
 			base.OnEnter ();
-			OnSlideInComplete += HandleOnSlideInComplete;
+			//OnSlideInComplete += HandleOnSlideInComplete;
+			OnSlideInStart += HandleOnSlideInStart;
 			OnSlideOutStart += HandleOnSlideOutStart;
 		}
+
+		
 
 		public override void OnExit ()
 		{
 			NextLevelButton.ButtonUpAction -= HandleNextLevelButtonButtonUpAction;
 			LevelSelectButton.ButtonUpAction -= HandleLevelSelectButtonButtonUpAction;
 			QuitButton.ButtonUpAction -= HandleQuitButtonButtonUpAction;
-			OnSlideInComplete -= HandleOnSlideInComplete;
+//			OnSlideInComplete -= HandleOnSlideInComplete;
 			OnSlideOutStart -= HandleOnSlideOutStart;
+			OnSlideInStart -= HandleOnSlideInStart;
 			base.OnExit ();
 		}
 		
