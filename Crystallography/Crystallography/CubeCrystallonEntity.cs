@@ -102,7 +102,7 @@ namespace Crystallography
 			sequence.Add( new DelayTime(1.0f));
 //			sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 3.0f));
 			sequence.Add( new CallFunc( () => Finish() ) );
-			foreach( ICrystallonEntity e in members ) {
+			foreach( AbstractCrystallonEntity e in members ) {
 				if (e is CardCrystallonEntity) {
 					(e as CardCrystallonEntity).HideGlow();
 					(e as CardCrystallonEntity).getNode().RunAction( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 3.0f));
@@ -113,12 +113,10 @@ namespace Crystallography
 			return this;
 		}
 		
-		public override GroupCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
+		public override AbstractCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
 		{
-			if( CanBeAddedTo( pGroup ) ) {
-				Attach( this, 1 );
-			}
-			return pGroup;
+			Attach( this );
+			return this;
 		}
 		
 		public override void Break ()
@@ -167,7 +165,7 @@ namespace Crystallography
 			Visible = false;
 			_physics.removePhysicsBody(_body);
 			setBody(null);
-			foreach( ICrystallonEntity e in members ) {
+			foreach( AbstractCrystallonEntity e in members ) {
 				(e as CardCrystallonEntity).setParticle(0);
 			}
 		}

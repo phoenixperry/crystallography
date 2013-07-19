@@ -52,7 +52,7 @@ namespace Crystallography
 		/// Object-specific code for being released from a GroupCrystallonEntity
 		/// </summary>
 		/// <returns>
-		/// The object
+		/// This object
 		/// </returns>
 		/// <param name='position'>
 		/// World position to be released at.
@@ -63,12 +63,20 @@ namespace Crystallography
 		/// Object-specific code for being added to a GroupCrystallonEntity
 		/// </summary>
 		/// <returns>
-		/// The group added to
+		/// This object
 		/// </returns>
 		/// <param name='pGroup'>
 		/// The group to be added to
 		/// </param>
-		public abstract GroupCrystallonEntity BeAddedToGroup( GroupCrystallonEntity pGroup );
+		public abstract AbstractCrystallonEntity BeAddedToGroup( GroupCrystallonEntity pGroup );
+		
+		/// <summary>
+		/// Object-specific code for being added to the Selection Group
+		/// </summary>
+		/// <returns>
+		/// This object
+		/// </returns>
+		public abstract AbstractCrystallonEntity BeSelected( float delay = 0.0f );
 		
 		/// <summary>
 		/// Returns this entity's <c>Node</c>-descended object.
@@ -125,7 +133,7 @@ namespace Crystallography
 				if (variantList == null) {
 					continue;
 				}
-				if (QualityManager.Instance.qualityDict[pQualityName][i].Contains(this.id) ) {
+				if (QualityManager.Instance.qualityDict[pQualityName][i].Contains((int)(this.id)) ) {
 					return i;
 				}
 			}
@@ -200,6 +208,19 @@ namespace Crystallography
 				}
 			}
 			pNewParent.AddChild(node);
+		}
+		
+		/// <summary>
+		/// Respond to being tapped
+		/// </summary>
+		public virtual void BeTapped( float delay = 0.0f) {
+			if( delay > 0.0f ) {
+				Sequence sequence = new Sequence();
+				sequence.Add( new DelayTime( delay ) );
+				sequence.Add( new CallFunc( ()=> playSound() ) );
+			} else {
+				playSound();
+			}
 		}
 		
 		public virtual bool CanBeAddedTo( GroupCrystallonEntity pGroup ) {

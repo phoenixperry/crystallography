@@ -105,12 +105,30 @@ namespace Crystallography
 			return this;
 		}
 		
-		public override GroupCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
+		public override AbstractCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
 		{
-			if( CanBeAddedTo(pGroup) ) {
-				pGroup.Attach( this, 1 );
+			pGroup.Attach( this );
+			if (pGroup is SelectionGroup) {
+				playSound();
 			}
-			return pGroup;
+		return this;
+		}
+		
+		public override AbstractCrystallonEntity BeSelected ( float delay = 0.0f )
+		{
+			return this;
+		}
+		
+		public override bool CanBeAddedTo (GroupCrystallonEntity pGroup)
+		{
+//			base.BeSnappedTo ();
+			if(pGroup.MemberType != this.GetType()) {
+				return false;
+			}
+			
+			bool okToSnap = ( pGroup.pucks[_orientationIndex].Children.Count == 0 );
+			okToSnap = okToSnap && (Array.IndexOf(pGroup.members, this) == -1);
+			return okToSnap;
 		}
 		
 		// METHODS -------------------------------------------------------------------------------

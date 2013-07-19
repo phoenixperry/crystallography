@@ -32,7 +32,9 @@ namespace Crystallography
 		
 		AbstractCrystallonEntity BeReleased( Vector2 position );
 		
-		GroupCrystallonEntity BeAddedToGroup( GroupCrystallonEntity pGroup );
+		AbstractCrystallonEntity BeAddedToGroup( GroupCrystallonEntity pGroup );
+		
+		AbstractCrystallonEntity BeSelected( float delay );
 		
 		bool CanBeAddedTo( GroupCrystallonEntity pGroup );
 	}

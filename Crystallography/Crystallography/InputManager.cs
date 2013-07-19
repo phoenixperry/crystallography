@@ -13,7 +13,7 @@ namespace Crystallography
 		// DOUBLE TAP CONSTANTS
 		private static readonly float MAX_PRESS_DURATION = 0.15f;
 		private static readonly float MAX_RELEASE_DURATION = 0.3f;
-		private static readonly float MAX_TAP_DISTANCE = 50;
+//		private static readonly float MAX_TAP_DISTANCE = 50;
 		
 		private static int tapCount;
 //		private static bool dragging;
@@ -22,7 +22,7 @@ namespace Crystallography
 		
 		public event EventHandler<BaseTouchEventArgs> 		DoubleTapDetected;
 		public event EventHandler<SustainedTouchEventArgs> 	DragDetected;
-		public event EventHandler<BaseTouchEventArgs> 		DragReleaseDetected;
+//		public event EventHandler<BaseTouchEventArgs> 		DragReleaseDetected;
 		
 		public event EventHandler							StartJustUpDetected;
 		public event EventHandler							CircleJustUpDetected;

@@ -132,16 +132,44 @@ namespace Crystallography
 		
 		// OVERRIDES ----------------------------------------------------------------------------------------------------------------------------------------------------
 		
-		public override bool CanBeAddedTo (GroupCrystallonEntity pGroup)
+		/// <summary>
+		/// Object-specific code for being added to any group.
+		/// </summary>
+		/// <returns>
+		/// This object
+		/// </returns>
+		/// <param name='pGroup'>
+		/// The destination group
+		/// </param>
+		public override AbstractCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
 		{
-//			base.BeSnappedTo ();
-			if(pGroup.MemberType != this.GetType()) {
-				return false;
+			HideGlow();
+			pGroup.Attach( this );
+			pGroup.PostAttach( this );
+			return this;
+		}
+		
+		/// <summary>
+		/// Object-specific code for being added to the Selection Group
+		/// </summary>
+		/// <returns>
+		/// This object
+		/// </returns>
+		public override AbstractCrystallonEntity BeSelected ( float delay = 0.0f )
+		{
+			if( delay > 0.0f ) {
+				Sequence sequence = new Sequence();
+				sequence.Add( new DelayTime( delay ) );
+				sequence.Add( new CallFunc( ()=> {
+					playSound();
+					ShowGlow();
+				} ) );
+				getNode().RunAction(sequence);
+			} else {
+				playSound();
+				ShowGlow();
 			}
-			
-			bool okToSnap = ( pGroup.pucks[_orientationIndex].Children.Count == 0 );
-			okToSnap = okToSnap && (Array.IndexOf(pGroup.members, this) == -1);
-			return okToSnap;
+			return this;
 		}
 		
 		public override AbstractCrystallonEntity BeReleased(Vector2 pPosition) {
@@ -157,6 +185,22 @@ namespace Crystallography
 			addToScene();
 			HideGlow();
 			return this;
+		}
+		
+		public override void BeTapped (float delay=0.0f)
+		{
+			if( delay > 0.0f ) {
+				Sequence sequence = new Sequence();
+				sequence.Add( new DelayTime( delay ) );
+				sequence.Add( new CallFunc( ()=> {
+					playSound();
+					ShowGlow( 0.2f );
+				} ) );
+				getNode().RunAction(sequence);
+			} else {
+				playSound();
+				ShowGlow( 0.2f );
+			}
 		}
 		
 		public override void removeFromScene (bool doCleanup)
@@ -235,8 +279,17 @@ namespace Crystallography
 //			
 //		}
 		
-		public void ShowGlow() {
+		public void ShowGlow( float pLifetime = 0.0f ) {
+			getNode().StopActionByTag(0);
 			if (GlowSprite==null) return;
+			if( pLifetime > 0.0f ) {
+				Sequence sequence = new Sequence() {
+					Tag = 0
+				};
+				sequence.Add( new DelayTime( pLifetime ) );
+				sequence.Add( new CallFunc( () => HideGlow() ) );
+				getNode().RunAction( sequence );
+			}
 			GlowSprite.Visible = true;
 		}
 		

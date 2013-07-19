@@ -9,7 +9,7 @@ namespace Crystallography
 	public class GroupCrystallonEntity : NodeCrystallonEntity {
 		
 		public enum POSITIONS {TOP=0, LEFT=1, RIGHT=2};
-		public ICrystallonEntity[] members;
+		public AbstractCrystallonEntity[] members;
 		protected int _maxMembers;
 		protected Node[] _pucks;
 		private int _numMembers;
@@ -59,7 +59,7 @@ namespace Crystallography
 																				: base( pScene, pGamePhysics, pShape ) {
 			_maxMembers = pMaxMembers;
 			_numMembers = 0;
-			members = new ICrystallonEntity[_maxMembers];
+			members = new AbstractCrystallonEntity[_maxMembers];
 			_pucks = new Node[_maxMembers];
 			for (int i=0; i < _maxMembers; i++) {
 				AddPuck(i);
@@ -72,19 +72,29 @@ namespace Crystallography
 		
 		// OVERRIDES -------------------------------------------------------------
 		
-		public override GroupCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
+		/// <summary>
+		/// Adds the members of this group to the specified GroupCrystallonEntity descendent, 
+		/// and schedules this newly emptied group's destruction.
+		/// </summary>
+		/// <returns>
+		/// null -- because this group is scheduled for destruction
+		/// </returns>
+		/// <param name='pGroup'>
+		/// The destination group
+		/// </param>
+		public override AbstractCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
 		{
-			if ( CanBeAddedTo(pGroup) ) {
-				for ( int i=0; i<members.Length; i++) {
-					AbstractCrystallonEntity e = members[i] as AbstractCrystallonEntity;
-					if ( e != null ) {
-//						int index = GetFreeSlot();
-//						members[index] = e;
-						pGroup.Attach( e, 1 );	// LAZY TYPECASTING... CLEAN UP LATER?
-					}
+			for ( int i=0; i<members.Length; i++) {
+				AbstractCrystallonEntity e = members[i];
+				if ( e != null ) {
+					pGroup.Attach( e );
 				}
 			}
-			return pGroup;
+			pGroup.PostAttach( this );
+			// CLEAR MEMBERS LIST & SCHEDULE DELETION OF EMPTIED GROUP
+			RemoveAll();
+			getNode().Schedule((dt) => { GroupManager.Instance.Remove(this, true); } );
+			return null;
 		}
 		
 		/// <summary>
@@ -102,6 +112,25 @@ namespace Crystallography
 			setVelocity(1.0f, GameScene.Random.NextAngle());
 
 			addToScene();
+			return this;
+		}
+		
+		public override void BeTapped ( float delay = 0.0f)
+		{
+			foreach (AbstractCrystallonEntity member in members) {
+				if (member == null) continue;
+				member.BeTapped( delay );
+				delay += 0.2f;
+			}
+		}
+		
+		public override AbstractCrystallonEntity BeSelected ( float delay = 0.0f )
+		{
+			foreach (AbstractCrystallonEntity member in members) {
+				if (member == null) continue;
+				member.BeSelected( delay );
+				delay += 0.2f;
+			}
 			return this;
 		}
 		
@@ -136,17 +165,11 @@ namespace Crystallography
 		{
 			//TODO This doesn't work, but it needs to. At least it doesn't crash for some reason...
 //			Sequence sequence = new Sequence();
-			foreach ( var member in members ) {
+			foreach ( AbstractCrystallonEntity member in members ) {
 				if (member == null) {
 					continue;
 				}
-//				sequence.Add( new CallFunc( () => ( member as AbstractCrystallonEntity ).playSound() ) );
-//				sequence.Add ( new DelayTime( 0.5f ) );
 			}
-//			sequence.Add( new CallFunc( () => ( members[1] as AbstractCrystallonEntity ).playSound() ) );
-//			sequence.Add ( new DelayTime( 0.5f ) );
-//			sequence.Add( new CallFunc( () => ( members[2] as AbstractCrystallonEntity ).playSound() ) );
-//			_scene.RunAction( sequence );
 		}
 		
 		/// <summary>
@@ -211,14 +234,10 @@ namespace Crystallography
 				MemberType = pEntity.GetType();
 			}
 			
-//			if (pEntity is SpriteTileCrystallonEntity) {
-//				return AddSpriteTile(pEntity as SpriteTileCrystallonEntity);
-//			} else if  (pEntity is GroupCrystallonEntity) {
-//				return AddGroup (pEntity as GroupCrystallonEntity);
-//			} else if ( pEntity is CubeCrystallonEntity ) { 
-//				return AddCube( pEntity as CubeCrystallonEntity );
-//			} 
-			return pEntity.BeAddedToGroup(this);
+			if( pEntity.CanBeAddedTo(this) ){
+				pEntity.BeAddedToGroup(this);
+			}
+			return this;
 		}
 		
 //		public GroupCrystallonEntity AddCube( CubeCrystallonEntity pEntity ) {
@@ -298,18 +317,13 @@ namespace Crystallography
 		}
 		
 		/// <summary>
-		/// Actually reparent an entity into this group.
+		/// Actually reparent a single entity to this group.
 		/// </summary>
 		/// <param name='pEntity'>
 		/// <see cref="Crystallography.AbstractCrystallonEntity"/>
 		/// </param>
-		public void Attach( AbstractCrystallonEntity pEntity, int pSlotsRequired ) {
-			// CHECK FOR SPACE IN GROUP
-			if( population + pSlotsRequired > _maxMembers ) {
-				return;
-			}
-			
-			IncreaseSlots( pSlotsRequired );
+		public void Attach( AbstractCrystallonEntity pEntity ) {
+			IncreaseSlots( 1 );
 			members[GetFreeSlot()] = pEntity;
 			
 			//create a child-node, give it a positional offset, make pEntity a child of child-node
@@ -326,19 +340,29 @@ namespace Crystallography
 				}
 			}
 			_numMembers++;
-			if ( this is SelectionGroup  == false ) {	// SelectionGroup has its own positioning code -- HACK This implementation is just sort of inelegant. Maybe abstract some of this out later?
-				if ( population  > 1 ) {
-					foreach( AbstractCrystallonEntity e in members ) {
-						if( e != null) {
-							int puckIndex = Array.IndexOf(_pucks, e.getNode().Parent);
-							_pucks[puckIndex].Position = e.getAttachOffset( puckIndex );
-						}
+		}
+		
+		/// <summary>
+		/// This is primarily used for positioning the group's pucks
+		/// </summary>
+		/// <param name='pEntity'>
+		/// P entity.
+		/// </param>
+		public virtual void PostAttach( AbstractCrystallonEntity pEntity ) {
+			if ( population  > 1 ) {
+				foreach( AbstractCrystallonEntity e in members ) {
+					if( e != null) {
+						int puckIndex = Array.IndexOf(_pucks, e.getNode().Parent);
+						_pucks[puckIndex].Position = e.getAttachOffset( puckIndex );
 					}
-				} else { // JUST CENTER THE OBJECT IF THERE'S ONLY ONE.
+				}
+			} else { // JUST CENTER THE OBJECT IF THERE'S ONLY ONE.
+				foreach (var puck in _pucks) {
 					puck.Position *= 0;
 				}
 			}
 		}
+		
 		
 		/// <summary>
 		/// Break this group into its component objects.
@@ -354,7 +378,7 @@ namespace Crystallography
 			Node puck;
 			for (int i=members.Length-1; i>=0; i--) {
 				if ( members[i] != null ) {
-					var e = members[i] as AbstractCrystallonEntity;
+					var e = members[i];
 					puck = Array.Find( _pucks, (obj) => obj == e.getNode().Parent );
 					var launchVelocity = puck.Position.Normalize();
 					Release( e, true );

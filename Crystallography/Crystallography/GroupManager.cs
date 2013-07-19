@@ -92,7 +92,7 @@ namespace Crystallography
 		/// <summary>
 		/// Spawn a new group at a random location.
 		/// </summary>
-		public GroupCrystallonEntity spawn(ICrystallonEntity[] pMembers) {
+		public GroupCrystallonEntity spawn(AbstractCrystallonEntity[] pMembers) {
 			var _screenWidth = Director.Instance.GL.Context.GetViewport().Width;
             var _screenHeight = Director.Instance.GL.Context.GetViewport().Height;
 			return spawn( 50f + 0.75f * _screenWidth * GameScene.Random.NextFloat(),
@@ -109,7 +109,7 @@ namespace Crystallography
 		/// <param name='pY'>
 		/// Y coordinate
 		/// </param>
-		public GroupCrystallonEntity spawn( float pX, float pY, ICrystallonEntity[] pMembers, bool pComplete = false ) {
+		public GroupCrystallonEntity spawn( float pX, float pY, AbstractCrystallonEntity[] pMembers, bool pComplete = false ) {
 //			var ss = SpriteSingleton.getInstance();
 			GroupCrystallonEntity g;
 			if (pComplete) {

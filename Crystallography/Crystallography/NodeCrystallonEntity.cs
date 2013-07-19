@@ -58,10 +58,10 @@ namespace Crystallography
 		
 		// METHODS----------------------------------
 		
-		public override GroupCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
+		public override AbstractCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
 		{
-			pGroup.Attach( this, 1 );
-			return pGroup;
+			pGroup.Attach( this  );
+			return this;
 		}
 	}
 }
