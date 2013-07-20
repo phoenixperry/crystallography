@@ -136,7 +136,7 @@ namespace Crystallography.UI.Deprecated
 				Console.WriteLine(v.Type.ToString());
 				if (v.Type == TouchEventType.None) {
 //					(Director.Instance.CurrentScene as GameScene).TempDisableInput();
-					(Director.Instance.CurrentScene as GameScene).goToNextLevel();
+					(Director.Instance.CurrentScene as GameScene).GoToNextLevel();
 //					InputManager.Instance.TouchDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
 //					InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
 				}

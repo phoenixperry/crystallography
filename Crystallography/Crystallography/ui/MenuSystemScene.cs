@@ -23,6 +23,9 @@ namespace Crystallography.UI
 		
 		public override void OnEnter ()
 		{
+#if DEBUG
+			Console.WriteLine("########### ENTER MenuSystemScene ###############");
+#endif
 			base.OnEnter ();
 			Support.MusicSystem.Instance.Play("intromusic.mp3");
 		}
@@ -44,6 +47,9 @@ namespace Crystallography.UI
 			Support.RemoveTextureWithFileName("/Application/assets/images/UI/icons/tie.png");
 			Support.RemoveTextureWithFileName("/Application/assets/images/UI/icons/phones.png");
 			Support.RemoveTextureWithFileName("/Application/assets/images/UI/icons/glasses.png");
+#if DEBUG
+			Console.WriteLine("########### EXIT MenuSystemScene ###############");
+#endif
 		}
 		
 		public override void Update (float dt)

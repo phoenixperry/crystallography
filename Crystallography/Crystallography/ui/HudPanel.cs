@@ -70,7 +70,6 @@ namespace Crystallography.UI
 		}
 		
 		public void SlideIn(SlideDirection pDirection) {
-			Visible = true;
 			Position = Offset;
 			if( SourceObject != null ) {
 				Position += SourceObject.Position;
@@ -98,6 +97,7 @@ namespace Crystallography.UI
 			
 			Sequence baseSequence = new Sequence();
 			baseSequence.Add( new CallFunc( () => {
+				Visible = true;
 				EventHandler handler = OnSlideInStart;
 				if ( handler != null ) {
 					handler( this, null );

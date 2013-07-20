@@ -52,13 +52,10 @@ namespace Crystallography.UI
 			LoadingText.Position = new Vector2(445.0f, 257.0f);
 			this.AddChild(LoadingText);
 			
-			
+			// LOADING PROCEDURE HEADER
 			loadProc = new List<Action>{
 				() => {
 					;//dummy
-				},
-				() => {
-					System.GC.Collect();
 				},
 				// PRE-LOAD LEVEL DATA
 				() => {
@@ -84,6 +81,14 @@ namespace Crystallography.UI
 		
 		// OVERRIDES ----------------------------------------------------------------------------------------
 		
+#if DEBUG
+		public override void OnEnter ()
+		{
+			base.OnEnter ();
+			Console.WriteLine("########### ENTER LoadingScene ###############");
+		}
+#endif
+		
 		public override void OnExit ()
 		{
 			base.OnExit ();
@@ -95,6 +100,9 @@ namespace Crystallography.UI
 			Hub.RemoveAllChildren(true);
 			Hub = null;
 			LoadingSpinner = null;
+#if DEBUG
+			Console.WriteLine("########### EXIT LoadingScene ###############");
+#endif
 		}
 		
 		public override void Update (float dt)
@@ -126,6 +134,9 @@ namespace Crystallography.UI
 		
 		// METHODS ------------------------------------------------------------------------------------------
 		
+		/// <summary>
+		/// Preload assets for Game Scene
+		/// </summary>
 		protected void AddGameProcs() {
 			List<Action> proc = new List<Action> {
 			// PRE-LOAD IMAGES
@@ -172,9 +183,27 @@ namespace Crystallography.UI
 				() => {
 					var temp = Support.TiledSpriteFromFile("/Application/assets/images/icons/icons.png", 4, 2);
 				},
+//				() => {
+//					LevelManager.Instance.Reset();
+//				},
+//				() => {
+//					LevelManager.Instance.GetLevelSettings( _levelNumber );
+//				},
+//				() => {
+//					QualityManager.Instance.Reset( CardManager.Instance, _levelNumber );
+//				},
+//				() => {
+//					var temp = GroupManager.Instance;
+//				},
+				() => {
+					System.GC.Collect();
+				},
 				// PREPARE GAME SCENE
 				() => {
 					_scene = new GameScene(_levelNumber, _timed);
+				},
+				() => {
+					(_scene as GameScene).ResetToLevel();
 				}
 			};
 			
@@ -182,6 +211,9 @@ namespace Crystallography.UI
 			proc.Clear();
 		}
 		
+		/// <summary>
+		/// Preload assets for Menu Scene
+		/// </summary>
 		protected void AddMenuProcs() {
 			List<Action> proc = new List<Action> {
 				() => {
@@ -200,6 +232,9 @@ namespace Crystallography.UI
 					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/InstructionsButton.png", 1, 3);
 				},
 				() => {
+					System.GC.Collect();
+				},
+				() => {
 					_scene = new MenuSystemScene("Menu");
 				}
 			};
@@ -208,6 +243,9 @@ namespace Crystallography.UI
 			proc.Clear();
 		}
 		
+		/// <summary>
+		/// Preload assets for Level Select Scene
+		/// </summary>
 		protected void AddLevelSelectProcs() {
 			List<Action> proc = new List<Action>{
 				() => {
@@ -218,6 +256,9 @@ namespace Crystallography.UI
 				},
 				() => {
 					var temp = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3);
+				},
+				() => {
+					System.GC.Collect();
 				},
 				() => {
 					_scene = new MenuSystemScene("Level Select");

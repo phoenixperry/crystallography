@@ -117,7 +117,7 @@ namespace Crystallography
 			Pause (false);
 			Sequence sequence = new Sequence();
 			sequence.Add( new DelayTime(0.1f) );
-			sequence.Add( new CallFunc( () => resetToLevel() ) );
+			sequence.Add( new CallFunc( () => ResetToLevel() ) );
 			this.RunAction(sequence);
 			
 			ForegroundLayer.AddChild( Support.ParticleEffectsManager.Instance );
@@ -145,7 +145,7 @@ namespace Crystallography
         {
         	Sequence sequence = new Sequence();
 			sequence.Add( new DelayTime( 1.0f ) );
-			sequence.Add( new CallFunc( () => goToNextLevel() ) );
+			sequence.Add( new CallFunc( () => GoToNextLevel() ) );
 			this.RunAction(sequence);
         }
         
@@ -153,6 +153,9 @@ namespace Crystallography
 		
 		public override void OnEnter ()
         {
+#if DEBUG
+			Console.WriteLine("########### ENTER GameScene ###############");
+#endif
 			base.OnEnter();
 			if( Random.NextFloat() > 0.5f ) {
 				Support.MusicSystem.Instance.Play("stack1music.mp3");
@@ -178,6 +181,9 @@ namespace Crystallography
 			Crystallography.UI.PausePanel.QuitButtonPressDetected -= (sender, e) => { QuitToTitle(); };
 			Crystallography.UI.PausePanel.PauseDetected -= (sender, e) => { Pause(e.isPaused); };
 			AppMain.UI_INPUT_ENABLED = true;
+#if DEBUG
+			Console.WriteLine("########### EXIT GameScene ###############");
+#endif
         }
 		
         public override void Update ( float dt )
@@ -231,21 +237,19 @@ namespace Crystallography
 		/// <summary>
 		/// Restarts GameScene at next level OR Goes to TitleScene if there are no more levels.
 		/// </summary>
-		public void goToNextLevel( ) {
+		public void GoToNextLevel( ) {
 			currentLevel++;
-			resetToLevel();
+			ForceGarbageCollection();
+			ResetToLevel();
 		}
 		
-		public void resetToLevel() {
+		public void ResetToLevel() {
 			if (currentLevel < TOTAL_LEVELS || currentLevel == 999) {
-				ForceGarbageCollection();
 				Console.WriteLine( "Resetting to start level " + currentLevel );
+				
 				LevelManager.Instance.Reset();
 				LevelManager.Instance.GetLevelSettings( currentLevel );
-//				background.PickBackground();
 				Clear();
-//				CardManager.Instance.Reset( this );
-//				GroupManager.Instance.Reset( this );
 				QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
 				CardManager.Instance.Populate();
 				EventHandler handler = LevelChangeDetected;

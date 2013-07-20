@@ -73,7 +73,7 @@ namespace Crystallography.UI
 			if (_initialized == false) {
 				Initialize();
 			}
-			Reset ();
+			//Reset ();
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
 #endif
@@ -148,7 +148,7 @@ namespace Crystallography.UI
 			GroupManager.Instance.Reset( Director.Instance.CurrentScene );
 //			NextLevelButton.ButtonUpAction -= HandleNextLevelButtonButtonUpAction;
 			InputManager.Instance.CircleJustUpDetected -= HandleNextLevelButtonButtonUpAction;
-			_scene.goToNextLevel();
+			_scene.GoToNextLevel();
 		}
 		
 		/// <summary>
@@ -184,7 +184,7 @@ namespace Crystallography.UI
 #if METRICS
 			DataStorage.CollectMetrics();
 #endif
-			_scene.resetToLevel();
+			_scene.ResetToLevel();
 		}
 		
 		/// <summary>
@@ -349,59 +349,13 @@ namespace Crystallography.UI
 			};
 			GameHudBar.AddChild(_nextLevelPanel, -1);
 			
-//			NextLevelButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/next_level_sm.png", 1, 3).TextureInfo, new Vector2i(0,0) );
-////			NextLevelButton.setPosition(845.0f, 587.0f);
-//			NextLevelButton.setPosition(115.0f,0.0f);
-////			this.AddChild(NextLevelButton.getNode());
-//			NextLevelButton.Visible = true;
-//			
-//			_nextLevelButtonPanel = new HudPanel(){
-//				Height = NextLevelButton.Height*1.5f,
-//				Width = NextLevelButton.Width,
-//				Offset = new Vector2(729.0f, 0.0f),
-//				DismissDelay = 0.0f
-//			};
-//			GameHudBar.AddChild(_nextLevelButtonPanel, -1);
-//			_nextLevelButtonPanel.AddChild(NextLevelButton.getNode());
-			
 			_messagePanel = new MessagePanel(){
 				Offset = new Vector2(480.0f, 0.0f),
 				Position = new Vector2(-400.0f, 0.0f),
 				Lifetime = 0.0f
 			};
-			
-//			MessageTitleText = new Label() {
-//				Text = "Lorem ipsum dolor sit amet, consectetur",
-//				FontMap = map,
-//				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
-//				Position = new Vector2(40.0f, 135.0f)
-//			};
-//			
-//			MessageText = new Label() {
-//				Text = "Lorem ipsum dolor sit amet, consectetur adipisicing \n" +
-//					"elit, sed do eiusmod tempor incididunt ut labore et \n" +
-//					"dolore magna aliqua. Ut enim ad minim veniam, quis \n"+
-//					"nostrud exercitation ullamco laboris nisi ut aliquip \n" +
-//					"ex ea commodo consequat. Duis aute irure dolor in \n", //+
-////					"reprehenderit in voluptate velit esse cillum dolore eu \n" +
-////					"fugiat nulla pariatur. Excepteur sint occaecat cupidatat \n" +
-////					"non proident, sunt in culpa qui officia deserunt mollit \n" +
-////					"anim id est laborum.",
-//				FontMap = FontManager.Instance.GetMap( FontManager.Instance.GetInGame("Bariol", 18) ),
-//				Position = new Vector2(40.0f, 107.0f)
-//			};
-//			var messageBG = Support.UnicolorSprite("Grey", 40, 40, 40, 200);
-//			messageBG.Scale = new Vector2(30.0f, 11.0f);
-//			var messageBar = Support.UnicolorSprite("LightBlue", 41, 226, 226, 255);
-//			messageBar.Scale = new Vector2(30.0f, 0.25f);
-//			messageBar.Position = new Vector2(0.0f, 172.0f);
-//			_messagePanel.AddChild( messageBG );
-//			_messagePanel.AddChild( messageBar);
-//			_messagePanel.AddChild( MessageTitleText);
-//			_messagePanel.AddChild( MessageText);
 			this.AddChild(_messagePanel);
-			
-//			ScoreIcon = Support.SpriteUVFromFile("/Application/assets/images/UI/score_now.png");
+
 			ScoreIcon = Support.SpriteUVFromFile("/Application/assets/images/handIcon.png");
 			ScoreIcon.Position = new Vector2(20.0f, 16.0f);
 			GameHudBar.AddChild(ScoreIcon);
@@ -415,11 +369,9 @@ namespace Crystallography.UI
 			BlueBox.Position = new Vector2(120.0f, 0.0f);
 			GameHudBar.AddChild(BlueBox);
 			
-			ScoreText = new Label("0123456789", bigMap);
+			ScoreText = new Label("", bigMap);
 			ScoreText.Position = new Vector2(5.0f, 12.0f);
 			BlueBox.AddChild(ScoreText);
-			
-//			GoalIcon = Support.SpriteUVFromFile("/Application/assets/images/UI/time_now.png");
 			
 			if(GameScene.currentLevel != 999) {
 				GoalIcon = Support.SpriteUVFromFile("/Application/assets/images/stopIcon.png");
@@ -435,7 +387,7 @@ namespace Crystallography.UI
 				RedBox.Position = new Vector2(354.0f, 0.0f);
 				GameHudBar.AddChild(RedBox);
 			
-				GoalText = new Label("--", bigMap);
+				GoalText = new Label("", bigMap);
 				GoalText.Position = new Vector2(5.0f, 12.0f);
 				RedBox.AddChild(GoalText);
 				
@@ -475,8 +427,9 @@ namespace Crystallography.UI
 		}
 		
 		public void Reset () {
-//			_nextLevelButtonPanel.Reset();
-//			_nextLevelPanel.Reset();
+#if DEBUG
+			Console.WriteLine("GameSceneHud.Reset()");
+#endif
 			Score = 0;
 			_displayScore = 0;
 			DisplayTimer = 0.0f;
@@ -506,11 +459,6 @@ namespace Crystallography.UI
 			_messagePanel.TitleText = LevelManager.Instance.MessageTitle;
 			if (_messagePanel.Text != "" || _messagePanel.TitleText != "") {
 				_messagePanel.SlideIn();
-//				Sequence sequence = new Sequence();
-//				sequence.Add( new CallFunc( () => {_messagePanel.SlideIn();} ) );
-//				sequence.Add( new DelayTime( 5.0f) );
-//				sequence.Add( new CallFunc( () => {_messagePanel.SlideOut();} ) );
-//				this.RunAction(sequence);
 			}
 		}
 		

@@ -211,7 +211,7 @@ namespace Crystallography.UI.Deprecated
 			Console.WriteLine("-----NextLevelButtonReleased--------");
 //			NextLevelButton.IconImage = NextLevelButton.CustomImage.BackgroundNormalImage;
 //			(Director.Instance.CurrentScene as GameScene).TempDisableInput();
-			(Director.Instance.CurrentScene as GameScene).goToNextLevel();
+			(Director.Instance.CurrentScene as GameScene).GoToNextLevel();
 //			InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
 //			InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
 //			InputManager.Instance.CircleJustUpDetected -= HandleInputManagerInstanceCircleJustUpDetected;

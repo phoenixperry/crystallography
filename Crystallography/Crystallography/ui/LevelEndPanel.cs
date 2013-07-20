@@ -128,7 +128,7 @@ namespace Crystallography.UI
 		protected void NextLevelButtonReleased() {
 			Console.WriteLine("-----NextLevelButtonReleased--------");
 			Hide();
-			_scene.goToNextLevel();
+			_scene.GoToNextLevel();
 		}
 		
 		protected void LevelSelectButtonReleased() {
