@@ -126,8 +126,13 @@ namespace Crystallography
 				return false;
 			}
 			
-			bool okToSnap = ( pGroup.pucks[_orientationIndex].Children.Count == 0 );
-			okToSnap = okToSnap && (Array.IndexOf(pGroup.members, this) == -1);
+			bool okToSnap;
+			if (AppMain.ORIENTATION_MATTERS) {
+				okToSnap = ( pGroup.pucks[_orientationIndex].Children.Count == 0 );
+				okToSnap = okToSnap && (Array.IndexOf(pGroup.members, this) == -1);
+			} else {
+				okToSnap = ( pGroup.population < pGroup.maxPopulation );
+			}
 			return okToSnap;
 		}
 		

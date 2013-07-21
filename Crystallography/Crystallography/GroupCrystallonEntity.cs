@@ -32,6 +32,10 @@ namespace Crystallography
 		public int population {
 			get { return _numMembers; }
 		}
+		
+		public int maxPopulation {
+			get { return _maxMembers; }
+		}
 
 		public Node[] pucks { get {return _pucks;} }
 		
@@ -149,11 +153,15 @@ namespace Crystallography
 				return false;
 			}
 			bool okToSnap = true;
-			for ( int i=0; i < _maxMembers; i++ ) {
-				if (_pucks[i].Children.Count > 0 && pGroup._pucks[i].Children.Count > 0) {
-					okToSnap = false;
-					break;
+			if( AppMain.ORIENTATION_MATTERS ) {
+				for ( int i=0; i < _maxMembers; i++ ) {
+					if (_pucks[i].Children.Count > 0 && pGroup._pucks[i].Children.Count > 0) {
+						okToSnap = false;
+						break;
+					}
 				}
+			} else {
+				okToSnap = ( this.population + pGroup.population > pGroup.maxPopulation );
 			}
 			return okToSnap;
 		}

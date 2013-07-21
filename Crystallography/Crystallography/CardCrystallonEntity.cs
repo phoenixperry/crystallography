@@ -65,10 +65,14 @@ namespace Crystallography
 			base.setOrientation (pOrientation);
 			if(_anim != null) {
 				if (pOrientation == 1) {
+					_anim.FlipU = false;
 					_anim.Rotation = new Vector2(1f,0f);
 				} else if (pOrientation == 2) {
-					_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
+//					_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
+					_anim.Rotation = new Vector2(1f,0f);
+					_anim.FlipU = true;
 				} else {
+					_anim.FlipU = false;
 					_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
 				}
 			}
@@ -178,9 +182,7 @@ namespace Crystallography
 			}
 			CardManager.Instance.Add( this as CardCrystallonEntity );
 			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Card], 0.02f, 0.008f, pPosition));
-//			_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Card], 0.1f, 0.01f, new Vector2(100f,100f + GameScene.Random.NextFloat()*100));
 			_sprite.Position = _body.Position * GamePhysics.PtoM;
-//			_sprite.Position = new Vector2(100f, 100f);
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 			addToScene();
 			HideGlow();
