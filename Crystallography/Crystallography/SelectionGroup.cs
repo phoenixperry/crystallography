@@ -511,89 +511,89 @@ namespace Crystallography
 		/// <summary>
 		/// Snaps nearby objects onto the SelectionGroup's available nodes.
 		/// </summary>
-		private void SnapTo() {
-			if ( population < MAX_CAPACITY ) {
-				float distance;
-				float closestDistance = float.MaxValue;
-				ICrystallonEntity closest = null;
-				//TODO Reduce the total number of entities we run the distance check on!!! Use a trigger area or something.
-				foreach ( ICrystallonEntity e in GameScene.getAllEntities() )
-				{
-					if (e == null) {
-						continue; // --------------------------------- e IS NOT A THING -- (IF THIS HAPPENS, IT'S PROBS A BUG)
-					}
-//					if (Array.IndexOf(members, e) != -1) {
-//						continue; // --------------------------------- e IS ALREADY PART OF THE GROUP -- IGNORE IT
+//		private void SnapTo() {
+//			if ( population < MAX_CAPACITY ) {
+//				float distance;
+//				float closestDistance = float.MaxValue;
+//				ICrystallonEntity closest = null;
+//				//TODO Reduce the total number of entities we run the distance check on!!! Use a trigger area or something.
+//				foreach ( ICrystallonEntity e in GameScene.getAllEntities() )
+//				{
+//					if (e == null) {
+//						continue; // --------------------------------- e IS NOT A THING -- (IF THIS HAPPENS, IT'S PROBS A BUG)
 //					}
-					if (e == this) {
-						continue; // --------------------------------- e IS THE SELECTION GROUP ITSELF -- FIND A WAY TO FILTER THIS OUT, LATER...
-					}
-//					if ( this.MemberType != e.GetType () ) {
-//						if (e.GetType().ToString() != "Crystallography.GroupCrystallonEntity") {	// types don't match & not a group
-//							continue;
-//						} else {
-//							var g = e as GroupCrystallonEntity;
-//							if ( g.MemberType != this.MemberType ) { // ----------------- type doesn't match group members' type
-//								continue;
-//							}
-//						}
+////					if (Array.IndexOf(members, e) != -1) {
+////						continue; // --------------------------------- e IS ALREADY PART OF THE GROUP -- IGNORE IT
+////					}
+//					if (e == this) {
+//						continue; // --------------------------------- e IS THE SELECTION GROUP ITSELF -- FIND A WAY TO FILTER THIS OUT, LATER...
 //					}
-//					if ( e is GroupCrystallonEntity && !(e is CubeCrystallonEntity) ) {
-//						var g = e as GroupCrystallonEntity;
-//						if ( g.MemberType != this.MemberType ) {
-//							continue;
-//						}
+////					if ( this.MemberType != e.GetType () ) {
+////						if (e.GetType().ToString() != "Crystallography.GroupCrystallonEntity") {	// types don't match & not a group
+////							continue;
+////						} else {
+////							var g = e as GroupCrystallonEntity;
+////							if ( g.MemberType != this.MemberType ) { // ----------------- type doesn't match group members' type
+////								continue;
+////							}
+////						}
+////					}
+////					if ( e is GroupCrystallonEntity && !(e is CubeCrystallonEntity) ) {
+////						var g = e as GroupCrystallonEntity;
+////						if ( g.MemberType != this.MemberType ) {
+////							continue;
+////						}
+////					}
+////					if ( e.GetType() != this.MemberType ){
+////						continue;
+////					}
+//
+////					if ( AppMain.ORIENTATION_MATTERS ) {
+////						bool c = e.CanBeAddedTo(this);
+////						if(false == c) {
+////							continue;
+////						}
+//					
+////						if ( e is GroupCrystallonEntity ) {
+////							if ( !(e is CubeCrystallonEntity) ) {
+////								bool collision = false;
+////								var g = e as GroupCrystallonEntity;
+////								for (int i=0; i<g.pucks.Length; i++) {
+////									if( g.pucks[i].Children.Count > 0 && this.pucks[i].Children.Count > 0) {
+////										collision = true;
+////										break;	// ----------------- found an overlapping group member...
+////									}
+////								}
+////								if (collision) {
+////									continue;	// ----------------- e IS A GROUP WITH MEMBERS THAT OVERLAP WITH SELECTION GROUP -- IGNORE
+////								}
+////							}
+////						} else {
+////							int orientation = (e as SpriteTileCrystallonEntity).getOrientation();
+////							if ( _pucks[orientation].Children.Count != 0 ) {
+////								continue;	// --------------------------- e IS OF AN ORIENTATION THAT IS ALREADY IN THE GROUP
+////							}
+////						}
+//					
+////					}
+//					distance = Vector2.Distance( getPosition(), e.getPosition() );
+//					if (closestDistance > distance) {
+//						closestDistance = distance;
+//						closest = e;
 //					}
-//					if ( e.GetType() != this.MemberType ){
-//						continue;
-//					}
-
-//					if ( AppMain.ORIENTATION_MATTERS ) {
-//						bool c = e.CanBeAddedTo(this);
-//						if(false == c) {
-//							continue;
-//						}
-					
-//						if ( e is GroupCrystallonEntity ) {
-//							if ( !(e is CubeCrystallonEntity) ) {
-//								bool collision = false;
-//								var g = e as GroupCrystallonEntity;
-//								for (int i=0; i<g.pucks.Length; i++) {
-//									if( g.pucks[i].Children.Count > 0 && this.pucks[i].Children.Count > 0) {
-//										collision = true;
-//										break;	// ----------------- found an overlapping group member...
-//									}
-//								}
-//								if (collision) {
-//									continue;	// ----------------- e IS A GROUP WITH MEMBERS THAT OVERLAP WITH SELECTION GROUP -- IGNORE
-//								}
-//							}
-//						} else {
-//							int orientation = (e as SpriteTileCrystallonEntity).getOrientation();
-//							if ( _pucks[orientation].Children.Count != 0 ) {
-//								continue;	// --------------------------- e IS OF AN ORIENTATION THAT IS ALREADY IN THE GROUP
-//							}
-//						}
-					
-//					}
-					distance = Vector2.Distance( getPosition(), e.getPosition() );
-					if (closestDistance > distance) {
-						closestDistance = distance;
-						closest = e;
-					}
-				}
-				
-				if ( closestDistance < SNAP_DISTANCE ) {
-					( closest as AbstractCrystallonEntity ).pickupLocation = closest.getPosition();
-					//( closest as AbstractCrystallonEntity).playSound();
-					//if ( closest is CardCrystallonEntity ) {
-					//	( closest as CardCrystallonEntity ).ShowGlow();
-					//}
-					Console.WriteLine("----ADDING closest----");
-					Add (closest);
-				}
-			}
-		}
+//				}
+//				
+//				if ( closestDistance < SNAP_DISTANCE ) {
+//					( closest as AbstractCrystallonEntity ).pickupLocation = closest.getPosition();
+//					//( closest as AbstractCrystallonEntity).playSound();
+//					//if ( closest is CardCrystallonEntity ) {
+//					//	( closest as CardCrystallonEntity ).ShowGlow();
+//					//}
+//					Console.WriteLine("----ADDING closest----");
+//					Add (closest);
+//				}
+//			}
+//		}
 		
 		// DESTRUCTOR ------------------------------------------------------------------------------
 		
