@@ -283,6 +283,7 @@
     <Content Include="assets\images\UI\header.png" />
     <Content Include="assets\images\levelBackBtn.png" />
     <Content Include="assets\images\levelPlayBtn.png" />
+    <Content Include="assets\images\burst.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

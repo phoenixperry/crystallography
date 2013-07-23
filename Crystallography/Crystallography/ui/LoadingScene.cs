@@ -181,6 +181,9 @@ namespace Crystallography.UI
 					var temp = Support.SpriteFromFile("/Application/assets/images/LevelTitleBG.png");
 				},
 				() => {
+					var temp = Support.SpriteFromFile("Application/assets/images/burst.png");
+				},
+				() => {
 					var temp = Support.TiledSpriteFromFile("/Application/assets/images/icons/icons.png", 4, 2);
 				},
 //				() => {
@@ -195,6 +198,9 @@ namespace Crystallography.UI
 //				() => {
 //					var temp = GroupManager.Instance;
 //				},
+				() => {
+					var temp = Crystallography.UI.IconPopupManager.Instance;
+				},
 				() => {
 					System.GC.Collect();
 				},
