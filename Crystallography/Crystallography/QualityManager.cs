@@ -255,11 +255,11 @@ namespace Crystallography
 			FailedMatchEventArgs failArgs = new FailedMatchEventArgs{ Names = new Dictionary<string,int>()};
 			EventHandler<FailedMatchEventArgs> failHandler;
 			foreach ( string key in qualityDict.Keys ) {
-//				if ( !AppMain.ORIENTATION_MATTERS) {
+				if ( !AppMain.ORIENTATION_MATTERS) {
 					if ( key == "QOrientation" ) {
 						continue;	// -------------------------------- Orientation is ALWAYS all different. Don't bother.
 					}
-//				}
+				}
 //				Console.WriteLine( "Evaluating: " + key );
 				var variations = qualityDict[key];
 				var type = Type.GetType( "Crystallography." + key );
@@ -272,8 +272,8 @@ namespace Crystallography
 					if ( score == 0 ) {	//------------------------------------------------------------ No match. Just quit.
 						if (pForScore) { //----------------------------------------------------------- This is a player-triggered Match Evaluation that has failed
 							failArgs.Names.Add(key.ToString().Substring(1),1); //                      as opposed to one from CardManager.MatchesPossible()
-							failed = true;
 						}
+						failed = true;
 					} else {	// ------------------------------------------------------------------- Is it an All-Same match?
 						qDict.Add ( quality, (score == quality.allSameScore) ) ;
 					}

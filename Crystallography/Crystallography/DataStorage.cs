@@ -15,6 +15,9 @@ namespace Crystallography
 		static readonly int numInfiniteHighScores = 3;
 		
 		static public Int32[] puzzleScores = new Int32[numPuzzles];
+//		static public Int32[] puzzleSolutionsFound = new Int32[numPuzzles];
+		static public Dictionary<Int32, List<Int32[]>> puzzleSolutionsFound = new Dictionary<Int32, List<Int32[]>>();
+		static public Int32[] puzzleSolutionsCount = new Int32[numPuzzles];
 		static public Int32[] timedScores = new Int32[numTimedHighScores];
 		static public Int32[] infiniteScores = new Int32[numInfiniteHighScores];
 		
@@ -25,9 +28,29 @@ namespace Crystallography
 		static private LinkedList<Metric> m = new LinkedList<Metric>();
 #endif
 		
-		public static void SavePuzzleScore(int pLevel, int pScore) {
+		public static void SavePuzzleScore(int pLevel, int pCubes, int pScore) {
 			puzzleScores[pLevel] = pScore;
-			SaveData();
+			Int32[] solution = new Int32[]{pCubes, pScore};
+			var previousSolutions = puzzleSolutionsFound[pLevel];
+			bool okToAdd = true;
+			foreach( var ps in previousSolutions ) { // ---- Check if solution was found previously
+				if ( ps[0] == solution[0] ) {
+					if ( ps[1] == solution[1] ) {
+						okToAdd = false;
+						break;
+					}
+				}
+			}
+//			if ( previousSolutions.Contains(solution) == false ) { 
+			if( okToAdd ) {
+//				Console.WriteLine(solution.ToString());
+//				Console.WriteLine(previousSolutions.ToString());
+				puzzleSolutionsFound[pLevel].Add(solution); // ----------------------- Record it
+				puzzleSolutionsCount[pLevel]++; // ----------------------------------- Increment the counter
+				SaveData(); // ------------------------------------------------------- Externalize (only if we made a change)
+			}
+//			puzzleSolutionsFound[pLevel] = pSolutionsFound;
+			
 		}
 		
 		public static void SaveTimedScore(int pScore) {
@@ -61,7 +84,13 @@ namespace Crystallography
 #if DEBUG
 			Console.WriteLine("==Save Data==");
 #endif
-			int bufferSize = sizeof(Int32) * numPuzzles;
+			int numRecords = 0;
+			for (int i = 0; i < puzzleSolutionsCount.Length ; i++) {
+				numRecords += (2 * puzzleSolutionsCount[i] + 1); // 2 ints per number of found solutions + the counter itself
+			}
+			
+			int bufferSize = sizeof(Int32) * numRecords;
+//			int bufferSize = sizeof(Int32) * numPuzzles;
 			bufferSize += sizeof(Int32) * numTimedHighScores;
 			bufferSize += sizeof(Int32) * numInfiniteHighScores;
 			bufferSize += sizeof(Int32) * 1; // hash
@@ -72,18 +101,41 @@ namespace Crystallography
 			int count = 0;
 			
 			// PUZZLE MODE DATA
-			for( int i=0; i < numPuzzles; ++i ) {
-				Buffer.BlockCopy(puzzleScores, sizeof(Int32) * i, buffer, sizeof(Int32) * count, sizeof(Int32));
+			
+//			for( int i=0; i < numPuzzles; ++i ) {
+//				Buffer.BlockCopy(puzzleScores, sizeof(Int32) * i, buffer, sizeof(Int32) * count, sizeof(Int32));
+//				count++;
+//				sum+=puzzleScores[i];
+//			}
+			
+			// SOLUTION COUNTS FOR EACH LEVEL
+			for( int i=0; i< numPuzzles; ++i) {
+				Buffer.BlockCopy(puzzleSolutionsCount, sizeof(Int32) * i, buffer, sizeof(Int32) * count, sizeof(Int32));
 				count++;
-				sum+=puzzleScores[i];
+				sum+=puzzleSolutionsCount[i];
 			}
+			// ACTUAL SOLUTION DATA
+			for (int key=0; key<puzzleSolutionsFound.Keys.Count; key++) {
+//			foreach( int key in puzzleSolutionsFound.Keys) {
+				foreach ( var pair in puzzleSolutionsFound[key] ) {
+					for (int i=0; i<pair.Length; ++i) {
+						Buffer.BlockCopy(pair, sizeof(Int32) * i, buffer, sizeof(Int32) * count, sizeof(Int32));
+						count++;
+						sum+=pair[i];
+					}
+				}
+			}
+			
 			// TIMED MODE DATA
+			
 			for( int i=0; i < numTimedHighScores; ++i ) {
 				Buffer.BlockCopy(timedScores, sizeof(Int32) * i, buffer, sizeof(Int32) * count, sizeof(Int32));
 				count++;
 				sum+=timedScores[i];
 			}
+			
 			// INFINITE MODE DATA
+			
 			for( int i=0; i < numInfiniteHighScores; ++i ) {
 				Buffer.BlockCopy(infiniteScores, sizeof(Int32) * i, buffer, sizeof(Int32) * count, sizeof(Int32));
 				count++;
@@ -134,18 +186,47 @@ namespace Crystallography
 						Int32 sum=0;
 						int count=0;
 						// PUZZLE MODE DATA
+						
+//						for( int i=0; i<numPuzzles; ++i ) {
+//							Buffer.BlockCopy(buffer, sizeof(Int32) * count, puzzleScores, sizeof(Int32) * i, sizeof(Int32) );
+//							count++;
+//							sum += puzzleScores[i];
+//						}
+						
+						// SOLUTION COUNTS FOR EACH LEVEL
 						for( int i=0; i<numPuzzles; ++i ) {
-							Buffer.BlockCopy(buffer, sizeof(Int32) * count, puzzleScores, sizeof(Int32) * i, sizeof(Int32) );
+							Buffer.BlockCopy(buffer, sizeof(Int32) * count, puzzleSolutionsCount, sizeof(Int32) * i, sizeof(Int32) );
 							count++;
-							sum += puzzleScores[i];
+							sum += puzzleSolutionsCount[i];
 						}
+						// ACTUAL SOLUTION DATA
+						Int32[] solution;
+						for (int key=0; key<puzzleSolutionsCount.Length; key++) { // ------ For each level
+							if( puzzleSolutionsFound.ContainsKey(key) == false ) {
+								puzzleSolutionsFound.Add(key, new List<Int32[]>() );
+							}
+							puzzleSolutionsFound[key].Clear();
+							for (int psc=0; psc < puzzleSolutionsCount[key]; psc++) { // -------- For each solution already found
+								solution = new Int32[]{0,0};
+								for (int i=0; i < solution.Length; ++i) { // ------------------ Make a cube/score data pair
+									Buffer.BlockCopy(buffer, sizeof(Int32) * count, solution, sizeof(Int32) * i, sizeof(Int32) );
+									count++;
+									sum += solution[i];
+								}
+								puzzleSolutionsFound[key].Add(solution); // ----------------- Add the data pair to the level's list
+							}
+						}
+
 						// TIMED MODE DATA
+
 						for( int i=0; i<numTimedHighScores; ++i ) {
 							Buffer.BlockCopy(buffer, sizeof(Int32) * count, timedScores, sizeof(Int32) * i, sizeof(Int32) );
 							count++;
 							sum += timedScores[i];
 						}
+						
 						// INFINITE MODE DATA
+						
 						for( int i=0; i<numInfiniteHighScores; ++i ) {
 							Buffer.BlockCopy(buffer, sizeof(Int32) * count, infiniteScores, sizeof(Int32) * i, sizeof(Int32) );
 							count++;
@@ -182,8 +263,11 @@ namespace Crystallography
 			Console.WriteLine("==Clear Data==");
 #endif
 			// PUZZLE MODE DATA
+			puzzleSolutionsFound.Clear();
 			for ( int i=0; i<numPuzzles; ++i) {
 				puzzleScores[i] = 0;
+				puzzleSolutionsFound.Add(i, new List<Int32[]>() );
+				puzzleSolutionsCount[i] = 0;
 			}
 			// TIMED MODE DATA
 			for( int i=0; i<numTimedHighScores; ++i ) {

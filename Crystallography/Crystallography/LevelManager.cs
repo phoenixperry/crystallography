@@ -18,6 +18,8 @@ namespace Crystallography
 		/// XML data describing qualities for all the cards in this level.
 		/// </summary>
 		private XDocument doc;
+		public Dictionary<int, List<int>> goalDict;
+		
 		
 		// GET & SET --------------------------------------------------------------
 		
@@ -33,19 +35,22 @@ namespace Crystallography
 			}
 		}
 		
-		public Vector4[] Palette  { get; set; }
-		public string PatternPath { get; set; }
-		public string SoundPrefix { get; set; }
-		public bool SoundGlow     { get; set; }
-		public int Goal	          { get; set; }
-		public int Bonus          { get; set; }
-		public string MessageBody { get; set; }
-		public string MessageTitle{ get; set; }
+		public Vector4[] Palette     { get; set; }
+		public string PatternPath    { get; set; }
+		public string SoundPrefix    { get; set; }
+		public bool SoundGlow        { get; set; }
+		public int Goal	             { get; set; }
+		public int PossibleSolutions {get; set;}
+		public int FoundSolutions    {get; set;}
+		public int Bonus             { get; set; }
+		public string MessageBody    { get; set; }
+		public string MessageTitle   { get; set; }
 		
 		// CONSTRUCTORS -----------------------------------------------------------
 		
 		protected LevelManager (){
 			Palette = new Vector4[3];
+			goalDict = new Dictionary<int, List<int>>();
 //			Instance = this;
 //			Palette = new Vector4[] { new Vector4(0.956863f, 0.917647f, 0.956863f, 1.0f), 
 //										new Vector4(0.898039f, 0.074510f, 0.074510f, 1.0f), 
@@ -61,6 +66,7 @@ namespace Crystallography
 		// METHODS ----------------------------------------------------------------
 		
 		public void GetLevelSettings( int pLevelNumber ) {
+			goalDict.Clear();
 			var levels = from data
 				in doc.Elements("GameData")
 					select new { AllElements = data.Elements() };
@@ -85,7 +91,15 @@ namespace Crystallography
 								} else {
 									SoundGlow = false;
 								}
-							} else if (line.Name.LocalName == "Goal") {
+							} else if (line.Name.LocalName == "Goal" ) {
+								var cubes = (int)line.Attribute("Cubes");
+								var score = (int)line.Attribute("Score");
+								if ( goalDict.ContainsKey(cubes) == false ) {
+									goalDict.Add( cubes, new List<int>() );
+								}
+								goalDict[cubes].Add(score);
+								PossibleSolutions++;
+							} else if (line.Name.LocalName == "OldGoal") {
 								Goal = (int)line.Attribute("Value");
 							} else if (line.Name.LocalName == "Bonus") {
 								Bonus = (int)line.Attribute("Value");
@@ -116,6 +130,8 @@ namespace Crystallography
 			PatternPath = "Application/assets/images/set1/gamePieces.png";
 			SoundPrefix = "stack1";
 			Goal = 1;
+			PossibleSolutions = 0;
+			FoundSolutions = 0;
 			Bonus = 0;
 			MessageBody = "";
 			MessageTitle = "";

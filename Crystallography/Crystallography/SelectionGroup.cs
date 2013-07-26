@@ -68,6 +68,10 @@ namespace Crystallography
 			InputManager.Instance.TouchDownDetected += HandleInputManagerInstanceTouchDownDetected;
 			InputManager.Instance.DragDetected += HandleInputManagerInstanceDragDetected;
 			InputManager.Instance.TapDetected += HandleInputManagerInstanceTapDetected;
+			
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		// EVENT HANDLERS --------------------------------------------------------
@@ -165,6 +169,7 @@ namespace Crystallography
 			if ( GameScene.paused ) return;
 			setPosition( e.touchPosition );
 			
+//			Console.WriteLine("MemberType: {0}", MemberType);
 //			Console.WriteLine("{0}, {1}", justDownPositionEntity, lastEntityTouched);
 
 			if (velocity < MAXIMUM_PICKUP_VELOCITY) {
@@ -174,7 +179,7 @@ namespace Crystallography
 					if (justDownPositionEntity != null) { // ------------------------------------------------ EDGE CASE: PLAYER TOUCHED DOWN ON A PIECE, BUT DRAGGED OFF OF IT
 						if (justDownPositionEntity != entity ) { // -----------------------------             BEFORE WE ADDED IT TO THE SELECTION GROUP.
 							if (entity != null) {
-								Console.WriteLine("----ADDING justDownPositionEntity----");
+//								Console.WriteLine("----ADDING justDownPositionEntity----");
 								Add (justDownPositionEntity); // -------------------------------------------- RARE:      PLAYER IS TOUCHING A DIFFERENT VALID PIECE BEFORE WE RESOLVED THE FIRST; ADD THE OLD ONE, RESOLVE THE NEW ONE BELOW
 							} else {
 								entity = justDownPositionEntity; // ----------------------------------------- COMMON:    PLAYER IS TOUCHING EMPTY SPACE; RESOLVE IT BELOW
@@ -192,12 +197,13 @@ namespace Crystallography
 						} else {
 							MemberType = entity.GetType ();
 						}
-						Console.WriteLine( "{0} ID# {1} selected", MemberType, entity.id );
-						Console.WriteLine("----ADDING lastEntityTouched----");
+//						Console.WriteLine( "{0} ID# {1} selected", MemberType, entity.id );
+//						Console.WriteLine("----ADDING lastEntityTouched----");
 						Add (entity);
-					} else {
-						MemberType = null;
-					}
+					} 
+//					else {
+//						MemberType = null;
+//					}
 					lastEntityTouched = entity;
 				}
 			}
@@ -288,6 +294,7 @@ namespace Crystallography
 				releaseDelay.Add ( new DelayTime( 0.25f ) );
 				releaseDelay.Add ( new CallFunc( () => {
 					Release( this, pForceBreak );
+					MemberType = null;
 					easeState = EaseState.IN;
 				} ) );
 			}
@@ -473,7 +480,6 @@ namespace Crystallography
 		/// </returns>
 		protected GroupCrystallonEntity ReleaseGroup( bool pComplete, bool pForceBreak = false ) {
 			var spawnPos = this.getPosition();
-//			var g = GroupManager.Instance.spawn(spawnPos.X, spawnPos.Y, pComplete);
 			var g = GroupManager.Instance.spawn(spawnPos.X, spawnPos.Y, members, pComplete);
 			g.complete = pComplete;
 //			foreach (AbstractCrystallonEntity e in members) {

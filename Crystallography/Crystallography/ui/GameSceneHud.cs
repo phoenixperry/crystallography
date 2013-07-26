@@ -63,6 +63,7 @@ namespace Crystallography.UI
 		public float NoMatchesPossibleTime {get; private set;}
 		public int Goal {get; private set;}
 		public int Score {get; private set;}
+		public int Cubes {get; private set;}
 		
 		// CONSTRUCTOR -------------------------------------------------------------------------------------------
 		
@@ -94,6 +95,7 @@ namespace Crystallography.UI
 		/// </summary>
 		void HandleCardManagerInstanceNoMatchesPossibleDetected (object sender, EventArgs e) {
 			NoMatchesPossibleTime = DisplayTimer;
+			MetGoal();
 			if (Goal <= Score) {
 				RestartButton.on = false;
 			}
@@ -142,7 +144,7 @@ namespace Crystallography.UI
 //			NextLevelButton.Visible = false;
 			_nextLevelPanel.SlideOut();
 			if( GameScene.currentLevel != 999 ) {
-				DataStorage.SavePuzzleScore( GameScene.currentLevel, Score );
+				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score );
 			}
 			CardManager.Instance.Reset( Director.Instance.CurrentScene );
 			GroupManager.Instance.Reset( Director.Instance.CurrentScene );
@@ -162,6 +164,7 @@ namespace Crystallography.UI
 		/// On Match Score Detected
 		/// </summary>
 		void HandleQualityManagerMatchScoreDetected (object sender, MatchScoreEventArgs e) {
+			Cubes++;
 			ScheduleScoreModifier( e.Points );
 			new ScorePopup( e.Entity, e.Points );
 			IconPopupManager.Instance.ScoreIcons( e.Entity, e.ScoreQualities );
@@ -237,9 +240,9 @@ namespace Crystallography.UI
 						mod = sign;
 					}
 					_displayScore += mod;
-					if(Goal <= _displayScore && _metGoal == false) {
-						MetGoal();
-					}
+//					if(Goal <= _displayScore && _metGoal == false) {
+//						MetGoal();
+//					}
 					ScoreText.Text = _displayScore.ToString();
 					float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
 					ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
@@ -431,6 +434,7 @@ namespace Crystallography.UI
 			Console.WriteLine("GameSceneHud.Reset()");
 #endif
 			Score = 0;
+			Cubes = 0;
 			_displayScore = 0;
 			DisplayTimer = 0.0f;
 			MetGoalTime = 0.0f;
@@ -473,20 +477,24 @@ namespace Crystallography.UI
 			MetGoalTime = DisplayTimer;
 			_metGoal = true;
 			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
-//			NextLevelButton.setPosition(845.0f, 587.0f); //Director.Instance.GL.Context.Screen.Height + NextLevelButton.Height);
-//			_nextLevelButtonPanel.SlideIn();
+			var previousSolutions = DataStorage.puzzleSolutionsFound[GameScene.currentLevel];
+			var score = previousSolutions.Count;
+			bool okToAdd = true;
+			foreach( var ps in previousSolutions ) { // ---- Check if solution was found previously
+				if ( ps[0] == Cubes ) {
+					if ( ps[1] == Score ) {
+						okToAdd = false;
+						break;
+					}
+				}
+			}
+			if (okToAdd) {
+				score++;
+			}
+			var completion = ((float)score / (float)LevelManager.Instance.PossibleSolutions);
+			_nextLevelPanel.Text = completion.ToString("P");
 			_nextLevelPanel.SlideIn();
-//			NextLevelButton.Visible = true;
-//			RestartButton.on = false;
-//			_buttonSlideIn = true;
-//			Sequence sequence = new Sequence();
-//			sequence.Add(new MoveTo (new Vector2(845.0f, 451.0f), 1.0f ) );
-//			sequence.Add(new DelayTime(1.0f));
-//			sequence.Add(new CallFunc( () => { 
-//				NextLevelButton.ButtonUpAction += HandleNextLevelButtonButtonUpAction;
-//				InputManager.Instance.CircleJustUpDetected += HandleNextLevelButtonButtonUpAction;
-//			} ) );
-//			NextLevelButton.getNode().RunAction( sequence );
+
 			_pauseTimer = true;
 		}
 		

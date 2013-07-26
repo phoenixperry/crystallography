@@ -149,14 +149,18 @@ namespace Crystallography
 							triad[1] = availableCards[j];
 							triad[2] = availableCards[k];
 							if ( QualityManager.Instance.EvaluateMatch( triad ) ) { // ------------- At least 1 possible match exists
+#if DEBUG
 								Console.WriteLine("Possible Sets Remain: TRUE");
+#endif
 								return true;
 							}
 						}
 					}
 				}
 			}
+#if DEBUG
 			Console.WriteLine("Possible Sets Remain: FALSE");
+#endif
 			return false;
 		}
 		

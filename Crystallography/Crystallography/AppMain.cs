@@ -67,11 +67,9 @@ namespace Crystallography
 				SystemEvents.CheckEvents();
 				GamePhysics.Instance.Simulate();
 				if ( UI_INPUT_ENABLED ) {
-//					UISystem.Update( Touch.GetData(0) );
 					Director.Instance.Update();
 					Touch.GetData(0).Clear();
 					Director.Instance.Render();
-//					UISystem.Render();
 				} else {
 					Director.Instance.Update();
 					Touch.GetData(0).Clear();
@@ -89,10 +87,8 @@ namespace Crystallography
 		
 		protected static bool Init() {
 			Director.Initialize();
-//			UISystem.Initialize(Director.Instance.GL.Context);
 			Director.Instance.RunWithScene( new Crystallography.UI.MenuSystemScene("Splash"), true );
-//			Director.Instance.RunWithScene( new TitleScene(), true );
-			
+//			DataStorage.ClearData();
 			if ( false == DataStorage.LoadData() ) {
 				DataStorage.Init();
 			}
