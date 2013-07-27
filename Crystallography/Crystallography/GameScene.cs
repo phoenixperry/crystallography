@@ -18,7 +18,7 @@ namespace Crystallography
 		public static readonly int TOTAL_LEVELS = 41;
 		
 		// Change the following value to true if you want bounding boxes to be rendered
-        private static bool DEBUG_BOUNDINGBOXS = false;
+        private static bool DEBUG_BOUNDINGBOXS = true;
 		
 		public static Random Random = new Random();
 		public static Crystallography.UI.GameSceneHud Hud;

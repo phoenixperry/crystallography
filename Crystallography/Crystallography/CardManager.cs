@@ -204,6 +204,7 @@ namespace Crystallography
 				card.removeFromScene( true );
 			}
 			availableCards.Clear();
+			NextId = 0;
 			_scene = pScene;
 			ids = null;
 		}

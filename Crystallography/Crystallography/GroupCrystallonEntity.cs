@@ -69,9 +69,6 @@ namespace Crystallography
 				AddPuck(i);
 			}
 			complete = pComplete;
-#if DEBUG
-			Console.WriteLine(this.GetType().ToString() + " " + id.ToString() + " created");
-#endif
 		}
 		
 		// OVERRIDES -------------------------------------------------------------
@@ -587,11 +584,5 @@ namespace Crystallography
 				}
 			}
 		}
-		
-#if DEBUG
-		~GroupCrystallonEntity() {
-			Console.WriteLine(GetType().ToString() + " deleted");
-		}
-#endif
 	}
 }

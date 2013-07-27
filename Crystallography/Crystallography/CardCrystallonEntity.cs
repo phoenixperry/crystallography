@@ -128,10 +128,6 @@ namespace Crystallography
 //			
 //			imm_quads = new ImmediateModeQuads< VertexData >( Director.Instance.GL, 4, VertexFormat.Float2, VertexFormat.Float2, VertexFormat.Float4 );
 //			_scene.AdHocDraw += DrawAnim;
-			
-#if DEBUG
-			Console.WriteLine(this.GetType().ToString() + " " + id.ToString() + " created");
-#endif
 		}
 		
 		// OVERRIDES ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -360,12 +356,6 @@ namespace Crystallography
 			countdownText.Text = countdown.ToString();
 		}
 		
-		// DESTRUCTOR ---------------------------------------------------------------------------------------------------------------------------------------------
-#if DEBUG
-		~CardCrystallonEntity() {
-			Console.WriteLine(GetType().ToString() + " deleted");
-		}
-#endif
 	}
 	
 	public struct VertexData

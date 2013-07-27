@@ -13,15 +13,14 @@ namespace Crystallography
 		protected Vector2 _offset;
 		protected string _sound;
 		public int id;
-		public Vector2 pickupLocation;
 		
 		// GET & SET ---------------------------------------------------------
 		
 		public System.Collections.Generic.List<Node> Children { get { return getNode ().Children; } }
 		
-//		public int id { get; set; }
-		
 		public Node Parent { get { return getNode ().Parent; } }
+		
+		public System.Guid GUID { get; private set; }
 		
 		public bool Visible { 
 			get { return getNode ().Visible; } 
@@ -40,10 +39,13 @@ namespace Crystallography
 		/// Reference to the <see cref="Crystallography.GamePhysics"/>.
 		/// </param>
 		public AbstractCrystallonEntity( Scene pScene, GamePhysics pGamePhysics ) {
+			GUID = Guid.NewGuid();
 			_scene = pScene;
 			_physics = pGamePhysics;
 			_offset = Vector2.Zero;
-			pickupLocation = Vector2.Zero;
+#if DEBUG
+			Console.WriteLine("{0} {1} created", this.GetType(), GUID);
+#endif
 		}
 		
 		// METHODS--------------------------
@@ -370,11 +372,10 @@ namespace Crystallography
 		}
 		
 		// DESTRUCTOR ----------------------------------------------------------------------------
-		
+#if DEBUG		
 		~AbstractCrystallonEntity() {
-#if DEBUG
-			Console.WriteLine(this.GetType().ToString() + " " + id.ToString() + " deleted");
-#endif
+			Console.WriteLine("{0} {1} : {2} deleted", this.GetType(), id, GUID);
 		}
+#endif
 	}
 }

@@ -19,6 +19,7 @@ namespace Crystallography
 		protected SpriteTile radial2;
 		protected Node radialNode;
 		protected Node radialNode2;
+		protected bool finished;
 		
 		// GET & SET -----------------------------------------------------------
 		
@@ -85,6 +86,7 @@ namespace Crystallography
 																			: base( pScene, pGamePhysics, pShape, 3, true ) {
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 //			_node.AdHocDraw += DrawAnim;
+			finished = false;
 		}
 			
 		// OVERRIDES -----------------------------------------------------------
@@ -105,7 +107,10 @@ namespace Crystallography
 			Sequence sequence = new Sequence();
 			sequence.Add( new DelayTime(2.0f));
 //			sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 3.0f));
-			sequence.Add( new CallFunc( () => Finish() ) );
+//			sequence.Add( new CallFunc( () => Finish() ) );
+			sequence.Add ( new CallFunc( () => { 
+				GroupManager.Instance.Remove(this, true); 
+			} ) );
 			getNode().RunAction(sequence);
 			foreach( AbstractCrystallonEntity e in members ) {
 				if (e is CardCrystallonEntity) {
@@ -183,12 +188,35 @@ namespace Crystallography
 		public override void Update (float dt)
 		{
 			base.Update(dt);
-//			Console.WriteLine(radial.CalcSizeInPixels().X);
-			radial.Position = -radial.CalcSizeInPixels() * radial.Scale.X * 0.5f;
-			radialNode.Position = getNode().Position;
-			radial2.Position = -radial2.CalcSizeInPixels() * radial2.Scale.X * 0.5f;
-			radialNode2.Position = getNode().Position;
-//			radial.Color.A = 1.0f - (members[0].getNode() as SpriteTile).Color.A;
+			if(!finished) {
+//				Console.WriteLine(radial.CalcSizeInPixels().X);
+				radial.Position = -radial.CalcSizeInPixels() * radial.Scale.X * 0.5f;
+				radialNode.Position = getNode().Position;
+				radial2.Position = -radial2.CalcSizeInPixels() * radial2.Scale.X * 0.5f;
+				radialNode2.Position = getNode().Position;
+//				radial.Color.A = 1.0f - (members[0].getNode() as SpriteTile).Color.A;
+			}
+		}
+		
+		//OVERRIDES ------------------------------------------------------------
+		
+		public override void removeFromScene (bool doCleanup)
+		{
+			if( doCleanup ) {
+				foreach( AbstractCrystallonEntity e in members ) {
+					(e as CardCrystallonEntity).setParticle(0);
+				}
+				GameScene.Layers[0].RemoveChild(radialNode, true);
+				GameScene.Layers[0].RemoveChild(radialNode2, true);
+				Top = null;
+				Left = null;
+				Right = null;
+				radial = null;
+				radial2 = null;
+				radialNode = null;
+				radialNode2 = null;
+			}
+			base.removeFromScene (doCleanup);
 		}
 		
 		// METHODS -------------------------------------------------------------
@@ -220,32 +248,33 @@ namespace Crystallography
 		}
 		
 		public void Finish() {
+			finished = true;
 			Visible = false;
-			_physics.removePhysicsBody(_body);
-			setBody(null);
-			foreach( AbstractCrystallonEntity e in members ) {
-				(e as CardCrystallonEntity).setParticle(0);
-			}
-			GameScene.Layers[0].RemoveChild(radial, true);
-			GameScene.Layers[0].RemoveChild(radial2, true);
+			//_physics.removePhysicsBody(_body);
+			//setBody(null);
+//			foreach( AbstractCrystallonEntity e in members ) {
+//				(e as CardCrystallonEntity).setParticle(0);
+//			}
+//			GameScene.Layers[0].RemoveChild(radialNode, true);
+//			GameScene.Layers[0].RemoveChild(radialNode2, true);
+//			Top = null;
+//			Left = null;
+//			Right = null;
+//			radial = null;
+//			radial2 = null;
+//			radialNode = null;
+//			radialNode2 = null;
+//			GroupManager.Instance.Remove(this, true);
 		}
 			
 		private CardCrystallonEntity GetSideEntity(int pIndex) {
 			Node n = pucks[pIndex].Children[0];
-				foreach (var member in members) {
-					if (member.getNode() == n) {
-						return member as CardCrystallonEntity;
-					}
+			foreach (var member in members) {
+				if (member.getNode() == n) {
+					return member as CardCrystallonEntity;
 				}
-				return null;
-		}
-		
-		// DESTRUCTOR -----------------------------------------------------------
-		
-		~CubeCrystallonEntity() {
-			Top = null;
-			Left = null;
-			Right = null;
+			}
+			return null;
 		}
 		
 	}

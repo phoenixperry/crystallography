@@ -26,13 +26,16 @@ namespace Crystallography
 			}
 		}
 		
+		public int NextId { get; private set; }
+		
 		// CONSTRUCTOR ---------------------------------------------------------------------
 		
 		protected GroupManager ()
 		{
-				availableGroups = new List<GroupCrystallonEntity>();
-				_scene = Director.Instance.CurrentScene;
-				_physics = GamePhysics.Instance;
+			availableGroups = new List<GroupCrystallonEntity>();
+			_scene = Director.Instance.CurrentScene;
+			_physics = GamePhysics.Instance;
+			Reset( _scene );
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
 #endif
@@ -61,10 +64,10 @@ namespace Crystallography
 		/// Remove all references to the group from the GroupManager? Defaults to <c>false</c>.
 		/// </param>
 		public void Remove( GroupCrystallonEntity pGroup, bool pDelete=false ) {
+			pGroup.removeFromScene( pDelete );
 			if ( pDelete ) {
 				rm ( pGroup );
 			}
-			pGroup.removeFromScene( pDelete );
 		}
 		
 		/// <summary>
@@ -75,6 +78,7 @@ namespace Crystallography
 				Remove ( g );
 			}
 			availableGroups.Clear();
+			NextId = 0;
 			_scene = pScene;
 		}
 		
@@ -85,7 +89,7 @@ namespace Crystallography
 		/// Group to be removed.
 		/// </param>
 		private void rm( GroupCrystallonEntity pGroup ) {
-			pGroup.RemoveAll();
+//			pGroup.RemoveAll();
 			availableGroups.Remove(pGroup);
 		}
 		
@@ -126,6 +130,8 @@ namespace Crystallography
 			foreach (AbstractCrystallonEntity e in pMembers) {
 				g.Add(e);
 			}
+			g.id = NextId;
+			NextId += 1;
 			g.setPosition( pX, pY );
 			g.BeReleased(g.getPosition());
 			return g;
