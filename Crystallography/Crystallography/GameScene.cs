@@ -16,10 +16,11 @@ namespace Crystallography
     {
 		// TODO make this dynamic or data-driven
 		public static readonly int TOTAL_LEVELS = 41;
-		
+
+#if DEBUG
 		// Change the following value to true if you want bounding boxes to be rendered
-        private static bool DEBUG_BOUNDINGBOXS = true;
-		
+        private static bool DEBUG_BOUNDINGBOXS = false;
+#endif
 		public static Random Random = new Random();
 		public static Crystallography.UI.GameSceneHud Hud;
     	public static GamePhysics _physics;
@@ -97,7 +98,8 @@ namespace Crystallography
 			var sg = SelectionGroup.Instance;
 			sg.Reset( this );
 			ForegroundLayer.AddChild(sg.getNode());
-	
+
+#if DEBUG
             // This is debug routine that will draw the physics bounding box around all physics bodies
             if(DEBUG_BOUNDINGBOXS)
             {
@@ -112,6 +114,7 @@ namespace Crystallography
 					}
                 };
             }
+#endif
 			
 			Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
 			Pause (false);

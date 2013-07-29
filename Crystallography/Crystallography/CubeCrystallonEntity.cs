@@ -21,6 +21,8 @@ namespace Crystallography
 		protected Node radialNode2;
 		protected bool finished;
 		
+		public static event EventHandler<CubeCompleteEventArgs>       CubeCompleteDetected;
+		
 		// GET & SET -----------------------------------------------------------
 		
 		/// <summary>
@@ -215,6 +217,13 @@ namespace Crystallography
 				radial2 = null;
 				radialNode = null;
 				radialNode2 = null;
+				
+				EventHandler<CubeCompleteEventArgs> handler = CubeCompleteDetected;
+				if ( handler != null ) {
+					handler( this, new CubeCompleteEventArgs {
+					members = Array.ConvertAll( this.members, item => (CardCrystallonEntity)item )
+					});
+				}
 			}
 			base.removeFromScene (doCleanup);
 		}
@@ -248,8 +257,8 @@ namespace Crystallography
 		}
 		
 		public void Finish() {
-			finished = true;
-			Visible = false;
+//			finished = true;
+//			Visible = false;
 			//_physics.removePhysicsBody(_body);
 			//setBody(null);
 //			foreach( AbstractCrystallonEntity e in members ) {
@@ -277,6 +286,10 @@ namespace Crystallography
 			return null;
 		}
 		
+	}
+	
+	public class CubeCompleteEventArgs : EventArgs {
+		public CardCrystallonEntity[] members;
 	}
 }
 

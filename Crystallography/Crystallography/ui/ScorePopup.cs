@@ -8,35 +8,35 @@ namespace Crystallography.UI
 {
 	public class ScorePopup : Label
 	{
-		private static readonly Vector2 SingleDigitOffset = new Vector2(-12.0f, 60.0f);
-		private static readonly Vector2 DoubleDigitOffset = new Vector2(-7.0f, 60.0f);
+		private static readonly Vector2 SingleDigitOffset = new Vector2(48.0f, 84.0f);
+		private static readonly Vector2 DoubleDigitOffset = new Vector2(51.0f, 84.0f);
 		private static readonly Font font = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25);
 		private static readonly FontMap map = Crystallography.UI.FontManager.Instance.GetMap( font );
 		
-		protected Node parentNode;
+		protected Node parent;
 		protected Vector2 offset;
 		
 		
-		public ScorePopup (ICrystallonEntity pParent, int pPoints) : base(pPoints.ToString(), map)
+		public ScorePopup (Node pParent, int pPoints) : base(pPoints.ToString(), map)
 		{
-			parentNode = pParent.getNode();
+			parent = pParent;
 			if (pPoints < 10) {
 				offset = DoubleDigitOffset;
 			} else {
 				offset = SingleDigitOffset;
 			}
-			Position = parentNode.Parent.Parent.Position + offset;
+//			velocity = Vector2.Zero;
+			Position = parent.LocalToWorld(parent.Position) + offset;
 			Color = Colors.White;
 			Pivot = new Vector2(0.5f, 0.5f);
 			HeightScale = 1.0f;
-			
-//			pParent.getNode().Parent.Parent.
-			
+						
 			Sequence sequence = new Sequence();
 			sequence.Add( new DelayTime( 0.1f ) );
 			GameScene.Layers[2].AddChild(this);
-//			sequence.Add( new CallFunc( () => { pParent.getNode().Parent.Parent.AddChild(this); } ) );
-			sequence.Add( new CallFunc( () => { Scheduler.Instance.ScheduleUpdateForTarget(this,0,false); } ) );
+			sequence.Add( new CallFunc( () => {
+				Scheduler.Instance.ScheduleUpdateForTarget(this,0,false);
+			} ) );
 			this.RunAction(sequence);
 			
 #if DEBUG
@@ -50,7 +50,13 @@ namespace Crystallography.UI
 		{
 			base.Update (dt);
 			Color.A -= dt/1.5f;
-			Position = parentNode.Parent.Parent.Position + offset;
+			
+			if( parent != null) {
+				Position = parent.LocalToWorld(parent.Position) + offset;
+			} 
+//			else {
+//				Position += offset;
+//			}
 			HeightScale += 0.3f * (dt/1.5f);
 			
 			if ( Color.A <= 0) {
@@ -61,7 +67,7 @@ namespace Crystallography.UI
 		// METHODS ---------------------------------------------------------------------------------
 		
 		public void Destroy() {
-			parentNode = null;
+			parent = null;
 			this.UnscheduleAll();
 			this.RemoveAllChildren(true);
 			this.Parent.RemoveChild(this, true);

@@ -31,13 +31,24 @@ namespace Crystallography.UI
 		
 		// METHODS --------------------------------------------------------------------
 		
-		public void ScoreIcons (ICrystallonEntity pParent, Dictionary<string,int> pQualities) {
+//		public void ScoreIcons (ICrystallonEntity pParent, Dictionary<string,int> pQualities) {
+//			SpawnIcons (pParent, pQualities, Colors.White);
+//		}
+		
+		public void ScoreIcons (CardCrystallonEntity pParent, Dictionary<string,int> pQualities) {
 			SpawnIcons (pParent, pQualities, Colors.White);
 		}
+		
+		public void ScoreIcons (GroupCrystallonEntity pParent, Dictionary<string,int> pQualities) {
+			SpawnIcons (pParent.members[0], pQualities, Colors.White);
+		}
+			
 		
 		public void FailedIcons (ICrystallonEntity pParent, Dictionary<string,int> pQualities) {
 			SpawnIcons (pParent, pQualities, Colors.Pink);
 		}
+		
+		
 		
 		protected void SpawnIcons (ICrystallonEntity pParent, Dictionary<string,int> pQualities, Vector4 pColor) {
 			Sequence sequence = new Sequence();
@@ -61,7 +72,7 @@ namespace Crystallography.UI
 						sequence.Add ( new CallFunc( () => { Support.ParticleEffectsManager.Instance.AddScoreParticle("Sound", (pParent as CardCrystallonEntity), pColor); } ) );
 						break;
 					}
-					sequence.Add( new DelayTime( 0.1f ) );
+					sequence.Add( new DelayTime( 0.05f ) );
 				}
 			}
 			pParent.getNode().RunAction(sequence);

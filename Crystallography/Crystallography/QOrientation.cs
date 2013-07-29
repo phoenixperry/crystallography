@@ -34,6 +34,9 @@ namespace Crystallography
 		{
 //			Instance = this;
 			_name = "QOrientation";
+			if( AppMain.ORIENTATION_MATTERS ) {
+				allSameScore = 0; // ------ All-Same for orientation reads as failure
+			}
 		}
 		
 		// OVERRIDES --------------------------------------------------------------

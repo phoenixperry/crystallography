@@ -44,7 +44,7 @@ namespace Crystallography.UI
 //		private int Goal;
 		private int _displayScore;
 		private float _updateTimer;
-		private bool _metGoal;
+//		private bool _metGoal;
 		
 		protected GameScene _scene;
 		protected bool _initialized = false;
@@ -166,8 +166,12 @@ namespace Crystallography.UI
 		void HandleQualityManagerMatchScoreDetected (object sender, MatchScoreEventArgs e) {
 			Cubes++;
 			ScheduleScoreModifier( e.Points );
-			new ScorePopup( e.Entity, e.Points );
-			IconPopupManager.Instance.ScoreIcons( e.Entity, e.ScoreQualities );
+			new ScorePopup( e.Node, e.Points );
+			if (e.Entity is GroupCrystallonEntity) {
+				IconPopupManager.Instance.ScoreIcons( e.Entity as GroupCrystallonEntity, e.ScoreQualities );
+			} else {
+				IconPopupManager.Instance.ScoreIcons( e.Entity as CardCrystallonEntity, e.ScoreQualities );
+			}
 		}
 		
 		/// <summary>
@@ -175,7 +179,7 @@ namespace Crystallography.UI
 		/// </summary>
 		void HandleQualityManagerFailedMatchDetected (object sender, FailedMatchEventArgs e)
 		{
-			IconPopupManager.Instance.FailedIcons( e.Entity, e.Names);
+			IconPopupManager.Instance.FailedIcons( e.Entity, e.Names );
 		}
 		
 		/// <summary>
@@ -184,6 +188,7 @@ namespace Crystallography.UI
 		void HandleRestartButtonButtonUpAction (object sender, EventArgs e)
 		{
 			ExitCode = LevelExitCode.RESET;
+			_nextLevelPanel.SlideOut();
 #if METRICS
 			DataStorage.CollectMetrics();
 #endif
@@ -447,7 +452,7 @@ namespace Crystallography.UI
 			
 //			_buttonSlideIn = false;
 			_pauseTimer = false;
-			_metGoal = false;
+//			_metGoal = false;
 			ScoreText.Text = _displayScore.ToString();
 			float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
 			ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
@@ -475,7 +480,7 @@ namespace Crystallography.UI
 		
 		public void MetGoal() {
 			MetGoalTime = DisplayTimer;
-			_metGoal = true;
+//			_metGoal = true;
 			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
 			var previousSolutions = DataStorage.puzzleSolutionsFound[GameScene.currentLevel];
 			var score = previousSolutions.Count;

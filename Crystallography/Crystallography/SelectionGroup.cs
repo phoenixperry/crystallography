@@ -239,7 +239,7 @@ namespace Crystallography
 		public override void RemoveAll () {
 			base.RemoveAll ();
 			foreach ( var puck in pucks ) {
-				puck.Children.Clear();
+				puck.RemoveAllChildren(false);
 			}
 		}
 		
@@ -381,21 +381,22 @@ namespace Crystallography
 		/// </summary>
 		public void GroupComplete() {
 			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "threetiles.wav");
-			if ( MemberType == typeof(CardCrystallonEntity) ) {
-				EventHandler<CubeCompleteEventArgs> handler = CubeCompleteDetected;
-				if ( handler != null ) {
-					handler( this, new CubeCompleteEventArgs {
-						members = Array.ConvertAll( this.members, item => (CardCrystallonEntity)item )
-					});
-				}
-			} else {
-				EventHandler<CubeGroupCompleteEventArgs> handler = CubeGroupCompleteDetected;
-				if ( handler != null ) {
-					handler( this, new CubeGroupCompleteEventArgs {
-						members = Array.ConvertAll( this.members, item => (CubeCrystallonEntity)item )
-					});
-				}
-			}
+//			if ( MemberType == typeof(CardCrystallonEntity) ) {
+//				EventHandler<CubeCompleteEventArgs> handler = CubeCompleteDetected;
+//				if ( handler != null ) {
+//					handler( this, new CubeCompleteEventArgs {
+//						members = Array.ConvertAll( this.members, item => (CardCrystallonEntity)item )
+//					});
+//				}
+//			} else {
+//				EventHandler<CubeGroupCompleteEventArgs> handler = CubeGroupCompleteDetected;
+//				if ( handler != null ) {
+//					handler( this, new CubeGroupCompleteEventArgs {
+//						members = Array.ConvertAll( this.members, item => (CubeCrystallonEntity)item )
+//					});
+//				}
+//			}
+			
 //			CardManager.Instance.MakeUnavailable( Array.ConvertAll( members, item => (CardCrystallonEntity)item ) );
 //			if ( CardManager.Instance.MatchesPossible() == false ) {
 //				Sequence sequence = new Sequence();
@@ -444,7 +445,7 @@ namespace Crystallography
 //						}
 //						GroupComplete();
 //					} else {
-						if (QualityManager.Instance.EvaluateMatch( members, true ) ) {
+						if (QualityManager.Instance.CheckForMatch( this, true ) ) {
 							GroupComplete();
 							isComplete = true;
 						} else {
@@ -621,9 +622,9 @@ namespace Crystallography
 	/// <summary>
 	/// CubeCompleteEvent arguments.
 	/// </summary>
-	public class CubeCompleteEventArgs : EventArgs {
-		public CardCrystallonEntity[] members;
-	}
+//	public class CubeCompleteEventArgs : EventArgs {
+//		public CardCrystallonEntity[] members;
+//	}
 	public class CubeGroupCompleteEventArgs : EventArgs {
 		public CubeCrystallonEntity[] members;
 	}

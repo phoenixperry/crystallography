@@ -12,8 +12,8 @@ namespace Crystallography
 {
 	public abstract class AbstractQuality : IQuality
 	{
-		public int allSameScore { get; private set; }
-		public int allDifferentScore { get; private set; }
+		public int allSameScore { get; protected set; }
+		public int allDifferentScore { get; protected set; }
 		
 		protected string _name;
 		

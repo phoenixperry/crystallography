@@ -18,6 +18,7 @@ namespace Crystallography
 		public event EventHandler NoMatchesPossibleDetected;
 		public event EventHandler CardSpawned;
 		
+		
 		// GET & SET -----------------------------------------------------------------------
 
 		public static CardManager Instance { 
@@ -53,7 +54,7 @@ namespace Crystallography
 			availableCards = new List<CardCrystallonEntity>();
 			_scene = Director.Instance.CurrentScene;
 			_physics = GamePhysics.Instance;
-			SelectionGroup.Instance.CubeCompleteDetected += HandleSelectionGroupInstanceCubeCompleteDetected;
+			CubeCrystallonEntity.CubeCompleteDetected += HandleSelectionGroupInstanceCubeCompleteDetected;
 			Reset (_scene);
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
@@ -139,29 +140,37 @@ namespace Crystallography
 		/// Returns whether or not at least one possible match remains, based on the contents of <c>availableCards</c>
 		/// </summary>
 		public bool MatchesPossible() {
-			int len = availableCards.Count;
-			if ( len >= 3 ) {	// ---------------------------------------------------------------- At least 3 cards must remain
-				CardCrystallonEntity[] triad = new CardCrystallonEntity[SelectionGroup.MAX_CAPACITY];
-				for (int i=0; i < len-2; i++) {
-					for (int j=i+1; j < len-1; j++) {
-						for (int k=j+1; k < len; k++) {
-							triad[0] = availableCards[i];
-							triad[1] = availableCards[j];
-							triad[2] = availableCards[k];
-							if ( QualityManager.Instance.EvaluateMatch( triad ) ) { // ------------- At least 1 possible match exists
+			if ( QualityManager.Instance.CheckForMatch( availableCards.ToArray(), false ) ) {
 #if DEBUG
-								Console.WriteLine("Possible Sets Remain: TRUE");
+				Console.WriteLine("Possible Sets Remain: TRUE");
 #endif
-								return true;
-							}
-						}
-					}
-				}
+				return true;
 			}
 #if DEBUG
 			Console.WriteLine("Possible Sets Remain: FALSE");
 #endif
 			return false;
+//			int len = availableCards.Count;
+//			if ( len >= 3 ) {	// ---------------------------------------------------------------- At least 3 cards must remain
+//				CardCrystallonEntity[] triad = new CardCrystallonEntity[SelectionGroup.MAX_CAPACITY];
+//				for (int i=0; i < len-2; i++) {
+//					for (int j=i+1; j < len-1; j++) {
+//						for (int k=j+1; k < len; k++) {
+//							triad[0] = availableCards[i];
+//							triad[1] = availableCards[j];
+//							triad[2] = availableCards[k];
+//							if ( QualityManager.Instance.EvaluateMatch( triad ) ) { // ------------- At least 1 possible match exists
+
+//								return true;
+//							}
+//						}
+//					}
+//				}
+//			}
+//#if DEBUG
+//			Console.WriteLine("Possible Sets Remain: FALSE");
+//#endif
+//			return false;
 		}
 		
 		/// <summary>
