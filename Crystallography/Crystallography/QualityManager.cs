@@ -164,10 +164,7 @@ namespace Crystallography
 		/// <summary>
 		/// Builds <c>qualityDict</c>
 		/// </summary>
-		/// <param name='pCardManagerInstance'>
-		/// Instance of <c>CardManager</c> with an assembled list of cards for this level.
-		/// </param>
-		private void BuildQualityDictionary( CardManager pCardManagerInstance ) {
+		private void BuildQualityDictionary() {
 			// --------------------------------------------------------------------- FACTORY
 			
 			// --------------------------------------------------------------------- STEP 1: Separate the card data into useful chunks
@@ -175,7 +172,7 @@ namespace Crystallography
 				in doc.Descendants("Card")
 				select new { AllQualities = data.Elements() };
 			// --------------------------------------------------------------------- STEP 2: Make as many cards as the level data says
-			int id = pCardManagerInstance.NextId;
+			int id = CardManager.Instance.NextId;
 			int count = 0;
 			foreach ( var card in cards ) {
 				// ----------------------------------------------------------------- STEP 3: Gather the qualities of the card
@@ -479,13 +476,13 @@ namespace Crystallography
 		/// <param name='pLevelNum'>
 		/// The level to load next.
 		/// </param>
-		public void Reset( CardManager pCardManagerInstance, int pLevelNum ) {
+		public void Reset( int pLevelNum ) {
 			//TODO Keep this from being called both BEFORE and AFTER level transition. Pick ONE.
 			ClearQualityDictionary();
 			LoadLevelQualities( pLevelNum );
 			QColor.Instance.setPalette();
 			QPattern.Instance.setPalette();
-			BuildQualityDictionary( pCardManagerInstance );
+			BuildQualityDictionary();
 //			ApplyQualities();
 		}
 		

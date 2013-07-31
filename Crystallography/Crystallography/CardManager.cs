@@ -7,8 +7,8 @@ namespace Crystallography
 {
 	public class CardManager
 	{
-		public static int STD_CARD_POPULATION = 15;
-		public static int MAX_CARD_POPULATION = 18;
+		public static int DEFAULT_STD_CARD_POPULATION = 15;
+		public static int DEFAULT_MAX_CARD_POPULATION = 18;
 		
 		public static List<CardCrystallonEntity> availableCards;
 		protected static CardManager _instance;
@@ -33,7 +33,7 @@ namespace Crystallography
 			}
 		}
 		
-		public int MaxPopulation { get; set; }
+//		public int MaxPopulation { get; set; }
 		
 		public int TotalCardsInDeck { get; set; }
 		
@@ -41,7 +41,9 @@ namespace Crystallography
 		
 		public bool PickRandomly {get; set; }
 		
-		protected List<int> ids;
+		protected List<int> Deck;
+		
+//		protected List<int> ids;
 		
 		// CONSTRUCTOR ---------------------------------------------------------------------
 		
@@ -49,7 +51,7 @@ namespace Crystallography
 		/// Initializes a new instance of the <see cref="Crystallography.CardManager"/> class.
 		/// </summary>
 		protected CardManager () {
-			MaxPopulation = 30;
+//			MaxPopulation = 30;
 			NextId = 0;
 			availableCards = new List<CardCrystallonEntity>();
 			_scene = Director.Instance.CurrentScene;
@@ -100,9 +102,20 @@ namespace Crystallography
 			
 		}
 		
+		protected void BuildDeck() {
+			Deck = new List<int>();
+			for (int i = 0; i < TotalCardsInDeck; i++) {
+//				ids.Add(i+NextId);
+				Deck.Add(i+NextId);
+			}
+			Deck.Sort();
+		}
+		
 		public void Destroy() {
 			availableCards.Clear ();
 			availableCards = null;
+			Deck.Clear();
+			Deck = null;
 			_instance = null;
 			_scene = null;
 			_physics = null;
@@ -177,32 +190,52 @@ namespace Crystallography
 		/// Spawn cards until we run out of cards to spawn, or hit the population cap.
 		/// </summary>
 		public void Populate ( bool pForce = false ) {
-			int fillPop = pForce ? MAX_CARD_POPULATION : STD_CARD_POPULATION;
+			if ( Deck == null ) {
+				BuildDeck();
+			}
+			
+			int fillPop = pForce ? LevelManager.Instance.StandardPop + 3 : LevelManager.Instance.StandardPop;
 			if (GameScene.currentLevel == 999) {
 				fillPop -= 3; // --------------------------------------------------- Lower limits to 12 & 15
-				ids = new List<int>();
-				for (int i = 0; i < TotalCardsInDeck; i++) {
-					ids.Add(i+NextId);
+			}
+//				ids = new List<int>();
+//				Deck = new int[TotalCardsInDeck];
+//				for (int i = 0; i < TotalCardsInDeck; i++) {
+//					ids.Add(i+NextId);
+//					Deck.Add(i+NextId);
+//					
+//				}
+//				Deck.Sort();
+			while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
+				int index;
+				if (PickRandomly) {
+					index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
+				} else {
+					index = 0;
 				}
-				while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
-					int index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
-					spawn(ids[index]);
-					ids.RemoveAt(index);
-				}
-			} else {
-				ids = new List<int>();
-				for (int i = 0; i < TotalCardsInDeck; i++) {
-					ids.Add(i+NextId);
-				}
-				while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
-					int index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
-					spawn(ids[index]);
-					ids.RemoveAt(index);
-				}
+//				spawn(ids[index]);
+				spawn (Deck[index]);
+//				ids.RemoveAt(index);
+				Deck.RemoveAt(index);
+			}
+//			} else {
+//				ids = new List<int>();
+//				for (int i = 0; i < TotalCardsInDeck; i++) {
+//					ids.Add(i+NextId);
+//					Deck.Add (i+NextId);
+//				}
+//				while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
+//					int index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
+//					spawn(ids[index]);
+//					spawn (Deck[index]);
+//					ids.RemoveAt(index);
+//					Deck.RemoveAt(index);
+//				}
+			
 //				while ( availableCards.Count < MaxPopulation && TotalCardsInDeck > 0) {
 //					spawn();
 //				}
-			}
+//			}
 		}
 		
 		/// <summary>
@@ -212,10 +245,19 @@ namespace Crystallography
 			foreach( var card in availableCards ) {
 				card.removeFromScene( true );
 			}
+			if (GameScene.currentLevel == 999) {
+				PickRandomly = true;
+			} else {
+				PickRandomly = false;
+			}
 			availableCards.Clear();
 			NextId = 0;
 			_scene = pScene;
-			ids = null;
+//			ids = null;
+			if (Deck != null) {
+				Deck.Clear();
+			}
+			Deck = null;
 		}
 		
 		/// <summary>
@@ -235,7 +277,6 @@ namespace Crystallography
 			var _screenWidth = Director.Instance.GL.Context.GetViewport().Width;
             var _screenHeight = Director.Instance.GL.Context.GetViewport().Height;
 			return spawn( 220.0f + 0.6f * _screenWidth * GameScene.Random.NextFloat(),
-			             //50f + 0.75f * _screenWidth * GameScene.Random.NextFloat(),
 			       50f + 0.75f * _screenHeight * GameScene.Random.NextFloat(), pId);
 		}
 		
@@ -249,7 +290,6 @@ namespace Crystallography
 		/// <c>float</c> Y coordinate in pixels.
 		/// </param>
 		public CardCrystallonEntity spawn( float pX, float pY, int pId=-1 ) {
-//			var ss = SpriteSingleton.getInstance();
 			
 			if (pId == -1){
 				pId = NextId;
@@ -265,7 +305,6 @@ namespace Crystallography
 			card.addToScene();
 			availableCards.Add(card);
 			card.Visible = false;
-//			(card.getNode() as SpriteTile).Color.W = 0.0f;
 			Sequence sequence = new Sequence();
 			sequence.Add( new DelayTime( 0.2f ));
 			sequence.Add( new CallFunc( () => FadeIn(card) ) );

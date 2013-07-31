@@ -90,17 +90,25 @@ namespace Crystallography.UI
 			BreaksDetected++;
 		}
 		
+		void HandleCubeCrystallonEntityCubeCompleteDetected (object sender, CubeCompleteEventArgs e)
+		{
+			HitMeButton.on = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < LevelManager.Instance.StandardPop + 3 );
+		}
+		
 		/// <summary>
 		/// Handles the card manager instance no matches possible detected.
 		/// </summary>
 		void HandleCardManagerInstanceNoMatchesPossibleDetected (object sender, EventArgs e) {
-			NoMatchesPossibleTime = DisplayTimer;
-			MetGoal();
-			if (Goal <= Score) {
-				RestartButton.on = false;
-			}
-//			_buttonSlideIn = true;
-			_pauseTimer = true;
+//			HitMeButton.on = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < LevelManager.Instance.StandardPop + 3 );
+//			if (HitMeButton.on == false) {
+				NoMatchesPossibleTime = DisplayTimer;
+				MetGoal();
+				if (Goal <= Score) {
+					RestartButton.on = false;
+				}
+//				_buttonSlideIn = true;
+				_pauseTimer = true;
+//			}
 		}
 		
 		/// <summary>
@@ -157,7 +165,7 @@ namespace Crystallography.UI
 		/// On Card Spawn
 		/// </summary>
 		void HandleCardManagerInstanceCardSpawned (object sender, EventArgs e) {
-			HitMeButton.on = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < CardManager.MAX_CARD_POPULATION );
+			HitMeButton.on = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < LevelManager.Instance.StandardPop + 3 );
 		}
 		
 		/// <summary>
@@ -268,6 +276,7 @@ namespace Crystallography.UI
 			GameScene.LevelChangeDetected += HandleGameSceneLevelChangeDetected;
 			GroupCrystallonEntity.BreakDetected += HandleGroupCrystallonEntityBreakDetected;
 			PausePanel.QuitButtonPressDetected += HandlePausePanelQuitButtonPressDetected;
+			CubeCrystallonEntity.CubeCompleteDetected += HandleCubeCrystallonEntityCubeCompleteDetected;
 			if(GameScene.currentLevel == 999) {
 				this.Schedule(calculateTimer,1);
 			}
@@ -294,6 +303,7 @@ namespace Crystallography.UI
 			GameScene.LevelChangeDetected -= HandleGameSceneLevelChangeDetected;
 			GroupCrystallonEntity.BreakDetected -= HandleGroupCrystallonEntityBreakDetected;
 			PausePanel.QuitButtonPressDetected -= HandlePausePanelQuitButtonPressDetected;
+			CubeCrystallonEntity.CubeCompleteDetected -= HandleCubeCrystallonEntityCubeCompleteDetected;
 			if(GameScene.currentLevel == 999) {
 				this.Unschedule(calculateTimer);
 			}

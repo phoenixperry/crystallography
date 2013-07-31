@@ -23,8 +23,8 @@ namespace Crystallography
 		private Vector2 lastPosition;
 		
 		
-		public event EventHandler<CubeCompleteEventArgs>       CubeCompleteDetected;
-		public event EventHandler<CubeGroupCompleteEventArgs>  CubeGroupCompleteDetected;
+//		public event EventHandler<CubeCompleteEventArgs>       CubeCompleteDetected;
+//		public event EventHandler<CubeGroupCompleteEventArgs>  CubeGroupCompleteDetected;
 		public event EventHandler                              CubeFailedDetected;
 		
 		// GET & SET -------------------------------------------------------------

@@ -253,7 +253,7 @@ namespace Crystallography
 				LevelManager.Instance.Reset();
 				LevelManager.Instance.GetLevelSettings( currentLevel );
 				Clear();
-				QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
+				QualityManager.Instance.Reset( currentLevel );
 				CardManager.Instance.Populate();
 				EventHandler handler = LevelChangeDetected;
 				if (handler != null) {

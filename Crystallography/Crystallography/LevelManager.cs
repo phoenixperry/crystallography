@@ -40,11 +40,12 @@ namespace Crystallography
 		public string SoundPrefix    { get; set; }
 		public bool SoundGlow        { get; set; }
 		public int Goal	             { get; set; }
-		public int PossibleSolutions {get; set;}
-		public int FoundSolutions    {get; set;}
+		public int PossibleSolutions { get; set; }
+		public int FoundSolutions    { get; set; }
 		public int Bonus             { get; set; }
 		public string MessageBody    { get; set; }
 		public string MessageTitle   { get; set; }
+		public int StandardPop       { get; set; }
 		
 		// CONSTRUCTORS -----------------------------------------------------------
 		
@@ -106,6 +107,8 @@ namespace Crystallography
 							} else if (line.Name.LocalName == "Message") {
 								MessageBody = line.Attribute("Body").Value;
 								MessageTitle = line.Attribute("Title").Value;
+							} else if (line.Name.LocalName == "StandardPop") {
+								StandardPop = (int)line.Attribute("Value");
 							}
 						}
 						return;
@@ -135,6 +138,7 @@ namespace Crystallography
 			Bonus = 0;
 			MessageBody = "";
 			MessageTitle = "";
+			StandardPop = 15;
 		}
 		
 		public void Reset() {

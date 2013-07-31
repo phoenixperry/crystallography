@@ -108,8 +108,6 @@ namespace Crystallography
 			setVelocity(1.0f, GameScene.Random.NextAngle());
 			Sequence sequence = new Sequence();
 			sequence.Add( new DelayTime(2.0f));
-//			sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 3.0f));
-//			sequence.Add( new CallFunc( () => Finish() ) );
 			sequence.Add ( new CallFunc( () => { 
 				GroupManager.Instance.Remove(this, true); 
 			} ) );
@@ -221,7 +219,7 @@ namespace Crystallography
 				EventHandler<CubeCompleteEventArgs> handler = CubeCompleteDetected;
 				if ( handler != null ) {
 					handler( this, new CubeCompleteEventArgs {
-					members = Array.ConvertAll( this.members, item => (CardCrystallonEntity)item )
+						members = Array.ConvertAll( this.members, item => (CardCrystallonEntity)item )
 					});
 				}
 			}
@@ -256,7 +254,7 @@ namespace Crystallography
 			Left = GetSideEntity(1);
 		}
 		
-		public void Finish() {
+//		public void Finish() {
 //			finished = true;
 //			Visible = false;
 			//_physics.removePhysicsBody(_body);
@@ -274,7 +272,7 @@ namespace Crystallography
 //			radialNode = null;
 //			radialNode2 = null;
 //			GroupManager.Instance.Remove(this, true);
-		}
+//		}
 			
 		private CardCrystallonEntity GetSideEntity(int pIndex) {
 			Node n = pucks[pIndex].Children[0];
