@@ -1,361 +1,473 @@
 <GameData>
-    <Level Value="0">
-        <Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+	<Level Value="0">
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set4/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="1" Score="1" />
 		<OldGoal Value="1" />
 		<Bonus Value="1" />
 		<Message Title="the basics." Body="drag pieces together to make cubes." />
-    </Level>
-    <Level Value="1"> 
-        <Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+	</Level>
+	<Level Value="1">
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack2" />
+		<Sound Prefix="stack2" Glow="false" />
 		<Goal Cubes="1" Score="3" />
 		<OldGoal Value="3" />
 		<Message Title="the rule." Body="all the sides of a cube must be the same &#xA;or all the sides must be different." />
-    </Level>
-    <Level Value="2">
-        <Color Red="0.807843" Green="1.0" Blue="0.0" />
-        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
-        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+	</Level>
+	<Level Value="2">
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack3" />
+		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="1" Score="3" />
 		<OldGoal Value="3" />
 		<Message Title="fixed orientation." Body="the orientation of sides cannot be &#xA;changed." />
-    </Level>
+	</Level>
 	<Level Value="3">
-        <Color Red="0.807843" Green="1.0" Blue="0.0" />
-        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
-        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack3" />
+		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="2" Score="4" />
 		<Goal Cubes="4" Score="6" />
 		<Goal Cubes="4" Score="12" />
 		<OldGoal Value="6" />
-		<Message  Title="&#x22;all same or all different.&#x22;" Body="that's all there is to it!" />
-    </Level>
-	<Level Value="4"> 
-        <Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Message Title="&#x22;all same or all different.&#x22;" Body="that's all there is to it!" />
+	</Level>
+	<Level Value="4">
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack2" />
+		<Sound Prefix="stack2" Glow="false" />
 		<Goal Cubes="2" Score="2" />
 		<Goal Cubes="2" Score="6" />
-		<Goal Cubes="3" Score="7" />
 		<Goal Cubes="3" Score="9" />
+		<Goal Cubes="3" Score="7" />
 		<OldGoal Value="9" />
-		<Message  Title="break it up" Body="you can double-tap a group of two to &#xA;break it apart. &#xA;&#xA;use the reset button to start all over." />
-    </Level>
+		<Message Title="break it up" Body="you can double-tap a group of two to &#xA;break it apart. &#xA;&#xA;use the reset button to start all over." />
+	</Level>
 	<Level Value="5">
-        <Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set4/gamePieces.png" />
-		<Sound Prefix="stack1" />
+		<Sound Prefix="stack1" Glow="false" />
+		<Goal Cubes="3" Score="9" />
 		<Goal Cubes="3" Score="5" />
 		<Goal Cubes="3" Score="7" />
-		<Goal Cubes="3" Score="9" />
+		<Goal Cubes="3" Score="3" />
 		<Goal Cubes="4" Score="10" />
 		<OldGoal Value="9" />
 		<Message Title="oranges are not the only fruit" Body="color is not the only trait. &#xA;&#xA;this is pattern." />
-    </Level>
-    <Level Value="6">
-		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+	</Level>
+	<Level Value="6">
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
-		<Sound Prefix="stack1" />
+		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="1" Score="2" />
 		<Goal Cubes="3" Score="16" />
 		<OldGoal Value="16" />
 		<Message Title="two traits one piece." Body="each trait on each piece must obey the &#xA;all same or all different rule" />
-    </Level>
+	</Level>
 	<Level Value="7">
-		<Color Red="0.807843" Green="1.0" Blue="0.0" />
-        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
-        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack3" />
+		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="4" Score="20" />
 		<OldGoal Value="20" />
-    </Level>
+	</Level>
 	<Level Value="8">
-		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set4/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
+		<Goal Cubes="1" Score="3" />
 		<OldGoal Value="3" />
 		<Message Title="noise reduction." Body="not every trait is visual. &#xA;&#xA;touch a piece and listen to the sound it &#xA;makes." />
-    </Level>
+	</Level>
 	<Level Value="9">
-		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
+		<Goal Cubes="2" Score="10" />
+		<Goal Cubes="2" Score="12" />
 		<OldGoal Value="10" />
-    </Level>
+	</Level>
 	<Level Value="10">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
+		<Goal Cubes="2" Score="18" />
+		<Goal Cubes="4" Score="34" />
 		<OldGoal Value="34" />
-    </Level>
+	</Level>
 	<Level Value="11">
-		<Color Red="0.807843" Green="1.0" Blue="0.0" />
-        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
-        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
+		<Goal Cubes="3" Score="14" />
+		<Goal Cubes="3" Score="12" />
+		<Goal Cubes="3" Score="16" />
+		<Goal Cubes="3" Score="18" />
+		<Goal Cubes="4" Score="20" />
+		<Goal Cubes="4" Score="22" />
+		<Goal Cubes="4" Score="18" />
+		<Goal Cubes="4" Score="14" />
+		<Goal Cubes="4" Score="24" />
+		<Goal Cubes="5" Score="22" />
+		<Goal Cubes="5" Score="24" />
 		<OldGoal Value="24" />
 		<Message Title="hit." Body="you can press the &#x22;hit me&#x22; button to get &#xA;more pieces." />
 	</Level>
 	<Level Value="12">
-		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack2" />
+		<Sound Prefix="stack2" Glow="false" />
+		<Goal Cubes="2" Score="6" />
 		<OldGoal Value="6" />
 		<Message Title="how moving." Body="this is the animation trait. &#xA;&#xA;it's probably easier than sound was." />
-    </Level>
+	</Level>
 	<Level Value="13">
-		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack3" />
+		<Sound Prefix="stack3" Glow="false" />
+		<Goal Cubes="3" Score="16" />
+		<Goal Cubes="3" Score="18" />
+		<Goal Cubes="4" Score="20" />
 		<OldGoal Value="18" />
-    </Level>
+	</Level>
 	<Level Value="14">
-		<Color Red="0.807843" Green="1.0" Blue="0.0" />
-        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
-        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack1"  />
+		<Sound Prefix="stack1" Glow="false" />
+		<Goal Cubes="2" Score="12" />
+		<Goal Cubes="2" Score="10" />
+		<Goal Cubes="3" Score="12" />
+		<Goal Cubes="3" Score="14" />
+		<Goal Cubes="3" Score="16" />
+		<Goal Cubes="3" Score="18" />
+		<Goal Cubes="5" Score="26" />
 		<OldGoal Value="18" />
 	</Level>
 	<Level Value="15">
-		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set4/gamePieces.png" />
-		<Sound Prefix="stack1" />
+		<Sound Prefix="stack1" Glow="false" />
+		<Goal Cubes="3" Score="7" />
 		<OldGoal Value="7" />
 		<Message Title="particle-ular." Body="this is the particle trait. &#xA;&#xA;in 2002 this feature alone would have &#xA;driven sales." />
 	</Level>
 	<Level Value="16">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack2" />
+		<Sound Prefix="stack2" Glow="false" />
+		<Goal Cubes="3" Score="14" />
+		<Goal Cubes="3" Score="12" />
+		<Goal Cubes="3" Score="16" />
+		<Goal Cubes="3" Score="18" />
+		<Goal Cubes="4" Score="20" />
+		<Goal Cubes="4" Score="22" />
+		<Goal Cubes="4" Score="18" />
+		<Goal Cubes="5" Score="26" />
+		<Goal Cubes="5" Score="20" />
 		<OldGoal Value="18" />
-    </Level>
+	</Level>
 	<Level Value="17">
-		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack3" />
+		<Sound Prefix="stack3" Glow="false" />
+		<Goal Cubes="4" Score="18" />
+		<Goal Cubes="4" Score="20" />
+		<Goal Cubes="4" Score="22" />
+		<Goal Cubes="5" Score="24" />
+		<Goal Cubes="5" Score="22" />
 		<OldGoal Value="22" />
-    </Level>
+	</Level>
 	<Level Value="18">
-		<Color Red="0.807843" Green="1.0" Blue="0.0" />
-        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
-        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack1" />
+		<Sound Prefix="stack1" Glow="false" />
+		<Goal Cubes="1" Score="9" />
 		<OldGoal Value="9" />
 		<Message Title="triple trouble." Body="we're too classy to make a three-way &#xA;joke." />
 	</Level>
 	<Level Value="19">
-		<Color Red="0.807843" Green="1.0" Blue="0.0" />
-        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
-        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack1" />
+		<Sound Prefix="stack1" Glow="false" />
+		<Goal Cubes="4" Score="30" />
 		<OldGoal Value="30" />
 	</Level>
 	<Level Value="20">
-		<Color Red="0.807843" Green="1.0" Blue="0.0" />
-        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
-        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack1" />
+		<Sound Prefix="stack1" Glow="false" />
+		<Goal Cubes="3" Score="21" />
+		<Goal Cubes="5" Score="37" />
 		<OldGoal Value="21" />
 	</Level>
 	<Level Value="21">
-		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack3" />
+		<Sound Prefix="stack3" Glow="false" />
+		<Goal Cubes="3" Score="27" />
 		<OldGoal Value="27" />
-    </Level>
+	</Level>
 	<Level Value="22">
-		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
-		<Sound Prefix="stack3" />
+		<Sound Prefix="stack3" Glow="false" />
+		<Goal Cubes="3" Score="21" />
+		<Goal Cubes="3" Score="25" />
+		<Goal Cubes="3" Score="23" />
+		<Goal Cubes="4" Score="24" />
+		<Goal Cubes="4" Score="28" />
+		<Goal Cubes="4" Score="26" />
+		<Goal Cubes="5" Score="37" />
+		<Goal Cubes="5" Score="35" />
 		<OldGoal Value="24" />
-    </Level>
+	</Level>
 	<Level Value="23">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
-		<Sound Prefix="stack2" />
+		<Sound Prefix="stack2" Glow="false" />
+		<Goal Cubes="3" Score="15" />
+		<Goal Cubes="3" Score="19" />
+		<Goal Cubes="3" Score="17" />
+		<Goal Cubes="5" Score="37" />
 		<OldGoal Value="37" />
-    </Level>
+	</Level>
 	<Level Value="24">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
+		<Goal Cubes="3" Score="27" />
 		<OldGoal Value="27" />
-    </Level>
+	</Level>
 	<Level Value="25">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
+		<Goal Cubes="3" Score="21" />
+		<Goal Cubes="4" Score="24" />
+		<Goal Cubes="4" Score="26" />
+		<Goal Cubes="5" Score="37" />
 		<OldGoal Value="30" />
-    </Level>
+	</Level>
 	<Level Value="26">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
+		<Goal Cubes="4" Score="26" />
+		<Goal Cubes="4" Score="28" />
+		<Goal Cubes="4" Score="30" />
+		<Goal Cubes="5" Score="33" />
+		<Goal Cubes="5" Score="35" />
+		<Goal Cubes="5" Score="37" />
+		<Goal Cubes="6" Score="40" />
 		<OldGoal Value="28" />
-    </Level>
+	</Level>
 	<Level Value="27">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
+		<Goal Cubes="2" Score="18" />
 		<OldGoal Value="18" />
-    </Level>
+	</Level>
 	<Level Value="28">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
+		<Goal Cubes="2" Score="14" />
+		<Goal Cubes="4" Score="30" />
 		<OldGoal Value="30" />
-    </Level>
+	</Level>
 	<Level Value="29">
-		<Color Red="0.807843" Green="1.0" Blue="0.0" />
-        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
-        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
+		<Goal Cubes="3" Score="21" />
+		<Goal Cubes="3" Score="25" />
+		<Goal Cubes="4" Score="28" />
+		<Goal Cubes="4" Score="30" />
+		<Goal Cubes="4" Score="32" />
+		<Goal Cubes="4" Score="26" />
+		<Goal Cubes="5" Score="37" />
+		<Goal Cubes="5" Score="39" />
+		<Goal Cubes="6" Score="42" />
 		<OldGoal Value="37" />
 	</Level>
 	<Level Value="30">
-		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
+		<Goal Cubes="2" Score="18" />
 		<OldGoal Value="18" />
 		<Message Title="four!" Body="just when you had three traits mastered." />
-    </Level>
+	</Level>
 	<Level Value="31">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
+		<Goal Cubes="4" Score="38" />
 		<OldGoal Value="38" />
-    </Level>
+	</Level>
 	<Level Value="32">
-		<Color Red="0.807843" Green="1.0" Blue="0.0" />
-        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
-        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
+		<Goal Cubes="2" Score="16" />
+		<Goal Cubes="4" Score="36" />
 		<OldGoal Value="36" />
 	</Level>
 	<Level Value="33">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
+		<Goal Cubes="4" Score="36" />
+		<Goal Cubes="5" Score="44" />
 		<OldGoal Value="32" />
-    </Level>
+	</Level>
 	<Level Value="34">
-		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
+		<Goal Cubes="4" Score="40" />
+		<Goal Cubes="6" Score="56" />
 		<OldGoal Value="40" />
-    </Level>
+	</Level>
 	<Level Value="35">
-		<Color Red="0.807843" Green="1.0" Blue="0.0" />
-        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
-        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
+		<Goal Cubes="2" Score="20" />
 		<OldGoal Value="20" />
 	</Level>
 	<Level Value="36">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
+		<Goal Cubes="3" Score="30" />
+		<Goal Cubes="3" Score="28" />
 		<OldGoal Value="30" />
-    </Level>
+	</Level>
 	<Level Value="37">
-		<Color Red="0.956863" Green="0.917647" Blue="0.956863" />
-        <Color Red="0.898039" Green="0.074510" Blue="0.074510" />
-        <Color Red="0.160784" Green="0.886274" Blue="0.886274" />
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
+		<Goal Cubes="4" Score="44" />
+		<Goal Cubes="5" Score="48" />
 		<OldGoal Value="40" />
-    </Level>
+	</Level>
 	<Level Value="38">
-		<Color Red="0.807843" Green="1.0" Blue="0.0" />
-        <Color Red="0.886275" Green="0.078431" Blue="0.078431" />
-        <Color Red="0.807843" Green="0.956863" Blue="0.886275" />
+		<Color Hex="CEFF00" />
+		<Color Hex="E21414" />
+		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
+		<Goal Cubes="4" Score="28" />
+		<Goal Cubes="4" Score="40" />
+		<Goal Cubes="4" Score="42" />
+		<Goal Cubes="4" Score="32" />
+		<Goal Cubes="4" Score="36" />
+		<Goal Cubes="5" Score="40" />
+		<Goal Cubes="5" Score="44" />
 		<OldGoal Value="36" />
 	</Level>
 	<Level Value="39">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="F4EAF4" />
+		<Color Hex="E51313" />
+		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
+		<Goal Cubes="3" Score="24" />
+		<Goal Cubes="4" Score="32" />
+		<Goal Cubes="4" Score="34" />
+		<Goal Cubes="5" Score="42" />
 		<OldGoal Value="48" />
-    </Level>
+	</Level>
 	<Level Value="40">
-		<Color Red="0.011765" Green="1.0" Blue="0.741176" />
-        <Color Red="0.976471" Green="0.290196" Blue="0.050980" />
-        <Color Red="1.0" Green="0.952941" Blue="0.043137" />
+		<Color Hex="03FFBD" />
+		<Color Hex="F94A0D" />
+		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
+		<Goal Cubes="3" Score="34" />
+		<Goal Cubes="3" Score="32" />
+		<Goal Cubes="4" Score="40" />
+		<Goal Cubes="5" Score="54" />
 		<OldGoal Value="60" />
-    </Level>
+	</Level>
 </GameData>

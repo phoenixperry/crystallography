@@ -52,9 +52,16 @@ namespace Crystallography
 	
 	public class AppMain
 	{
-		private static readonly bool _ORIENTATION_MATTERS = true;
+		private static bool _ORIENTATION_MATTERS = true;
 		
-		public static bool ORIENTATION_MATTERS { get { return _ORIENTATION_MATTERS && GameScene.currentLevel != 999; } }
+		public static bool ORIENTATION_MATTERS {
+			get { 
+				return _ORIENTATION_MATTERS && GameScene.currentLevel != 999; 
+			}
+			set { 
+				_ORIENTATION_MATTERS = value;
+			}
+		}
 		
 		public static bool UI_INPUT_ENABLED = false;
 		public static bool GAMEPLAY_INPUT_ENABLED = true;

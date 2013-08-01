@@ -78,10 +78,12 @@ namespace Crystallography
 						int i = 0;
 						foreach (XElement line in element.Nodes()) {
 							if (line.Name.LocalName == "Color") {
-								Palette[i].X = (float)line.Attribute("Red");
-								Palette[i].Y = (float)line.Attribute("Green");
-								Palette[i].Z = (float)line.Attribute("Blue");
-								Palette[i].W = 1.0f;
+//								Palette[i].X = (float)line.Attribute("Red");
+//								Palette[i].Y = (float)line.Attribute("Green");
+//								Palette[i].Z = (float)line.Attribute("Blue");
+//								Palette[i].W = 1.0f;
+								string hexColor = line.Attribute("Hex").Value;
+								Palette[i] = ExtractColor(hexColor);
 								i++;
 							} else if (line.Name.LocalName == "Pattern") {
 								PatternPath = line.Attribute("Path").Value;
@@ -109,6 +111,10 @@ namespace Crystallography
 								MessageTitle = line.Attribute("Title").Value;
 							} else if (line.Name.LocalName == "StandardPop") {
 								StandardPop = (int)line.Attribute("Value");
+							} else if (line.Name.LocalName == "Orientation") {
+								if ( 0 == (int)line.Attribute("Value") ) {
+									AppMain.ORIENTATION_MATTERS = false;
+								}
 							}
 						}
 						return;
@@ -126,7 +132,15 @@ namespace Crystallography
 			doc = XDocument.Parse( xml );
 		}
 		
+		protected Vector4 ExtractColor( string hex ) {
+			float r = (float)Convert.ToInt32( hex.Substring(0, 2), 16 );
+			float g = (float)Convert.ToInt32( hex.Substring(2, 2), 16 );
+			float b = (float)Convert.ToInt32( hex.Substring(4, 2), 16 );
+			return new Vector4( r/255.0f, g/255.0f, b/255.0f, 1.0f );
+		}
+		
 		public void SetToDefault() {
+			AppMain.ORIENTATION_MATTERS = true;
 			Palette[0] = new Vector4(0.956863f, 0.917647f, 0.956863f, 1.0f);
 			Palette[1] = new Vector4(0.898039f, 0.074510f, 0.074510f, 1.0f);
 			Palette[2] = new Vector4(0.160784f, 0.886274f, 0.886274f, 1.0f);

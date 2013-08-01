@@ -103,9 +103,9 @@ namespace Crystallography.UI
 //			if (HitMeButton.on == false) {
 				NoMatchesPossibleTime = DisplayTimer;
 				MetGoal();
-				if (Goal <= Score) {
-					RestartButton.on = false;
-				}
+//				if (Goal <= Score) {
+				RestartButton.on = false;
+//				}
 //				_buttonSlideIn = true;
 				_pauseTimer = true;
 //			}

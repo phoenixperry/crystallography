@@ -4,7 +4,7 @@ import os
 import string
 
 outFilePrefix = './analysis/'
-csvFile = './crystallonlevels.csv'
+csvFile = './crystalloncards.csv'
 
 pNote = re.compile(r'NOTE.*',re.IGNORECASE)
 
