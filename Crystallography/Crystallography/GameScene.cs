@@ -248,7 +248,9 @@ namespace Crystallography
 		
 		public void ResetToLevel() {
 			if (currentLevel < TOTAL_LEVELS || currentLevel == 999) {
+#if DEBUG
 				Console.WriteLine( "Resetting to start level " + currentLevel );
+#endif
 				
 				LevelManager.Instance.Reset();
 				LevelManager.Instance.GetLevelSettings( currentLevel );
@@ -260,7 +262,9 @@ namespace Crystallography
 					handler( this, null );
 				}
 			} else {
+#if DEBUG
 				Console.WriteLine( "All known levels (" + TOTAL_LEVELS + ") complete. Returning to TitleScene." );
+#endif
 				QuitToTitle();
 			}
 		}
