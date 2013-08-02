@@ -208,11 +208,12 @@
 		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="false" />
-		<Goal Cubes="4" Score="18" />
-		<Goal Cubes="4" Score="20" />
-		<Goal Cubes="4" Score="22" />
-		<Goal Cubes="5" Score="24" />
 		<Goal Cubes="5" Score="22" />
+		<Goal Cubes="5" Score="26" />
+		<Goal Cubes="5" Score="24" />
+		<Goal Cubes="5" Score="28" />
+		<Goal Cubes="6" Score="30" />
+		<Goal Cubes="6" Score="28" />
 		<OldGoal Value="22" />
 	</Level>
 	<Level Value="18">
@@ -308,12 +309,14 @@
 		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
-		<Goal Cubes="4" Score="26" />
 		<Goal Cubes="4" Score="28" />
-		<Goal Cubes="4" Score="30" />
+		<Goal Cubes="4" Score="32" />
+		<Goal Cubes="4" Score="26" />
 		<Goal Cubes="5" Score="33" />
 		<Goal Cubes="5" Score="35" />
 		<Goal Cubes="5" Score="37" />
+		<Goal Cubes="5" Score="39" />
+		<Goal Cubes="6" Score="42" />
 		<Goal Cubes="6" Score="40" />
 		<OldGoal Value="28" />
 	</Level>
@@ -342,14 +345,14 @@
 		<Color Hex="CEF4E2" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
-		<Goal Cubes="3" Score="21" />
-		<Goal Cubes="3" Score="25" />
 		<Goal Cubes="4" Score="28" />
 		<Goal Cubes="4" Score="30" />
 		<Goal Cubes="4" Score="32" />
 		<Goal Cubes="4" Score="26" />
 		<Goal Cubes="5" Score="37" />
 		<Goal Cubes="5" Score="39" />
+		<Goal Cubes="5" Score="35" />
+		<Goal Cubes="6" Score="44" />
 		<Goal Cubes="6" Score="42" />
 		<OldGoal Value="37" />
 	</Level>
@@ -388,8 +391,11 @@
 		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
-		<Goal Cubes="4" Score="36" />
-		<Goal Cubes="5" Score="44" />
+		<Goal Cubes="3" Score="30" />
+		<Goal Cubes="4" Score="38" />
+		<Goal Cubes="5" Score="46" />
+		<Goal Cubes="6" Score="56" />
+		<Goal Cubes="6" Score="54" />
 		<OldGoal Value="32" />
 	</Level>
 	<Level Value="34">
@@ -440,10 +446,9 @@
 		<Goal Cubes="4" Score="28" />
 		<Goal Cubes="4" Score="40" />
 		<Goal Cubes="4" Score="42" />
-		<Goal Cubes="4" Score="32" />
-		<Goal Cubes="4" Score="36" />
-		<Goal Cubes="5" Score="40" />
 		<Goal Cubes="5" Score="44" />
+		<Goal Cubes="5" Score="48" />
+		<Goal Cubes="6" Score="52" />
 		<OldGoal Value="36" />
 	</Level>
 	<Level Value="39">
@@ -453,9 +458,9 @@
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="3" Score="24" />
-		<Goal Cubes="4" Score="32" />
 		<Goal Cubes="4" Score="34" />
-		<Goal Cubes="5" Score="42" />
+		<Goal Cubes="5" Score="44" />
+		<Goal Cubes="6" Score="54" />
 		<OldGoal Value="48" />
 	</Level>
 	<Level Value="40">
@@ -464,10 +469,10 @@
 		<Color Hex="FFF30B" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
-		<Goal Cubes="3" Score="34" />
 		<Goal Cubes="3" Score="32" />
 		<Goal Cubes="4" Score="40" />
-		<Goal Cubes="5" Score="54" />
+		<Goal Cubes="4" Score="46" />
+		<Goal Cubes="6" Score="66" />
 		<OldGoal Value="60" />
 	</Level>
 </GameData>
