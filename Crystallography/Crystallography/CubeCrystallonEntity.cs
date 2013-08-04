@@ -14,11 +14,10 @@ namespace Crystallography
 		static readonly Vector2[] POSITION_OFFSETS = { 	new Vector2(0f,-23.5f),
 														new Vector2(-27.0f,23.5f),
 														new Vector2(27.0f,23.5f) };
+		static readonly float[] ROTATIONS = { 0.999f, -0.999f, 0.0f };
 		protected readonly static float DEFAULT_SPEED = 0.3f;
-		protected SpriteTile radial;
-		protected SpriteTile radial2;
-		protected Node radialNode;
-		protected Node radialNode2;
+		protected SpriteTile[] radialSprites;
+		protected Node[] radialNodes;
 		protected bool finished;
 		
 		public static event EventHandler<CubeCompleteEventArgs>       CubeCompleteDetected;
@@ -87,8 +86,6 @@ namespace Crystallography
 		public CubeCrystallonEntity(Scene pScene, GamePhysics pGamePhysics, PhysicsShape pShape = null ) 
 																			: base( pScene, pGamePhysics, pShape, 3, true ) {
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
-//			_node.AdHocDraw += DrawAnim;
-			finished = false;
 		}
 			
 		// OVERRIDES -----------------------------------------------------------
@@ -118,58 +115,36 @@ namespace Crystallography
 					sequence = new Sequence();
 					sequence.Add( new DelayTime( 0.8f ) );
 					sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 0.5f) );
-//					(e as CardCrystallonEntity).getNode().RunAction( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 3.0f));
 					(e as CardCrystallonEntity).getNode().RunAction( sequence );
 				}
 			}
 			addToScene();
 //			getNode().RunAction(sequence);
 			
-			radialNode = new Node();
-			radial = Support.SpriteFromFile("Application/assets/images/burst.png");
-//			radial.Color.A = 0.0f;
-			radial.Color = new Vector4(1.0f, 1.0f, 0.49f, 0.0f);
-			radial.Pivot = new Vector2(0.5f, 0.5f);
-			radial.Scale = new Vector2(0.1f, 0.1f);
-			radialNode.AddChild(radial);
-			radial.Position = -radial.CalcSizeInPixels() * radial.Scale.X * 0.5f;
-			radialNode.Position = getNode().Position;
-			sequence = new Sequence();
-			sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, 0.25f), 0.5f) {
-				Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.ExpEaseOut(t, 1.5f)
-			} );
-			sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -0.25f), 1.0f) );
-			radial.RunAction(sequence);
-			sequence = new Sequence();
-			sequence.Add( new ScaleTo( new Vector2(1.5f, 1.5f), 0.5f) );
-//			sequence.Add( new ScaleTo( new Vector2(0.1f, 0.1f), 0.5f) );
-			radial.RunAction(sequence);
-			radialNode.RunAction( new RotateBy ( new Vector2( 0.052f, 0.999f), 3.0f ) );
-			GameScene.Layers[0].AddChild(radialNode);
+			radialNodes = new Node[3];
+			radialSprites = new SpriteTile[3];
 			
-			
-			radialNode2 = new Node();
-			radial2 = Support.SpriteFromFile("Application/assets/images/burst.png");
-			radial2.Color.A = 0.0f;
-			radial2.Pivot = new Vector2(0.5f, 0.5f);
-			radial2.Scale = new Vector2(0.1f, 0.1f);
-			radialNode2.AddChild(radial2);
-			radial2.Position = -radial2.CalcSizeInPixels() * radial2.Scale.X * 0.5f;
-			radialNode2.Position = getNode().Position;
-			sequence = new Sequence();
-			sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, 0.25f), 0.5f) {
-				Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.ExpEaseOut(t, 1.5f)
-			} );
-			sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -0.25f), 1.0f) );
-			radial2.RunAction(sequence);
-			sequence = new Sequence();
-			sequence.Add( new ScaleTo( new Vector2(1.2f, 1.3f), 0.5f) );
-//			sequence.Add( new ScaleTo( new Vector2(0.1f, 0.1f), 0.5f) );
-			radial2.RunAction(sequence);
-			radialNode2.RunAction( new RotateBy ( new Vector2( 0.052f, -0.999f ), 3.0f ) {
-				Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear(t)
-			});
-			GameScene.Layers[0].AddChild(radialNode2);
+			for(int i=0; i<radialNodes.Length; i++) {
+				radialNodes[i] = new Node();
+				radialSprites[i] = Support.SpriteFromFile("Application/assets/images/burst.png");
+				radialSprites[i].Color = (members[i].getNode() as SpriteBase).Color.Xyz0;
+				radialSprites[i].Pivot = new Vector2(0.5f, 0.5f);
+				radialSprites[i].Scale = new Vector2(0.1f, 0.1f);
+				radialNodes[i].AddChild (radialSprites[i]);
+				radialSprites[i].Position = -radialSprites[i].CalcSizeInPixels() * radialSprites[i].Scale.X * 0.5f;
+				radialNodes[i].Position = getNode().Position;
+				sequence = new Sequence();
+				sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, 0.5f), 0.5f) {
+					Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.ExpEaseOut(t, 1.5f)
+				} );
+				sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -0.5f), 0.75f) );
+				radialSprites[i].RunAction(sequence);
+				sequence = new Sequence();
+				sequence.Add( new ScaleTo( new Vector2(1.5f, 1.5f), 0.5f) );
+				radialSprites[i].RunAction(sequence);
+				radialNodes[i].RunAction( new RotateBy ( new Vector2( 0.052f, ROTATIONS[i]), 3.0f ) );
+				GameScene.Layers[0].AddChild(radialNodes[i]);
+			}
 			
 			return this;
 		}
@@ -188,13 +163,9 @@ namespace Crystallography
 		public override void Update (float dt)
 		{
 			base.Update(dt);
-			if(!finished) {
-//				Console.WriteLine(radial.CalcSizeInPixels().X);
-				radial.Position = -radial.CalcSizeInPixels() * radial.Scale.X * 0.5f;
-				radialNode.Position = getNode().Position;
-				radial2.Position = -radial2.CalcSizeInPixels() * radial2.Scale.X * 0.5f;
-				radialNode2.Position = getNode().Position;
-//				radial.Color.A = 1.0f - (members[0].getNode() as SpriteTile).Color.A;
+			for( int i=0; i<radialNodes.Length; i++) {
+				radialSprites[i].Position = -radialSprites[i].CalcSizeInPixels() * radialSprites[i].Scale.X * 0.5f;
+				radialNodes[i].Position = getNode().Position;
 			}
 		}
 		
@@ -206,16 +177,14 @@ namespace Crystallography
 				foreach( AbstractCrystallonEntity e in members ) {
 					(e as CardCrystallonEntity).setParticle(0);
 				}
-				GameScene.Layers[0].RemoveChild(radialNode, true);
-				GameScene.Layers[0].RemoveChild(radialNode2, true);
+				for( int i=0; i<3; i++ ) {
+					GameScene.Layers[0].RemoveChild(radialNodes[i], true);
+					radialNodes[i] = null;
+					radialSprites[i] = null;
+				}
 				Top = null;
 				Left = null;
 				Right = null;
-				radial = null;
-				radial2 = null;
-				radialNode = null;
-				radialNode2 = null;
-				
 				EventHandler<CubeCompleteEventArgs> handler = CubeCompleteDetected;
 				if ( handler != null ) {
 					handler( this, new CubeCompleteEventArgs {
