@@ -198,14 +198,6 @@ namespace Crystallography
 			if (GameScene.currentLevel == 999) {
 				fillPop -= 3; // --------------------------------------------------- Lower limits to 12 & 15
 			}
-//				ids = new List<int>();
-//				Deck = new int[TotalCardsInDeck];
-//				for (int i = 0; i < TotalCardsInDeck; i++) {
-//					ids.Add(i+NextId);
-//					Deck.Add(i+NextId);
-//					
-//				}
-//				Deck.Sort();
 			while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
 				int index;
 				if (PickRandomly) {
@@ -213,29 +205,9 @@ namespace Crystallography
 				} else {
 					index = 0;
 				}
-//				spawn(ids[index]);
 				spawn (Deck[index]);
-//				ids.RemoveAt(index);
 				Deck.RemoveAt(index);
 			}
-//			} else {
-//				ids = new List<int>();
-//				for (int i = 0; i < TotalCardsInDeck; i++) {
-//					ids.Add(i+NextId);
-//					Deck.Add (i+NextId);
-//				}
-//				while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
-//					int index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
-//					spawn(ids[index]);
-//					spawn (Deck[index]);
-//					ids.RemoveAt(index);
-//					Deck.RemoveAt(index);
-//				}
-			
-//				while ( availableCards.Count < MaxPopulation && TotalCardsInDeck > 0) {
-//					spawn();
-//				}
-//			}
 		}
 		
 		/// <summary>
@@ -315,6 +287,14 @@ namespace Crystallography
 				}
 			
 			return card;
+		}
+		
+		public void Teleport( CardCrystallonEntity pCard ) {
+			pCard.Visible = false;
+			var _screenWidth = Director.Instance.GL.Context.GetViewport().Width * 0.6f + 220.0f;
+            var _screenHeight = Director.Instance.GL.Context.GetViewport().Height * 0.75f + 50.0f;
+			pCard.setPosition( _screenWidth * GameScene.Random.NextFloat(), _screenHeight * GameScene.Random.NextFloat() );
+			pCard.getNode().RunAction( new CallFunc( () => { FadeIn (pCard); } ) );
 		}
 		
 		protected void FadeIn(CardCrystallonEntity card) {

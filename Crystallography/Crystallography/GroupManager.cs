@@ -139,6 +139,25 @@ namespace Crystallography
 //			return Add(g);
 		}
 		
+		public void Teleport( GroupCrystallonEntity pGroup ) {
+			pGroup.Visible = false;
+			var _screenWidth = Director.Instance.GL.Context.GetViewport().Width * 0.6f + 220.0f;
+            var _screenHeight = Director.Instance.GL.Context.GetViewport().Height * 0.75f + 50.0f;
+			pGroup.setPosition( _screenWidth * GameScene.Random.NextFloat(), _screenHeight * GameScene.Random.NextFloat() );
+			pGroup.getNode().RunAction( new CallFunc( () => { FadeIn (pGroup); } ) );
+		}
+		
+		protected void FadeIn( GroupCrystallonEntity pGroup) {
+			pGroup.Visible = true;
+			foreach( AbstractCrystallonEntity e in pGroup.members ) {
+				if (e is CardCrystallonEntity) {
+					(e as CardCrystallonEntity).HideGlow();
+					(e.getNode() as SpriteBase).Color.W = 0.0f;
+					e.getNode().RunAction( new TintBy( new Sce.PlayStation.Core.Vector4(0.0f, 0.0f, 0.0f, 1.0f), 2.0f) );
+				}
+			}
+		}
+		
 		// DESTRUCTOR --------------------------------------------------------------------
 #if DEBUG
 		~GroupManager() {
