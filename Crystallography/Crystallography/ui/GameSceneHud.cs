@@ -10,17 +10,17 @@ namespace Crystallography.UI
 	{
 		SpriteUV GameHudBar;
 		SpriteUV ScoreIcon;
-		SpriteUV GoalIcon;
+//		SpriteUV GoalIcon;
 		SpriteUV BlueBox;
-		SpriteUV RedBox;
+//		SpriteUV RedBox;
 //		ButtonEntity NextLevelButton;
 		ButtonEntity HitMeButton;
 		ButtonEntity RestartButton;
 		
 		Label ScoreTitleText;
-		Label GoalTitleText;
+//		Label GoalTitleText;
 		Label ScoreText;
-		Label GoalText;
+//		Label GoalText;
 		
 		SpriteUV TimeBox;
 		Label TimerSeparatorText;
@@ -392,22 +392,22 @@ namespace Crystallography.UI
 			BlueBox.AddChild(ScoreText);
 			
 			if(GameScene.currentLevel != 999) {
-				GoalIcon = Support.SpriteUVFromFile("/Application/assets/images/stopIcon.png");
-				GoalIcon.Position = new Vector2(244.0f, 16.0f);
-				GameHudBar.AddChild(GoalIcon);
-			
-				GoalTitleText = new Label("goal", map);
-				GoalTitleText.Position = new Vector2(299.0f, 25.0f);
-				GoalTitleText.Color = new Vector4( 0.89803922f, 0.0745098f, 0.0745098f, 1.0f);
-				GameHudBar.AddChild(GoalTitleText);
-			
-				RedBox = Support.SpriteUVFromFile("/Application/assets/images/redbox.png");
-				RedBox.Position = new Vector2(354.0f, 0.0f);
-				GameHudBar.AddChild(RedBox);
-			
-				GoalText = new Label("", bigMap);
-				GoalText.Position = new Vector2(5.0f, 12.0f);
-				RedBox.AddChild(GoalText);
+//				GoalIcon = Support.SpriteUVFromFile("/Application/assets/images/stopIcon.png");
+//				GoalIcon.Position = new Vector2(244.0f, 16.0f);
+//				GameHudBar.AddChild(GoalIcon);
+//			
+//				GoalTitleText = new Label("goal", map);
+//				GoalTitleText.Position = new Vector2(299.0f, 25.0f);
+//				GoalTitleText.Color = new Vector4( 0.89803922f, 0.0745098f, 0.0745098f, 1.0f);
+//				GameHudBar.AddChild(GoalTitleText);
+//			
+//				RedBox = Support.SpriteUVFromFile("/Application/assets/images/redbox.png");
+//				RedBox.Position = new Vector2(354.0f, 0.0f);
+//				GameHudBar.AddChild(RedBox);
+//			
+//				GoalText = new Label("", bigMap);
+//				GoalText.Position = new Vector2(5.0f, 12.0f);
+//				RedBox.AddChild(GoalText);
 				
 				RestartButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
 //				RestartButton.setPosition( 748.0f, 509.0f );
@@ -467,12 +467,12 @@ namespace Crystallography.UI
 			float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
 			ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
 			
-			if(GameScene.currentLevel != 999) {
-				Goal = LevelManager.Instance.Goal;
-				GoalText.Text = Goal.ToString();
-				x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(GoalText.Text);
-				GoalText.Position = new Vector2(x, GoalText.Position.Y);
-			}
+//			if(GameScene.currentLevel != 999) {
+//				Goal = LevelManager.Instance.Goal;
+//				GoalText.Text = Goal.ToString();
+//				x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(GoalText.Text);
+//				GoalText.Position = new Vector2(x, GoalText.Position.Y);
+//			}
 			
 			_messagePanel.Text = LevelManager.Instance.MessageBody;
 			_messagePanel.TitleText = LevelManager.Instance.MessageTitle;
