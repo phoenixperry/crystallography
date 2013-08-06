@@ -15,6 +15,10 @@ namespace Crystallography.UI
 		ButtonEntity LevelSelectButton;
 		ButtonEntity NextLevelButton;
 		
+		public string[] Messages;
+		protected int messageIndex;
+		protected float messageTimer;
+		
 		public string Text {
 			get {
 				return MessageText.Text;
@@ -77,12 +81,12 @@ namespace Crystallography.UI
 		
 		// EVENT HANDLERS ----------------------------------------------------------------------------------------------------------------------------------------
 		
-//		void HandleOnSlideInComplete (object sender, EventArgs e)
-//		{
-//			NextLevelButton.ButtonUpAction += HandleNextLevelButtonButtonUpAction;
-//			LevelSelectButton.ButtonUpAction += HandleLevelSelectButtonButtonUpAction;
-//			QuitButton.ButtonUpAction += HandleQuitButtonButtonUpAction;
-//		}
+		void HandleOnSlideInComplete (object sender, EventArgs e)
+		{
+			messageTimer = -10.0f;
+			messageIndex = 0;
+			this.Schedule(SwapMessage, 1);
+		}
 		
 		void HandleOnSlideInStart (object sender, EventArgs e)
 		{
@@ -93,6 +97,7 @@ namespace Crystallography.UI
 		
 		void HandleOnSlideOutStart (object sender, EventArgs e)
 		{
+			this.Unschedule(SwapMessage);
 			NextLevelButton.ButtonUpAction -= HandleNextLevelButtonButtonUpAction;
 			LevelSelectButton.ButtonUpAction -= HandleLevelSelectButtonButtonUpAction;
 			QuitButton.ButtonUpAction -= HandleQuitButtonButtonUpAction;
@@ -127,11 +132,10 @@ namespace Crystallography.UI
 		public override void OnEnter ()
 		{
 			base.OnEnter ();
-			//OnSlideInComplete += HandleOnSlideInComplete;
+			OnSlideInComplete += HandleOnSlideInComplete;
 			OnSlideInStart += HandleOnSlideInStart;
 			OnSlideOutStart += HandleOnSlideOutStart;
 		}
-
 		
 
 		public override void OnExit ()
@@ -139,13 +143,37 @@ namespace Crystallography.UI
 			NextLevelButton.ButtonUpAction -= HandleNextLevelButtonButtonUpAction;
 			LevelSelectButton.ButtonUpAction -= HandleLevelSelectButtonButtonUpAction;
 			QuitButton.ButtonUpAction -= HandleQuitButtonButtonUpAction;
-//			OnSlideInComplete -= HandleOnSlideInComplete;
+			OnSlideInComplete -= HandleOnSlideInComplete;
 			OnSlideOutStart -= HandleOnSlideOutStart;
 			OnSlideInStart -= HandleOnSlideInStart;
 			base.OnExit ();
 		}
 		
 		// METHODS ----------------------------------------------------------------------------------------------------------------------------------------------
+		
+		protected void SwapMessage( float dt ) {
+			messageTimer += dt;
+			if (messageTimer < 0.0f) {
+				MessageText.Color.W -= dt / 0.5f;
+				if (MessageText.Color.W <= 0.0f) {
+					MessageText.Color.W = 0.0f;
+					if( messageIndex == Messages.Length ) {
+						messageIndex = 0;
+					}
+					Text = Messages[messageIndex++];
+					messageTimer = 0.0f;
+				}
+			} else {
+				if( MessageText.Color.W < 1.0f ) {
+					MessageText.Color.W += dt / 0.5f;
+				}
+				if ( messageTimer > 1.5f) {
+					MessageText.Color.W = 1.0f;
+					messageTimer = -10.0f;
+				}
+			}
+		}
+		
 		
 		protected void CenterText() {
 			var textWidth = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold").GetTextWidth(Text);

@@ -126,19 +126,25 @@ namespace Crystallography.UI
 		}
 		
 		protected void NextLevelButtonReleased() {
+#if DEBUG
 			Console.WriteLine("-----NextLevelButtonReleased--------");
+#endif
 			Hide();
 			_scene.GoToNextLevel();
 		}
 		
 		protected void LevelSelectButtonReleased() {
+#if DEBUG
 			Console.WriteLine("-----LevelSelectButtonReleased--------");
+#endif
 			Hide();
 			GameScene.QuitToLevelSelect();
 		}
 		
 		protected void QuitButtonReleased() {
+#if DEBUG
 			Console.WriteLine("-----QuitButtonReleased--------");
+#endif
 			Hide();
 			GameScene.QuitToTitle();
 		}

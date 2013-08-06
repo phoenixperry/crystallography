@@ -14,6 +14,8 @@ namespace Crystallography
 		protected Node[] _pucks;
 		private int _numMembers;
 		
+		protected float _keepOnScreenTimer;
+		
 		public static event EventHandler BreakDetected;
 		
 		
@@ -113,6 +115,10 @@ namespace Crystallography
 			setVelocity(1.0f, GameScene.Random.NextAngle());
 
 			addToScene();
+			
+			_keepOnScreenTimer = 0.0f;
+			this.getNode().ScheduleInterval( KeepOnScreen, 0.5f, 1);
+			
 			return this;
 		}
 		
@@ -453,6 +459,20 @@ namespace Crystallography
 			}
 			return -1;
 //			Array.FindIndex( members, (obj) => obj == null );
+		}
+		
+		protected void KeepOnScreen (float dt) {
+			_keepOnScreenTimer += dt;
+			if ( false == GameScene.PlayBounds.IsInside( this.getPosition() ) ) {
+				GroupManager.Instance.Teleport(this);
+				_keepOnScreenTimer = -1.0f;
+			} else if ( _keepOnScreenTimer > 2.0f ) {
+				_keepOnScreenTimer = -1.0f;
+			}
+			
+			if (_keepOnScreenTimer < 0.0f) {
+				this.getNode().Unschedule(KeepOnScreen);
+			}
 		}
 		
 		/// <summary>

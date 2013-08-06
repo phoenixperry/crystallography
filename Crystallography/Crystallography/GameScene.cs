@@ -16,6 +16,7 @@ namespace Crystallography
     {
 		// TODO make this dynamic or data-driven
 		public static readonly int TOTAL_LEVELS = 41;
+		public static readonly Bounds2 PlayBounds = new Bounds2( Vector2.Zero, new Vector2( Director.Instance.GL.Context.Screen.Width, Director.Instance.GL.Context.Screen.Height - 71.0f ) );
 
 #if DEBUG
 		// Change the following value to true if you want bounding boxes to be rendered

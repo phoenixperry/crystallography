@@ -31,9 +31,11 @@ namespace Crystallography
 //		protected SpriteTile _glowSprite;
 		protected int _glowIndex;
 		
-		protected int countdownMax;
-		protected Label countdownText;
-		public int countdown;
+		protected float _keepOnScreenTimer;
+		
+//		protected int countdownMax;
+//		protected Label countdownText;
+//		public int countdown;
 		
 		// GET & SET ------------------------------------------------------------------------------------------------------------------------------------------------------
 		
@@ -108,26 +110,8 @@ namespace Crystallography
 			_anim = null;
 			GlowSprite = null;
 			_sprite.Scale*=CARD_SCALAR;
+			_keepOnScreenTimer = -1.0f;
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
-			
-//			Node dummy = new Node();
-//			dummy.Scale = 1/_sprite.Scale;
-//			_sprite.AddChild(dummy);
-//			dummy.AdHocDraw += DrawAnim;
-			
-//			ShaderProgram = new ShaderProgram("/Application/shaders/rotate.cgx");
-//			AnimTexture  = new Texture2D("/Application/assets/animation/animation2.png", false);
-//			frame = 0;
-//			
-//			dummy.ScheduleInterval( (dt) => {
-//				frame++;
-//				if (frame > 10) {
-//					frame = 0;
-//				}
-//			}, 0.083f, 0);
-//			
-//			imm_quads = new ImmediateModeQuads< VertexData >( Director.Instance.GL, 4, VertexFormat.Float2, VertexFormat.Float2, VertexFormat.Float4 );
-//			_scene.AdHocDraw += DrawAnim;
 		}
 		
 		// OVERRIDES ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -157,6 +141,7 @@ namespace Crystallography
 		/// </returns>
 		public override AbstractCrystallonEntity BeSelected ( float delay = 0.0f )
 		{
+			this.getNode().Unschedule( KeepOnScreen );
 			if( delay > 0.0f ) {
 				Sequence sequence = new Sequence();
 				sequence.Add( new DelayTime( delay ) );
@@ -182,6 +167,11 @@ namespace Crystallography
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 			addToScene();
 			HideGlow();
+			
+			// Rescue pieces that were released off screen
+			_keepOnScreenTimer = 0.0f;
+			this.getNode().ScheduleInterval( KeepOnScreen, 0.5f, 1);
+			
 			return this;
 		}
 		
@@ -221,9 +211,6 @@ namespace Crystallography
 		public override void Update (float dt)
 		{
 			base.Update(dt);
-//			if (_sprite.Position.X == float.NaN) {
-//				int i = 0;
-//			}
 		}
 		
 		// METHODS ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -332,28 +319,41 @@ namespace Crystallography
 //			_mask.AddChild(_anim);
 		}
 		
-		public void resetCountdown() {
-			countdown = countdownMax;
-		}
-		
-		public void setCountdown( int pCount ) {
-			countdown = countdownMax = pCount;
-			
-			countdownText = new Label(pCount.ToString(), QCountdown.map);
-			countdownText.Color = Colors.White;
-			countdownText.HeightScale /=70f;
-			countdownText.Pivot = new Vector2(0.5f, 0.5f);
-			countdownText.Position = new Vector2(0.5f, 0.4f);
-			this.getNode().AddChild(countdownText);
-//			(_scene as GameScene).AddChild(countdownText);
-		}
-		
-		public void advanceCountdown() {
-			countdown--;
-			if (countdown < 0) {
-				countdown = countdownMax;
+		protected void KeepOnScreen (float dt) {
+			_keepOnScreenTimer += dt;
+			if ( false == GameScene.PlayBounds.IsInside( this.getPosition() ) ) {
+				CardManager.Instance.Teleport(this);
+				_keepOnScreenTimer = -1.0f;
+			} else if ( _keepOnScreenTimer > 2.0f ) {
+				_keepOnScreenTimer = -1.0f;
 			}
-			countdownText.Text = countdown.ToString();
+			
+			if (_keepOnScreenTimer < 0.0f) {
+				this.getNode().Unschedule(KeepOnScreen);
+			}
+		}
+		
+		public void resetCountdown() {
+//			countdown = countdownMax;
+		}
+//		
+		public void setCountdown( int pCount ) {
+//			countdown = countdownMax = pCount;
+//			
+//			countdownText = new Label(pCount.ToString(), QCountdown.map);
+//			countdownText.Color = Colors.White;
+//			countdownText.HeightScale /=70f;
+//			countdownText.Pivot = new Vector2(0.5f, 0.5f);
+//			countdownText.Position = new Vector2(0.5f, 0.4f);
+//			this.getNode().AddChild(countdownText);
+		}
+//		
+		public void advanceCountdown() {
+//			countdown--;
+//			if (countdown < 0) {
+//				countdown = countdownMax;
+//			}
+//			countdownText.Text = countdown.ToString();
 		}
 		
 	}
