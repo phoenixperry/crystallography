@@ -499,15 +499,26 @@ namespace Crystallography.UI
 				if ( ps[0] == Cubes ) {
 					if ( ps[1] == Score ) {
 						okToAdd = false;
-						break;
+//						break;
 					}
 				}
 			}
 			if (okToAdd) {
 				score++;
 			}
+			_nextLevelPanel.Messages = new string[LevelManager.Instance.PossibleSolutions + 1];
 			var completion = ((float)score / (float)LevelManager.Instance.PossibleSolutions);
-			_nextLevelPanel.Text = completion.ToString("P");
+			_nextLevelPanel.Messages[0] = completion.ToString("P0");
+			
+			int i = 1;
+			foreach( int cube in LevelManager.Instance.goalDict.Keys ) {
+				foreach ( int points in LevelManager.Instance.goalDict[cube] ) {
+					_nextLevelPanel.Messages[i++] = cube.ToString() + "-" + points.ToString();
+				}
+			}
+//			var completion = ((float)score / (float)LevelManager.Instance.PossibleSolutions);
+//			_nextLevelPanel.Text = completion.ToString("P");
+			_nextLevelPanel.Text = "you clever thing.";
 			_nextLevelPanel.SlideIn();
 
 			_pauseTimer = true;
