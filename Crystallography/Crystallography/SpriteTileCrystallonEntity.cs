@@ -151,7 +151,7 @@ namespace Crystallography
 		
 		protected void spawnParticle(float dt) {
 			Support.ParticleEffectsManager.Instance.AddParticle(_particleIndex-1, this, 
-			                         new Vector4(0.8f, 0.56078431f, 1.0f, 1.0f), 12.0f);
+			                         new Vector4(1.0f, 1.0f, 1.0f, 1.0f), 12.0f);
 //				                     QColor.palette[(_colorIndex+1)%3], 12.0f);
 		}
 	}
