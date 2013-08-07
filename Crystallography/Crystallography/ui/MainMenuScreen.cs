@@ -77,7 +77,8 @@ namespace Crystallography.UI
 #if DEBUG
 			Console.WriteLine("Level Select");
 #endif
-			MenuSystem.SetScreen("Level Select");
+//			MenuSystem.SetScreen("Level Select");
+			Director.Instance.ReplaceScene(new LoadingScene(0, false, "Level Select") );
 		}
 		
 		void HandleCreditsButtonButtonUpAction (object sender, EventArgs e) {

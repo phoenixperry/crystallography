@@ -58,12 +58,6 @@ namespace Crystallography.UI
 			InputManager.Instance.Update(dt);
 		}
 		
-//		public override void Draw ()
-//		{
-//			base.Draw ();
-//			UISystem.Render();
-//		}
-		
 		// METHODS ---------------------------------------------------------------------------------
 		
 		public void SetScreen( string pDestinationScreen) {

@@ -132,6 +132,13 @@ namespace Crystallography.UI
 			_sprite.TileIndex1D = status;
 		}
 		
+		public void FakePress() {
+			var oldStatus = status;
+			status = PRESSED;
+			onButtonUp();
+			status = oldStatus;
+		}
+		
 		protected void onButtonDown() {
 			if( !this.Visible || (status != NORMAL) ) {
 				return;
