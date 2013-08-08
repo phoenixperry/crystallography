@@ -16,6 +16,7 @@ namespace Crystallography.UI
 		ButtonEntity NextLevelButton;
 		
 		public string[] Messages;
+		public Vector4[] Colors;
 		protected int messageIndex;
 		protected float messageTimer;
 		
@@ -151,6 +152,73 @@ namespace Crystallography.UI
 		
 		// METHODS ----------------------------------------------------------------------------------------------------------------------------------------------
 		
+		public void Populate( int pCubes, int pScore) {
+			var previousSolutions = DataStorage.puzzleSolutionsFound[GameScene.currentLevel];
+			var score = previousSolutions.Count;
+			bool okToAdd = true;
+			foreach( var ps in previousSolutions ) { // ---- Check if solution was found previously
+				if ( ps[0] == pCubes ) {
+					if ( ps[1] == pScore ) {
+						okToAdd = false;
+						break;
+					}
+				}
+			}
+			if (okToAdd) {
+				score++;
+			}
+			this.Messages = new string[LevelManager.Instance.PossibleSolutions + 1];
+			this.Colors = new Vector4[LevelManager.Instance.PossibleSolutions + 1];
+			var completion = ((float)score / (float)LevelManager.Instance.PossibleSolutions);
+			this.Messages[0] = completion.ToString("P0");
+			this.Colors[0] = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Yellow;
+			this.Messages[1] = pCubes.ToString();
+			if (pCubes == 1 ) {
+				this.Messages[1] += " cube, ";
+			} else {
+				this.Messages[1] += " cubes, ";
+			}  
+			this.Messages[1] += pScore.ToString();
+			if (pScore == 1) {
+				this.Messages[1] += " point";
+			} else {
+				this.Messages[1] += " points";
+			}
+			this.Colors[1] = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Yellow;
+			int i = 2;
+			foreach( int cube in LevelManager.Instance.goalDict.Keys ) {
+				foreach ( int points in LevelManager.Instance.goalDict[cube] ) {
+					if ( cube != pCubes || points != pScore ) {
+						foreach( var ps in previousSolutions) {
+							if ( ps[0] == cube && ps[1] == points ) {
+								this.Colors[i] = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.White;
+								break;
+							}
+						}
+						if ( this.Colors[i] == Vector4.Zero ) {
+							this.Colors[i] = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Grey50;
+						}
+						this.Messages[i] = cube.ToString();
+						if (cube == 1 ) {
+							this.Messages[i] += " cube, ";
+						} else {
+							this.Messages[i] += " cubes, ";
+						}  
+						this.Messages[i] += points.ToString();
+						if (points == 1) {
+							this.Messages[i] += " point";
+						} else {
+							this.Messages[i] += " points";
+						}
+						i++;
+					}
+				}
+			}
+			this.Text = "you clever thing.";
+			MessageText.Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f);
+		}
+		
+		
 		protected void SwapMessage( float dt ) {
 			messageTimer += dt;
 			if (messageTimer < 0.0f) {
@@ -160,6 +228,7 @@ namespace Crystallography.UI
 					if( messageIndex == Messages.Length ) {
 						messageIndex = 0;
 					}
+					MessageText.Color = this.Colors[messageIndex].Xyz0;
 					Text = Messages[messageIndex++];
 					messageTimer = 0.0f;
 				}

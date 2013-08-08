@@ -67,6 +67,7 @@ namespace Crystallography
 		// METHODS ----------------------------------------------------------------
 		
 		public void GetLevelSettings( int pLevelNumber ) {
+			PossibleSolutions = 0;
 			goalDict.Clear();
 			var levels = from data
 				in doc.Elements("GameData")
@@ -78,10 +79,6 @@ namespace Crystallography
 						int i = 0;
 						foreach (XElement line in element.Nodes()) {
 							if (line.Name.LocalName == "Color") {
-//								Palette[i].X = (float)line.Attribute("Red");
-//								Palette[i].Y = (float)line.Attribute("Green");
-//								Palette[i].Z = (float)line.Attribute("Blue");
-//								Palette[i].W = 1.0f;
 								string hexColor = line.Attribute("Hex").Value;
 								Palette[i] = ExtractColor(hexColor);
 								i++;
@@ -118,6 +115,31 @@ namespace Crystallography
 							}
 						}
 						return;
+					}
+				}
+			}
+		}
+		
+		public void GetSolutions( int pLevelNumber ) {
+			PossibleSolutions = 0;
+			goalDict.Clear();
+			var levels = from data
+				in doc.Elements("GameData")
+					select new { AllElements = data.Elements() };
+			foreach (var level in levels) {
+				foreach( XElement element in level.AllElements ) {
+					if ( (int)element.Attribute("Value") == pLevelNumber ) {
+						foreach (XElement line in element.Nodes()) {
+							if (line.Name.LocalName == "Goal" ) {
+								var cubes = (int)line.Attribute("Cubes");
+								var score = (int)line.Attribute("Score");
+								if ( goalDict.ContainsKey(cubes) == false ) {
+									goalDict.Add( cubes, new List<int>() );
+								}
+								goalDict[cubes].Add(score);
+								PossibleSolutions++;
+							}
+						}
 					}
 				}
 			}
