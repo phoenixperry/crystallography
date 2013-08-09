@@ -57,6 +57,9 @@ namespace Crystallography.UI
 				() => {
 					;//dummy
 				},
+				() => {
+					InputManager.Instance.enabled = false;
+				},
 				// PRE-LOAD LEVEL DATA
 				() => {
 					LevelManager.Instance.LoadGameData();
@@ -75,6 +78,12 @@ namespace Crystallography.UI
 				AddGameProcs();
 				break;
 			}
+			
+			loadProc.AddRange( new List<Action> {
+				() => {
+					InputManager.Instance.enabled = true;
+				}
+			} );
 			
 			Scheduler.Instance.ScheduleUpdateForTarget(this, 0, false);
 		}
