@@ -10,15 +10,17 @@ namespace Crystallography.UI
 		SpriteTile Background;
 		
 		Label MessageText;
+		Label PercentageText;
 		
 		ButtonEntity QuitButton;
 		ButtonEntity LevelSelectButton;
 		ButtonEntity NextLevelButton;
 		
-		public string[] Messages;
+		public SolutionIcon[] Solutions;
 		public Vector4[] Colors;
 		protected int messageIndex;
 		protected float messageTimer;
+		protected int visibleSolutionIndex;
 		
 		public string Text {
 			get {
@@ -27,6 +29,15 @@ namespace Crystallography.UI
 			set {
 				MessageText.Text = value;
 				CenterText();
+			}
+		}
+		
+		public float Percentage {
+			get {
+				return float.Parse(PercentageText.Text);
+			}
+			set {
+				PercentageText.Text = value.ToString("P0");
 			}
 		}
 		
@@ -43,7 +54,7 @@ namespace Crystallography.UI
 			Width = 448.0f;
 			
 			Background = Support.UnicolorSprite("Grey", 40, 40, 40, 200);
-			Background.Scale = new Vector2(28.0f, 11.0f);
+			Background.Scale = new Vector2(28.0f, 15.0f);
 			this.AddChild(Background);
 			
 			MessageText = new Label() {
@@ -55,11 +66,19 @@ namespace Crystallography.UI
 			};
 			this.AddChild( MessageText );
 			
+			
 			QuitButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/quit_game.png", 1, 3).TextureInfo, new Vector2i(0,0) );
 			QuitButton.setPosition(58.5f,26.5f);
 			QuitButton.Visible = true;
 			this.AddChild(QuitButton.getNode());
 			
+			
+			PercentageText = new Label() {
+				Text = "100 %",
+				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold" ) ),
+				Position = new Vector2( 320.0f, QuitButton.Height + 90.0f )
+			};
+			this.AddChild( PercentageText );
 			
 			
 			LevelSelectButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/levelSelectBtn.png", 1, 3).TextureInfo, new Vector2i(0,0) );
@@ -75,7 +94,7 @@ namespace Crystallography.UI
 			this.AddChild(NextLevelButton.getNode());
 			
 			var charHeight = MessageText.FontMap.CharPixelHeight;
-			Height = (charHeight * 3.0f) + QuitButton.Height;
+			Height = (charHeight * 5.0f) + QuitButton.Height;
 			MessageText.Position = new Vector2(40.0f, QuitButton.Height + charHeight );
 			CenterText();
 		}
@@ -86,7 +105,9 @@ namespace Crystallography.UI
 		{
 			messageTimer = -10.0f;
 			messageIndex = 0;
-			this.Schedule(SwapMessage, 1);
+			if( Solutions.Length > 4 ) {
+				this.Schedule(SwapMessage, 1);
+			}
 		}
 		
 		void HandleOnSlideInStart (object sender, EventArgs e)
@@ -94,6 +115,15 @@ namespace Crystallography.UI
 			NextLevelButton.ButtonUpAction += HandleNextLevelButtonButtonUpAction;
 			LevelSelectButton.ButtonUpAction += HandleLevelSelectButtonButtonUpAction;
 			QuitButton.ButtonUpAction += HandleQuitButtonButtonUpAction;
+		}
+		
+		void HandleOnSlideOutComplete (object sender, EventArgs e)
+		{
+			for( int i=0; i < Solutions.Length; i++ ) {
+				this.RemoveChild(Solutions[i], true);
+				Solutions[i] = null;
+			}
+			Solutions = null;
 		}
 		
 		void HandleOnSlideOutStart (object sender, EventArgs e)
@@ -134,6 +164,7 @@ namespace Crystallography.UI
 		{
 			base.OnEnter ();
 			OnSlideInComplete += HandleOnSlideInComplete;
+			OnSlideOutComplete += HandleOnSlideOutComplete;
 			OnSlideInStart += HandleOnSlideInStart;
 			OnSlideOutStart += HandleOnSlideOutStart;
 		}
@@ -154,7 +185,7 @@ namespace Crystallography.UI
 		
 		public void Populate( int pCubes, int pScore) {
 			var previousSolutions = DataStorage.puzzleSolutionsFound[GameScene.currentLevel];
-			var score = previousSolutions.Count;
+			var numFound = previousSolutions.Count;
 			bool okToAdd = true;
 			foreach( var ps in previousSolutions ) { // ---- Check if solution was found previously
 				if ( ps[0] == pCubes ) {
@@ -165,51 +196,70 @@ namespace Crystallography.UI
 				}
 			}
 			if (okToAdd) {
-				score++;
+				numFound++;
 			}
-			this.Messages = new string[LevelManager.Instance.PossibleSolutions + 1];
+			this.Solutions = new SolutionIcon[LevelManager.Instance.PossibleSolutions];
 			this.Colors = new Vector4[LevelManager.Instance.PossibleSolutions + 1];
-			var completion = ((float)score / (float)LevelManager.Instance.PossibleSolutions);
-			this.Messages[0] = completion.ToString("P0");
-			this.Colors[0] = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Yellow;
-			this.Messages[1] = pCubes.ToString();
-			if (pCubes == 1 ) {
-				this.Messages[1] += " cube, ";
-			} else {
-				this.Messages[1] += " cubes, ";
-			}  
-			this.Messages[1] += pScore.ToString();
-			if (pScore == 1) {
-				this.Messages[1] += " point";
-			} else {
-				this.Messages[1] += " points";
-			}
-			this.Colors[1] = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Yellow;
-			int i = 2;
+			var completion = ((float)numFound / (float)LevelManager.Instance.PossibleSolutions);
+//			this.Messages[0] = completion.ToString("P0");
+			Percentage = completion;
+//			this.Colors[0] = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Yellow;
+			visibleSolutionIndex = 0;
+			this.Solutions[0] = new SolutionIcon() {//pCubes.ToString();
+				CubeText = pCubes.ToString(),
+				ScoreText = pScore.ToString(),
+				Color = QColor.palette[1],
+				Position = new Vector2(40.0f, QuitButton.Height + 80.0f)
+			};
+			this.AddChild(Solutions[0]);
+//			if (pCubes == 1 ) {
+//				this.Messages[1] += " cube, ";
+//			} else {
+//				this.Messages[1] += " cubes, ";
+//			}  
+//			this.Messages[1] += pScore.ToString();
+//			if (pScore == 1) {
+//				this.Messages[1] += " point";
+//			} else {
+//				this.Messages[1] += " points";
+//			}
+//			this.Colors[1] = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Yellow;
+			int i = 1;
 			foreach( int cube in LevelManager.Instance.goalDict.Keys ) {
 				foreach ( int points in LevelManager.Instance.goalDict[cube] ) {
-					if ( cube != pCubes || points != pScore ) {
+					if ( cube != pCubes || points != pScore ) { //----------------------- already handled the solution player just found
+						Solutions[i] = new SolutionIcon() {
+							CubeText = cube.ToString(),
+							ScoreText = points.ToString(),
+							Color = Vector4.Zero,
+							Position = new Vector2(40.0f + 65.0f*(i%4), QuitButton.Height + 80.0f)
+						};
 						foreach( var ps in previousSolutions) {
 							if ( ps[0] == cube && ps[1] == points ) {
-								this.Colors[i] = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.White;
+								Solutions[i].Color = QColor.palette[0];
 								break;
 							}
 						}
-						if ( this.Colors[i] == Vector4.Zero ) {
-							this.Colors[i] = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Grey50;
+//						if ( this.Colors[i] == Vector4.Zero ) {
+						if ( Solutions[i].Color == Vector4.Zero ) {
+							Solutions[i].Color = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Grey50;
 						}
-						this.Messages[i] = cube.ToString();
-						if (cube == 1 ) {
-							this.Messages[i] += " cube, ";
-						} else {
-							this.Messages[i] += " cubes, ";
-						}  
-						this.Messages[i] += points.ToString();
-						if (points == 1) {
-							this.Messages[i] += " point";
-						} else {
-							this.Messages[i] += " points";
+						if ( i > 3 ) {
+							Solutions[i].Alpha = 0.0f;
 						}
+//						this.Messages[i] = cube.ToString();
+//						if (cube == 1 ) {
+//							this.Messages[i] += " cube, ";
+//						} else {
+//							this.Messages[i] += " cubes, ";
+//						}  
+//						this.Messages[i] += points.ToString();
+//						if (points == 1) {
+//							this.Messages[i] += " point";
+//						} else {
+//							this.Messages[i] += " points";
+//						}
+						this.AddChild(Solutions[i]);
 						i++;
 					}
 				}
@@ -222,24 +272,61 @@ namespace Crystallography.UI
 		protected void SwapMessage( float dt ) {
 			messageTimer += dt;
 			if (messageTimer < 0.0f) {
-				MessageText.Color.W -= dt / 0.5f;
-				if (MessageText.Color.W <= 0.0f) {
-					MessageText.Color.W = 0.0f;
-					if( messageIndex == Messages.Length ) {
-						messageIndex = 0;
+				Solutions[visibleSolutionIndex].Alpha -= dt / 0.5f;
+				for ( int i = visibleSolutionIndex + 1; i < visibleSolutionIndex + 4; i++ ) {
+					if ( i >= Solutions.Length ) break;
+					
+					Solutions[i].Alpha = Solutions[visibleSolutionIndex].Alpha;
+				}
+				if( Solutions[visibleSolutionIndex].Alpha <= 0.0f ) {
+					Solutions[visibleSolutionIndex].Alpha = 0.0f;
+					for ( int i = visibleSolutionIndex + 1; i < visibleSolutionIndex + 4; i++ ) {
+						if ( i >= Solutions.Length ) break;
+						
+						Solutions[i].Alpha = Solutions[visibleSolutionIndex].Alpha;
 					}
-					MessageText.Color = this.Colors[messageIndex].Xyz0;
-					Text = Messages[messageIndex++];
+					
+					visibleSolutionIndex += 4;
+					if (visibleSolutionIndex >= Solutions.Length) {
+						visibleSolutionIndex = 0;
+					}
 					messageTimer = 0.0f;
 				}
+//				MessageText.Color.W -= dt / 0.5f;
+//				if (MessageText.Color.W <= 0.0f) {
+//					MessageText.Color.W = 0.0f;
+//					if( messageIndex == Messages.Length ) {
+//						messageIndex = 0;
+//					}
+//					MessageText.Color = this.Colors[messageIndex].Xyz0;
+//					Text = Messages[messageIndex++];
+//					messageTimer = 0.0f;
+//				}
 			} else {
-				if( MessageText.Color.W < 1.0f ) {
-					MessageText.Color.W += dt / 0.5f;
+				if( Solutions[visibleSolutionIndex].Alpha < 1.0f){
+					Solutions[visibleSolutionIndex].Alpha += dt / 0.5f;
+					for ( int i = visibleSolutionIndex + 1; i < visibleSolutionIndex + 4; i++ ) {
+						if ( i >= Solutions.Length ) break;
+						
+						Solutions[i].Alpha = Solutions[visibleSolutionIndex].Color.W;
+					}
 				}
-				if ( messageTimer > 1.5f) {
-					MessageText.Color.W = 1.0f;
+				if( messageTimer > 1.5f) {
+					Solutions[visibleSolutionIndex].Alpha = 1.0f;
+					for ( int i = visibleSolutionIndex + 1; i < visibleSolutionIndex + 4; i++ ) {
+						if ( i >= Solutions.Length ) break;
+						
+						Solutions[i].Alpha = Solutions[visibleSolutionIndex].Alpha;
+					}
 					messageTimer = -10.0f;
 				}
+//				if( MessageText.Color.W < 1.0f ) {
+//					MessageText.Color.W += dt / 0.5f;
+//				}
+//				if ( messageTimer > 1.5f) {
+//					MessageText.Color.W = 1.0f;
+//					messageTimer = -10.0f;
+//				}
 			}
 		}
 		

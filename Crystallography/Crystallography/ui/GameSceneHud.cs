@@ -152,9 +152,9 @@ namespace Crystallography.UI
 //			NextLevelButton.Visible = false;
 			_nextLevelPanel.SlideOut();
 			bool complete = false;
-			if (_nextLevelPanel.Messages[0] == "100 %") {
-				complete = true;
-			}
+//			if (_nextLevelPanel.Messages[0] == "100 %") {
+//				complete = true;
+//			}
 			if( GameScene.currentLevel != 999 ) {
 				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
 			}

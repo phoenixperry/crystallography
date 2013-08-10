@@ -14,6 +14,7 @@ namespace Crystallography
 		public string CubeText  { get { return cubes.Text; } set { cubes.Text = value; } }
 		public string ScoreText { get { return score.Text; } set { score.Text = value; } }
 		public Vector4 Color { get { return image.Color; } set { image.Color = value; cubes.Color = value; score.Color = value; } }
+		public float Alpha { get { return image.Color.W; } set { image.Color.W = value; cubes.Color.W = value; score.Color.W = value; } }
 		
 		// CONSTRUCTOR -------------------------------------------------------------------------
 		public SolutionIcon () : base() {

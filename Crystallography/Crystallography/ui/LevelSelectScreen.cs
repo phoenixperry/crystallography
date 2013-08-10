@@ -198,7 +198,7 @@ namespace Crystallography.UI
 					Solutions[i].Color = Vector4.Zero;
 					foreach( var ps in previousSolutions) {
 						if ( ps[0] == cube && ps[1] == points ) {
-							Solutions[i].Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f); //Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.White;
+							Solutions[i].Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f);
 							break;
 						}
 					}
