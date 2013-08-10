@@ -100,6 +100,7 @@
     <Compile Include="ui\TitleScreen.cs" />
     <Compile Include="ui\CreditsScreen.cs" />
     <Compile Include="ui\GameSceneHud.cs" />
+    <Compile Include="SolutionIcon.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -284,6 +285,9 @@
     <Content Include="assets\images\levelBackBtn.png" />
     <Content Include="assets\images\levelPlayBtn.png" />
     <Content Include="assets\images\burst.png" />
+    <Content Include="assets\images\UI\LevelSelectItemButtonDisabled.png" />
+    <Content Include="assets\images\UI\cubePointsLg.png" />
+    <Content Include="assets\images\UI\cubePoints.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

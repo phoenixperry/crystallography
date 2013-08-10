@@ -151,8 +151,12 @@ namespace Crystallography.UI
 #endif
 //			NextLevelButton.Visible = false;
 			_nextLevelPanel.SlideOut();
+			bool complete = false;
+			if (_nextLevelPanel.Messages[0] == "100 %") {
+				complete = true;
+			}
 			if( GameScene.currentLevel != 999 ) {
-				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score );
+				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
 			}
 			CardManager.Instance.Reset( Director.Instance.CurrentScene );
 			GroupManager.Instance.Reset( Director.Instance.CurrentScene );

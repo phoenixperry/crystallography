@@ -21,6 +21,8 @@ namespace Crystallography.UI
 
 		SpriteTile BlackBlock1;
 		SpriteTile BlackBlock2;
+		SpriteTile[] Icons;
+		List<SolutionIcon> Solutions;
 		
 		ButtonEntity BackButton;
 		ButtonEntity PlayButton;
@@ -68,21 +70,59 @@ namespace Crystallography.UI
 			
 			LevelNumberText = new Label(){
 				Text = SelectedLevel.ToString("00"),
-				Position = new Vector2(638.0f, 312.0f),
+				Position = new Vector2(638.0f, 390.0f),
 				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 102, "Bold") ),
-				Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f)
+//				Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f)
 			};
 			CenterText(LevelNumberText);
 			this.AddChild(LevelNumberText);
 			
 			CompletionPercentageText = new Label() {
 				Text = (1.0f).ToString("P0"),
-				Position = new Vector2(638.0f, 280.0f),
+				Position = new Vector2(638.0f, 150.0f),
 				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold") ),
-				Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f)
+//				Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f)
 			};
 			CenterText(CompletionPercentageText);
 			this.AddChild(CompletionPercentageText);
+			
+			Icons = new SpriteTile[4];
+			for( int i=0; i < Icons.Length; i++) {
+				Icons[i] = Support.TiledSpriteFromFile("/Application/assets/images/icons/icons.png", 4, 2);
+				Icons[i].Visible = false;
+				Icons[i].Position = new Vector2(638.0f + 68 * i, 340.0f);
+				this.AddChild(Icons[i]);
+			}
+			
+			Solutions = new List<SolutionIcon>() {
+				new SolutionIcon(){
+					CubeText = "99",
+					ScoreText = "88"
+				},
+				new SolutionIcon(){
+					CubeText = "99",
+					ScoreText = "88"
+				},
+				new SolutionIcon(){
+					CubeText = "99",
+					ScoreText = "88"
+				},
+				new SolutionIcon(){
+					CubeText = "99",
+					ScoreText = "88"
+				},
+				new SolutionIcon(){
+					CubeText = "99",
+					ScoreText = "88"
+				}
+			};
+			for( int i=0; i < Solutions.Count; i++) {
+				Solutions[i].Visible = false;
+				var column = i % 4;
+				var row = ( i - column ) / 4;
+				Solutions[i].Position = new Vector2(638.0f + 60.0f * column, 270.0f - row * 55);
+				this.AddChild(Solutions[i]);
+			}
 			
 			LevelSelectTitleText = new Label(){
 				Text="select a level",
@@ -137,10 +177,65 @@ namespace Crystallography.UI
 			var previousSolutions = DataStorage.puzzleSolutionsFound[ SelectedLevel ];
 			var completion = ((float)previousSolutions.Count / (float)LevelManager.Instance.PossibleSolutions);
 			
+			
+			// HACK THIS IS SUPER INEFFICIENT!!!!!!!!!!!!!
+			while( LevelManager.Instance.PossibleSolutions > Solutions.Count) {
+				Solutions.Add (
+					new SolutionIcon(){
+					CubeText = "99",
+					ScoreText = "88",
+				});
+			}
+			foreach(SolutionIcon s in Solutions){
+				s.Visible = false;
+			}
+			
+			int i = 0;
+			foreach( int cube in LevelManager.Instance.goalDict.Keys ) {
+				foreach ( int points in LevelManager.Instance.goalDict[cube] ) {
+					Solutions[i].CubeText = cube.ToString();
+					Solutions[i].ScoreText = points.ToString();
+					Solutions[i].Color = Vector4.Zero;
+					foreach( var ps in previousSolutions) {
+						if ( ps[0] == cube && ps[1] == points ) {
+							Solutions[i].Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f); //Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.White;
+							break;
+						}
+					}
+					if ( Solutions[i].Color == Vector4.Zero ) {
+						Solutions[i].Color = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Grey50;
+					}
+					Solutions[i].Visible = true;
+					i++;
+				}
+			}
+			
 			CompletionPercentageText.Text = completion.ToString("P0") + " solved.";
 			LevelNumberText.Text = SelectedLevel.ToString("00");
 			CenterText(LevelNumberText);
 			CenterText(CompletionPercentageText);
+			
+			
+			// HACK THIS IS ALL SUPER INEFFICIENT!!!!!!!
+			QualityManager.Instance.ClearQualityDictionary();
+			QualityManager.Instance.LoadLevelQualities( SelectedLevel );
+			QualityManager.Instance.BuildQualityDictionary();
+			
+			var names = new string[4];
+			int j = 0;
+			foreach (SpriteBase icon in Icons) {
+				icon.Visible = false;
+			}
+			foreach (string name in QualityManager.Instance.qualityDict.Keys) {
+				if (name == "QOrientation") continue;
+				var variations = QualityManager.Instance.qualityDict[name];
+				if( variations[0] != null && variations[1] != null && variations[2] != null ) {
+					names[j] = name.Substring(1);
+					Icons[j].TileIndex1D = (int)EnumHelper.FromString<Crystallography.Icons>(names[j]);
+					Icons[j].Visible = true;
+					j++;
+				}
+			}
 			
 		}
 		
@@ -189,6 +284,13 @@ namespace Crystallography.UI
 			
 			BackButton = null;
 			PlayButton = null;
+			
+			for (int i=0; i < Icons.Length; i++){
+				Icons[i] = null;
+			}
+			Icons = null;
+			Solutions.Clear();
+			Solutions = null;
 		}
 		
 		// METHODS ------------------------------------------------------------------------------------------------------------------------------
@@ -211,7 +313,6 @@ namespace Crystallography.UI
 	
 	public class LevelPage : Node {
 		public static readonly int ITEMS_PER_PAGE = 12;
-//		static float Width = 567.0f;
 		static float Width = 457.0f;
 		static float Height = 396.0f;
 		public List<LevelSelectItem> Items {get; private set;}
@@ -229,10 +330,18 @@ namespace Crystallography.UI
 			// HACK -- THIS ENSURES THAT QColor HAS BEEN INITIALIZED, BUT IT'S KIND OF DUMB THAT WE HAVE TO DO THAT. MAYBE JUST HARD CODE THE COLORS HERE?
 			var temp = QColor.Instance.allDifferentScore;
 			for ( int i=0; i < buttonCount; i++ ) {
-				LevelSelectItem item = new LevelSelectItem();
-				item.LevelID = i + baseIndex;
-				item.Position = new Vector2(0.125f*Width + 0.25f*Width*(i%4), Height - 0.167f*Height - 0.333f*Height*((i-(i%4))/4));
-				(item.Button.getNode() as SpriteTile).Color = QColor.palette[i%3];
+				int column = i%4;
+				int row = (i - column)/4;
+				bool complete = DataStorage.puzzleComplete[i + baseIndex];
+				bool locked = DataStorage.puzzleLocked[i + baseIndex];
+//				bool locked = false;
+				LevelSelectItem item = new LevelSelectItem( complete, locked ) {
+					levelID = i + baseIndex,
+					Position = new Vector2(0.125f*Width + 0.25f*Width*column, Height - 0.167f*Height - 0.333f*Height*row)
+				};
+				if (complete) {
+					item.SetPalette((i+1)%3);
+				}
 				Items.Add(item);
 				this.AddChild(item);
 			}
@@ -250,7 +359,7 @@ namespace Crystallography.UI
 		
 		public void Enable() {
 			foreach (LevelSelectItem item in Items ) {
-				item.Button.on = true;
+				item.Button.on = !item.locked;
 			}
 		}
 		
@@ -269,33 +378,67 @@ namespace Crystallography.UI
 	}
 	
 	public class LevelSelectItem : Node {
-		public int LevelID {get; set;}
-		public Vector4 Color {get; set;}
+		public bool locked;
+		public int levelID;
+
+		public Vector4 Color {
+			get {
+				return (Button.getNode() as SpriteBase).Color;
+			} 
+			set {
+				(Button.getNode() as SpriteBase).Color = value;
+			}
+		}
 		public ButtonEntity Button {get; private set;}
+		
+		
 		public static event EventHandler<LevelSelectionEventArgs> LevelSelectionDetected;
 		
-		public LevelSelectItem() {
-			Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
+		// CONSTRUCTOR ----------------------------------------------------------------------------------------------------------------------------
+		
+		public LevelSelectItem(bool pComplete, bool pLocked) {
+			if (pComplete) {
+				Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
+			} else {
+				Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButtonDisabled.png", 1, 3).TextureInfo, new Vector2i(0,0));
+			}
 			Button.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
 			this.AddChild(Button.getNode());
-			
+			locked = pLocked;
+			if (locked) {
+				var lockIcon = Support.SpriteFromFile("Application/assets/images/UI/lockIcon.png");
+				lockIcon.Position = new Vector2( 25.0f, -38.0f);
+				this.AddChild( lockIcon );
+			}
 			Button.ButtonUpAction += HandleButtonButtonUpAction;
+			Button.on = !locked;
 		}
-
+		
+		// EVENT HANDLERS -------------------------------------------------------------------------------------------------------------------------
+		
 		void HandleButtonButtonUpAction (object sender, EventArgs e)
 		{
 			EventHandler<LevelSelectionEventArgs> handler = LevelSelectionDetected;
 			if ( handler != null ) {
-				handler( this, new LevelSelectionEventArgs() { ID = this.LevelID });
+				handler( this, new LevelSelectionEventArgs() { ID = this.levelID });
 			}
 		}
 		
-		public override void OnExit ()
-		{
+		// OVERRIDES ------------------------------------------------------------------------------------------------------------------------------
+		
+		public override void OnExit() {
 			Button.ButtonUpAction -= HandleButtonButtonUpAction;
-			base.OnExit ();
 			Button = null;
+			base.OnExit ();
 		}
+		
+		// METHODS --------------------------------------------------------------------------------------------------------------------------------
+		
+		public void SetPalette( int pIndex ) {
+			Color = QColor.palette[pIndex];
+		}
+		
+		// DESTRUCTOR -----------------------------------------------------------------------------------------------------------------------------
 #if DEBUG
 		~LevelSelectItem() {
 			Console.WriteLine(GetType().ToString() + " " + "Deleted");

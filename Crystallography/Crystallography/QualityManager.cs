@@ -164,7 +164,7 @@ namespace Crystallography
 		/// <summary>
 		/// Builds <c>qualityDict</c>
 		/// </summary>
-		private void BuildQualityDictionary() {
+		public void BuildQualityDictionary() {
 			// --------------------------------------------------------------------- FACTORY
 			
 			// --------------------------------------------------------------------- STEP 1: Separate the card data into useful chunks
@@ -222,7 +222,7 @@ namespace Crystallography
 		/// <summary>
 		/// Clears <c>qualityDict</c> correctly.
 		/// </summary>
-		private void ClearQualityDictionary() {
+		public void ClearQualityDictionary() {
 			foreach( List<int>[] quality in qualityDict.Values ) {
 				foreach (  List<int> variant in quality ) {
 					if (variant != null) {
@@ -438,7 +438,7 @@ namespace Crystallography
 		/// <param name='pLevelNum'>
 		/// <c>int</c> Which level to load
 		/// </param>
-		private void LoadLevelQualities( int pLevelNum ) {
+		public void LoadLevelQualities( int pLevelNum ) {
 			FileStream fileStream = File.OpenRead( "/Application/assets/levels/level_" + pLevelNum + ".xml" );
 			StreamReader fileStreamReader = new StreamReader( fileStream );
 			string xml = fileStreamReader.ReadToEnd();

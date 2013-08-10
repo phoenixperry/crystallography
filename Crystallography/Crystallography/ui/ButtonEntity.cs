@@ -36,7 +36,7 @@ namespace Crystallography.UI
 			set { 
 				_onToggle = value;
 				label.Visible = _onToggle;
-				status = _onToggle ? NORMAL : DISABLED;
+				status = (_onToggle ? NORMAL : DISABLED);
 			}
 		}
 		
