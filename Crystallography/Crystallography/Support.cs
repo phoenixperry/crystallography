@@ -280,11 +280,13 @@ namespace Crystallography
 
 			public string AssetsPrefix;
 			public Dictionary<string, SoundPlayer> SoundDatabase;
-
+			public float Volume;
+			
 			public SoundSystem(string assets_prefix)
 			{
 				AssetsPrefix = assets_prefix;
 				SoundDatabase = new Dictionary<string,SoundPlayer>();
+				Volume = 0.7f;
 			}
 
 			public void CheckCache(string name)
@@ -307,9 +309,13 @@ namespace Crystallography
 				// replace any playing instance
 				SoundDatabase[name].Stop();
 				SoundDatabase[name].Play();
-				SoundDatabase[name].Volume = 0.7f;
+				SoundDatabase[name].Volume = Volume;
 			}
-
+			
+			public void SetVolume(float pVolume) {
+				Volume = pVolume;
+			}
+			
 			public void Stop(string name)
 			{
 				CheckCache(name);
@@ -325,7 +331,7 @@ namespace Crystallography
 				}
 
 				SoundDatabase[name].Play();
-				SoundDatabase[name].Volume = 0.7f;
+				SoundDatabase[name].Volume = Volume;
 			}
 		}
 
@@ -334,10 +340,14 @@ namespace Crystallography
 			public static MusicSystem Instance = new MusicSystem("/Application/assets/audio/bgm/");
 
 			public string AssetsPrefix;
+			public string CurrentMusic;
 			public Dictionary<string, BgmPlayer> MusicDatabase;
+			
+			public float Volume;
 
 			public MusicSystem(string assets_prefix)
 			{
+				Volume = 0.4f;
 				AssetsPrefix = assets_prefix;
 				MusicDatabase = new Dictionary<string, BgmPlayer>();
 			}
@@ -356,21 +366,29 @@ namespace Crystallography
 			public void Play(string name)
 			{
 				StopAll();
-
+				
 				using (var music = new Bgm(AssetsPrefix + name) )
 				{
 					var player = music.CreatePlayer();
 					MusicDatabase[name] = player;
-	
 					MusicDatabase[name].Play();
 					MusicDatabase[name].Loop = true;
-					MusicDatabase[name].Volume = 0.4f;
+					MusicDatabase[name].Volume = Volume;
+					CurrentMusic = name;
 				}
 			}
-
+			
+			public void SetVolume(float pVolume) {
+				Volume = pVolume;
+				if( string.IsNullOrEmpty(CurrentMusic) == false ) {
+					MusicDatabase[CurrentMusic].Volume = Volume;
+				}
+			}
+			
 			public void Stop(string name)
 			{
 				StopAll();
+				CurrentMusic = null;
 			}
 
 			public void PlayNoClobber(string name)

@@ -85,7 +85,8 @@ namespace Crystallography.UI
 #if DEBUG
 			Console.WriteLine("Credits");
 #endif
-			MenuSystem.SetScreen("Credits");
+//			MenuSystem.SetScreen("Credits");
+			MenuSystem.SetScreen("Options");
 		}
 		
 		void HandleInstructionsButtonButtonUpAction (object sender, EventArgs e) {

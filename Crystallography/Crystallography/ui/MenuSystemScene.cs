@@ -81,6 +81,9 @@ namespace Crystallography.UI
 			case ("Instructions"):
 				Screen = new InstructionsScreen(this);
 				break;
+			case("Options"):
+				Screen = new OptionsMenuScreen(this);
+				break;
 			default:
 				break;
 			}

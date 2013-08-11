@@ -13,8 +13,8 @@ namespace Crystallography
 		
 		public static readonly int MAX_CAPACITY = 3;
 		protected static readonly float SNAP_DISTANCE = 50.0f;
-		protected static readonly float EASE_DISTANCE = 70.0f;
-		protected static readonly float MAXIMUM_PICKUP_VELOCITY = 700.0f; //400.0f;
+		public static float EASE_DISTANCE = 70.0f;
+		public static float MAXIMUM_PICKUP_VELOCITY = 700.0f; //400.0f;
 		
 		private AbstractCrystallonEntity lastEntityReleased;
 //		private AbstractCrystallonEntity lastEntityAdded;
