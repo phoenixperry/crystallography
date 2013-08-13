@@ -118,6 +118,13 @@ namespace Crystallography.UI
 			Knob.Position = new Vector2((pValue/(max-min+min))*length, 0.0f);
 		}
 		
+		
+		// DESTRUCTOR ---------------------------------------------------------
+#if DEBUG
+		~Slider() {
+			Console.WriteLine(GetType().ToString() + " " + "Deleted");
+		}
+#endif
 	}
 }
 

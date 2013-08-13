@@ -14,13 +14,13 @@ namespace Crystallography
 		static readonly int numTimedHighScores = 3;
 		static readonly int numInfiniteHighScores = 3;
 		
-//		static public Int32[] puzzleScores = new Int32[numPuzzles];
 		static public Boolean[] puzzleComplete = new Boolean[numPuzzles];
 		static public Boolean[] puzzleLocked = new Boolean[numPuzzles];
 		static public Dictionary<Int32, List<Int32[]>> puzzleSolutionsFound = new Dictionary<Int32, List<Int32[]>>();
 		static public Int32[] puzzleSolutionsCount = new Int32[numPuzzles];
 		static public Int32[] timedScores = new Int32[numTimedHighScores];
 		static public Int32[] infiniteScores = new Int32[numInfiniteHighScores];
+		static public Int32[] options = new Int32[4];
 		
 #if METRICS
 		static readonly string METRICS_FILE = "/Documents/metrics.dat";
@@ -78,6 +78,10 @@ namespace Crystallography
 			SaveData();
 		}
 		
+		public static void SaveOptions( Int32[] pOptions ) {
+			options = pOptions;
+		}
+		
 		
 		public static void SaveData() {
 #if DEBUG
@@ -93,6 +97,7 @@ namespace Crystallography
 			bufferSize += sizeof(Boolean) * numRecords; // locked?
 			bufferSize += sizeof(Int32) * numTimedHighScores;
 			bufferSize += sizeof(Int32) * numInfiniteHighScores;
+			bufferSize += sizeof(Int32) * 4; // options
 			bufferSize += sizeof(Int32) * 1; // hash
 			
 			byte[] buffer = new byte [bufferSize];
@@ -158,6 +163,15 @@ namespace Crystallography
 				Buffer.BlockCopy(infiniteScores, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
 				count++;
 				sum+=infiniteScores[i];
+			}
+			bufferBase += sizeof(Int32) * count;
+			
+			// OPTIONS
+			count = 0;
+			for( int i=0; i < 4; ++i ) {
+				Buffer.BlockCopy(options, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
+				count++;
+				sum+=options[i];
 			}
 			bufferBase += sizeof(Int32) * count;
 			
@@ -269,6 +283,15 @@ namespace Crystallography
 						}
 						bufferBase += sizeof(Int32) * count;
 						
+						// OPTIONS
+						count = 0;
+						for( int i=0; i<4; ++i ) {
+							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, options, sizeof(Int32) * i, sizeof(Int32) );
+							count++;
+							sum += options[i];
+						}
+						bufferBase += sizeof(Int32) * count;
+						
 						Int32 hash = BitConverter.ToInt32( buffer, bufferBase );
 						
 						hStream.Close();
@@ -316,6 +339,12 @@ namespace Crystallography
 			for( int i=0; i < numInfiniteHighScores; ++i ) {
 				infiniteScores[i] = 0;
 			}
+			// OPTIONS
+			options[0] = 40;
+			options[1] = 70;
+			options[2] = 70;
+			options[3] = 700;
+			
 			SaveData();
 		}
 		

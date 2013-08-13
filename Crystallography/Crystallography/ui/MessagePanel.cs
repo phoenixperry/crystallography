@@ -32,27 +32,40 @@ namespace Crystallography.UI
 		}
 		
 		// CONSTRUCTOR ------------------------------------------------------------------------------------------------------------
-		public MessagePanel (){
+		public MessagePanel() {
+			Initialize( 480.0f, 176.0f );
+		}
+		
+		public MessagePanel (float pWidth, float pHeight) {
+			Initialize( pWidth, pHeight );
+		}
+		
+		
+		// METHODS ----------------------------------------------------------------------------------------------------------------
+		
+		protected void Initialize ( float pWidth, float pHeight ) {
 			DismissDelay = 1.0f;
-			Height = 176.0f;
-			Width = 450.0f;
+			Height = pHeight;
+			Width = pWidth;
+			var xScale = pWidth/16.0f;
+			var yScale = pHeight/16.0f;
 			SlideInDirection = SlideDirection.UP;
 			SlideOutDirection = SlideDirection.DOWN;
 			
 			Background = Support.UnicolorSprite("Grey", 40, 40, 40, 200);
-			Background.Scale = new Vector2(30.0f, 11.0f);
+			Background.Scale = new Vector2(xScale, yScale);
 			this.AddChild(Background);
 			
 			Bar = Support.UnicolorSprite("LightBlue", 41, 226, 226, 255);
-			Bar.Scale = new Vector2(30.0f, 0.25f);
-			Bar.Position = new Vector2(0.0f, 172.0f);
+			Bar.Scale = new Vector2(xScale, 0.25f);
+			Bar.Position = new Vector2(0.0f, pHeight - 4.0f);
 			this.AddChild(Bar);
 			
 			MessageTitleText = new Label() {
 				Text = "Lorem ipsum dolor sit amet, consectetur",
 				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold") ),
 				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
-				Position = new Vector2(40.0f, 135.0f)
+				Position = new Vector2(40.0f, pHeight - 41.0f)
 			};
 			this.AddChild(MessageTitleText);
 			
@@ -67,7 +80,7 @@ namespace Crystallography.UI
 //					"non proident, sunt in culpa qui officia deserunt mollit \n" +
 //					"anim id est laborum.",
 				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25) ),
-				Position = new Vector2(40.0f, 107.0f)
+				Position = new Vector2(40.0f, pHeight - 69.0f)
 			};
 			this.AddChild(MessageText);
 		}
