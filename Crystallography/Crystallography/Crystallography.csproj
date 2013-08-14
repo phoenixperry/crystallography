@@ -19,7 +19,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <DefineConstants>DEBUG</DefineConstants>
+    <DefineConstants>DEBUG, UNLOCK_ALL</DefineConstants>
     <CustomCommands>
       <CustomCommands>
         <Command type="AfterClean" command="" externalConsole="true" pauseExternalConsole="true" />

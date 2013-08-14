@@ -333,8 +333,11 @@ namespace Crystallography.UI
 				int column = i%4;
 				int row = (i - column)/4;
 				bool complete = DataStorage.puzzleComplete[i + baseIndex];
+#if UNLOCK_ALL
+				bool locked = false;
+#else
 				bool locked = DataStorage.puzzleLocked[i + baseIndex];
-//				bool locked = false;
+#endif
 				LevelSelectItem item = new LevelSelectItem( complete, locked ) {
 					levelID = i + baseIndex,
 					Position = new Vector2(0.125f*Width + 0.25f*Width*column, Height - 0.167f*Height - 0.333f*Height*row)
