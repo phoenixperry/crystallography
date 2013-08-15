@@ -66,7 +66,8 @@ namespace Crystallography
 		/// </summary>
 		public void setPalette () {
 //			setPalette( "Application/assets/animation/leftFall/leftFall.png", 6, 5, 16, 16, 0, 15, 16, 25);
-			setPalette( "Application/assets/animation/animation2.png", 4, 4, 0, 0, 0, 11, 12, 14);
+			//explain please why this is not 0-13 and 14-15. Thanks! :) 
+			setPalette( "Application/assets/animation/animation2.png", 4, 4, 0,14,14,16,0,0);
 //			setPalette( "Application/assets/animation/char_anims.png", 3, 2, 0, 0, 0, 3, 3, 6);
 //			setPalette( "Application/assets/animation/ball_anim.png", 5, 1, 0, 0, 0, 5, 0, 5);
 		}
