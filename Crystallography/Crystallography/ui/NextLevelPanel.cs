@@ -201,9 +201,7 @@ namespace Crystallography.UI
 			this.Solutions = new SolutionIcon[LevelManager.Instance.PossibleSolutions];
 			this.Colors = new Vector4[LevelManager.Instance.PossibleSolutions + 1];
 			var completion = ((float)numFound / (float)LevelManager.Instance.PossibleSolutions);
-//			this.Messages[0] = completion.ToString("P0");
 			Percentage = completion;
-//			this.Colors[0] = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Yellow;
 			visibleSolutionIndex = 0;
 			this.Solutions[0] = new SolutionIcon() {//pCubes.ToString();
 				CubeText = pCubes.ToString(),
@@ -212,18 +210,6 @@ namespace Crystallography.UI
 				Position = new Vector2(40.0f, QuitButton.Height + 80.0f)
 			};
 			this.AddChild(Solutions[0]);
-//			if (pCubes == 1 ) {
-//				this.Messages[1] += " cube, ";
-//			} else {
-//				this.Messages[1] += " cubes, ";
-//			}  
-//			this.Messages[1] += pScore.ToString();
-//			if (pScore == 1) {
-//				this.Messages[1] += " point";
-//			} else {
-//				this.Messages[1] += " points";
-//			}
-//			this.Colors[1] = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Yellow;
 			int i = 1;
 			foreach( int cube in LevelManager.Instance.goalDict.Keys ) {
 				foreach ( int points in LevelManager.Instance.goalDict[cube] ) {
@@ -240,25 +226,12 @@ namespace Crystallography.UI
 								break;
 							}
 						}
-//						if ( this.Colors[i] == Vector4.Zero ) {
 						if ( Solutions[i].Color == Vector4.Zero ) {
 							Solutions[i].Color = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Grey50;
 						}
 						if ( i > 3 ) {
 							Solutions[i].Alpha = 0.0f;
 						}
-//						this.Messages[i] = cube.ToString();
-//						if (cube == 1 ) {
-//							this.Messages[i] += " cube, ";
-//						} else {
-//							this.Messages[i] += " cubes, ";
-//						}  
-//						this.Messages[i] += points.ToString();
-//						if (points == 1) {
-//							this.Messages[i] += " point";
-//						} else {
-//							this.Messages[i] += " points";
-//						}
 						this.AddChild(Solutions[i]);
 						i++;
 					}

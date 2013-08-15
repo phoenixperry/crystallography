@@ -126,7 +126,6 @@ namespace Crystallography.UI
 				}
 			}
 			levelTitle.SetQualityNames( variables.ToArray() );
-//			levelTitle.EnterAnim();
 			levelTitle.SlideIn();
 			if(GameScene.currentLevel != 999) {
 				RestartButton.on = true;
@@ -149,7 +148,6 @@ namespace Crystallography.UI
 #if METRICS
 			DataStorage.CollectMetrics();
 #endif
-//			NextLevelButton.Visible = false;
 			_nextLevelPanel.SlideOut();
 			bool complete = false;
 //			if (_nextLevelPanel.Messages[0] == "100 %") {
