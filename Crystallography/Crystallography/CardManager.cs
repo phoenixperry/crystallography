@@ -102,10 +102,16 @@ namespace Crystallography
 			
 		}
 		
+		protected CardCrystallonEntity BuildCard(int pId) {
+			return new CardCrystallonEntity(_scene, _physics, pId, 
+			                                QPattern.Instance.patternTiles.TextureInfo, QPattern.Instance.patternTiles.TileIndex2D, 
+			                                _physics.SceneShapes[0]);
+			
+		}
+		
 		protected void BuildDeck() {
 			Deck = new List<int>();
 			for (int i = 0; i < TotalCardsInDeck; i++) {
-//				ids.Add(i+NextId);
 				Deck.Add(i+NextId);
 			}
 			Deck.Sort();
@@ -153,7 +159,22 @@ namespace Crystallography
 		/// Returns whether or not at least one possible match remains, based on the contents of <c>availableCards</c>
 		/// </summary>
 		public bool MatchesPossible() {
-			if ( QualityManager.Instance.CheckForMatch( availableCards.ToArray(), false ) ) {
+			List<int> testGroup = new List<int>();
+			List<int> hitMeCards = new List<int>();
+			foreach( CardCrystallonEntity c in availableCards ){
+				testGroup.Add(c.id);
+			}
+			if (Deck.Count > 0) {	// if Hit Me is possible, incorporate top 3 cards on the deck into match evaluation
+				var count = 3;
+				if ( Deck.Count < 3 ) {
+					count = Deck.Count;
+				}
+				testGroup.AddRange( Deck.GetRange(0, count) );
+				hitMeCards.AddRange( Deck.GetRange(0, count) );
+			}
+			
+//			if ( QualityManager.Instance.CheckForMatch( availableCards.ToArray(), false ) ) {
+			if ( QualityManager.Instance.CheckForMatch( testGroup.ToArray(), hitMeCards.ToArray() ) ) {
 #if DEBUG
 				Console.WriteLine("Possible Sets Remain: TRUE");
 #endif
@@ -192,6 +213,9 @@ namespace Crystallography
 		public void Populate ( bool pForce = false ) {
 			if ( Deck == null ) {
 				BuildDeck();
+				if (GameScene.currentLevel == 999) {
+					ShuffleDeck();
+				}
 			}
 			
 			int fillPop = pForce ? LevelManager.Instance.StandardPop + 3 : LevelManager.Instance.StandardPop;
@@ -199,14 +223,15 @@ namespace Crystallography
 				fillPop -= 3; // --------------------------------------------------- Lower limits to 12 & 15
 			}
 			while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
-				int index;
-				if (PickRandomly) {
-					index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
-				} else {
-					index = 0;
-				}
-				spawn (Deck[index]);
-				Deck.RemoveAt(index);
+//				int index;
+//				if (PickRandomly) {
+//					index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
+//				} else {
+//					index = 0;
+//				}
+//				spawn (Deck[index]);
+				spawn (Deck[0]);
+				Deck.RemoveAt(0);
 			}
 		}
 		
@@ -243,6 +268,19 @@ namespace Crystallography
 		}
 		
 		/// <summary>
+		/// Puts the cards in the deck in a random order.
+		/// </summary>
+		protected void ShuffleDeck() {
+			var d = new List<int>();
+			for( int i=0; i<TotalCardsInDeck; i++ ) {
+				var card = Deck[ (int)System.Math.Floor(GameScene.Random.NextFloat() * Deck.Count) ];
+				d.Add(card);
+				Deck.Remove(card);
+			}
+			Deck = d;
+		}
+		
+		/// <summary>
 		/// Creates a new <c>CardCrystallonEntity</c>, adds it to the current scene at a random location.
 		/// </summary>
 		public CardCrystallonEntity spawn( int pId = -1) {
@@ -266,10 +304,10 @@ namespace Crystallography
 			if (pId == -1){
 				pId = NextId;
 			}
-			CardCrystallonEntity card = new CardCrystallonEntity(_scene, _physics, pId, 
-			                                QPattern.Instance.patternTiles.TextureInfo, QPattern.Instance.patternTiles.TileIndex2D, 
-			                                _physics.SceneShapes[0]);
-			
+//			CardCrystallonEntity card = new CardCrystallonEntity(_scene, _physics, pId, 
+//			                                QPattern.Instance.patternTiles.TextureInfo, QPattern.Instance.patternTiles.TileIndex2D, 
+//			                                _physics.SceneShapes[0]);
+			CardCrystallonEntity card = BuildCard(pId);
 			NextId++;
 			TotalCardsInDeck--;
 			QualityManager.Instance.ApplyQualitiesToEntity( card );

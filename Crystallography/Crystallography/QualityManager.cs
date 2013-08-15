@@ -315,6 +315,90 @@ namespace Crystallography
 		}
 		
 		/// <summary>
+		/// A light-weight match finder for when we don't care about points.
+		/// </summary>
+		/// <returns>
+		/// If there is at least ONE possible match in the array of cards.
+		/// </returns>
+		/// <param name='pCardIds'>
+		/// An array of card IDs.
+		/// </param>
+		public bool CheckForMatch( int[] pCardIds, int[] pHitMeCards ) {
+			int len = pCardIds.Length;
+			if (len < SelectionGroup.MAX_CAPACITY) {
+				return false;
+			}
+			
+			int[] triad = new int[SelectionGroup.MAX_CAPACITY];
+			for (int i=0; i < len-2; i++) {
+				for (int j=i+1; j < len-1; j++) {
+					for (int k=j+1; k < len; k++) {
+						triad[0] = pCardIds[i];
+						triad[1] = pCardIds[j];
+						triad[2] = pCardIds[k];
+						if( EvaluateMatch(triad) ) { // ------- as soon as we find one legal cube...
+#if DEBUG
+							Console.WriteLine("First Match Found: {0}, {1}, {2}", pCardIds[i], pCardIds[j], pCardIds[k]);
+							if( pHitMeCards.Length > 0 ) {
+								int hitIndex = len - pHitMeCards.Length;
+								if( k >= hitIndex ) {
+									Console.WriteLine("Hit Me Required: {0}", pCardIds[k]);
+								}
+								if( j >= hitIndex ) {
+									Console.WriteLine("Hit Me Required: {0}", pCardIds[j]);
+								}
+								if( i >= hitIndex ) {
+									Console.WriteLine("Hit Me Required: {0}", pCardIds[i]);
+								}
+							}
+							
+#endif
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+		}
+		
+		/// <summary>
+		/// A light-weight match evaluator.
+		/// </summary>
+		/// <returns>
+		/// If these three cards form a legal cube.
+		/// </returns>
+		/// <param name='pIds'>
+		/// An array of card IDs to be evaluated.
+		/// </param>
+		private bool EvaluateMatch( int[] pIds ) {
+//			bool failed = false;
+			foreach ( string key in qualityDict.Keys ) { // ----------- for each quality
+				if ( key == "QOrientation" && AppMain.ORIENTATION_MATTERS == false ) {
+					continue;
+				}
+				var variations = qualityDict[key];
+				for( int i=0; i < variations.Length; i++) { // -------- for each variation of the quality
+					if ( variations[i] == null ) {
+						continue;
+					}
+					int count = 0;
+					for (int j=0; j<pIds.Length; j++ ) { 
+						if( variations[i].Contains(pIds[j]) ) { // ---------- check for each Id
+							count++;
+						}
+					}
+					if (count == 2) { // ------------------------------ if there are exactly 2 cards, this isn't a legal cube.
+						return false;
+					}
+					if (count != 1 && key == "QOrientation") { // ---- if orientation isn't unique
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+		
+		/// <summary>
 		/// Returns whether the qualities possessed by the Array of <c>ICrystallonEntity</c> are all-same-or-all-different.
 		/// </summary>
 		/// <param name='pEntities'>
