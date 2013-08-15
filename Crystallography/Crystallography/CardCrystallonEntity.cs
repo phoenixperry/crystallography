@@ -298,7 +298,7 @@ namespace Crystallography
 //			_anim.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstAlpha, BlendFuncFactor.OneMinusSrcAlpha);
 //			_anim.BlendMode.BlendFunc = animBlend;
 //			_anim.BlendMode.Enabled = true;
-			_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 0.083f*(1+pEnd-pStart), true) );
+			_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 0.1f*(1+pEnd-pStart), true) );
 
 			if (getOrientation() == 1) {
 //				_anim.Rotation = new Vector2(1f,0f);

@@ -169,7 +169,8 @@ namespace Crystallography
 			{
 				current -= min;
 				current += steps;
-				current %= max - min;
+//				current %= max - min;
+				current %= max - min + 1;
 				current += min;
 			}
 			else
@@ -224,7 +225,8 @@ namespace Crystallography
 
 				int min = System.Math.Min(a, b);
 				int max = System.Math.Max(a, b);
-				int frames = System.Math.Max(1, max - min);	
+//				int frames = System.Math.Max(1, max - min);
+				int frames = max - min + 1;
 
 				frame_time = seconds / (float)frames;
 				animation_start = min;
