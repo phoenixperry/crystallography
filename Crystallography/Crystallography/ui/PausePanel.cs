@@ -109,8 +109,9 @@ namespace Crystallography.UI
 		
 		public void Pause( bool pOn ) {
 			if( GameScene.canPause == false) return;
-			
+#if DEBUG
 			Console.WriteLine("Pause: " + pOn);
+#endif
 			if(pOn) {
 				Show ();
 			} else {
