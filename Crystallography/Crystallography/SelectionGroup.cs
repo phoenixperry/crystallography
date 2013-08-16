@@ -105,16 +105,24 @@ namespace Crystallography
 		{
 			if( GameScene.paused ) return;
 			
-			if(lastEntityReleased == lastEntityTouched) {
-				if (lastEntityReleased != null) {
-					if( population > 1 ) {
-						EaseIn ( true );
-					}
-					if (lastEntityReleased is GroupCrystallonEntity) {
-						(lastEntityReleased as GroupCrystallonEntity).Break ();
-					}
-				}
+			if( lastEntityTouched == null ) return;
+			
+			if ( population  > 1 ) {
+				EaseIn(true);
 			}
+			if (lastEntityTouched is GroupCrystallonEntity) {
+				(lastEntityTouched as GroupCrystallonEntity).Break();
+			}
+//			if(lastEntityReleased == lastEntityTouched) {
+//				if (lastEntityReleased != null) {
+//					if( population > 1 ) {
+//						EaseIn ( true );
+//					}
+//					if (lastEntityReleased is GroupCrystallonEntity) {
+//						(lastEntityReleased as GroupCrystallonEntity).Break ();
+//					}
+//				}
+//			}
 		}
 		
 		/// <summary>
