@@ -290,6 +290,7 @@
     <Content Include="assets\images\UI\LevelSelectItemButtonDisabled.png" />
     <Content Include="assets\images\UI\cubePointsLg.png" />
     <Content Include="assets\images\UI\cubePoints.png" />
+    <Content Include="assets\animation\animation2top.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

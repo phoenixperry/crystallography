@@ -68,15 +68,12 @@ namespace Crystallography
 			if(_anim != null) {
 				if (pOrientation == 1) {
 					_anim.FlipU = false;
-					_anim.Rotation = new Vector2(1f,0f);
 				} else if (pOrientation == 2) {
-//					_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
-					_anim.Rotation = new Vector2(1f,0f);
 					_anim.FlipU = true;
 				} else {
 					_anim.FlipU = false;
-					_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
 				}
+				_anim.TextureInfo = QAnimation.Instance.GetOrientedAnimation( getOrientation() ).TextureInfo;
 			}
 			if(GlowSprite != null) {
 				GlowSprite.TileIndex1D = _orientationIndex;
@@ -215,55 +212,6 @@ namespace Crystallography
 		
 		// METHODS ------------------------------------------------------------------------------------------------------------------------------------------------------
 		
-//		public void DrawAnim() {
-//			Director.Instance.DrawHelpers.DrawCircle(new Vector2(Width/2.0f,Height/2.0f),60.0f,32);
-//			float x1, x2, y1, y2;
-//			Matrix4 transform = Director.Instance.GL.GetMVP();
-//				
-//			Director.Instance.GL.ModelMatrix.Push();
-//			Director.Instance.GL.ModelMatrix.SetIdentity();
-//			
-//			ShaderProgram.SetUniformValue(ShaderProgram.FindUniform("MVP"), ref transform);
-////			ShaderProgram.SetUniformValue(ShaderProgram.FindUniform("angle"), ref angle);
-//
-//			ShaderProgram.SetAttributeBinding(0, "iPosition");
-//			ShaderProgram.SetAttributeBinding(1, "iUV");
-//			ShaderProgram.SetAttributeBinding(2, "iColor");
-//
-//			Director.Instance.GL.Context.SetShaderProgram(ShaderProgram);
-//			
-//			imm_quads.ImmBeginQuads( 4 );
-////			imm_quads.ImmBeginQuads( (uint)ActiveQualityParticles );
-//			
-////			int frame = 0;
-//			
-//			Vector4 white = Colors.White;
-//			var column = frame % 4;
-//			var row = (frame - column) / 4;
-//			
-//			y1 = 0.25f * row; //(float)System.Math.Floor((float)frame/4.0f);
-//			y2 = 0.25f + y1;
-//			x1 = 0.25f * column; //((float)frame-y1*4.0f);
-//			x2 = 0.25f + x1;
-//			
-//			Vector2 z = Vector2.Zero;
-//			
-//			Director.Instance.GL.Context.SetTexture(0, AnimTexture);
-//			imm_quads.ImmAddQuad( 
-//				new VertexData() { position = z + new Vector2(0, 0), uv = new Vector2(x1, 1.0f-y1), color = white },
-//				new VertexData() { position = z + new Vector2(Width, 0), uv = new Vector2(x2, 1.0f-y1), color = white },
-//				new VertexData() { position = z + new Vector2(0, Height), uv = new Vector2(x1, 1.0f-y2), color = white },
-//				new VertexData() { position = z + new Vector2(Width, Height), uv = new Vector2(x2, 1.0f-y2), color = white }
-//			);
-//			
-//			imm_quads.ImmEndQuads();
-//			
-//			Director.Instance.GL.Context.SetShaderProgram(null);
-//			Director.Instance.GL.Context.SetVertexBuffer(0, null);
-//			Director.Instance.GL.ModelMatrix.Pop();
-//			
-//		}
-		
 		public void ShowGlow( float pLifetime = 0.0f ) {
 			getNode().StopActionByTag(0);
 			if (GlowSprite==null) return;
@@ -288,35 +236,18 @@ namespace Crystallography
 				_anim = null;
 				return;
 			}
+			
 			_anim = new SpriteTile( anim.TextureInfo, anim.TileIndex2D );
-//			_mask = new SpriteTile( QAnimation.Instance.maskTiles.TextureInfo, _orientationIndex);
-//			_anim.Scale /= 4.0f;
+			
 			_anim.Pivot = this.getNode().Pivot;
-//			_mask.Pivot = this.getNode().Pivot;
-//			_mask.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstColor, BlendFuncFactor.One);
-//			_anim.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.ReverseSubtract, BlendFuncFactor.One, BlendFuncFactor.OneMinusSrcColor);
-//			_anim.BlendMode.BlendFunc = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstAlpha, BlendFuncFactor.OneMinusSrcAlpha);
-//			_anim.BlendMode.BlendFunc = animBlend;
-//			_anim.BlendMode.Enabled = true;
+
 			_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 0.1f*(1+pEnd-pStart), true) );
 
-			if (getOrientation() == 1) {
-//				_anim.Rotation = new Vector2(1f,0f);
-			} else if (getOrientation() == 2) {
+			if (getOrientation() == 2) {
 				_anim.FlipU = true;
-//				_anim.Rotate(Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Deg2Rad(-60.0f));
-//				_anim.Rotation = new Vector2(0.515038074910054f, -0.857167300702112f);
-//				_anim.Rotation = new Vector2(0.5f, -0.866025403784439f); //60
-			} else {
-//				_anim.Pivot = new Vector2(0.52f,0.54f);
-				_anim.Position = new Vector2(0.00f, 0.015f);
-//				_anim.Rotation = new Vector2(0.484809620246337f, 0.874619707139396f);
-//				_anim.Rotation = new Vector2(0.5f, 0.866025403784439f);
-				_anim.Rotate(Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Deg2Rad(-120.0f));
-			}
+			} 
+
 			this.getNode().AddChild(_anim);
-//			this.getNode().AddChild(_mask);
-//			_mask.AddChild(_anim);
 		}
 		
 		protected void KeepOnScreen (float dt) {
