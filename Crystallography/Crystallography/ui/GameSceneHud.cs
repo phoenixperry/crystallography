@@ -99,16 +99,10 @@ namespace Crystallography.UI
 		/// Handles the card manager instance no matches possible detected.
 		/// </summary>
 		void HandleCardManagerInstanceNoMatchesPossibleDetected (object sender, EventArgs e) {
-//			HitMeButton.on = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < LevelManager.Instance.StandardPop + 3 );
-//			if (HitMeButton.on == false) {
-				NoMatchesPossibleTime = DisplayTimer;
-				MetGoal();
-//				if (Goal <= Score) {
-				RestartButton.on = false;
-//				}
-//				_buttonSlideIn = true;
-				_pauseTimer = true;
-//			}
+			NoMatchesPossibleTime = DisplayTimer;
+			MetGoal();
+			RestartButton.on = false;
+			_pauseTimer = true;
 		}
 		
 		/// <summary>
@@ -150,15 +144,11 @@ namespace Crystallography.UI
 #endif
 			_nextLevelPanel.SlideOut();
 			bool complete = false;
-//			if (_nextLevelPanel.Messages[0] == "100 %") {
-//				complete = true;
-//			}
 			if( GameScene.currentLevel != 999 ) {
 				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
 			}
 			CardManager.Instance.Reset( Director.Instance.CurrentScene );
 			GroupManager.Instance.Reset( Director.Instance.CurrentScene );
-//			NextLevelButton.ButtonUpAction -= HandleNextLevelButtonButtonUpAction;
 			InputManager.Instance.CircleJustUpDetected -= HandleNextLevelButtonButtonUpAction;
 			_scene.GoToNextLevel();
 		}
