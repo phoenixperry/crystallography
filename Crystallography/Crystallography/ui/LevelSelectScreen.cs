@@ -156,7 +156,8 @@ namespace Crystallography.UI
 #if DEBUG
 			Console.WriteLine("Back");
 #endif
-			MenuSystem.SetScreen("Menu");
+//			MenuSystem.SetScreen("Menu");
+			Director.Instance.ReplaceScene( new LoadingScene(0, false, "Menu") );
 		}
 		
 		void HandlePlayButtonButtonUpAction (object sender, EventArgs e)
