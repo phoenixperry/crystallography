@@ -232,7 +232,17 @@ namespace Crystallography.UI
 		protected void AddMenuProcs() {
 			List<Action> proc = new List<Action> {
 				() => {
-					var temp = Support.SpriteFromFile("/Application/assets/images/UI/menuButtonBackground.png");
+//					var temp = Support.SpriteFromFile("/Application/assets/images/UI/menuButtonBackground.png");
+					var temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_bottom.png");
+				},
+				() => {
+					var temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_blue2.png");
+				},
+				() => {
+					var temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_red2.png");
+				},
+				() => {
+					var temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_top.png");
 				},
 				() => {
 					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/NewGameButton.png", 1, 3);

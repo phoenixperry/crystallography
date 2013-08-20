@@ -178,7 +178,6 @@
     <Content Include="assets\images\UI\instructions7.png" />
     <Content Include="assets\images\UI\instructions8.png" />
     <Content Include="assets\images\UI\lockIcon.png" />
-    <Content Include="assets\images\UI\menuButtonBackground.png" />
     <Content Include="assets\images\UI\play.png" />
     <Content Include="assets\images\UI\playOVer.png" />
     <Content Include="assets\images\UI\quit.png" />
@@ -291,6 +290,10 @@
     <Content Include="assets\images\UI\cubePointsLg.png" />
     <Content Include="assets\images\UI\cubePoints.png" />
     <Content Include="assets\animation\animation2top.png" />
+    <Content Include="assets\images\UI\menuBtnBG_bottom.png" />
+    <Content Include="assets\images\UI\menuBtnBG_top.png" />
+    <Content Include="assets\images\UI\menuBtnBG_blue2.png" />
+    <Content Include="assets\images\UI\menuBtnBG_red2.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
