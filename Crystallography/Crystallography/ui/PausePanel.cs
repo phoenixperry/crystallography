@@ -7,9 +7,10 @@ namespace Crystallography.UI
 {
 	public class PausePanel : Layer
 	{
-		SpriteUV Background;
+		SpriteTile Background;
 		Label PauseText;
 //		FontMap map;
+		ButtonEntity ResetButton;
 		ButtonEntity ResumeButton;
 		ButtonEntity GiveUpButton;
 		
@@ -17,6 +18,7 @@ namespace Crystallography.UI
 		protected GameScene _scene;
 		
 		public static event EventHandler QuitButtonPressDetected;
+		public static event EventHandler ResetButtonPressDetected;
 		public static event EventHandler<PauseEventArgs> PauseDetected;
 		
 		// CONSTRUCTOR --------------------------------------------------------------------------------------------------------
@@ -32,6 +34,14 @@ namespace Crystallography.UI
 		
 		void HandleInputManagerInstanceStartJustUpDetected (object sender, EventArgs e) {
 			PauseToggle();
+		}
+		
+		void HandleResetButtonButtonUpAction (object sender, EventArgs e) {
+			Pause (false);
+			EventHandler handler = ResetButtonPressDetected;
+			if (handler != null ) {
+				handler(this, null);
+			}
 		}
 		
 		void HandleGiveUpButtonButtonUpAction (object sender, EventArgs e) {
@@ -70,22 +80,30 @@ namespace Crystallography.UI
 			_initialized = true;
 			FontMap map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold") );
 			
-			Background = Support.SpriteUVFromFile("/Application/assets/images/PausePanelBG.png");
-			Background.Position = new Vector2(55.0f, 227.0f);
+//			Background = Support.SpriteUVFromFile("/Application/assets/images/PausePanelBG.png");
+			Background = Support.UnicolorSprite("med_grey", 153, 153, 153, 255);
+			Background.Position = new Vector2(328.0f, 112.0f);
+			Background.Scale = new Vector2(20.0f, 18.9375f);
 			this.AddChild(Background);
 			
 			PauseText = new Label("Paused.", map);
-			PauseText.Position = new Vector2(26.0f, 28.0f);
-			Background.AddChild(PauseText);
+			PauseText.Position = new Vector2(418.0f, 365.0f);
+			this.AddChild(PauseText);
 			
-			ResumeButton = new ButtonEntity("    resume", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			ResumeButton.setPosition(413.0f, 277.0f);
+			ResetButton = new ButtonEntity("      restart", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+			ResetButton.setPosition(487.0f, 238.0f);
+			ResetButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
+			ResetButton.on = false;
+			this.AddChild(ResetButton.getNode());
+			
+			ResumeButton = new ButtonEntity("     resume", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+			ResumeButton.setPosition(487.0f, 319.0f);
 			ResumeButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
 			ResumeButton.on = false;
 			this.AddChild(ResumeButton.getNode());
 			
-			GiveUpButton = new ButtonEntity("      give up", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/redBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			GiveUpButton.setPosition(694.0f, 277.0f);
+			GiveUpButton = new ButtonEntity("        quit", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/redBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+			GiveUpButton.setPosition(487.0f, 157.0f);
 			GiveUpButton.label.FontMap = ResumeButton.label.FontMap;
 			GiveUpButton.on = false;
 			this.AddChild(GiveUpButton.getNode());
@@ -93,16 +111,20 @@ namespace Crystallography.UI
 		
 		public void Hide() {
 			this.Visible = false;
+			ResetButton.on = false;
 			ResumeButton.on = false;
 			GiveUpButton.on = false;
+			ResetButton.ButtonUpAction -= HandleResetButtonButtonUpAction;
 			ResumeButton.ButtonUpAction -= HandleResumeButtonButtonUpAction;
 			GiveUpButton.ButtonUpAction -= HandleGiveUpButtonButtonUpAction;
 		}
 		
 		public void Show() {
 			this.Visible = true;
+			ResetButton.on = true;
 			ResumeButton.on = true;
 			GiveUpButton.on = true;
+			ResetButton.ButtonUpAction += HandleResetButtonButtonUpAction;
 			ResumeButton.ButtonUpAction += HandleResumeButtonButtonUpAction;
 			GiveUpButton.ButtonUpAction += HandleGiveUpButtonButtonUpAction;
 		}

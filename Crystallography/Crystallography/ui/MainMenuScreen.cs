@@ -311,12 +311,7 @@ namespace Crystallography.UI
 			} ) );
 			sequence.Add( new DelayTime( duration1 ) );
 			sequence.Add( new CallFunc( () => { MaskBGTop.Visible = false; } ) );
-//			MaskBGTop.RunAction(sequence);
 			
-//			sequence = new Sequence();
-//			var delay1 = delay0 + duration1;
-//			var delay1 = duration1;
-//			sequence.Add( new DelayTime( delay1 ) );
 			var duration2 = 257.0f/speed;
 			sequence.Add( new CallFunc( () => {
 				NewGameButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration2) {
@@ -325,12 +320,7 @@ namespace Crystallography.UI
 			} ) );
 			sequence.Add( new DelayTime( duration2 ) );
 			sequence.Add( new CallFunc( () => { MaskBGButton1.Visible = false; } ) );
-//			NewGameButton.getNode().RunAction(sequence);
 			
-//			sequence = new Sequence();
-//			var delay2 = delay1 + duration2;
-//			var delay2 = duration2;
-//			sequence.Add( new DelayTime( delay2 ) );
 			var duration3 = 151.0f/speed * 2.0f;
 			sequence.Add( new CallFunc( () => {
 				MaskBGSpacer1.RunAction( new MoveBy( new Vector2(0.0f, -151.0f), duration3) {
@@ -339,12 +329,7 @@ namespace Crystallography.UI
 			} ) );
 			sequence.Add( new DelayTime( duration3 ) );
 			sequence.Add( new CallFunc( () => { MaskBGSpacer1.Visible = false; } ) );
-//			MaskBGSpacer1.RunAction(sequence);
 			
-//			sequence = new Sequence();
-//			var delay3 = delay2 + duration3;
-//			var delay3 = duration3;
-//			sequence.Add( new DelayTime( delay3 ) );
 			var duration4 = 257.0f/speed;
 			sequence.Add( new CallFunc( () => {
 				LevelSelectButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration4) {
@@ -353,13 +338,7 @@ namespace Crystallography.UI
 			} ) );
 			sequence.Add( new DelayTime( duration4 ) );
 			sequence.Add( new CallFunc( () => { MaskBGButton2.Visible = false; } ) );
-//			MaskBGButton2.RunAction(sequence);
-//			LevelSelectButton.getNode().RunAction(sequence);
 			
-//			sequence = new Sequence();
-//			var delay4 = delay3 + duration4;
-//			var delay4 = duration4;
-//			sequence.Add( new DelayTime( delay4 ) );
 			var duration5 = 151.0f/speed * 2.0f;
 			sequence.Add( new CallFunc( () => { 
 				MaskBGSpacer2.RunAction( new MoveBy( new Vector2(0.0f, -151.0f), duration5) {
@@ -368,12 +347,7 @@ namespace Crystallography.UI
 			} ) );
 			sequence.Add( new DelayTime( duration5 ) );
 			sequence.Add( new CallFunc( () => { MaskBGSpacer2.Visible = false; } ) );
-//			MaskBGSpacer2.RunAction(sequence);
 			
-//			sequence = new Sequence();
-//			var delay5 = delay4 + duration5;
-//			var delay5 = duration5;
-//			sequence.Add( new DelayTime( delay5 ) );
 			var duration6 = 257.0f/speed;
 			sequence.Add( new CallFunc( () => {
 				InstructionsButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration6 ) {
@@ -382,12 +356,7 @@ namespace Crystallography.UI
 			} ) );
 			sequence.Add( new DelayTime( duration6 ) );
 			sequence.Add( new CallFunc( () => { MaskBGButton3.Visible = false; } ) );
-//			InstructionsButton.getNode().RunAction(sequence);
 			
-//			sequence = new Sequence();
-//			var delay6 = delay5 + duration6;
-//			var delay6 = duration6;
-//			sequence.Add( new DelayTime( delay6 ) );
 			var duration7 = 151.0f/speed * 2.0f;
 			sequence.Add( new CallFunc( () => {
 				MaskBGSpacer3.RunAction( new MoveBy( new Vector2(0.0f, -151.0f), duration7) {
@@ -396,12 +365,7 @@ namespace Crystallography.UI
 			} ) );
 			sequence.Add( new DelayTime( duration7 ) );
 			sequence.Add( new CallFunc( () => { MaskBGSpacer3.Visible = false; } ) );
-//			MaskBGSpacer3.RunAction(sequence);
 			
-//			sequence = new Sequence();
-//			var delay7 = delay6 + duration7;
-//			var delay7 = duration7;
-//			sequence.Add( new DelayTime( delay7 ) );
 			var duration8 = 257.0f/speed;
 			sequence.Add( new CallFunc( () => {
 				CreditsButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration8) {
@@ -410,12 +374,7 @@ namespace Crystallography.UI
 			} ) );
 			sequence.Add( new DelayTime( duration8 ) );
 			sequence.Add( new CallFunc( () => { MaskBGButton4.Visible = false; } ) );
-//			CreditsButton.getNode().RunAction(sequence);
 			
-//			sequence = new Sequence();
-//			var delay8 = delay7 + duration8;
-//			var delay8 = duration8;
-//			sequence.Add( new DelayTime( delay8 ) );
 			var duration9 = 79.0f/speed * 4.0f;
 			sequence.Add( new CallFunc( () => {
 				MaskBGBottom.RunAction( new MoveBy( new Vector2(0.0f, -79.0f), duration9) {
@@ -425,7 +384,6 @@ namespace Crystallography.UI
 			sequence.Add( new DelayTime( duration9 ) );
 			sequence.Add( new CallFunc( () => { MaskBGBottom.Visible = false; } ) );
 			sequence.Add( new CallFunc( () => { InputManager.Instance.enabled = true; } ) );
-//			MaskBGBottom.RunAction(sequence);
 			
 			this.RunAction(sequence);
 			
@@ -446,7 +404,6 @@ namespace Crystallography.UI
 #endif
 			this.RemoveAllChildren(true);
 			MenuSystem = null;
-//			MenuBackground = null;
 			MenuBGBottom = null;
 			MenuBGSpacer1 = null;
 			MenuBGSpacer2 = null;

@@ -119,6 +119,7 @@ namespace Crystallography.UI
 		
 		void HandleOnSlideOutComplete (object sender, EventArgs e)
 		{
+			if (Solutions == null) return;
 			for( int i=0; i < Solutions.Length; i++ ) {
 				this.RemoveChild(Solutions[i], true);
 				Solutions[i] = null;

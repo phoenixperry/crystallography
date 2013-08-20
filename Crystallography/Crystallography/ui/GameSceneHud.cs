@@ -15,7 +15,7 @@ namespace Crystallography.UI
 //		SpriteUV RedBox;
 //		ButtonEntity NextLevelButton;
 		ButtonEntity HitMeButton;
-		ButtonEntity RestartButton;
+//		ButtonEntity RestartButton;
 		
 		Label ScoreTitleText;
 //		Label GoalTitleText;
@@ -101,7 +101,7 @@ namespace Crystallography.UI
 		void HandleCardManagerInstanceNoMatchesPossibleDetected (object sender, EventArgs e) {
 			NoMatchesPossibleTime = DisplayTimer;
 			MetGoal();
-			RestartButton.on = false;
+//			RestartButton.on = false;
 			_pauseTimer = true;
 		}
 		
@@ -121,9 +121,9 @@ namespace Crystallography.UI
 			}
 			levelTitle.SetQualityNames( variables.ToArray() );
 			levelTitle.SlideIn();
-			if(GameScene.currentLevel != 999) {
-				RestartButton.on = true;
-			}
+//			if(GameScene.currentLevel != 999) {
+//				RestartButton.on = true;
+//			}
 		}
 		
 		/// <summary>
@@ -185,7 +185,17 @@ namespace Crystallography.UI
 		/// <summary>
 		/// On Restart Button Up
 		/// </summary>
-		void HandleRestartButtonButtonUpAction (object sender, EventArgs e)
+//		void HandleRestartButtonButtonUpAction (object sender, EventArgs e)
+//		{
+//			ExitCode = LevelExitCode.RESET;
+//			_nextLevelPanel.SlideOut();
+//#if METRICS
+//			DataStorage.CollectMetrics();
+//#endif
+//			_scene.ResetToLevel();
+//		}
+		
+		void HandlePausePanelResetButtonPressDetected (object sender, EventArgs e)
 		{
 			ExitCode = LevelExitCode.RESET;
 			_nextLevelPanel.SlideOut();
@@ -194,6 +204,7 @@ namespace Crystallography.UI
 #endif
 			_scene.ResetToLevel();
 		}
+		
 		
 		/// <summary>
 		/// On LevelSelectButton Up
@@ -268,6 +279,7 @@ namespace Crystallography.UI
 			GameScene.LevelChangeDetected += HandleGameSceneLevelChangeDetected;
 			GroupCrystallonEntity.BreakDetected += HandleGroupCrystallonEntityBreakDetected;
 			PausePanel.QuitButtonPressDetected += HandlePausePanelQuitButtonPressDetected;
+			PausePanel.ResetButtonPressDetected += HandlePausePanelResetButtonPressDetected;
 			CubeCrystallonEntity.CubeCompleteDetected += HandleCubeCrystallonEntityCubeCompleteDetected;
 			if(GameScene.currentLevel == 999) {
 				this.Schedule(calculateTimer,1);
@@ -295,6 +307,7 @@ namespace Crystallography.UI
 			GameScene.LevelChangeDetected -= HandleGameSceneLevelChangeDetected;
 			GroupCrystallonEntity.BreakDetected -= HandleGroupCrystallonEntityBreakDetected;
 			PausePanel.QuitButtonPressDetected -= HandlePausePanelQuitButtonPressDetected;
+			PausePanel.ResetButtonPressDetected -= HandlePausePanelResetButtonPressDetected;
 			CubeCrystallonEntity.CubeCompleteDetected -= HandleCubeCrystallonEntityCubeCompleteDetected;
 			if(GameScene.currentLevel == 999) {
 				this.Unschedule(calculateTimer);
@@ -401,11 +414,10 @@ namespace Crystallography.UI
 //				GoalText.Position = new Vector2(5.0f, 12.0f);
 //				RedBox.AddChild(GoalText);
 				
-				RestartButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//				RestartButton.setPosition( 748.0f, 509.0f );
-				RestartButton.setPosition( 636.0f, 509.0f );
-				this.AddChild(RestartButton.getNode());
-				RestartButton.ButtonUpAction += HandleRestartButtonButtonUpAction;
+//				RestartButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//				RestartButton.setPosition( 636.0f, 509.0f );
+//				this.AddChild(RestartButton.getNode());
+//				RestartButton.ButtonUpAction += HandleRestartButtonButtonUpAction;
 			} else {
 				TimeBox = Support.SpriteUVFromFile("/Application/assets/images/timerIcon.png");
 //				TimeBox.Position = new Vector2(454.0f, 16.0f);
