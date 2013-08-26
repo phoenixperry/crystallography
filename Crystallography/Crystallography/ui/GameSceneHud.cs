@@ -11,16 +11,19 @@ namespace Crystallography.UI
 		SpriteUV GameHudBar;
 		SpriteUV ScoreIcon;
 //		SpriteUV GoalIcon;
+		SpriteTile CubeIcon;
 		SpriteUV BlueBox;
-//		SpriteUV RedBox;
+		SpriteTile RedBox;
 //		ButtonEntity NextLevelButton;
 		ButtonEntity HitMeButton;
 //		ButtonEntity RestartButton;
 		
 		Label ScoreTitleText;
+		Label CubesTitleText;
 //		Label GoalTitleText;
 		Label ScoreText;
 //		Label GoalText;
+		Label CubeText;
 		
 		SpriteUV TimeBox;
 		Label TimerSeparatorText;
@@ -165,6 +168,10 @@ namespace Crystallography.UI
 		/// </summary>
 		void HandleQualityManagerMatchScoreDetected (object sender, MatchScoreEventArgs e) {
 			Cubes++;
+			CubeText.Text = Cubes.ToString();
+			float x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(CubeText.Text);
+			CubeText.Position = new Vector2(x, CubeText.Position.Y);
+			
 			ScheduleScoreModifier( e.Points );
 			new ScorePopup( e.Node, e.Points );
 			if (e.Entity is GroupCrystallonEntity) {
@@ -380,16 +387,19 @@ namespace Crystallography.UI
 			this.AddChild(_messagePanel);
 
 			ScoreIcon = Support.SpriteUVFromFile("/Application/assets/images/handIcon.png");
-			ScoreIcon.Position = new Vector2(20.0f, 16.0f);
+//			ScoreIcon.Position = new Vector2(20.0f, 16.0f);
+			ScoreIcon.Position = new Vector2(244.0f, 16.0f);
 			GameHudBar.AddChild(ScoreIcon);
 			
 			ScoreTitleText = new Label("score", map);
-			ScoreTitleText.Position = new Vector2(54.0f, 25.0f);
+//			ScoreTitleText.Position = new Vector2(54.0f, 25.0f);
+			ScoreTitleText.Position = new Vector2(287, 25.0f);
 			ScoreTitleText.Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f);
 			GameHudBar.AddChild(ScoreTitleText);
 			
 			BlueBox = Support.SpriteUVFromFile("/Application/assets/images/blueBox.png");
-			BlueBox.Position = new Vector2(120.0f, 0.0f);
+//			BlueBox.Position = new Vector2(120.0f, 0.0f);
+			BlueBox.Position = new Vector2(354.0f, 0.0f);
 			GameHudBar.AddChild(BlueBox);
 			
 			ScoreText = new Label("", bigMap);
@@ -397,6 +407,25 @@ namespace Crystallography.UI
 			BlueBox.AddChild(ScoreText);
 			
 			if(GameScene.currentLevel != 999) {
+				CubeIcon = Support.SpriteFromFile("/Application/assets/images/stopIcon.png");
+//				CubeIcon.Position = new Vector2(244.0f,16.0f);
+				CubeIcon.Position = new Vector2(20.0f,16.0f);
+				GameHudBar.AddChild(CubeIcon);
+				
+				CubesTitleText = new Label("cubes", map);
+//				CubesTitleText.Position = new Vector2(287.0f, 25.0f);
+				CubesTitleText.Position = new Vector2(63.0f, 25.0f);
+				CubesTitleText.Color = new Vector4( 0.89803922f, 0.0745098f, 0.0745098f, 1.0f);
+				GameHudBar.AddChild(CubesTitleText);
+				
+				RedBox = Support.SpriteFromFile("/Application/assets/images/redbox.png");
+//				RedBox.Position = new Vector2(354.0f, 0.0f);
+				RedBox.Position = new Vector2(130.0f, 0.0f);
+				GameHudBar.AddChild(RedBox);
+				
+				CubeText = new Label("", bigMap);
+				CubeText.Position = new Vector2(5.0f, 12.0f);
+				RedBox.AddChild(CubeText);
 //				GoalIcon = Support.SpriteUVFromFile("/Application/assets/images/stopIcon.png");
 //				GoalIcon.Position = new Vector2(244.0f, 16.0f);
 //				GameHudBar.AddChild(GoalIcon);
@@ -471,12 +500,15 @@ namespace Crystallography.UI
 			float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
 			ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
 			
-//			if(GameScene.currentLevel != 999) {
+			if(GameScene.currentLevel != 999) {
+				CubeText.Text = "0";
+				x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(CubeText.Text);
+				CubeText.Position = new Vector2(x, CubeText.Position.Y);
 //				Goal = LevelManager.Instance.Goal;
 //				GoalText.Text = Goal.ToString();
 //				x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(GoalText.Text);
 //				GoalText.Position = new Vector2(x, GoalText.Position.Y);
-//			}
+			}
 			
 			_messagePanel.Text = LevelManager.Instance.MessageBody;
 			_messagePanel.TitleText = LevelManager.Instance.MessageTitle;
