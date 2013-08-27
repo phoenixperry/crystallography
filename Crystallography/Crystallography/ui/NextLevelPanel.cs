@@ -12,9 +12,13 @@ namespace Crystallography.UI
 		Label MessageText;
 		Label PercentageText;
 		
-		ButtonEntity QuitButton;
-		ButtonEntity LevelSelectButton;
-		ButtonEntity NextLevelButton;
+//		ButtonEntity QuitButton;
+//		ButtonEntity LevelSelectButton;
+//		ButtonEntity NextLevelButton;
+		
+		BetterButton QuitButton;
+		BetterButton LevelSelectButton;
+		BetterButton NextLevelButton;
 		
 		public SolutionIcon[] Solutions;
 		public Vector4[] Colors;
@@ -67,10 +71,17 @@ namespace Crystallography.UI
 			this.AddChild( MessageText );
 			
 			
-			QuitButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/quit_game.png", 1, 3).TextureInfo, new Vector2i(0,0) );
-			QuitButton.setPosition(58.5f,26.5f);
-			QuitButton.Visible = true;
-			this.AddChild(QuitButton.getNode());
+			QuitButton = new BetterButton(117.0f, 53.0f) {
+				Text = "quit",
+				Position = new Vector2(0.0f, 0.0f),
+				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			};
+			this.AddChild(QuitButton);
+			
+//			QuitButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/quit_game.png", 1, 3).TextureInfo, new Vector2i(0,0) );
+//			QuitButton.setPosition(58.5f,26.5f);
+//			QuitButton.Visible = true;
+//			this.AddChild(QuitButton.getNode());
 			
 			
 			PercentageText = new Label() {
@@ -81,17 +92,31 @@ namespace Crystallography.UI
 			this.AddChild( PercentageText );
 			
 			
-			LevelSelectButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/levelSelectBtn.png", 1, 3).TextureInfo, new Vector2i(0,0) );
-			LevelSelectButton.setPosition(QuitButton.Width + 2.0f + 88.0f,26.5f);
-			LevelSelectButton.Visible = true;
-			this.AddChild(LevelSelectButton.getNode());
+			LevelSelectButton = new BetterButton(176.0f, 53.0f) {
+				Text = "level select",
+				Position = new Vector2(QuitButton.Width + 4.0f , 0.0f),
+				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			};
+			this.AddChild(LevelSelectButton);
+			
+//			LevelSelectButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/levelSelectBtn.png", 1, 3).TextureInfo, new Vector2i(0,0) );
+//			LevelSelectButton.setPosition(QuitButton.Width + 2.0f + 88.0f,26.5f);
+//			LevelSelectButton.Visible = true;
+//			this.AddChild(LevelSelectButton.getNode());
 			
 			
+			NextLevelButton = new BetterButton(148.0f, 53.0f) {
+				Text = "next level",
+				Position = new Vector2(QuitButton.Width + LevelSelectButton.Width + 8.0f, 0.0f),
+				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+			};
+			this.AddChild(NextLevelButton);
 			
-			NextLevelButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/nextLevel.png", 1, 3).TextureInfo, new Vector2i(0,0) );
-			NextLevelButton.setPosition(LevelSelectButton.Width + QuitButton.Width + 4.0f + 74.0f, 26.5f);
-			NextLevelButton.Visible = true;
-			this.AddChild(NextLevelButton.getNode());
+			
+//			NextLevelButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/nextLevel.png", 1, 3).TextureInfo, new Vector2i(0,0) );
+//			NextLevelButton.setPosition(LevelSelectButton.Width + QuitButton.Width + 4.0f + 74.0f, 26.5f);
+//			NextLevelButton.Visible = true;
+//			this.AddChild(NextLevelButton.getNode());
 			
 			var charHeight = MessageText.FontMap.CharPixelHeight;
 			Height = (charHeight * 5.0f) + QuitButton.Height;

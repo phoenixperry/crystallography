@@ -14,10 +14,15 @@ namespace Crystallography.UI
 		Slider effectsSlider;
 		Slider musicSlider;
 		
-		ButtonEntity OKButton;
-		ButtonEntity CancelButton;
-		ButtonEntity ClearButton;
-		ButtonEntity ClearOKButton;
+//		ButtonEntity OKButton;
+//		ButtonEntity CancelButton;
+//		ButtonEntity ClearButton;
+//		ButtonEntity ClearOKButton;
+		
+		BetterButton OKButton;
+		BetterButton CancelButton;
+		BetterButton ClearButton;
+		BetterButton ClearOKButton;
 		
 		MessagePanel ClearPanel;
 		
@@ -92,16 +97,19 @@ namespace Crystallography.UI
 			stickySlider.SetSliderValue((float)DataStorage.options[3]);
 			this.AddChild(stickySlider);
 			
+			OKButton = new BetterButton(289.0f, 71.0f) {
+				Text = "ok",
+				Position = new Vector2(671.0f, 0.0f),
+				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+			};
+			this.AddChild(OKButton);
 			
-			OKButton = new ButtonEntity("         ok", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/redBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			OKButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
-			OKButton.setPosition(816.0f, 35.0f);
-			this.AddChild(OKButton.getNode());
-			
-			CancelButton = new ButtonEntity("     cancel", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			CancelButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
-			CancelButton.setPosition(816.0f, 105.0f);
-			this.AddChild(CancelButton.getNode());
+			CancelButton = new BetterButton(289.0f, 71.0f) {
+				Text = "cancel",
+				Position = new Vector2(671.0f, 71.0f),
+				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			};
+			this.AddChild(CancelButton);
 			
 			ClearPanel = new MessagePanel(289.0f, 240.0f) {
 				TitleText = "really?",
@@ -111,16 +119,19 @@ namespace Crystallography.UI
 			};
 			this.AddChild(ClearPanel);
 			
-			ClearButton = new ButtonEntity("clear all data", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			ClearButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
-			ClearButton.setPosition(ClearButton.Width/2.0f, 35.0f);
-			this.AddChild(ClearButton.getNode());
+			ClearButton = new BetterButton(289.0f, 71.0f) {
+				Text = "clear all data",
+				Position = new Vector2(0.0f, 0.0f),
+				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			};
+			this.AddChild(ClearButton);
 			
-			ClearOKButton = new ButtonEntity("      do it", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/redBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			ClearOKButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
-			ClearOKButton.setPosition(ClearOKButton.Width/2.0f, 35.0f);
-			ClearPanel.AddChild(ClearOKButton.getNode());
-			
+			ClearOKButton = new BetterButton(289.0f, 71.0f) {
+				Text = "do it",
+				Position = new Vector2(0.0f, 0.0f),
+				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+			};
+			ClearPanel.AddChild(ClearOKButton);
 		}
 		
 		// EVENT HANDLERS ------------------------------------------------------

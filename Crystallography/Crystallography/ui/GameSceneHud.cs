@@ -15,8 +15,11 @@ namespace Crystallography.UI
 		SpriteUV BlueBox;
 		SpriteTile RedBox;
 //		ButtonEntity NextLevelButton;
-		ButtonEntity HitMeButton;
+//		ButtonEntity HitMeButton;
 //		ButtonEntity RestartButton;
+		
+		BetterButton HitMeButton;
+		BetterButton PauseButton;
 		
 		Label ScoreTitleText;
 		Label CubesTitleText;
@@ -95,7 +98,7 @@ namespace Crystallography.UI
 		
 		void HandleCubeCrystallonEntityCubeCompleteDetected (object sender, CubeCompleteEventArgs e)
 		{
-			HitMeButton.on = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < LevelManager.Instance.StandardPop + 3 );
+			HitMeButton.On = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < LevelManager.Instance.StandardPop + 3 );
 		}
 		
 		/// <summary>
@@ -160,7 +163,7 @@ namespace Crystallography.UI
 		/// On Card Spawn
 		/// </summary>
 		void HandleCardManagerInstanceCardSpawned (object sender, EventArgs e) {
-			HitMeButton.on = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < LevelManager.Instance.StandardPop + 3 );
+			HitMeButton.On = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < LevelManager.Instance.StandardPop + 3 );
 		}
 		
 		/// <summary>
@@ -189,6 +192,12 @@ namespace Crystallography.UI
 			IconPopupManager.Instance.FailedIcons( e.Entity, e.Names );
 		}
 		
+		
+		void HandlePauseButtonButtonUpAction (object sender, EventArgs e)
+		{
+			pausePanel.PauseToggle();
+		}
+		
 		/// <summary>
 		/// On Restart Button Up
 		/// </summary>
@@ -201,7 +210,6 @@ namespace Crystallography.UI
 //#endif
 //			_scene.ResetToLevel();
 //		}
-		
 		void HandlePausePanelResetButtonPressDetected (object sender, EventArgs e)
 		{
 			ExitCode = LevelExitCode.RESET;
@@ -308,6 +316,8 @@ namespace Crystallography.UI
 			_nextLevelPanel.NextLevelDetected -= HandleNextLevelButtonButtonUpAction;
 			_nextLevelPanel.QuitDetected -= HandlePausePanelQuitButtonPressDetected;
 			_nextLevelPanel.LevelSelectDetected -= Handle_nextLevelPanelLevelSelectDetected;
+			HitMeButton.ButtonUpAction -= HandleHitMeButtonButtonUpAction;
+			PauseButton.ButtonUpAction -= HandlePauseButtonButtonUpAction;
 			QualityManager.MatchScoreDetected -= HandleQualityManagerMatchScoreDetected;
 			QualityManager.FailedMatchDetected -= HandleQualityManagerFailedMatchDetected;
 			CardManager.Instance.NoMatchesPossibleDetected -= HandleCardManagerInstanceNoMatchesPossibleDetected;
@@ -468,14 +478,32 @@ namespace Crystallography.UI
 //				this.Schedule(calculateTimer,1);
 			}
 			
-			HitMeButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/hitMe.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//			HitMeButton.setPosition(883.0f, 509.0f);
-			HitMeButton.setPosition(863.0f, 509.0f);
-			this.AddChild(HitMeButton.getNode());
+			PauseButton = new BetterButton(115.0f, 71.0f) {
+				Text = "| |",
+				Position = new Vector2(845.0f, 473.0f),
+				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+			};
+			this.AddChild(PauseButton);
+			PauseButton.ButtonUpAction += HandlePauseButtonButtonUpAction;
+			
+			HitMeButton = new BetterButton(115.0f, 71.0f) {
+				Text = "+3",
+				Position = new Vector2(720.0f, 473.0f),
+				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			};
+			this.AddChild(HitMeButton);
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
+			
+//			HitMeButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/hitMe.png", 1, 3).TextureInfo, new Vector2i(0,0));
+////			HitMeButton.setPosition(883.0f, 509.0f);
+//			HitMeButton.setPosition(863.0f, 509.0f);
+//			this.AddChild(HitMeButton.getNode());
+//			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
 			
 			CardManager.Instance.CardSpawned += HandleCardManagerInstanceCardSpawned;
 		}
+
+		
 		
 		public void Reset () {
 #if DEBUG

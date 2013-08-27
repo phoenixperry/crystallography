@@ -23,13 +23,21 @@ namespace Crystallography.UI
 		SpriteTile MaskBGSpacer3;
 		SpriteTile MaskBGButton4;
 		SpriteTile MaskBGBottom;
-		ButtonEntity NewGameButton;
-		ButtonEntity LevelSelectButton;
-		ButtonEntity CreditsButton;
-		ButtonEntity InstructionsButton;
+		
+//		ButtonEntity NewGameButton;
+//		ButtonEntity LevelSelectButton;
+//		ButtonEntity CreditsButton;
+//		ButtonEntity InstructionsButton;
+		
+		BetterButton NewGameButton;
+		BetterButton LevelSelectButton;
+		BetterButton CreditsButton;
+		BetterButton InstructionsButton;
 #if METRICS
-		ButtonEntity PrintAnalyticsButton;
-		ButtonEntity ClearAnalyticsButton;
+//		ButtonEntity PrintAnalyticsButton;
+//		ButtonEntity ClearAnalyticsButton;
+		BetterButton PrintAnalyticsButton;
+		BetterButton ClearAnalyticsButton;
 		float HoldTimer;
 #endif
 		
@@ -94,29 +102,54 @@ namespace Crystallography.UI
 			this.AddChild(MaskBGTop);
 			
 			
+			NewGameButton = new BetterButton(256.0f, 64.0f) {
+				Text = "play",
+				Position = new Vector2(94.0f, 365.0f),
+				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+			};
+			this.AddChild(NewGameButton);
 			
+			LevelSelectButton = new BetterButton(256.0f, 64.0f) {
+				Text = "level select",
+				Position = new Vector2(94.0f, 281.0f),
+				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			};
+			this.AddChild(LevelSelectButton);
 			
+			InstructionsButton = new BetterButton(256.0f, 64.0f) {
+				Text = "instructions",
+				Position = new Vector2(94.0f, 197.0f),
+				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+			};
+			this.AddChild(InstructionsButton);
 			
-			NewGameButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/NewGameButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//			NewGameButton.setPosition(480.0f, 393.0f);
-			NewGameButton.setPosition(223.0f, 396.0f);
-			NewGameButton.on = true;
-			this.AddChild(NewGameButton.getNode());
+			CreditsButton = new BetterButton(256.0f, 64.0f) {
+				Text = "credits",
+				Position = new Vector2(94.0f, 112.0f),
+				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			};
+			this.AddChild(CreditsButton);
 			
-			LevelSelectButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/LevelSelectButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			LevelSelectButton.setPosition (223.0f, 312.0f);
-			LevelSelectButton.on = true;
-			this.AddChild(LevelSelectButton.getNode());
-			
-			InstructionsButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/InstructionsButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			InstructionsButton.setPosition(223.0f, 228.0f);
-			InstructionsButton.on = true;
-			this.AddChild(InstructionsButton.getNode());
-			
-			CreditsButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/CreditsButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			CreditsButton.setPosition(223.0f, 143.0f);
-			CreditsButton.on = true;
-			this.AddChild(CreditsButton.getNode());
+//			NewGameButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/NewGameButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
+////			NewGameButton.setPosition(480.0f, 393.0f);
+//			NewGameButton.setPosition(223.0f, 396.0f);
+//			NewGameButton.on = true;
+//			this.AddChild(NewGameButton.getNode());
+//			
+//			LevelSelectButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/LevelSelectButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//			LevelSelectButton.setPosition (223.0f, 312.0f);
+//			LevelSelectButton.on = true;
+//			this.AddChild(LevelSelectButton.getNode());
+//			
+//			InstructionsButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/InstructionsButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//			InstructionsButton.setPosition(223.0f, 228.0f);
+//			InstructionsButton.on = true;
+//			this.AddChild(InstructionsButton.getNode());
+//			
+//			CreditsButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/CreditsButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//			CreditsButton.setPosition(223.0f, 143.0f);
+//			CreditsButton.on = true;
+//			this.AddChild(CreditsButton.getNode());
 			
 			
 			
@@ -225,15 +258,29 @@ namespace Crystallography.UI
 #if METRICS
 			HoldTimer = 0.0f;
 			
-			PrintAnalyticsButton = new ButtonEntity("Print Metrics", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			PrintAnalyticsButton.setPosition(780.0f, 229.0f);
-			PrintAnalyticsButton.on = false;
-			this.AddChild(PrintAnalyticsButton.getNode());
+			PrintAnalyticsButton = new BetterButton(256.0f, 64.0f) {
+				Text = "print metrics",
+				Position = new Vector2(704.0f, 281.0f),
+				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f),
+				On = false
+			}
 			
-			ClearAnalyticsButton = new ButtonEntity("Clear Metrics", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			ClearAnalyticsButton.setPosition(180.0f, 229.0f);
-			ClearAnalyticsButton.on = false;
-			this.AddChild(ClearAnalyticsButton.getNode());
+			ClearAnalyticsButton = new BetterButton(256.0f, 64.0f) {
+				Text = "clear metrics",
+				Position = new Vector2(704.0f, 281.0f),
+				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f),
+				On = false
+			}
+			
+//			PrintAnalyticsButton = new ButtonEntity("Print Metrics", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//			PrintAnalyticsButton.setPosition(780.0f, 229.0f);
+//			PrintAnalyticsButton.on = false;
+//			this.AddChild(PrintAnalyticsButton.getNode());
+//			
+//			ClearAnalyticsButton = new ButtonEntity("Clear Metrics", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//			ClearAnalyticsButton.setPosition(180.0f, 229.0f);
+//			ClearAnalyticsButton.on = false;
+//			this.AddChild(ClearAnalyticsButton.getNode());
 #endif	
 		}
 		
@@ -314,7 +361,8 @@ namespace Crystallography.UI
 			
 			var duration2 = 257.0f/speed;
 			sequence.Add( new CallFunc( () => {
-				NewGameButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration2) {
+//				NewGameButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration2) {
+				NewGameButton.RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration2) {
 					Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear
 				} );
 			} ) );
@@ -332,7 +380,8 @@ namespace Crystallography.UI
 			
 			var duration4 = 257.0f/speed;
 			sequence.Add( new CallFunc( () => {
-				LevelSelectButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration4) {
+//				LevelSelectButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration4) {
+				LevelSelectButton.RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration4) {
 					Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear
 				} );
 			} ) );
@@ -350,7 +399,8 @@ namespace Crystallography.UI
 			
 			var duration6 = 257.0f/speed;
 			sequence.Add( new CallFunc( () => {
-				InstructionsButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration6 ) {
+//				InstructionsButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration6 ) {
+				InstructionsButton.RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration6 ) {
 					Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear
 				} );
 			} ) );
@@ -368,7 +418,8 @@ namespace Crystallography.UI
 			
 			var duration8 = 257.0f/speed;
 			sequence.Add( new CallFunc( () => {
-				CreditsButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration8) {
+//				CreditsButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration8) {
+				CreditsButton.RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration8) {
 					Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear
 				} );
 			} ) );
@@ -433,8 +484,8 @@ namespace Crystallography.UI
 				HoldTimer += dt;
 				if (HoldTimer > 2.0f) {
 					HoldTimer = 0.0f;
-					PrintAnalyticsButton.on = !PrintAnalyticsButton.on;
-					ClearAnalyticsButton.on = !ClearAnalyticsButton.on;
+					PrintAnalyticsButton.On = !PrintAnalyticsButton.On;
+					ClearAnalyticsButton.On = !ClearAnalyticsButton.On;
 				}
 			} else {
 				HoldTimer = 0.0f;

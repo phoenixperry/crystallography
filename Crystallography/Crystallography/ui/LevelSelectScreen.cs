@@ -24,8 +24,10 @@ namespace Crystallography.UI
 		SpriteTile[] Icons;
 		List<SolutionIcon> Solutions;
 		
-		ButtonEntity BackButton;
-		ButtonEntity PlayButton;
+//		ButtonEntity BackButton;
+//		ButtonEntity PlayButton;
+		BetterButton BackButton;
+		BetterButton PlayButton;
 		
 		int SelectedLevel;
 		
@@ -138,15 +140,29 @@ namespace Crystallography.UI
 			};
 			this.AddChild(LevelSelectInstructionsText);
 			
-			BackButton = new ButtonEntity("", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/levelBackBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			BackButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
-			BackButton.setPosition(776.0f, 105.0f);
-			this.AddChild(BackButton.getNode());
+			BackButton = new BetterButton(369.0f, 64.0f) {
+				Text = "back",
+				Position = new Vector2(591.0f, 74.0f),
+				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			};
+			this.AddChild(BackButton);
 			
-			PlayButton = new ButtonEntity("", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/levelPlayBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-			PlayButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
-			PlayButton.setPosition(776.0f, 35.0f);
-			this.AddChild(PlayButton.getNode());
+			PlayButton = new BetterButton(369.0f, 64.0f) {
+				Text = "play",
+				Position = new Vector2(591.0f, 0.0f),
+				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+			};
+			this.AddChild(PlayButton);
+			
+//			BackButton = new ButtonEntity("", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/levelBackBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//			BackButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
+//			BackButton.setPosition(776.0f, 105.0f);
+//			this.AddChild(BackButton.getNode());
+//			
+//			PlayButton = new ButtonEntity("", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/levelPlayBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//			PlayButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
+//			PlayButton.setPosition(776.0f, 35.0f);
+//			this.AddChild(PlayButton.getNode());
 		}
 		
 		// EVENT HANDLERS -------------------------------------------------------------------------------------------------------------------
@@ -251,7 +267,7 @@ namespace Crystallography.UI
 			this.SwipePanels.OnSwipeComplete += HandleSwipePanelshandleOnSwipeComplete;
 			
 			// Set initial state to level 00
-			(Panels[0] as LevelPage).Items[0].Button.FakePress();
+			(Panels[0] as LevelPage).Items[0].FakePress();
 		}
 
 		void HandleSwipePanelshandleOnSwipeComplete (object sender, EventArgs e)
@@ -363,13 +379,13 @@ namespace Crystallography.UI
 		
 		public void Enable() {
 			foreach (LevelSelectItem item in Items ) {
-				item.Button.on = !item.locked;
+				item.On = !item.locked;
 			}
 		}
 		
 		public void Disable() {
 			foreach (LevelSelectItem item in Items ) {
-				item.Button.on = false;
+				item.On = false;
 			}
 		}
 		
@@ -381,20 +397,9 @@ namespace Crystallography.UI
 #endif
 	}
 	
-	public class LevelSelectItem : Node {
+	public class LevelSelectItem : BetterButton {
 		public bool locked;
 		public int levelID;
-
-		public Vector4 Color {
-			get {
-				return (Button.getNode() as SpriteBase).Color;
-			} 
-			set {
-				(Button.getNode() as SpriteBase).Color = value;
-			}
-		}
-		public ButtonEntity Button {get; private set;}
-		
 		
 		public static event EventHandler<LevelSelectionEventArgs> LevelSelectionDetected;
 		
@@ -402,41 +407,44 @@ namespace Crystallography.UI
 		
 		public LevelSelectItem(bool pComplete, bool pLocked) {
 			if (pComplete) {
-				Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//				Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
+				_background = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3);
 			} else {
-				Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButtonDisabled.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//				Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButtonDisabled.png", 1, 3).TextureInfo, new Vector2i(0,0));
+				_background = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButtonDisabled.png", 1, 3);
 			}
-			Button.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
-			this.AddChild(Button.getNode());
+			_background.CenterSprite();
+			var size = _background.CalcSizeInPixels();
+			Initialize(size.X, size.Y);
+			_bounds = new Bounds2( new Vector2(-Width/2.0f, -Height/2.0f), new Vector2(Width/2.0f, Height/2.0f) );
+//			_bounds.Add( new Vector2(-Width/2.0f, -Height/2.0f) );
+//			Button.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
+//			this.AddChild(Button.getNode());
 			locked = pLocked;
 			if (locked) {
 				var lockIcon = Support.SpriteFromFile("Application/assets/images/UI/lockIcon.png");
 				lockIcon.Position = new Vector2( 25.0f, -38.0f);
 				this.AddChild( lockIcon );
 			}
-			Button.ButtonUpAction += HandleButtonButtonUpAction;
-			Button.on = !locked;
+//			Button.ButtonUpAction += HandleButtonButtonUpAction;
+			this.On = !locked;
 		}
 		
-		// EVENT HANDLERS -------------------------------------------------------------------------------------------------------------------------
+		// OVERRIDES ----------------------------------------------------------------------------------------------------------------------------
 		
-		void HandleButtonButtonUpAction (object sender, EventArgs e)
+		protected override void OnButtonUp ()
 		{
+			if( !Visible || (_status != PRESSED) ) {
+				return;
+			}
+			_status = NORMAL;
 			EventHandler<LevelSelectionEventArgs> handler = LevelSelectionDetected;
 			if ( handler != null ) {
 				handler( this, new LevelSelectionEventArgs() { ID = this.levelID });
 			}
 		}
 		
-		// OVERRIDES ------------------------------------------------------------------------------------------------------------------------------
-		
-		public override void OnExit() {
-			Button.ButtonUpAction -= HandleButtonButtonUpAction;
-			Button = null;
-			base.OnExit ();
-		}
-		
-		// METHODS --------------------------------------------------------------------------------------------------------------------------------
+		// METHODS ------------------------------------------------------------------------------------------------------------------------------
 		
 		public void SetPalette( int pIndex ) {
 			Color = QColor.palette[pIndex];
@@ -449,6 +457,76 @@ namespace Crystallography.UI
 		}
 #endif
 	}
+	
+//	public class LevelSelectItem : Node {
+//		public bool locked;
+//		public int levelID;
+//
+//		public Vector4 Color {
+//			get {
+//				return (Button.getNode() as SpriteBase).Color;
+//			} 
+//			set {
+//				(Button.getNode() as SpriteBase).Color = value;
+//			}
+//		}
+////		public ButtonEntity Button {get; private set;}
+//		public BetterButton Button (get; private set;}
+//		
+//		
+//		public static event EventHandler<LevelSelectionEventArgs> LevelSelectionDetected;
+//		
+//		// CONSTRUCTOR ----------------------------------------------------------------------------------------------------------------------------
+//		
+//		public LevelSelectItem(bool pComplete, bool pLocked) {
+//			if (pComplete) {
+//				Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//			} else {
+//				Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButtonDisabled.png", 1, 3).TextureInfo, new Vector2i(0,0));
+//			}
+//			Button.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
+//			this.AddChild(Button.getNode());
+//			locked = pLocked;
+//			if (locked) {
+//				var lockIcon = Support.SpriteFromFile("Application/assets/images/UI/lockIcon.png");
+//				lockIcon.Position = new Vector2( 25.0f, -38.0f);
+//				this.AddChild( lockIcon );
+//			}
+//			Button.ButtonUpAction += HandleButtonButtonUpAction;
+//			Button.on = !locked;
+//		}
+//		
+//		// EVENT HANDLERS -------------------------------------------------------------------------------------------------------------------------
+//		
+//		void HandleButtonButtonUpAction (object sender, EventArgs e)
+//		{
+//			EventHandler<LevelSelectionEventArgs> handler = LevelSelectionDetected;
+//			if ( handler != null ) {
+//				handler( this, new LevelSelectionEventArgs() { ID = this.levelID });
+//			}
+//		}
+//		
+//		// OVERRIDES ------------------------------------------------------------------------------------------------------------------------------
+//		
+//		public override void OnExit() {
+//			Button.ButtonUpAction -= HandleButtonButtonUpAction;
+//			Button = null;
+//			base.OnExit ();
+//		}
+//		
+//		// METHODS --------------------------------------------------------------------------------------------------------------------------------
+//		
+//		public void SetPalette( int pIndex ) {
+//			Color = QColor.palette[pIndex];
+//		}
+//		
+//		// DESTRUCTOR -----------------------------------------------------------------------------------------------------------------------------
+//#if DEBUG
+//		~LevelSelectItem() {
+//			Console.WriteLine(GetType().ToString() + " " + "Deleted");
+//		}
+//#endif
+//	}
 	
 	public class LevelSelectIndicator : Node {
 		public LevelSelectIndicator() {

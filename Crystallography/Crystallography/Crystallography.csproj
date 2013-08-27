@@ -103,6 +103,7 @@
     <Compile Include="SolutionIcon.cs" />
     <Compile Include="ui\OptionsMenuScreen.cs" />
     <Compile Include="ui\Slider.cs" />
+    <Compile Include="ui\BetterButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -294,6 +295,7 @@
     <Content Include="assets\images\UI\menuBtnBG_top.png" />
     <Content Include="assets\images\UI\menuBtnBG_blue2.png" />
     <Content Include="assets\images\UI\menuBtnBG_red2.png" />
+    <Content Include="assets\images\UI\BetterButton.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
