@@ -10,22 +10,16 @@ namespace Crystallography.UI
 	{
 		SpriteUV GameHudBar;
 		SpriteUV ScoreIcon;
-//		SpriteUV GoalIcon;
 		SpriteTile CubeIcon;
 		SpriteUV BlueBox;
 		SpriteTile RedBox;
-//		ButtonEntity NextLevelButton;
-//		ButtonEntity HitMeButton;
-//		ButtonEntity RestartButton;
 		
 		BetterButton HitMeButton;
 		BetterButton PauseButton;
 		
 		Label ScoreTitleText;
 		Label CubesTitleText;
-//		Label GoalTitleText;
 		Label ScoreText;
-//		Label GoalText;
 		Label CubeText;
 		
 		SpriteUV TimeBox;
@@ -33,12 +27,8 @@ namespace Crystallography.UI
 		Label TimerSecondsText;
 		Label TimerMinutesText;
 		
-//		Label MessageTitleText;
-//		Label MessageText;
-		
 		LevelTitle levelTitle;
 		MessagePanel _messagePanel;
-//		HudPanel _nextLevelButtonPanel;
 		NextLevelPanel _nextLevelPanel;
 		
 		public LevelEndPanel levelEndPanel;
@@ -47,14 +37,11 @@ namespace Crystallography.UI
 		private const float SCORE_UPDATE_DELAY = 0.100f;
 		private const float INITIAL_SCORE_UPDATE_DELAY = 0.400f;
 		
-//		private int Goal;
 		private int _displayScore;
 		private float _updateTimer;
-//		private bool _metGoal;
 		
 		protected GameScene _scene;
 		protected bool _initialized = false;
-//		protected bool _buttonSlideIn;
 		protected bool _pauseTimer;
 		
 		
@@ -75,12 +62,9 @@ namespace Crystallography.UI
 		
 		public GameSceneHud( GameScene scene ) {
 			_scene = scene;
-//			_buttonSlideIn = false;
-			
 			if (_initialized == false) {
 				Initialize();
 			}
-			//Reset ();
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
 #endif
@@ -107,7 +91,6 @@ namespace Crystallography.UI
 		void HandleCardManagerInstanceNoMatchesPossibleDetected (object sender, EventArgs e) {
 			NoMatchesPossibleTime = DisplayTimer;
 			MetGoal();
-//			RestartButton.on = false;
 			_pauseTimer = true;
 		}
 		
@@ -127,9 +110,6 @@ namespace Crystallography.UI
 			}
 			levelTitle.SetQualityNames( variables.ToArray() );
 			levelTitle.SlideIn();
-//			if(GameScene.currentLevel != 999) {
-//				RestartButton.on = true;
-//			}
 		}
 		
 		/// <summary>
@@ -271,9 +251,6 @@ namespace Crystallography.UI
 						mod = sign;
 					}
 					_displayScore += mod;
-//					if(Goal <= _displayScore && _metGoal == false) {
-//						MetGoal();
-//					}
 					ScoreText.Text = _displayScore.ToString();
 					float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
 					ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
@@ -397,18 +374,15 @@ namespace Crystallography.UI
 			this.AddChild(_messagePanel);
 
 			ScoreIcon = Support.SpriteUVFromFile("/Application/assets/images/handIcon.png");
-//			ScoreIcon.Position = new Vector2(20.0f, 16.0f);
 			ScoreIcon.Position = new Vector2(244.0f, 16.0f);
 			GameHudBar.AddChild(ScoreIcon);
 			
 			ScoreTitleText = new Label("score", map);
-//			ScoreTitleText.Position = new Vector2(54.0f, 25.0f);
 			ScoreTitleText.Position = new Vector2(287, 25.0f);
 			ScoreTitleText.Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f);
 			GameHudBar.AddChild(ScoreTitleText);
 			
 			BlueBox = Support.SpriteUVFromFile("/Application/assets/images/blueBox.png");
-//			BlueBox.Position = new Vector2(120.0f, 0.0f);
 			BlueBox.Position = new Vector2(354.0f, 0.0f);
 			GameHudBar.AddChild(BlueBox);
 			
@@ -416,51 +390,27 @@ namespace Crystallography.UI
 			ScoreText.Position = new Vector2(5.0f, 12.0f);
 			BlueBox.AddChild(ScoreText);
 			
-			if(GameScene.currentLevel != 999) {
+//			if(GameScene.currentLevel != 999) {
 				CubeIcon = Support.SpriteFromFile("/Application/assets/images/stopIcon.png");
-//				CubeIcon.Position = new Vector2(244.0f,16.0f);
 				CubeIcon.Position = new Vector2(20.0f,16.0f);
 				GameHudBar.AddChild(CubeIcon);
 				
 				CubesTitleText = new Label("cubes", map);
-//				CubesTitleText.Position = new Vector2(287.0f, 25.0f);
 				CubesTitleText.Position = new Vector2(63.0f, 25.0f);
 				CubesTitleText.Color = new Vector4( 0.89803922f, 0.0745098f, 0.0745098f, 1.0f);
 				GameHudBar.AddChild(CubesTitleText);
 				
 				RedBox = Support.SpriteFromFile("/Application/assets/images/redbox.png");
-//				RedBox.Position = new Vector2(354.0f, 0.0f);
 				RedBox.Position = new Vector2(130.0f, 0.0f);
 				GameHudBar.AddChild(RedBox);
 				
 				CubeText = new Label("", bigMap);
 				CubeText.Position = new Vector2(5.0f, 12.0f);
 				RedBox.AddChild(CubeText);
-//				GoalIcon = Support.SpriteUVFromFile("/Application/assets/images/stopIcon.png");
-//				GoalIcon.Position = new Vector2(244.0f, 16.0f);
-//				GameHudBar.AddChild(GoalIcon);
-//			
-//				GoalTitleText = new Label("goal", map);
-//				GoalTitleText.Position = new Vector2(299.0f, 25.0f);
-//				GoalTitleText.Color = new Vector4( 0.89803922f, 0.0745098f, 0.0745098f, 1.0f);
-//				GameHudBar.AddChild(GoalTitleText);
-//			
-//				RedBox = Support.SpriteUVFromFile("/Application/assets/images/redbox.png");
-//				RedBox.Position = new Vector2(354.0f, 0.0f);
-//				GameHudBar.AddChild(RedBox);
-//			
-//				GoalText = new Label("", bigMap);
-//				GoalText.Position = new Vector2(5.0f, 12.0f);
-//				RedBox.AddChild(GoalText);
-				
-//				RestartButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//				RestartButton.setPosition( 636.0f, 509.0f );
-//				this.AddChild(RestartButton.getNode());
-//				RestartButton.ButtonUpAction += HandleRestartButtonButtonUpAction;
-			} else {
+//			} else {
+			if (GameScene.currentLevel == 999) {
 				TimeBox = Support.SpriteUVFromFile("/Application/assets/images/timerIcon.png");
-//				TimeBox.Position = new Vector2(454.0f, 16.0f);
-				TimeBox.Position = new Vector2(244.0f, 16.0f);
+				TimeBox.Position = new Vector2(468.0f, 16.0f);
 				GameHudBar.AddChild(TimeBox);
 				
 				TimerSeparatorText = new Label(":", bigMap);
@@ -474,8 +424,6 @@ namespace Crystallography.UI
 				TimerMinutesText = new Label("00", bigMap);
 				TimerMinutesText.Position = new Vector2(45.0f, -4.0f);
 				TimeBox.AddChild(TimerMinutesText);
-				
-//				this.Schedule(calculateTimer,1);
 			}
 			
 			PauseButton = new BetterButton(115.0f, 71.0f) {
@@ -487,18 +435,12 @@ namespace Crystallography.UI
 			PauseButton.ButtonUpAction += HandlePauseButtonButtonUpAction;
 			
 			HitMeButton = new BetterButton(115.0f, 71.0f) {
-				Text = "+3",
+				Text = "+",
 				Position = new Vector2(720.0f, 473.0f),
 				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
 			this.AddChild(HitMeButton);
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
-			
-//			HitMeButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/hitMe.png", 1, 3).TextureInfo, new Vector2i(0,0));
-////			HitMeButton.setPosition(883.0f, 509.0f);
-//			HitMeButton.setPosition(863.0f, 509.0f);
-//			this.AddChild(HitMeButton.getNode());
-//			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
 			
 			CardManager.Instance.CardSpawned += HandleCardManagerInstanceCardSpawned;
 		}
@@ -521,22 +463,16 @@ namespace Crystallography.UI
 			
 			ExitCode = LevelExitCode.NULL;
 			
-//			_buttonSlideIn = false;
 			_pauseTimer = false;
-//			_metGoal = false;
 			ScoreText.Text = _displayScore.ToString();
 			float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
 			ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
 			
-			if(GameScene.currentLevel != 999) {
+//			if(GameScene.currentLevel != 999) {
 				CubeText.Text = "0";
 				x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(CubeText.Text);
 				CubeText.Position = new Vector2(x, CubeText.Position.Y);
-//				Goal = LevelManager.Instance.Goal;
-//				GoalText.Text = Goal.ToString();
-//				x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(GoalText.Text);
-//				GoalText.Position = new Vector2(x, GoalText.Position.Y);
-			}
+//			}
 			
 			_messagePanel.Text = LevelManager.Instance.MessageBody;
 			_messagePanel.TitleText = LevelManager.Instance.MessageTitle;
@@ -555,31 +491,6 @@ namespace Crystallography.UI
 		public void MetGoal() {
 			MetGoalTime = DisplayTimer;
 			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
-//			var previousSolutions = DataStorage.puzzleSolutionsFound[GameScene.currentLevel];
-//			var score = previousSolutions.Count;
-//			bool okToAdd = true;
-//			foreach( var ps in previousSolutions ) { // ---- Check if solution was found previously
-//				if ( ps[0] == Cubes ) {
-//					if ( ps[1] == Score ) {
-//						okToAdd = false;
-//						break;
-//					}
-//				}
-//			}
-//			if (okToAdd) {
-//				score++;
-//			}
-//			_nextLevelPanel.Messages = new string[LevelManager.Instance.PossibleSolutions + 1];
-//			var completion = ((float)score / (float)LevelManager.Instance.PossibleSolutions);
-//			_nextLevelPanel.Messages[0] = completion.ToString("P0");
-//			
-//			int i = 1;
-//			foreach( int cube in LevelManager.Instance.goalDict.Keys ) {
-//				foreach ( int points in LevelManager.Instance.goalDict[cube] ) {
-//					_nextLevelPanel.Messages[i++] = cube.ToString() + "-" + points.ToString();
-//				}
-//			}
-//			_nextLevelPanel.Text = "you clever thing.";
 			_nextLevelPanel.Populate( Cubes, Score );
 			_nextLevelPanel.SlideIn();
 			_pauseTimer = true;

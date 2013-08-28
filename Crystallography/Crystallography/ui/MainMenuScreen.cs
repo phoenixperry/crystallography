@@ -8,7 +8,6 @@ namespace Crystallography.UI
 	public class MainMenuScreen : Layer
 	{
 		MenuSystemScene MenuSystem;
-//		SpriteTile MenuBackground;
 		SpriteTile MenuBGBottom;
 		SpriteTile MenuBGTop;
 		SpriteTile MenuBGSpacer1;
@@ -24,18 +23,11 @@ namespace Crystallography.UI
 		SpriteTile MaskBGButton4;
 		SpriteTile MaskBGBottom;
 		
-//		ButtonEntity NewGameButton;
-//		ButtonEntity LevelSelectButton;
-//		ButtonEntity CreditsButton;
-//		ButtonEntity InstructionsButton;
-		
 		BetterButton NewGameButton;
 		BetterButton LevelSelectButton;
 		BetterButton CreditsButton;
 		BetterButton InstructionsButton;
 #if METRICS
-//		ButtonEntity PrintAnalyticsButton;
-//		ButtonEntity ClearAnalyticsButton;
 		BetterButton PrintAnalyticsButton;
 		BetterButton ClearAnalyticsButton;
 		float HoldTimer;
@@ -45,10 +37,6 @@ namespace Crystallography.UI
 		
 		public MainMenuScreen (MenuSystemScene pMenuSystem) {
 			MenuSystem = pMenuSystem;
-			
-//			MenuBackground = Support.SpriteFromFile("/Application/assets/images/UI/menuButtonBackground.png");
-//			MenuBackground.Position = new Vector2(351.0f, 32.0f);
-//			this.AddChild(MenuBackground);
 			
 			MenuBGBottom = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_bottom.png");
 			MenuBGBottom.Position = new Vector2(351.0f, 32.0f);
@@ -60,7 +48,6 @@ namespace Crystallography.UI
 			this.AddChild(MaskBGBottom);
 			
 			MenuBGSpacer3 = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_blue2.png");
-//			MenuBGSpacer3.Position = new Vector2(351.0f, 174.0f);
 			MenuBGSpacer3.Position = new Vector2(351.0f, 111.0f);
 			MenuBGSpacer3.FlipU = true;
 			this.AddChild(MenuBGSpacer3);
@@ -71,7 +58,6 @@ namespace Crystallography.UI
 			this.AddChild(MaskBGSpacer3);
 			
 			MenuBGSpacer2 = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_red2.png");
-//			MenuBGSpacer2.Position = new Vector2(351.0f, 255.0f);
 			MenuBGSpacer2.Position = new Vector2(351.0f, 192.0f);
 			MenuBGSpacer2.FlipU = true;
 			this.AddChild(MenuBGSpacer2);
@@ -82,7 +68,6 @@ namespace Crystallography.UI
 			this.AddChild(MaskBGSpacer2);
 			
 			MenuBGSpacer1 = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_blue2.png");
-//			MenuBGSpacer1.Position = new Vector2(351.0f, 342.0f);
 			MenuBGSpacer1.Position = new Vector2(351.0f, 279.0f);
 			MenuBGSpacer1.FlipU = true;
 			this.AddChild(MenuBGSpacer1);
@@ -130,31 +115,7 @@ namespace Crystallography.UI
 			};
 			this.AddChild(CreditsButton);
 			
-//			NewGameButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/NewGameButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
-////			NewGameButton.setPosition(480.0f, 393.0f);
-//			NewGameButton.setPosition(223.0f, 396.0f);
-//			NewGameButton.on = true;
-//			this.AddChild(NewGameButton.getNode());
-//			
-//			LevelSelectButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/LevelSelectButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//			LevelSelectButton.setPosition (223.0f, 312.0f);
-//			LevelSelectButton.on = true;
-//			this.AddChild(LevelSelectButton.getNode());
-//			
-//			InstructionsButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/InstructionsButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//			InstructionsButton.setPosition(223.0f, 228.0f);
-//			InstructionsButton.on = true;
-//			this.AddChild(InstructionsButton.getNode());
-//			
-//			CreditsButton = new ButtonEntity(" ", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/UI/CreditsButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//			CreditsButton.setPosition(223.0f, 143.0f);
-//			CreditsButton.on = true;
-//			this.AddChild(CreditsButton.getNode());
-			
-			
-			
 			MaskBGButton1 = Support.UnicolorSprite("black", 0, 0, 0, 255);
-//			MaskBGButton1.Position = new Vector2(351.0f, 362.0f);
 			MaskBGButton1.Position = new Vector2(94.0f, 365.0f);
 			MaskBGButton1.Scale = new Vector2(16.1f, 4.0f);
 			this.AddChild(MaskBGButton1);
@@ -174,87 +135,6 @@ namespace Crystallography.UI
 			MaskBGButton4.Scale = new Vector2(16.1f, 4.0f);
 			this.AddChild(MaskBGButton4);
 			
-//			var speed = 2000.0f;
-//			
-//			
-//			Sequence sequence = new Sequence();
-//			var delay0 = 0.5f;
-//			sequence.Add( new CallFunc( () => { InputManager.Instance.enabled = false; } ) );
-//			sequence.Add( new DelayTime( delay0 ) );
-//			var duration1 = 200.0f/speed;
-//			sequence.Add( new MoveBy( new Vector2(0.0f, -78.0f), duration1) {Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			sequence.Add( new CallFunc( () => { MaskBGTop.Visible = false; } ) );
-//			MaskBGTop.RunAction(sequence);
-//			
-//			sequence = new Sequence();
-//			var delay1 = delay0 + duration1;
-//			sequence.Add( new DelayTime( delay1 ) );
-//			var duration2 = 257.0f/speed;
-//			sequence.Add( new MoveBy( new Vector2(257.0f, 0.0f), duration2) {Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			sequence.Add( new CallFunc( () => { MaskBGButton1.Visible = false; } ) );
-////			MaskBGButton1.RunAction(sequence);
-//			NewGameButton.getNode().RunAction(sequence);
-//			
-//			sequence = new Sequence();
-//			var delay2 = delay1 + duration2;
-//			sequence.Add( new DelayTime( delay2 ) );
-//			var duration3 = 200.0f/speed;
-//			sequence.Add( new MoveBy( new Vector2(0.0f, -151.0f), duration3) {Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			sequence.Add( new CallFunc( () => { MaskBGSpacer1.Visible = false; } ) );
-//			MaskBGSpacer1.RunAction(sequence);
-//			
-//			sequence = new Sequence();
-//			var delay3 = delay2 + duration3;
-//			sequence.Add( new DelayTime( delay3 ) );
-//			var duration4 = 257.0f/speed;
-//			sequence.Add( new MoveBy( new Vector2(257.0f, 0.0f), duration4) {Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			sequence.Add( new CallFunc( () => { MaskBGButton2.Visible = false; } ) );
-////			MaskBGButton2.RunAction(sequence);
-//			LevelSelectButton.getNode().RunAction(sequence);
-//			
-//			sequence = new Sequence();
-//			var delay4 = delay3 + duration4;
-//			sequence.Add( new DelayTime( delay4 ) );
-//			var duration5 = 200.0f/speed;
-//			sequence.Add( new MoveBy( new Vector2(0.0f, -151.0f), duration5) {Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			sequence.Add( new CallFunc( () => { MaskBGSpacer2.Visible = false; } ) );
-//			MaskBGSpacer2.RunAction(sequence);
-//			
-//			sequence = new Sequence();
-//			var delay5 = delay4 + duration5;
-//			sequence.Add( new DelayTime( delay5 ) );
-//			var duration6 = 257.0f/speed;
-//			sequence.Add( new MoveBy( new Vector2(257.0f, 0.0f), duration6 ) {Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			sequence.Add( new CallFunc( () => { MaskBGButton3.Visible = false; } ) );
-////			MaskBGButton3.RunAction(sequence);
-//			InstructionsButton.getNode().RunAction(sequence);
-//			
-//			sequence = new Sequence();
-//			var delay6 = delay5 + duration6;
-//			sequence.Add( new DelayTime( delay6 ) );
-//			var duration7 = 200.0f/speed;
-//			sequence.Add( new MoveBy( new Vector2(0.0f, -151.0f), duration7) {Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			sequence.Add( new CallFunc( () => { MaskBGSpacer3.Visible = false; } ) );
-//			MaskBGSpacer3.RunAction(sequence);
-//			
-//			sequence = new Sequence();
-//			var delay7 = delay6 + duration7;
-//			sequence.Add( new DelayTime( delay7 ) );
-//			var duration8 = 257.0f/speed;
-//			sequence.Add( new MoveBy( new Vector2(257.0f, 0.0f), duration8) {Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			sequence.Add( new CallFunc( () => { MaskBGButton4.Visible = false; } ) );
-////			MaskBGButton4.RunAction(sequence);
-//			CreditsButton.getNode().RunAction(sequence);
-//			
-//			sequence = new Sequence();
-//			var delay8 = delay7 + duration8;
-//			sequence.Add( new DelayTime( delay8 ) );
-//			var duration9 = 200.0f/speed;
-//			sequence.Add( new MoveBy( new Vector2(0.0f, -79.0f), duration9) {Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			sequence.Add( new CallFunc( () => { MaskBGBottom.Visible = false; } ) );
-//			sequence.Add( new CallFunc( () => { InputManager.Instance.enabled = true; } ) );
-//			MaskBGBottom.RunAction(sequence);
-			
 #if METRICS
 			HoldTimer = 0.0f;
 			
@@ -271,16 +151,6 @@ namespace Crystallography.UI
 				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f),
 				On = false
 			}
-			
-//			PrintAnalyticsButton = new ButtonEntity("Print Metrics", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//			PrintAnalyticsButton.setPosition(780.0f, 229.0f);
-//			PrintAnalyticsButton.on = false;
-//			this.AddChild(PrintAnalyticsButton.getNode());
-//			
-//			ClearAnalyticsButton = new ButtonEntity("Clear Metrics", MenuSystem, GamePhysics.Instance, Support.TiledSpriteFromFile("/Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//			ClearAnalyticsButton.setPosition(180.0f, 229.0f);
-//			ClearAnalyticsButton.on = false;
-//			this.AddChild(ClearAnalyticsButton.getNode());
 #endif	
 		}
 		
@@ -298,7 +168,6 @@ namespace Crystallography.UI
 #if DEBUG
 			Console.WriteLine("Level Select");
 #endif
-//			MenuSystem.SetScreen("Level Select");
 			Director.Instance.ReplaceScene(new LoadingScene(0, false, "Level Select") );
 		}
 		
@@ -314,7 +183,8 @@ namespace Crystallography.UI
 #if DEBUG
 			Console.WriteLine("Instructions");
 #endif
-			MenuSystem.SetScreen("Instructions");
+//			MenuSystem.SetScreen("Instructions");
+			Director.Instance.ReplaceScene(new LoadingScene(999, false) );
 		}
 		
 #if METRICS
