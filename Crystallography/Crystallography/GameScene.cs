@@ -66,33 +66,19 @@ namespace Crystallography
 			this.AddChild( DialogLayer = new Layer() );
 			Layers = new Layer[] {BackgroundLayer, GameplayLayer, ForegroundLayer, DialogLayer};
 						
-//			LevelManager.Instance.LoadGameData();
 			LevelManager.Instance.GetLevelSettings( pCurrentLevel );
 			
 			Touch.GetData(0).Clear();
-//			UISystem.SetScene( new Crystallography.UI.ScoreScene() );
 			InputManager.Instance.Reset();
-						
-//			background = new Crystallography.BG.CrystallonBackground();
-//			BackgroundLayer.AddChild(background);
 			
 			currentLevel = pCurrentLevel;
             this.Camera.SetViewFromViewport();
             _physics = GamePhysics.Instance;
 			
-//			CardManager.Instance.Reset( this );
-//			GroupManager.Instance.Reset( this );
-			
-			
-			
-//			QualityManager.Instance.Reset( CardManager.Instance, currentLevel );
-			
-//			CardManager.Instance.Populate();
-			
 			
 			Hud = new Crystallography.UI.GameSceneHud(this);
 			if (pTimed) {
-				// Set Up Timer
+				// TODO Set Up Timer
 			}
 			ForegroundLayer.AddChild(Hud);
 			
@@ -126,18 +112,6 @@ namespace Crystallography
 			
 			ForegroundLayer.AddChild( Support.ParticleEffectsManager.Instance );
 			
-//			TestButton = new ButtonEntity("Button", this, _physics, Support.TiledSpriteFromFile("Application/assets/images/button_85x56.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//			TestButton.setPosition( 100f, 100f );
-//			TestButton.addToScene(2);
-//			TestButton.ButtonUpAction += (sender, e) => {
-//				Console.WriteLine ("TAP!");
-//			};
-			
-//			LevelEndPanel TestLayer = new LevelEndPanel(this);
-//			ForegroundLayer.AddChild(TestLayer);
-//			TestLayer.Hide();
-//			TestLayer.Show();
-			
 #if METRICS
 			DataStorage.AddMetric("Level", () => currentLevel, 1);
 #endif
@@ -153,6 +127,11 @@ namespace Crystallography
 			this.RunAction(sequence);
         }
         
+		void HandleCrystallographyUIPausePanelPauseDetected (object sender, PauseEventArgs e)
+		{
+			Pause (e.isPaused);
+		}
+		
 		// OVERRIDES ---------------------------------------------------------------------------
 		
 		public override void OnEnter ()
@@ -166,9 +145,7 @@ namespace Crystallography
 			} else {
 				Support.MusicSystem.Instance.Play("stack2music.mp3");
 			}
-			
-//			PausePanel.QuitButtonPressDetected += (sender, e) => { QuitToTitle(); };
-			Crystallography.UI.PausePanel.PauseDetected += (sender, e) => { Pause(e.isPaused); };
+			Crystallography.UI.PausePanel.PauseDetected += HandleCrystallographyUIPausePanelPauseDetected;
         }
 		
         public override void OnExit ()
@@ -178,12 +155,10 @@ namespace Crystallography
 			}
 			Layers = null;
 			Hud = null;
-//			SelectionGroup.Instance.Parent.RemoveChild(SelectionGroup.Instance.getNode(), false);
 			Support.ParticleEffectsManager.Instance.Destroy();
 			base.OnExit();
 			Support.MusicSystem.Instance.StopAll();
-			Crystallography.UI.PausePanel.QuitButtonPressDetected -= (sender, e) => { QuitToTitle(); };
-			Crystallography.UI.PausePanel.PauseDetected -= (sender, e) => { Pause(e.isPaused); };
+			Crystallography.UI.PausePanel.PauseDetected -= HandleCrystallographyUIPausePanelPauseDetected;
 			AppMain.UI_INPUT_ENABLED = true;
 #if DEBUG
 			Console.WriteLine("########### EXIT GameScene ###############");
@@ -194,22 +169,7 @@ namespace Crystallography
         {
 			InputManager.Instance.Update(dt);
             base.Update (dt);			
-			
-            //We don't need these, but sadly, the Simulate call does.
-//            Vector2 dummy1 = Vector2.Zero;
-//            Vector2 dummy2 = Vector2.Zero;
-			
-			if( paused == false ) {
-				//PHYSICS UPDATE CALL
-//	            _physics.Simulate(-1, dummy1, dummy2);
-				_physics.Simulate();
-			}
         }
-		
-//		public override void Draw ()
-//		{
-//			base.Draw ();
-//		}
 		
 		// METHODS -------------------------------------------------------------------------------------------------
 		
@@ -278,16 +238,13 @@ namespace Crystallography
 		public static void QuitToTitle() {
 			( Director.Instance.CurrentScene as GameScene ).Clear();
 			ForceGarbageCollection();
-//			UISystem.CurrentScene.RootWidget.Dispose();
 			Director.Instance.ReplaceScene( new Crystallography.UI.LoadingScene(0,false,"Menu") );
 		}
 		
 		public static void QuitToLevelSelect() {
 			( Director.Instance.CurrentScene as GameScene ).Clear();
 			ForceGarbageCollection();
-//			UISystem.CurrentScene.RootWidget.Dispose();
 			Director.Instance.ReplaceScene( new Crystallography.UI.LoadingScene(0,false,"Level Select") );
-//			UISystem.SetScene( new Crystallography.UI.LevelSelectScene() );
 		}
 		
 		private static void ForceGarbageCollection() {
@@ -296,19 +253,6 @@ namespace Crystallography
 #endif
 				System.GC.Collect();
 		}
-		
-//		public void DisableInput() {
-//			AppMain.UI_INPUT_ENABLED = false;
-//		}
-//		
-//		public void TempDisableInput() {
-//			Sequence sequence = new Sequence();
-//			sequence.Add( new CallFunc( () => DisableInput() ) );
-//			sequence.Add( new DelayTime(0.1f) );
-//			sequence.Add( new CallFunc( () => DisableInput() ) );
-//			this.RunAction(sequence);
-//			Console.WriteLine("TempDisableInput");
-//		}
 		
 		// DESTRUCTOR -------------------------------------------------------------------------------------
 #if DEBUG

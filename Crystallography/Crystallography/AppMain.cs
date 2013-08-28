@@ -72,21 +72,12 @@ namespace Crystallography
 			
 			while( true ){
 				SystemEvents.CheckEvents();
-				GamePhysics.Instance.Simulate();
-				if ( UI_INPUT_ENABLED ) {
-					Director.Instance.Update();
-					Touch.GetData(0).Clear();
-					Director.Instance.Render();
-				} else {
-					Director.Instance.Update();
-					Touch.GetData(0).Clear();
-					Director.Instance.Render();
+				if( false == GameScene.paused) {
+					GamePhysics.Instance.Simulate();
 				}
-				
-				
-//				Director.Instance.Render();
-//				UISystem.Render();
-				
+				Director.Instance.Update();
+				Touch.GetData(0).Clear();
+				Director.Instance.Render();
 				Director.Instance.GL.Context.SwapBuffers();
 				Director.Instance.PostSwap();
 			}
@@ -95,7 +86,6 @@ namespace Crystallography
 		protected static bool Init() {
 			Director.Initialize();
 			Director.Instance.RunWithScene( new Crystallography.UI.MenuSystemScene("Splash"), true );
-//			DataStorage.ClearData();
 			if ( false == DataStorage.LoadData() ) {
 				DataStorage.Init();
 			}
