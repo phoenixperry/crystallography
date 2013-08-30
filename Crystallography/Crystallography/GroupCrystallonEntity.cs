@@ -87,6 +87,13 @@ namespace Crystallography
 		/// </param>
 		public override AbstractCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
 		{
+//			if( AppMain.ORIENTATION_MATTERS == false ) {
+//				if ( pGroup.population == 1 ) {
+//					AbstractCrystallonEntity piece = (AbstractCrystallonEntity)pGroup.Remove(pGroup.members[0]);
+//					(piece as SpriteTileCrystallonEntity).setOrientation(2);
+//					pGroup.Attach( piece );
+//				}
+//			}
 			for ( int i=0; i<members.Length; i++) {
 				AbstractCrystallonEntity e = members[i];
 				if ( e != null ) {
@@ -164,7 +171,7 @@ namespace Crystallography
 					}
 				}
 			} else {
-				okToSnap = ( this.population + pGroup.population > pGroup.maxPopulation );
+				okToSnap = ( this.population + pGroup.population <= pGroup.maxPopulation );
 			}
 			return okToSnap;
 		}
@@ -200,7 +207,6 @@ namespace Crystallography
 				members = null;
 				for( int i=0; i<_pucks.Length; i++ ) {
 					_pucks[i].RemoveAllChildren( doCleanup );
-					//TODO what is the GC protocol for nodes?
 					_pucks[i] = null;
 				}
 				_pucks = null; 
@@ -219,9 +225,6 @@ namespace Crystallography
 		{
 			base.Update(dt);
 			
-//			foreach (ICrystallonEntity e in members) {
-				// updates to children?
-//			}
 			if (getBody() != null) {
 				getNode().Position = getBody().Position * GamePhysics.PtoM;
 			}
@@ -398,12 +401,6 @@ namespace Crystallography
 				}
 			}
 			
-//			RemoveAll();
-//			EventHandler handler = BreakDetected;
-//			if ( handler != null ) {
-//				handler( this, null );
-//			}
-			
 			if (this is SelectionGroup == false) { 
 				GroupManager.Instance.Remove(this, true);
 			} else {
@@ -432,19 +429,6 @@ namespace Crystallography
 			int orientation = ( pEntity as SpriteTileCrystallonEntity ).getOrientation();
 			int attachPosition = -1;
 			attachPosition = orientation;
-//			switch (orientation) {
-//			case ("Top"):
-//					attachPosition = 0;
-//				break;
-//			case ("Left"):
-//					attachPosition = 1;
-//				break;
-//			case ("Right"):
-//					attachPosition = 2;
-//				break;
-//			default:
-//				break;
-//			}
 			return attachPosition;
 		}
 		
@@ -530,14 +514,6 @@ namespace Crystallography
 			} else {
 				return null;
 			}
-//			if (population < 1) {
-//					return null;
-//			}
-//			if (population < 2) {
-//				return ReleaseSingle();
-//			} else {
-//				return ReleaseGroup();
-//			}
 		}
 		
 		/// <summary>
@@ -547,37 +523,8 @@ namespace Crystallography
 		/// The CardCrystallonEntity
 		/// </returns>
 		protected virtual AbstractCrystallonEntity ReleaseSingle( AbstractCrystallonEntity pEntity ) {
-			Remove (pEntity);
-//			return null;
+			Remove( pEntity );
 			return pEntity.BeReleased( this.getPosition() );
-			
-//			return null;
-//			if (!AppMain.ORIENTATION_MATTERS) {
-//				if ( pEntity is CardCrystallonEntity ) {
-//					QOrientation.Instance.Apply(pEntity,0);
-//				}
-//			}
-//			if(complete) {
-//				if ( pEntity is CardCrystallonEntity ) {
-//					CardManager.Instance.Add( pEntity as CardCrystallonEntity );
-//				}
-//			}
-//			pEntity.setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[0], 0.1f, 0.01f, this.getPosition()));
-//			pEntity.setVelocity(1.0f, GameScene.Random.NextAngle());
-//			pEntity.addToScene();
-//			return pEntity;
-//			Node node = getNode();
-//			for ( int i=0; i<members.Length; i++ ) {
-//				if ( members[i] != null ) {
-//					CardCrystallonEntity c = members[i] as CardCrystallonEntity;
-//					Remove( c );
-//					c.setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[0], 0.1f, 0.01f, this.getPosition()));
-//					c.setVelocity(1.0f, GameScene.Random.NextAngle());
-//					c.addToScene();
-//					return c;
-//				}
-//			}
-//			return null;
 		}
 		
 		/// <summary>
