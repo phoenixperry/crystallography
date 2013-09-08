@@ -100,10 +100,10 @@
     <Compile Include="ui\TitleScreen.cs" />
     <Compile Include="ui\CreditsScreen.cs" />
     <Compile Include="ui\GameSceneHud.cs" />
-    <Compile Include="SolutionIcon.cs" />
     <Compile Include="ui\OptionsMenuScreen.cs" />
     <Compile Include="ui\Slider.cs" />
     <Compile Include="ui\BetterButton.cs" />
+    <Compile Include="ui\SolutionIcon.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

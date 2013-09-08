@@ -3,7 +3,7 @@ using Sce.PlayStation.HighLevel.GameEngine2D;
 //using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 using Sce.PlayStation.Core;
 
-namespace Crystallography
+namespace Crystallography.UI
 {
 	public class SolutionIcon : Node
 	{
