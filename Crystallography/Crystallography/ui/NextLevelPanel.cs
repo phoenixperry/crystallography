@@ -13,7 +13,7 @@ namespace Crystallography.UI
 		SpriteTile Background;
 		
 		Label MessageText;
-		Label PercentageText;
+//		Label PercentageText;
 		Label PossibleSolutionsText;
 		
 //		ButtonEntity QuitButton;
@@ -40,14 +40,14 @@ namespace Crystallography.UI
 			}
 		}
 		
-		public float Percentage {
-			get {
-				return float.Parse(PercentageText.Text);
-			}
-			set {
-				PercentageText.Text = value.ToString("P0");
-			}
-		}
+//		public float Percentage {
+//			get {
+//				return float.Parse(PercentageText.Text);
+//			}
+//			set {
+//				PercentageText.Text = value.ToString("P0");
+//			}
+//		}
 		
 		public event EventHandler QuitDetected;
 		public event EventHandler LevelSelectDetected;
@@ -85,6 +85,7 @@ namespace Crystallography.UI
 			
 			QuitButton = new BetterButton(117.0f, 53.0f) {
 				Text = "quit",
+				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
 				Position = new Vector2(0.0f, 0.0f),
 				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
@@ -96,16 +97,17 @@ namespace Crystallography.UI
 //			this.AddChild(QuitButton.getNode());
 			
 			
-			PercentageText = new Label() {
-				Text = "100 %",
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold" ) ),
-				Position = new Vector2( 320.0f, QuitButton.Height + 90.0f )
-			};
+//			PercentageText = new Label() {
+//				Text = "100 %",
+//				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold" ) ),
+//				Position = new Vector2( 320.0f, QuitButton.Height + 90.0f )
+//			};
 //			this.AddChild( PercentageText );
 			
 			
 			LevelSelectButton = new BetterButton(176.0f, 53.0f) {
 				Text = "level select",
+				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
 				Position = new Vector2(QuitButton.Width + 4.0f , 0.0f),
 				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
@@ -119,6 +121,11 @@ namespace Crystallography.UI
 			
 			NextLevelButton = new BetterButton(148.0f, 53.0f) {
 				Text = "next level",
+				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
+				IconOnLeft = false,
+				Icon = Support.SpriteFromFile("/Application/assets/images/UI/nextLevelIcon.png"),
+				IconAndTextOffset = new Vector2(2.0f, 0.0f),
+				TextOffset = new Vector2(-2.0f, 0.0f),
 				Position = new Vector2(QuitButton.Width + LevelSelectButton.Width + 8.0f, 0.0f),
 				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
 			};
@@ -240,7 +247,7 @@ namespace Crystallography.UI
 			this.Colors = new Vector4[LevelManager.Instance.PossibleSolutions + 1];
 			var completion = ((float)numFound / (float)LevelManager.Instance.PossibleSolutions);
 			PossibleSolutionsText.Text = "possible solutions (found " + numFound.ToString() + " of " + LevelManager.Instance.PossibleSolutions.ToString() + "):";
-			Percentage = completion;
+//			Percentage = completion;
 			visibleSolutionIndex = 0;
 			this.Solutions[0] = new SolutionIcon() {
 				CubeText = pCubes.ToString(),

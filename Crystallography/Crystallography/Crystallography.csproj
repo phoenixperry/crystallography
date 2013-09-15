@@ -296,6 +296,8 @@
     <Content Include="assets\images\UI\menuBtnBG_blue2.png" />
     <Content Include="assets\images\UI\menuBtnBG_red2.png" />
     <Content Include="assets\images\UI\BetterButton.png" />
+    <Content Include="assets\images\UI\restartIcon.png" />
+    <Content Include="assets\images\UI\nextLevelIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

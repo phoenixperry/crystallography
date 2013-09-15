@@ -1,5 +1,6 @@
 using System;
 using Sce.PlayStation.Core;
+using Sce.PlayStation.Core.Imaging;
 using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
@@ -15,17 +16,22 @@ namespace Crystallography.UI
 		
 		public float Height;
 		public float Width;
-		public Vector2 TextOffset;
 		
 		protected SpriteTile _background;
+		protected SpriteTile _icon;
 		protected Bounds2 _bounds;
 		protected Label _buttonText;
+		protected Vector2 _textOffset;
+		protected Vector2 _iconAndTextOffset;
+		protected Font _textFont;
 		protected int _status;
 		protected bool _onToggle;
 		protected bool _pressed;
-//		protected bool _initialized;
+		protected bool _initialized;
+		protected bool _iconOnLeft = true;
 		protected float halfHeight;
 		protected float halfWidth;
+		
 		
 		public event EventHandler ButtonUpAction;
 		
@@ -37,9 +43,35 @@ namespace Crystallography.UI
 			set { _background.Color = value; }
 		}
 		
-		public Vector4 TextColor{
-			get { return _buttonText.Color; }
-			set { _buttonText.Color = value; }
+		public SpriteTile Icon {
+			get { return _icon; }
+			set {
+				if(_icon != null) {
+					this.RemoveChild(_icon, true);
+				}
+				_icon = value;
+				if(value != null) {
+					_icon.Position = new Vector2( 0.0f, 0.5f * (Height - _icon.CalcSizeInPixels().Y) );
+					this.AddChild(_icon);
+				}
+				CenterText();
+			}
+		}
+		
+		public Vector2 IconAndTextOffset {
+			get {return _iconAndTextOffset;}
+			set {
+				_iconAndTextOffset = value;
+				CenterText();
+			}
+		}
+		
+		public bool IconOnLeft {
+			get {return _iconOnLeft;}
+			set {
+				_iconOnLeft = value;
+				CenterText();
+			}
 		}
 		
 		public bool On { 
@@ -55,10 +87,41 @@ namespace Crystallography.UI
 		
 		public string Text {
 			get {
-				return _buttonText.Text;
+				if (_buttonText == null) {
+					return "";
+				} else {
+					return _buttonText.Text;
+				}
 			}
 			set {
 				_buttonText.Text = value;
+				CenterText();
+			}
+		}
+		
+		public Vector4 TextColor{
+			get { return _buttonText.Color; }
+			set { _buttonText.Color = value; }
+		}
+		
+		public Font TextFont {
+			get {
+				return _textFont;
+			}
+			set {
+				_textFont = value;
+				if (_buttonText != null) {
+					_buttonText.FontMap = Crystallography.UI.FontManager.Instance.GetMap( _textFont );
+					_buttonText.Position = new Vector2(0.0f, 0.5f * (Height - _buttonText.FontMap.CharPixelHeight) );
+				}
+				CenterText();
+			}
+		}
+		
+		public Vector2 TextOffset {
+			get { return _textOffset; }
+			set {
+				_textOffset = value;
 				CenterText();
 			}
 		}
@@ -68,17 +131,26 @@ namespace Crystallography.UI
 		
 		public BetterButton() {}
 		
-		public BetterButton (string pPath) : base() {
-			_background = Support.TiledSpriteFromFile(pPath, 1, 3);
+//		public BetterButton (float pWidth, float pHeight, Font pFont) {
+//			_textFont = pFont;
+//			Initialize(pWidth, pHeight);
+//		}
+//		
+//		public BetterButton( string pBackgroundPath, Font pFont) {
+//			_textFont = pFont;
+//			_background = Support.TiledSpriteFromFile(pBackgroundPath, 1, 3);
+//			var size = _background.CalcSizeInPixels();
+//			Initialize(size.X, size.Y);
+//		} 
+		
+		public BetterButton (string pBackgroundPath) {
+			_background = Support.TiledSpriteFromFile(pBackgroundPath, 1, 3);
 			var size = _background.CalcSizeInPixels();
 			Initialize(size.X, size.Y);
 		}
 		
 		public BetterButton (float pWidth, float pHeight) : base() {
 			Initialize(pWidth, pHeight);
-#if DEBUG
-			Console.WriteLine(GetType().ToString() + " created" );
-#endif
 		}
 		
 		
@@ -93,6 +165,10 @@ namespace Crystallography.UI
 		}
 		
 		void HandleInputManagerInstanceTouchJustUpDetected (object sender, BaseTouchEventArgs e) {
+			if( !Visible || (_status != PRESSED) ) {
+				return;
+			}
+			_status = NORMAL;
 			if(_bounds.IsInside( this.WorldToLocal(e.touchPosition) ) ) {
 				OnButtonUp();
 			}
@@ -110,6 +186,11 @@ namespace Crystallography.UI
 		
 		public override void OnExit ()
 		{
+			_background = null;
+			_icon = null;
+			_buttonText = null;
+			_textFont = null;
+			RemoveAllChildren(true);
 			base.OnExit ();
 			InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
 			InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
@@ -130,13 +211,22 @@ namespace Crystallography.UI
 			switch( _background.TileIndex1D ) {
 			case BetterButton.PRESSED:
 				_buttonText.Color.A = 0.7f;
+				if(_icon != null) {
+					_icon.Color.A = 0.7f;
+				}
 				break;
 			case BetterButton.DISABLED:
 				_buttonText.Color.A = 0.5f;
+				if(_icon != null) {
+					_icon.Color.A = 0.5f;
+				}
 				break;
 			case BetterButton.NORMAL:
 			default:
 				_buttonText.Color.A = 1.0f;
+				if(_icon != null) {
+					_icon.Color.A = 1.0f;
+				}
 				break;
 			}
 		}
@@ -145,8 +235,32 @@ namespace Crystallography.UI
 		// METHODS -----------------------------------------------------------------------
 		
 		protected void CenterText() {
-			var textWidth = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Regular").GetTextWidth(Text);
-			_buttonText.Position = new Vector2(0.5f * (Width - textWidth), _buttonText.Position.Y) - TextOffset;
+			float labelWidth = 0.0f;
+			if (_buttonText != null) {
+				labelWidth += _buttonText.GetlContentLocalBounds().Size.X;
+			}
+			float x;
+			if( Icon != null) {
+				var iconWidth = Icon.CalcSizeInPixels().X;
+				labelWidth += iconWidth;
+				x = 0.5f * (Width - labelWidth);
+				var y = 0.5f * (Height - _icon.CalcSizeInPixels().Y);
+				var iconX = 0.0f;
+				if(_iconOnLeft) {
+					iconX = x;
+					x += iconWidth;
+				} else {
+					iconX = ( Width - 0.5f * (Width - labelWidth) ) - iconWidth;
+				}
+				Icon.Position = new Vector2(iconX, y) + _iconAndTextOffset;
+				
+			} else {
+				x = 0.5f * (Width - labelWidth);
+			}
+			if (_buttonText != null) {
+				var y = 0.5f * (Height - _buttonText.FontMap.CharPixelHeight);
+				_buttonText.Position = new Vector2(x, y) + _textOffset;
+			}
 		}
 		
 		public void FakePress() {
@@ -159,7 +273,8 @@ namespace Crystallography.UI
 		public void Initialize(float pWidth, float pHeight) {
 			Width = pWidth;
 			Height = pHeight;
-			TextOffset = Vector2.Zero;
+			_textOffset = Vector2.Zero;
+			_iconAndTextOffset = Vector2.Zero;
 			Vector2 size = new Vector2(pWidth, pHeight);
 			
 			_status = NORMAL;
@@ -173,17 +288,22 @@ namespace Crystallography.UI
 			}
 			this.AddChild(_background);
 			
-			var font = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold");
-			var map = Crystallography.UI.FontManager.Instance.GetMap( font );
+			if (_textFont == null) {
+				_textFont = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold");
+			}
+			var map = Crystallography.UI.FontManager.Instance.GetMap( _textFont );
 			
 			_buttonText = new Label() {
 				Text = "",
 				FontMap = map,
-				Position = new Vector2(0.0f, 0.5f * (Height - 36) )
+				Position = new Vector2(0.0f, 0.5f * (Height - map.CharPixelHeight) )
 			};
 			this.AddChild(_buttonText);
 			
 			ScheduleUpdate(0);
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		protected virtual void OnButtonDown() {
@@ -194,10 +314,6 @@ namespace Crystallography.UI
 		}
 		
 		protected virtual void OnButtonUp() {
-			if( !Visible || (_status != PRESSED) ) {
-				return;
-			}
-			_status = NORMAL;
 			EventHandler handler = ButtonUpAction;
 			if ( handler != null ) {
 				handler( this, null );

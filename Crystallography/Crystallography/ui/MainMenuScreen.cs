@@ -90,7 +90,7 @@ namespace Crystallography.UI
 			NewGameButton = new BetterButton(256.0f, 64.0f) {
 				Text = "play",
 				Position = new Vector2(94.0f, 365.0f),
-				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f),
 			};
 			this.AddChild(NewGameButton);
 			
