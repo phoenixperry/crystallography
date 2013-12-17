@@ -24,6 +24,8 @@ namespace Crystallography
 		
 		public Dictionary<int,int> countdownDict;
 		
+		public List<string> scoringQualityList;
+		
 		/// <summary>
 		/// XML data describing qualities for all the cards in this level.
 		/// </summary>
@@ -55,6 +57,7 @@ namespace Crystallography
 			Instance = this;
 			qualityDict = new Dictionary<string, List<int>[]>();
 			countdownDict = new Dictionary<int, int>();
+			scoringQualityList = new List<string>();
 			
 			InputManager.Instance.CrossJustUpDetected += delegate {
 //				CountdownTick();
@@ -90,26 +93,26 @@ namespace Crystallography
 		/// <summary>
 		/// Applies qualities to all cards as prescribed in <c>qualityDict</c>
 		/// </summary>
-		private void ApplyQualities() {
-			foreach ( string key in qualityDict.Keys ) {
-				if ( !AppMain.ORIENTATION_MATTERS) {
-					if ( key == "QOrientation" ) {
-						continue;
-					}
-				}
-				var type = Type.GetType( "Crystallography." + key );
-				var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
-				var variations = qualityDict[key];
-				for ( int i=0; i<variations.Length; i++ ) {
-					var cardList = variations[i];
-					if ( cardList != null ) {
-						foreach ( var id in cardList ) {
-							quality.Apply(CardManager.Instance.getCardById(id), i);
-						}
-					}
-				}	
-			}
-		}
+//		private void ApplyQualities() {
+//			foreach ( string key in qualityDict.Keys ) {
+//				if ( !AppMain.ORIENTATION_MATTERS) {
+//					if ( key == "QOrientation" ) {
+//						continue;
+//					}
+//				}
+//				var type = Type.GetType( "Crystallography." + key );
+//				var quality = (IQuality)type.GetProperty("Instance").GetValue(null, null);
+//				var variations = qualityDict[key];
+//				for ( int i=0; i<variations.Length; i++ ) {
+//					var cardList = variations[i];
+//					if ( cardList != null ) {
+//						foreach ( var id in cardList ) {
+//							quality.Apply(CardManager.Instance.getCardById(id), i);
+//						}
+//					}
+//				}	
+//			}
+//		}
 		
 		public void ApplySingleQualityToEntity( string pQualityName, CardCrystallonEntity pEntity ) {
 			if (qualityDict.ContainsKey(pQualityName) == false) return;
@@ -127,7 +130,7 @@ namespace Crystallography
 		}
 		
 		/// <summary>
-		/// Applies the qualities to a specific card, based on its ID.
+		/// Applies all qualities listed in the level definition sheet to a specific card.
 		/// </summary>
 		/// <param name='pEntity'>
 		/// The specified Card
@@ -159,6 +162,35 @@ namespace Crystallography
 					QCountdown.Instance.Apply(pEntity, c);
 				}
 			}
+		}
+		
+		/// <summary>
+		/// Applies the array of qualities to entity.
+		/// </summary>
+		/// <param name='pQualityArray'>
+		/// P array of literal quality names e.g. "QColor"
+		/// </param>
+		/// <param name='pEntity'>
+		/// P the card to apply the qualities to
+		/// </param>
+		public void ApplyQualitiesToEntity( List<string> pQualityList, CardCrystallonEntity pEntity) {
+//			var len = pQualityList.Count;
+			foreach ( string quality in pQualityList) {
+				if ( !AppMain.ORIENTATION_MATTERS ) {
+					if ( quality == "QOrientation" ) {
+						continue;
+					}
+				}
+				ApplySingleQualityToEntity( quality, pEntity);
+			}
+//			for ( var i=0; i < len; i++ ) {
+//				if ( !AppMain.ORIENTATION_MATTERS ) {
+//					if ( pQualityArray[i] == "QOrientation" ) {
+//						continue;
+//					}
+//				}
+//				ApplySingleQualityToEntity( pQualityArray[i], pEntity);
+//			}
 		}
 		
 		/// <summary>
@@ -200,6 +232,8 @@ namespace Crystallography
 				id++;
 			}	// ----------------------------------------------------------------- STEP 5: Done.
 			CardManager.Instance.TotalCardsInDeck = count;
+			scoringQualityList = qualityDict.Keys.ToList();
+			scoringQualityList.Remove("QOrientation");
 
 			// TEST
 //			foreach (string key in qualityDict.Keys) {
@@ -232,6 +266,7 @@ namespace Crystallography
 			}
 			qualityDict.Clear();
 			countdownDict.Clear();
+			scoringQualityList.Clear();
 		}
 		
 		/// <summary>
@@ -503,14 +538,17 @@ namespace Crystallography
 			scoreArgs.ScoreQualities = new Dictionary<string, int>();
 			
 			foreach ( AbstractQuality key in pQDict.Keys ) {
-				if (AppMain.ORIENTATION_MATTERS) {
-					if ( key is QOrientation) {	// we need to match orientation to ensure valid sets exist, but don't score points for it.
-						continue;
-					}
+				string name = key.ToString().Substring(17);
+				if ( scoringQualityList.Contains("Q" + name) ) {
+//				if (AppMain.ORIENTATION_MATTERS) {
+//					if ( key is QOrientation) {	// we need to match orientation to ensure valid sets exist, but don't score points for it.
+//						continue;
+//					}
+//				}
+					var thisQualityScore = key.Score( pQDict[key] );
+					scoreArgs.ScoreQualities.Add(name, thisQualityScore );
+					score += thisQualityScore;
 				}
-				var thisQualityScore = key.Score( pQDict[key] );
-				scoreArgs.ScoreQualities.Add(key.ToString().Substring(17), thisQualityScore );
-				score += thisQualityScore;
 			}
 			scoreArgs.Points = score;
 			return scoreArgs;
@@ -589,7 +627,7 @@ namespace Crystallography
 		/// <see cref="Crystallography.AbstractCrystallonEntity"/>
 		/// </param>
 		/// <param name='pQualityName'>
-		/// <c>string</c> Class name for this quality.
+		/// <c>string</c> Class name for this quality. Must start with a capitol Q.
 		/// </param>
 		/// <param name='pVariant'>
 		/// <c>int</c> Index of the variant. Probs 0, 1, or 2.

@@ -46,13 +46,7 @@ namespace Crystallography
 		public override void Apply ( ICrystallonEntity pEntity, int pVariant)
 		{
 			CardCrystallonEntity e = pEntity as CardCrystallonEntity;
-//			UpdateAnimOrientation(pEntity, e.getOrientation());
 			e.setAnim( GetOrientedAnimation(e.getOrientation()), palette[pVariant, 0], palette[pVariant, 1] );
-//			if ( e.getOrientation() != 0 ) {
-//				e.setAnim(sideTiles, palette[pVariant, 0], palette[pVariant, 1]);
-//			} else {
-//				e.setAnim(topTiles, palette[pVariant, 0], palette[pVariant, 1]);
-//			}
 		}
 		
 		/// <summary>

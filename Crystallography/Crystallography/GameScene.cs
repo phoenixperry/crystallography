@@ -146,7 +146,24 @@ namespace Crystallography
 				Support.MusicSystem.Instance.Play("stack2music.mp3");
 			}
 			Crystallography.UI.PausePanel.PauseDetected += HandleCrystallographyUIPausePanelPauseDetected;
+			
+			if( currentLevel == 999 ) {
+				InputManager.Instance.UpJustUpDetected += HandleInputManagerInstanceUpJustUpDetected;
+				InputManager.Instance.DownJustUpDetected += HandleInputManagerInstanceDownJustUpDetected;
+			}
         }
+
+		void HandleInputManagerInstanceDownJustUpDetected (object sender, EventArgs e)
+		{
+//			CardManager.Instance.RemoveQuality("QPattern");
+			LevelManager.Instance.ChangeDifficulty(-1);
+		}
+
+		void HandleInputManagerInstanceUpJustUpDetected (object sender, EventArgs e)
+		{
+//			CardManager.Instance.AddQuality("QPattern");
+			LevelManager.Instance.ChangeDifficulty(1);
+		}
 		
         public override void OnExit ()
         {
@@ -159,6 +176,9 @@ namespace Crystallography
 			base.OnExit();
 			Support.MusicSystem.Instance.StopAll();
 			Crystallography.UI.PausePanel.PauseDetected -= HandleCrystallographyUIPausePanelPauseDetected;
+			
+			InputManager.Instance.UpJustUpDetected -= HandleInputManagerInstanceUpJustUpDetected;
+			
 			AppMain.UI_INPUT_ENABLED = true;
 #if DEBUG
 			Console.WriteLine("########### EXIT GameScene ###############");

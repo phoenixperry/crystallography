@@ -10,14 +10,23 @@ namespace Crystallography
 		public static int DEFAULT_STD_CARD_POPULATION = 15;
 		public static int DEFAULT_MAX_CARD_POPULATION = 18;
 		
-		public static List<CardCrystallonEntity> availableCards;
 		protected static CardManager _instance;
+		
+		/// <summary>
+		/// List of cards that are on screen and can be used in matches.
+		/// </summary>
+		public static List<CardCrystallonEntity> availableCards;
+		
 		protected Scene _scene;
 		protected GamePhysics _physics;
 		
+		/// <summary>
+		/// A list of all the card IDs that have not been put on screen yet. This list is modified every time cards are spawned onto the screen.
+		/// </summary>
+		protected List<int> DeckOfIDs;
+		
 		public event EventHandler NoMatchesPossibleDetected;
 		public event EventHandler CardSpawned;
-		
 		
 		// GET & SET -----------------------------------------------------------------------
 
@@ -33,17 +42,11 @@ namespace Crystallography
 			}
 		}
 		
-//		public int MaxPopulation { get; set; }
-		
 		public int TotalCardsInDeck { get; set; }
 		
 		public int NextId { get; private set; }
 		
 		public bool PickRandomly {get; set; }
-		
-		protected List<int> Deck;
-		
-//		protected List<int> ids;
 		
 		// CONSTRUCTOR ---------------------------------------------------------------------
 		
@@ -51,7 +54,6 @@ namespace Crystallography
 		/// Initializes a new instance of the <see cref="Crystallography.CardManager"/> class.
 		/// </summary>
 		protected CardManager () {
-//			MaxPopulation = 30;
 			NextId = 0;
 			availableCards = new List<CardCrystallonEntity>();
 			_scene = Director.Instance.CurrentScene;
@@ -99,9 +101,40 @@ namespace Crystallography
 				availableCards.Add(pCard);
 			}
 			return pCard;
-			
 		}
 		
+		public void AddQuality( string pQualityString ) {
+			QualityManager.Instance.scoringQualityList.Add(pQualityString);
+			if( pQualityString == "QSound") {
+				LevelManager.Instance.SoundGlow = true;
+			}
+			foreach ( CardCrystallonEntity card in availableCards) {
+				QualityManager.Instance.SetQuality(card, pQualityString, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
+			}
+		}
+		
+		public void RemoveQuality(string pQualityString) {
+			QualityManager.Instance.scoringQualityList.Remove(pQualityString);
+			if( pQualityString == "QSound") {
+				LevelManager.Instance.SoundGlow = false;
+//				foreach ( CardCrystallonEntity card in availableCards) {
+//					QualityManager.Instance.SetQuality(card, "QGlow", -1 );
+//				}
+			}
+			foreach ( CardCrystallonEntity card in availableCards) {
+				QualityManager.Instance.SetQuality(card, pQualityString, 0 );
+			}
+		}
+		
+		/// <summary>
+		/// Builds a particular card.
+		/// </summary>
+		/// <returns>
+		/// The card.
+		/// </returns>
+		/// <param name='pId'>
+		/// P identifier.
+		/// </param>
 		protected CardCrystallonEntity BuildCard(int pId) {
 			return new CardCrystallonEntity(_scene, _physics, pId, 
 			                                QPattern.Instance.patternTiles.TextureInfo, QPattern.Instance.patternTiles.TileIndex2D, 
@@ -109,24 +142,37 @@ namespace Crystallography
 			
 		}
 		
-		protected void BuildDeck() {
-			Deck = new List<int>();
+		/// <summary>
+		/// Constructs a deck and arranges it in ID order, that is the order the cards are listed in
+		/// in our levels spread sheet.
+		/// </summary>
+		protected void BuildDeckOfIDs() {
+			DeckOfIDs = new List<int>();
 			for (int i = 0; i < TotalCardsInDeck; i++) {
-				Deck.Add(i+NextId);
+				DeckOfIDs.Add(i+NextId);
 			}
-			Deck.Sort();
+			DeckOfIDs.Sort();
 		}
 		
 		public void Destroy() {
 			availableCards.Clear ();
 			availableCards = null;
-			Deck.Clear();
-			Deck = null;
+			DeckOfIDs.Clear();
+			DeckOfIDs = null;
 			_instance = null;
 			_scene = null;
 			_physics = null;
 		}
 		
+		/// <summary>
+		/// Gets a card with a specific ID number.
+		/// </summary>
+		/// <returns>
+		/// The card.
+		/// </returns>
+		/// <param name='pId'>
+		/// P identifier.
+		/// </param>
 		public CardCrystallonEntity getCardById( int pId ) {
 			foreach ( CardCrystallonEntity c in availableCards ) {
 				if ( c.id == pId ) {
@@ -149,6 +195,12 @@ namespace Crystallography
 			pCardEntity.removeFromScene( pDelete );
 		}
 		
+		/// <summary>
+		/// Removes a specific card from the list of available cards.
+		/// </summary>
+		/// <param name='pCardEntities'>
+		/// P card entities.
+		/// </param>
 		public void MakeUnavailable( CardCrystallonEntity[] pCardEntities ) {
 			foreach ( CardCrystallonEntity e in pCardEntities ) {
 				rm ( e );
@@ -164,16 +216,15 @@ namespace Crystallography
 			foreach( CardCrystallonEntity c in availableCards ){
 				testGroup.Add(c.id);
 			}
-			if (Deck.Count > 0) {	// if Hit Me is possible, incorporate top 3 cards on the deck into match evaluation
+			if (DeckOfIDs.Count > 0) {	// if it is possible for the player to add cards, incorporate top 3 cards on the deck into match evaluation
 				var count = 3;
-				if ( Deck.Count < 3 ) {
-					count = Deck.Count;
+				if ( DeckOfIDs.Count < 3 ) {
+					count = DeckOfIDs.Count;
 				}
-				testGroup.AddRange( Deck.GetRange(0, count) );
-				hitMeCards.AddRange( Deck.GetRange(0, count) );
+				testGroup.AddRange( DeckOfIDs.GetRange(0, count) );
+				hitMeCards.AddRange( DeckOfIDs.GetRange(0, count) );
 			}
 			
-//			if ( QualityManager.Instance.CheckForMatch( availableCards.ToArray(), false ) ) {
 			if ( QualityManager.Instance.CheckForMatch( testGroup.ToArray(), hitMeCards.ToArray() ) ) {
 #if DEBUG
 				Console.WriteLine("Possible Sets Remain: TRUE");
@@ -184,54 +235,49 @@ namespace Crystallography
 			Console.WriteLine("Possible Sets Remain: FALSE");
 #endif
 			return false;
-//			int len = availableCards.Count;
-//			if ( len >= 3 ) {	// ---------------------------------------------------------------- At least 3 cards must remain
-//				CardCrystallonEntity[] triad = new CardCrystallonEntity[SelectionGroup.MAX_CAPACITY];
-//				for (int i=0; i < len-2; i++) {
-//					for (int j=i+1; j < len-1; j++) {
-//						for (int k=j+1; k < len; k++) {
-//							triad[0] = availableCards[i];
-//							triad[1] = availableCards[j];
-//							triad[2] = availableCards[k];
-//							if ( QualityManager.Instance.EvaluateMatch( triad ) ) { // ------------- At least 1 possible match exists
-
-//								return true;
-//							}
-//						}
-//					}
-//				}
-//			}
-//#if DEBUG
-//			Console.WriteLine("Possible Sets Remain: FALSE");
-//#endif
-//			return false;
 		}
 		
 		/// <summary>
 		/// Spawn cards until we run out of cards to spawn, or hit the population cap.
 		/// </summary>
 		public void Populate ( bool pForce = false ) {
-			if ( Deck == null ) {
-				BuildDeck();
+			if ( DeckOfIDs == null ) {
+				BuildDeckOfIDs();
 				if (GameScene.currentLevel == 999) {
-					ShuffleDeck();
+//					ShuffleDeckOfIDs();
+					// HACK testing infinite mode dynamic scoring
+					QualityManager.Instance.scoringQualityList.Clear();
+					QualityManager.Instance.scoringQualityList.Add("QColor");
+//					QualityManager.Instance.scoringQualityList.Add("QPattern");
 				}
 			}
 			
+			// Player can add 3 cards above the normal limit
 			int fillPop = pForce ? LevelManager.Instance.StandardPop + 3 : LevelManager.Instance.StandardPop;
 			if (GameScene.currentLevel == 999) {
 				fillPop -= 3; // --------------------------------------------------- Lower limits to 12 & 15
 			}
 			while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
-//				int index;
-//				if (PickRandomly) {
-//					index = (int)System.Math.Floor(GameScene.Random.NextFloat() * TotalCardsInDeck);
-//				} else {
-//					index = 0;
-//				}
-//				spawn (Deck[index]);
-				spawn (Deck[0]);
-				Deck.RemoveAt(0);
+				var card = spawn (DeckOfIDs[0]);
+				if (GameScene.currentLevel == 999) {
+					foreach ( string quality in QualityManager.Instance.qualityDict.Keys ) {
+						if ( QualityManager.Instance.scoringQualityList.Contains(quality) ) {
+							QualityManager.Instance.SetQuality(card, quality, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
+						} else{
+							QualityManager.Instance.SetQuality(card, quality, 0 );
+						}
+					}
+//					QualityManager.Instance.SetQuality(card, "QAnimation", 0);
+//					QualityManager.Instance.SetQuality(card, "QParticle", 0);
+////					QualityManager.Instance.SetQuality(card, "QPattern", (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
+//					QualityManager.Instance.SetQuality(card, "QPattern", 0);
+//					QualityManager.Instance.SetQuality(card, "QSound", 0);
+//					QualityManager.Instance.SetQuality(card, "QColor", (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
+// 					QualityManager.Instance.ApplyQualitiesToEntity(card);
+					
+				}
+//				spawn (DeckOfIDs[0]);
+				DeckOfIDs.RemoveAt(0);
 			}
 		}
 		
@@ -251,10 +297,10 @@ namespace Crystallography
 			NextId = 0;
 			_scene = pScene;
 //			ids = null;
-			if (Deck != null) {
-				Deck.Clear();
+			if (DeckOfIDs != null) {
+				DeckOfIDs.Clear();
 			}
-			Deck = null;
+			DeckOfIDs = null;
 		}
 		
 		/// <summary>
@@ -270,14 +316,14 @@ namespace Crystallography
 		/// <summary>
 		/// Puts the cards in the deck in a random order.
 		/// </summary>
-		protected void ShuffleDeck() {
+		protected void ShuffleDeckOfIDs() {
 			var d = new List<int>();
 			for( int i=0; i<TotalCardsInDeck; i++ ) {
-				var card = Deck[ (int)System.Math.Floor(GameScene.Random.NextFloat() * Deck.Count) ];
+				var card = DeckOfIDs[ (int)System.Math.Floor(GameScene.Random.NextFloat() * DeckOfIDs.Count) ];
 				d.Add(card);
-				Deck.Remove(card);
+				DeckOfIDs.Remove(card);
 			}
-			Deck = d;
+			DeckOfIDs = d;
 		}
 		
 		/// <summary>
@@ -301,21 +347,32 @@ namespace Crystallography
 		/// </param>
 		public CardCrystallonEntity spawn( float pX, float pY, int pId=-1 ) {
 			
+			// INSTANTIATE
 			if (pId == -1){
 				pId = NextId;
 			}
-//			CardCrystallonEntity card = new CardCrystallonEntity(_scene, _physics, pId, 
-//			                                QPattern.Instance.patternTiles.TextureInfo, QPattern.Instance.patternTiles.TileIndex2D, 
-//			                                _physics.SceneShapes[0]);
 			CardCrystallonEntity card = BuildCard(pId);
 			NextId++;
 			TotalCardsInDeck--;
-			QualityManager.Instance.ApplyQualitiesToEntity( card );
+			
+			// APPLY QUALITIES
+			if ( GameScene.currentLevel != 999) {
+				QualityManager.Instance.ApplyQualitiesToEntity( card );
+			} else {
+//				List<string> qualities = new List<string>();
+//				qualities.Add("QColor");
+//				QualityManager.Instance.ApplyQualitiesToEntity( qualities, card);
+			}
+			
+			
+			// ADD TO WORLD
 			card.setPosition( pX, pY );
 			card.addToScene();
 			availableCards.Add(card);
 			card.Visible = false;
-			Sequence sequence = new Sequence();
+			
+			// TRIGGER SPAWN VFX
+			Sequence sequence = new Sequence(){ Tag=2 };
 			sequence.Add( new DelayTime( 0.2f ));
 			sequence.Add( new CallFunc( () => FadeIn(card) ) );
 			card.getNode().RunAction( sequence );
@@ -327,6 +384,12 @@ namespace Crystallography
 			return card;
 		}
 		
+		/// <summary>
+		/// Teleport the specified pCard.
+		/// </summary>
+		/// <param name='pCard'>
+		/// P card.
+		/// </param>
 		public void Teleport( CardCrystallonEntity pCard ) {
 			pCard.Visible = false;
 			var _screenWidth = Director.Instance.GL.Context.GetViewport().Width * 0.6f + 220.0f;
@@ -335,10 +398,16 @@ namespace Crystallography
 			pCard.getNode().RunAction( new CallFunc( () => { FadeIn (pCard); } ) );
 		}
 		
-		protected void FadeIn(CardCrystallonEntity card) {
-			card.Visible = true;
-			(card.getNode() as SpriteTile).Color.W = 0.0f;
-			card.getNode().RunAction( new TintBy( Sce.PlayStation.Core.Vector4.UnitW, 2.0f));
+		/// <summary>
+		/// Fades the specified card in.
+		/// </summary>
+		/// <param name='pCard'>
+		/// P card.
+		/// </param>
+		protected void FadeIn(CardCrystallonEntity pCard) {
+			pCard.Visible = true;
+			(pCard.getNode() as SpriteTile).Color.W = 0.0f;
+			pCard.getNode().RunAction( new TintBy( Sce.PlayStation.Core.Vector4.UnitW, 2.0f ) );
 		}
 		
 		// DESTRUCTOR ----------------------------------------------------------------------------------------

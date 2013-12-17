@@ -44,6 +44,9 @@ namespace Crystallography
 			if (pEntity is CardCrystallonEntity == false) return;
 			CardCrystallonEntity e = pEntity as CardCrystallonEntity;
 			e.setGlow( pVariant );
+			if (pVariant == -1) {
+				return;
+			}
 			e.GlowSprite.RunAction( new TintTo(palette[pVariant], 0.0f) );
 //			pEntity.getNode().RunAction( new TintTo( palette[pVariant], 0.0f ) );
 		}

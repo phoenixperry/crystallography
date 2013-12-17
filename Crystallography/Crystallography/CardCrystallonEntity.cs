@@ -56,6 +56,12 @@ namespace Crystallography
 		}
 		
 		public virtual void setGlow(int pGlow) {
+			if (pGlow == -1) {
+				HideGlow();
+				this.getNode().RemoveChild(GlowSprite, true);
+				GlowSprite = null;
+				return;
+			}
 			_glowIndex = pGlow;
 			GlowSprite = new SpriteTile(QGlow.Instance.GlowTiles.TextureInfo, _orientationIndex);
 			HideGlow();
@@ -124,6 +130,7 @@ namespace Crystallography
 		/// </param>
 		public override AbstractCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
 		{
+			(this.getNode() as SpriteTile).Color.W = 1.0f; // make fully opaque if selected while fading in.
 			HideGlow();
 			pGroup.Attach( this );
 			pGroup.PostAttach( this );
@@ -233,7 +240,10 @@ namespace Crystallography
 		
 		public void setAnim( SpriteTile anim, int pStart, int pEnd ) {
 			if (pStart == pEnd) {
-				_anim = null;
+				if (_anim != null) {
+					this.getNode().RemoveChild(_anim, true);
+					_anim = null;
+				}
 				return;
 			}
 			
@@ -264,11 +274,11 @@ namespace Crystallography
 			}
 		}
 		
-		public void resetCountdown() {
+//		public void resetCountdown() {
 //			countdown = countdownMax;
-		}
+//		}
 //		
-		public void setCountdown( int pCount ) {
+//		public void setCountdown( int pCount ) {
 //			countdown = countdownMax = pCount;
 //			
 //			countdownText = new Label(pCount.ToString(), QCountdown.map);
@@ -277,15 +287,15 @@ namespace Crystallography
 //			countdownText.Pivot = new Vector2(0.5f, 0.5f);
 //			countdownText.Position = new Vector2(0.5f, 0.4f);
 //			this.getNode().AddChild(countdownText);
-		}
+//		}
 //		
-		public void advanceCountdown() {
+//		public void advanceCountdown() {
 //			countdown--;
 //			if (countdown < 0) {
 //				countdown = countdownMax;
 //			}
 //			countdownText.Text = countdown.ToString();
-		}
+//		}
 		
 	}
 	

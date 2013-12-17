@@ -53,6 +53,9 @@ namespace Crystallography.UI
 		protected void SpawnIcons (ICrystallonEntity pParent, Dictionary<string,int> pQualities, Vector4 pColor) {
 			Sequence sequence = new Sequence();
 			foreach( string key in pQualities.Keys) {
+				if(key == "Orientation") {
+					continue;
+				}
 				for (int i=0; i<pQualities[key]; i++) {
 					switch(key){
 					case("Color"):
@@ -68,8 +71,12 @@ namespace Crystallography.UI
 						sequence.Add ( new CallFunc( () => { Support.ParticleEffectsManager.Instance.AddScoreParticle("Particle", (pParent as CardCrystallonEntity), pColor); } ) );
 						break;
 					case("Sound"):
-					default:
 						sequence.Add ( new CallFunc( () => { Support.ParticleEffectsManager.Instance.AddScoreParticle("Sound", (pParent as CardCrystallonEntity), pColor); } ) );
+						break;
+					default:
+#if DEBUG
+						sequence.Add ( new CallFunc( () => { Support.ParticleEffectsManager.Instance.AddScoreParticle("Particle", (pParent as CardCrystallonEntity), Colors.Green); } ) );
+#endif
 						break;
 					}
 					sequence.Add( new DelayTime( 0.05f ) );

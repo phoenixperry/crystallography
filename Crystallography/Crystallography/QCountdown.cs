@@ -40,15 +40,16 @@ namespace Crystallography
 		// OVERRIDES ----------------------------------------------------------------------
 		
 		override public void Apply ( ICrystallonEntity pEntity, int pVariant ) {
-			CardCrystallonEntity e = pEntity as CardCrystallonEntity;
-			e.setCountdown( pVariant );
+//			CardCrystallonEntity e = pEntity as CardCrystallonEntity;
+//			e.setCountdown( pVariant );
 		}
 		
 		// METHODS ------------------------------------------------------------------------
 		
 		public void Tick ( ICrystallonEntity pEntity ) {
-			CardCrystallonEntity e = pEntity as CardCrystallonEntity;
-			e.advanceCountdown();
+//			CardCrystallonEntity e = pEntity as CardCrystallonEntity;
+//			e.advanceCountdown();
+			
 //			e.countdown--;
 //			if ( e.countdown < 0 ) {
 //				// Fire some sort of event and reset the countdown

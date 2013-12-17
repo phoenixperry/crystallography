@@ -12,6 +12,9 @@ namespace Crystallography
 {
 	public class LevelManager
 	{
+		protected static readonly int MAX_DIFFICULTY = 3;
+		protected static readonly int MIN_DIFFICULTY = 0;
+		
 		protected static LevelManager _instance;
 		
 		/// <summary>
@@ -19,6 +22,7 @@ namespace Crystallography
 		/// </summary>
 		private XDocument doc;
 		public Dictionary<int, List<int>> goalDict;
+		public int difficulty;
 		
 		
 		// GET & SET --------------------------------------------------------------
@@ -59,6 +63,7 @@ namespace Crystallography
 //			PatternPath = "Application/assets/images/set1/gamePieces.png";
 //			SoundPrefix = "stack1";
 			SetToDefault();
+			
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
 #endif
@@ -145,6 +150,75 @@ namespace Crystallography
 			}
 		}
 		
+		public void ChangeDifficulty( int pDeltaDiff ) {
+			bool up = true;
+			if ( pDeltaDiff < 0 ) {
+				if ( pDeltaDiff + difficulty < MIN_DIFFICULTY ) {
+					pDeltaDiff = MIN_DIFFICULTY - difficulty;	// ENFORCE LOWER CAP
+				}
+				up = false;
+				pDeltaDiff = -pDeltaDiff;
+			} else if ( pDeltaDiff + difficulty > MAX_DIFFICULTY ) {
+				pDeltaDiff = MAX_DIFFICULTY - difficulty;	// ENFORCE UPPER CAP
+			}
+			
+			for ( var i = 0; i < pDeltaDiff; i++ ) {
+				if (up) {
+					IncreaseDifficulty();
+				} else {
+					ReduceDifficulty();
+				}
+			}
+		}
+		
+		protected void IncreaseDifficulty() {
+#if DEBUG
+			Console.WriteLine("Increase Difficulty");
+#endif
+			switch (QualityManager.Instance.scoringQualityList.Count) {
+			case 1:
+				CardManager.Instance.AddQuality("QPattern");
+				difficulty++;
+				break;
+			case 2:
+				CardManager.Instance.AddQuality("QParticle");
+				difficulty++;
+				break;
+			case 3:
+				CardManager.Instance.AddQuality("QSound");
+				difficulty++;
+				break;
+			case 4:
+			default:
+				//no more to add
+				break;
+			}
+		}
+		
+		protected void ReduceDifficulty() {
+#if DEBUG
+			Console.WriteLine("Reduce Difficulty");
+#endif
+			switch (QualityManager.Instance.scoringQualityList.Count) {
+			case 4:
+				CardManager.Instance.RemoveQuality("QSound");
+				difficulty--;
+				break;
+			case 3:
+				CardManager.Instance.RemoveQuality("QParticle");
+				difficulty--;
+				break;
+			case 2:
+				CardManager.Instance.RemoveQuality("QPattern");
+				difficulty--;
+				break;
+			case 1:
+			default:
+				// no more to remove
+				break;
+			}
+		}
+		
 		public void LoadGameData() {
 			FileStream fileStream = File.OpenRead( "/Application/assets/levels/levelData.xml" );
 			StreamReader fileStreamReader = new StreamReader( fileStream );
@@ -175,6 +249,10 @@ namespace Crystallography
 			MessageBody = "";
 			MessageTitle = "";
 			StandardPop = 15;
+			
+			if ( GameScene.currentLevel == 999 ) {
+				difficulty = 0;
+			}
 		}
 		
 		public void Reset() {

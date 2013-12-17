@@ -57,6 +57,8 @@ namespace Crystallography
 			
 			if (LevelManager.Instance.SoundGlow == true) {
 				QGlow.Instance.Apply(pEntity, pVariant);
+			} else {
+				QGlow.Instance.Apply(pEntity, -1);
 			}
 		}
 		

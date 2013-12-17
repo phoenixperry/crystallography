@@ -27,6 +27,8 @@ namespace Crystallography
 		public event EventHandler							StartJustUpDetected;
 		public event EventHandler							CircleJustUpDetected;
 		public event EventHandler							CrossJustUpDetected;
+		public event EventHandler							UpJustUpDetected;
+		public event EventHandler							DownJustUpDetected;
 		
 		public event EventHandler<BaseTouchEventArgs> 		TapDetected;
 		public event EventHandler<SustainedTouchEventArgs> 	TouchDownDetected;
@@ -136,6 +138,12 @@ namespace Crystallography
 			if ( Input2.GamePad0.Cross.Release ) {
 				OnCrossJustUp();
 			}
+			if ( Input2.GamePad0.Up.Release ) {
+				OnUpJustUp();
+			}
+			if ( Input2.GamePad0.Down.Release ) {
+				OnDownJustUp();
+			}
 		}
 		
 		protected void OnCircleJustUp() {
@@ -147,6 +155,20 @@ namespace Crystallography
 		
 		protected void OnCrossJustUp() {
 			EventHandler handler = CrossJustUpDetected;
+			if ( handler != null ) {
+				handler( this, null );
+			}
+		}
+		
+		protected void OnUpJustUp() {
+			EventHandler handler = UpJustUpDetected;
+			if ( handler != null ) {
+				handler( this, null );
+			}
+		}
+		
+		protected void OnDownJustUp() {
+			EventHandler handler = DownJustUpDetected;
 			if ( handler != null ) {
 				handler( this, null );
 			}

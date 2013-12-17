@@ -275,10 +275,11 @@ namespace Crystallography
 			easeState = EaseState.MOVING_IN;
 			
 			for (int i=0; i<MAX_CAPACITY; i++) {
-				_pucks[i].StopAllActions();
+//				_pucks[i].StopAllActions();
+				_pucks[i].StopActionByTag( 1 );
 			}
 			if ( population == 1 ) {	// ------------------------------------------------------ move single object to the center
-				Sequence sequence = new Sequence();
+				Sequence sequence = new Sequence(){ Tag=1 };
 				sequence.Add( new MoveTo( Vector2.Zero, 0.2f )
 							{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
 				foreach (AbstractCrystallonEntity e in members) {
@@ -290,14 +291,14 @@ namespace Crystallography
 				foreach (AbstractCrystallonEntity e in members) {
 					if ( e != null ) {
 						var offset = ( e.getAttachOffset( Array.IndexOf(_pucks, e.getNode().Parent) ) );
-						Sequence sequence = new Sequence();
+						Sequence sequence = new Sequence(){ Tag=1 };
 						sequence.Add ( new MoveTo( offset, 0.2f ) 
 						             { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
 						_pucks[Array.IndexOf(_pucks, e.getNode().Parent)].RunAction( sequence );
 					}
 				}
 			}
-			Sequence releaseDelay = new Sequence();
+			Sequence releaseDelay = new Sequence(){ Tag=1 };
 			if ( population > 0 ) {
 				releaseDelay.Add ( new DelayTime( 0.25f ) );
 				releaseDelay.Add ( new CallFunc( () => {
@@ -320,14 +321,15 @@ namespace Crystallography
 			easeState = EaseState.MOVING_OUT;
 			
 			for (int i=0; i<MAX_CAPACITY; i++) {
-				_pucks[i].StopAllActions();
+//				_pucks[i].StopAllActions();
+				_pucks[i].StopActionByTag( 1 );
 			}
-			Sequence sequence = new Sequence();
+			Sequence sequence = new Sequence(){ Tag=1 };
 			sequence.Add( new MoveTo( new Vector2(0.5f, 10.0f+EASE_DISTANCE), 0.2f)
 			            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
 			_pucks[0].RunAction( sequence );
 			
-			sequence = new Sequence();
+			sequence = new Sequence(){ Tag=1 };
 			if ( MemberType.ToString() == "Crystallography.CardCrystallonEntity") { 
 				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE-10.0f, 20.5f), 0.2f)
 				            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
@@ -337,7 +339,7 @@ namespace Crystallography
 			}
 			_pucks[1].RunAction( sequence );
 			
-			sequence = new Sequence();
+			sequence = new Sequence(){ Tag=1 };
 			if ( MemberType.ToString() == "Crystallography.CardCrystallonEntity") { 
 				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE+10.0f, 20.5f), 0.2f)
 			           	 	{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
