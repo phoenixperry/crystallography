@@ -104,6 +104,7 @@
     <Compile Include="ui\Slider.cs" />
     <Compile Include="ui\BetterButton.cs" />
     <Compile Include="ui\SolutionIcon.cs" />
+    <Compile Include="ui\TimerEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
