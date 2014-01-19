@@ -9,7 +9,7 @@ using Sce.PlayStation.HighLevel.GameEngine2D;
 using System.Xml.Linq;
 
 namespace Crystallography
-{
+{	
 	public abstract class AbstractQuality : IQuality
 	{
 		public int allSameScore { get; protected set; }
