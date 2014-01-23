@@ -50,7 +50,6 @@ namespace Crystallography.UI
 					Support.MusicSystem.Instance.SetVolume(volume);
 				}
 			};
-//			musicSlider.SetSliderValue(Support.MusicSystem.Instance.Volume);
 			musicSlider.SetSliderValue((float)(DataStorage.options[0]/100.0f));
 			this.AddChild(musicSlider);
 			
@@ -65,7 +64,6 @@ namespace Crystallography.UI
 					Support.SoundSystem.Instance.Play( LevelManager.Instance.SoundPrefix + "high.wav" );
 				}
 			};
-//			effectsSlider.SetSliderValue(Support.SoundSystem.Instance.Volume);
 			effectsSlider.SetSliderValue((float)(DataStorage.options[1]/100.0f));
 			this.AddChild(effectsSlider);
 			
@@ -79,7 +77,6 @@ namespace Crystallography.UI
 					SelectionGroup.EASE_DISTANCE = radius;
 				}
 			};
-//			orbitSlider.SetSliderValue(SelectionGroup.EASE_DISTANCE);
 			orbitSlider.SetSliderValue((float)DataStorage.options[2]);
 			this.AddChild(orbitSlider);
 			
@@ -93,7 +90,6 @@ namespace Crystallography.UI
 					SelectionGroup.MAXIMUM_PICKUP_VELOCITY = velocity;
 				}
 			};
-//			stickySlider.SetSliderValue(SelectionGroup.MAXIMUM_PICKUP_VELOCITY);
 			stickySlider.SetSliderValue((float)DataStorage.options[3]);
 			this.AddChild(stickySlider);
 			

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Sce.PlayStation.Core;
 using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
@@ -7,18 +8,33 @@ namespace Crystallography.UI
 {
 	public class Slider : Node
 	{
+		protected static readonly float TICK_WIDTH = 3.0f/16.0f;
+		
 		Label Title;
 		SpriteTile Track;
 		SpriteTile Knob;
+		SpriteTile[] Ticks;
 		Bounds2 bounds;
 		float val;
 		float length;
 		bool active;
 		
+		public List<float> discreteOptions;
+		
 		public Action<float> OnChange;
 		
 		public float min;
 		public float max;
+		
+		// GET & SET --------------------------------------------------------------------------
+		
+		public float Value {
+			get { return val; }
+		}
+		
+		public float Length {
+			get { return length; }
+		}
 		
 		public string Text {
 			get {
@@ -42,6 +58,7 @@ namespace Crystallography.UI
 			
 			min = 0.0f;
 			max = 100.0f;
+			val = min;
 			Track = Support.UnicolorSprite("white", 255, 255, 255, 255);
 			Track.Scale = new Vector2(20.0f, 0.5f);
 			this.AddChild(Track);
@@ -53,6 +70,9 @@ namespace Crystallography.UI
 			this.AddChild(Knob);
 			
 			bounds = new Bounds2( new Vector2(-20.0f, -20.0f), new Vector2(length+20.0f, 36.0f) );
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		// EVENT HANDLERS --------------------------------------------------------------------
@@ -72,8 +92,25 @@ namespace Crystallography.UI
 			if(active) {
 				var percentage = Knob.Position.X / length;
 				val = percentage * (max-min) + min;
+				
+				if ( discreteOptions != null && discreteOptions.Count > 0 ) {
+					float diff = float.MaxValue;
+					float finalVal = val;
+					foreach (float opt in discreteOptions) {
+						if (diff > Sce.PlayStation.Core.FMath.Abs(val - opt) ) {
+							finalVal = opt;
+							diff = val - opt;
+						} else {
+							break;
+						}
+					}
+					val = finalVal;
+					SetSliderValue(val);
+				}
 				active = false;
-				OnChange(val);
+				if (OnChange != null) {
+					OnChange(val);
+				}
 			}
 		}
 
@@ -109,13 +146,34 @@ namespace Crystallography.UI
 			Knob = null;
 			Track = null;
 			Title = null;
+			Ticks = null;
 		}
 		
 		// METHODS --------------------------------------------------------------------------
 		
 		public void SetSliderValue(float pValue){
 			val = pValue;
-			Knob.Position = new Vector2((pValue/(max-min+min))*length, 0.0f);
+			Knob.Position = new Vector2( length * ((pValue-min)/(max-min)), 0.0f);
+		}
+		
+		public void AddTickmarks() {
+			if (discreteOptions != null && discreteOptions.Count > 0) {
+				if (Ticks != null) {
+					foreach (SpriteTile s in Ticks) {
+						this.RemoveChild(s, true);
+					}
+					Ticks = null;
+				}
+				Ticks = new SpriteTile[discreteOptions.Count];
+				var optionsArray = discreteOptions.ToArray();
+				float offsetX = -( 1 + Sce.PlayStation.Core.FMath.Floor(TICK_WIDTH * 8.0f) );
+				for (int i=0; i < Ticks.Length; i ++) {
+					Ticks[i] = Support.UnicolorSprite("white", 255, 255, 255, 255);
+					Ticks[i].Scale = new Vector2( TICK_WIDTH, 1f);
+					Ticks[i].Position = new Vector2( length * ((optionsArray[i]-min) / (max-min)) + offsetX, -8.0f );
+					this.AddChild(Ticks[i]);
+				}
+			}
 		}
 		
 		

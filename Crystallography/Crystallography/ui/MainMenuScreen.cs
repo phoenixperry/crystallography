@@ -88,28 +88,28 @@ namespace Crystallography.UI
 			
 			
 			NewGameButton = new BetterButton(256.0f, 64.0f) {
-				Text = "play",
+				Text = "puzzle mode",
 				Position = new Vector2(94.0f, 365.0f),
 				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f),
 			};
 			this.AddChild(NewGameButton);
 			
 			LevelSelectButton = new BetterButton(256.0f, 64.0f) {
-				Text = "level select",
+				Text = "puzzle select",
 				Position = new Vector2(94.0f, 281.0f),
 				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
 			this.AddChild(LevelSelectButton);
 			
 			InstructionsButton = new BetterButton(256.0f, 64.0f) {
-				Text = "instructions",
+				Text = "challenge mode",
 				Position = new Vector2(94.0f, 197.0f),
 				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
 			};
 			this.AddChild(InstructionsButton);
 			
 			CreditsButton = new BetterButton(256.0f, 64.0f) {
-				Text = "credits",
+				Text = "options",
 				Position = new Vector2(94.0f, 112.0f),
 				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
@@ -183,8 +183,8 @@ namespace Crystallography.UI
 #if DEBUG
 			Console.WriteLine("Instructions");
 #endif
-//			MenuSystem.SetScreen("Instructions");
-			Director.Instance.ReplaceScene(new LoadingScene(999, false) );
+			MenuSystem.SetScreen("Infinite Mode");
+//			Director.Instance.ReplaceScene(new LoadingScene(999, false) );
 		}
 		
 #if METRICS

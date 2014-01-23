@@ -84,6 +84,9 @@ namespace Crystallography.UI
 			case("Options"):
 				Screen = new OptionsMenuScreen(this);
 				break;
+			case("Infinite Mode"):
+				Screen = new InfiniteModeScreen(this);
+				break;
 			default:
 				break;
 			}

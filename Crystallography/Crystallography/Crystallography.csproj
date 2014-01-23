@@ -105,6 +105,7 @@
     <Compile Include="ui\BetterButton.cs" />
     <Compile Include="ui\SolutionIcon.cs" />
     <Compile Include="ui\TimerEntity.cs" />
+    <Compile Include="ui\InfiniteModeScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
