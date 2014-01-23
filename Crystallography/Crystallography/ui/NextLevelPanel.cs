@@ -229,58 +229,70 @@ namespace Crystallography.UI
 		// METHODS ----------------------------------------------------------------------------------------------------------------------------------------------
 		
 		public void Populate( int pCubes, int pScore) {
-			var previousSolutions = DataStorage.puzzleSolutionsFound[GameScene.currentLevel];
-			var numFound = previousSolutions.Count;
-			bool okToAdd = true;
-			foreach( var ps in previousSolutions ) { // ---- Check if solution was found previously
-				if ( ps[0] == pCubes ) {
-					if ( ps[1] == pScore ) {
-						okToAdd = false;
-						break;
+			if ( GameScene.currentLevel == 999 ) {
+				PossibleSolutionsText.Text = "";
+				this.Solutions = new SolutionIcon[1];
+				this.Solutions[0] = new SolutionIcon() {
+					CubeText = pCubes.ToString(),
+					ScoreText = pScore.ToString(),
+					Color = QColor.palette[1],
+					Position = new Vector2(40.0f, QuitButton.Height + 60.0f)
+				};
+				this.AddChild(Solutions[0]);
+			} else {
+				var previousSolutions = DataStorage.puzzleSolutionsFound[GameScene.currentLevel];
+				var numFound = previousSolutions.Count;
+				bool okToAdd = true;
+				foreach( var ps in previousSolutions ) { // ---- Check if solution was found previously
+					if ( ps[0] == pCubes ) {
+						if ( ps[1] == pScore ) {
+							okToAdd = false;
+							break;
+						}
 					}
 				}
-			}
-			if (okToAdd) {
-				numFound++;
-			}
-			this.Solutions = new SolutionIcon[LevelManager.Instance.PossibleSolutions];
-			this.Colors = new Vector4[LevelManager.Instance.PossibleSolutions + 1];
-			var completion = ((float)numFound / (float)LevelManager.Instance.PossibleSolutions);
-			PossibleSolutionsText.Text = "possible solutions (found " + numFound.ToString() + " of " + LevelManager.Instance.PossibleSolutions.ToString() + "):";
-//			Percentage = completion;
-			visibleSolutionIndex = 0;
-			this.Solutions[0] = new SolutionIcon() {
-				CubeText = pCubes.ToString(),
-				ScoreText = pScore.ToString(),
-				Color = QColor.palette[1],
-				Position = new Vector2(40.0f, QuitButton.Height + 60.0f)
-			};
-			this.AddChild(Solutions[0]);
-			int i = 1;
-			foreach( int cube in LevelManager.Instance.goalDict.Keys ) {
-				foreach ( int points in LevelManager.Instance.goalDict[cube] ) {
-					if ( cube != pCubes || points != pScore ) { //----------------------- already handled the solution player just found
-						Solutions[i] = new SolutionIcon() {
-							CubeText = cube.ToString(),
-							ScoreText = points.ToString(),
-							Color = Vector4.Zero,
-							Position = new Vector2(40.0f + 65.0f*(i%MAX_SOLUTIONS_ON_SCREEN), QuitButton.Height + 60.0f)
-						};
-						foreach( var ps in previousSolutions) {
-							if ( ps[0] == cube && ps[1] == points ) {
-//								Solutions[i].Color = QColor.palette[0];
-								Solutions[i].Color = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.White;
-								break;
+				if (okToAdd) {
+					numFound++;
+				}
+				this.Solutions = new SolutionIcon[LevelManager.Instance.PossibleSolutions];
+				this.Colors = new Vector4[LevelManager.Instance.PossibleSolutions + 1];
+				var completion = ((float)numFound / (float)LevelManager.Instance.PossibleSolutions);
+				PossibleSolutionsText.Text = "possible solutions (found " + numFound.ToString() + " of " + LevelManager.Instance.PossibleSolutions.ToString() + "):";
+//				Percentage = completion;
+				visibleSolutionIndex = 0;
+				this.Solutions[0] = new SolutionIcon() {
+					CubeText = pCubes.ToString(),
+					ScoreText = pScore.ToString(),
+					Color = QColor.palette[1],
+					Position = new Vector2(40.0f, QuitButton.Height + 60.0f)
+				};
+				this.AddChild(Solutions[0]);
+				int i = 1;
+				foreach( int cube in LevelManager.Instance.goalDict.Keys ) {
+					foreach ( int points in LevelManager.Instance.goalDict[cube] ) {
+						if ( cube != pCubes || points != pScore ) { //----------------------- already handled the solution player just found
+							Solutions[i] = new SolutionIcon() {
+								CubeText = cube.ToString(),
+								ScoreText = points.ToString(),
+								Color = Vector4.Zero,
+								Position = new Vector2(40.0f + 65.0f*(i%MAX_SOLUTIONS_ON_SCREEN), QuitButton.Height + 60.0f)
+							};
+							foreach( var ps in previousSolutions) {
+								if ( ps[0] == cube && ps[1] == points ) {
+//									Solutions[i].Color = QColor.palette[0];
+									Solutions[i].Color = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.White;
+									break;
+								}
 							}
+							if ( Solutions[i].Color == Vector4.Zero ) {
+								Solutions[i].Color = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Grey50;
+							}
+							if ( i > MAX_SOLUTIONS_ON_SCREEN-1 ) {
+								Solutions[i].Alpha = 0.0f;
+							}
+							this.AddChild(Solutions[i]);
+							i++;
 						}
-						if ( Solutions[i].Color == Vector4.Zero ) {
-							Solutions[i].Color = Sce.PlayStation.HighLevel.GameEngine2D.Base.Colors.Grey50;
-						}
-						if ( i > MAX_SOLUTIONS_ON_SCREEN-1 ) {
-							Solutions[i].Alpha = 0.0f;
-						}
-						this.AddChild(Solutions[i]);
-						i++;
 					}
 				}
 			}

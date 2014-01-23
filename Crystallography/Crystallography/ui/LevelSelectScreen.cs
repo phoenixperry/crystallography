@@ -434,10 +434,6 @@ namespace Crystallography.UI
 		
 		protected override void OnButtonUp ()
 		{
-			if( !Visible || (_status != PRESSED) ) {
-				return;
-			}
-			_status = NORMAL;
 			EventHandler<LevelSelectionEventArgs> handler = LevelSelectionDetected;
 			if ( handler != null ) {
 				handler( this, new LevelSelectionEventArgs() { ID = this.levelID });
