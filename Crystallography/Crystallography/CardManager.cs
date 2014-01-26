@@ -204,6 +204,11 @@ namespace Crystallography
 		public void MakeUnavailable( CardCrystallonEntity[] pCardEntities ) {
 			foreach ( CardCrystallonEntity e in pCardEntities ) {
 				rm ( e );
+				// IN INFINITE MODE, RECYCLE CARD IDS
+				if ( GameScene.currentLevel == 999 ) {
+					DeckOfIDs.Add(e.id);
+					TotalCardsInDeck++;
+				}
 			}
 		}
 		
@@ -245,7 +250,6 @@ namespace Crystallography
 				BuildDeckOfIDs();
 				if (GameScene.currentLevel == 999) {
 //					ShuffleDeckOfIDs();
-					// HACK testing infinite mode dynamic scoring
 					QualityManager.Instance.scoringQualityList.Clear();
 					QualityManager.Instance.scoringQualityList.Add("QColor");
 //					QualityManager.Instance.scoringQualityList.Add("QPattern");
@@ -259,6 +263,7 @@ namespace Crystallography
 			}
 			while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
 				var card = spawn (DeckOfIDs[0]);
+				DeckOfIDs.RemoveAt(0);
 				if (GameScene.currentLevel == 999) {
 					foreach ( string quality in QualityManager.Instance.qualityDict.Keys ) {
 						if ( QualityManager.Instance.scoringQualityList.Contains(quality) ) {
@@ -267,17 +272,7 @@ namespace Crystallography
 							QualityManager.Instance.SetQuality(card, quality, 0 );
 						}
 					}
-//					QualityManager.Instance.SetQuality(card, "QAnimation", 0);
-//					QualityManager.Instance.SetQuality(card, "QParticle", 0);
-////					QualityManager.Instance.SetQuality(card, "QPattern", (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
-//					QualityManager.Instance.SetQuality(card, "QPattern", 0);
-//					QualityManager.Instance.SetQuality(card, "QSound", 0);
-//					QualityManager.Instance.SetQuality(card, "QColor", (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
-// 					QualityManager.Instance.ApplyQualitiesToEntity(card);
-					
 				}
-//				spawn (DeckOfIDs[0]);
-				DeckOfIDs.RemoveAt(0);
 			}
 		}
 		
@@ -350,19 +345,19 @@ namespace Crystallography
 			// INSTANTIATE
 			if (pId == -1){
 				pId = NextId;
+				NextId++;
 			}
 			CardCrystallonEntity card = BuildCard(pId);
-			NextId++;
 			TotalCardsInDeck--;
 			
 			// APPLY QUALITIES
 			if ( GameScene.currentLevel != 999) {
 				QualityManager.Instance.ApplyQualitiesToEntity( card );
-			} else {
+			} //else {
 //				List<string> qualities = new List<string>();
 //				qualities.Add("QColor");
 //				QualityManager.Instance.ApplyQualitiesToEntity( qualities, card);
-			}
+//			}
 			
 			
 			// ADD TO WORLD
