@@ -108,9 +108,6 @@ namespace Crystallography.UI
 					SetSliderValue(val);
 				}
 				active = false;
-				if (OnChange != null) {
-					OnChange(val);
-				}
 			}
 		}
 
@@ -151,9 +148,13 @@ namespace Crystallography.UI
 		
 		// METHODS --------------------------------------------------------------------------
 		
-		public void SetSliderValue(float pValue){
-			val = pValue;
+		public void SetSliderValue(float pValue, bool pSilent=false){
+			val = Sce.PlayStation.Core.FMath.Min(pValue, max);
+			val = Sce.PlayStation.Core.FMath.Max(val, min);
 			Knob.Position = new Vector2( length * ((pValue-min)/(max-min)), 0.0f);
+			if ( false == pSilent && OnChange != null) {
+				OnChange(val);
+			}
 		}
 		
 		public void AddTickmarks() {

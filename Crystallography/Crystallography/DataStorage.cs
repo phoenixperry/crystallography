@@ -27,7 +27,7 @@ namespace Crystallography
 		static public Int32[,] infiniteScores = new Int32[numInfiniteHighScores, 2];
 		static public Int32[,] infiniteCubes = new Int32[numInfiniteHighCubes, 2];
 		
-		static public Int32[] options = new Int32[4];
+		static public Int32[] options = new Int32[5];
 		
 #if METRICS
 		static readonly string METRICS_FILE = "/Documents/metrics.dat";
@@ -138,7 +138,7 @@ namespace Crystallography
 			bufferSize += sizeof(Int32) * 2 * numTimedHighCubes;
 			bufferSize += sizeof(Int32) * 2 * numInfiniteHighScores;
 			bufferSize += sizeof(Int32) * 2 * numInfiniteHighCubes;
-			bufferSize += sizeof(Int32) * 4; // options
+			bufferSize += sizeof(Int32) * options.Length; // options
 			bufferSize += sizeof(Int32) * 1; // hash
 			
 			byte[] buffer = new byte [bufferSize];
@@ -249,7 +249,7 @@ namespace Crystallography
 			
 			// OPTIONS
 			count = 0;
-			for( int i=0; i < 4; ++i ) {
+			for( int i=0; i < options.Length; ++i ) {
 				Buffer.BlockCopy(options, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
 				count++;
 				sum+=options[i];
@@ -406,7 +406,7 @@ namespace Crystallography
 						
 						// OPTIONS
 						count = 0;
-						for( int i=0; i<4; ++i ) {
+						for( int i=0; i<options.Length; ++i ) {
 							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, options, sizeof(Int32) * i, sizeof(Int32) );
 							count++;
 							sum += options[i];
@@ -471,10 +471,11 @@ namespace Crystallography
 				infiniteCubes[i,1] = 0;
 			}
 			// OPTIONS
-			options[0] = 40;
-			options[1] = 70;
-			options[2] = 70;
-			options[3] = 700;
+			options[0] = 40;	// OPTIONS: MUSIC VOL
+			options[1] = 70;	// OPTIONS: EFFECTS VOL
+			options[2] = 70;	// OPTIONS: ORBIT DISTANCE
+			options[3] = 700;	// OPTIONS: STICKYNESS
+			options[4] = 60;	// INFINITE: TIMER DURATION
 			
 			SaveData();
 		}

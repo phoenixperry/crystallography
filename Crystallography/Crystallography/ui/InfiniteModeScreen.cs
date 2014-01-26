@@ -21,6 +21,11 @@ namespace Crystallography.UI
 		public InfiniteModeScreen (MenuSystemScene pMenuSystem) {
 			MenuSystem = pMenuSystem;
 			
+			_timeLimitText = new Label() {
+				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") )
+			};
+			this.AddChild(_timeLimitText);
+			
 			timeLimitSlider = new Slider() {
 				Text = "time limit",
 				Position = new Vector2(320.0f, 400.0f),
@@ -36,15 +41,10 @@ namespace Crystallography.UI
 				}
 			};
 			timeLimitSlider.AddTickmarks();
-			timeLimitSlider.SetSliderValue( 5.0f );
+			timeLimitSlider.SetSliderValue( (float)DataStorage.options[4] );
 			this.AddChild(timeLimitSlider);
 			
-			_timeLimitText = new Label() {
-				Text = timeLimitSlider.Value.ToString() + " min",
-				Position = new Vector2(timeLimitSlider.Position.X + timeLimitSlider.Length + 20.0f, timeLimitSlider.Position.Y),
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") )
-			};
-			this.AddChild(_timeLimitText);
+			_timeLimitText.Position = new Vector2(timeLimitSlider.Position.X + timeLimitSlider.Length + 20.0f, timeLimitSlider.Position.Y);
 			
 			cancelButton = new BetterButton(289.0f, 71.0f) {
 				Text = "main menu",
@@ -66,10 +66,12 @@ namespace Crystallography.UI
 		void HandleCancelButtonButtonUpAction (object sender, EventArgs e)
 		{
 			Exit();
+			MenuSystem.SetScreen("Menu");
 		}
 		
 		void HandleplayButtonButtonUpAction (object sender, EventArgs e)
 		{
+			Exit();
 			Director.Instance.ReplaceScene(new LoadingScene(999, false) );
 		}
 		
@@ -95,7 +97,7 @@ namespace Crystallography.UI
 		
 		protected void Exit() {
 			// TODO WRITE SETTINGS TO DATA FOR PERSISTENCE
-			MenuSystem.SetScreen("Menu");
+			DataStorage.options[4] = (int)timeLimitSlider.Value;
 		}
 		
 		// DESTRUCTOR --------------------------------------------
