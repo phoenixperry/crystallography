@@ -10,7 +10,7 @@ namespace Crystallography.UI
 	{
 		protected Dictionary<string, UIFont> fontDict;
 //		protected Dictionary<string, Font> inGameFontDict;
-		protected Dictionary<Font, FontMap> fontMapDict;
+		protected Dictionary<string, FontMap> fontMapDict;
 		
 		public string assetRoot;
 		
@@ -28,7 +28,7 @@ namespace Crystallography.UI
 			assetRoot = pAssetRoot;
 			fontDict = new Dictionary<string, UIFont>();
 //			inGameFontDict = new Dictionary<string, Font>();
-			fontMapDict = new Dictionary<Font, FontMap>();
+			fontMapDict = new Dictionary<string, FontMap>();
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " Created");
 #endif
@@ -56,18 +56,17 @@ namespace Crystallography.UI
 				var font = new UIFont( assetRoot + pName + "_" + pStyle + ".otf", pSize, FontStyle.Regular );
 				fontDict.Add( key, font );
 #if DEBUG
-				Console.WriteLine ( "UIFont: " + pName + "_" + pStyle + "_" + pSize + " created" );
+				Console.WriteLine ( "UIFont: " + pName + "_" + pStyle + "_" + pSize + " created. " + fontDict.Keys.Count + " members in fontDict." );
 #endif
 			}
 		}
 		
-		protected void CheckMapCache( Font font ) {
-//			string key = font.Name + font.Style.ToString() + font.Size.ToString();
-			if (fontMapDict.ContainsKey( font ) ) {
+		protected void CheckMapCache( string pKey, Font font ) {
+			if (fontMapDict.ContainsKey( pKey ) ) {
 				return;
 			} else {
 				var map = new FontMap( font );
-				fontMapDict.Add( font, map );
+				fontMapDict.Add( pKey, map );
 			}
 		}
 		
@@ -94,8 +93,9 @@ namespace Crystallography.UI
 		}
 		
 		public FontMap GetMap( Font font ) {
-			CheckMapCache( font );
-			return fontMapDict[ font ];
+			string key = font.Name + font.Size.ToString();
+			CheckMapCache( key, font );
+			return fontMapDict[ key ];
 		}
 	}
 }
