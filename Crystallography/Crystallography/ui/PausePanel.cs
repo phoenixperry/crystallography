@@ -97,25 +97,28 @@ namespace Crystallography.UI
 			ResetButton = new BetterButton(289.0f, 71.0f) {
 				Text = "restart",
 				Position = new Vector2(343.0f, 203.0f),
-				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f),
-				On = false
+				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)//,
+//				On = false
 			};
+			ResetButton.On(false);
 			this.AddChild(ResetButton);
 			
 			ResumeButton = new BetterButton(289.0f, 71.0f) {
 				Text = "resume",
 				Position = new Vector2(343.0f, 284.0f),
-				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f),
-				On = false
+				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)//,
+//				On = false
 			};
+			ResumeButton.On (false);
 			this.AddChild(ResumeButton);
 			
 			GiveUpButton = new BetterButton(289.0f, 71.0f) {
 				Text = "quit",
 				Position = new Vector2(343.0f, 122.0f),
-				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f),
-				On = false
+				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)//,
+//				On = false
 			};
+			GiveUpButton.On(false);
 			this.AddChild(GiveUpButton);
 			
 //			ResetButton = new ButtonEntity("      restart", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
@@ -135,13 +138,17 @@ namespace Crystallography.UI
 //			GiveUpButton.label.FontMap = ResumeButton.label.FontMap;
 //			GiveUpButton.on = false;
 //			this.AddChild(GiveUpButton.getNode());
+		
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		public void Hide() {
 			this.Visible = false;
-			ResetButton.On = false;
-			ResumeButton.On = false;
-			GiveUpButton.On = false;
+			ResetButton.On(false);
+			ResumeButton.On(false);
+			GiveUpButton.On(false);
 			ResetButton.ButtonUpAction -= HandleResetButtonButtonUpAction;
 			ResumeButton.ButtonUpAction -= HandleResumeButtonButtonUpAction;
 			GiveUpButton.ButtonUpAction -= HandleGiveUpButtonButtonUpAction;
@@ -149,9 +156,9 @@ namespace Crystallography.UI
 		
 		public void Show() {
 			this.Visible = true;
-			ResetButton.On = true;
-			ResumeButton.On = true;
-			GiveUpButton.On = true;
+			ResetButton.On(true);
+			ResumeButton.On(true);
+			GiveUpButton.On(true);
 			ResetButton.ButtonUpAction += HandleResetButtonButtonUpAction;
 			ResumeButton.ButtonUpAction += HandleResumeButtonButtonUpAction;
 			GiveUpButton.ButtonUpAction += HandleGiveUpButtonButtonUpAction;

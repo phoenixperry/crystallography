@@ -83,6 +83,9 @@ namespace Crystallography.UI
 				Position = new Vector2(40.0f, pHeight - 69.0f)
 			};
 			this.AddChild(MessageText);
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created. " + MessageText.Text );
+#endif
 		}
 		
 		// DESTRUCTOR -------------------------------------------------------------------------------------------------------------

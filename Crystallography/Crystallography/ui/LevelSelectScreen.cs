@@ -379,13 +379,13 @@ namespace Crystallography.UI
 		
 		public void Enable() {
 			foreach (LevelSelectItem item in Items ) {
-				item.On = !item.locked;
+				item.On(!item.locked);
 			}
 		}
 		
 		public void Disable() {
 			foreach (LevelSelectItem item in Items ) {
-				item.On = false;
+				item.On(false);
 			}
 		}
 		
@@ -427,7 +427,7 @@ namespace Crystallography.UI
 				this.AddChild( lockIcon );
 			}
 //			Button.ButtonUpAction += HandleButtonButtonUpAction;
-			this.On = !locked;
+			this.On(!locked);
 		}
 		
 		// OVERRIDES ----------------------------------------------------------------------------------------------------------------------------

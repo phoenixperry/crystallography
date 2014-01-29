@@ -150,7 +150,8 @@ namespace Crystallography.UI
 			List<Action> proc = new List<Action> {
 			// PRE-LOAD IMAGES
 				() => {
-					var temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Regular");
+					var temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 16, "Bold");
+					temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Regular");
 					temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold");
 					temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold");
 					temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 102, "Bold");
@@ -165,6 +166,12 @@ namespace Crystallography.UI
 					var temp = Support.SpriteFromFile("/Application/assets/images/handIcon.png");
 				},
 				() => {
+					Support.SoundSystem.Instance.Stop(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
+					Support.SoundSystem.Instance.Stop(LevelManager.Instance.SoundPrefix + "threetiles.wav");
+					Support.SoundSystem.Instance.Stop(LevelManager.Instance.SoundPrefix + "wrong.wav");
+					Support.SoundSystem.Instance.Stop(LevelManager.Instance.SoundPrefix + "break.wav");
+				},
+				() => {
 					var temp = Support.SpriteFromFile("/Application/assets/images/blueBox.png");
 				},
 				() => {
@@ -172,6 +179,9 @@ namespace Crystallography.UI
 				},
 				() => {
 					var temp = Support.SpriteFromFile("/Application/assets/images/redbox.png");
+				},
+				() => {
+					var temp = Support.SpriteFromFile("/Application/assets/images/UI/cubePoints.png");
 				},
 				() => {
 					if (_levelNumber != 999) {

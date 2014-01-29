@@ -48,7 +48,9 @@ namespace Crystallography.UI
 		protected bool _initialized = false;
 		protected bool _pauseTimer;
 		
-		
+		public static event EventHandler CubesUpdated;
+		public static event EventHandler ScoreUpdated;
+		public static event EventHandler BreaksUpdated;
 		
 		// GET & SET ---------------------------------------------------------------------------------------------
 		
@@ -82,11 +84,15 @@ namespace Crystallography.UI
 		void HandleGroupCrystallonEntityBreakDetected (object sender, EventArgs e)
 		{
 			BreaksDetected++;
+			EventHandler handler = BreaksUpdated;
+			if ( handler != null ) {
+				handler( this, null );
+			}
 		}
 		
 		void HandleCubeCrystallonEntityCubeCompleteDetected (object sender, CubeCompleteEventArgs e)
 		{
-			HitMeButton.On = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < LevelManager.Instance.StandardPop + 3 );
+			EnableHitMeButton();
 		}
 		
 		/// <summary>
@@ -129,7 +135,7 @@ namespace Crystallography.UI
 		/// <summary>
 		/// On Next Level Button Up
 		/// </summary>
-		void HandleNextLevelButtonButtonUpAction (object sender, EventArgs e) {
+		void Handle_nextLevelPanelButtonButtonUpAction (object sender, EventArgs e) {
 			ExitCode = LevelExitCode.NEXT_LEVEL;
 #if METRICS
 			DataStorage.CollectMetrics();
@@ -141,7 +147,7 @@ namespace Crystallography.UI
 			}
 			CardManager.Instance.Reset( Director.Instance.CurrentScene );
 			GroupManager.Instance.Reset( Director.Instance.CurrentScene );
-			InputManager.Instance.CircleJustUpDetected -= HandleNextLevelButtonButtonUpAction;
+			InputManager.Instance.CircleJustUpDetected -= Handle_nextLevelPanelButtonButtonUpAction;
 			_scene.GoToNextLevel();
 		}
 		
@@ -149,7 +155,7 @@ namespace Crystallography.UI
 		/// On Card Spawn
 		/// </summary>
 		void HandleCardManagerInstanceCardSpawned (object sender, EventArgs e) {
-			HitMeButton.On = ( CardManager.Instance.TotalCardsInDeck > 0 && CardManager.availableCards.Count < LevelManager.Instance.StandardPop + 3 );
+			EnableHitMeButton();
 		}
 		
 		/// <summary>
@@ -160,6 +166,11 @@ namespace Crystallography.UI
 			CubeText.Text = Cubes.ToString();
 			float x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(CubeText.Text);
 			CubeText.Position = new Vector2(x, CubeText.Position.Y);
+			
+			EventHandler handler = CubesUpdated;
+			if ( handler != null ) {
+				handler( this, null );
+			}
 			
 			ScheduleScoreModifier( e.Points );
 			new ScorePopup( e.Node, e.Points );
@@ -216,10 +227,22 @@ namespace Crystallography.UI
 		void Handle_nextLevelPanelLevelSelectDetected (object sender, EventArgs e)
 		{
 			ExitCode = LevelExitCode.QUIT_LEVEL_SELECT;
+			bool complete = false;
 #if METRICS
 			DataStorage.CollectMetrics();
 #endif
+			if( GameScene.currentLevel != 999 ) {
+				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
+			}
 			GameScene.QuitToLevelSelect();
+		}
+		
+		void Handle_nextLevelPanelQuitButtonPressDetected (object sender, EventArgs e) {
+			bool complete = false;
+			if( GameScene.currentLevel != 999 ) {
+				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
+			}
+			HandlePausePanelQuitButtonPressDetected( sender, e );
 		}
 		
 		/// <summary>
@@ -264,6 +287,13 @@ namespace Crystallography.UI
 					float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
 					ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
 					_updateTimer = 0.0f;
+					
+					if ( Score == _displayScore ) {
+						EventHandler handler = ScoreUpdated;
+						if ( handler != null ) {
+							handler( this, null );
+						}
+					}
 				}
 				
 			}
@@ -271,8 +301,8 @@ namespace Crystallography.UI
 		
 		public override void OnEnter () {
 			base.OnEnter();
-			_nextLevelPanel.NextLevelDetected += HandleNextLevelButtonButtonUpAction;
-			_nextLevelPanel.QuitDetected += HandlePausePanelQuitButtonPressDetected;
+			_nextLevelPanel.NextLevelDetected += Handle_nextLevelPanelButtonButtonUpAction;
+			_nextLevelPanel.QuitDetected += Handle_nextLevelPanelQuitButtonPressDetected;
 			_nextLevelPanel.LevelSelectDetected += Handle_nextLevelPanelLevelSelectDetected;
 			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
 			QualityManager.FailedMatchDetected += HandleQualityManagerFailedMatchDetected;
@@ -299,8 +329,8 @@ namespace Crystallography.UI
 		
 		public override void OnExit () {
 			base.OnExit();
-			_nextLevelPanel.NextLevelDetected -= HandleNextLevelButtonButtonUpAction;
-			_nextLevelPanel.QuitDetected -= HandlePausePanelQuitButtonPressDetected;
+			_nextLevelPanel.NextLevelDetected -= Handle_nextLevelPanelButtonButtonUpAction;
+			_nextLevelPanel.QuitDetected -= Handle_nextLevelPanelQuitButtonPressDetected;
 			_nextLevelPanel.LevelSelectDetected -= Handle_nextLevelPanelLevelSelectDetected;
 			HitMeButton.ButtonUpAction -= HandleHitMeButtonButtonUpAction;
 			PauseButton.ButtonUpAction -= HandlePauseButtonButtonUpAction;
@@ -360,6 +390,13 @@ namespace Crystallography.UI
 			var xscale = 200.0f/16.0f;
 			
 			TimeBar.Scale = new Vector2(xscale * ((30.0f-DisplayTimer)/30.0f), 1.0f);
+		}
+		
+		public void EnableHitMeButton() {
+			HitMeButton.On(   CardManager.Instance.TotalCardsInDeck > 0 
+			               && CardManager.availableCards.Count < LevelManager.Instance.StandardPop + 3 
+			               && !LevelManager.Instance.HitMeDisabled
+			              );
 		}
 		
 		private void Initialize() {
@@ -471,6 +508,7 @@ namespace Crystallography.UI
 				Position = new Vector2(720.0f, 473.0f),
 				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
+			HitMeButton.On(!LevelManager.Instance.HitMeDisabled);
 			this.AddChild(HitMeButton);
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
 			
@@ -506,8 +544,21 @@ namespace Crystallography.UI
 				CubeText.Position = new Vector2(x, CubeText.Position.Y);
 //			}
 			
-			_messagePanel.Text = LevelManager.Instance.MessageBody;
-			_messagePanel.TitleText = LevelManager.Instance.MessageTitle;
+			UpdateMessagePanel( LevelManager.Instance.MessageTitle, LevelManager.Instance.MessageBody );
+			EnableHitMeButton();
+			
+//			_messagePanel.Text = LevelManager.Instance.MessageBody;
+//			_messagePanel.TitleText = LevelManager.Instance.MessageTitle;
+//			if (_messagePanel.Text != "" || _messagePanel.TitleText != "") {
+//				_messagePanel.SlideIn();
+//			}
+		}
+		
+		public void UpdateMessagePanel( string pTitle, string pMessage, float? pDismissDelay=null, float? pLifetime=null ) {
+			_messagePanel.DismissDelay = pDismissDelay ?? 1.0f;
+			_messagePanel.Lifetime = pLifetime ?? 0.0f;
+			_messagePanel.Text = pMessage;
+			_messagePanel.TitleText = pTitle;
 			if (_messagePanel.Text != "" || _messagePanel.TitleText != "") {
 				_messagePanel.SlideIn();
 			}

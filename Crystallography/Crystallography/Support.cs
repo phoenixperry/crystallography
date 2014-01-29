@@ -3,6 +3,7 @@
  * Copyright (C) 2013 Sony Computer Entertainment Inc.
  * All Rights Reserved.
  */
+//using System;
 
 using System.Collections.Generic;
 
@@ -301,6 +302,9 @@ namespace Crystallography
 				{
 					var player = sound.CreatePlayer();
 					SoundDatabase[name] = player;
+#if DEBUG
+				System.Console.WriteLine("SOUND CACHE: " + AssetsPrefix + name + " ADDED. " + SoundDatabase.Keys.Count + " sounds in SoundDatabase");
+#endif
 				}
 			}
 

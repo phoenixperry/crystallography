@@ -74,15 +74,6 @@ namespace Crystallography.UI
 			}
 		}
 		
-		public bool On { 
-			get { return _onToggle; }
-			set { 
-				_onToggle = value;
-				_buttonText.Visible = _onToggle;
-				_status = (_onToggle ? NORMAL : DISABLED);
-			}
-		}
-		
 		public int Status { get {return _status;} }
 		
 		public string Text {
@@ -304,6 +295,15 @@ namespace Crystallography.UI
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
 #endif
+		}
+		
+		public bool On(bool? pTurnOn=null) {
+			if (pTurnOn != null) {
+				_onToggle = (bool)pTurnOn;
+				_buttonText.Visible = _onToggle;
+				_status = (_onToggle ? NORMAL : DISABLED);
+			}
+			return  _onToggle;
 		}
 		
 		protected virtual void OnButtonDown() {

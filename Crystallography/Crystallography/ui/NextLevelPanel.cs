@@ -141,6 +141,10 @@ namespace Crystallography.UI
 			Height = (charHeight * 5.0f) + QuitButton.Height;
 			MessageText.Position = new Vector2(40.0f, QuitButton.Height + 20 );
 			CenterText();
+			
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		// EVENT HANDLERS ----------------------------------------------------------------------------------------------------------------------------------------
@@ -270,7 +274,7 @@ namespace Crystallography.UI
 				int i = 1;
 				foreach( int cube in LevelManager.Instance.goalDict.Keys ) {
 					foreach ( int points in LevelManager.Instance.goalDict[cube] ) {
-						if ( cube != pCubes || points != pScore ) { //----------------------- already handled the solution player just found
+						if ( (  cube != pCubes || points != pScore ) && i < Solutions.Length ) { //----------------------- already handled the solution player just found
 							Solutions[i] = new SolutionIcon() {
 								CubeText = cube.ToString(),
 								ScoreText = points.ToString(),

@@ -5,10 +5,31 @@
 		<Color Hex="29E2E2" />
 		<Pattern Path="Application/assets/images/set4/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
-		<Goal Cubes="1" Score="1" />
+		<Goal Cubes="8" Score="22" />
+		<StandardPop  Value="2" />
+		<HitMeDisabled Value="true" />
 		<OldGoal Value="1" />
 		<Bonus Value="1" />
-		<Message Title="the basics." Body="drag pieces together to make cubes." />
+		<Message Title="hello, you clever thing." Body="drag these 2 pieces together, &#xA;then double-tap to break them apart." />
+		<Event Type="BreaksEqual" Value="1" Action="SetStandardPop" Args="3;;populate" />
+		<Event Type="BreaksEqual" Value="1" Action="RemoveScoringQuality" Args="QPattern" />
+		<Event Type="BreaksEqual" Value="1" Action="RemoveScoringQuality" Args="QColor" />
+		<Event Type="BreaksEqual" Value="1" Action="UpdateMessagePanel" Args="just so.;;now, let's make a cube, shall we?&#xA;cubes need a top, a left and a right.;;0.0;;0.0" />
+		<Event Type="CubesEqual" Value="1" Action="SetPatternPath" Args="Application/assets/images/set1/gamePieces.png" />
+		<Event Type="CubesEqual" Value="1" Action="AddScoringQuality" Args="QColor" />
+		<Event Type="CubesEqual" Value="1" Action="SetBonus" Args="0" />
+		<Event Type="CubesEqual" Value="1" Action="UpdateMessagePanel" Args="3 of a kind.;;pieces can have 'qualities.'&#xA;'color' is just such a quality. red in this case.;;0.0;;0.0" />
+		<Event Type="CubesEqual" Value="2" Action="UpdateMessagePanel" Args="3 all unique.;;you can also form a cube when a quality&#xA;is all-different.&#xA;3 different colors means 3 points.;;0.0;;0.0" />
+		<Event Type="CubesEqual" Value="3" Action="AddScoringQuality" Args="QPattern" />
+		<Event Type="CubesEqual" Value="3" Action="RemoveScoringQuality" Args="QColor" />
+		<Event Type="CubesEqual" Value="3" Action="UpdateMessagePanel" Args="pattern recognition.;;color isn't the only quality.&#xA;pay attention to pattern, too.;;0.0;;0.0" />
+		<Event Type="CubesEqual" Value="4" Action="AddScoringQuality" Args="QColor" />
+		<Event Type="CubesEqual" Value="4" Action="UpdateMessagePanel" Args="compound interest.;;just because one quality is all-same&#xA;doesn't mean the other has to be.&#xA;try color and pattern together!;;0.0;;0.0" />
+		<Event Type="CubesEqual" Value="4" Action="SetStandardPop" Args="6" />
+		<Event Type="CubesEqual" Value="5" Action="SetStandardPop" Args="3" />
+		<Event Type="CubesEqual" Value="6" Action="SetHitMeDisabled" Args="false" />
+		<Event Type="CubesEqual" Value="6" Action="UpdateMessagePanel" Args="hit me.;;if you can't find a match press &#xA;the + button in the upper right corner!&#xA;you'll get up to 3 more pieces.;;0.0;;0.0" />
+		<Event Type="CubesEqual" Value="8" Action="UpdateMessagePanel" Args="brilliant.;;now you know everything there is to know&#xA;about how to play Crystallon.;;0.0;;0.0" />
 	</Level>
 	<Level Value="1">
 		<Color Hex="03FFBD" />

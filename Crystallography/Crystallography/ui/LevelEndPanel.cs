@@ -87,6 +87,10 @@ namespace Crystallography.UI
 			QuitButton = new ButtonEntity("", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/quit_game.png", 1, 3).TextureInfo, new Vector2i(0,0));
 			QuitButton.setPosition(181, 35);
 			this.AddChild(QuitButton.getNode ());
+			
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		public void Hide() {

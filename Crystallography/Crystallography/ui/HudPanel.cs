@@ -30,6 +30,9 @@ namespace Crystallography.UI
 			SlideInDirection = SlideDirection.DOWN;
 			SlideOutDirection = SlideDirection.UP;
 			Visible = false;
+#if DEBUG
+			Console.WriteLine(GetType().ToString() + " created" );
+#endif
 		}
 		
 		// EVENT HANDLERS -------------------------------------------------------------------------------------------------
@@ -112,7 +115,7 @@ namespace Crystallography.UI
 			} ) );
 			this.RunAction( baseSequence );
 			
-			if (DismissDelay > 0.0) {
+			if (DismissDelay > 0.0f) {
 				Sequence sequence = new Sequence();
 				sequence.Add( new DelayTime(DismissDelay) );
 				sequence.Add( new CallFunc( () => {AllowDismiss (); } ) );

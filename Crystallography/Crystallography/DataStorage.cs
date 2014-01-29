@@ -37,6 +37,9 @@ namespace Crystallography
 #endif
 		
 		public static void SavePuzzleScore(int pLevel, int pCubes, int pScore, bool pComplete) {
+#if DEBUG
+			Console.WriteLine("### SAVING SOLUTION DATA: Lv {0} Cu {1} Sc {2} Cmpl {3}", pLevel, pCubes, pScore, pComplete);
+#endif
 			Int32[] solution = new Int32[]{pCubes, pScore};
 			var previousSolutions = puzzleSolutionsFound[pLevel];
 			bool okToAdd = true;

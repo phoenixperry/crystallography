@@ -126,13 +126,13 @@ namespace Crystallography
 			
 			for(int i=0; i<radialNodes.Length; i++) {
 				radialNodes[i] = new Node();
+				radialNodes[i].Position = getNode().Position;
 				radialSprites[i] = Support.SpriteFromFile("Application/assets/images/burst.png");
+				radialSprites[i].Position = -radialSprites[i].CalcSizeInPixels() * radialSprites[i].Scale.X * 0.5f;
 				radialSprites[i].Color = (members[i].getNode() as SpriteBase).Color.Xyz0;
 				radialSprites[i].Pivot = new Vector2(0.5f, 0.5f);
 				radialSprites[i].Scale = new Vector2(0.1f, 0.1f);
 				radialNodes[i].AddChild (radialSprites[i]);
-				radialSprites[i].Position = -radialSprites[i].CalcSizeInPixels() * radialSprites[i].Scale.X * 0.5f;
-				radialNodes[i].Position = getNode().Position;
 				sequence = new Sequence();
 				sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, 0.5f), 0.5f) {
 					Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.ExpEaseOut(t, 1.5f)
@@ -165,7 +165,7 @@ namespace Crystallography
 			base.Update(dt);
 			for( int i=0; i<radialNodes.Length; i++) {
 				radialSprites[i].Position = -radialSprites[i].CalcSizeInPixels() * radialSprites[i].Scale.X * 0.5f;
-				radialNodes[i].Position = getNode().Position;
+//				radialNodes[i].Position = getNode().Position;
 			}
 		}
 		
@@ -197,17 +197,6 @@ namespace Crystallography
 		
 		// METHODS -------------------------------------------------------------
 		
-//		public void DrawAnim() {
-////			Console.WriteLine("Draw");
-//			if ( _body != null ) {
-//				var bottomLeft = Vector2.Zero;
-//				var topRight = getPosition();
-//				Director.Instance.DrawHelpers.DrawCircle(Vector2.Zero,60.0f,32);
-////				Director.Instance.DrawHelpers.DrawBounds2Fill (
-////				new Bounds2(bottomLeft, topRight));
-//			}
-//		}
-		
 		public void Rotate ( bool pClockwise ) {
 			if (pClockwise) {
 				Top.attachTo(_pucks[2]);
@@ -222,26 +211,6 @@ namespace Crystallography
 			Right = GetSideEntity(2);
 			Left = GetSideEntity(1);
 		}
-		
-//		public void Finish() {
-//			finished = true;
-//			Visible = false;
-			//_physics.removePhysicsBody(_body);
-			//setBody(null);
-//			foreach( AbstractCrystallonEntity e in members ) {
-//				(e as CardCrystallonEntity).setParticle(0);
-//			}
-//			GameScene.Layers[0].RemoveChild(radialNode, true);
-//			GameScene.Layers[0].RemoveChild(radialNode2, true);
-//			Top = null;
-//			Left = null;
-//			Right = null;
-//			radial = null;
-//			radial2 = null;
-//			radialNode = null;
-//			radialNode2 = null;
-//			GroupManager.Instance.Remove(this, true);
-//		}
 			
 		private CardCrystallonEntity GetSideEntity(int pIndex) {
 			Node n = pucks[pIndex].Children[0];

@@ -14,6 +14,7 @@ namespace Crystallography
 	{
 		protected static readonly int MAX_DIFFICULTY = 3;
 		protected static readonly int MIN_DIFFICULTY = 0;
+		protected static readonly string[] DELIMITER = new string[]{";;"};
 		
 		protected static LevelManager _instance;
 		
@@ -24,6 +25,7 @@ namespace Crystallography
 		public Dictionary<int, List<int>> goalDict;
 		public int difficulty;
 		
+		protected Dictionary<string, List<LevelEventData>> levelEventDict;
 		
 		// GET & SET --------------------------------------------------------------
 		
@@ -50,26 +52,105 @@ namespace Crystallography
 		public string MessageBody    { get; set; }
 		public string MessageTitle   { get; set; }
 		public int StandardPop       { get; set; }
+		public bool HitMeDisabled	 { get; set; }
 		
 		// CONSTRUCTORS -----------------------------------------------------------
 		
 		protected LevelManager (){
 			Palette = new Vector4[3];
 			goalDict = new Dictionary<int, List<int>>();
-//			Instance = this;
-//			Palette = new Vector4[] { new Vector4(0.956863f, 0.917647f, 0.956863f, 1.0f), 
-//										new Vector4(0.898039f, 0.074510f, 0.074510f, 1.0f), 
-//										new Vector4(0.160784f, 0.886274f, 0.886274f, 1.0f) };
-//			PatternPath = "Application/assets/images/set1/gamePieces.png";
-//			SoundPrefix = "stack1";
 			SetToDefault();
+			
+			UI.GameSceneHud.CubesUpdated += HandleUIGameSceneHudCubesUpdated;
+			UI.GameSceneHud.BreaksUpdated += HandleUIGameSceneHudBreaksUpdated;
+			
 			
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
 #endif
 		}
 		
+		// EVENT HANDLERS ---------------------------------------------------------
+		
+		void HandleUIGameSceneHudBreaksUpdated (object sender, EventArgs e)
+		{
+			List<LevelEventData> list;
+			
+			if ( levelEventDict.ContainsKey("BreaksEqual") ) {
+				list = levelEventDict["BreaksEqual"];
+				foreach (LevelEventData d in list) {
+					if ( GameScene.Hud.BreaksDetected == d.Value ) {
+						HandleGenericEvent(d);
+					}
+				}
+			}
+		}
+		
+		void HandleUIGameSceneHudCubesUpdated (object sender, EventArgs e)
+		{
+			List<LevelEventData> list;
+			
+			if ( levelEventDict.ContainsKey("CubesEqual") ) {
+				list = levelEventDict["CubesEqual"];
+				foreach (LevelEventData d in list) {
+					if ( GameScene.Hud.Cubes == d.Value ) {
+						HandleGenericEvent(d);
+					}
+				}
+			}
+		}
+		
+		// OVERRIDES --------------------------------------------------------------
+		
+		
+		
 		// METHODS ----------------------------------------------------------------
+		
+		private void HandleGenericEvent( LevelEventData d ) {
+			string[] args;
+			switch(d.Action) {
+			case ("UpdateMessagePanel"):
+				args = d.Args.Split(DELIMITER, StringSplitOptions.None);
+				GameScene.Hud.UpdateMessagePanel( args[0]
+				                                , args[1]
+				                                , args.Length > 2 ? float.Parse(args[2]) : 1.0f
+				                                , args.Length > 3 ? float.Parse(args[3]) : 0.0f 
+				                                );
+				break;
+			case ("AddScoringQuality"):
+				QualityManager.Instance.scoringQualityList.Add(d.Args);
+				if( d.Args == "QSound") {
+					LevelManager.Instance.SoundGlow = true;
+				}
+				break;
+			case ("RemoveScoringQuality"):
+				QualityManager.Instance.scoringQualityList.Remove(d.Args);
+				if( d.Args == "QSound") {
+					LevelManager.Instance.SoundGlow = false;
+				}
+				break;
+			case ("SetPatternPath"):
+				PatternPath = d.Args;
+				QPattern.Instance.setPalette();
+				break;
+			case ("SetStandardPop"):
+				args = d.Args.Split(DELIMITER, StringSplitOptions.None);
+				StandardPop = int.Parse(args[0]);
+				if (args.Length > 1) {
+					if (args[1] == "populate") CardManager.Instance.Populate(false);
+				}
+				break;
+			case ("SetHitMeDisabled"):
+				HitMeDisabled = Boolean.Parse(d.Args);
+			break;
+			case ("SetBonus"):
+				Bonus = int.Parse(d.Args);
+				break;
+			default:
+				Console.WriteLine("UNRECOGNIZED EVENT ACTION: " + d.Value);
+				break;
+			}
+		}
 		
 		public void GetLevelSettings( int pLevelNumber ) {
 			PossibleSolutions = 0;
@@ -113,10 +194,23 @@ namespace Crystallography
 								MessageTitle = line.Attribute("Title").Value;
 							} else if (line.Name.LocalName == "StandardPop") {
 								StandardPop = (int)line.Attribute("Value");
+							} else if (line.Name.LocalName == "HitMeDisabled") {
+								HitMeDisabled = line.Attribute("Value").Value == "true";
 							} else if (line.Name.LocalName == "Orientation") {
 								if ( 0 == (int)line.Attribute("Value") ) {
 									AppMain.ORIENTATION_MATTERS = false;
 								}
+							} else if ( line.Name.LocalName == "Event" ) {
+								string type = line.Attribute("Type").Value;
+								if ( false == levelEventDict.ContainsKey(type) ) {
+									levelEventDict[type] = new List<LevelEventData>();
+								}
+								
+								levelEventDict[type].Add( new LevelEventData() {
+									Value = float.Parse( line.Attribute("Value").Value ),
+									Action = line.Attribute("Action").Value,
+									Args = line.Attribute("Args").Value
+								});
 							}
 						}
 						return;
@@ -249,6 +343,15 @@ namespace Crystallography
 			MessageBody = "";
 			MessageTitle = "";
 			StandardPop = 15;
+			HitMeDisabled = false;
+			
+			if ( levelEventDict != null ) {
+				foreach (var list in levelEventDict.Values) {
+					list.Clear();
+				}
+				levelEventDict.Clear();
+			}
+			levelEventDict = new Dictionary<string, List<LevelEventData>>();
 			
 			if ( GameScene.currentLevel == 999 ) {
 				difficulty = 0;
@@ -265,6 +368,14 @@ namespace Crystallography
 			Console.WriteLine(GetType().ToString() + " deleted");
 		}
 #endif
+	}
+	
+	// HELPER CLASS ---------------------------------------------------------------------------------------
+
+	public class LevelEventData {
+		public float Value;
+		public string Action;
+		public string Args;
 	}
 }
 

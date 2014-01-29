@@ -117,9 +117,6 @@ namespace Crystallography
 			QualityManager.Instance.scoringQualityList.Remove(pQualityString);
 			if( pQualityString == "QSound") {
 				LevelManager.Instance.SoundGlow = false;
-//				foreach ( CardCrystallonEntity card in availableCards) {
-//					QualityManager.Instance.SetQuality(card, "QGlow", -1 );
-//				}
 			}
 			foreach ( CardCrystallonEntity card in availableCards) {
 				QualityManager.Instance.SetQuality(card, pQualityString, 0 );
