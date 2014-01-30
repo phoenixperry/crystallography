@@ -246,10 +246,8 @@ namespace Crystallography
 			if ( DeckOfIDs == null ) {
 				BuildDeckOfIDs();
 				if (GameScene.currentLevel == 999) {
-//					ShuffleDeckOfIDs();
 					QualityManager.Instance.scoringQualityList.Clear();
 					QualityManager.Instance.scoringQualityList.Add("QColor");
-//					QualityManager.Instance.scoringQualityList.Add("QPattern");
 				}
 			}
 			
@@ -322,10 +320,10 @@ namespace Crystallography
 		/// Creates a new <c>CardCrystallonEntity</c>, adds it to the current scene at a random location.
 		/// </summary>
 		public CardCrystallonEntity spawn( int pId = -1) {
-			var _screenWidth = Director.Instance.GL.Context.GetViewport().Width;
-            var _screenHeight = Director.Instance.GL.Context.GetViewport().Height;
-			return spawn( 220.0f + 0.6f * _screenWidth * GameScene.Random.NextFloat(),
-			       50f + 0.75f * _screenHeight * GameScene.Random.NextFloat(), pId);
+			float x = LevelManager.Instance.SpawnRect.X + LevelManager.Instance.SpawnRect.Z * GameScene.Random.NextFloat();
+			float y = LevelManager.Instance.SpawnRect.Y + LevelManager.Instance.SpawnRect.W * GameScene.Random.NextFloat();
+			
+			return spawn( x , y, pId);
 		}
 		
 		/// <summary>

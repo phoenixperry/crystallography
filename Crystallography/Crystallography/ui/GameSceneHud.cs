@@ -31,11 +31,11 @@ namespace Crystallography.UI
 		
 		SpriteTile TimeBar;
 		
-		LevelTitle levelTitle;
-		MessagePanel _messagePanel;
-		NextLevelPanel _nextLevelPanel;
+		public LevelTitle levelTitle;
+		public MessagePanel _messagePanel;
+		public NextLevelPanel _nextLevelPanel;
 		
-		public LevelEndPanel levelEndPanel;
+//		public LevelEndPanel levelEndPanel;
 		public PausePanel pausePanel;
 		
 		private const float SCORE_UPDATE_DELAY = 0.100f;
@@ -409,9 +409,9 @@ namespace Crystallography.UI
 			_scene.DialogLayer.AddChild(pausePanel);
 			pausePanel.Hide();
 			
-			levelEndPanel = new LevelEndPanel(_scene);
-			_scene.DialogLayer.AddChild(levelEndPanel);
-			levelEndPanel.Hide();
+//			levelEndPanel = new LevelEndPanel(_scene);
+//			_scene.DialogLayer.AddChild(levelEndPanel);
+//			levelEndPanel.Hide();
 			
 			GameHudBar = Support.SpriteUVFromFile("/Application/assets/images/GameHudBar.png");
 			GameHudBar.Position = new Vector2(0.0f, 473.0f);

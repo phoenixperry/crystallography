@@ -49,10 +49,10 @@ namespace Crystallography
 			get {
 				if (Hud == null) {
 					return false;
-				} else {
-					return (Hud.levelEndPanel.Visible == false);
-				}
-				
+				}// else {
+//					return (Hud.levelEndPanel.Visible == false);
+//				}
+				return true;
 			}
 		}
 		

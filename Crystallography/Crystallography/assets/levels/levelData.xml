@@ -10,6 +10,7 @@
 		<HitMeDisabled Value="true" />
 		<OldGoal Value="1" />
 		<Bonus Value="1" />
+		<SpawnRect X="220" Y="217" Width="573" Height="218" />
 		<Message Title="hello, you clever thing." Body="drag these 2 pieces together, &#xA;then double-tap to break them apart." />
 		<Event Type="BreaksEqual" Value="1" Action="SetStandardPop" Args="3;;populate" />
 		<Event Type="BreaksEqual" Value="1" Action="RemoveScoringQuality" Args="QPattern" />

@@ -53,6 +53,7 @@ namespace Crystallography
 		public string MessageTitle   { get; set; }
 		public int StandardPop       { get; set; }
 		public bool HitMeDisabled	 { get; set; }
+		public Vector4 SpawnRect	 { get; set; }
 		
 		// CONSTRUCTORS -----------------------------------------------------------
 		
@@ -196,6 +197,12 @@ namespace Crystallography
 								StandardPop = (int)line.Attribute("Value");
 							} else if (line.Name.LocalName == "HitMeDisabled") {
 								HitMeDisabled = line.Attribute("Value").Value == "true";
+							} else if (line.Name.LocalName == "SpawnRect") {
+								SpawnRect = new Vector4( float.Parse(line.Attribute ("X").Value),
+								                         float.Parse(line.Attribute ("Y").Value),
+								                         float.Parse(line.Attribute("Width").Value),
+								                         float.Parse(line.Attribute("Height").Value)
+								                        );
 							} else if (line.Name.LocalName == "Orientation") {
 								if ( 0 == (int)line.Attribute("Value") ) {
 									AppMain.ORIENTATION_MATTERS = false;
@@ -205,7 +212,6 @@ namespace Crystallography
 								if ( false == levelEventDict.ContainsKey(type) ) {
 									levelEventDict[type] = new List<LevelEventData>();
 								}
-								
 								levelEventDict[type].Add( new LevelEventData() {
 									Value = float.Parse( line.Attribute("Value").Value ),
 									Action = line.Attribute("Action").Value,
@@ -344,6 +350,7 @@ namespace Crystallography
 			MessageTitle = "";
 			StandardPop = 15;
 			HitMeDisabled = false;
+			SpawnRect = new Vector4(220.0f, 50.0f, 0.6f * 960.0f, 0.75f * 544.0f);
 			
 			if ( levelEventDict != null ) {
 				foreach (var list in levelEventDict.Values) {
