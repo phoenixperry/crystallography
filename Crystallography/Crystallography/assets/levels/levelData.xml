@@ -3,6 +3,7 @@
 		<Color Hex="F4EAF4" />
 		<Color Hex="E51313" />
 		<Color Hex="29E2E2" />
+		<BackgroundColor Hex="FFFFFF" />
 		<Pattern Path="Application/assets/images/set4/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="8" Score="22" />

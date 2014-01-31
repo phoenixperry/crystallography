@@ -7,6 +7,8 @@ using System.IO;
 using System.Reflection;
 
 using Sce.PlayStation.Core;
+using Sce.PlayStation.HighLevel.GameEngine2D;
+using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
 namespace Crystallography
 {
@@ -54,6 +56,11 @@ namespace Crystallography
 		public int StandardPop       { get; set; }
 		public bool HitMeDisabled	 { get; set; }
 		public Vector4 SpawnRect	 { get; set; }
+		
+		public Vector4 BackgroundColor {
+			get { return Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.GL.Context.GetClearColor(); }
+			set { Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.GL.Context.SetClearColor(value); }
+		}
 		
 		// CONSTRUCTORS -----------------------------------------------------------
 		
@@ -178,6 +185,8 @@ namespace Crystallography
 								} else {
 									SoundGlow = false;
 								}
+							} else if (line.Name.LocalName == "BackgroundColor") {
+								BackgroundColor = ExtractColor(line.Attribute("Hex").Value);
 							} else if (line.Name.LocalName == "Goal" ) {
 								var cubes = (int)line.Attribute("Cubes");
 								var score = (int)line.Attribute("Score");
@@ -340,6 +349,7 @@ namespace Crystallography
 			Palette[0] = new Vector4(0.956863f, 0.917647f, 0.956863f, 1.0f);
 			Palette[1] = new Vector4(0.898039f, 0.074510f, 0.074510f, 1.0f);
 			Palette[2] = new Vector4(0.160784f, 0.886274f, 0.886274f, 1.0f);
+			BackgroundColor = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
 			PatternPath = "Application/assets/images/set1/gamePieces.png";
 			SoundPrefix = "stack1";
 			Goal = 1;

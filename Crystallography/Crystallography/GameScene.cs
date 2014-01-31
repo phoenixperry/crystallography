@@ -75,7 +75,6 @@ namespace Crystallography
             this.Camera.SetViewFromViewport();
             _physics = GamePhysics.Instance;
 			
-			
 			Hud = new Crystallography.UI.GameSceneHud(this);
 			if (pTimed) {
 				// TODO Set Up Timer

@@ -275,7 +275,6 @@ namespace Crystallography
 			easeState = EaseState.MOVING_IN;
 			
 			for (int i=0; i<MAX_CAPACITY; i++) {
-//				_pucks[i].StopAllActions();
 				_pucks[i].StopActionByTag( 1 );
 			}
 			if ( population == 1 ) {	// ------------------------------------------------------ move single object to the center
