@@ -33,6 +33,95 @@ namespace Crystallography
 			return System.Array.FindIndex(pArray, (obj) => obj == null);
 		}
 		
+		public static Vector4 HSBToRGB( Vector4 hsb ) {
+			Vector4 rgb = Vector4.Zero;
+			rgb.A = hsb.A;
+			if (hsb.Y == 0.0f) {
+				rgb.R = rgb.G = rgb.B = hsb.Z;
+			} else {
+				float h = (hsb.X - FMath.Floor(hsb.X)) * 6.0f;
+                float f = h - FMath.Floor(h);
+                float p = hsb.Z * (1.0f - hsb.Y);
+                float q = hsb.Z * (1.0f - hsb.Y * f);
+                float t = hsb.Z * (1.0f - (hsb.Y * (1.0f - f)));
+                switch ((int) h) {
+                case 0:
+                    rgb.R = hsb.Z;
+                    rgb.G = t;
+                    rgb.B = p;
+                    break;
+                case 1:
+                    rgb.R = q;
+                    rgb.G = hsb.Z;
+                    rgb.B = p;
+                    break;
+                case 2:
+                    rgb.R = p;
+                    rgb.G = hsb.Z;
+                    rgb.B = t;
+                    break;
+                case 3:
+                    rgb.R = p;
+                    rgb.G = q;
+                    rgb.B = hsb.Z;
+                    break;
+                case 4:
+                    rgb.R = t;
+                    rgb.G = p;
+                    rgb.B = hsb.Z;
+                    break;
+                case 5:
+                    rgb.R = hsb.Z;
+                    rgb.G = p;
+                    rgb.B = q;
+                    break;
+                }
+			}
+            return rgb;
+		}
+		
+		public static Vector4 RGBToHSB( Vector4 rgba ) {
+			Vector4 hsba = Vector4.Zero;
+			hsba.A = rgba.A;
+			
+			float cmax = FMath.Max(rgba.R, rgba.G);
+			if (cmax < rgba.B) {
+				cmax = rgba.B;
+			}
+			float cmin = FMath.Min(rgba.R, rgba.G);
+			if (cmin > rgba.B) {
+				cmin = rgba.B;
+			}
+			hsba.Z = cmax;
+       		if (cmax != 0.0f) {
+       			hsba.Y = (cmax - cmin) / cmax;
+			} else {
+				hsba.Y = 0.0f;
+			}
+			if (hsba.Y == 0.0f) {
+				hsba.X = 0.0f;
+			} else {
+				float redc =	(cmax - rgba.R) / (cmax - cmin);
+				float greenc =	(cmax - rgba.G) / (cmax - cmin);
+				float bluec = 	(cmax - rgba.B) / (cmax - cmin);
+				if (rgba.R == cmax) {
+					hsba.X = bluec - greenc;
+				} else if (rgba.G == cmax) {
+					hsba.X = 2.0f + redc - bluec;
+				} else {
+               		hsba.X = 4.0f + greenc - redc;
+				}
+               	hsba.X = hsba.X / 6.0f;
+               	if (hsba.X < 0.0f) {
+            	       hsba.X = hsba.X + 1.0f;
+				}
+           	}
+//           	hsbvals[0] = hue;
+//           	hsbvals[1] = saturation;
+//           	hsbvals[2] = brightness;
+			return hsba;
+		}
+		
 		public static Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile SpriteFromFile(string filename)
 		{
 			if (TextureCache.ContainsKey(filename) == false)

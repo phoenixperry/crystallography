@@ -396,8 +396,31 @@ namespace Crystallography
 		/// </param>
 		protected void FadeIn(CardCrystallonEntity pCard) {
 			pCard.Visible = true;
-			(pCard.getNode() as SpriteTile).Color.W = 0.0f;
-			pCard.getNode().RunAction( new TintBy( Sce.PlayStation.Core.Vector4.UnitW, 2.0f ) );
+			(pCard.getNode() as SpriteBase).Color.W = 0.0f; //QColor.palette[pCard.getColor()].Xyz0;
+			pCard.TintTo(QColor.palette[pCard.getColor()], 2.0f, true);
+		}
+		
+		public void TintAllCards(float pDuration = 1.0f) {
+			foreach (var card in availableCards) {
+				card.TintTo(QColor.palette[card.getColor()], pDuration, false);
+			}
+		}
+		
+		public void RotateColors( int rotations, float pRotateTime, float pRestTime=1.0f) {
+			Director.Instance.CurrentScene.StopActionByTag(30);
+			var cRot = new Sequence();
+			cRot.Add( new CallFunc( () => {
+				QColor.Instance.rotatePalette();
+			} ));
+			cRot.Add( new CallFunc( () => {
+				TintAllCards( pRotateTime );
+			} ));
+			cRot.Add( new DelayTime(pRotateTime + pRestTime) );
+			if (rotations > 0) {
+				Director.Instance.CurrentScene.RunAction(new Repeat(cRot, rotations) {Tag = 30});
+			} else {
+				Director.Instance.CurrentScene.RunAction(new RepeatForever() {Tag = 30, InnerAction = cRot});
+			}
 		}
 		
 		// DESTRUCTOR ----------------------------------------------------------------------------------------

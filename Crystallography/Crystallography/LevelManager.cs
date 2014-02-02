@@ -186,7 +186,14 @@ namespace Crystallography
 									SoundGlow = false;
 								}
 							} else if (line.Name.LocalName == "BackgroundColor") {
-								BackgroundColor = ExtractColor(line.Attribute("Hex").Value);
+//								var bgTint = new TintTo(ExtractColor(line.Attribute("Hex").Value), 3.0f) {
+//									Get = () => BackgroundColor,
+//									Set = value => {BackgroundColor = value;},
+//									Tween = (x) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(x,2)
+//								};
+//								Director.Instance.CurrentScene.RunAction(bgTint);
+								TintBackground( ExtractColor(line.Attribute("Hex").Value), 3.0f );
+								
 							} else if (line.Name.LocalName == "Goal" ) {
 								var cubes = (int)line.Attribute("Cubes");
 								var score = (int)line.Attribute("Score");
@@ -278,6 +285,15 @@ namespace Crystallography
 					ReduceDifficulty();
 				}
 			}
+		}
+		
+		public void TintBackground( Vector4 pColor, float pDuration ) {
+			var bgTint = new TintTo(pColor, pDuration) {
+				Get = () => BackgroundColor,
+				Set = value => {BackgroundColor = value;},
+				Tween = (x) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(x,2)
+			};
+			Director.Instance.CurrentScene.RunAction(bgTint);
 		}
 		
 		protected void IncreaseDifficulty() {

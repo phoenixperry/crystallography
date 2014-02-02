@@ -47,9 +47,16 @@ namespace Crystallography
 		// OVERRIDES --------------------------------------------------------------------
 		
 		public override void Apply ( ICrystallonEntity pEntity, int pVariant ) {
-			pEntity.getNode().RunAction( new TintTo( palette[pVariant], 0.0f ) );
 			if ( pEntity is SpriteTileCrystallonEntity ) {
+				(pEntity.getNode() as SpriteBase).Color = palette[pVariant];
+				
+//				var entityTintTo = new TintTo(palette[pVariant], 0.0f) {
+//					Get = () => ( pEntity.getNode() as SpriteBase).Color,
+//					Set = value => { (pEntity.getNode() as SpriteBase).Color = value; },
+//					Tween = (x) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(x,2)
+//				};
 				( pEntity as SpriteTileCrystallonEntity ).setColor(pVariant);
+//				Director.Instance.CurrentScene.RunAction(entityTintTo);
 			}
 		}
 		
@@ -67,6 +74,15 @@ namespace Crystallography
 			palette[0] = pColor1;
 			palette[1] = pColor2;
 			palette[2] = pColor3;
+		}
+		
+		public void rotatePalette() {
+			Vector4 temp = palette[0];
+			for (var i = 0; i < palette.Length-1; i++) {
+				palette[i] = palette[i+1];
+				Console.WriteLine(palette[i].ToString());
+			}
+			palette[palette.Length-1] = temp;
 		}
 	}
 }

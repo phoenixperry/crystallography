@@ -111,6 +111,13 @@ namespace Crystallography
 			
 			ForegroundLayer.AddChild( Support.ParticleEffectsManager.Instance );
 			
+//			var c = new Vector4(0.271f, 0.688f, 0.525f, 0.666f);
+//			Console.WriteLine(c.ToString());
+//			c = Support.RGBToHSB(c);
+//			Console.WriteLine(c.ToString());
+//			c = Support.HSBToRGB(c);
+//			Console.WriteLine(c.ToString());
+			
 #if METRICS
 			DataStorage.AddMetric("Level", () => currentLevel, 1);
 #endif
@@ -241,6 +248,7 @@ namespace Crystallography
 				if (handler != null) {
 					handler( this, null );
 				}
+				CardManager.Instance.RotateColors(-1, 3.0f);
 			} else {
 #if DEBUG
 				Console.WriteLine( "All known levels (" + TOTAL_LEVELS + ") complete. Returning to TitleScene." );

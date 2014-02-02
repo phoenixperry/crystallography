@@ -103,27 +103,35 @@ namespace Crystallography
 			GroupManager.Instance.Add( this );
 			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Cube], 0.1f, 0.01f, pPosition));
 			setVelocity(1.0f, GameScene.Random.NextAngle());
+			
+			// SET UP SELF-DESTRUCT
 			Sequence sequence = new Sequence();
 			sequence.Add( new DelayTime(2.0f));
 			sequence.Add ( new CallFunc( () => { 
 				GroupManager.Instance.Remove(this, true); 
 			} ) );
 			getNode().RunAction(sequence);
-			foreach( AbstractCrystallonEntity e in members ) {
-				if (e is CardCrystallonEntity) {
-					(e as CardCrystallonEntity).HideGlow();
-					sequence = new Sequence();
-					sequence.Add( new DelayTime( 0.8f ) );
-					sequence.Add( new TintBy( new Vector4(0.0f, 0.0f, 0.0f, -1.0f), 0.5f) );
-					(e as CardCrystallonEntity).getNode().RunAction( sequence );
+			
+			// FADE OUT SEQUENCE
+			sequence = new Sequence();
+			sequence.Add( new DelayTime( 0.8f ) );
+			sequence.Add( new CallFunc( () => {
+				foreach( AbstractCrystallonEntity e in members ) {
+					if (e is CardCrystallonEntity) {
+						Console.WriteLine(e.id.ToString());
+						(e as CardCrystallonEntity).HideGlow();
+						(e as CardCrystallonEntity).TintTo( Vector4.Zero, 0.5f, true);
+					}
 				}
-			}
+			}));
+			Director.Instance.CurrentScene.RunAction(sequence);
+			
 			addToScene();
-//			getNode().RunAction(sequence);
 			
 			radialNodes = new Node[3];
 			radialSprites = new SpriteTile[3];
 			
+			// RADIAL BURST VFX
 			for(int i=0; i<radialNodes.Length; i++) {
 				radialNodes[i] = new Node();
 				radialNodes[i].Position = getNode().Position;
