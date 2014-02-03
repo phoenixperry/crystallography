@@ -250,7 +250,7 @@ namespace Crystallography
 				}
 				
 				QColor.Instance.ShiftColors(1, 1.0f);
-				CardManager.Instance.RotateColors(-1, 1.0f, 5.0f);
+//				CardManager.Instance.RotateColors(-1, 1.0f, 5.0f);
 				
 			} else {
 #if DEBUG
