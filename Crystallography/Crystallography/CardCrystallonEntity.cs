@@ -275,25 +275,31 @@ namespace Crystallography
 		}
 		
 		public void TintTo( Vector4 pColor, float pDuration, bool alpha) {
-			this.getNode().StopActionByTag(alpha ? 2 : 3);
-			var entityTintTo = new TintTo(Support.RGBToHSB(pColor), pDuration) {
-				Tag = alpha ? 2 : 3,
-				Get = () => Support.RGBToHSB(( this.getNode() as SpriteBase).Color),
-				Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(t,2)
-			};
 			if (alpha) {
-				entityTintTo.Set = (value) => { 
-					(this.getNode() as SpriteBase).Color.W = value.W;
-				};
+				(this.getNode() as SpriteBase).ShiftSpriteAlpha(pColor, pDuration);
 			} else {
-				entityTintTo.Set = (value) => {
-					var hsba = Support.HSBToRGB(value);
-					(this.getNode() as SpriteBase).Color.X = hsba.X;
-					(this.getNode() as SpriteBase).Color.Y = hsba.Y;
-					(this.getNode() as SpriteBase).Color.Z = hsba.Z;
-				};
+				(this.getNode() as SpriteBase).ShiftSpriteColor(pColor, pDuration);
 			}
-			this.getNode().RunAction(entityTintTo);
+			
+//			this.getNode().StopActionByTag(alpha ? 2 : 3);
+//			var entityTintTo = new TintTo(Support.RGBToHSB(pColor), pDuration) {
+//				Tag = alpha ? 2 : 3,
+//				Get = () => Support.RGBToHSB(( this.getNode() as SpriteBase).Color),
+//				Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(t,2)
+//			};
+//			if (alpha) {
+//				entityTintTo.Set = (value) => { 
+//					(this.getNode() as SpriteBase).Color.W = value.W;
+//				};
+//			} else {
+//				entityTintTo.Set = (value) => {
+//					var hsba = Support.HSBToRGB(value);
+//					(this.getNode() as SpriteBase).Color.X = hsba.X;
+//					(this.getNode() as SpriteBase).Color.Y = hsba.Y;
+//					(this.getNode() as SpriteBase).Color.Z = hsba.Z;
+//				};
+//			}
+//			this.getNode().RunAction(entityTintTo);
 		}
 		
 //		public void resetCountdown() {

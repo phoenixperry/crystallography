@@ -75,6 +75,14 @@ namespace Crystallography.UI
 			InputManager.Instance.StartJustUpDetected -= HandleInputManagerInstanceStartJustUpDetected;
 			base.OnExit ();
 			
+			Background = null;
+			PauseText = null;
+			ResetButton = null;
+			ResumeButton = null;
+			GiveUpButton = null;
+			
+			RemoveAllChildren(true);
+			
 			InputManager.Instance.StartJustUpDetected -= HandleInputManagerInstanceStartJustUpDetected;
 		}
 		
@@ -84,7 +92,6 @@ namespace Crystallography.UI
 			_initialized = true;
 			FontMap map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold") );
 			
-//			Background = Support.SpriteUVFromFile("/Application/assets/images/PausePanelBG.png");
 			Background = Support.UnicolorSprite("med_grey", 153, 153, 153, 255);
 			Background.Position = new Vector2(328.0f, 112.0f);
 			Background.Scale = new Vector2(20.0f, 18.9375f);
@@ -97,47 +104,30 @@ namespace Crystallography.UI
 			ResetButton = new BetterButton(289.0f, 71.0f) {
 				Text = "restart",
 				Position = new Vector2(343.0f, 203.0f),
-				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)//,
-//				On = false
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
+			ResetButton.background.RegisterPalette(2);
 			ResetButton.On(false);
 			this.AddChild(ResetButton);
 			
 			ResumeButton = new BetterButton(289.0f, 71.0f) {
 				Text = "resume",
 				Position = new Vector2(343.0f, 284.0f),
-				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)//,
-//				On = false
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
+			ResumeButton.background.RegisterPalette(2);
 			ResumeButton.On (false);
 			this.AddChild(ResumeButton);
 			
 			GiveUpButton = new BetterButton(289.0f, 71.0f) {
 				Text = "quit",
 				Position = new Vector2(343.0f, 122.0f),
-				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)//,
-//				On = false
+//				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
 			};
+			GiveUpButton.background.RegisterPalette(1);
 			GiveUpButton.On(false);
 			this.AddChild(GiveUpButton);
 			
-//			ResetButton = new ButtonEntity("      restart", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//			ResetButton.setPosition(487.0f, 238.0f);
-//			ResetButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
-//			ResetButton.on = false;
-//			this.AddChild(ResetButton.getNode());
-//			
-//			ResumeButton = new ButtonEntity("     resume", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/blueBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//			ResumeButton.setPosition(487.0f, 319.0f);
-//			ResumeButton.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
-//			ResumeButton.on = false;
-//			this.AddChild(ResumeButton.getNode());
-//			
-//			GiveUpButton = new ButtonEntity("        quit", _scene, GamePhysics.Instance, Support.TiledSpriteFromFile("Application/assets/images/redBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
-//			GiveUpButton.setPosition(487.0f, 157.0f);
-//			GiveUpButton.label.FontMap = ResumeButton.label.FontMap;
-//			GiveUpButton.on = false;
-//			this.AddChild(GiveUpButton.getNode());
 		
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
@@ -174,9 +164,6 @@ namespace Crystallography.UI
 			} else {
 				Hide ();
 			}
-//			PauseMenu.Visible = pOn;
-//			AppMain.UI_INPUT_ENABLED = pOn;
-//			AppMain.GAMEPLAY_INPUT_ENABLED = !pOn;
 			EventHandler<PauseEventArgs> handler = PauseDetected;
 			if (handler != null) {
 				handler( this, new PauseEventArgs { isPaused = pOn } );

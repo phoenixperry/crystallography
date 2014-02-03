@@ -11,7 +11,7 @@ namespace Crystallography.UI
 		SpriteUV GameHudBar;
 		SpriteUV ScoreIcon;
 		SpriteTile CubeIcon;
-		SpriteUV BlueBox;
+		SpriteTile BlueBox;
 		SpriteTile RedBox;
 		
 		BetterButton HitMeButton;
@@ -24,11 +24,11 @@ namespace Crystallography.UI
 		
 		TimerEntity GameTimer;
 		
-		SpriteUV TimeBox;
-		Label TimerSeparatorText;
-		Label TimerSecondsText;
-		Label TimerMinutesText;
-		
+//		SpriteUV TimeBox;
+//		Label TimerSeparatorText;
+//		Label TimerSecondsText;
+//		Label TimerMinutesText;
+//		
 		SpriteTile TimeBar;
 		
 		public LevelTitle levelTitle;
@@ -164,7 +164,7 @@ namespace Crystallography.UI
 		void HandleQualityManagerMatchScoreDetected (object sender, MatchScoreEventArgs e) {
 			Cubes++;
 			CubeText.Text = Cubes.ToString();
-			float x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(CubeText.Text);
+			float x = RedBox.Position.X +  50.0f - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(CubeText.Text);
 			CubeText.Position = new Vector2(x, CubeText.Position.Y);
 			
 			EventHandler handler = CubesUpdated;
@@ -284,7 +284,7 @@ namespace Crystallography.UI
 					}
 					_displayScore += mod;
 					ScoreText.Text = _displayScore.ToString();
-					float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
+					float x = BlueBox.Position.X + 50.0f - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
 					ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
 					_updateTimer = 0.0f;
 					
@@ -312,6 +312,7 @@ namespace Crystallography.UI
 			PausePanel.QuitButtonPressDetected += HandlePausePanelQuitButtonPressDetected;
 			PausePanel.ResetButtonPressDetected += HandlePausePanelResetButtonPressDetected;
 			CubeCrystallonEntity.CubeCompleteDetected += HandleCubeCrystallonEntityCubeCompleteDetected;
+			CardManager.Instance.CardSpawned += HandleCardManagerInstanceCardSpawned;
 //			if(GameScene.currentLevel == 999) {
 //				this.Schedule(CalculateTimer,1);
 //			}
@@ -342,9 +343,19 @@ namespace Crystallography.UI
 			PausePanel.QuitButtonPressDetected -= HandlePausePanelQuitButtonPressDetected;
 			PausePanel.ResetButtonPressDetected -= HandlePausePanelResetButtonPressDetected;
 			CubeCrystallonEntity.CubeCompleteDetected -= HandleCubeCrystallonEntityCubeCompleteDetected;
+			CardManager.Instance.CardSpawned -= HandleCardManagerInstanceCardSpawned;
 //			if(GameScene.currentLevel == 999) {
 //				this.Unschedule(CalculateTimer);
 //			}
+			
+			_nextLevelPanel = null;
+			HitMeButton = null;
+			PauseButton = null;
+			pausePanel = null;
+			levelTitle = null;
+			_messagePanel = null;
+			_scene = null;
+			
 #if METRICS
 			if(ExitCode == LevelExitCode.NULL){
 				DataStorage.CollectMetrics();
@@ -442,16 +453,20 @@ namespace Crystallography.UI
 			
 			ScoreTitleText = new Label("score", map);
 			ScoreTitleText.Position = new Vector2(287, 25.0f);
-			ScoreTitleText.Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f);
+//			ScoreTitleText.Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f);
+			ScoreTitleText.RegisterPalette(2);
 			GameHudBar.AddChild(ScoreTitleText);
 			
-			BlueBox = Support.SpriteUVFromFile("/Application/assets/images/blueBox.png");
+//			BlueBox = Support.SpriteUVFromFile("/Application/assets/images/blueBox.png");
+			BlueBox = Support.UnicolorSprite("white", 255,255,255,255);
+			BlueBox.Scale = new Vector2(6.25f, 4.4375f);
 			BlueBox.Position = new Vector2(354.0f, 0.0f);
+			BlueBox.RegisterPalette(2);
 			GameHudBar.AddChild(BlueBox);
 			
 			ScoreText = new Label("", bigMap);
-			ScoreText.Position = new Vector2(5.0f, 12.0f);
-			BlueBox.AddChild(ScoreText);
+			ScoreText.Position = new Vector2(359.0f, 12.0f);
+			GameHudBar.AddChild(ScoreText);
 			
 			CubeIcon = Support.SpriteFromFile("/Application/assets/images/stopIcon.png");
 			CubeIcon.Position = new Vector2(20.0f,16.0f);
@@ -459,16 +474,20 @@ namespace Crystallography.UI
 			
 			CubesTitleText = new Label("cubes", map);
 			CubesTitleText.Position = new Vector2(63.0f, 25.0f);
-			CubesTitleText.Color = new Vector4( 0.89803922f, 0.0745098f, 0.0745098f, 1.0f);
+//			CubesTitleText.Color = new Vector4( 0.89803922f, 0.0745098f, 0.0745098f, 1.0f);
+			CubesTitleText.RegisterPalette(1);
 			GameHudBar.AddChild(CubesTitleText);
 			
-			RedBox = Support.SpriteFromFile("/Application/assets/images/redbox.png");
+//			RedBox = Support.SpriteFromFile("/Application/assets/images/redbox.png");
+			RedBox = Support.UnicolorSprite("white", 255,255,255,255);
 			RedBox.Position = new Vector2(130.0f, 0.0f);
+			RedBox.Scale = new Vector2(6.25f, 4.4375f);
+			RedBox.RegisterPalette(1);
 			GameHudBar.AddChild(RedBox);
 			
 			CubeText = new Label("", bigMap);
-			CubeText.Position = new Vector2(5.0f, 12.0f);
-			RedBox.AddChild(CubeText);
+			CubeText.Position = new Vector2(135.0f, 12.0f);
+			GameHudBar.AddChild(CubeText);
 			
 			GameTimer = new TimerEntity();
 			if (GameScene.currentLevel == 999) {
@@ -498,21 +517,23 @@ namespace Crystallography.UI
 			PauseButton = new BetterButton(115.0f, 71.0f) {
 				Text = "| |",
 				Position = new Vector2(845.0f, 473.0f),
-				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+//				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
 			};
 			this.AddChild(PauseButton);
+			PauseButton.background.RegisterPalette(1);
 			PauseButton.ButtonUpAction += HandlePauseButtonButtonUpAction;
 			
 			HitMeButton = new BetterButton(115.0f, 71.0f) {
 				Text = "+",
 				Position = new Vector2(720.0f, 473.0f),
-				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
 			HitMeButton.On(!LevelManager.Instance.HitMeDisabled);
 			this.AddChild(HitMeButton);
+			HitMeButton.background.RegisterPalette(2);
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
 			
-			CardManager.Instance.CardSpawned += HandleCardManagerInstanceCardSpawned;
+			
 		}
 
 		
@@ -535,12 +556,12 @@ namespace Crystallography.UI
 			
 			GameTimer.Reset();
 			ScoreText.Text = _displayScore.ToString();
-			float x = 0.5f * BlueBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
+			float x = BlueBox.Position.X + 50.0f - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
 			ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
 			
 //			if(GameScene.currentLevel != 999) {
 				CubeText.Text = "0";
-				x = 0.5f * RedBox.CalcSizeInPixels().X - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(CubeText.Text);
+				x = RedBox.Position.X + 50.0f - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(CubeText.Text);
 				CubeText.Position = new Vector2(x, CubeText.Position.Y);
 //			}
 			
@@ -576,7 +597,6 @@ namespace Crystallography.UI
 			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
 			_nextLevelPanel.Populate( Cubes, Score );
 			_nextLevelPanel.SlideIn();
-//			_pauseTimer = true;
 			GameTimer.Pause(true);
 		}
 		

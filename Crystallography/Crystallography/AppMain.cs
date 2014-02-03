@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.Core.Input;
-using Sce.PlayStation.HighLevel.UI; 
 using Sce.PlayStation.HighLevel.GameEngine2D; 
+
 namespace Crystallography
 {
 	public static class RandomExtensions
@@ -49,6 +49,84 @@ namespace Crystallography
             return new Vector2(self.NextFloat(), self.NextFloat());
         }
     }
+	
+	public static class LabelExtensions {
+		public static void ShiftLabelColor (this Label self, Vector4 pColor, float pDuration = 0.0f) {
+			self.StopActionByTag(3);
+			var shift = new TintTo(pColor, pDuration) {
+				Tag = 3,
+				Get = () => self.Color,
+				Set = (value) => {
+					self.Color.R = value.R;
+					self.Color.G = value.G;
+					self.Color.B = value.B;
+				},
+				Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(t,2)
+			};
+			self.RunAction(shift);
+		}
+		
+		public static void ShiftLabelAlpha( this SpriteBase self, Vector4 pColor, float pDuration=0.0f) {
+			self.StopActionByTag(2);
+			var shift = new TintTo(pColor, pDuration) {
+				Tag = 2,
+				Get = () => self.Color,
+				Set = (value) => { self.Color.A = value.A; },
+				Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(t,2)
+			};
+			self.RunAction(shift);
+		}
+	}
+	
+	public static class SpriteBaseExtensions {
+		public static void ShiftSpriteColor (this SpriteBase self, Vector4 pColor, float pDuration = 0.0f) {
+			self.StopActionByTag(3);
+			var shift = new TintTo(pColor, pDuration) {
+				Tag = 3,
+				Get = () => self.Color,
+				Set = (value) => {
+					self.Color.R = value.R;
+					self.Color.G = value.G;
+					self.Color.B = value.B;
+				},
+				Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(t,2)
+			};
+			self.RunAction(shift);
+		}
+		
+		public static void ShiftSpriteAlpha( this SpriteBase self, Vector4 pColor, float pDuration=0.0f) {
+			self.StopActionByTag(2);
+			var shift = new TintTo(pColor, pDuration) {
+				Tag = 2,
+				Get = () => self.Color,
+				Set = (value) => { self.Color.A = value.A; },
+				Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(t,2)
+			};
+			self.RunAction(shift);
+		}
+	}
+	
+	public static class NodeExtensions {		
+		public static void RegisterPalette( this Node self, int pIndex ) {
+			var reg = QColor.registry[pIndex];
+			if (QColor.registry[pIndex] == null) {
+				QColor.registry[pIndex] = new List<Node>();
+			}
+			if ( false == QColor.registry[pIndex].Contains(self) ) {
+				QColor.registry[pIndex].Add(self);
+			}
+			QColor.Instance.ApplyUI(self, pIndex);
+		}
+		
+		public static void UnregisterPalette( this Node self ) {
+			for (int i = 0; i < QColor.registry.Length; i++) {
+				var reg = QColor.registry[i];
+				if (reg != null) {
+					reg.Remove(self);
+				}
+			}
+		}
+	}
 	
 	public class AppMain
 	{

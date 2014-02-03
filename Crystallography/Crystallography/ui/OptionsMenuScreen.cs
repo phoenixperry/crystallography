@@ -96,15 +96,17 @@ namespace Crystallography.UI
 			OKButton = new BetterButton(289.0f, 71.0f) {
 				Text = "ok",
 				Position = new Vector2(671.0f, 0.0f),
-				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+//				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
 			};
+			OKButton.background.RegisterPalette(1);
 			this.AddChild(OKButton);
 			
 			CancelButton = new BetterButton(289.0f, 71.0f) {
 				Text = "cancel",
 				Position = new Vector2(671.0f, 71.0f),
-				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
+			CancelButton.background.RegisterPalette(2);
 			this.AddChild(CancelButton);
 			
 			ClearPanel = new MessagePanel(289.0f, 240.0f) {
@@ -118,15 +120,17 @@ namespace Crystallography.UI
 			ClearButton = new BetterButton(289.0f, 71.0f) {
 				Text = "clear all data",
 				Position = new Vector2(0.0f, 0.0f),
-				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
+			ClearButton.background.RegisterPalette(2);
 			this.AddChild(ClearButton);
 			
 			ClearOKButton = new BetterButton(289.0f, 71.0f) {
 				Text = "do it",
 				Position = new Vector2(0.0f, 0.0f),
-				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+//				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
 			};
+			ClearOKButton.background.RegisterPalette(1);
 			ClearPanel.AddChild(ClearOKButton);
 		}
 		
@@ -187,6 +191,10 @@ namespace Crystallography.UI
 		
 		public override void OnExit ()
 		{
+			OKButton.UnregisterPalette();
+			ClearButton.UnregisterPalette();
+			ClearOKButton.UnregisterPalette();
+			CancelButton.UnregisterPalette();
 			OKButton.ButtonUpAction -= HandleOKButtonButtonUpAction;
 			ClearButton.ButtonUpAction -= HandleClearButtonButtonUpAction;
 			ClearPanel.OnSlideInComplete -= HandleClearPanelOnSlideInComplete;

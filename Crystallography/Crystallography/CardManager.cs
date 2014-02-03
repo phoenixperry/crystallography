@@ -371,6 +371,8 @@ namespace Crystallography
 					handler( this, null );
 				}
 			
+//			card.getNode().RegisterPalette(card.getColor());
+			
 			return card;
 		}
 		

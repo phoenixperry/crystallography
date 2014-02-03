@@ -17,7 +17,7 @@ namespace Crystallography.UI
 		public float Height;
 		public float Width;
 		
-		protected SpriteTile _background;
+		public SpriteTile background;
 		protected SpriteTile _icon;
 		protected Bounds2 _bounds;
 		protected Label _buttonText;
@@ -39,8 +39,8 @@ namespace Crystallography.UI
 		// GET & SET --------------------------------------------------------------------
 		
 		public Vector4 Color {
-			get { return _background.Color; }
-			set { _background.Color = value; }
+			get { return background.Color; }
+			set { background.Color = value; }
 		}
 		
 		public SpriteTile Icon {
@@ -129,14 +129,14 @@ namespace Crystallography.UI
 //		
 //		public BetterButton( string pBackgroundPath, Font pFont) {
 //			_textFont = pFont;
-//			_background = Support.TiledSpriteFromFile(pBackgroundPath, 1, 3);
-//			var size = _background.CalcSizeInPixels();
+//			background = Support.TiledSpriteFromFile(pBackgroundPath, 1, 3);
+//			var size = background.CalcSizeInPixels();
 //			Initialize(size.X, size.Y);
 //		} 
 		
 		public BetterButton (string pBackgroundPath) {
-			_background = Support.TiledSpriteFromFile(pBackgroundPath, 1, 3);
-			var size = _background.CalcSizeInPixels();
+			background = Support.TiledSpriteFromFile(pBackgroundPath, 1, 3);
+			var size = background.CalcSizeInPixels();
 			Initialize(size.X, size.Y);
 		}
 		
@@ -177,12 +177,12 @@ namespace Crystallography.UI
 		
 		public override void OnExit ()
 		{
-			_background = null;
+			background = null;
 			_icon = null;
 			_buttonText = null;
 			_textFont = null;
-			RemoveAllChildren(true);
 			base.OnExit ();
+			RemoveAllChildren(true);
 			InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
 			InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
 		}
@@ -197,9 +197,9 @@ namespace Crystallography.UI
 				}
 				
 			}
-			_background.TileIndex1D = _status;
+			background.TileIndex1D = _status;
 			
-			switch( _background.TileIndex1D ) {
+			switch( background.TileIndex1D ) {
 			case BetterButton.PRESSED:
 				_buttonText.Color.A = 0.7f;
 				if(_icon != null) {
@@ -273,11 +273,11 @@ namespace Crystallography.UI
 			_pressed = false;
 			_bounds = new Bounds2(Vector2.Zero, size);
 			
-			if (_background == null) {
-				_background = Support.TiledSpriteFromFile("/Application/assets/images/UI/BetterButton.png", 1, 3);
-				_background.Scale = size / DefaultDimensions;
+			if (background == null) {
+				background = Support.TiledSpriteFromFile("/Application/assets/images/UI/BetterButton.png", 1, 3);
+				background.Scale = size / DefaultDimensions;
 			}
-			this.AddChild(_background);
+			this.AddChild(background);
 			
 			if (_textFont == null) {
 				_textFont = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold");

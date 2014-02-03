@@ -56,17 +56,19 @@ namespace Crystallography.UI
 			Background.Scale = new Vector2(xScale, yScale);
 			this.AddChild(Background);
 			
-			Bar = Support.UnicolorSprite("LightBlue", 41, 226, 226, 255);
+			Bar = Support.UnicolorSprite("white", 255, 255, 255, 255);
 			Bar.Scale = new Vector2(xScale, 0.25f);
 			Bar.Position = new Vector2(0.0f, pHeight - 4.0f);
+			Bar.RegisterPalette(2);
 			this.AddChild(Bar);
 			
 			MessageTitleText = new Label() {
 				Text = "Lorem ipsum dolor sit amet, consectetur",
 				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold") ),
-				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
+//				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
 				Position = new Vector2(40.0f, pHeight - 41.0f)
 			};
+			MessageTitleText.RegisterPalette(2);
 			this.AddChild(MessageTitleText);
 			
 			MessageText = new Label() {

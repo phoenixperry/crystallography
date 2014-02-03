@@ -29,19 +29,16 @@ namespace Crystallography
 		}
 		
 		public static Vector4[] palette = new Vector4[3];
+//		public static Vector4[] uiPalette = new Vector4[3];
+		
+		public static List<Node>[] registry = new List<Node>[3];
 		
 		// CONSTRUCTOR ------------------------------------------------------------------
 		
 		protected QColor() : base()
 		{
-//			Instance = this;
 			_name = "QColor";
-//			Instance = this;
 			setPalette();
-			           
-			           //new Vector4(0.96f,0.88f,0.88f,1.0f), // pink
-//			           new Vector4(0.90f,0.075f,0.075f,1.0f), // red
-//			           new Vector4(0.16f,0.88f,0.88f,1.0f) ); // teal
 		}
 		
 		// OVERRIDES --------------------------------------------------------------------
@@ -49,22 +46,19 @@ namespace Crystallography
 		public override void Apply ( ICrystallonEntity pEntity, int pVariant ) {
 			if ( pEntity is SpriteTileCrystallonEntity ) {
 				(pEntity.getNode() as SpriteBase).Color = palette[pVariant];
-				
-//				var entityTintTo = new TintTo(palette[pVariant], 0.0f) {
-//					Get = () => ( pEntity.getNode() as SpriteBase).Color,
-//					Set = value => { (pEntity.getNode() as SpriteBase).Color = value; },
-//					Tween = (x) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(x,2)
-//				};
 				( pEntity as SpriteTileCrystallonEntity ).setColor(pVariant);
-//				Director.Instance.CurrentScene.RunAction(entityTintTo);
 			}
 		}
 		
-//		public override bool Match ( ICrystallonEntity[] pEntities ) {
-//			return base.Match(pEntities);
-//		}
-		
 		// METHODS ----------------------------------------------------------------------
+		
+		public void ApplyUI ( Node pNode, int pVariant ) {
+			if (pNode is SpriteBase) {
+				(pNode as SpriteBase).Color = palette[pVariant];
+			} else {
+				(pNode as Label).Color = palette[pVariant];
+			}
+		}
 		
 		public void setPalette () {
 			setPalette( LevelManager.Instance.Palette[0], LevelManager.Instance.Palette[1], LevelManager.Instance.Palette[2] );
@@ -80,9 +74,42 @@ namespace Crystallography
 			Vector4 temp = palette[0];
 			for (var i = 0; i < palette.Length-1; i++) {
 				palette[i] = palette[i+1];
-				Console.WriteLine(palette[i].ToString());
 			}
 			palette[palette.Length-1] = temp;
+		}
+		
+		public void ShiftColors( int pShifts, float pShiftTime, float pRestTime=1.0f) {
+			Director.Instance.CurrentScene.StopActionByTag(30);
+			var cRot = new Sequence();
+//			cRot.Add( new CallFunc( () => {
+//				rotatePalette();
+//			} ));
+			cRot.Add( new CallFunc( () => {
+				for (int i=0; i < registry.Length; i++) {
+					var list = registry[i];
+					if ( list != null ) {
+						foreach ( Node node in list ) {
+							if ( node is SpriteBase) {
+								(node as SpriteBase).ShiftSpriteColor(QColor.palette[i], pShiftTime);
+							} else {
+								(node as Label).ShiftLabelColor(QColor.palette[i], pShiftTime);
+							}
+						}
+					}
+				}
+			} ));
+			cRot.Add( new DelayTime(pShiftTime + pRestTime) );
+			if (pShifts > 1) {
+				Director.Instance.CurrentScene.RunAction(new Repeat(cRot, pShifts) {Tag = 30});
+			} else if (pShifts == 1) {
+				Director.Instance.CurrentScene.RunAction(cRot);
+			} else {
+				Director.Instance.CurrentScene.RunAction(new RepeatForever() {Tag = 30, InnerAction = cRot});
+			}
+		}
+		
+		public void StopShiftColors() {
+			Director.Instance.CurrentScene.StopActionByTag(30);
 		}
 	}
 }

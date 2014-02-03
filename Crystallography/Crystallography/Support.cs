@@ -33,45 +33,54 @@ namespace Crystallography
 			return System.Array.FindIndex(pArray, (obj) => obj == null);
 		}
 		
-		public static Vector4 HSBToRGB( Vector4 hsb ) {
+		/// <summary>
+		/// Converts HSB color values to RGB color values
+		/// </summary>
+		/// <returns>
+		/// RGB color values
+		/// </returns>
+		/// <param name='hsb'>
+		/// HSBA color values
+		/// </param>
+		public static Vector4 HSBToRGB( Vector4 hsba ) {
 			Vector4 rgb = Vector4.Zero;
-			rgb.A = hsb.A;
-			if (hsb.Y == 0.0f) {
-				rgb.R = rgb.G = rgb.B = hsb.Z;
+			rgb.A = hsba.A;
+			if (hsba.Y == 0.0f) {
+				rgb.R = rgb.G = rgb.B = hsba.Z;
 			} else {
-				float h = (hsb.X - FMath.Floor(hsb.X)) * 6.0f;
+				float h = (hsba.X - FMath.Floor(hsba.X)) * 6.0f;
                 float f = h - FMath.Floor(h);
-                float p = hsb.Z * (1.0f - hsb.Y);
-                float q = hsb.Z * (1.0f - hsb.Y * f);
-                float t = hsb.Z * (1.0f - (hsb.Y * (1.0f - f)));
+                float p = hsba.Z * (1.0f - hsba.Y);
+                float q = hsba.Z * (1.0f - hsba.Y * f);
+                float t = hsba.Z * (1.0f - (hsba.Y * (1.0f - f)));
                 switch ((int) h) {
                 case 0:
-                    rgb.R = hsb.Z;
+                    rgb.R = hsba.Z;
                     rgb.G = t;
                     rgb.B = p;
                     break;
                 case 1:
                     rgb.R = q;
-                    rgb.G = hsb.Z;
+                    rgb.G = hsba.Z;
                     rgb.B = p;
                     break;
                 case 2:
                     rgb.R = p;
-                    rgb.G = hsb.Z;
+                    rgb.G = hsba.Z;
                     rgb.B = t;
                     break;
                 case 3:
                     rgb.R = p;
                     rgb.G = q;
-                    rgb.B = hsb.Z;
+                    rgb.B = hsba.Z;
                     break;
                 case 4:
                     rgb.R = t;
                     rgb.G = p;
-                    rgb.B = hsb.Z;
+                    rgb.B = hsba.Z;
                     break;
                 case 5:
-                    rgb.R = hsb.Z;
+                    rgb.R = hsba.Z;
                     rgb.G = p;
                     rgb.B = q;
                     break;
@@ -80,6 +89,15 @@ namespace Crystallography
             return rgb;
 		}
 		
+		/// <summary>
+		/// Converts RGB color values to HSB color values
+		/// </summary>
+		/// <returns>
+		/// HSB color values
+		/// </returns>
+		/// <param name='rgba'>
+		/// RGB color values
+		/// </param>
 		public static Vector4 RGBToHSB( Vector4 rgba ) {
 			Vector4 hsba = Vector4.Zero;
 			hsba.A = rgba.A;
@@ -116,9 +134,6 @@ namespace Crystallography
             	       hsba.X = hsba.X + 1.0f;
 				}
            	}
-//           	hsbvals[0] = hue;
-//           	hsbvals[1] = saturation;
-//           	hsbvals[2] = brightness;
 			return hsba;
 		}
 		

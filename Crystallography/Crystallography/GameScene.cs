@@ -66,7 +66,7 @@ namespace Crystallography
 			this.AddChild( DialogLayer = new Layer() );
 			Layers = new Layer[] {BackgroundLayer, GameplayLayer, ForegroundLayer, DialogLayer};
 						
-			LevelManager.Instance.GetLevelSettings( pCurrentLevel );
+//			LevelManager.Instance.GetLevelSettings( pCurrentLevel );
 			
 			Touch.GetData(0).Clear();
 			InputManager.Instance.Reset();
@@ -248,7 +248,10 @@ namespace Crystallography
 				if (handler != null) {
 					handler( this, null );
 				}
-				CardManager.Instance.RotateColors(-1, 3.0f);
+				
+				QColor.Instance.ShiftColors(1, 1.0f);
+				CardManager.Instance.RotateColors(-1, 1.0f, 5.0f);
+				
 			} else {
 #if DEBUG
 				Console.WriteLine( "All known levels (" + TOTAL_LEVELS + ") complete. Returning to TitleScene." );

@@ -68,18 +68,20 @@ namespace Crystallography.UI
 			PossibleSolutionsText = new Label() {
 				Text = "all possible solutions:",
 				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold" ) ),
-				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
+//				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
 				Position = new Vector2(40.0f, 180.0f)
 			};
+			PossibleSolutionsText.RegisterPalette(2);
 			this.AddChild( PossibleSolutionsText );
 			
 			MessageText = new Label() {
 //				Text = "Lorem ipsum dolor sit amet",
 				Text = "you clever thing.",
 				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold" ) ),
-				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
+//				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
 //				Position = new Vector2(40.0f, 95.0f)
 			};
+			MessageText.RegisterPalette(2);
 			this.AddChild( MessageText );
 			
 			
@@ -89,6 +91,7 @@ namespace Crystallography.UI
 				Position = new Vector2(0.0f, 0.0f),
 				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
+			QuitButton.background.RegisterPalette(2);
 			this.AddChild(QuitButton);
 			
 //			QuitButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/quit_game.png", 1, 3).TextureInfo, new Vector2i(0,0) );
@@ -109,8 +112,9 @@ namespace Crystallography.UI
 				Text = "level select",
 				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
 				Position = new Vector2(QuitButton.Width + 4.0f , 0.0f),
-				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
+			LevelSelectButton.background.RegisterPalette(2);
 			this.AddChild(LevelSelectButton);
 			
 //			LevelSelectButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/levelSelectBtn.png", 1, 3).TextureInfo, new Vector2i(0,0) );
@@ -127,8 +131,9 @@ namespace Crystallography.UI
 				IconAndTextOffset = new Vector2(2.0f, 0.0f),
 				TextOffset = new Vector2(-2.0f, 0.0f),
 				Position = new Vector2(QuitButton.Width + LevelSelectButton.Width + 8.0f, 0.0f),
-				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+//				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
 			};
+			NextLevelButton.background.RegisterPalette(1);
 			this.AddChild(NextLevelButton);
 			
 			
@@ -167,12 +172,7 @@ namespace Crystallography.UI
 		
 		void HandleOnSlideOutComplete (object sender, EventArgs e)
 		{
-			if (Solutions == null) return;
-			for( int i=0; i < Solutions.Length; i++ ) {
-				this.RemoveChild(Solutions[i], true);
-				Solutions[i] = null;
-			}
-			Solutions = null;
+			CleanUpSolutions();
 		}
 		
 		void HandleOnSlideOutStart (object sender, EventArgs e)
@@ -227,10 +227,32 @@ namespace Crystallography.UI
 			OnSlideInComplete -= HandleOnSlideInComplete;
 			OnSlideOutStart -= HandleOnSlideOutStart;
 			OnSlideInStart -= HandleOnSlideInStart;
+			
+			Background = null;
+			MessageText = null;
+			PossibleSolutionsText = null;
+			QuitButton = null;
+			LevelSelectButton = null;
+			NextLevelButton = null;
+			
+			CleanUpSolutions();
+			
 			base.OnExit ();
+			RemoveAllChildren(true);
 		}
 		
 		// METHODS ----------------------------------------------------------------------------------------------------------------------------------------------
+		
+		protected void CleanUpSolutions() {
+			if (Solutions != null) {
+				for( int i=0; i < Solutions.Length; i++ ) {
+					this.RemoveChild(Solutions[i], true);
+					Solutions[i] = null;
+				}
+				Solutions = null;
+			}
+			Colors = null;
+		}
 		
 		public void Populate( int pCubes, int pScore) {
 			if ( GameScene.currentLevel == 999 ) {

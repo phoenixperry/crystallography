@@ -61,11 +61,13 @@ namespace Crystallography.UI
 			(Panels[0] as LevelPage).Items[0].AddChild(Indicator);
 			
 			// BLACK MASKS TO HIDE MORE LEVELS BEHIND
-			BlackBlock1 = Support.UnicolorSprite("BlackBlock", 0,0,0,255);
+			BlackBlock1 = Support.UnicolorSprite("white", 255,255,255,255);
+			BlackBlock1.Color = LevelManager.Instance.BackgroundColor;
 			BlackBlock1.Scale = new Vector2(28.5625f, 24.75f);
 			BlackBlock1.Position = new Vector2(588.0f, 46.0f);
 			this.AddChild(BlackBlock1);
-			BlackBlock2 = Support.UnicolorSprite("BlackBlock", 0,0,0,255);
+			BlackBlock2 = Support.UnicolorSprite("white", 255,255,255,255);
+			BlackBlock2.Color = LevelManager.Instance.BackgroundColor;
 			BlackBlock2.Position = new Vector2(-397.0f, 46.0f);
 			BlackBlock2.Scale = BlackBlock1.Scale;
 			this.AddChild (BlackBlock2);
@@ -143,15 +145,17 @@ namespace Crystallography.UI
 			BackButton = new BetterButton(369.0f, 64.0f) {
 				Text = "back",
 				Position = new Vector2(591.0f, 74.0f),
-				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
+			BackButton.background.RegisterPalette(2);
 			this.AddChild(BackButton);
 			
 			PlayButton = new BetterButton(369.0f, 64.0f) {
 				Text = "play",
 				Position = new Vector2(591.0f, 0.0f),
-				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+//				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
 			};
+			PlayButton.background.RegisterPalette(1);
 			this.AddChild(PlayButton);
 			
 //			BackButton = new ButtonEntity("", MenuSystem, null, Support.TiledSpriteFromFile("Application/assets/images/levelBackBtn.png", 1, 3).TextureInfo, new Vector2i(0,0));
@@ -215,7 +219,7 @@ namespace Crystallography.UI
 					Solutions[i].Color = Vector4.Zero;
 					foreach( var ps in previousSolutions) {
 						if ( ps[0] == cube && ps[1] == points ) {
-							Solutions[i].Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f);
+							Solutions[i].Color = QColor.palette[2]; //new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f);
 							break;
 						}
 					}
@@ -283,6 +287,8 @@ namespace Crystallography.UI
 		
 		public override void OnExit ()
 		{
+			BackButton.UnregisterPalette();
+			PlayButton.UnregisterPalette();
 			LevelSelectItem.LevelSelectionDetected -= HandleLevelSelectItemLevelSelectionDetected;
 			BackButton.ButtonUpAction -= HandleBackButtonButtonUpAction;
 			PlayButton.ButtonUpAction -= HandlePlayButtonButtonUpAction;
@@ -408,13 +414,13 @@ namespace Crystallography.UI
 		public LevelSelectItem(bool pComplete, bool pLocked) {
 			if (pComplete) {
 //				Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
-				_background = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3);
+				background = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3);
 			} else {
 //				Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButtonDisabled.png", 1, 3).TextureInfo, new Vector2i(0,0));
-				_background = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButtonDisabled.png", 1, 3);
+				background = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButtonDisabled.png", 1, 3);
 			}
-			_background.CenterSprite();
-			var size = _background.CalcSizeInPixels();
+			background.CenterSprite();
+			var size = background.CalcSizeInPixels();
 			Initialize(size.X, size.Y);
 			_bounds = new Bounds2( new Vector2(-Width/2.0f, -Height/2.0f), new Vector2(Width/2.0f, Height/2.0f) );
 //			_bounds.Add( new Vector2(-Width/2.0f, -Height/2.0f) );
