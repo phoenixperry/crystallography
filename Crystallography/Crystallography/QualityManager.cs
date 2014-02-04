@@ -451,18 +451,14 @@ namespace Crystallography
 			EventHandler<FailedMatchEventArgs> failHandler;
 			pQDict = new Dictionary<AbstractQuality, bool>();
 			
-			foreach ( string key in qualityDict.Keys ) {
-//				if ( !AppMain.ORIENTATION_MATTERS) {
-//					if ( key == "QOrientation" ) {
-//						continue;	// -------------------------------- Orientation is ALWAYS all different. Don't bother.
-//					}
-//				}
-//				Console.WriteLine( "Evaluating: " + key );
+//			foreach ( string key in qualityDict.Keys ) {
+			foreach ( string key in scoringQualityList ) {
 				var variations = qualityDict[key];
 				var type = Type.GetType( "Crystallography." + key );
 				var quality = (AbstractQuality)type.GetProperty("Instance").GetValue(null, null);
-				if ( (variations[0] == null && variations[1] == null) || (variations[1] == null && variations[2] == null) || ( variations[0] == null && variations[2] == null ) ) {	// no variations of this quality in this level
-//					pQDict.Add(quality, true);	// --------------------------------------------------- worth All-Same points.
+				if (   (variations[0] == null && variations[1] == null) 
+				    || (variations[1] == null && variations[2] == null) 
+				    || (variations[0] == null && variations[2] == null ) ) {	// no variations of this quality on any card in this entire level
 					continue;
 				} else {
 					score = quality.Match( pEntities, pForScore );
@@ -540,11 +536,6 @@ namespace Crystallography
 			foreach ( AbstractQuality key in pQDict.Keys ) {
 				string name = key.ToString().Substring(17);
 				if ( scoringQualityList.Contains("Q" + name) ) {
-//				if (AppMain.ORIENTATION_MATTERS) {
-//					if ( key is QOrientation) {	// we need to match orientation to ensure valid sets exist, but don't score points for it.
-//						continue;
-//					}
-//				}
 					var thisQualityScore = key.Score( pQDict[key] );
 					scoreArgs.ScoreQualities.Add(name, thisQualityScore );
 					score += thisQualityScore;
@@ -590,6 +581,19 @@ namespace Crystallography
 		}
 		
 		/// <summary>
+		/// Removes an entity from all qualities in <c>qualityDict</c>
+		/// </summary>
+		/// <param name='pEntity'>
+		/// The Entity
+		/// </param>
+		public void RemoveAll( AbstractCrystallonEntity pEntity ) {
+			var allQualities = qualityDict.Keys.ToList();
+			foreach( var quality in allQualities ) {
+				Remove (pEntity, quality);
+			}
+		}
+		
+		/// <summary>
 		/// Reset the <c>QualityManager</c>
 		/// </summary>
 		/// <param name='pCardManagerInstance'>
@@ -605,7 +609,6 @@ namespace Crystallography
 			QColor.Instance.setPalette();
 			QPattern.Instance.setPalette();
 			BuildQualityDictionary();
-//			ApplyQualities();
 		}
 		
 		public void ScrambleQuality( string pQualityName ) {

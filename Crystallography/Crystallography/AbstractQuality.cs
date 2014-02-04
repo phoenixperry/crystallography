@@ -48,20 +48,29 @@ namespace Crystallography
 		/// Is this to score points, or just to test whether matches are still possible?
 		/// </param>
 		public virtual int Match( ICrystallonEntity[] pEntities, bool pForScore ) {
+			int numWild = 0;
 			List<int>[] variants = QualityManager.Instance.qualityDict[_name];
 			int[] results = {0,0,0};
 			foreach ( ICrystallonEntity e in pEntities ) {
+				var card = e as CardCrystallonEntity;
+				
+				if (card.Wild){
+					numWild++;
+					continue;
+				}
+				
 				for (int i=0; i<variants.Length; i++) {
-					if ( variants[i].Contains( (e as CardCrystallonEntity).id ) ) {
+					if ( variants[i].Contains( card.id ) ) {
 						results[i]++;
 						break;
 					}
 				}
 			}
-			if ( Array.IndexOf(results, 2) != -1 ) { // ------- Successful match is 1 of each or 3 of one. Any 2s => FAIL
-				return 0;
-			} else if ( pForScore ) {
-				if (results[0] == 1) { // --------------------- All Different
+			if (pForScore) {
+				if ( Array.IndexOf(results, 2) != -1 ) { // ------- Successful match is 1 of each or 3 of one. Any 2s => FAIL
+					return numWild > 0 ? allSameScore : 0 ;
+				} else if (    (results[0] == 1 || results[1] == 1) 
+				            && numWild < 2) { // --------------------- All Different
 					return allDifferentScore;
 				} else { // ----------------------------------- All Same
 					return allSameScore;

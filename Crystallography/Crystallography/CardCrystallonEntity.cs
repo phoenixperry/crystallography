@@ -18,20 +18,12 @@ namespace Crystallography
 														new Vector2(40.5f*CARD_SCALAR,-31.5f*CARD_SCALAR) };
 		protected readonly static float DEFAULT_SPEED = 0.3f;
 		
-//		protected readonly static BlendFunc animBlend = new BlendFunc(BlendFuncMode.Add, BlendFuncFactor.DstColor, BlendFuncFactor.SrcAlpha);
-//		protected readonly static BlendFunc animBlend = new BlendFunc(BlendFuncMode.Subtract, BlendFuncFactor.DstColor, BlendFuncFactor.Zero);
-		
-//		protected ShaderProgram ShaderProgram;
-//		protected Texture2D AnimTexture;
-//		protected ImmediateModeQuads< VertexData > imm_quads;
-//		protected int frame;
-		
 		protected SpriteTile _anim;
-//		protected SpriteTile _mask;
-//		protected SpriteTile _glowSprite;
 		protected int _glowIndex;
 		
 		protected float _keepOnScreenTimer;
+		
+		public bool Wild;
 		
 //		protected int countdownMax;
 //		protected Label countdownText;
@@ -223,14 +215,23 @@ namespace Crystallography
 			getNode().StopActionByTag(0);
 			if (GlowSprite==null) return;
 			if( pLifetime > 0.0f ) {
-				Sequence sequence = new Sequence() {
-					Tag = 0
-				};
+				Sequence sequence = new Sequence() { Tag = 0 };
 				sequence.Add( new DelayTime( pLifetime ) );
 				sequence.Add( new CallFunc( () => HideGlow() ) );
 				getNode().RunAction( sequence );
 			}
 			GlowSprite.Visible = true;
+		}
+		
+		public void Flash() {
+			Sequence sequence = new Sequence();
+			sequence.Add( new CallFunc( () => TintTo( QColor.palette[1], 0.08f, false) ) );
+			sequence.Add( new DelayTime(0.08f) );
+			sequence.Add( new CallFunc( () => TintTo( QColor.palette[2], 0.08f, false) ) );
+			sequence.Add( new DelayTime(0.08f) );
+			sequence.Add( new CallFunc( () => TintTo( QColor.palette[0], 0.08f, false) ) );
+			sequence.Add( new DelayTime(0.08f) );
+			this.getNode().RunAction( new RepeatForever() { InnerAction=sequence, Tag = 40 } );
 		}
 		
 		public void HideGlow() {
@@ -280,51 +281,7 @@ namespace Crystallography
 			} else {
 				(this.getNode() as SpriteBase).ShiftSpriteColor(pColor, pDuration);
 			}
-			
-//			this.getNode().StopActionByTag(alpha ? 2 : 3);
-//			var entityTintTo = new TintTo(Support.RGBToHSB(pColor), pDuration) {
-//				Tag = alpha ? 2 : 3,
-//				Get = () => Support.RGBToHSB(( this.getNode() as SpriteBase).Color),
-//				Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(t,2)
-//			};
-//			if (alpha) {
-//				entityTintTo.Set = (value) => { 
-//					(this.getNode() as SpriteBase).Color.W = value.W;
-//				};
-//			} else {
-//				entityTintTo.Set = (value) => {
-//					var hsba = Support.HSBToRGB(value);
-//					(this.getNode() as SpriteBase).Color.X = hsba.X;
-//					(this.getNode() as SpriteBase).Color.Y = hsba.Y;
-//					(this.getNode() as SpriteBase).Color.Z = hsba.Z;
-//				};
-//			}
-//			this.getNode().RunAction(entityTintTo);
 		}
-		
-//		public void resetCountdown() {
-//			countdown = countdownMax;
-//		}
-//		
-//		public void setCountdown( int pCount ) {
-//			countdown = countdownMax = pCount;
-//			
-//			countdownText = new Label(pCount.ToString(), QCountdown.map);
-//			countdownText.Color = Colors.White;
-//			countdownText.HeightScale /=70f;
-//			countdownText.Pivot = new Vector2(0.5f, 0.5f);
-//			countdownText.Position = new Vector2(0.5f, 0.4f);
-//			this.getNode().AddChild(countdownText);
-//		}
-//		
-//		public void advanceCountdown() {
-//			countdown--;
-//			if (countdown < 0) {
-//				countdown = countdownMax;
-//			}
-//			countdownText.Text = countdown.ToString();
-//		}
-		
 	}
 	
 	public struct VertexData

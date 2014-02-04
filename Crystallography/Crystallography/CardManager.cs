@@ -7,6 +7,9 @@ namespace Crystallography
 {
 	public class CardManager
 	{
+		public static readonly int MAX_WILDCARDS = 3;
+		public static readonly float WILDCARD_BASE_CHANCE = 0.05f;
+		
 		public static int DEFAULT_STD_CARD_POPULATION = 15;
 		public static int DEFAULT_MAX_CARD_POPULATION = 18;
 		
@@ -16,6 +19,7 @@ namespace Crystallography
 		/// List of cards that are on screen and can be used in matches.
 		/// </summary>
 		public static List<CardCrystallonEntity> availableCards;
+		public static List<CardCrystallonEntity> availableWildCards;
 		
 		protected Scene _scene;
 		protected GamePhysics _physics;
@@ -56,6 +60,7 @@ namespace Crystallography
 		protected CardManager () {
 			NextId = 0;
 			availableCards = new List<CardCrystallonEntity>();
+			availableWildCards = new List<CardCrystallonEntity>();
 			_scene = Director.Instance.CurrentScene;
 			_physics = GamePhysics.Instance;
 			CubeCrystallonEntity.CubeCompleteDetected += HandleSelectionGroupInstanceCubeCompleteDetected;
@@ -133,9 +138,10 @@ namespace Crystallography
 		/// P identifier.
 		/// </param>
 		protected CardCrystallonEntity BuildCard(int pId) {
-			return new CardCrystallonEntity(_scene, _physics, pId, 
-			                                QPattern.Instance.patternTiles.TextureInfo, QPattern.Instance.patternTiles.TileIndex2D, 
-			                                _physics.SceneShapes[0]);
+			return new CardCrystallonEntity(_scene, _physics, pId, QPattern.Instance.patternTiles.TextureInfo, 
+			                                QPattern.Instance.patternTiles.TileIndex2D, _physics.SceneShapes[0]) {
+//				Wild = GameScene.currentLevel == 999
+			};
 			
 		}
 		
@@ -154,6 +160,8 @@ namespace Crystallography
 		public void Destroy() {
 			availableCards.Clear ();
 			availableCards = null;
+			availableWildCards.Clear ();
+			availableWildCards = null;
 			DeckOfIDs.Clear();
 			DeckOfIDs = null;
 			_instance = null;
@@ -260,11 +268,19 @@ namespace Crystallography
 				var card = spawn (DeckOfIDs[0]);
 				DeckOfIDs.RemoveAt(0);
 				if (GameScene.currentLevel == 999) {
-					foreach ( string quality in QualityManager.Instance.qualityDict.Keys ) {
-						if ( QualityManager.Instance.scoringQualityList.Contains(quality) ) {
-							QualityManager.Instance.SetQuality(card, quality, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
-						} else{
-							QualityManager.Instance.SetQuality(card, quality, 0 );
+					if (   availableWildCards.Count < MAX_WILDCARDS
+					    && GameScene.Random.NextFloat() < WILDCARD_BASE_CHANCE ) {
+						card.Wild = true;
+						QualityManager.Instance.RemoveAll(card);
+						availableWildCards.Add(card);
+						card.Flash();
+					} else {
+						foreach ( string quality in QualityManager.Instance.qualityDict.Keys ) {
+							if ( QualityManager.Instance.scoringQualityList.Contains(quality) ) {
+								QualityManager.Instance.SetQuality(card, quality, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
+							} else{
+								QualityManager.Instance.SetQuality(card, quality, 0 );
+							}
 						}
 					}
 				}
@@ -284,6 +300,7 @@ namespace Crystallography
 				PickRandomly = false;
 			}
 			availableCards.Clear();
+			availableWildCards.Clear ();
 			NextId = 0;
 			_scene = pScene;
 //			ids = null;
@@ -301,6 +318,9 @@ namespace Crystallography
 		/// </param>
 		private void rm( CardCrystallonEntity pCard ) {
 			availableCards.Remove(pCard);
+			if(pCard.Wild) {
+				availableWildCards.Remove(pCard);
+			}
 		}
 		
 		/// <summary>
