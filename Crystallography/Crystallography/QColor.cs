@@ -29,7 +29,7 @@ namespace Crystallography
 		}
 		
 		public static Vector4[] palette = new Vector4[3];
-//		public static Vector4[] uiPalette = new Vector4[3];
+		public static Vector4[] uiPalette = new Vector4[3];
 		
 		public static List<Node>[] registry = new List<Node>[3];
 		
@@ -54,9 +54,9 @@ namespace Crystallography
 		
 		public void ApplyUI ( Node pNode, int pVariant ) {
 			if (pNode is SpriteBase) {
-				(pNode as SpriteBase).Color = palette[pVariant];
+				(pNode as SpriteBase).Color = uiPalette[pVariant];
 			} else {
-				(pNode as Label).Color = palette[pVariant];
+				(pNode as Label).Color = uiPalette[pVariant];
 			}
 		}
 		
@@ -65,9 +65,9 @@ namespace Crystallography
 		}
 		
 		public void setPalette( Vector4 pColor1, Vector4 pColor2, Vector4 pColor3 ) {
-			palette[0] = pColor1;
-			palette[1] = pColor2;
-			palette[2] = pColor3;
+			palette[0] = uiPalette[0] = pColor1;
+			palette[1] = uiPalette[1] = pColor2;
+			palette[2] = uiPalette[2] = pColor3;
 		}
 		
 		public void rotatePalette() {
@@ -90,9 +90,9 @@ namespace Crystallography
 					if ( list != null ) {
 						foreach ( Node node in list ) {
 							if ( node is SpriteBase) {
-								(node as SpriteBase).ShiftSpriteColor(QColor.palette[i], pShiftTime);
+								(node as SpriteBase).ShiftSpriteColor(QColor.uiPalette[i], pShiftTime);
 							} else {
-								(node as Label).ShiftLabelColor(QColor.palette[i], pShiftTime);
+								(node as Label).ShiftLabelColor(QColor.uiPalette[i], pShiftTime);
 							}
 						}
 					}
