@@ -109,20 +109,24 @@ namespace Crystallography
 		}
 		
 		public void AddQuality( string pQualityString ) {
-			QualityManager.Instance.scoringQualityList.Add(pQualityString);
-			if( pQualityString == "QSound") {
-				LevelManager.Instance.SoundGlow = true;
-			}
+//			if ( false == QualityManager.Instance.scoringQualityList.Contains(pQualityString) ) {
+//				QualityManager.Instance.scoringQualityList.Add(pQualityString);
+//			}
+//			if( pQualityString == "QSound") {
+//				LevelManager.Instance.SoundGlow = true;
+//			}
+			QualityManager.Instance.AddScoringQuality( pQualityString );
 			foreach ( CardCrystallonEntity card in availableCards) {
 				QualityManager.Instance.SetQuality(card, pQualityString, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
 			}
 		}
 		
 		public void RemoveQuality(string pQualityString) {
-			QualityManager.Instance.scoringQualityList.Remove(pQualityString);
-			if( pQualityString == "QSound") {
-				LevelManager.Instance.SoundGlow = false;
-			}
+//			QualityManager.Instance.scoringQualityList.Remove(pQualityString);
+//			if( pQualityString == "QSound") {
+//				LevelManager.Instance.SoundGlow = false;
+//			}
+			QualityManager.Instance.RemoveScoringQuality( pQualityString );
 			foreach ( CardCrystallonEntity card in availableCards) {
 				QualityManager.Instance.SetQuality(card, pQualityString, 0 );
 			}

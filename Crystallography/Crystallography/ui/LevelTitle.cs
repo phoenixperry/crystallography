@@ -79,7 +79,7 @@ namespace Crystallography.UI
 				Position = new Vector2( 44.0f, 250.0f),
 //				Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f)
 			};
-			LevelNumberText.RegisterPalette(2);
+			LevelNumberText.RegisterPalette(0);
 			
 			Background.AddChild(LevelNumberText);
 			
@@ -88,6 +88,7 @@ namespace Crystallography.UI
 				FontMap = map,
 				Position = new Vector2( 39.0f, 20.0f)
 			};
+			TapToDismissText.RegisterPalette(0);
 			Background.AddChild(TapToDismissText);
 			
 			Icons = new SpriteTile[4];

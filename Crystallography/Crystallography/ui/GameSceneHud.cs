@@ -420,10 +420,6 @@ namespace Crystallography.UI
 			_scene.DialogLayer.AddChild(pausePanel);
 			pausePanel.Hide();
 			
-//			levelEndPanel = new LevelEndPanel(_scene);
-//			_scene.DialogLayer.AddChild(levelEndPanel);
-//			levelEndPanel.Hide();
-			
 			GameHudBar = Support.SpriteUVFromFile("/Application/assets/images/GameHudBar.png");
 			GameHudBar.Position = new Vector2(0.0f, 473.0f);
 			this.AddChild(GameHudBar);

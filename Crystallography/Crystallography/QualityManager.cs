@@ -90,6 +90,22 @@ namespace Crystallography
 			qualityDict[pQualityName][pVariant].Add( pEntity.id );
 		}
 		
+		public void AddScoringQuality( string pQuality ) {
+			if ( false == QualityManager.Instance.scoringQualityList.Contains(pQuality) ) {
+				QualityManager.Instance.scoringQualityList.Add(pQuality);
+				if( pQuality == "QSound") {
+					LevelManager.Instance.SoundGlow = true;
+				}
+			}
+		}
+		
+		public void RemoveScoringQuality( string pQuality ) {
+			QualityManager.Instance.scoringQualityList.Remove( pQuality );
+			if( pQuality == "QSound") {
+				LevelManager.Instance.SoundGlow = false;
+			}
+		}
+		
 		/// <summary>
 		/// Applies qualities to all cards as prescribed in <c>qualityDict</c>
 		/// </summary>

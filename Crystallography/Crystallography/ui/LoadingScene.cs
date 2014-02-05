@@ -46,10 +46,12 @@ namespace Crystallography.UI
 			LoadingSpinner = Support.SpriteFromFile("/Application/assets/images/UI/loading.png");
 			LoadingSpinner.Pivot = new Vector2(0.5f, 0.5f);
 			LoadingSpinner.Position = new Vector2(-145.0f, -119.0f);
+			LoadingSpinner.RegisterPalette(1);
 			Hub.AddChild(LoadingSpinner);
 			
 			LoadingText = new Label("loading", UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold")));
 			LoadingText.Position = new Vector2(445.0f, 257.0f);
+			LoadingText.RegisterPalette(2);
 			this.AddChild(LoadingText);
 			
 			// LOADING PROCEDURE HEADER

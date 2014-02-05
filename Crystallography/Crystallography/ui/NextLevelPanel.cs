@@ -71,7 +71,7 @@ namespace Crystallography.UI
 //				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
 				Position = new Vector2(40.0f, 180.0f)
 			};
-			PossibleSolutionsText.RegisterPalette(2);
+			PossibleSolutionsText.RegisterPalette(0);
 			this.AddChild( PossibleSolutionsText );
 			
 			MessageText = new Label() {
@@ -81,7 +81,7 @@ namespace Crystallography.UI
 //				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
 //				Position = new Vector2(40.0f, 95.0f)
 			};
-			MessageText.RegisterPalette(2);
+			MessageText.RegisterPalette(0);
 			this.AddChild( MessageText );
 			
 			
@@ -261,7 +261,7 @@ namespace Crystallography.UI
 				this.Solutions[0] = new SolutionIcon() {
 					CubeText = pCubes.ToString(),
 					ScoreText = pScore.ToString(),
-					Color = QColor.palette[1],
+					Color = QColor.palette[0],
 					Position = new Vector2(40.0f, QuitButton.Height + 60.0f)
 				};
 				this.AddChild(Solutions[0]);
@@ -323,7 +323,7 @@ namespace Crystallography.UI
 				}
 			}
 			this.Text = "you clever thing.";
-			MessageText.Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f);
+//			MessageText.Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f);
 		}
 		
 		

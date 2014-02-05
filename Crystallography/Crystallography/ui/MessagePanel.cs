@@ -59,7 +59,7 @@ namespace Crystallography.UI
 			Bar = Support.UnicolorSprite("white", 255, 255, 255, 255);
 			Bar.Scale = new Vector2(xScale, 0.25f);
 			Bar.Position = new Vector2(0.0f, pHeight - 4.0f);
-			Bar.RegisterPalette(2);
+			Bar.RegisterPalette(0);
 			this.AddChild(Bar);
 			
 			MessageTitleText = new Label() {
@@ -68,7 +68,7 @@ namespace Crystallography.UI
 //				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
 				Position = new Vector2(40.0f, pHeight - 41.0f)
 			};
-			MessageTitleText.RegisterPalette(2);
+			MessageTitleText.RegisterPalette(0);
 			this.AddChild(MessageTitleText);
 			
 			MessageText = new Label() {

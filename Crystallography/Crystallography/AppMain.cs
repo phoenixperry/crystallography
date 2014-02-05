@@ -168,6 +168,8 @@ namespace Crystallography
 				DataStorage.Init();
 			}
 			
+			Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.GL.Context.SetClearColor(Support.ExtractColor("E5E3D1"));
+			
 #if METRICS
 			if ( false == DataStorage.LoadMetrics() ) {
 				DataStorage.ClearMetrics();

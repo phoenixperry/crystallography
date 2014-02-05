@@ -137,6 +137,13 @@ namespace Crystallography
 			return hsba;
 		}
 		
+		public static Vector4 ExtractColor( string hex ) {
+			float r = (float)System.Convert.ToInt32( hex.Substring(0, 2), 16 );
+			float g = (float)System.Convert.ToInt32( hex.Substring(2, 2), 16 );
+			float b = (float)System.Convert.ToInt32( hex.Substring(4, 2), 16 );
+			return new Vector4( r/255.0f, g/255.0f, b/255.0f, 1.0f );
+		}
+		
 		public static Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile SpriteFromFile(string filename)
 		{
 			if (TextureCache.ContainsKey(filename) == false)

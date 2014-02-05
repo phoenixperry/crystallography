@@ -126,16 +126,18 @@ namespace Crystallography
 				                                );
 				break;
 			case ("AddScoringQuality"):
-				QualityManager.Instance.scoringQualityList.Add(d.Args);
-				if( d.Args == "QSound") {
-					LevelManager.Instance.SoundGlow = true;
-				}
+//				QualityManager.Instance.scoringQualityList.Add(d.Args);
+//				if( d.Args == "QSound") {
+//					LevelManager.Instance.SoundGlow = true;
+//				}
+				QualityManager.Instance.AddScoringQuality( d.Args );
 				break;
 			case ("RemoveScoringQuality"):
-				QualityManager.Instance.scoringQualityList.Remove(d.Args);
-				if( d.Args == "QSound") {
-					LevelManager.Instance.SoundGlow = false;
-				}
+//				QualityManager.Instance.scoringQualityList.Remove(d.Args);
+//				if( d.Args == "QSound") {
+//					LevelManager.Instance.SoundGlow = false;
+//				}
+				QualityManager.Instance.RemoveScoringQuality( d.Args );
 				break;
 			case ("SetPatternPath"):
 				PatternPath = d.Args;
@@ -170,12 +172,15 @@ namespace Crystallography
 			foreach (var level in levels) {
 				foreach( XElement element in level.AllElements ) {
 					if ( (int)element.Attribute("Value") == pLevelNumber ) {
-						int i = 0;
+//						int i = 0;
 						foreach (XElement line in element.Nodes()) {
 							if (line.Name.LocalName == "Color") {
-								string hexColor = line.Attribute("Hex").Value;
-								Palette[i] = ExtractColor(hexColor);
-								i++;
+								Palette[0] = Support.ExtractColor(line.Attribute("LightHex").Value);
+								Palette[1] = Support.ExtractColor(line.Attribute("MidHex").Value);
+								Palette[2] = Support.ExtractColor(line.Attribute("DarkHex").Value);
+//								string hexColor = line.Attribute("Hex").Value;
+//								Palette[i] = ExtractColor(hexColor);
+//								i++;
 							} else if (line.Name.LocalName == "Pattern") {
 								PatternPath = line.Attribute("Path").Value;
 							} else if (line.Name.LocalName == "Sound") {
@@ -185,15 +190,8 @@ namespace Crystallography
 								} else {
 									SoundGlow = false;
 								}
-							} else if (line.Name.LocalName == "BackgroundColor") {
-//								var bgTint = new TintTo(ExtractColor(line.Attribute("Hex").Value), 3.0f) {
-//									Get = () => BackgroundColor,
-//									Set = value => {BackgroundColor = value;},
-//									Tween = (x) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(x,2)
-//								};
-//								Director.Instance.CurrentScene.RunAction(bgTint);
-								TintBackground( ExtractColor(line.Attribute("Hex").Value), 3.0f );
-								
+							} else if (line.Name.LocalName == "Background") {
+								TintBackground( Support.ExtractColor(line.Attribute("Main").Value), 3.0f );
 							} else if (line.Name.LocalName == "Goal" ) {
 								var cubes = (int)line.Attribute("Cubes");
 								var score = (int)line.Attribute("Score");
@@ -353,19 +351,19 @@ namespace Crystallography
 			doc = XDocument.Parse( xml );
 		}
 		
-		protected Vector4 ExtractColor( string hex ) {
-			float r = (float)Convert.ToInt32( hex.Substring(0, 2), 16 );
-			float g = (float)Convert.ToInt32( hex.Substring(2, 2), 16 );
-			float b = (float)Convert.ToInt32( hex.Substring(4, 2), 16 );
-			return new Vector4( r/255.0f, g/255.0f, b/255.0f, 1.0f );
-		}
+//		protected Vector4 ExtractColor( string hex ) {
+//			float r = (float)Convert.ToInt32( hex.Substring(0, 2), 16 );
+//			float g = (float)Convert.ToInt32( hex.Substring(2, 2), 16 );
+//			float b = (float)Convert.ToInt32( hex.Substring(4, 2), 16 );
+//			return new Vector4( r/255.0f, g/255.0f, b/255.0f, 1.0f );
+//		}
 		
 		public void SetToDefault() {
 			AppMain.ORIENTATION_MATTERS = true;
-			Palette[0] = new Vector4(0.956863f, 0.917647f, 0.956863f, 1.0f);
-			Palette[1] = new Vector4(0.898039f, 0.074510f, 0.074510f, 1.0f);
-			Palette[2] = new Vector4(0.160784f, 0.886274f, 0.886274f, 1.0f);
-			BackgroundColor = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
+			Palette[0] = Support.ExtractColor("F70046");
+			Palette[1] = Support.ExtractColor("CC0686");
+			Palette[2] = Support.ExtractColor("790143");
+			BackgroundColor = Support.ExtractColor("E5E3D1");
 			PatternPath = "Application/assets/images/set1/gamePieces.png";
 			SoundPrefix = "stack1";
 			Goal = 1;
