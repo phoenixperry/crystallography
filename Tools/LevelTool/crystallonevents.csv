@@ -1,0 +1,20 @@
+Level,Type,Value,Action,Args
+0,BreaksEqual,1,SetStandardPop,3;;populate
+0,BreaksEqual,1,RemoveScoringQuality,QPattern
+0,BreaksEqual,1,RemoveScoringQuality,QColor
+0,BreaksEqual,1,UpdateMessagePanel,"just so.;;now, let's make a cube, shall we?&#xA;cubes need a top, a left and a right.;;0.0;;0.0"
+0,CubesEqual,1,SetPatternPath,Application/assets/images/set1/gamePieces.png
+0,CubesEqual,1,AddScoringQuality,QColor
+0,CubesEqual,1,SetBonus,0
+0,CubesEqual,1,UpdateMessagePanel,3 of a kind.;;pieces can have 'qualities.'&#xA;'color' is just such a quality. red in this case.;;0.0;;0.0
+0,CubesEqual,2,UpdateMessagePanel,3 all unique.;;you can also form a cube when a quality&#xA;is all-different.&#xA;3 different colors means 3 points.;;0.0;;0.0
+0,CubesEqual,3,AddScoringQuality,QPattern
+0,CubesEqual,3,RemoveScoringQuality,QColor
+0,CubesEqual,3,UpdateMessagePanel,"pattern recognition.;;color isn't the only quality.&#xA;pay attention to pattern, too.;;0.0;;0.0"
+0,CubesEqual,4,AddScoringQuality,QColor
+0,CubesEqual,4,UpdateMessagePanel,compound interest.;;just because one quality is all-same&#xA;doesn't mean the other has to be.&#xA;try color and pattern together!;;0.0;;0.0
+0,CubesEqual,4,SetStandardPop,6
+0,CubesEqual,5,SetStandardPop,3
+0,CubesEqual,6,UpdateMessagePanel,hit me.;;if you can't find a match press &#xA;the + button in the upper right corner!&#xA;you'll get up to 3 more pieces.;;0.0;;0.0
+0,CubesEqual,6,SetHitMeDisabled,FALSE
+0,CubesEqual,8,UpdateMessagePanel,brilliant.;;now you know everything there is to know&#xA;about how to play Crystallon.;;0.0;;0.0
