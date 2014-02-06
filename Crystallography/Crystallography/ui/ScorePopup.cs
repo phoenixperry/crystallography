@@ -27,7 +27,7 @@ namespace Crystallography.UI
 			}
 //			velocity = Vector2.Zero;
 			Position = parent.LocalToWorld(parent.Position) + offset;
-			Color = Colors.White;
+			this.RegisterPalette(2);
 			Pivot = new Vector2(0.5f, 0.5f);
 			HeightScale = 1.0f;
 						

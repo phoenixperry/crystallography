@@ -172,11 +172,33 @@ namespace Crystallography.UI
 					Ticks[i] = Support.UnicolorSprite("white", 255, 255, 255, 255);
 					Ticks[i].Scale = new Vector2( TICK_WIDTH, 1f);
 					Ticks[i].Position = new Vector2( length * ((optionsArray[i]-min) / (max-min)) + offsetX, -8.0f );
+					Ticks[i].Color = Track.Color;
 					this.AddChild(Ticks[i]);
 				}
 			}
 		}
 		
+		public void RegisterPalette(int pIndex) {
+			Title.RegisterPalette(pIndex);
+			Knob.RegisterPalette(pIndex);
+			Track.RegisterPalette(pIndex);
+			if(Ticks != null ) {
+				foreach (var tick in Ticks) {
+					tick.RegisterPalette(pIndex);
+				}
+			}
+		}
+		
+		public void UnregisterPalette() {
+			Title.UnregisterPalette();
+			Knob.UnregisterPalette();
+			Track.UnregisterPalette();
+			if(Ticks != null ) {
+				foreach (var tick in Ticks) {
+					tick.UnregisterPalette();
+				}
+			}
+		}
 		
 		// DESTRUCTOR ---------------------------------------------------------
 #if DEBUG

@@ -79,10 +79,12 @@ namespace Crystallography.UI
 			AbsoluteTimer = 0.0f;
 			
 			TimerIcon = Support.TiledSpriteFromFile("/Application/assets/images/timerIcon.png", 1, 1);
+			TimerIcon.RegisterPalette(0);
 			this.AddChild(TimerIcon);
 			
-			TimeBar = Support.UnicolorSprite( "TimeBar", 255, 0, 0, 255);
-			TimeBar.Position = new Vector2(45.0f, 0.0f);
+			TimeBar = Support.UnicolorSprite( "white", 255, 255, 255, 255);
+			TimeBar.Position = new Vector2(45.0f, 8.0f);
+			TimeBar.RegisterPalette(0);
 			TimerIcon.AddChild(TimeBar);
 			
 			Reset ();
@@ -111,7 +113,7 @@ namespace Crystallography.UI
 				LevelManager.Instance.ChangeDifficulty(-1);
 				DisplayTimer = 0.0f;
 			}
-			var xscale = 200.0f/16.0f;
+			var xscale = 300.0f/16.0f;
 			
 			TimeBar.Scale = new Vector2(xscale * ((30.0f-DisplayTimer)/30.0f), 1.0f);
 		}

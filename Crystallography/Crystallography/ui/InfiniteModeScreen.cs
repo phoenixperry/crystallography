@@ -24,6 +24,7 @@ namespace Crystallography.UI
 			_timeLimitText = new Label() {
 				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") )
 			};
+			_timeLimitText.RegisterPalette(0);
 			this.AddChild(_timeLimitText);
 			
 			timeLimitSlider = new Slider() {
@@ -41,6 +42,7 @@ namespace Crystallography.UI
 				}
 			};
 			timeLimitSlider.AddTickmarks();
+			timeLimitSlider.RegisterPalette(0);
 			timeLimitSlider.SetSliderValue( (float)DataStorage.options[4] );
 			this.AddChild(timeLimitSlider);
 			
@@ -49,15 +51,17 @@ namespace Crystallography.UI
 			cancelButton = new BetterButton(289.0f, 71.0f) {
 				Text = "main menu",
 				Position = new Vector2(671.0f, 71.0f),
-				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
+			cancelButton.background.RegisterPalette(2);
 			this.AddChild(cancelButton);
 			
 			playButton = new BetterButton(289.0f, 71.0f) {
 				Text = "play",
 				Position = new Vector2(671.0f, 0.0f),
-				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+//				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
 			};
+			playButton.background.RegisterPalette(0);
 			this.AddChild(playButton);
 		}
 		

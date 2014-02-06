@@ -8,7 +8,7 @@ namespace Crystallography.UI
 {
 	public class LevelTitle : HudPanel
 	{
-		public static readonly float X_OFFSET = 10.0f;
+		public static readonly float X_OFFSET = 0.0f;
 		
 		SpriteTile Background;
 		SpriteTile[] Icons;
@@ -49,11 +49,9 @@ namespace Crystallography.UI
 			}
 			Icons = null;
 			LevelNumberText = null;
-			Label TapToDismiss = null;
+//			Label TapToDismiss = null;
 			map = null;
-//			Support.RemoveTextureWithFileName("/Application/assets/images/LevelTitleBG.png");
 			QualityNames.Clear();
-//			_scene = null;
 			
 			base.OnExit ();
 			RemoveAllChildren(true);
