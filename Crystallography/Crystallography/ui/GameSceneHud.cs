@@ -37,7 +37,8 @@ namespace Crystallography.UI
 //		
 		SpriteTile TimeBar;
 		
-		public LevelTitle levelTitle;
+//		public LevelTitle levelTitle;
+		public LevelTitleMkTwo levelTitle;
 		public MessagePanel _messagePanel;
 		public NextLevelPanel _nextLevelPanel;
 		
@@ -117,7 +118,8 @@ namespace Crystallography.UI
 		/// </summary>
 		void HandleGameSceneLevelChangeDetected (object sender, EventArgs e) {
 			Reset ();
-			levelTitle.SetLevelText(GameScene.currentLevel);
+//			levelTitle.SetLevelText(GameScene.currentLevel);
+//			levelTitle.Title = GameScene.currentLevel;
 			List<string> variables = new List<string>();
 			foreach (string key in QualityManager.Instance.qualityDict.Keys) {
 				if ( key == "QOrientation") continue;
@@ -127,6 +129,17 @@ namespace Crystallography.UI
 				}
 			}
 			levelTitle.SetQualityNames( variables.ToArray() );
+			switch(GameScene.currentLevel) {
+			case 0:
+				levelTitle.Title = "crystallon tutorial";
+				break;
+			case 999:
+				levelTitle.Title = "crystallon challenge mode";
+				break;
+			default:
+				levelTitle.Title = "crystallon puzzle " + GameScene.currentLevel.ToString();
+				break;
+			}
 			levelTitle.SlideIn();
 		}
 		
@@ -147,6 +160,7 @@ namespace Crystallography.UI
 			DataStorage.CollectMetrics();
 #endif
 			_nextLevelPanel.SlideOut();
+			_messagePanel.SlideOut();
 			bool complete = false;
 			if( GameScene.currentLevel != 999 ) {
 				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
@@ -222,6 +236,7 @@ namespace Crystallography.UI
 		{
 			ExitCode = LevelExitCode.RESET;
 			_nextLevelPanel.SlideOut();
+			_messagePanel.SlideOut();
 #if METRICS
 			DataStorage.CollectMetrics();
 #endif
@@ -251,6 +266,12 @@ namespace Crystallography.UI
 				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
 			}
 			HandlePausePanelQuitButtonPressDetected( sender, e );
+		}
+		
+		void HandleLevelTitleOnSlideOutComplete (object sender, EventArgs e) {
+			UpdateMessagePanel( LevelManager.Instance.MessageTitle, LevelManager.Instance.MessageBody );
+//			EnableHitMeButton();
+			CardManager.Instance.Populate();
 		}
 		
 		/// <summary>
@@ -314,6 +335,7 @@ namespace Crystallography.UI
 			_nextLevelPanel.NextLevelDetected += Handle_nextLevelPanelButtonButtonUpAction;
 			_nextLevelPanel.QuitDetected += Handle_nextLevelPanelQuitButtonPressDetected;
 			_nextLevelPanel.LevelSelectDetected += Handle_nextLevelPanelLevelSelectDetected;
+			levelTitle.OnSlideOutComplete += HandleLevelTitleOnSlideOutComplete;
 			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
 			QualityManager.FailedMatchDetected += HandleQualityManagerFailedMatchDetected;
 			CardManager.Instance.NoMatchesPossibleDetected += HandleCardManagerInstanceNoMatchesPossibleDetected;
@@ -446,13 +468,19 @@ namespace Crystallography.UI
 			GameHudBar.AddChild(HudBarLine);
 			
 			
-			levelTitle = new LevelTitle(_scene){
+//			levelTitle = new LevelTitle(_scene){
+//				SlideInDirection = SlideDirection.RIGHT,
+//				SlideOutDirection = SlideDirection.LEFT,
+//				Offset = new Vector2(LevelTitle.X_OFFSET, -432.0f),
+//				Lifetime = 4.0f
+//			};
+			levelTitle = new LevelTitleMkTwo() {
 				SlideInDirection = SlideDirection.RIGHT,
 				SlideOutDirection = SlideDirection.LEFT,
-				Offset = new Vector2(LevelTitle.X_OFFSET, -432.0f),
-				Lifetime = 4.0f
+				Offset = new Vector2(0.0f, 0.0f),
+//				Lifetime = 4.0f
 			};
-			GameHudBar.AddChild(levelTitle, -1);
+			this.AddChild(levelTitle, -1);
 			
 			_nextLevelPanel = new NextLevelPanel(){
 				Offset = new Vector2(510.0f, 0.0f),
@@ -474,21 +502,16 @@ namespace Crystallography.UI
 			
 			ScoreTitleText = new Label("score", map);
 			ScoreTitleText.Position = new Vector2(287, 25.0f);
-//			ScoreTitleText.Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f);
 			ScoreTitleText.RegisterPalette(1);
-//			GameHudBar.AddChild(ScoreTitleText);
 			
-//			BlueBox = Support.SpriteUVFromFile("/Application/assets/images/blueBox.png");
 			BlueBox = Support.UnicolorSprite("white", 255,255,255,255);
 			BlueBox.Scale = new Vector2(6.25f, 4.4375f);
 			BlueBox.Position = new Vector2(354.0f, 0.0f);
 			BlueBox.RegisterPalette(2);
-//			GameHudBar.AddChild(BlueBox);
 			
 			ScoreText = new Label("", bigMap) {
 				Position = SCORE_TEXT_POS
 			};
-//			ScoreText.Position = new Vector2(359.0f, 12.0f);
 			ScoreText.RegisterPalette(1);
 			GameHudBar.AddChild(ScoreText);
 			
@@ -499,21 +522,16 @@ namespace Crystallography.UI
 			
 			CubesTitleText = new Label("cubes", map);
 			CubesTitleText.Position = new Vector2(63.0f, 25.0f);
-//			CubesTitleText.Color = new Vector4( 0.89803922f, 0.0745098f, 0.0745098f, 1.0f);
 			CubesTitleText.RegisterPalette(2);
-//			GameHudBar.AddChild(CubesTitleText);
 			
-//			RedBox = Support.SpriteFromFile("/Application/assets/images/redbox.png");
 			RedBox = Support.UnicolorSprite("white", 255,255,255,255);
 			RedBox.Position = new Vector2(130.0f, 0.0f);
 			RedBox.Scale = new Vector2(6.25f, 4.4375f);
 			RedBox.RegisterPalette(1);
-//			GameHudBar.AddChild(RedBox);
 			
 			CubeText = new Label("", bigMap){
 				Position = CUBES_TEXT_POS
 			};
-//			CubeText.Position = new Vector2(135.0f, 12.0f);
 			CubeText.RegisterPalette(2);
 			GameHudBar.AddChild(CubeText);
 			
@@ -524,7 +542,7 @@ namespace Crystallography.UI
 //				TimeBox = Support.SpriteUVFromFile("/Application/assets/images/timerIcon.png");
 //				TimeBox.Position = new Vector2(468.0f, 16.0f);
 //				GameHudBar.AddChild(TimeBox);
-				
+//				
 //				TimerSeparatorText = new Label(":", bigMap);
 //				TimerSeparatorText.Position = new Vector2(97.0f, -2.0f);
 //				TimeBox.AddChild(TimerSeparatorText);
@@ -536,7 +554,7 @@ namespace Crystallography.UI
 //				TimerMinutesText = new Label("00", bigMap);
 //				TimerMinutesText.Position = new Vector2(45.0f, -4.0f);
 //				TimeBox.AddChild(TimerMinutesText);
-				
+//				
 //				TimeBar = Support.UnicolorSprite("TimeBar", 255, 0, 0, 255);
 //				TimeBar.Position = new Vector2(45.0f, 0.0f);
 //				TimeBox.AddChild(TimeBar);
@@ -545,7 +563,6 @@ namespace Crystallography.UI
 			PauseButton = new BetterButton(115.0f, 71.0f) {
 				Text = "| |",
 				Position = new Vector2(845.0f, 473.0f),
-//				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
 			};
 			this.AddChild(PauseButton);
 			PauseButton.background.RegisterPalette(2);
@@ -554,14 +571,11 @@ namespace Crystallography.UI
 			HitMeButton = new BetterButton(115.0f, 71.0f) {
 				Text = "+",
 				Position = new Vector2(720.0f, 473.0f),
-//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
 			HitMeButton.On(!LevelManager.Instance.HitMeDisabled);
 			this.AddChild(HitMeButton);
 			HitMeButton.background.RegisterPalette(1);
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
-			
-			
 		}
 
 		
@@ -573,7 +587,6 @@ namespace Crystallography.UI
 			Score = 0;
 			Cubes = 0;
 			_displayScore = 0;
-//			DisplayTimer = 0.0f;
 			MetGoalTime = 0.0f;
 			NoMatchesPossibleTime = 0.0f;
 			_updateTimer = 0.0f;
@@ -584,27 +597,10 @@ namespace Crystallography.UI
 			
 			GameTimer.Reset();
 			ScoreText.Text = _displayScore.ToString();
-//			float x = BlueBox.Position.X + 50.0f - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
-//			float x = 67.0f + 50.0f - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(ScoreText.Text);
-//			ScoreText.Position = new Vector2(x, ScoreText.Position.Y);
 			CenterCubeScoreText(ScoreText, SCORE_TEXT_POS);
 			
-//			if(GameScene.currentLevel != 999) {
 			CubeText.Text = "0";
-//				x = RedBox.Position.X + 50.0f - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(CubeText.Text);
-//			x = 287.0f + 50.0f - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(CubeText.Text);	
-//			CubeText.Position = new Vector2(x, CubeText.Position.Y);
-//			}
 			CenterCubeScoreText(CubeText, CUBES_TEXT_POS);
-			
-			UpdateMessagePanel( LevelManager.Instance.MessageTitle, LevelManager.Instance.MessageBody );
-			EnableHitMeButton();
-			
-//			_messagePanel.Text = LevelManager.Instance.MessageBody;
-//			_messagePanel.TitleText = LevelManager.Instance.MessageTitle;
-//			if (_messagePanel.Text != "" || _messagePanel.TitleText != "") {
-//				_messagePanel.SlideIn();
-//			}
 		}
 		
 		private void CenterCubeScoreText(Label pLabel, Vector2 pAnchor) {

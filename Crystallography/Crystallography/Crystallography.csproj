@@ -106,6 +106,7 @@
     <Compile Include="ui\SolutionIcon.cs" />
     <Compile Include="ui\TimerEntity.cs" />
     <Compile Include="ui\InfiniteModeScreen.cs" />
+    <Compile Include="LevelTitleMkTwo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

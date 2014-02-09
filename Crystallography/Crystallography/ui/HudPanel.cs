@@ -10,6 +10,7 @@ namespace Crystallography.UI
 		public float Height {get; set;}
 		public float Width {get; set;}
 		public float Lifetime {get; set;}
+		public float MoveDuration {get; set;}
 		public float DismissDelay {get; set;}
 		public Node SourceObject {get; set;}
 		public Vector2 Offset {get; set;}
@@ -26,6 +27,7 @@ namespace Crystallography.UI
 		public HudPanel () {
 			Offset = Vector2.Zero;
 			Lifetime = 0.0f;
+			MoveDuration = 1.0f;
 			DismissDelay = 0.1f;
 			SlideInDirection = SlideDirection.DOWN;
 			SlideOutDirection = SlideDirection.UP;
@@ -106,7 +108,7 @@ namespace Crystallography.UI
 					handler( this, null );
 				}
 			} ) );
-			baseSequence.Add( new MoveTo( Destination, 1.0f) );
+			baseSequence.Add( new MoveTo( Destination, MoveDuration) );
 			baseSequence.Add( new CallFunc( () => {
 				EventHandler handler = OnSlideInComplete;
 				if ( handler != null ) {
@@ -130,7 +132,7 @@ namespace Crystallography.UI
 			}
 		}
 		
-		public void SlideOut() {
+		public virtual void SlideOut() {
 			SlideOut (SlideOutDirection);
 		}
 		
@@ -163,7 +165,7 @@ namespace Crystallography.UI
 					handler( this, null );
 				}
 			} ) );
-			sequence.Add( new MoveTo( Destination, 1.0f) );
+			sequence.Add( new MoveTo( Destination, MoveDuration) );
 			sequence.Add( new CallFunc( () => {
 //				Visible=false;
 				EventHandler handler = OnSlideOutComplete;
