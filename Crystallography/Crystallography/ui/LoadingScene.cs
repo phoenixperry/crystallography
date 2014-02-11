@@ -230,6 +230,9 @@ namespace Crystallography.UI
 					_scene = new GameScene(_levelNumber, _timed);
 				},
 				() => {
+					while (GameScene.Hud.Initialized == false) {
+						//WAIT
+					}
 					(_scene as GameScene).ResetToLevel();
 				}
 			};
