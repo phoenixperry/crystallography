@@ -117,6 +117,7 @@ namespace Crystallography
 //			}
 			QualityManager.Instance.AddScoringQuality( pQualityString );
 			foreach ( CardCrystallonEntity card in availableCards) {
+				if (card is WildCardCrystallonEntity) continue;
 				QualityManager.Instance.SetQuality(card, pQualityString, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
 			}
 		}
@@ -142,10 +143,18 @@ namespace Crystallography
 		/// P identifier.
 		/// </param>
 		protected CardCrystallonEntity BuildCard(int pId) {
-			return new CardCrystallonEntity(_scene, _physics, pId, QPattern.Instance.patternTiles.TextureInfo, 
-			                                QPattern.Instance.patternTiles.TileIndex2D, _physics.SceneShapes[0]) {
-//				Wild = GameScene.currentLevel == 999
-			};
+			CardCrystallonEntity card;
+			if (   GameScene.currentLevel == 999
+			    && availableWildCards.Count < MAX_WILDCARDS
+			    && GameScene.Random.NextFloat() < WILDCARD_BASE_CHANCE) { // ------------------------------------------ POSSIBLE WILDCARD
+				
+				card = new WildCardCrystallonEntity(_scene, _physics, pId, QPattern.Instance.patternTiles.TextureInfo, 
+			                                QPattern.Instance.patternTiles.TileIndex2D, _physics.SceneShapes[0]);
+			} else { // ----------------------------------------------------------------------------------------------- NORMAL CARD
+				card = new CardCrystallonEntity(_scene, _physics, pId, QPattern.Instance.patternTiles.TextureInfo, 
+			                                QPattern.Instance.patternTiles.TileIndex2D, _physics.SceneShapes[0]);
+			}
+			return card;
 			
 		}
 		
@@ -225,25 +234,31 @@ namespace Crystallography
 		/// Returns whether or not at least one possible match remains, based on the contents of <c>availableCards</c>
 		/// </summary>
 		public bool MatchesPossible() {
-			List<int> testGroup = new List<int>();
-			List<int> hitMeCards = new List<int>();
-			foreach( CardCrystallonEntity c in availableCards ){
-				testGroup.Add(c.id);
-			}
-			if (DeckOfIDs.Count > 0) {	// if it is possible for the player to add cards, incorporate top 3 cards on the deck into match evaluation
-				var count = 3;
-				if ( DeckOfIDs.Count < 3 ) {
-					count = DeckOfIDs.Count;
-				}
-				testGroup.AddRange( DeckOfIDs.GetRange(0, count) );
-				hitMeCards.AddRange( DeckOfIDs.GetRange(0, count) );
-			}
+			if ( availableCards.Count + DeckOfIDs.Count >= SelectionGroup.MAX_CAPACITY ) { // -- NEED AT LEAST 3 CARDS
+				if ( availableWildCards.Count < 1 ) { // --------------------------------------- WILDCARD GUARANTEES A MATCH, SO ONLY TEST IF THERE ARE NONE
+					List<int> testGroup = new List<int>();
+					List<int> hitMeCards = new List<int>();
+					foreach( CardCrystallonEntity c in availableCards ){
+						testGroup.Add(c.id);
+					}
+					if (   LevelManager.Instance.HitMeDisabled == false 
+					    && DeckOfIDs.Count > 0) {	// ----------------------------------------- IF CARDS CAN BE ADDED, INCLUDE THEM TOO
+						var count = 3;
+						if ( DeckOfIDs.Count < 3 ) {
+							count = DeckOfIDs.Count;
+						}
+						
+						testGroup.AddRange( DeckOfIDs.GetRange(0, count) );
+						hitMeCards.AddRange( DeckOfIDs.GetRange(0, count) );
+					}
 			
-			if ( QualityManager.Instance.CheckForMatch( testGroup.ToArray(), hitMeCards.ToArray() ) ) {
+					if ( QualityManager.Instance.CheckForMatch( testGroup.ToArray(), hitMeCards.Count ) ) {
 #if DEBUG
-				Console.WriteLine("Possible Sets Remain: TRUE");
+						Console.WriteLine("Possible Sets Remain: TRUE");
 #endif
-				return true;
+						return true;
+					}
+				}
 			}
 #if DEBUG
 			Console.WriteLine("Possible Sets Remain: FALSE");
@@ -271,23 +286,23 @@ namespace Crystallography
 			while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
 				var card = spawn (DeckOfIDs[0]);
 				DeckOfIDs.RemoveAt(0);
-				if (GameScene.currentLevel == 999) {
-					if (   availableWildCards.Count < MAX_WILDCARDS
-					    && GameScene.Random.NextFloat() < WILDCARD_BASE_CHANCE ) {
-						card.Wild = true;
-						QualityManager.Instance.RemoveAll(card);
-						availableWildCards.Add(card);
-						card.Flash();
-					} else {
-						foreach ( string quality in QualityManager.Instance.qualityDict.Keys ) {
-							if ( QualityManager.Instance.scoringQualityList.Contains(quality) ) {
-								QualityManager.Instance.SetQuality(card, quality, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
-							} else{
-								QualityManager.Instance.SetQuality(card, quality, 0 );
-							}
-						}
-					}
-				}
+//				if (GameScene.currentLevel == 999) {
+//					if (   availableWildCards.Count < MAX_WILDCARDS
+//					    && GameScene.Random.NextFloat() < WILDCARD_BASE_CHANCE ) {
+//						card.Wild = true;
+//						QualityManager.Instance.RemoveAll(card);
+//						availableWildCards.Add(card);
+//						card.Flash();
+//					} else {
+//						foreach ( string quality in QualityManager.Instance.qualityDict.Keys ) {
+//							if ( QualityManager.Instance.scoringQualityList.Contains(quality) ) {
+//								QualityManager.Instance.SetQuality(card, quality, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
+//							} else{
+//								QualityManager.Instance.SetQuality(card, quality, 0 );
+//							}
+//						}
+//					}
+//				}
 			}
 		}
 		
@@ -298,16 +313,15 @@ namespace Crystallography
 			foreach( var card in availableCards ) {
 				card.removeFromScene( true );
 			}
-			if (GameScene.currentLevel == 999) {
-				PickRandomly = true;
-			} else {
-				PickRandomly = false;
-			}
+//			if (GameScene.currentLevel == 999) {
+//				PickRandomly = true;
+//			} else {
+//				PickRandomly = false;
+//			}
 			availableCards.Clear();
 			availableWildCards.Clear ();
 			NextId = 0;
 			_scene = pScene;
-//			ids = null;
 			if (DeckOfIDs != null) {
 				DeckOfIDs.Clear();
 			}
@@ -370,14 +384,22 @@ namespace Crystallography
 			TotalCardsInDeck--;
 			
 			// APPLY QUALITIES
-			if ( GameScene.currentLevel != 999) {
-				QualityManager.Instance.ApplyQualitiesToEntity( card );
-			} //else {
-//				List<string> qualities = new List<string>();
-//				qualities.Add("QColor");
-//				QualityManager.Instance.ApplyQualitiesToEntity( qualities, card);
+			card.ApplyQualities();
+//			if ( GameScene.currentLevel != 999) {
+//				QualityManager.Instance.ApplyQualitiesToEntity( card );
+//			} else {
+////				List<string> qualities = new List<string>();
+////				qualities.Add("QColor");
+////				QualityManager.Instance.ApplyQualitiesToEntity( qualities, card);
+//				foreach ( string quality in QualityManager.Instance.qualityDict.Keys ) {
+//					if ( QualityManager.Instance.scoringQualityList.Contains(quality) ) {
+//						QualityManager.Instance.SetQuality(card, quality, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
+//					} else{
+//						QualityManager.Instance.SetQuality(card, quality, 0 );
+//					}
+//				}
 //			}
-			
+//			
 			
 			// ADD TO WORLD
 			card.setPosition( pX, pY );

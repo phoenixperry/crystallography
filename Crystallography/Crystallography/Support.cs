@@ -144,6 +144,33 @@ namespace Crystallography
 			return new Vector4( r/255.0f, g/255.0f, b/255.0f, 1.0f );
 		}
 		
+		public static float GetAngle( Sce.PlayStation.Core.Vector2 p1, Sce.PlayStation.Core.Vector2 p2, bool degrees=false ) {
+			var x = p2.X - p1.X;
+			var y = p2.Y - p1.Y;
+			if ( x == 0.0f && y == 0.0f ) {
+				return 0.0f;
+			}
+			var c1 = 3.14159265f * 0.25f;
+			var c2 = 3.0f * c1;
+			var ay = y < 0 ? -y : y;
+			var angle = 0.0f;
+			if ( x >= 0 ) {
+				angle = c1 - c1 * ((x - ay) / (x + ay));
+			} else {
+				angle = c2 - c1 * ((x + ay) / (ay - x));
+			}
+			angle = y < 0 ? -angle : angle;
+			if ( angle > 2 * c1 ) {
+				angle -= 2 * c2;
+			} else {
+				angle += 2 * c1;
+			}
+			if (degrees) {
+				angle *= 57.2957796f;
+			}
+			return angle;
+		}
+		
 		public static Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile SpriteFromFile(string filename)
 		{
 			if (TextureCache.ContainsKey(filename) == false)

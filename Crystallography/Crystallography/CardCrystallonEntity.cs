@@ -16,7 +16,7 @@ namespace Crystallography
 		static readonly Vector2[] POSITION_OFFSETS = { 	new Vector2(0f,39.0f*CARD_SCALAR),
 														new Vector2(-40.5f*CARD_SCALAR,-31.5f*CARD_SCALAR),
 														new Vector2(40.5f*CARD_SCALAR,-31.5f*CARD_SCALAR) };
-		protected readonly static float DEFAULT_SPEED = 0.3f;
+		public readonly static float DEFAULT_SPEED = 0.3f;
 		
 		protected SpriteTile _anim;
 		protected int _glowIndex;
@@ -211,6 +211,20 @@ namespace Crystallography
 		
 		// METHODS ------------------------------------------------------------------------------------------------------------------------------------------------------
 		
+		public virtual void ApplyQualities() {
+			if ( GameScene.currentLevel != 999) { // ------------------------------ PUZZLE MODE QUALITIES (FROM DATA)
+				QualityManager.Instance.ApplyQualitiesToEntity( this );
+			} else { // ----------------------------------------------------------- INFINITE MODE QUALITIES (RANDOM)
+				foreach ( string quality in QualityManager.Instance.qualityDict.Keys ) {
+					if ( QualityManager.Instance.scoringQualityList.Contains(quality) ) {
+						QualityManager.Instance.SetQuality(this, quality, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
+					} else{
+						QualityManager.Instance.SetQuality(this, quality, 0 );
+					}
+				}
+			}
+		}
+		
 		public void ShowGlow( float pLifetime = 0.0f ) {
 			getNode().StopActionByTag(0);
 			if (GlowSprite==null) return;
@@ -221,17 +235,6 @@ namespace Crystallography
 				getNode().RunAction( sequence );
 			}
 			GlowSprite.Visible = true;
-		}
-		
-		public void Flash() {
-			Sequence sequence = new Sequence();
-			sequence.Add( new CallFunc( () => TintTo( QColor.palette[1], 0.08f, false) ) );
-			sequence.Add( new DelayTime(0.08f) );
-			sequence.Add( new CallFunc( () => TintTo( QColor.palette[2], 0.08f, false) ) );
-			sequence.Add( new DelayTime(0.08f) );
-			sequence.Add( new CallFunc( () => TintTo( QColor.palette[0], 0.08f, false) ) );
-			sequence.Add( new DelayTime(0.08f) );
-			this.getNode().RunAction( new RepeatForever() { InnerAction=sequence, Tag = 40 } );
 		}
 		
 		public void HideGlow() {

@@ -121,17 +121,14 @@ namespace Crystallography
 		
 		public override bool CanBeAddedTo (GroupCrystallonEntity pGroup)
 		{
-//			base.BeSnappedTo ();
-			if(pGroup.MemberType != this.GetType()) {
-				return false;
-			}
-			
-			bool okToSnap;
-			if (AppMain.ORIENTATION_MATTERS) {
-				okToSnap = ( pGroup.pucks[_orientationIndex].Children.Count == 0 );
-				okToSnap = okToSnap && (Array.IndexOf(pGroup.members, this) == -1);
-			} else {
-				okToSnap = ( pGroup.population < pGroup.maxPopulation );
+			bool okToSnap = false;
+			if( pGroup.MemberType.IsAssignableFrom(this.GetType()) ) { // CHECK FOR OBJECT TYPE COMPATIBILITY WITH GROUP
+				if (AppMain.ORIENTATION_MATTERS) { // ------------------- ORIENTATION TEST
+					okToSnap = ( pGroup.pucks[_orientationIndex].Children.Count == 0 );
+					okToSnap = okToSnap && (Array.IndexOf(pGroup.members, this) == -1);
+				} else {
+					okToSnap = ( pGroup.population < pGroup.maxPopulation );
+				}
 			}
 			return okToSnap;
 		}

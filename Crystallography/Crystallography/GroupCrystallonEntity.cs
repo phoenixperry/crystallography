@@ -159,19 +159,19 @@ namespace Crystallography
 		/// </param>
 		public override bool CanBeAddedTo ( GroupCrystallonEntity pGroup )
 		{
-			if (pGroup.MemberType != this.MemberType) {
-				return false;
-			}
-			bool okToSnap = true;
-			if( AppMain.ORIENTATION_MATTERS ) {
-				for ( int i=0; i < _maxMembers; i++ ) {
-					if (_pucks[i].Children.Count > 0 && pGroup._pucks[i].Children.Count > 0) {
-						okToSnap = false;
-						break;
+			bool okToSnap = false;
+			if ( pGroup.MemberType.IsAssignableFrom(this.MemberType) ) { // GROUPS' MEMBER TYPES ARE COMPATIBLE
+				if( AppMain.ORIENTATION_MATTERS ) { // -------------------- ORIENTATION TEST
+					okToSnap = true;
+					for ( int i=0; i < _maxMembers; i++ ) {
+						if (_pucks[i].Children.Count > 0 && pGroup._pucks[i].Children.Count > 0) {
+							okToSnap = false;
+							break;
+						}
 					}
+				} else {
+					okToSnap = ( this.population + pGroup.population <= pGroup.maxPopulation );
 				}
-			} else {
-				okToSnap = ( this.population + pGroup.population <= pGroup.maxPopulation );
 			}
 			return okToSnap;
 		}
@@ -239,17 +239,16 @@ namespace Crystallography
 		/// <see cref="Crystallography.ICrystallonEntity"/>
 		/// </param>
 		public virtual GroupCrystallonEntity Add(ICrystallonEntity pEntity) {
-			// Idiot check
-			if ( pEntity == null ) {
-				return this;
-			}
-			
-			if ( population == 0 && !(this is SelectionGroup) ) {
-				MemberType = pEntity.GetType();
-			}
-			
-			if( pEntity.CanBeAddedTo(this) ){
-				pEntity.BeAddedToGroup(this);
+			if ( pEntity != null ) {
+				if ( population == 0 && !(this is SelectionGroup) ) {
+					MemberType = pEntity.GetType();
+					if ( MemberType == typeof(WildCardCrystallonEntity) ) {
+						MemberType = typeof(CardCrystallonEntity);
+					}
+				}
+				if( pEntity.CanBeAddedTo(this) ){
+					pEntity.BeAddedToGroup(this);
+				}
 			}
 			return this;
 		}

@@ -374,37 +374,39 @@ namespace Crystallography
 		/// <param name='pCardIds'>
 		/// An array of card IDs.
 		/// </param>
-		public bool CheckForMatch( int[] pCardIds, int[] pHitMeCards ) {
+		/// /// <param name='pHitMeCount'>
+		/// Number of offscreen cards being included
+		/// </param>
+//		public bool CheckForMatch( int[] pCardIds, int[] pHitMeCards ) {
+		public bool CheckForMatch( int[] pCardIds, int pHitMeCount) {
 			int len = pCardIds.Length;
-			if (len < SelectionGroup.MAX_CAPACITY) {
-				return false;
-			}
-			
-			int[] triad = new int[SelectionGroup.MAX_CAPACITY];
-			for (int i=0; i < len-2; i++) {
-				for (int j=i+1; j < len-1; j++) {
-					for (int k=j+1; k < len; k++) {
-						triad[0] = pCardIds[i];
-						triad[1] = pCardIds[j];
-						triad[2] = pCardIds[k];
-						if( EvaluateMatch(triad) ) { // ------- as soon as we find one legal cube...
+			if (len >= SelectionGroup.MAX_CAPACITY) {
+				
+				int[] triad = new int[SelectionGroup.MAX_CAPACITY];
+				for (int i=0; i < len-2; i++) {
+					for (int j=i+1; j < len-1; j++) {
+						for (int k=j+1; k < len; k++) {
+							triad[0] = pCardIds[i];
+							triad[1] = pCardIds[j];
+							triad[2] = pCardIds[k];
+							if( EvaluateMatch(triad) ) { // ------- as soon as we find one legal cube...
 #if DEBUG
-							Console.WriteLine("First Match Found: {0}, {1}, {2}", pCardIds[i], pCardIds[j], pCardIds[k]);
-							if( pHitMeCards.Length > 0 ) {
-								int hitIndex = len - pHitMeCards.Length;
-								if( k >= hitIndex ) {
-									Console.WriteLine("Hit Me Required: {0}", pCardIds[k]);
+								Console.WriteLine("First Match Found: {0}, {1}, {2}", pCardIds[i], pCardIds[j], pCardIds[k]);
+								if( pHitMeCount > 0 ) {
+									int hitIndex = len - pHitMeCount;
+									if( k >= hitIndex ) {
+										Console.WriteLine("Hit Me Required: {0}", pCardIds[k]);
+									}
+									if( j >= hitIndex ) {
+										Console.WriteLine("Hit Me Required: {0}", pCardIds[j]);
+									}
+									if( i >= hitIndex ) {
+										Console.WriteLine("Hit Me Required: {0}", pCardIds[i]);
+									}
 								}
-								if( j >= hitIndex ) {
-									Console.WriteLine("Hit Me Required: {0}", pCardIds[j]);
-								}
-								if( i >= hitIndex ) {
-									Console.WriteLine("Hit Me Required: {0}", pCardIds[i]);
-								}
-							}
-							
 #endif
-							return true;
+								return true;
+							}
 						}
 					}
 				}
