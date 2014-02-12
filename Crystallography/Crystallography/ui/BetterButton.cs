@@ -301,6 +301,9 @@ namespace Crystallography.UI
 			if (pTurnOn != null) {
 				_onToggle = (bool)pTurnOn;
 				_buttonText.Visible = _onToggle;
+				if( Icon != null ) {
+					Icon.Visible = _onToggle;
+				}
 				_status = (_onToggle ? NORMAL : DISABLED);
 			}
 			return  _onToggle;

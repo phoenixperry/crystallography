@@ -43,6 +43,7 @@ namespace Crystallography.UI
 			
 			MenuBGBottom = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_bottom.png");
 			MenuBGBottom.Position = new Vector2(351.0f, 32.0f);
+			MenuBGBottom.RegisterPalette(1);
 			this.AddChild(MenuBGBottom);
 			
 			MaskBGBottom = Support.UnicolorSprite("white", 255, 255, 255, 255);
@@ -54,6 +55,7 @@ namespace Crystallography.UI
 			MenuBGSpacer3 = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_blue2.png");
 			MenuBGSpacer3.Position = new Vector2(351.0f, 111.0f);
 			MenuBGSpacer3.FlipU = true;
+			MenuBGSpacer3.RegisterPalette(2);
 			this.AddChild(MenuBGSpacer3);
 			
 			MaskBGSpacer3 = Support.UnicolorSprite("white", 255, 255, 255, 255);
@@ -65,6 +67,7 @@ namespace Crystallography.UI
 			MenuBGSpacer2 = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_red2.png");
 			MenuBGSpacer2.Position = new Vector2(351.0f, 192.0f);
 			MenuBGSpacer2.FlipU = true;
+			MenuBGSpacer2.RegisterPalette(1);
 			this.AddChild(MenuBGSpacer2);
 			
 			MaskBGSpacer2 = Support.UnicolorSprite("white", 255, 255, 255, 255);
@@ -76,6 +79,7 @@ namespace Crystallography.UI
 			MenuBGSpacer1 = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_blue2.png");
 			MenuBGSpacer1.Position = new Vector2(351.0f, 279.0f);
 			MenuBGSpacer1.FlipU = true;
+			MenuBGSpacer1.RegisterPalette(2);
 			this.AddChild(MenuBGSpacer1);
 			
 			MaskBGSpacer1 = Support.UnicolorSprite("white", 255, 255, 255, 255);
@@ -86,6 +90,7 @@ namespace Crystallography.UI
 			
 			MenuBGTop = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_top.png");
 			MenuBGTop.Position = new Vector2(351.0f, 423.0f);
+			MenuBGTop.RegisterPalette(1);
 			this.AddChild(MenuBGTop);
 			
 			MaskBGTop = Support.UnicolorSprite("white", 255, 255, 255, 255);
@@ -96,7 +101,7 @@ namespace Crystallography.UI
 			
 			
 			NewGameButton = new BetterButton(256.0f, 64.0f) {
-				Text = "puzzle mode",
+				Text = "tutorial",
 				Position = new Vector2(94.0f, 365.0f),
 //				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f),
 			};
@@ -104,7 +109,7 @@ namespace Crystallography.UI
 			this.AddChild(NewGameButton);
 			
 			LevelSelectButton = new BetterButton(256.0f, 64.0f) {
-				Text = "puzzle select",
+				Text = "puzzle mode",
 				Position = new Vector2(94.0f, 281.0f),
 //				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
@@ -175,16 +180,19 @@ namespace Crystallography.UI
 		
 		void HandleNewGameButtonButtonUpAction (object sender, EventArgs e) {
 #if DEBUG
-			Console.WriteLine("New Game");
+//			Console.WriteLine("New Game");
+			Console.WriteLine("Tutorial");
 #endif
 			Director.Instance.ReplaceScene(new LoadingScene(0, false) );
 		}
 		
 		void HandleLevelSelectButtonButtonUpAction (object sender, EventArgs e) {
 #if DEBUG
-			Console.WriteLine("Level Select");
+//			Console.WriteLine("Level Select");
+			Console.WriteLine("New Game");
 #endif
-			Director.Instance.ReplaceScene(new LoadingScene(0, false, "Level Select") );
+//			Director.Instance.ReplaceScene(new LoadingScene(0, false, "Level Select") );
+			Director.Instance.ReplaceScene(new LoadingScene(1, false) );
 		}
 		
 		void HandleCreditsButtonButtonUpAction (object sender, EventArgs e) {

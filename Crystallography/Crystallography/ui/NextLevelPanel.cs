@@ -58,7 +58,6 @@ namespace Crystallography.UI
 		
 		public NextLevelPanel () {
 			DismissDelay = 0.0f;
-//			Height = 176.0f;
 			Width = 448.0f;
 			
 			Background = Support.UnicolorSprite("Grey", 40, 40, 40, 200);
@@ -68,18 +67,14 @@ namespace Crystallography.UI
 			PossibleSolutionsText = new Label() {
 				Text = "all possible solutions:",
 				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold" ) ),
-//				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
 				Position = new Vector2(40.0f, 180.0f)
 			};
 			PossibleSolutionsText.RegisterPalette(0);
 			this.AddChild( PossibleSolutionsText );
 			
 			MessageText = new Label() {
-//				Text = "Lorem ipsum dolor sit amet",
 				Text = "you clever thing.",
 				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold" ) ),
-//				Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f),
-//				Position = new Vector2(40.0f, 95.0f)
 			};
 			MessageText.RegisterPalette(0);
 			this.AddChild( MessageText );
@@ -94,34 +89,13 @@ namespace Crystallography.UI
 			QuitButton.background.RegisterPalette(2);
 			this.AddChild(QuitButton);
 			
-//			QuitButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/quit_game.png", 1, 3).TextureInfo, new Vector2i(0,0) );
-//			QuitButton.setPosition(58.5f,26.5f);
-//			QuitButton.Visible = true;
-//			this.AddChild(QuitButton.getNode());
-			
-			
-//			PercentageText = new Label() {
-//				Text = "100 %",
-//				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold" ) ),
-//				Position = new Vector2( 320.0f, QuitButton.Height + 90.0f )
-//			};
-//			this.AddChild( PercentageText );
-			
-			
 			LevelSelectButton = new BetterButton(176.0f, 53.0f) {
 				Text = "level select",
 				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
 				Position = new Vector2(QuitButton.Width + 4.0f , 0.0f),
-//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
 			LevelSelectButton.background.RegisterPalette(2);
 			this.AddChild(LevelSelectButton);
-			
-//			LevelSelectButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/levelSelectBtn.png", 1, 3).TextureInfo, new Vector2i(0,0) );
-//			LevelSelectButton.setPosition(QuitButton.Width + 2.0f + 88.0f,26.5f);
-//			LevelSelectButton.Visible = true;
-//			this.AddChild(LevelSelectButton.getNode());
-			
 			
 			NextLevelButton = new BetterButton(148.0f, 53.0f) {
 				Text = "next level",
@@ -135,12 +109,6 @@ namespace Crystallography.UI
 			};
 			NextLevelButton.background.RegisterPalette(1);
 			this.AddChild(NextLevelButton);
-			
-			
-//			NextLevelButton = new ButtonEntity("", null, null, Support.TiledSpriteFromFile("Application/assets/images/nextLevel.png", 1, 3).TextureInfo, new Vector2i(0,0) );
-//			NextLevelButton.setPosition(LevelSelectButton.Width + QuitButton.Width + 4.0f + 74.0f, 26.5f);
-//			NextLevelButton.Visible = true;
-//			this.AddChild(NextLevelButton.getNode());
 			
 			var charHeight = MessageText.FontMap.CharPixelHeight;
 			Height = (charHeight * 5.0f) + QuitButton.Height;
@@ -165,8 +133,18 @@ namespace Crystallography.UI
 		
 		void HandleOnSlideInStart (object sender, EventArgs e)
 		{
-			NextLevelButton.ButtonUpAction += HandleNextLevelButtonButtonUpAction;
-			LevelSelectButton.ButtonUpAction += HandleLevelSelectButtonButtonUpAction;
+			LevelSelectButton.On(false);
+			NextLevelButton.On(false);
+			if (   GameScene.currentLevel != 0
+			    && GameScene.currentLevel != 999 ) {
+				
+				LevelSelectButton.On(true);
+				LevelSelectButton.ButtonUpAction += HandleLevelSelectButtonButtonUpAction;
+				if ( GameScene.currentLevel != GameScene.TOTAL_LEVELS-1 ) {
+					NextLevelButton.On(true);
+					NextLevelButton.ButtonUpAction += HandleNextLevelButtonButtonUpAction;
+				}
+			}
 			QuitButton.ButtonUpAction += HandleQuitButtonButtonUpAction;
 		}
 		
