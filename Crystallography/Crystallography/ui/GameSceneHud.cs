@@ -70,6 +70,7 @@ namespace Crystallography.UI
 		public int Goal {get; private set;}
 		public int Score {get; private set;}
 		public int Cubes {get; private set;}
+		public bool Initialized {get {return _initialized;} }
 		
 		// CONSTRUCTOR -------------------------------------------------------------------------------------------
 		
@@ -443,8 +444,6 @@ namespace Crystallography.UI
 		}
 		
 		private void Initialize() {
-			_initialized = true;
-			
 			FontMap map = FontManager.Instance.GetMap( FontManager.Instance.GetInGame("Bariol", 25, "Bold") );
 			FontMap bigMap = FontManager.Instance.GetMap( FontManager.Instance.GetInGame("Bariol", 44, "Bold") );
 			
@@ -576,6 +575,8 @@ namespace Crystallography.UI
 			this.AddChild(HitMeButton);
 			HitMeButton.background.RegisterPalette(1);
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
+			
+			_initialized = true;
 		}
 
 		
