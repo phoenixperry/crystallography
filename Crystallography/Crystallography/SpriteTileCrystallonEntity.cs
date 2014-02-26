@@ -94,8 +94,10 @@ namespace Crystallography
 		public override void Update (float dt)
 		{
 			if(getBody() != null) {
-				if (_body.Velocity.Length() != 0.3f) {
-					_body.Velocity = _body.Velocity.Normalize() * 0.3f;
+				var len = _body.Velocity.Length();
+				if (len > 0.3f) {
+					len = FMath.Min ( 4.0f, FMath.Max(0.3f, len - dt * 5.0f));
+					_body.Velocity = _body.Velocity.Normalize() * len;
 				}
 				_sprite.Position = _body.Position * GamePhysics.PtoM;
 			}
@@ -109,9 +111,15 @@ namespace Crystallography
 		{
 			pGroup.Attach( this );
 			if (pGroup is SelectionGroup) {
-				playSound();
+				getNode().StopActionByTag(20);
+				Sequence sequence = new Sequence() { Tag = 20 };
+				sequence.Add( new DelayTime( 3.0f ) );
+				sequence.Add( new CallFunc( () => {
+					playSound();
+				} ) );
+				getNode().RunAction(sequence);
 			}
-		return this;
+			return this;
 		}
 		
 		public override AbstractCrystallonEntity BeSelected ( float delay = 0.0f )
@@ -119,10 +127,28 @@ namespace Crystallography
 			return this;
 		}
 		
+		public override void BeTapped (float delay=0.0f)
+		{
+//			if( delay > 0.0f ) {
+				getNode().StopActionByTag(20);
+				Sequence sequence = new Sequence() { Tag = 20 };
+				sequence.Add( new DelayTime( delay ) );
+				sequence.Add( new CallFunc( ()=> {
+					playSound();
+					
+				} ) );
+				getNode().RunAction(sequence);
+//			} 
+//			else {
+//				playSound();
+//			}
+		}
+		
 		public override bool CanBeAddedTo (GroupCrystallonEntity pGroup)
 		{
 			bool okToSnap = false;
-			if( pGroup.MemberType.IsAssignableFrom(this.GetType()) ) { // CHECK FOR OBJECT TYPE COMPATIBILITY WITH GROUP
+//			if( pGroup.MemberType.IsAssignableFrom(this.GetType()) ) { // CHECK FOR OBJECT TYPE COMPATIBILITY WITH GROUP
+			if ( pGroup.CheckMemberTypeCompatability(this) ){
 				if (AppMain.ORIENTATION_MATTERS) { // ------------------- ORIENTATION TEST
 					okToSnap = ( pGroup.pucks[_orientationIndex].Children.Count == 0 );
 					okToSnap = okToSnap && (Array.IndexOf(pGroup.members, this) == -1);

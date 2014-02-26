@@ -11,8 +11,8 @@ namespace Crystallography
 		public bool enabled = true;
 		
 		// DOUBLE TAP CONSTANTS
-		private static readonly float MAX_PRESS_DURATION = 0.15f;
-		private static readonly float MAX_RELEASE_DURATION = 0.3f;
+		public static readonly float MAX_PRESS_DURATION = 0.15f;
+		public static readonly float MAX_RELEASE_DURATION = 0.3f;
 //		private static readonly float MAX_TAP_DISTANCE = 50;
 		
 		private static int tapCount;

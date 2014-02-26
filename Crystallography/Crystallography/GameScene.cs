@@ -25,6 +25,7 @@ namespace Crystallography
 		public static Random Random = new Random();
 		public static Crystallography.UI.GameSceneHud Hud;
     	public static GamePhysics _physics;
+		public static SelectionGroup SG;
 		protected static List<ICrystallonEntity> _allEntites = new List<ICrystallonEntity>();
 		
 		public static event EventHandler LevelChangeDetected;
@@ -81,9 +82,9 @@ namespace Crystallography
 			}
 			ForegroundLayer.AddChild(Hud);
 			
-			var sg = SelectionGroup.Instance;
-			sg.Reset( this );
-			ForegroundLayer.AddChild(sg.getNode());
+			SG = SelectionGroup.Instance;
+			SG.Reset( this );
+			ForegroundLayer.AddChild(SG.getNode());
 
 #if DEBUG
             // This is debug routine that will draw the physics bounding box around all physics bodies
@@ -99,6 +100,15 @@ namespace Crystallography
 						}
 					}
                 };
+				
+				this.AdHocDraw += () => {
+					var s = SelectionGroup.Instance.getPosition() - SelectionGroup.Instance.heading.Normalize() * FMath.Max( 80.0f, FMath.Min(120.0f, (120.0f * SelectionGroup.Instance.velocity/100.0f)));
+					var bl = s - (2*Vector2.One);
+					var tr = bl + (4*Vector2.One);
+					Director.Instance.DrawHelpers.DrawBounds2Fill(
+						new Bounds2(bl,tr)
+					);
+				};
             }
 #endif
 			
@@ -178,6 +188,8 @@ namespace Crystallography
 			}
 			Layers = null;
 			Hud = null;
+			SG.Destroy();
+			SG = null;
 			Support.ParticleEffectsManager.Instance.Destroy();
 			base.OnExit();
 			Support.MusicSystem.Instance.StopAll();

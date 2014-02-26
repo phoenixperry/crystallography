@@ -15,11 +15,15 @@ namespace Crystallography
 		protected static readonly float SNAP_DISTANCE = 50.0f;
 		public static float EASE_DISTANCE = 70.0f;
 		public static float MAXIMUM_PICKUP_VELOCITY = 700.0f; //400.0f;
+		private static float MAX_SELECTION_DELAY = 0.5f;
 		
 		private AbstractCrystallonEntity lastEntityReleased;
 		private AbstractCrystallonEntity lastEntityTouched;
 		private AbstractCrystallonEntity justDownPositionEntity;
-		private Vector2 lastPosition;
+		private List<Vector2> lastPosition;
+		public Vector2 heading;
+		
+		private float selectionDelay;
 		
 		public event EventHandler CubeFailedDetected;
 		
@@ -67,6 +71,18 @@ namespace Crystallography
 			
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
+			
+//			Director.Instance.CurrentScene.AdHocDraw += () => {
+//				foreach (Node puck in _pucks) {
+////					puck.DebugDrawTransform();
+//					var bl = puck.Position - (2*Vector2.One);
+//					var tr = bl + (4*Vector2.One);
+//					Director.Instance.DrawHelpers.DrawBounds2Fill(
+//						new Bounds2(bl, tr)
+//					);
+//				}
+//			};
+			
 #endif
 		}
 		
@@ -118,6 +134,7 @@ namespace Crystallography
 		/// </param>
 		void HandleInputManagerInstanceTouchJustUpDetected (object sender, BaseTouchEventArgs e)
 		{
+			lastPosition.Clear();
 			if ( GameScene.paused ) return;
 			
 			if ( population > 0 && (easeState == EaseState.OUT || easeState == EaseState.MOVING_OUT) ) {
@@ -138,11 +155,17 @@ namespace Crystallography
 		void HandleInputManagerInstanceTouchJustDownDetected (object sender, BaseTouchEventArgs e)
 		{
 			if ( GameScene.paused ) return;
+			setPosition( e.touchPosition );
 			
 			lastEntityTouched = justDownPositionEntity = GetEntityAtPosition( e.touchPosition ) as AbstractCrystallonEntity;
 			
 			AddParticle(0.0f);
 			Scheduler.Instance.Schedule(this.getNode(), AddParticle, 0.1f, false, 1);
+			
+			if ( lastEntityTouched is CardCrystallonEntity ) {
+				Add ( lastEntityTouched );
+				justDownPositionEntity = null;
+			}
 		}
 		
 		/// <summary>
@@ -160,29 +183,47 @@ namespace Crystallography
 			setPosition( e.touchPosition );
 
 			if (velocity < MAXIMUM_PICKUP_VELOCITY) {
-				if ( InputManager.dragging ) {
-					var entity = GetEntityAtPosition( e.touchPosition ) as AbstractCrystallonEntity;
+				if ( InputManager.dragging ) { // ----------------------------------------------------------- LOOK FOR ENTITIES THE PLAYER MIGHT BE TRYING TO TOUCH
+					// TEST FINGER POSITION
+					var entity = GetEntityAtPosition( e.touchPosition );
 					if (justDownPositionEntity != null) { // ------------------------------------------------ EDGE CASE: PLAYER TOUCHED DOWN ON A PIECE, BUT DRAGGED OFF OF IT
 						if (justDownPositionEntity != entity ) { // -----------------------------             BEFORE WE ADDED IT TO THE SELECTION GROUP.
 							if (entity == null) {
-//								Add (justDownPositionEntity); // -------------------------------------------- RARE:      PLAYER IS TOUCHING A DIFFERENT VALID PIECE BEFORE WE RESOLVED THE FIRST; ADD THE OLD ONE, RESOLVE THE NEW ONE BELOW
-//							} else {
 								entity = justDownPositionEntity; // ----------------------------------------- COMMON:    PLAYER IS TOUCHING EMPTY SPACE; RESOLVE IT BELOW
 							}
 						}
 						justDownPositionEntity = null;
 					}
 					
-					if (entity != null) {
-						if (entity is CubeCrystallonEntity) { // ------------------------------------------ IGNORE CUBES
-							return; 
-						} else if (entity.GetType().ToString() == "Crystallography.GroupCrystallonEntity") {
-							var g = entity as GroupCrystallonEntity;
-							MemberType = g.MemberType;
-						} else {
-							MemberType = entity.GetType ();
+					if ( entity == null ) {
+						// TRY THE POSITIONS OF PIECES THE PLAYER ALREADY HAS
+						if (population < 3 && selectionDelay == 0.0f) {
+							var pos = e.touchPosition - heading.Normalize() * FMath.Max( 80.0f, FMath.Min(120.0f, (120.0f * (SelectionGroup.Instance.velocity/100.0f))));
+							var ent = GetEntityAtPosition( pos );
+							if (ent != null ) {
+								Pull (ent);
+							}
 						}
-						Add (entity);
+//						foreach ( Node puck in pucks ) {
+//							if (puck.Children.Count == 0) {
+//								entity = GetEntityAtPosition( getNode().LocalToWorld(puck.Position) );
+//								break;
+//							}
+//						}
+					}
+					
+					if (entity != null) {
+//						if (entity is CubeCrystallonEntity) { // ------------------------------------------ IGNORE CUBES
+//							return; 
+//						} else if (entity.GetType().ToString() == "Crystallography.GroupCrystallonEntity") {
+//							var g = entity as GroupCrystallonEntity;
+//							MemberType = g.MemberType;
+//						} else {
+//							MemberType = entity.GetType ();
+//						}
+						if ( selectionDelay == 0.0f) {
+							Add (entity);
+						}
 					} 
 					lastEntityTouched = entity;
 				}
@@ -190,6 +231,19 @@ namespace Crystallography
 		}
 		
 		// OVERRIDES -------------------------------------------------------------
+		
+//		public override GroupCrystallonEntity Add (ICrystallonEntity pEntity)
+//		{
+//			if (pEntity != null) {
+//				if ( false == pEntity is CubeCrystallonEntity ) { // ------------------------------------ IGNORE CUBES
+//					if( pEntity.CanBeAddedTo(this) ){
+//						pEntity.BeAddedToGroup(this);
+//					}
+//				}
+//			}
+//			return this;
+////			return base.Add (pEntity);
+//		}
 		
 		/// <summary>
 		///  DON'T CALL THIS FUNCTION ON SELECTION GROUP. JUST RETURNS A REFERENCE TO ITSELF.
@@ -208,8 +262,9 @@ namespace Crystallography
 		}
 		
 		public override void PostAttach ( AbstractCrystallonEntity pEntity ) {
-			pEntity.BeSelected();
+			pEntity.BeSelected( InputManager.MAX_PRESS_DURATION );
 			EaseOut();
+			selectionDelay = MAX_SELECTION_DELAY;
 		}
 		
 		public override void RemoveAll () {
@@ -222,8 +277,30 @@ namespace Crystallography
 		public override void Update (float dt) {	
 			base.Update(dt);
 			
-			velocity = Vector2.Distance( getPosition(), lastPosition ) / dt;
-			lastPosition = getPosition();
+			if (selectionDelay > 0.0f) {
+				selectionDelay = FMath.Max(0.0f, selectionDelay - dt);
+			}
+			
+			heading = Vector2.Zero;
+			if (lastPosition.Count > 0) {
+				velocity = Vector2.Distance( getPosition(), lastPosition[lastPosition.Count-1] ) / dt;
+				foreach (Vector2 p in lastPosition) {
+				heading += p - getPosition();
+			}
+			heading /= lastPosition.Count;
+			} else {
+				velocity = 0.0f;
+			}
+//			if (velocity > 0.0f) {
+//				Console.WriteLine("Velocity: {0}", velocity);
+//			}
+			
+//			heading = lastPosition - getPosition();
+			lastPosition.Add( getPosition() );
+			if (lastPosition.Count > 10) {
+				lastPosition.RemoveAt(0);
+			}
+//			Console.WriteLine("velocity: {0} heading: {1}, {2}", velocity, heading.X, heading.Y);
 		}
 		
 		// METHODS ---------------------------------------------------------------
@@ -269,6 +346,9 @@ namespace Crystallography
 					Release( this, pForceBreak );
 					MemberType = null;
 					easeState = EaseState.IN;
+					foreach (Node puck in pucks) { // ----- PLACE ALL PUCKS AT SelectionGroup POSITION
+						puck.Position = Vector2.Zero;
+					}
 				} ) );
 			}
 			_scene.RunAction( releaseDelay );
@@ -320,7 +400,7 @@ namespace Crystallography
 		/// <param name='position'>
 		/// Screen Position in pixels.
 		/// </param>
-		protected ICrystallonEntity GetEntityAtPosition( Vector2 position ) {
+		protected AbstractCrystallonEntity GetEntityAtPosition( Vector2 position ) {
 			var lowerLeft = Vector2.Zero;
 			var upperRight = Vector2.Zero;
 			System.Collections.ObjectModel.ReadOnlyCollection<ICrystallonEntity> allEntities = GameScene.getAllEntities();
@@ -333,13 +413,13 @@ namespace Crystallography
 					upperRight = body.AabbMax * GamePhysics.PtoM;
 				} else if (e is SpriteTileCrystallonEntity) { // ----------------- e DESCENDS FROM SpriteTileCrystallonEntity (rarer)
 					Node puck = e.getNode();
-					Vector2 halfDimensions = new Vector2((e as SpriteTileCrystallonEntity).Width/2.0f, (e as SpriteTileCrystallonEntity).Height/2f);
+					Vector2 halfDimensions = new Vector2((e as SpriteTileCrystallonEntity).Width/3.0f, (e as SpriteTileCrystallonEntity).Height/3.0f);
 					lowerLeft = (e as SpriteTileCrystallonEntity).getPosition() - halfDimensions;
 					upperRight = (e as SpriteTileCrystallonEntity).getPosition() + halfDimensions;
 				} 
 				if (position.X >= lowerLeft.X && position.Y >= lowerLeft.Y &&
 			    	position.X <= upperRight.X && position.Y <= upperRight.Y) {
-					return e;
+					return e as AbstractCrystallonEntity;
 				}
 			}
 			return null; // PLAYER TAPPED ON EMPTY SPACE, LIKE A N00B
@@ -362,6 +442,11 @@ namespace Crystallography
 				handler( this, null );
 			}
 			this.Break();
+		}
+		
+		public void Pull(AbstractCrystallonEntity pEntity) {
+			var dir = getPosition() - pEntity.getPosition();
+			pEntity.addImpulse(0.03f * dir.Normalize() * GamePhysics.PtoM );
 		}
 		
 		/// <summary>
@@ -443,22 +528,44 @@ namespace Crystallography
 		public void Reset( Scene pScene ) {
 			RemoveAll();
 			MemberType = null;
-			lastPosition = getPosition();
+			if (lastPosition != null) {
+				lastPosition.Clear();
+			} else {
+				lastPosition = new List<Vector2>();
+			}
+			lastPosition.Add( getPosition() );
+			heading = Vector2.Zero;
 			lastEntityReleased = null;
 			lastEntityTouched = null;
 			justDownPositionEntity = null;
 			_scene = pScene;
 			easeState = EaseState.IN;
+			selectionDelay = 0.0f;
+		}
+		
+		public void Destroy() {
+			InputManager.Instance.DoubleTapDetected -= HandleInputManagerInstanceDoubleTapDetected;
+			InputManager.Instance.TouchJustDownDetected -= HandleInputManagerInstanceTouchJustDownDetected;
+			InputManager.Instance.TouchJustUpDetected -= HandleInputManagerInstanceTouchJustUpDetected;
+			InputManager.Instance.TouchDownDetected -= HandleInputManagerInstanceTouchDownDetected;
+			InputManager.Instance.DragDetected -= HandleInputManagerInstanceDragDetected;
+			InputManager.Instance.TapDetected -= HandleInputManagerInstanceTapDetected;
+			
+			RemoveAll();
+			this.removeFromScene(true);
+			_instance = null;
+			lastPosition.Clear();
+			lastPosition = null;
+			_scene = null;
+			lastEntityReleased = null;
+			lastEntityTouched = null;
+			justDownPositionEntity = null;
 		}
 
 		
 		// DESTRUCTOR ------------------------------------------------------------------------------
 		
 		~SelectionGroup() {
-			lastEntityReleased = null;
-			lastEntityTouched = null;
-			justDownPositionEntity = null;
-			Instance = null;
 #if DEBUG
 			Console.WriteLine("SelectionGroup deleted.");
 #endif

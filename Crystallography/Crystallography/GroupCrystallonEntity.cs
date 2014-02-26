@@ -160,7 +160,8 @@ namespace Crystallography
 		public override bool CanBeAddedTo ( GroupCrystallonEntity pGroup )
 		{
 			bool okToSnap = false;
-			if ( pGroup.MemberType.IsAssignableFrom(this.MemberType) ) { // GROUPS' MEMBER TYPES ARE COMPATIBLE
+//			if ( pGroup.MemberType.IsAssignableFrom(this.MemberType) ) { // GROUPS' MEMBER TYPES ARE COMPATIBLE
+			if ( pGroup.CheckMemberTypeCompatability(this) ) {
 				if( AppMain.ORIENTATION_MATTERS ) { // -------------------- ORIENTATION TEST
 					okToSnap = true;
 					for ( int i=0; i < _maxMembers; i++ ) {
@@ -240,12 +241,13 @@ namespace Crystallography
 		/// </param>
 		public virtual GroupCrystallonEntity Add(ICrystallonEntity pEntity) {
 			if ( pEntity != null ) {
-				if ( population == 0 && !(this is SelectionGroup) ) {
-					MemberType = pEntity.GetType();
-					if ( MemberType == typeof(WildCardCrystallonEntity) ) {
-						MemberType = typeof(CardCrystallonEntity);
-					}
-				}
+//				if ( population == 0 && !(this is SelectionGroup) ) {
+//				if ( population == 0 ) {
+//					MemberType = pEntity.GetType();
+//					if ( MemberType == typeof(WildCardCrystallonEntity) ) {
+//						MemberType = typeof(CardCrystallonEntity);
+//					}
+//				}
 				if( pEntity.CanBeAddedTo(this) ){
 					pEntity.BeAddedToGroup(this);
 				}
@@ -405,6 +407,26 @@ namespace Crystallography
 			} else {
 				RemoveAll();
 			}
+		}
+		
+		public bool CheckMemberTypeCompatability( AbstractCrystallonEntity pEntity ) {
+			// NO CURRENT MEMBER TYPE
+			if (MemberType == null) {
+				if ( typeof(GroupCrystallonEntity).IsAssignableFrom(pEntity.GetType()) ) { // ------- HANDLE GROUP-TYPE OBJECTS
+					MemberType = (pEntity as GroupCrystallonEntity).MemberType;
+				} else if ( typeof(CardCrystallonEntity).IsAssignableFrom(pEntity.GetType()) ) { // - HANDLE CARD-TYPE OBJECTS
+					MemberType = typeof(CardCrystallonEntity);
+				}
+			} else {
+				Type t = null;
+				if ( typeof(GroupCrystallonEntity).IsAssignableFrom(pEntity.GetType()) ) { // ------- HANDLE GROUP-TYPE OBJECTS
+					t = (pEntity as GroupCrystallonEntity).MemberType;
+				} else if ( typeof(CardCrystallonEntity).IsAssignableFrom(pEntity.GetType()) ) { // - HANDLE CARD-TYPE OBJECTS
+					t = typeof(CardCrystallonEntity);
+				}
+				return this.MemberType.IsAssignableFrom(t);
+			}
+			return true;
 		}
 		
 		/// <summary>

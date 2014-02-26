@@ -138,18 +138,20 @@ namespace Crystallography
 		public override AbstractCrystallonEntity BeSelected ( float delay = 0.0f )
 		{
 			this.getNode().Unschedule( KeepOnScreen );
-			if( delay > 0.0f ) {
-				Sequence sequence = new Sequence();
+			getNode().StopActionByTag(20);
+//			if( delay > 0.0f ) {
+				Sequence sequence = new Sequence() { Tag = 20 };
 				sequence.Add( new DelayTime( delay ) );
 				sequence.Add( new CallFunc( ()=> {
 					playSound();
 					ShowGlow();
 				} ) );
 				getNode().RunAction(sequence);
-			} else {
-				playSound();
-				ShowGlow();
-			}
+//			} 
+//			else {
+//				playSound();
+//				ShowGlow();
+//			}
 			return this;
 		}
 		
@@ -173,18 +175,19 @@ namespace Crystallography
 		
 		public override void BeTapped (float delay=0.0f)
 		{
-			if( delay > 0.0f ) {
-				Sequence sequence = new Sequence();
-				sequence.Add( new DelayTime( delay ) );
+//			if( delay > 0.0f ) {
+				getNode().StopActionByTag(20);
+				Sequence sequence = new Sequence() { Tag = 20 };
 				sequence.Add( new CallFunc( ()=> {
 					playSound();
 					ShowGlow( 0.2f );
 				} ) );
 				getNode().RunAction(sequence);
-			} else {
-				playSound();
-				ShowGlow( 0.2f );
-			}
+//			} 
+//			else {
+//				playSound();
+//				ShowGlow( 0.2f );
+//			}
 		}
 		
 		public override void removeFromScene (bool doCleanup)

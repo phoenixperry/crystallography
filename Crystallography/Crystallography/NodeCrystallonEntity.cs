@@ -49,11 +49,20 @@ namespace Crystallography
 		
 		public override void Update (float dt)
 		{
-			if (_body != null) {
-				if (_body.Velocity.Length() != 0.3f) {
-						_body.Velocity = _body.Velocity.Normalize() * 0.3f;
-					}
+			if(getBody() != null) {
+				var len = _body.Velocity.Length();
+				if (len > 0.3f) {
+					len = FMath.Min ( 4.0f, FMath.Max(0.3f, len - dt * 5.0f));
+					_body.Velocity = _body.Velocity.Normalize() * len;
+				}
+//				_sprite.Position = _body.Position * GamePhysics.PtoM;
 			}
+			
+//			if (_body != null) {
+//				if (_body.Velocity.Length() != 0.3f) {
+//						_body.Velocity = _body.Velocity.Normalize() * 0.3f;
+//					}
+//			}
 		}
 		
 		// METHODS----------------------------------
