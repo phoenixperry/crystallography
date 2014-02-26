@@ -365,13 +365,13 @@ namespace Crystallography
 				_pucks[i].StopActionByTag( 1 );
 			}
 			Sequence sequence = new Sequence(){ Tag=1 };
-			sequence.Add( new MoveTo( new Vector2(0.5f, 10.0f+EASE_DISTANCE), 0.2f)
+			sequence.Add( new MoveTo( new Vector2(0.5f, 30.0f+EASE_DISTANCE), 0.2f)
 			            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
 			_pucks[0].RunAction( sequence );
 			
 			sequence = new Sequence(){ Tag=1 };
 			if ( typeof(CardCrystallonEntity).IsAssignableFrom(this.MemberType) ) {
-				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE-10.0f, 20.5f), 0.2f)
+				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE-30.0f, 20.5f), 0.2f)
 				            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
 			} else {
 				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
@@ -381,7 +381,7 @@ namespace Crystallography
 			
 			sequence = new Sequence(){ Tag=1 };
 			if ( typeof (CardCrystallonEntity).IsAssignableFrom(this.MemberType) ) {
-				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE+10.0f, 20.5f), 0.2f)
+				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE+30.0f, 20.5f), 0.2f)
 			           	 	{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
 			} else {
 				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)

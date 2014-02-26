@@ -168,6 +168,11 @@ namespace Crystallography
 			// DO NOTHING.
 		}
 		
+		public override bool CanBeAddedTo (GroupCrystallonEntity pGroup)
+		{
+			return false;
+		}
+		
 		public override void Update (float dt)
 		{
 			base.Update(dt);
