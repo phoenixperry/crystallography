@@ -31,6 +31,12 @@ namespace Crystallography.UI
 					SplashImage = Support.SpriteFromFile("/Application/assets/images/UI/eyes.png");
 					this.AddChild(SplashImage);
 					var temp = Support.SpriteFromFile("/Application/assets/images/UI/header.png");
+					temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_blue2.png");
+					temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_red2.png");
+					temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_bottom.png");
+					temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_top.png");
+					var b = new BetterButton();
+					b.Cleanup();
 				},
 				() => {
 					Scheduler.Instance.Schedule( this, (dt) => { 
@@ -52,6 +58,8 @@ namespace Crystallography.UI
 		{
 			base.OnExit ();
 			MenuSystem = null;
+			loadProc.Clear();
+			loadProc = null;
 			this.RemoveAllChildren(true);
 			Support.RemoveTextureWithFileName("/Application/assets/images/UI/eyes.png");
 		}
