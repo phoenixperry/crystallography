@@ -8,7 +8,8 @@ namespace Crystallography
 		COLOR = 1,
 		PARTICLE = 2,
 		PATTERN = 3,
-		SOUND = 4
+		SOUND = 4,
+		SYMBOL = 5
 	}
 }
 

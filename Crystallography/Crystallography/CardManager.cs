@@ -118,6 +118,7 @@ namespace Crystallography
 			QualityManager.Instance.AddScoringQuality( pQualityString );
 			foreach ( CardCrystallonEntity card in availableCards) {
 				if (card is WildCardCrystallonEntity) continue;
+				if (card.Scored) continue;
 				QualityManager.Instance.SetQuality(card, pQualityString, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
 			}
 		}
@@ -410,7 +411,7 @@ namespace Crystallography
 			// TRIGGER SPAWN VFX
 			Sequence sequence = new Sequence(){ Tag=2 };
 			sequence.Add( new DelayTime( 0.2f ));
-			sequence.Add( new CallFunc( () => FadeIn(card) ) );
+			sequence.Add( new CallFunc( () => {card.FadeIn();} ) );
 			card.getNode().RunAction( sequence );
 			EventHandler handler = CardSpawned;
 				if (handler != null) {
@@ -433,7 +434,7 @@ namespace Crystallography
 			var _screenWidth = Director.Instance.GL.Context.GetViewport().Width * 0.6f + 220.0f;
             var _screenHeight = Director.Instance.GL.Context.GetViewport().Height * 0.75f + 50.0f;
 			pCard.setPosition( _screenWidth * GameScene.Random.NextFloat(), _screenHeight * GameScene.Random.NextFloat() );
-			pCard.getNode().RunAction( new CallFunc( () => { FadeIn (pCard); } ) );
+			pCard.getNode().RunAction( new CallFunc( () => { pCard.FadeIn(); } ) );
 		}
 		
 		/// <summary>
@@ -442,11 +443,11 @@ namespace Crystallography
 		/// <param name='pCard'>
 		/// P card.
 		/// </param>
-		protected void FadeIn(CardCrystallonEntity pCard) {
-			pCard.Visible = true;
-			(pCard.getNode() as SpriteBase).Color.W = 0.0f; //QColor.palette[pCard.getColor()].Xyz0;
-			pCard.TintTo(QColor.palette[pCard.getColor()], 2.0f, true);
-		}
+//		protected void FadeIn(CardCrystallonEntity pCard) {
+//			pCard.Visible = true;
+//			(pCard.getNode() as SpriteBase).Color.W = 0.0f;
+//			pCard.TintTo(QColor.palette[pCard.getColor()], 2.0f, true);
+//		}
 		
 		public void TintAllCards(float pDuration = 1.0f) {
 			foreach (var card in availableCards) {

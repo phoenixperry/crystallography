@@ -45,6 +45,7 @@ namespace Crystallography
 		
 		public Vector4[] Palette     { get; set; }
 		public string PatternPath    { get; set; }
+		public string SymbolPath 	 { get; set; }
 		public string SoundPrefix    { get; set; }
 		public bool SoundGlow        { get; set; }
 		public int Goal	             { get; set; }
@@ -126,17 +127,9 @@ namespace Crystallography
 				                                );
 				break;
 			case ("AddScoringQuality"):
-//				QualityManager.Instance.scoringQualityList.Add(d.Args);
-//				if( d.Args == "QSound") {
-//					LevelManager.Instance.SoundGlow = true;
-//				}
 				QualityManager.Instance.AddScoringQuality( d.Args );
 				break;
 			case ("RemoveScoringQuality"):
-//				QualityManager.Instance.scoringQualityList.Remove(d.Args);
-//				if( d.Args == "QSound") {
-//					LevelManager.Instance.SoundGlow = false;
-//				}
 				QualityManager.Instance.RemoveScoringQuality( d.Args );
 				break;
 			case ("SetPatternPath"):
@@ -172,15 +165,11 @@ namespace Crystallography
 			foreach (var level in levels) {
 				foreach( XElement element in level.AllElements ) {
 					if ( (int)element.Attribute("Value") == pLevelNumber ) {
-//						int i = 0;
 						foreach (XElement line in element.Nodes()) {
 							if (line.Name.LocalName == "Color") {
 								Palette[0] = Support.ExtractColor(line.Attribute("LightHex").Value);
 								Palette[1] = Support.ExtractColor(line.Attribute("MidHex").Value);
 								Palette[2] = Support.ExtractColor(line.Attribute("DarkHex").Value);
-//								string hexColor = line.Attribute("Hex").Value;
-//								Palette[i] = ExtractColor(hexColor);
-//								i++;
 							} else if (line.Name.LocalName == "Pattern") {
 								PatternPath = line.Attribute("Path").Value;
 							} else if (line.Name.LocalName == "Sound") {
@@ -190,6 +179,8 @@ namespace Crystallography
 								} else {
 									SoundGlow = false;
 								}
+							} else if (line.Name.LocalName == "Symbol") {
+								SymbolPath = line.Attribute("Path").Value;
 							} else if (line.Name.LocalName == "Background") {
 								TintBackground( Support.ExtractColor(line.Attribute("Main").Value), 3.0f );
 							} else if (line.Name.LocalName == "Goal" ) {
@@ -304,7 +295,7 @@ namespace Crystallography
 				difficulty++;
 				break;
 			case 2:
-				CardManager.Instance.AddQuality("QParticle");
+				CardManager.Instance.AddQuality("QSymbol");
 				difficulty++;
 				break;
 			case 3:
@@ -328,7 +319,7 @@ namespace Crystallography
 				difficulty--;
 				break;
 			case 3:
-				CardManager.Instance.RemoveQuality("QParticle");
+				CardManager.Instance.RemoveQuality("QSymbol");
 				difficulty--;
 				break;
 			case 2:
@@ -365,6 +356,7 @@ namespace Crystallography
 			Palette[2] = Support.ExtractColor("790143");
 			BackgroundColor = Support.ExtractColor("E5E3D1");
 			PatternPath = "Application/assets/images/set1/gamePieces.png";
+			SymbolPath = "Application/assets/images/set1/symbol.png";
 			SoundPrefix = "stack1";
 			Goal = 1;
 			PossibleSolutions = 0;

@@ -108,6 +108,7 @@
     <Compile Include="ui\InfiniteModeScreen.cs" />
     <Compile Include="WildCardCrystallonEntity.cs" />
     <Compile Include="ui\LevelTitleMkTwo.cs" />
+    <Compile Include="QSymbol.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -302,6 +303,7 @@
     <Content Include="assets\images\UI\BetterButton.png" />
     <Content Include="assets\images\UI\restartIcon.png" />
     <Content Include="assets\images\UI\nextLevelIcon.png" />
+    <Content Include="assets\images\set1\symbol.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

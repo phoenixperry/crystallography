@@ -665,10 +665,6 @@ namespace Crystallography
 #if DEBUG
 		~QualityManager() {
 			Console.WriteLine(GetType().ToString() + " deleted");
-//			Instance = null;
-//			ClearQualityDictionary();
-//			qualityDict = null;
-//			doc = null;
 		}
 #endif
 	}

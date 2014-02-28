@@ -19,11 +19,14 @@ namespace Crystallography
 		public readonly static float DEFAULT_SPEED = 0.3f;
 		
 		protected SpriteTile _anim;
+		protected SpriteTile _symbol;
 		protected int _glowIndex;
+		protected int? _symbolIndex;
 		
 		protected float _keepOnScreenTimer;
 		
 		public bool Wild;
+		public bool Scored;
 		
 //		protected int countdownMax;
 //		protected Label countdownText;
@@ -45,6 +48,24 @@ namespace Crystallography
 		public override Vector2 getAttachOffset (int position)
 		{
 			return POSITION_OFFSETS[position];
+		}
+		
+		public virtual void setSymbol( int? pSymbol ) {
+			_symbolIndex = pSymbol;
+			if (_symbolIndex == null) {
+				if(_symbol != null) {
+					getNode().RemoveChild(_symbol, true);
+				}
+				_symbol = null;
+				return;
+			} 
+			if (_symbol == null) {
+				_symbol = new SpriteTile(QSymbol.Instance.symbolTiles.TextureInfo);
+				_symbol.RegisterPalette(_colorIndex);
+				getNode().AddChild(_symbol);
+			}
+			_symbol.TileIndex2D.X = _orientationIndex;
+			_symbol.TileIndex2D.Y = _symbolIndex ?? 0;
 		}
 		
 		public virtual void setGlow(int pGlow) {
@@ -72,6 +93,9 @@ namespace Crystallography
 					_anim.FlipU = false;
 				}
 				_anim.TextureInfo = QAnimation.Instance.GetOrientedAnimation( getOrientation() ).TextureInfo;
+			}
+			if(_symbol != null) {
+				_symbol.TileIndex2D.X = _orientationIndex;
 			}
 			if(GlowSprite != null) {
 				GlowSprite.TileIndex1D = _orientationIndex;
@@ -104,6 +128,7 @@ namespace Crystallography
 			id = pId;
 			_anim = null;
 			GlowSprite = null;
+			Scored = false;
 			_sprite.Scale*=CARD_SCALAR;
 			_keepOnScreenTimer = -1.0f;
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
@@ -255,6 +280,7 @@ namespace Crystallography
 			}
 			
 			_anim = new SpriteTile( anim.TextureInfo, anim.TileIndex2D );
+			_anim.RegisterPalette(_colorIndex);
 			
 			_anim.Pivot = this.getNode().Pivot;
 
@@ -281,12 +307,37 @@ namespace Crystallography
 			}
 		}
 		
+		public void FadeIn() {
+			Visible = true;
+			_sprite.Color.W = 0.0f;
+			if ( _anim != null ) {
+				_anim.Color.W = 0.0f;
+			}
+			if ( _symbol != null ) {
+				_symbol.Color.W = 0.0f;
+			}
+			TintTo(QColor.palette[getColor()], 2.0f, true);
+		}
+		
 		public void TintTo( Vector4 pColor, float pDuration, bool alpha) {
 			if (alpha) {
 				(this.getNode() as SpriteBase).ShiftSpriteAlpha(pColor, pDuration);
+				if (_anim != null) {
+					_anim.ShiftSpriteAlpha(pColor, pDuration);
+				}
+				if (_symbol != null) {
+					_symbol.ShiftSpriteAlpha(pColor, pDuration);
+				}
 			} else {
 				(this.getNode() as SpriteBase).ShiftSpriteColor(pColor, pDuration);
+				if (_anim != null) {
+					_anim.ShiftSpriteAlpha(pColor, pDuration);
+				}
+				if (_symbol != null) {
+					_symbol.ShiftSpriteAlpha(pColor, pDuration);
+				}
 			}
+			
 		}
 	}
 	

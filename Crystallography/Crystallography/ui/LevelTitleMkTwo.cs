@@ -178,8 +178,8 @@ namespace Crystallography.UI
 				icon.Visible = false;
 			}
 			foreach ( string name in pNames ) {
-				Icons[i].TileIndex1D = (int)EnumHelper.FromString<Crystallography.Icons>(name);
-//				Icons[i].Visible = true;
+				var ix = (int?)EnumHelper.FromString<Crystallography.Icons>(name) ?? 0;
+				Icons[i].TileIndex1D = ix;
 				QualityNames.Add( n = new Label() {
 					FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Regular")),
 					Text = name,
