@@ -11,7 +11,6 @@ namespace Crystallography.UI
 		public static readonly Vector2 SCORE_TEXT_POS = new Vector2(277.0f, 12.0f);
 		public static readonly Vector2 CUBES_TEXT_POS = new Vector2(117.0f, 12.0f);
 		
-//		SpriteUV GameHudBar;
 		Node GameHudBar;
 		SpriteTile HudBarMask;
 		SpriteTile HudBarLine;
@@ -30,19 +29,12 @@ namespace Crystallography.UI
 		
 		TimerEntity GameTimer;
 		
-//		SpriteUV TimeBox;
-//		Label TimerSeparatorText;
-//		Label TimerSecondsText;
-//		Label TimerMinutesText;
-//		
 		SpriteTile TimeBar;
 		
-//		public LevelTitle levelTitle;
 		public LevelTitleMkTwo levelTitle;
 		public MessagePanel _messagePanel;
 		public NextLevelPanel _nextLevelPanel;
 		
-//		public LevelEndPanel levelEndPanel;
 		public PausePanel pausePanel;
 		
 		private const float SCORE_UPDATE_DELAY = 0.100f;
@@ -177,6 +169,7 @@ namespace Crystallography.UI
 		/// </summary>
 		void HandleCardManagerInstanceCardSpawned (object sender, EventArgs e) {
 			EnableHitMeButton();
+			GameTimer.Pause(false);
 		}
 		
 		/// <summary>
@@ -185,9 +178,6 @@ namespace Crystallography.UI
 		void HandleQualityManagerMatchScoreDetected (object sender, MatchScoreEventArgs e) {
 			Cubes++;
 			CubeText.Text = Cubes.ToString();
-//			float x = RedBox.Position.X +  50.0f - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(CubeText.Text);
-//			float x = 67.0f +  50.0f - 0.5f * FontManager.Instance.GetInGame("Bariol", 44, "Bold").GetTextWidth(CubeText.Text);
-//			CubeText.Position = new Vector2(x, CubeText.Position.Y);
 			CenterCubeScoreText(CubeText, CUBES_TEXT_POS);
 			
 			EventHandler handler = CubesUpdated;
@@ -597,6 +587,7 @@ namespace Crystallography.UI
 			ExitCode = LevelExitCode.NULL;
 			
 			GameTimer.Reset();
+			GameTimer.Pause(true);
 			ScoreText.Text = _displayScore.ToString();
 			CenterCubeScoreText(ScoreText, SCORE_TEXT_POS);
 			

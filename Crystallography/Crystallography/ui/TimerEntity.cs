@@ -22,9 +22,9 @@ namespace Crystallography.UI
 		
 		// CONSTRUCTORS ----------------------------------------------------
 		
-		public TimerEntity () : base() {
+		public TimerEntity (bool pStartPaused = true) : base() {
 			if ( false == _intialized ) {
-				Initialize();
+				Initialize(pStartPaused);
 			}
 		}
 		
@@ -74,8 +74,9 @@ namespace Crystallography.UI
 		
 		// METHODS ---------------------------------------------------------
 		
-		private void Initialize() {
+		private void Initialize(bool pStartPaused) {
 			_intialized = true;
+			_pauseTimer = pStartPaused;
 			AbsoluteTimer = 0.0f;
 			
 			TimerIcon = Support.TiledSpriteFromFile("/Application/assets/images/timerIcon.png", 1, 1);
@@ -88,6 +89,7 @@ namespace Crystallography.UI
 			TimerIcon.AddChild(TimeBar);
 			
 			Reset ();
+			UpdateBar();
 		}
 		
 		public void Pause( bool pOn=true ) {
@@ -95,9 +97,9 @@ namespace Crystallography.UI
 		}
 		
 		public void Reset() {
-			_pauseTimer = false;
+//			_pauseTimer = false;
 			_barAdjustment = 0.0f;
-			DisplayTimer = 0.0f;
+			DisplayTimer = 0.001f;
 //			AbsoluteTimer = 0.0f;
 			LevelTimer = 0.0f;
 		}
