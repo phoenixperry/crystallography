@@ -9,7 +9,8 @@
 		<HitMeDisabled Value="true" />
 		<StandardPop Value="2" />
 		<SpawnRect X="220" Y="217" Width="573" Height="218" />
-		<Message Title="hello, you clever thing." Body="drag these 2 pieces together, &#xA;then double-tap to break them apart." />
+		<Message Title="hello, you clever thing." Body="drag these pieces together" />
+		<Event Type="GroupSpawned" Value="1" Action="UpdateMessagePanel" Args="very good.;;now double-tap to break them apart.;;0.0;;0.0" />
 		<Event Type="BreaksEqual" Value="1" Action="SetStandardPop" Args="3;;populate" />
 		<Event Type="BreaksEqual" Value="1" Action="RemoveScoringQuality" Args="QPattern" />
 		<Event Type="BreaksEqual" Value="1" Action="RemoveScoringQuality" Args="QColor" />

@@ -12,6 +12,8 @@ namespace Crystallography
 		protected Scene _scene;
 		protected GamePhysics _physics;
 		
+		public event EventHandler GroupSpawned;
+		
 		// GET & SET -----------------------------------------------------------------------
 		
 		public static GroupManager Instance { 
@@ -126,6 +128,12 @@ namespace Crystallography
 			NextId += 1;
 			g.setPosition( pX, pY );
 			g.BeReleased(g.getPosition());
+			
+			EventHandler handler = GroupSpawned;
+			if (handler != null) {
+				handler( this, null );
+			}
+			
 			return g;
 //			g.addToScene();
 //			return Add(g);

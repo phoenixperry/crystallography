@@ -8,6 +8,7 @@ namespace Crystallography
 	public class CardManager
 	{
 		public static readonly int MAX_WILDCARDS = 3;
+		public static readonly int WILDCARD_BASE_GROUP = 60;
 		public static readonly float WILDCARD_BASE_CHANCE = 0.05f;
 		
 		public static int DEFAULT_STD_CARD_POPULATION = 15;
@@ -28,6 +29,8 @@ namespace Crystallography
 		/// A list of all the card IDs that have not been put on screen yet. This list is modified every time cards are spawned onto the screen.
 		/// </summary>
 		protected List<int> DeckOfIDs;
+		protected List<int> WildcardIDs;
+		protected int WildcardGroupCounter;
 		
 		public event EventHandler NoMatchesPossibleDetected;
 		public event EventHandler CardSpawned;
@@ -147,14 +150,17 @@ namespace Crystallography
 			CardCrystallonEntity card;
 			if (   GameScene.currentLevel == 999
 			    && availableWildCards.Count < MAX_WILDCARDS
-			    && GameScene.Random.NextFloat() < WILDCARD_BASE_CHANCE) { // ------------------------------------------ POSSIBLE WILDCARD
+//			    && GameScene.Random.NextFloat() < WILDCARD_BASE_CHANCE) { // ------------------------------------------ POSSIBLE WILDCARD
+			    && WildcardIDs.Contains(pId) ) {
 				
 				card = new WildCardCrystallonEntity(_scene, _physics, pId, QPattern.Instance.patternTiles.TextureInfo, 
 			                                QPattern.Instance.patternTiles.TileIndex2D, _physics.SceneShapes[0]);
+				availableWildCards.Add(card);
 			} else { // ----------------------------------------------------------------------------------------------- NORMAL CARD
 				card = new CardCrystallonEntity(_scene, _physics, pId, QPattern.Instance.patternTiles.TextureInfo, 
 			                                QPattern.Instance.patternTiles.TileIndex2D, _physics.SceneShapes[0]);
 			}
+			availableCards.Add(card);
 			return card;
 			
 		}
@@ -259,6 +265,11 @@ namespace Crystallography
 #endif
 						return true;
 					}
+				} else {
+#if DEBUG
+					Console.WriteLine("Possible Sets Remain: TRUE (Wildcard)");
+#endif
+					return true;
 				}
 			}
 #if DEBUG
@@ -274,6 +285,7 @@ namespace Crystallography
 			if ( DeckOfIDs == null ) {
 				BuildDeckOfIDs();
 				if (GameScene.currentLevel == 999) {
+					PrepareWildcards();
 					QualityManager.Instance.scoringQualityList.Clear();
 					QualityManager.Instance.scoringQualityList.Add("QColor");
 				}
@@ -287,24 +299,22 @@ namespace Crystallography
 			while ( availableCards.Count < fillPop && TotalCardsInDeck > 0) {
 				var card = spawn (DeckOfIDs[0]);
 				DeckOfIDs.RemoveAt(0);
-//				if (GameScene.currentLevel == 999) {
-//					if (   availableWildCards.Count < MAX_WILDCARDS
-//					    && GameScene.Random.NextFloat() < WILDCARD_BASE_CHANCE ) {
-//						card.Wild = true;
-//						QualityManager.Instance.RemoveAll(card);
-//						availableWildCards.Add(card);
-//						card.Flash();
-//					} else {
-//						foreach ( string quality in QualityManager.Instance.qualityDict.Keys ) {
-//							if ( QualityManager.Instance.scoringQualityList.Contains(quality) ) {
-//								QualityManager.Instance.SetQuality(card, quality, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
-//							} else{
-//								QualityManager.Instance.SetQuality(card, quality, 0 );
-//							}
-//						}
-//					}
-//				}
 			}
+		}
+		
+		protected void PrepareWildcards() {
+			if (WildcardIDs == null) {
+				WildcardIDs = new List<int>();
+			}
+			WildcardIDs.Clear();
+			int range = (int)Sce.PlayStation.Core.FMath.Min ( WILDCARD_BASE_GROUP, DeckOfIDs.Count );
+			var list = DeckOfIDs.GetRange(0, range);
+			for (int i = 0; i < MAX_WILDCARDS; i++) {
+				var ix = (int)Sce.PlayStation.Core.FMath.Floor(GameScene.Random.NextFloat() * list.Count);
+				WildcardIDs.Add( list[ix] ); 
+				list.RemoveAt(ix);
+			}
+			WildcardGroupCounter = 0;
 		}
 		
 		/// <summary>
@@ -314,11 +324,6 @@ namespace Crystallography
 			foreach( var card in availableCards ) {
 				card.removeFromScene( true );
 			}
-//			if (GameScene.currentLevel == 999) {
-//				PickRandomly = true;
-//			} else {
-//				PickRandomly = false;
-//			}
 			availableCards.Clear();
 			availableWildCards.Clear ();
 			NextId = 0;
@@ -327,6 +332,7 @@ namespace Crystallography
 				DeckOfIDs.Clear();
 			}
 			DeckOfIDs = null;
+			WildcardGroupCounter = 0;
 		}
 		
 		/// <summary>
@@ -383,42 +389,31 @@ namespace Crystallography
 			}
 			CardCrystallonEntity card = BuildCard(pId);
 			TotalCardsInDeck--;
+			if (GameScene.currentLevel == 999) {
+				WildcardGroupCounter = (WildcardGroupCounter + 1)%WILDCARD_BASE_GROUP;
+				if (WildcardGroupCounter == 0) {
+					PrepareWildcards();
+				}
+			}
 			
 			// APPLY QUALITIES
-			card.ApplyQualities();
-//			if ( GameScene.currentLevel != 999) {
-//				QualityManager.Instance.ApplyQualitiesToEntity( card );
-//			} else {
-////				List<string> qualities = new List<string>();
-////				qualities.Add("QColor");
-////				QualityManager.Instance.ApplyQualitiesToEntity( qualities, card);
-//				foreach ( string quality in QualityManager.Instance.qualityDict.Keys ) {
-//					if ( QualityManager.Instance.scoringQualityList.Contains(quality) ) {
-//						QualityManager.Instance.SetQuality(card, quality, (int)System.Math.Floor(GameScene.Random.NextFloat() * 3.0f) );
-//					} else{
-//						QualityManager.Instance.SetQuality(card, quality, 0 );
-//					}
-//				}
-//			}
-//			
+			card.ApplyQualities();		
 			
 			// ADD TO WORLD
 			card.setPosition( pX, pY );
 			card.addToScene();
-			availableCards.Add(card);
 			card.Visible = false;
 			
 			// TRIGGER SPAWN VFX
 			Sequence sequence = new Sequence(){ Tag=2 };
 			sequence.Add( new DelayTime( 0.2f ));
 			sequence.Add( new CallFunc( () => {card.FadeIn();} ) );
+			sequence.Add( new DelayTime(2.0f) );
 			card.getNode().RunAction( sequence );
 			EventHandler handler = CardSpawned;
-				if (handler != null) {
-					handler( this, null );
-				}
-			
-//			card.getNode().RegisterPalette(card.getColor());
+			if (handler != null) {
+				handler( this, null );
+			}
 			
 			return card;
 		}

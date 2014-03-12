@@ -1,4 +1,5 @@
 Level,Type,Value,Action,Args
+0,GroupSpawned,1,UpdateMessagePanel,very good.;;now double-tap to break them apart.;;0.0;;0.0
 0,BreaksEqual,1,SetStandardPop,3;;populate
 0,BreaksEqual,1,RemoveScoringQuality,QPattern
 0,BreaksEqual,1,RemoveScoringQuality,QColor

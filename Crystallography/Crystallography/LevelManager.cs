@@ -70,8 +70,8 @@ namespace Crystallography
 			goalDict = new Dictionary<int, List<int>>();
 			SetToDefault();
 			
-			UI.GameSceneHud.CubesUpdated += HandleUIGameSceneHudCubesUpdated;
-			UI.GameSceneHud.BreaksUpdated += HandleUIGameSceneHudBreaksUpdated;
+//			UI.GameSceneHud.CubesUpdated += HandleUIGameSceneHudCubesUpdated;
+//			UI.GameSceneHud.BreaksUpdated += HandleUIGameSceneHudBreaksUpdated;
 			
 			
 #if DEBUG
@@ -104,6 +104,21 @@ namespace Crystallography
 				foreach (LevelEventData d in list) {
 					if ( GameScene.Hud.Cubes == d.Value ) {
 						HandleGenericEvent(d);
+					}
+				}
+			}
+		}
+		
+		void HandleGroupManagerInstanceGroupSpawned (object sender, EventArgs e)
+		{
+			List<LevelEventData> list;
+			
+			if ( levelEventDict.ContainsKey("GroupSpawned") ) {
+				list = levelEventDict["GroupSpawned"];
+				foreach (LevelEventData d in list) {
+					if ( GroupManager.availableGroups.Count == d.Value ) {
+						HandleGenericEvent(d);
+						GroupManager.Instance.GroupSpawned -= HandleGroupManagerInstanceGroupSpawned;
 					}
 				}
 			}
@@ -216,6 +231,13 @@ namespace Crystallography
 								string type = line.Attribute("Type").Value;
 								if ( false == levelEventDict.ContainsKey(type) ) {
 									levelEventDict[type] = new List<LevelEventData>();
+									if (type == "BreaksEqual") {
+										UI.GameSceneHud.BreaksUpdated += HandleUIGameSceneHudBreaksUpdated;
+									} else if (type == "CubesEqual") {
+										UI.GameSceneHud.CubesUpdated += HandleUIGameSceneHudCubesUpdated;
+									} else if ( type == "GroupSpawned") {
+										GroupManager.Instance.GroupSpawned += HandleGroupManagerInstanceGroupSpawned;
+									}
 								}
 								levelEventDict[type].Add( new LevelEventData() {
 									Value = float.Parse( line.Attribute("Value").Value ),
@@ -229,6 +251,8 @@ namespace Crystallography
 				}
 			}
 		}
+
+		
 		
 		public void GetSolutions( int pLevelNumber ) {
 			PossibleSolutions = 0;
@@ -350,6 +374,10 @@ namespace Crystallography
 //		}
 		
 		public void SetToDefault() {
+			UI.GameSceneHud.CubesUpdated -= HandleUIGameSceneHudCubesUpdated;
+			UI.GameSceneHud.BreaksUpdated -= HandleUIGameSceneHudBreaksUpdated;
+			GroupManager.Instance.GroupSpawned -= HandleGroupManagerInstanceGroupSpawned;
+			
 			AppMain.ORIENTATION_MATTERS = true;
 			Palette[0] = Support.ExtractColor("F70046");
 			Palette[1] = Support.ExtractColor("CC0686");
