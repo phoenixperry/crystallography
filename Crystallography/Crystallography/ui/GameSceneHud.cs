@@ -477,9 +477,9 @@ namespace Crystallography.UI
 			};
 			GameHudBar.AddChild(_nextLevelPanel, -1);
 			
-			_messagePanel = new MessagePanel(){
-				Offset = new Vector2(480.0f, 0.0f),
-				Position = new Vector2(-400.0f, 0.0f),
+			_messagePanel = new MessagePanel(920.0f, 148.0f ){
+				Offset = new Vector2(20.0f, 0.0f),
+				Position = new Vector2(0.0f, 0.0f),
 				Lifetime = 0.0f
 			};
 			this.AddChild(_messagePanel);

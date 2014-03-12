@@ -4,12 +4,12 @@
 		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
 		<Pattern Path="Application/assets/images/set4/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
-		<Goal Cubes="8" Score="22" />
+		<Goal Cubes="0" Score="8" />
 		<Bonus Value="1" />
 		<HitMeDisabled Value="true" />
 		<StandardPop Value="2" />
 		<SpawnRect X="220" Y="217" Width="573" Height="218" />
-		<Message Title="hello, you clever thing." Body="drag these pieces together" />
+		<Message Title="hello, you clever thing." Body="drag these 2 pieces together" />
 		<Event Type="GroupSpawned" Value="1" Action="UpdateMessagePanel" Args="very good.;;now double-tap to break them apart.;;0.0;;0.0" />
 		<Event Type="BreaksEqual" Value="1" Action="SetStandardPop" Args="3;;populate" />
 		<Event Type="BreaksEqual" Value="1" Action="RemoveScoringQuality" Args="QPattern" />
@@ -19,17 +19,17 @@
 		<Event Type="CubesEqual" Value="1" Action="AddScoringQuality" Args="QColor" />
 		<Event Type="CubesEqual" Value="1" Action="SetBonus" Args="0" />
 		<Event Type="CubesEqual" Value="1" Action="UpdateMessagePanel" Args="3 of a kind.;;pieces can have 'qualities.'&#xA;'color' is just such a quality. red in this case.;;0.0;;0.0" />
-		<Event Type="CubesEqual" Value="2" Action="UpdateMessagePanel" Args="3 all unique.;;you can also form a cube when a quality&#xA;is all-different.&#xA;3 different colors means 3 points.;;0.0;;0.0" />
+		<Event Type="CubesEqual" Value="2" Action="UpdateMessagePanel" Args="3 all unique.;;you can also form a cube when a quality is all-different.&#xA;3 different colors means 3 points.;;0.0;;0.0" />
 		<Event Type="CubesEqual" Value="3" Action="AddScoringQuality" Args="QPattern" />
 		<Event Type="CubesEqual" Value="3" Action="RemoveScoringQuality" Args="QColor" />
-		<Event Type="CubesEqual" Value="3" Action="UpdateMessagePanel" Args="pattern recognition.;;color isn't the only quality.&#xA;this is pattern. it's all&#xA;dotsy-stripesy-solidsy;;0.0;;0.0" />
+		<Event Type="CubesEqual" Value="3" Action="UpdateMessagePanel" Args="pattern recognition.;;color isn't the only quality. this is pattern.&#xA;it's all dotsy-stripesy-solidsy;;0.0;;0.0" />
 		<Event Type="CubesEqual" Value="4" Action="AddScoringQuality" Args="QColor" />
-		<Event Type="CubesEqual" Value="4" Action="UpdateMessagePanel" Args="compound interest.;;just because one quality is all-same&#xA;doesn't mean the other has to be.&#xA;try color and pattern together!;;0.0;;0.0" />
+		<Event Type="CubesEqual" Value="4" Action="UpdateMessagePanel" Args="compound interest.;;just because one quality is all-same doesn't mean the other has to be.&#xA;try color and pattern together!;;0.0;;0.0" />
 		<Event Type="CubesEqual" Value="4" Action="SetStandardPop" Args="6" />
 		<Event Type="CubesEqual" Value="5" Action="SetStandardPop" Args="3" />
-		<Event Type="CubesEqual" Value="6" Action="UpdateMessagePanel" Args="hit me.;;if you can't find a match press &#xA;the + button in the upper right corner!&#xA;you'll get up to 3 more pieces.;;0.0;;0.0" />
+		<Event Type="CubesEqual" Value="6" Action="UpdateMessagePanel" Args="hit me.;;if you can't find a match press the + button in the upper right corner!&#xA;you'll get up to 3 more pieces.;;0.0;;0.0" />
 		<Event Type="CubesEqual" Value="6" Action="SetHitMeDisabled" Args="FALSE" />
-		<Event Type="CubesEqual" Value="8" Action="UpdateMessagePanel" Args="brilliant.;;now you know everything there is to know&#xA;about how to play Crystallon.;;0.0;;0.0" />
+		<Event Type="CubesEqual" Value="8" Action="UpdateMessagePanel" Args="brilliant.;;now you know everything there is to know about how to play Crystallon.;;0.0;;0.0" />
 	</Level>
 	<Level Value="1">
 		<Color LightHex="29CC29" MidHex="198219" DarkHex="308482" />
@@ -181,27 +181,27 @@
 		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
 		<Pattern Path="Application/assets/images/set3/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="false" />
-		<Goal Cubes="3" Score="14" />
 		<Goal Cubes="3" Score="12" />
-		<Goal Cubes="3" Score="16" />
-		<Goal Cubes="3" Score="18" />
 		<Goal Cubes="4" Score="20" />
 		<Goal Cubes="4" Score="22" />
 		<Goal Cubes="4" Score="18" />
+		<Goal Cubes="4" Score="24" />
 		<Goal Cubes="5" Score="26" />
 		<Goal Cubes="5" Score="20" />
+		<Goal Cubes="5" Score="24" />
 	</Level>
 	<Level Value="17">
 		<Color LightHex="F49908" MidHex="BAB109" DarkHex="666600" />
 		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="false" />
-		<Goal Cubes="5" Score="22" />
 		<Goal Cubes="5" Score="26" />
 		<Goal Cubes="5" Score="24" />
+		<Goal Cubes="5" Score="22" />
 		<Goal Cubes="5" Score="28" />
-		<Goal Cubes="6" Score="30" />
 		<Goal Cubes="6" Score="28" />
+		<Goal Cubes="6" Score="32" />
+		<Goal Cubes="6" Score="30" />
 	</Level>
 	<Level Value="18">
 		<Color LightHex="F70046" MidHex="CC0686" DarkHex="790143" />
@@ -239,11 +239,13 @@
 		<Pattern Path="Application/assets/images/set1/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="3" Score="21" />
-		<Goal Cubes="3" Score="25" />
 		<Goal Cubes="3" Score="23" />
 		<Goal Cubes="4" Score="24" />
 		<Goal Cubes="4" Score="28" />
 		<Goal Cubes="4" Score="26" />
+		<Goal Cubes="4" Score="32" />
+		<Goal Cubes="4" Score="30" />
+		<Goal Cubes="4" Score="34" />
 		<Goal Cubes="5" Score="37" />
 		<Goal Cubes="5" Score="35" />
 	</Level>
@@ -269,10 +271,11 @@
 		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
-		<Goal Cubes="3" Score="21" />
 		<Goal Cubes="4" Score="24" />
 		<Goal Cubes="4" Score="26" />
-		<Goal Cubes="5" Score="37" />
+		<Goal Cubes="4" Score="28" />
+		<Goal Cubes="6" Score="44" />
+		<Goal Cubes="0" Score="0" />
 	</Level>
 	<Level Value="26">
 		<Color LightHex="F49908" MidHex="BAB109" DarkHex="666600" />
@@ -309,13 +312,13 @@
 		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
 		<Pattern Path="Application/assets/images/set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
-		<Goal Cubes="4" Score="28" />
 		<Goal Cubes="4" Score="30" />
+		<Goal Cubes="4" Score="28" />
 		<Goal Cubes="4" Score="32" />
 		<Goal Cubes="4" Score="26" />
+		<Goal Cubes="5" Score="35" />
 		<Goal Cubes="5" Score="37" />
 		<Goal Cubes="5" Score="39" />
-		<Goal Cubes="5" Score="35" />
 		<Goal Cubes="6" Score="44" />
 		<Goal Cubes="6" Score="42" />
 	</Level>
