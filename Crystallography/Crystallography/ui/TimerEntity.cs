@@ -9,6 +9,8 @@ namespace Crystallography.UI
 	{
 		SpriteTile TimerIcon;
 		SpriteTile TimeBar;
+		SpriteTile LeftEnd;
+		SpriteTile RightEnd;
 		
 		protected bool _intialized = false;
 		protected bool _pauseTimer = false;
@@ -88,6 +90,15 @@ namespace Crystallography.UI
 			TimeBar.RegisterPalette(0);
 			TimerIcon.AddChild(TimeBar);
 			
+			LeftEnd = Support.TiledSpriteFromFile("/Application/assets/images/timerEnd.png", 1, 1);
+			LeftEnd.FlipU = true;
+			RightEnd = Support.TiledSpriteFromFile("/Application/assets/images/timerEnd.png", 1, 1);
+			LeftEnd.Color = RightEnd.Color = LevelManager.Instance.BackgroundColor;
+			LeftEnd.Position = TimeBar.Position;
+			RightEnd.Position = new Vector2(TimeBar.Position.X + 16.0f * TimeBar.Scale.X - 16.0f, TimeBar.Position.Y);
+			this.AddChild(LeftEnd);
+			this.AddChild(RightEnd);
+			
 			Reset ();
 			UpdateBar();
 		}
@@ -118,6 +129,8 @@ namespace Crystallography.UI
 			var xscale = 300.0f/16.0f;
 			
 			TimeBar.Scale = new Vector2(xscale * ((30.0f-DisplayTimer)/30.0f), 1.0f);
+			
+			RightEnd.Position = new Vector2(TimeBar.Position.X + 16.0f * TimeBar.Scale.X - 16.0f, TimeBar.Position.Y);
 		}
 	}
 }
