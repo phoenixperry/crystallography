@@ -549,21 +549,23 @@ namespace Crystallography.UI
 //				TimeBox.AddChild(TimeBar);
 			}
 			
-			PauseButton = new BetterButton(115.0f, 71.0f) {
+			PauseButton = new BetterButton("/Application/assets/images/UI/BetterButtonTransparent.png", 115.0f, 71.0f) {
 				Text = "| |",
 				Position = new Vector2(845.0f, 473.0f),
 			};
 			this.AddChild(PauseButton);
 			PauseButton.background.RegisterPalette(2);
+			PauseButton.ButtonLabel.RegisterPalette(2);
 			PauseButton.ButtonUpAction += HandlePauseButtonButtonUpAction;
 			
-			HitMeButton = new BetterButton(115.0f, 71.0f) {
+			HitMeButton = new BetterButton("/Application/assets/images/UI/BetterButtonTransparent.png", 115.0f, 71.0f) {
 				Text = "+",
 				Position = new Vector2(720.0f, 473.0f),
 			};
 			HitMeButton.On(!LevelManager.Instance.HitMeDisabled);
 			this.AddChild(HitMeButton);
 			HitMeButton.background.RegisterPalette(1);
+			HitMeButton.ButtonLabel.RegisterPalette(1);
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
 			
 			_initialized = true;

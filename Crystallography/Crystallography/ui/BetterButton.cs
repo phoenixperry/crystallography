@@ -95,6 +95,8 @@ namespace Crystallography.UI
 			set { _buttonText.Color = value; }
 		}
 		
+		public Label ButtonLabel{ get { return _buttonText; } }
+		
 		public Font TextFont {
 			get {
 				return _textFont;
@@ -141,6 +143,11 @@ namespace Crystallography.UI
 		}
 		
 		public BetterButton (float pWidth, float pHeight) : base() {
+			Initialize(pWidth, pHeight);
+		}
+		
+		public BetterButton (string pBackgroundPath, float pWidth, float pHeight) {
+			background = Support.TiledSpriteFromFile(pBackgroundPath, 1, 3);
 			Initialize(pWidth, pHeight);
 		}
 		
@@ -275,8 +282,8 @@ namespace Crystallography.UI
 			
 			if (background == null) {
 				background = Support.TiledSpriteFromFile("/Application/assets/images/UI/BetterButton.png", 1, 3);
-				background.Scale = size / DefaultDimensions;
 			}
+			background.Scale = size / DefaultDimensions;
 			this.AddChild(background);
 			
 			if (_textFont == null) {
