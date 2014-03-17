@@ -20,7 +20,7 @@ namespace Crystallography
         private float _screenHeight;
             
             
-        public enum BODIES { Card = 0, Cube, LeftBumper, RightBumper, TopBumper, BottomBumper };
+        public enum BODIES { Card = 0, Cube, LeftBumper, RightBumper, TopBumper, BottomBumper, MessageBumper };
     	
 		// GET & SET ------------------------------------------------------------------------------------
 		
@@ -109,7 +109,9 @@ namespace Crystallography
 			this.SceneBodies[this.NumBody].SetBodyStatic();
 			this.NumBody++;
 			
-//            System.Random rand = new System.Random();
+			//MESSAGE
+			this.SceneShapes[this.NumShape] = new PhysicsShape( (new Vector2(920.0f, 148.0f) / PtoM ) );
+			this.NumShape++;
             
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
@@ -146,7 +148,6 @@ namespace Crystallography
 				i = NumShape-1;
 			}
 			this.SceneBodies[this.NumBody] = new PhysicsBody( pShape, pMass );
-//			this.SceneBodies[this.NumBody].ShapeIndex = Array.FindIndex<PhysicsShape>(this.SceneShapes, pShape);
 			this.SceneBodies[this.NumBody].ShapeIndex = (uint)i;
 			this.SceneBodies[this.NumBody].ColFriction = pColFriction;
 			this.SceneBodies[this.NumBody].Position = pPosition / PtoM;

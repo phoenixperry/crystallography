@@ -483,6 +483,10 @@ namespace Crystallography.UI
 				Lifetime = 0.0f
 			};
 			this.AddChild(_messagePanel);
+			_messagePanel.body = GamePhysics.Instance.RegisterPhysicsBody(GamePhysics.Instance.SceneShapes[4], float.MaxValue, 0.0f, _messagePanel.Position / GamePhysics.PtoM);
+			_messagePanel.AdHocDraw += () => {
+				_messagePanel.body.Position = _messagePanel.Position / GamePhysics.PtoM;
+			};
 
 			ScoreIcon = Support.SpriteUVFromFile("/Application/assets/images/handIcon.png");
 			ScoreIcon.Position = new Vector2(184.0f, 16.0f);

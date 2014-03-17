@@ -13,6 +13,8 @@ namespace Crystallography.UI
 		Label MessageTitleText;
 		Label MessageText;
 		
+		public Sce.PlayStation.HighLevel.Physics2D.PhysicsBody body;
+		
 		public string Text {
 			get {
 				return MessageText.Text;
