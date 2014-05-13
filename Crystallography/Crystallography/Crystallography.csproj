@@ -85,7 +85,6 @@
     <Compile Include="DataStorage.cs" />
     <Compile Include="ui\ButtonEntity.cs" />
     <Compile Include="ui\HudPanel.cs" />
-    <Compile Include="ui\LevelEndPanel.cs" />
     <Compile Include="ui\LevelSelectScreen.cs" />
     <Compile Include="ui\LevelTitle.cs" />
     <Compile Include="ui\LoadingScene.cs" />
@@ -109,6 +108,7 @@
     <Compile Include="WildCardCrystallonEntity.cs" />
     <Compile Include="ui\LevelTitleMkTwo.cs" />
     <Compile Include="QSymbol.cs" />
+    <Compile Include="InfiniteModeEndPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

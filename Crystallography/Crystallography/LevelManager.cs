@@ -14,8 +14,8 @@ namespace Crystallography
 {
 	public class LevelManager
 	{
-		protected static readonly int MAX_DIFFICULTY = 3;
-		protected static readonly int MIN_DIFFICULTY = 0;
+		public static readonly int MAX_DIFFICULTY = 3;
+		public static readonly int MIN_DIFFICULTY = 0;
 		protected static readonly string[] DELIMITER = new string[]{";;"};
 		
 		protected static LevelManager _instance;
@@ -281,14 +281,14 @@ namespace Crystallography
 		
 		public void ChangeDifficulty( int pDeltaDiff ) {
 			bool up = true;
-			if ( pDeltaDiff < 0 ) {
+			if ( pDeltaDiff < 0 ) {	// ------------------------------------------------ LOWER DIFFICULTY
 				if ( pDeltaDiff + difficulty < MIN_DIFFICULTY ) {
-					pDeltaDiff = MIN_DIFFICULTY - difficulty;	// ENFORCE LOWER CAP
+					pDeltaDiff = MIN_DIFFICULTY - difficulty;	//	------------------- ENFORCE LOWER CAP
 				}
 				up = false;
 				pDeltaDiff = -pDeltaDiff;
-			} else if ( pDeltaDiff + difficulty > MAX_DIFFICULTY ) {
-				pDeltaDiff = MAX_DIFFICULTY - difficulty;	// ENFORCE UPPER CAP
+			} else if ( pDeltaDiff + difficulty > MAX_DIFFICULTY ) {	// ------------ RAISE DIFFICULTY
+				pDeltaDiff = MAX_DIFFICULTY - difficulty;	// ------------------------ ENFORCE UPPER CAP
 			}
 			
 			for ( var i = 0; i < pDeltaDiff; i++ ) {

@@ -33,7 +33,7 @@ namespace Crystallography.UI
 		
 		public LevelTitleMkTwo levelTitle;
 		public MessagePanel _messagePanel;
-		public NextLevelPanel _nextLevelPanel;
+		public HudPanel _nextLevelPanel;
 		
 		public PausePanel pausePanel;
 		
@@ -278,6 +278,25 @@ namespace Crystallography.UI
 			GameScene.QuitToTitle();
 		}
 		
+		void HandleGameTimerBarFilled (object sender, EventArgs e)
+		{
+			// DIFFICULTY INCREASE!
+			LevelManager.Instance.ChangeDifficulty(1);
+			GameTimer.SetDisplayTimer(15.0f);
+		}
+
+		void HandleGameTimerBarEmptied (object sender, EventArgs e)
+		{
+			if (LevelManager.Instance.difficulty > LevelManager.MIN_DIFFICULTY) {
+				// DIFFICULTY DECREASE!
+				LevelManager.Instance.ChangeDifficulty(-1);
+				GameTimer.SetDisplayTimer(0.0f);
+			} else {
+				// BOTTOM OUT -- GAME OVER
+				MetGoal();
+			}
+		}
+		
 		// OVERRIDES -----------------------------------------------------------------------------------------------
 		
 		public override void Update (float dt) {
@@ -323,9 +342,7 @@ namespace Crystallography.UI
 		
 		public override void OnEnter () {
 			base.OnEnter();
-			_nextLevelPanel.NextLevelDetected += Handle_nextLevelPanelButtonButtonUpAction;
-			_nextLevelPanel.QuitDetected += Handle_nextLevelPanelQuitButtonPressDetected;
-			_nextLevelPanel.LevelSelectDetected += Handle_nextLevelPanelLevelSelectDetected;
+			
 			levelTitle.OnSlideOutComplete += HandleLevelTitleOnSlideOutComplete;
 			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
 			QualityManager.FailedMatchDetected += HandleQualityManagerFailedMatchDetected;
@@ -336,9 +353,16 @@ namespace Crystallography.UI
 			PausePanel.ResetButtonPressDetected += HandlePausePanelResetButtonPressDetected;
 			CubeCrystallonEntity.CubeCompleteDetected += HandleCubeCrystallonEntityCubeCompleteDetected;
 			CardManager.Instance.CardSpawned += HandleCardManagerInstanceCardSpawned;
-//			if(GameScene.currentLevel == 999) {
-//				this.Schedule(CalculateTimer,1);
-//			}
+			if(GameScene.currentLevel == 999) {
+				GameTimer.BarEmptied += HandleGameTimerBarEmptied;
+				GameTimer.BarFilled += HandleGameTimerBarFilled;
+				(_nextLevelPanel as InfiniteModeEndPanel).RetryDetected += HandlePausePanelResetButtonPressDetected;
+				(_nextLevelPanel as InfiniteModeEndPanel).QuitDetected += Handle_nextLevelPanelQuitButtonPressDetected;
+			} else {
+			(_nextLevelPanel as NextLevelPanel).NextLevelDetected += Handle_nextLevelPanelButtonButtonUpAction;
+			(_nextLevelPanel as NextLevelPanel).QuitDetected += Handle_nextLevelPanelQuitButtonPressDetected;
+			(_nextLevelPanel as NextLevelPanel).LevelSelectDetected += Handle_nextLevelPanelLevelSelectDetected;
+			}
 #if METRICS
 			DataStorage.AddMetric( "Goal", () => Goal, MetricSort.LAST );
 			DataStorage.AddMetric( "Score", () => Score, MetricSort.LAST );
@@ -353,9 +377,7 @@ namespace Crystallography.UI
 		
 		public override void OnExit () {
 			base.OnExit();
-			_nextLevelPanel.NextLevelDetected -= Handle_nextLevelPanelButtonButtonUpAction;
-			_nextLevelPanel.QuitDetected -= Handle_nextLevelPanelQuitButtonPressDetected;
-			_nextLevelPanel.LevelSelectDetected -= Handle_nextLevelPanelLevelSelectDetected;
+			
 			HitMeButton.ButtonUpAction -= HandleHitMeButtonButtonUpAction;
 			PauseButton.ButtonUpAction -= HandlePauseButtonButtonUpAction;
 			QualityManager.MatchScoreDetected -= HandleQualityManagerMatchScoreDetected;
@@ -367,9 +389,16 @@ namespace Crystallography.UI
 			PausePanel.ResetButtonPressDetected -= HandlePausePanelResetButtonPressDetected;
 			CubeCrystallonEntity.CubeCompleteDetected -= HandleCubeCrystallonEntityCubeCompleteDetected;
 			CardManager.Instance.CardSpawned -= HandleCardManagerInstanceCardSpawned;
-//			if(GameScene.currentLevel == 999) {
-//				this.Unschedule(CalculateTimer);
-//			}
+			if(GameScene.currentLevel == 999) {
+				GameTimer.BarEmptied -= HandleGameTimerBarEmptied;
+				GameTimer.BarFilled -= HandleGameTimerBarFilled;
+				(_nextLevelPanel as InfiniteModeEndPanel).RetryDetected -= HandlePausePanelResetButtonPressDetected;
+				(_nextLevelPanel as InfiniteModeEndPanel).QuitDetected -= Handle_nextLevelPanelQuitButtonPressDetected;
+			} else {
+				(_nextLevelPanel as NextLevelPanel).NextLevelDetected -= Handle_nextLevelPanelButtonButtonUpAction;
+			(_nextLevelPanel as NextLevelPanel).QuitDetected -= Handle_nextLevelPanelQuitButtonPressDetected;
+			(_nextLevelPanel as NextLevelPanel).LevelSelectDetected -= Handle_nextLevelPanelLevelSelectDetected;
+			}
 			
 			_nextLevelPanel = null;
 			HitMeButton = null;
@@ -471,10 +500,17 @@ namespace Crystallography.UI
 			};
 			this.AddChild(levelTitle, -1);
 			
-			_nextLevelPanel = new NextLevelPanel(){
-				Offset = new Vector2(510.0f, 0.0f),
-				
-			};
+			if (GameScene.currentLevel == 999) {
+				_nextLevelPanel = new InfiniteModeEndPanel(){
+					Offset = new Vector2(510.0f, 0.0f),
+					
+				};
+			} else {
+				_nextLevelPanel = new NextLevelPanel(){
+					Offset = new Vector2(510.0f, 0.0f),
+					
+				};
+			}
 			GameHudBar.AddChild(_nextLevelPanel, -1);
 			
 			_messagePanel = new MessagePanel(920.0f, 148.0f ){
@@ -626,7 +662,9 @@ namespace Crystallography.UI
 		public void MetGoal() {
 			MetGoalTime = GameTimer.LevelTimer;
 			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
-			_nextLevelPanel.Populate( Cubes, Score );
+			if (GameScene.currentLevel != 999) {
+				(_nextLevelPanel as NextLevelPanel).Populate( Cubes, Score );
+			}
 			_nextLevelPanel.SlideIn();
 			GameTimer.Pause(true);
 		}

@@ -16,6 +16,9 @@ namespace Crystallography.UI
 		protected bool _pauseTimer = false;
 		protected float _barAdjustment;
 		
+		public event EventHandler BarFilled;
+		public event EventHandler BarEmptied;
+		
 		// GET & SET -------------------------------------------------------
 		
 		public float DisplayTimer {get; private set;}
@@ -40,16 +43,31 @@ namespace Crystallography.UI
 			}
 		}
 		
+		void HandleBarFilled (object sender, EventArgs e) {
+			_barAdjustment = 0.0f;
+//			DisplayTimer = 15.0f;
+		}
+		
+		void HandleBarEmptied (object sender, EventArgs e) {
+			
+			
+//			DisplayTimer = 0.0f;
+		}
+		
 		// OVERRIDES -------------------------------------------------------
 		
 		public override void OnEnter () {
 			base.OnEnter();
 			QualityManager.MatchScoreDetected += HandleQualityManagerMatchScoreDetected;
+			BarFilled += HandleBarFilled;
+			BarEmptied += HandleBarEmptied;
 		}
 		
 		public override void OnExit () {
 			base.OnExit();
 			QualityManager.MatchScoreDetected -= HandleQualityManagerMatchScoreDetected;
+			BarFilled -= HandleBarFilled;
+			BarEmptied -= HandleBarEmptied;
 		}
 		
 		public override void Update (float dt) {
@@ -108,23 +126,26 @@ namespace Crystallography.UI
 		}
 		
 		public void Reset() {
-//			_pauseTimer = false;
 			_barAdjustment = 0.0f;
 			DisplayTimer = 0.001f;
-//			AbsoluteTimer = 0.0f;
 			LevelTimer = 0.0f;
 		}
 		
+		public void SetDisplayTimer( float pTime ) {
+			DisplayTimer = pTime;
+		}
+		
 		protected void UpdateBar() {
-			if ( DisplayTimer <= 0.0f ) {
-				// DIFFICULTY INCREASE!
-				LevelManager.Instance.ChangeDifficulty(1);
-				_barAdjustment = 0.0f;
-				DisplayTimer = 15.0f;
-			} else if (DisplayTimer > 30.0f) {
-				// DIFFICULTY DECREASE!
-				LevelManager.Instance.ChangeDifficulty(-1);
-				DisplayTimer = 0.0f;
+			if ( DisplayTimer <= 0.0f ) {	// ------------------ BAR FILLED
+				EventHandler handler = BarFilled;
+				if (handler != null) {
+					handler( this, null );
+				}
+			} else if (DisplayTimer > 30.0f) {	// ------------- BAR EMPTIED
+				EventHandler handler = BarEmptied;
+				if (handler != null) {
+					handler( this, null );
+				}
 			}
 			var xscale = 300.0f/16.0f;
 			
