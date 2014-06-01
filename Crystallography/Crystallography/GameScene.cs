@@ -91,18 +91,63 @@ namespace Crystallography
             if(DEBUG_BOUNDINGBOXS)
             {
                 this.AdHocDraw += () => {
-					foreach (PhysicsBody pb in _physics.SceneBodies) {
-						if ( pb != null ) {
-							var bottomLeft = pb.AabbMin;
-							var topRight = pb.AabbMax;
-							Director.Instance.DrawHelpers.DrawBounds2Fill (
-								new Bounds2(bottomLeft*GamePhysics.PtoM, topRight*GamePhysics.PtoM));
+					foreach (ICrystallonEntity e in _allEntites) {
+						if (e is SpriteTileCrystallonEntity) {
+//							Node n = e.getNode();
+//							Vector2 halfDimensions = new Vector2((e as SpriteTileCrystallonEntity).Width, (e as SpriteTileCrystallonEntity).Height) /4.0f;
+//							var bl = n.Position - halfDimensions;
+//							var tr = n.Position + halfDimensions;
+							Director.Instance.DrawHelpers.DrawBounds2(
+								e.getBounds()
+							);
 						}
 					}
+//					foreach (PhysicsBody pb in _physics.SceneBodies) {
+//						if ( pb != null ) {
+//							var bottomLeft = pb.AabbMin;
+//							var topRight = pb.AabbMax;
+//							Director.Instance.DrawHelpers.DrawBounds2Fill (
+//								new Bounds2(bottomLeft*GamePhysics.PtoM, topRight*GamePhysics.PtoM));
+//						}
+//					}
                 };
 				
 				this.AdHocDraw += () => {
-					var s = SelectionGroup.Instance.getPosition() - SelectionGroup.Instance.heading.Normalize() * FMath.Max( 80.0f, FMath.Min(120.0f, (120.0f * SelectionGroup.Instance.velocity/100.0f)));
+					var s = SelectionGroup.Instance.getNode().Position;
+					var bl = s - (20*Vector2.One);
+					var tr = s + (20*Vector2.One);
+					Director.Instance.DrawHelpers.DrawBounds2Fill(
+						new Bounds2(bl,tr)
+					);
+				};
+				
+				this.AdHocDraw += () => {
+//					var s = SelectionGroup.Instance.getPosition() - SelectionGroup.Instance.heading.Normalize() * FMath.Max( 80.0f, FMath.Min(120.0f, (120.0f * SelectionGroup.Instance.velocity/100.0f)));
+					var s = SelectionGroup.Instance.getNode().LocalToWorld( SelectionGroup.UP_LEFT_SELECTION_POINT );
+					var bl = s - (2*Vector2.One);
+					var tr = bl + (4*Vector2.One);
+					Director.Instance.DrawHelpers.DrawBounds2Fill(
+						new Bounds2(bl,tr)
+					);
+				};
+				this.AdHocDraw += () => {
+					var s = SelectionGroup.Instance.getNode().LocalToWorld( SelectionGroup.UP_RIGHT_SELECTION_POINT );
+					var bl = s - (2*Vector2.One);
+					var tr = bl + (4*Vector2.One);
+					Director.Instance.DrawHelpers.DrawBounds2Fill(
+						new Bounds2(bl,tr)
+					);
+				};
+				this.AdHocDraw += () => {
+					var s = SelectionGroup.Instance.getNode().LocalToWorld( SelectionGroup.LEFT_UP_SELECTION_POINT );
+					var bl = s - (2*Vector2.One);
+					var tr = bl + (4*Vector2.One);
+					Director.Instance.DrawHelpers.DrawBounds2Fill(
+						new Bounds2(bl,tr)
+					);
+				};
+				this.AdHocDraw += () => {
+					var s = SelectionGroup.Instance.getNode().LocalToWorld( SelectionGroup.RIGHT_UP_SELECTION_POINT );
 					var bl = s - (2*Vector2.One);
 					var tr = bl + (4*Vector2.One);
 					Director.Instance.DrawHelpers.DrawBounds2Fill(

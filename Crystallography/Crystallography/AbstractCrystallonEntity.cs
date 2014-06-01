@@ -1,6 +1,7 @@
 using System;
 using Sce.PlayStation.Core;
 using Sce.PlayStation.HighLevel.GameEngine2D;
+using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 using Sce.PlayStation.HighLevel.Physics2D;
 
 namespace Crystallography
@@ -95,6 +96,14 @@ namespace Crystallography
 		/// <see cref="Sce.PlayStation.HighLevel.Physics2D.PhysicsBody"/>
 		/// </returns>
 		public abstract PhysicsBody getBody();
+		
+		/// <summary>
+		/// Gets the bounds.
+		/// </summary>
+		/// <returns>
+		/// The bounds.
+		/// </returns>
+		public abstract Bounds2 getBounds();
 		
 		/// <summary>
 		/// Returns an offset position <c>Vector2</c> for this sort of entity when it is in a <c>GroupCrystallonEntity</c>.

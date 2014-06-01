@@ -19,6 +19,14 @@ namespace Crystallography
 			return _body;
 		}
 		
+		public override Bounds2 getBounds ()
+		{
+			if(_body != null)
+				return new Bounds2(_body.AabbMin * GamePhysics.PtoM, _body.AabbMax * GamePhysics.PtoM);
+			else
+				return Bounds2.Zero;
+		}
+		
 		public override void setBody (PhysicsBody body)
 		{
 			_body = body;

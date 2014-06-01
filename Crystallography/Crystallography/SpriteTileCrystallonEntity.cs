@@ -25,6 +25,16 @@ namespace Crystallography
 			return _body;
 		}
 		
+		public override Bounds2 getBounds ()
+		{
+			Vector2 halfDimensions;
+			if (_orientationIndex == 0)
+				halfDimensions = new Vector2(Width/3.0f, Height/4.0f);
+			else
+				halfDimensions = new Vector2(Width/4.0f, Height/3.0f);
+			return new Bounds2( getPosition() - halfDimensions, getPosition() + halfDimensions );
+		}
+		
 		public int getColor() {
 			return _colorIndex;
 		}

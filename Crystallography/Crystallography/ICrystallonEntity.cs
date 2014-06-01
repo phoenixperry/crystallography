@@ -1,6 +1,7 @@
 using System;
 using Sce.PlayStation.Core;
 using Sce.PlayStation.HighLevel.GameEngine2D;
+using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 using Sce.PlayStation.HighLevel.Physics2D;
 
 namespace Crystallography
@@ -17,6 +18,8 @@ namespace Crystallography
 		PhysicsBody getBody();
 		
 		Vector2 getPosition();
+		
+		Bounds2 getBounds();
 		
 		int getQualityVariant( string pQualityName );
 		

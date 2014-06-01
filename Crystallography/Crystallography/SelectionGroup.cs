@@ -13,8 +13,17 @@ namespace Crystallography
 		
 		public static readonly int MAX_CAPACITY = 3;
 		protected static readonly float SNAP_DISTANCE = 50.0f;
+		
 		public static float EASE_DISTANCE = 70.0f;
-		public static float MAXIMUM_PICKUP_VELOCITY = 700.0f; //400.0f;
+		protected static Vector2 UP_OFFSET;// = new Vector2(0.5f, 30.0f+EASE_DISTANCE);
+		protected static Vector2 LEFT_OFFSET;// = new Vector2(-EASE_DISTANCE-30.0f, 20.5f);
+		protected static Vector2 RIGHT_OFFSET;// = new Vector2(EASE_DISTANCE+30.0f, 20.5f);
+		public static Vector2 UP_LEFT_SELECTION_POINT;// = new Vector2(-39.5f, 10.0f+EASE_DISTANCE);
+		public static Vector2 UP_RIGHT_SELECTION_POINT;// = new Vector2(40.5f, 10.0f+EASE_DISTANCE);
+		public static Vector2 LEFT_UP_SELECTION_POINT;// = new Vector2(-EASE_DISTANCE-20, 70.5f);
+		public static Vector2 RIGHT_UP_SELECTION_POINT;// = new Vector2(EASE_DISTANCE+20, 70.5f);
+		
+		public static float MAXIMUM_PICKUP_VELOCITY = 700.0f;
 		private static float MAX_SELECTION_DELAY = 0.5f;
 		
 		private AbstractCrystallonEntity lastEntityReleased;
@@ -23,7 +32,9 @@ namespace Crystallography
 		private List<Vector2> lastPosition;
 		public Vector2 heading;
 		
-		private float selectionDelay;
+		protected List<Vector2> selectionPoints;
+		
+		public float selectionDelay;
 		
 		public event EventHandler CubeFailedDetected;
 		
@@ -183,27 +194,45 @@ namespace Crystallography
 			setPosition( e.touchPosition );
 
 			if (velocity < MAXIMUM_PICKUP_VELOCITY) {
-				if ( InputManager.dragging ) { // ----------------------------------------------------------- LOOK FOR ENTITIES THE PLAYER MIGHT BE TRYING TO TOUCH
+				if ( InputManager.dragging ) { // ----------------------------------- LOOK FOR ENTITIES THE PLAYER MIGHT BE TRYING TO TOUCH
 					// TEST FINGER POSITION
 					var entity = GetEntityAtPosition( e.touchPosition );
-					if (justDownPositionEntity != null) { // ------------------------------------------------ EDGE CASE: PLAYER TOUCHED DOWN ON A PIECE, BUT DRAGGED OFF OF IT
-						if (justDownPositionEntity != entity ) { // -----------------------------             BEFORE WE ADDED IT TO THE SELECTION GROUP.
+					if (justDownPositionEntity != null) { // ------------------------ EDGE CASE: PLAYER TOUCHED DOWN ON A PIECE, BUT DRAGGED OFF OF IT
+						if (justDownPositionEntity != entity ) { // ----------------- BEFORE WE ADDED IT TO THE SELECTION GROUP.
 							if (entity == null) {
-								entity = justDownPositionEntity; // ----------------------------------------- COMMON:    PLAYER IS TOUCHING EMPTY SPACE; RESOLVE IT BELOW
+								entity = justDownPositionEntity; // ----------------- COMMON: PLAYER IS TOUCHING EMPTY SPACE; RESOLVE IT BELOW
 							}
 						}
 						justDownPositionEntity = null;
 					}
 					
-					if ( entity == null ) {
-						// TRY THE POSITIONS OF PIECES THE PLAYER ALREADY HAS
-						if (population < 3 && selectionDelay == 0.0f) {
-							var pos = e.touchPosition - heading.Normalize() * FMath.Max( 80.0f, FMath.Min(120.0f, (120.0f * (SelectionGroup.Instance.velocity/100.0f))));
-							var ent = GetEntityAtPosition( pos );
-							if (ent != null ) {
-								Pull (ent);
+					if ( entity == null 
+					     && velocity < 100.0f 
+					     && population != 0) {
+						// TRY THE PICK UP POSITIONS FOR THE PIECE THE PLAYER ALREADY HAS
+						
+						if (_pucks[(int)POSITIONS.TOP].Children.Count != 0) {
+							entity = GetEntityAtPosition( getNode().LocalToWorld(UP_LEFT_SELECTION_POINT), POSITIONS.LEFT);
+							if (entity == null) {
+								entity = GetEntityAtPosition( getNode().LocalToWorld(UP_RIGHT_SELECTION_POINT), POSITIONS.RIGHT);
 							}
 						}
+						if ( entity == null && _pucks[(int)POSITIONS.LEFT].Children.Count != 0) {
+							entity = GetEntityAtPosition( getNode().LocalToWorld(LEFT_UP_SELECTION_POINT), POSITIONS.TOP);
+						}
+						if ( entity == null && _pucks[(int)POSITIONS.RIGHT].Children.Count != 0){
+							entity = GetEntityAtPosition( getNode().LocalToWorld(RIGHT_UP_SELECTION_POINT), POSITIONS.TOP);
+						}
+						
+						
+//						if (population < 3 && selectionDelay == 0.0f) {
+//							var pos = e.touchPosition - heading.Normalize() * FMath.Max( 80.0f, FMath.Min(120.0f, (120.0f * (SelectionGroup.Instance.velocity/100.0f))));
+//							var ent = GetEntityAtPosition( pos );
+//							if (ent != null ) {
+//								Pull (ent);
+//							}
+//						}
+						
 //						foreach ( Node puck in pucks ) {
 //							if (puck.Children.Count == 0) {
 //								entity = GetEntityAtPosition( getNode().LocalToWorld(puck.Position) );
@@ -365,30 +394,35 @@ namespace Crystallography
 				_pucks[i].StopActionByTag( 1 );
 			}
 			Sequence sequence = new Sequence(){ Tag=1 };
-			sequence.Add( new MoveTo( new Vector2(0.5f, 30.0f+EASE_DISTANCE), 0.2f)
+//			sequence.Add( new MoveTo( new Vector2(0.5f, 30.0f+EASE_DISTANCE), 0.2f)
+			sequence.Add( new MoveTo( UP_OFFSET, 0.2f)
 			            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-			_pucks[0].RunAction( sequence );
+			_pucks[(int)POSITIONS.TOP].RunAction( sequence );
 			
 			sequence = new Sequence(){ Tag=1 };
-			if ( typeof(CardCrystallonEntity).IsAssignableFrom(this.MemberType) ) {
-				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE-30.0f, 20.5f), 0.2f)
+//			if ( typeof(CardCrystallonEntity).IsAssignableFrom(this.MemberType) ) {
+//				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE-30.0f, 20.5f), 0.2f)
+				sequence.Add( new MoveTo( LEFT_OFFSET, 0.2f)
 				            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-			} else {
-				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
-				            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-			}
-			_pucks[1].RunAction( sequence );
+//			}
+//			else {
+//				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
+//				            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
+//			}
+			_pucks[(int)POSITIONS.LEFT].RunAction( sequence );
 			
 			sequence = new Sequence(){ Tag=1 };
-			if ( typeof (CardCrystallonEntity).IsAssignableFrom(this.MemberType) ) {
-				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE+30.0f, 20.5f), 0.2f)
+//			if ( typeof (CardCrystallonEntity).IsAssignableFrom(this.MemberType) ) {
+//				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE+30.0f, 20.5f), 0.2f)
+				sequence.Add( new MoveTo( RIGHT_OFFSET, 0.2f)
 			           	 	{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-			} else {
-				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
-			           	 	{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-				sequence.Add( new CallFunc( () => {easeState = EaseState.OUT;} ) );
-			}
-			_pucks[2].RunAction( sequence );
+//			} 
+//			else {
+//				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
+//			           	 	{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
+//			}
+			sequence.Add( new CallFunc( () => {easeState = EaseState.OUT;} ) );
+			_pucks[(int)POSITIONS.RIGHT].RunAction( sequence );
 		}
 		
 		/// <summary>
@@ -400,25 +434,45 @@ namespace Crystallography
 		/// <param name='position'>
 		/// Screen Position in pixels.
 		/// </param>
-		protected AbstractCrystallonEntity GetEntityAtPosition( Vector2 position ) {
-			var lowerLeft = Vector2.Zero;
-			var upperRight = Vector2.Zero;
+		protected AbstractCrystallonEntity GetEntityAtPosition( Vector2 position, POSITIONS? pos=null ) {
+//			Bounds2 pickupArea = Bounds2.Zero;
+//			var lowerLeft = Vector2.Zero;
+//			var upperRight = Vector2.Zero;
 			System.Collections.ObjectModel.ReadOnlyCollection<ICrystallonEntity> allEntities = GameScene.getAllEntities();
 			foreach (ICrystallonEntity e in allEntities) {
 				if (e == null) continue;	// e IS NOT ACTUALLY A THING -- IGNORE (BUT IF THIS EVER HAPPENS, IT'S PROBS A BUG)
-				if ( e is NodeCrystallonEntity ) { // ----------------------------- e DESCENDS FROM NodeCrystallonEntity, LIKE GROUPS DO
-					PhysicsBody body = e.getBody();
-					if (body == null) continue; // e IS SINGLE POINT IN SPACE -- IGNORE
-					lowerLeft = body.AabbMin * GamePhysics.PtoM;
-					upperRight = body.AabbMax * GamePhysics.PtoM;
-				} else if (e is SpriteTileCrystallonEntity) { // ----------------- e DESCENDS FROM SpriteTileCrystallonEntity (rarer)
-					Node puck = e.getNode();
-					Vector2 halfDimensions = new Vector2((e as SpriteTileCrystallonEntity).Width/3.0f, (e as SpriteTileCrystallonEntity).Height/3.0f);
-					lowerLeft = (e as SpriteTileCrystallonEntity).getPosition() - halfDimensions;
-					upperRight = (e as SpriteTileCrystallonEntity).getPosition() + halfDimensions;
-				} 
-				if (position.X >= lowerLeft.X && position.Y >= lowerLeft.Y &&
-			    	position.X <= upperRight.X && position.Y <= upperRight.Y) {
+				if ( pos == null ) {
+					if( e.getBounds().Overlaps(new Bounds2(position - 20.0f * Vector2.One, position + 20.0f * Vector2.One)) ){
+						return e as AbstractCrystallonEntity;
+					}
+				}
+//				if ( e is NodeCrystallonEntity ) { // ----------------------------- e DESCENDS FROM NodeCrystallonEntity, LIKE GROUPS DO
+//					PhysicsBody body = e.getBody();
+//					if (body == null) continue; // e IS SINGLE POINT IN SPACE -- IGNORE
+//					lowerLeft = body.AabbMin * GamePhysics.PtoM;
+//					upperRight = body.AabbMax * GamePhysics.PtoM;
+//				} else if (e is SpriteTileCrystallonEntity) { // ----------------- e DESCENDS FROM SpriteTileCrystallonEntity (rarer)
+//					if (AppMain.ORIENTATION_MATTERS 
+//					    && pos != null
+//					    && (e as SpriteTileCrystallonEntity).getOrientation() != (int)pos) { // ----- test for orientation-related pickup points
+//							continue;
+//					}
+//					Node puck = e.getNode();
+//					Vector2 halfDimensions = new Vector2((e as SpriteTileCrystallonEntity).Width, (e as SpriteTileCrystallonEntity).Height)/4.0f;
+//					lowerLeft = (e as SpriteTileCrystallonEntity).getPosition() - halfDimensions;
+//					upperRight = (e as SpriteTileCrystallonEntity).getPosition() + halfDimensions;
+//				}
+//				pickupArea = Bounds2.SafeBounds(lowerLeft, upperRight);
+				if (AppMain.ORIENTATION_MATTERS 
+				    && pos != null
+				    && e is SpriteTileCrystallonEntity
+				    && (e as SpriteTileCrystallonEntity).getOrientation() != (int)pos) { // ----- test for orientation-related pickup points
+							continue;
+					}
+				if ( e.getBounds().IsInside(position) ) {
+//				if ( pickupArea.IsInside(position) ){
+//				if (position.X >= lowerLeft.X && position.Y >= lowerLeft.Y &&
+//			    	position.X <= upperRight.X && position.Y <= upperRight.Y) {
 					return e as AbstractCrystallonEntity;
 				}
 			}
@@ -533,6 +587,11 @@ namespace Crystallography
 			} else {
 				lastPosition = new List<Vector2>();
 			}
+			if (selectionPoints != null) {
+				selectionPoints.Clear();
+			} else {
+				selectionPoints = new List<Vector2>();
+			}
 			lastPosition.Add( getPosition() );
 			heading = Vector2.Zero;
 			lastEntityReleased = null;
@@ -541,6 +600,15 @@ namespace Crystallography
 			_scene = pScene;
 			easeState = EaseState.IN;
 			selectionDelay = 0.0f;
+			
+			// NEED TO RESET THESE IN CASE PLAYER ADJUSTED EASE DISTANCE IN OPTIONS MENU
+			UP_OFFSET = new Vector2(0.5f, 30.0f+EASE_DISTANCE);
+			LEFT_OFFSET = new Vector2(-EASE_DISTANCE-35.0f, 17.5f);
+			RIGHT_OFFSET = new Vector2(EASE_DISTANCE+35.0f, 17.5f);
+			UP_LEFT_SELECTION_POINT = new Vector2(-39.5f, 10.0f+EASE_DISTANCE);
+			UP_RIGHT_SELECTION_POINT = new Vector2(40.5f, 10.0f+EASE_DISTANCE);
+			LEFT_UP_SELECTION_POINT = new Vector2(-EASE_DISTANCE-20, 55.5f);
+			RIGHT_UP_SELECTION_POINT = new Vector2(EASE_DISTANCE+20, 55.5f);
 		}
 		
 		public void Destroy() {
