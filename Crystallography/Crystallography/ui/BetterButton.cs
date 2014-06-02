@@ -343,8 +343,8 @@ namespace Crystallography.UI
 			// DEFAULT BACKGROUND IMAGE
 			if (background == null) {
 				background = Support.TiledSpriteFromFile("/Application/assets/images/UI/BetterButton.png", 1, 3);
+				background.Scale = size / DefaultDimensions;
 			}
-			background.Scale = size / DefaultDimensions;
 			this.AddChild(background);
 			
 			// DEFAULT BUTTON TYPEFACE
