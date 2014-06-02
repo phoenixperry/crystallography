@@ -136,16 +136,43 @@ namespace Crystallography.UI
 //			Initialize(size.X, size.Y);
 //		} 
 		
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Crystallography.UI.BetterButton"/> class that uses a specific background image.
+		/// </summary>
+		/// <param name='pBackgroundPath'>
+		/// P background path.
+		/// </param>
 		public BetterButton (string pBackgroundPath) {
 			background = Support.TiledSpriteFromFile(pBackgroundPath, 1, 3);
 			var size = background.CalcSizeInPixels();
 			Initialize(size.X, size.Y);
 		}
 		
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Crystallography.UI.BetterButton"/> class that uses the default background, set to particular dimensions.
+		/// </summary>
+		/// <param name='pWidth'>
+		/// P width.
+		/// </param>
+		/// <param name='pHeight'>
+		/// P height.
+		/// </param>
 		public BetterButton (float pWidth, float pHeight) : base() {
 			Initialize(pWidth, pHeight);
 		}
 		
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Crystallography.UI.BetterButton"/> class using a specific background image, scaled to particular dimensions.
+		/// </summary>
+		/// <param name='pBackgroundPath'>
+		/// P background path.
+		/// </param>
+		/// <param name='pWidth'>
+		/// P width.
+		/// </param>
+		/// <param name='pHeight'>
+		/// P height.
+		/// </param>
 		public BetterButton (string pBackgroundPath, float pWidth, float pHeight) {
 			background = Support.TiledSpriteFromFile(pBackgroundPath, 1, 3);
 			Initialize(pWidth, pHeight);
@@ -154,6 +181,15 @@ namespace Crystallography.UI
 		
 		// EVENT HANDLERS ----------------------------------------------------------------
 		
+		/// <summary>
+		/// Handles the input manager TouchJustDown event
+		/// </summary>
+		/// <param name='sender'>
+		/// Sender.
+		/// </param>
+		/// <param name='e'>
+		/// BaseTouchEventArgs
+		/// </param>
 		void HandleInputManagerInstanceTouchJustDownDetected (object sender, BaseTouchEventArgs e) {
 			_pressed = false;
 			if(_bounds.IsInside( this.WorldToLocal(e.touchPosition) ) ) {
@@ -162,6 +198,15 @@ namespace Crystallography.UI
 			}
 		}
 		
+		/// <summary>
+		/// Handles the input manager TouchJustUp event
+		/// </summary>
+		/// <param name='sender'>
+		/// Sender.
+		/// </param>
+		/// <param name='e'>
+		/// BaseTouchEventArgs
+		/// </param>
 		void HandleInputManagerInstanceTouchJustUpDetected (object sender, BaseTouchEventArgs e) {
 			if( !Visible || (_status != PRESSED) ) {
 				return;
@@ -232,6 +277,9 @@ namespace Crystallography.UI
 		
 		// METHODS -----------------------------------------------------------------------
 		
+		/// <summary>
+		/// Centers the label text of the button, including icon if present.
+		/// </summary>
 		protected void CenterText() {
 			float labelWidth = 0.0f;
 			if (_buttonText != null) {
@@ -261,6 +309,9 @@ namespace Crystallography.UI
 			}
 		}
 		
+		/// <summary>
+		/// Triggers a successful button press from within code without changing the button's current state.
+		/// </summary>
 		public void FakePress() {
 			var oldStatus = _status;
 			_status = PRESSED;
@@ -268,6 +319,15 @@ namespace Crystallography.UI
 			_status = oldStatus;
 		}
 		
+		/// <summary>
+		/// Initialize the specified pWidth and pHeight.
+		/// </summary>
+		/// <param name='pWidth'>
+		/// Desired button width in pixels.
+		/// </param>
+		/// <param name='pHeight'>
+		/// Desired button height in pixels.
+		/// </param>
 		public void Initialize(float pWidth, float pHeight) {
 			Width = pWidth;
 			Height = pHeight;
@@ -280,12 +340,14 @@ namespace Crystallography.UI
 			_pressed = false;
 			_bounds = new Bounds2(Vector2.Zero, size);
 			
+			// DEFAULT BACKGROUND IMAGE
 			if (background == null) {
 				background = Support.TiledSpriteFromFile("/Application/assets/images/UI/BetterButton.png", 1, 3);
 			}
 			background.Scale = size / DefaultDimensions;
 			this.AddChild(background);
 			
+			// DEFAULT BUTTON TYPEFACE
 			if (_textFont == null) {
 				_textFont = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold");
 			}
@@ -304,6 +366,12 @@ namespace Crystallography.UI
 #endif
 		}
 		
+		/// <summary>
+		/// Enables (or disables) the button.
+		/// </summary>
+		/// <param name='pTurnOn'>
+		/// If set to <c>true</c> p turn on.
+		/// </param>
 		public bool On(bool? pTurnOn=null) {
 			if (pTurnOn != null) {
 				_onToggle = (bool)pTurnOn;
@@ -316,6 +384,9 @@ namespace Crystallography.UI
 			return  _onToggle;
 		}
 		
+		/// <summary>
+		/// Raises the button down event. MOSTLY JUST USED TO MAKE BUTTON LOOK PRESSED.
+		/// </summary>
 		protected virtual void OnButtonDown() {
 			if( !Visible || (_status != NORMAL) ) {
 				return;
@@ -323,6 +394,9 @@ namespace Crystallography.UI
 			_status = PRESSED;
 		}
 		
+		/// <summary>
+		/// Raises the button up event. USE THIS FOR TRIGGERING THINGS.
+		/// </summary>
 		protected virtual void OnButtonUp() {
 			EventHandler handler = ButtonUpAction;
 			if ( handler != null ) {
