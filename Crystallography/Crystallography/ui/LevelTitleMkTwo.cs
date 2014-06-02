@@ -18,6 +18,8 @@ namespace Crystallography.UI
 		
 		static readonly float ICON_MOVE_DURATION = 0.5f;
 		
+		protected float iconWidth;
+		
 		protected bool _initialized = false;
 		
 		// GET & SET -------------------------------------------------
@@ -49,6 +51,15 @@ namespace Crystallography.UI
 		
 		// EVENT HANDLERS ---------------------------------------------
 		
+		/// <summary>
+		/// Triggers when icons reach their destination after sliding into view (on screen).
+		/// </summary>
+		/// <param name='sender'>
+		/// Sender.
+		/// </param>
+		/// <param name='e'>
+		/// Event arguments
+		/// </param>
 		void HandleOnSlideInComplete (object sender, EventArgs e) {
 			Sequence sequence = new Sequence();
 			
@@ -72,11 +83,13 @@ namespace Crystallography.UI
 		
 		// OVERRIDES --------------------------------------------------
 		
+		
 		public override void OnEnter ()
 		{
 			base.OnEnter ();
 			OnSlideInComplete += HandleOnSlideInComplete;
 		}
+		
 		
 		public override void OnExit ()
 		{
@@ -93,6 +106,9 @@ namespace Crystallography.UI
 			QualityNames.Clear();
 		}
 		
+		/// <summary>
+		/// Slide the icons out of view (off screen).
+		/// </summary>
 		public override void SlideOut ()
 		{
 			Sequence sequence = new Sequence();
@@ -108,6 +124,9 @@ namespace Crystallography.UI
 		
 		// METHODS ----------------------------------------------------
 		
+		/// <summary>
+		/// Initialize this instance.
+		/// </summary>
 		private void Initialize() {
 			SlideInDirection = SlideDirection.RIGHT;
 			SlideOutDirection = SlideDirection.LEFT;
@@ -123,7 +142,7 @@ namespace Crystallography.UI
 			LevelTitleLabel = new Label() {
 				Text = "00",
 				FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold")),
-				Position = new Vector2(30.0f, 3.0f * 544.0f/4.0f)
+				Position = new Vector2(30.0f, 0.75f * 544.0f)
 			};
 			this.AddChild(LevelTitleLabel);
 			LevelTitleLabel.RegisterPalette(0);
@@ -165,8 +184,15 @@ namespace Crystallography.UI
 				IconSliders[i].AddChild(Icons[i]);
 //				Icons[i].Visible = false;
 			}
+			iconWidth = Icons[0].CalcSizeInPixels().X;
 		}
 		
+		/// <summary>
+		/// Sets the contents of the labels that appear under the icons at level start
+		/// </summary>
+		/// <param name='pNames'>
+		/// P names.
+		/// </param>
 		public void SetQualityNames( string[] pNames ) {
 			foreach ( Label l in QualityNames) {
 				l.Parent.RemoveChild(l, true);
@@ -183,8 +209,9 @@ namespace Crystallography.UI
 				QualityNames.Add( n = new Label() {
 					FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Regular")),
 					Text = name,
-					Position = new Vector2( 0.0f, -20.0f )
+//					Position = new Vector2( 0.0f, -20.0f )
 				});
+				n.Position = new Vector2( 0.5f * (iconWidth - n.GetlContentLocalBounds().Size.X), -20.0f ); // CENTER TEXT UNDER ICON
 				n.RegisterPalette(i%3);
 				Icons[i].AddChild(n);
 				i++;
