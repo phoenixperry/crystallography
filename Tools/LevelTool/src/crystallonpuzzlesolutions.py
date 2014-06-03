@@ -59,11 +59,11 @@ def main():
     global deck
 
     population = PopDict[rows[0]['Level']]
-    
+
     for row in rows:
         rowCounter += 1
         qualities = {}
-        
+
         if ( row['Level'] != str(levelNum) ): # end of current level's data reached
             deck = levelCards
 
@@ -71,7 +71,7 @@ def main():
             SetUpLevel( deck ) #this populates deck and cardNumbers
 
             # FIND ALL POSSIBLE PLAYTHROUGHS
-            
+
             if( len(cardNumbers) > population ):
                 SimulatePlay( cardNumbers[:population], cardNumbers[population:] )
             else:
@@ -96,13 +96,13 @@ def main():
                     goodChains.extend(cubeChain[key])
 
             print stats
-            
+
             # CALCULATE TOTAL SCORES FOR CUBE UNIQUE CHAINS
             BuildScoreChains( cubeChain ) # this populates scoreChain
 
-            
-            
-            
+
+
+
             # OUTPUT HEADER ROW FOR LEVEL
             possibleLengths = ''
             possibleScores = ''
@@ -218,7 +218,7 @@ def SimulatePlay ( pOnScreen, pLeftover, pPreviousCubes=[] ):
         Cubes = FindPossibleCubes( pOnScreen, False )
     else:
         Cubes = allPossibleCubes
-    
+
     # If no possible cubes can be made from this on-screen card population, return
     counter = len(Cubes)
     if( counter == 0 ):
@@ -227,7 +227,7 @@ def SimulatePlay ( pOnScreen, pLeftover, pPreviousCubes=[] ):
         else:
             cubeChain[counter] = [pPreviousCubes[:]]
         return
-    
+
     # Recursively create all possible paths to having no cards off screen
     if ( len(pLeftover) > 0 ):
         newLeftover = []
@@ -247,9 +247,9 @@ def SimulatePlay ( pOnScreen, pLeftover, pPreviousCubes=[] ):
                 newOnScreen.extend(adds)
             newCubes = pPreviousCubes[:]
             newCubes.append(cube)
-            
+
             SimulatePlay( newOnScreen, newLeftover, newCubes  )
-            
+
     # If there are no cards left in reserve, simulate all possible remaining playthroughs from this state
     else:
         BuildCubeChains( Cubes, pPreviousCubes, len(pPreviousCubes) )
@@ -269,7 +269,7 @@ def FindPossibleCubes( pCardsOnScreen, pReturnScores=False ):
     scores = {}
 
     if (len(pCardsOnScreen) >= 3):
-        
+
         # Build a list of all possible cubes, valid or not, filtering only orientation
         cards = []
         for i in range(0, len(pCardsOnScreen)-2):
@@ -298,7 +298,7 @@ def FindPossibleCubes( pCardsOnScreen, pReturnScores=False ):
     else:
         return cubes
 
-                
+
 ##############################################################################
 # CalculateScore
 #
@@ -322,10 +322,10 @@ def CalculateScore ( pCube, pScoringQualities ):
             break
     return score
 
-        
+
 ######################################################################################
 # BuildCubeChains()
-# 
+#
 # Finds any possible remaining cubes when there are no more cards left in reserve
 ######################################################################################
 def BuildCubeChains( pFreshList, pUsedList=[], pCounter=0 ):
@@ -343,7 +343,7 @@ def BuildCubeChains( pFreshList, pUsedList=[], pCounter=0 ):
             # using this cube...
             newUsedList.append(possibleCube)
             newCounter += 1
-            
+
             # remove any cubes that could not be formed after making
             # this cube from the copied fresh list
             for freshCube in newFreshList:
@@ -355,10 +355,10 @@ def BuildCubeChains( pFreshList, pUsedList=[], pCounter=0 ):
             # clean up the list by removing all the null items
             while newFreshList.count(None) > 0:
                 newFreshList.remove(None)
-                        
+
             # if there are more possible cubes, explore deeper
             isTerminus = pCounter == BuildCubeChains( newFreshList, newUsedList, newCounter )
-                
+
     pUsedList.sort()
     length = len(pUsedList)
     if length in cubeChain.keys():
@@ -370,7 +370,7 @@ def BuildCubeChains( pFreshList, pUsedList=[], pCounter=0 ):
             cubeChain[length].append(pUsedList[:])
     else:
         cubeChain[length] = [pUsedList[:]]
-    
+
     return newCounter
 
 
