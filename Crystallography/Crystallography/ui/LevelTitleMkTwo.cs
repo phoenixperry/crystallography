@@ -9,7 +9,7 @@ namespace Crystallography.UI
 {
 	public class LevelTitleMkTwo : HudPanel 
 	{
-		SpriteTile[] Icons;
+		Node[] Icons;
 		HudPanel[] IconSliders;
 		Label TapToDismissLabel;
         Label LevelTitleLabel;
@@ -19,6 +19,7 @@ namespace Crystallography.UI
 		static readonly float ICON_MOVE_DURATION = 0.5f;
 		
 		protected float iconWidth;
+		protected float iconHeight;
 		
 		protected bool _initialized = false;
 		
@@ -43,6 +44,7 @@ namespace Crystallography.UI
 		public LevelTitleMkTwo () : base() {
 			if (_initialized == false) {
 				Initialize();
+				var init = ColorIcon.Instance;
 			}
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
@@ -65,7 +67,8 @@ namespace Crystallography.UI
 			
 			for ( int i=0; i < QualityNames.Count; i++ ) {
 				var slider = IconSliders[i];
-				float x = ( (float)QualityNames.Count - (float)i ) * 960.0f/( 1.0f + (float)QualityNames.Count ) - Icons[i].CalcSizeInPixels().X/2.0f;
+// 				float x = ( (float)QualityNames.Count - (float)i ) * 960.0f/( 1.0f + (float)QualityNames.Count ) - (Icons[i] as SpriteTile).CalcSizeInPixels().X/2.0f;
+				float x = ( (float)QualityNames.Count - (float)i ) * 960.0f/( 1.0f + (float)QualityNames.Count ) - iconWidth/2.0f;
 				
 //				Icons[i].Visible = true;
 				slider.Position = slider.Offset = new Vector2(x, 0.0f);
@@ -104,6 +107,7 @@ namespace Crystallography.UI
 			Icons = null;
 			LevelTitleLabel = null;
 			QualityNames.Clear();
+			ColorIcon.Destroy();
 		}
 		
 		/// <summary>
@@ -175,16 +179,17 @@ namespace Crystallography.UI
 				this.AddChild(IconSliders[i]);
 			}
 			
-			Icons = new SpriteTile[4];
+			Icons = new Node[4];
 			for( int i=0; i < Icons.Length; i++) {
 				Icons[i] = Support.TiledSpriteFromFile("/Application/assets/images/icons/icons.png", 4, 2);
-				float y = 544.0f/2.0f - Icons[i].CalcSizeInPixels().Y/2.0f;
+				float y = 544.0f/2.0f - (Icons[i] as SpriteTile).CalcSizeInPixels().Y/2.0f;
 				Icons[i].RegisterPalette(i%3);
 				Icons[i].Position = new Vector2(0.0f, y);
 				IconSliders[i].AddChild(Icons[i]);
 //				Icons[i].Visible = false;
 			}
-			iconWidth = Icons[0].CalcSizeInPixels().X;
+			iconWidth = (Icons[0] as SpriteTile).CalcSizeInPixels().X;
+			iconHeight = (Icons[0] as SpriteTile).CalcSizeInPixels().Y;
 		}
 		
 		/// <summary>
@@ -202,18 +207,29 @@ namespace Crystallography.UI
 			int i = 0;
 			foreach(HudPanel icon in IconSliders) {
 				icon.Visible = false;
+//				icon.RemoveChild(ColorIcon.Instance, false);
+				icon.RemoveAllChildren(false);
 			}
 			foreach ( string name in pNames ) {
-				var ix = (int?)EnumHelper.FromString<Crystallography.Icons>(name) ?? 0;
-				Icons[i].TileIndex1D = ix;
+				Node node;
+				if (name != "Color") {
+					// default sprite index to 0
+					var ix = (int?)EnumHelper.FromString<Crystallography.Icons>(name) ?? 0;
+					(Icons[i] as SpriteTile).TileIndex1D = ix;
+					node = Icons[i];
+				} else {
+//					Icons[i] = ColorIcon.Instance;
+					node = ColorIcon.Instance;
+				}
+				IconSliders[i].AddChild(node);
+				node.Position = new Vector2(0.0f, 544.0f/2.0f - iconHeight/2.0f );
 				QualityNames.Add( n = new Label() {
-					FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Regular")),
-					Text = name,
-//					Position = new Vector2( 0.0f, -20.0f )
+					FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Bold")),
+					Text = name
 				});
-				n.Position = new Vector2( 0.5f * (iconWidth - n.GetlContentLocalBounds().Size.X), -20.0f ); // CENTER TEXT UNDER ICON
-				n.RegisterPalette(i%3);
-				Icons[i].AddChild(n);
+				n.Position = new Vector2( 0.5f * (iconWidth - n.GetlContentLocalBounds().Size.X), -25.0f ); // CENTER TEXT UNDER ICON
+				n.Color = Support.ExtractColor("7F7E75");
+				node.AddChild(n);
 				i++;
 			}
 		}

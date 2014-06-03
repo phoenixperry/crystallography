@@ -109,6 +109,7 @@
     <Compile Include="ui\LevelTitleMkTwo.cs" />
     <Compile Include="QSymbol.cs" />
     <Compile Include="InfiniteModeEndPanel.cs" />
+    <Compile Include="ui\ColorIcon.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

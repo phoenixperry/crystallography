@@ -355,7 +355,12 @@ namespace Crystallography.UI
 			for ( int i=0; i < buttonCount; i++ ) {
 				int column = i%4;
 				int row = (i - column)/4;
-				bool complete = DataStorage.puzzleComplete[i + baseIndex];
+				float complete = 
+					DataStorage.puzzleComplete[i + baseIndex] ? 
+					1.0f : (float)DataStorage.puzzleSolutionsCount[i + baseIndex] / (float)LevelManager.Instance.GetPossibleSolutions(i + baseIndex);
+//				if (complete == false) {
+//					
+//				}
 #if UNLOCK_ALL
 				bool locked = false;
 #else
@@ -365,8 +370,9 @@ namespace Crystallography.UI
 					levelID = i + baseIndex,
 					Position = new Vector2(0.125f*Width + 0.25f*Width*column, Height - 0.167f*Height - 0.333f*Height*row)
 				};
-				if (complete) {
-					item.SetPalette((i+1)%3);
+				item.background.RegisterPalette((baseIndex + i)%3);
+				if (complete < 1.0f) {
+					item.background.Color = new Vector4(item.background.Color.R, item.background.Color.G, item.background.Color.B, 0.1f + 0.65f*complete);
 				}
 				Items.Add(item);
 				this.AddChild(item);
@@ -411,28 +417,23 @@ namespace Crystallography.UI
 		
 		// CONSTRUCTOR ----------------------------------------------------------------------------------------------------------------------------
 		
-		public LevelSelectItem(bool pComplete, bool pLocked) {
-			if (pComplete) {
-//				Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3).TextureInfo, new Vector2i(0,0));
+		public LevelSelectItem(float pComplete, bool pLocked) {
+			if (pComplete == 1.0f) {
 				background = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3);
+				
 			} else {
-//				Button = new ButtonEntity("", Director.Instance.CurrentScene, null, Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButtonDisabled.png", 1, 3).TextureInfo, new Vector2i(0,0));
 				background = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButtonDisabled.png", 1, 3);
 			}
 			background.CenterSprite();
 			var size = background.CalcSizeInPixels();
 			Initialize(size.X, size.Y);
 			_bounds = new Bounds2( new Vector2(-Width/2.0f, -Height/2.0f), new Vector2(Width/2.0f, Height/2.0f) );
-//			_bounds.Add( new Vector2(-Width/2.0f, -Height/2.0f) );
-//			Button.label.FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
-//			this.AddChild(Button.getNode());
 			locked = pLocked;
 			if (locked) {
 				var lockIcon = Support.SpriteFromFile("Application/assets/images/UI/lockIcon.png");
 				lockIcon.Position = new Vector2( 25.0f, -38.0f);
 				this.AddChild( lockIcon );
 			}
-//			Button.ButtonUpAction += HandleButtonButtonUpAction;
 			this.On(!locked);
 		}
 		
@@ -534,6 +535,7 @@ namespace Crystallography.UI
 		public LevelSelectIndicator() {
 			var img = Support.SpriteFromFile("Application/assets/images/UI/LevelSelectIndicator.png");
 			img.Position = -0.5f*img.CalcSizeInPixels();
+//			img.Position = new Vector2(img.Position.X, img.Position.Y + 1.0f);
 			AddChild(img);
 		}
 	}

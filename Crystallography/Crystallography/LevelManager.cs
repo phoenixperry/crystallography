@@ -252,8 +252,6 @@ namespace Crystallography
 			}
 		}
 
-		
-		
 		public void GetSolutions( int pLevelNumber ) {
 			PossibleSolutions = 0;
 			goalDict.Clear();
@@ -277,6 +275,25 @@ namespace Crystallography
 					}
 				}
 			}
+		}
+		
+		public int GetPossibleSolutions ( int pLevelNumber ) {
+			int s = 0;
+			var levels = from data
+				in doc.Elements("GameData")
+					select new { AllElements = data.Elements() };
+			foreach (var level in levels) {
+				foreach( XElement element in level.AllElements ) {
+					if ( (int)element.Attribute("Value") == pLevelNumber ) {
+						foreach (XElement line in element.Nodes()) {
+							if (line.Name.LocalName == "Goal" ) {
+								s++;
+							}
+						}
+					}
+				}
+			}
+			return s;
 		}
 		
 		public void ChangeDifficulty( int pDeltaDiff ) {
