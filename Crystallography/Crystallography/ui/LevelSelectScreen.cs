@@ -16,12 +16,15 @@ namespace Crystallography.UI
 		
 		Label LevelSelectTitleText;
 		Label LevelSelectInstructionsText;
+		Label PossibleSolutionsText;
 		Label LevelNumberText;
-		Label CompletionPercentageText;
+		Label QualitiesText;
+//		Label CompletionPercentageText;
 
 		SpriteTile BlackBlock1;
 		SpriteTile BlackBlock2;
-		SpriteTile[] Icons;
+		Node[] Icons;
+		Label[] IconLabels;
 		List<SolutionIcon> Solutions;
 		
 //		ButtonEntity BackButton;
@@ -35,6 +38,7 @@ namespace Crystallography.UI
 		
 		public LevelSelectScreen (MenuSystemScene pMenuSystem) {
 			SelectedLevel = 0;
+			var init = ColorIcon.Instance;
 			MenuSystem = pMenuSystem;
 			
 			var pages = FMath.Ceiling(GameScene.TOTAL_LEVELS / (float)LevelPage.ITEMS_PER_PAGE);
@@ -62,97 +66,123 @@ namespace Crystallography.UI
 			
 			// BLACK MASKS TO HIDE MORE LEVELS BEHIND
 			BlackBlock1 = Support.UnicolorSprite("white", 255,255,255,255);
-			BlackBlock1.Color = LevelManager.Instance.BackgroundColor;
-			BlackBlock1.Scale = new Vector2(28.5625f, 24.75f);
-			BlackBlock1.Position = new Vector2(588.0f, 46.0f);
+			BlackBlock1.Color = Support.ExtractColor("333330");
+			BlackBlock1.Scale = new Vector2(361.0f/16.0f, Director.Instance.GL.Context.Screen.Height/16.0f);
+			BlackBlock1.Position = new Vector2(Director.Instance.GL.Context.Screen.Width-361.0f, 46.0f);
 			this.AddChild(BlackBlock1);
 			BlackBlock2 = Support.UnicolorSprite("white", 255,255,255,255);
 			BlackBlock2.Color = LevelManager.Instance.BackgroundColor;
-			BlackBlock2.Position = new Vector2(-397.0f, 46.0f);
-			BlackBlock2.Scale = BlackBlock1.Scale;
+			BlackBlock2.Position = Vector2.Zero;
+			BlackBlock2.Scale = new Vector2(50.0f/16.0f, Director.Instance.GL.Context.Screen.Height/16.0f);
 			this.AddChild (BlackBlock2);
 			
 			LevelNumberText = new Label(){
-				Text = SelectedLevel.ToString("00"),
-				Position = new Vector2(638.0f, 390.0f),
-				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 102, "Bold") ),
-//				Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f)
+				Text = SelectedLevel.ToString(),
+				Position = new Vector2(Director.Instance.GL.Context.Screen.Width-328.0f, Director.Instance.GL.Context.Screen.Height-90.0f),
+				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 64, "Bold") ),
+				Color = LevelManager.Instance.BackgroundColor
 			};
-			CenterText(LevelNumberText);
+//			CenterText(LevelNumberText);
 			this.AddChild(LevelNumberText);
 			
-			CompletionPercentageText = new Label() {
-				Text = (1.0f).ToString("P0"),
-				Position = new Vector2(638.0f, 150.0f),
+			PossibleSolutionsText = new Label(){
+				Text = "possible solutions",
+				Position = new Vector2(Director.Instance.GL.Context.Screen.Width - 339.0f, Director.Instance.GL.Context.Screen.Height-120.0f),
 				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold") ),
-//				Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f)
+				Color = LevelManager.Instance.BackgroundColor
 			};
-			CenterText(CompletionPercentageText);
-			this.AddChild(CompletionPercentageText);
+			this.AddChild(PossibleSolutionsText);
 			
-			Icons = new SpriteTile[4];
+			Solutions = new List<SolutionIcon>(); //{
+//				new SolutionIcon(){
+//					CubeText = "99",
+//					ScoreText = "88"
+//				},
+//				new SolutionIcon(){
+//					CubeText = "99",
+//					ScoreText = "88"
+//				},
+//				new SolutionIcon(){
+//					CubeText = "99",
+//					ScoreText = "88"
+//				},
+//				new SolutionIcon(){
+//					CubeText = "99",
+//					ScoreText = "88"
+//				},
+//				new SolutionIcon(){
+//					CubeText = "99",
+//					ScoreText = "88"
+//				}
+//			};
+//			for( int i=0; i < Solutions.Count; i++) {
+//				Solutions[i].Visible = false;
+//				var column = i % 4;
+//				var row = ( i - column ) / 4;
+//				Solutions[i].Position = new Vector2(Director.Instance.GL.Context.Screen.Width - 339.0f + 60.0f * column,
+//				                                    Director.Instance.GL.Context.Screen.Height - 200.0f - row * 80.0f);
+//				this.AddChild(Solutions[i]);
+//			}
+			
+			QualitiesText = new Label() {
+				Text = "qualities",
+				Position = new Vector2(Director.Instance.GL.Context.Screen.Width - 339.0f, 223.0f),
+				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold") ),
+				Color = LevelManager.Instance.BackgroundColor
+			};
+			this.AddChild(QualitiesText);
+			
+//			CompletionPercentageText = new Label() {
+//				Text = (1.0f).ToString("P0"),
+//				Position = new Vector2(638.0f, 150.0f),
+//				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold") ),
+////				Color = new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f)
+//			};
+//			CenterText(CompletionPercentageText);
+//			this.AddChild(CompletionPercentageText);
+			
+			Icons = new Node[4];
+			IconLabels = new Label[4];
 			for( int i=0; i < Icons.Length; i++) {
 				Icons[i] = Support.TiledSpriteFromFile("/Application/assets/images/icons/icons.png", 4, 2);
-				Icons[i].Visible = false;
-				Icons[i].Position = new Vector2(638.0f + 68 * i, 340.0f);
+//				Icons[i].Visible = false;
+				Icons[i].Position = new Vector2(638.0f + 68 * i, 175.0f);
+				Icons[i].Scale = Vector2.One/2.0f;
+				IconLabels[i] = new Label() {
+					FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") ),
+					Color = LevelManager.Instance.BackgroundColor
+				};
 				this.AddChild(Icons[i]);
 			}
 			
-			Solutions = new List<SolutionIcon>() {
-				new SolutionIcon(){
-					CubeText = "99",
-					ScoreText = "88"
-				},
-				new SolutionIcon(){
-					CubeText = "99",
-					ScoreText = "88"
-				},
-				new SolutionIcon(){
-					CubeText = "99",
-					ScoreText = "88"
-				},
-				new SolutionIcon(){
-					CubeText = "99",
-					ScoreText = "88"
-				},
-				new SolutionIcon(){
-					CubeText = "99",
-					ScoreText = "88"
-				}
-			};
-			for( int i=0; i < Solutions.Count; i++) {
-				Solutions[i].Visible = false;
-				var column = i % 4;
-				var row = ( i - column ) / 4;
-				Solutions[i].Position = new Vector2(638.0f + 60.0f * column, 270.0f - row * 55);
-				this.AddChild(Solutions[i]);
-			}
 			
 			LevelSelectTitleText = new Label(){
-				Text="select a level",
+				Text="level select",
 				Position = new Vector2(60.0f, 488.0f),
-				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Regular") )
+				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Regular") ),
+				Color = Support.ExtractColor("333330")
 			};
 			this.AddChild(LevelSelectTitleText);
 			
 			LevelSelectInstructionsText = new Label(){
 				Text="select a cube and then press play.",
 				Position = new Vector2(60.0f, 465.0f),
-				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Regular") )
+				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Regular") ),
+				Color = Support.ExtractColor("333330")
 			};
 			this.AddChild(LevelSelectInstructionsText);
 			
-			BackButton = new BetterButton(369.0f, 64.0f) {
+			BackButton = new BetterButton(361.0f, 61.0f) {
 				Text = "back",
-				Position = new Vector2(591.0f, 74.0f),
+				Position = new Vector2(Director.Instance.GL.Context.Screen.Width-361.0f, 61.0f),
 //				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
 			BackButton.background.RegisterPalette(2);
 			this.AddChild(BackButton);
 			
-			PlayButton = new BetterButton(369.0f, 64.0f) {
+			PlayButton = new BetterButton(361.0f, 61.0f) {
 				Text = "play",
-				Position = new Vector2(591.0f, 0.0f),
+				Position = new Vector2(Director.Instance.GL.Context.Screen.Width-361.0f, 0.0f),
 //				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
 			};
 			PlayButton.background.RegisterPalette(1);
@@ -201,11 +231,16 @@ namespace Crystallography.UI
 			
 			// HACK THIS IS SUPER INEFFICIENT!!!!!!!!!!!!!
 			while( LevelManager.Instance.PossibleSolutions > Solutions.Count) {
-				Solutions.Add (
-					new SolutionIcon(){
+				var solution = new SolutionIcon(){
 					CubeText = "99",
 					ScoreText = "88",
-				});
+				};
+				var column = Solutions.Count % 5;
+				var row = ( Solutions.Count - column ) / 5;
+				solution.Position = new Vector2(Director.Instance.GL.Context.Screen.Width - 339.0f + 66.0f * column,
+				                                    Director.Instance.GL.Context.Screen.Height - 200.0f - row * 80.0f);
+				Solutions.Add (solution);
+				this.AddChild(solution);
 			}
 			foreach(SolutionIcon s in Solutions){
 				s.Visible = false;
@@ -219,7 +254,7 @@ namespace Crystallography.UI
 					Solutions[i].Color = Vector4.Zero;
 					foreach( var ps in previousSolutions) {
 						if ( ps[0] == cube && ps[1] == points ) {
-							Solutions[i].Color = QColor.palette[2]; //new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f);
+							Solutions[i].Color = QColor.palette[0]; //new Vector4( 0.16078431f, 0.88627451f, 0.88627451f, 1.0f);
 							break;
 						}
 					}
@@ -231,10 +266,10 @@ namespace Crystallography.UI
 				}
 			}
 			
-			CompletionPercentageText.Text = completion.ToString("P0") + " solved.";
-			LevelNumberText.Text = SelectedLevel.ToString("00");
-			CenterText(LevelNumberText);
-			CenterText(CompletionPercentageText);
+//			CompletionPercentageText.Text = completion.ToString("P0") + " solved.";
+			LevelNumberText.Text = SelectedLevel.ToString();
+//			CenterText(LevelNumberText);
+//			CenterText(CompletionPercentageText);
 			
 			
 			// HACK THIS IS ALL SUPER INEFFICIENT!!!!!!!
@@ -244,16 +279,35 @@ namespace Crystallography.UI
 			
 			var names = new string[4];
 			int j = 0;
-			foreach (SpriteBase icon in Icons) {
-				icon.Visible = false;
+			foreach (Node icon in Icons) {
+				this.RemoveChild(icon, false);
+			}
+			this.RemoveChild(ColorIcon.Instance, false);
+			foreach (Label label in IconLabels) {
+				if (label.Parent != null) {
+					label.Parent.RemoveChild(label, false);
+				}
 			}
 			foreach (string name in QualityManager.Instance.qualityDict.Keys) {
+				Node node;
 				if (name == "QOrientation") continue;
 				var variations = QualityManager.Instance.qualityDict[name];
 				if( variations[0] != null && variations[1] != null && variations[2] != null ) {
 					names[j] = name.Substring(1);
-					Icons[j].TileIndex1D = (int)EnumHelper.FromString<Crystallography.Icons>(names[j]);
-					Icons[j].Visible = true;
+					IconLabels[j].Text = names[j];
+					IconLabels[j].Position = new Vector2(0.5f*(120.0f - IconLabels[j].GetlContentLocalBounds().Size.X), -50.0f);
+					if(names[j] != "Color") {
+						(Icons[j] as SpriteTile).TileIndex1D = (int)EnumHelper.FromString<Crystallography.Icons>(names[j]);
+						(Icons[j] as SpriteTile).RegisterPalette(j%3);
+						node = Icons[j];
+					} else {
+						node = ColorIcon.Instance;
+					}
+//					node.Visible = true;
+					node.Position = new Vector2(638.0f + 68 * j, 175.0f);
+					node.Scale = Vector2.One/2.0f;
+					this.AddChild(node);
+					node.AddChild(IconLabels[j]);
 					j++;
 				}
 			}
@@ -287,6 +341,7 @@ namespace Crystallography.UI
 		
 		public override void OnExit ()
 		{
+//			ColorIcon.Destroy();
 			BackButton.UnregisterPalette();
 			PlayButton.UnregisterPalette();
 			LevelSelectItem.LevelSelectionDetected -= HandleLevelSelectItemLevelSelectionDetected;

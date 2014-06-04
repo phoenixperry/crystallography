@@ -307,6 +307,7 @@
     <Content Include="assets\images\set1\symbol.png" />
     <Content Include="assets\images\timerEnd.png" />
     <Content Include="assets\images\UI\BetterButtonTransparent.png" />
+    <Content Include="assets\images\UI\ratioIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

@@ -18,18 +18,19 @@ namespace Crystallography.UI
 		
 		// CONSTRUCTOR -------------------------------------------------------------------------
 		public SolutionIcon () : base() {
-			image = Support.SpriteFromFile("/Application/assets/images/UI/cubePoints.png");
+//			image = Support.SpriteFromFile("/Application/assets/images/UI/cubePoints.png");
+			image = Support.SpriteFromFile("/Application/assets/images/UI/ratioIcon.png");
 			AddChild(image);
 			
 			cubes = new Label(){
-				Position = new Vector2(26.0f, 33.0f),
+				Position = new Vector2(30.0f, 17.0f),
 				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 16, "Bold") )
 			};
 			cubes.Color = image.Color;
 			AddChild(cubes);
 			
 			score = new Label(){
-				Position = new Vector2(43.0f, 5.0f),
+				Position = new Vector2(30.0f, 53.0f),
 				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 16, "Bold") )
 			};
 			score.Color = image.Color;
