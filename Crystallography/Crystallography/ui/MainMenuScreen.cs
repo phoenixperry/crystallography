@@ -191,8 +191,8 @@ namespace Crystallography.UI
 //			Console.WriteLine("Level Select");
 			Console.WriteLine("New Game");
 #endif
-//			Director.Instance.ReplaceScene(new LoadingScene(0, false, "Level Select") );
-			Director.Instance.ReplaceScene(new LoadingScene(1, false) );
+			Director.Instance.ReplaceScene(new LoadingScene(0, false, "Level Select") );
+//			Director.Instance.ReplaceScene(new LoadingScene(1, false) );
 		}
 		
 		void HandleCreditsButtonButtonUpAction (object sender, EventArgs e) {

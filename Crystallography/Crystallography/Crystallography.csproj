@@ -110,6 +110,7 @@
     <Compile Include="QSymbol.cs" />
     <Compile Include="InfiniteModeEndPanel.cs" />
     <Compile Include="ui\ColorIcon.cs" />
+    <Compile Include="Tags.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -307,6 +308,7 @@
     <Content Include="assets\images\set1\symbol.png" />
     <Content Include="assets\images\timerEnd.png" />
     <Content Include="assets\images\UI\BetterButtonTransparent.png" />
+    <Content Include="assets\images\UI\ratioIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
