@@ -368,7 +368,7 @@ namespace Crystallography.UI
 		
 		public override void OnExit ()
 		{
-//			ColorIcon.Destroy();
+			ColorIcon.Destroy();
 			BackButton.UnregisterPalette();
 			PlayButton.UnregisterPalette();
 			LevelSelectItem.LevelSelectionDetected -= HandleLevelSelectItemLevelSelectionDetected;
