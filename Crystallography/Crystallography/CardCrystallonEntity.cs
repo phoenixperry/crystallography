@@ -13,9 +13,9 @@ namespace Crystallography
 		/// <summary>
 		/// Offsets used by different pieces to form a cube.
 		/// </summary>
-		static readonly Vector2[] POSITION_OFFSETS = { 	new Vector2(0f,29.0f*CARD_SCALAR),
-														new Vector2(-33.0f*CARD_SCALAR,-26.5f*CARD_SCALAR),
-														new Vector2(33.0f*CARD_SCALAR,-26.5f*CARD_SCALAR) };
+		static readonly Vector2[] POSITION_OFFSETS = { 	new Vector2(0.5f,37.5f*CARD_SCALAR),
+														new Vector2(-32.25f*CARD_SCALAR,-19.0f*CARD_SCALAR),
+														new Vector2(32.25f*CARD_SCALAR,-19.0f*CARD_SCALAR) };
 		public readonly static float DEFAULT_SPEED = 0.3f;
 		
 		protected SpriteTile _anim;
