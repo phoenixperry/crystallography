@@ -85,7 +85,7 @@ namespace Crystallography
 		
 		public CubeCrystallonEntity(Scene pScene, GamePhysics pGamePhysics, PhysicsShape pShape = null ) 
 																			: base( pScene, pGamePhysics, pShape, 3, true ) {
-			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
+//			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 		}
 			
 		// OVERRIDES -----------------------------------------------------------
@@ -102,7 +102,8 @@ namespace Crystallography
 		public override AbstractCrystallonEntity BeReleased( Vector2 pPosition ) {
 			GroupManager.Instance.Add( this );
 			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Cube], 0.1f, 0.01f, pPosition));
-			setVelocity(1.0f, GameScene.Random.NextAngle());
+			getBody().SetBodyStatic();
+//			setVelocity(0.0f, GameScene.Random.NextAngle());
 			
 			// SET UP SELF-DESTRUCT
 			Sequence sequence = new Sequence();
@@ -114,18 +115,30 @@ namespace Crystallography
 			
 			// FADE OUT SEQUENCE
 			sequence = new Sequence();
-			sequence.Add( new DelayTime( 0.8f ) );
+			sequence.Add( new DelayTime( 0.1f ) );
 			sequence.Add( new CallFunc( () => {
 				foreach( AbstractCrystallonEntity e in members ) {
 					if (e is CardCrystallonEntity) {
 						Console.WriteLine(e.id.ToString());
 						(e as CardCrystallonEntity).HideGlow();
 						(e as CardCrystallonEntity).Scored = true;
-						(e as CardCrystallonEntity).TintTo( Vector4.Zero, 0.5f, true);
+//						(e as CardCrystallonEntity).TintTo( Vector4.Zero, 0.5f, true);
 					}
 				}
 			}));
-			Director.Instance.CurrentScene.RunAction(sequence);
+			sequence.Add( new ScaleTo( Vector2.One * 1.3f, 0.2f ) {  Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(t,2.0f) } );
+			sequence.Add( new ScaleTo( Vector2.Zero, 0.8f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseIn(t,2.0f) } );
+//			Director.Instance.CurrentScene.RunAction(sequence);
+			getNode().RunAction(sequence);
+			
+			sequence = new Sequence();
+			sequence.Add( new DelayTime( 0.1f ) );
+			sequence.Add( new RotateBy( new Vector2(0.96593f, -0.25882f), 0.2f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseInOut(t,2.0f) } );
+			sequence.Add( new RotateBy( new Vector2(-1.0f, 0.0f), 0.4f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseIn(t,2.0f) } );
+			sequence.Add( new RotateBy( new Vector2(-1.0f, 0.0f), 0.2f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear(t) } );
+			sequence.Add( new RotateBy( new Vector2(-1.0f, 0.0f), 0.15f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear(t) } );
+			sequence.Add( new RotateBy( new Vector2(-1.0f, 0.0f), 0.05f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear(t) } );
+			getNode().RunAction(sequence);
 			
 			addToScene();
 			
@@ -207,6 +220,10 @@ namespace Crystallography
 				}
 			}
 			base.removeFromScene (doCleanup);
+		}
+		
+		new public void setVelocity(float pPixelsPerSecond, float pRadians = float.NaN) {
+			_body.Velocity = Vector2.Zero;
 		}
 		
 		// METHODS -------------------------------------------------------------
