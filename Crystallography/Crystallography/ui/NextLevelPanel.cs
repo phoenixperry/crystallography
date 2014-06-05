@@ -11,10 +11,14 @@ namespace Crystallography.UI
 		const float MESSAGE_SWAP_DELAY = 4.0f;
 		
 		SpriteTile Background;
+		SpriteTile DiagonalLine;
 		
-		Label MessageText;
+//		Label MessageText;
 //		Label PercentageText;
+		Label FoundSolutionsText;
 		Label PossibleSolutionsText;
+		Label OutOfText;
+		Label TotalSolutionsText;
 		
 //		ButtonEntity QuitButton;
 //		ButtonEntity LevelSelectButton;
@@ -30,15 +34,15 @@ namespace Crystallography.UI
 		protected float messageTimer;
 		protected int visibleSolutionIndex;
 		
-		public string Text {
-			get {
-				return MessageText.Text;
-			}
-			set {
-				MessageText.Text = value;
-				CenterText();
-			}
-		}
+//		public string Text {
+//			get {
+//				return MessageText.Text;
+//			}
+//			set {
+//				MessageText.Text = value;
+//				CenterText();
+//			}
+//		}
 		
 //		public float Percentage {
 //			get {
@@ -58,62 +62,108 @@ namespace Crystallography.UI
 		
 		public NextLevelPanel () {
 			DismissDelay = 0.0f;
-			Width = 448.0f;
+			Width = 458.0f;
 			
-			Background = Support.UnicolorSprite("Grey", 40, 40, 40, 200);
-			Background.Scale = new Vector2(28.0f, 15.0f);
+			Background = Support.UnicolorSprite("white", 255, 255, 255, 255);
+			Background.Scale = new Vector2(448.0f/16.0f, 128.0f/16.0f);
+			Background.RegisterPalette(0);
 			this.AddChild(Background);
 			
-			PossibleSolutionsText = new Label() {
-				Text = "all possible solutions:",
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold" ) ),
-				Position = new Vector2(40.0f, 180.0f)
-			};
-			PossibleSolutionsText.RegisterPalette(0);
-			this.AddChild( PossibleSolutionsText );
-			
-			MessageText = new Label() {
-				Text = "you clever thing.",
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold" ) ),
-			};
-			MessageText.RegisterPalette(0);
-			this.AddChild( MessageText );
 			
 			
-			QuitButton = new BetterButton(117.0f, 53.0f) {
-				Text = "quit",
+//			MessageText = new Label() {
+//				Text = "you clever thing.",
+//				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold" ) ),
+//			};
+//			MessageText.RegisterPalette(0);
+//			this.AddChild( MessageText );
+			
+			
+			NextLevelButton = new BetterButton(78.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {
+				Text = "next",
 				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
-				Position = new Vector2(0.0f, 0.0f),
-				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
-			};
-			QuitButton.background.RegisterPalette(2);
-			this.AddChild(QuitButton);
-			
-			LevelSelectButton = new BetterButton(176.0f, 53.0f) {
-				Text = "level select",
-				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
-				Position = new Vector2(QuitButton.Width + 4.0f , 0.0f),
-			};
-			LevelSelectButton.background.RegisterPalette(2);
-			this.AddChild(LevelSelectButton);
-			
-			NextLevelButton = new BetterButton(148.0f, 53.0f) {
-				Text = "next level",
-				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
-				IconOnLeft = false,
-				Icon = Support.SpriteFromFile("/Application/assets/images/UI/nextLevelIcon.png"),
-				IconAndTextOffset = new Vector2(2.0f, 0.0f),
-				TextOffset = new Vector2(-2.0f, 0.0f),
-				Position = new Vector2(QuitButton.Width + LevelSelectButton.Width + 8.0f, 0.0f),
+//				IconOnLeft = false,
+				Icon = Support.SpriteFromFile("/Application/assets/images/UI/arrow.png"),
+				IconAndTextOffset = new Vector2(22.0f, 10.0f),
+				TextOffset = new Vector2(-40.0f, -45.0f),
+				Position = new Vector2(Width - 108.0f, 0.0f),
 //				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
 			};
-			NextLevelButton.background.RegisterPalette(1);
+			NextLevelButton.background.RegisterPalette(0);
+			NextLevelButton.Icon.Color = LevelManager.Instance.BackgroundColor;
+			NextLevelButton.TextColor = LevelManager.Instance.BackgroundColor;
 			this.AddChild(NextLevelButton);
 			
-			var charHeight = MessageText.FontMap.CharPixelHeight;
-			Height = (charHeight * 5.0f) + QuitButton.Height;
-			MessageText.Position = new Vector2(40.0f, QuitButton.Height + 20 );
-			CenterText();
+			LevelSelectButton = new BetterButton(80.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {
+				Text = "select",
+				Icon = Support.SpriteFromFile("/Application/assets/images/UI/levels.png"),
+				IconAndTextOffset = new Vector2(30.0f, 10.0f),
+				TextOffset = new Vector2(-35.0f, -45.0f),
+				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
+				Position = new Vector2(Width - NextLevelButton.Width - 110.0f, 0.0f),
+			};
+			LevelSelectButton.background.RegisterPalette(0);
+			LevelSelectButton.Icon.Color = LevelManager.Instance.BackgroundColor;
+			LevelSelectButton.TextColor = LevelManager.Instance.BackgroundColor;
+			this.AddChild(LevelSelectButton);
+			
+			QuitButton = new BetterButton(94.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {
+				Text = "quit",
+				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
+				Icon = Support.SpriteFromFile("/Application/assets/images/UI/replay.png"),
+				IconAndTextOffset = new Vector2(22.0f, 10.0f),
+				TextOffset = new Vector2(-45.0f, -45.0f),
+				Position = new Vector2(Width - NextLevelButton.Width - LevelSelectButton.Width - 124.0f, 0.0f),
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			};
+			QuitButton.background.RegisterPalette(0);
+			QuitButton.Icon.Color = LevelManager.Instance.BackgroundColor;
+			QuitButton.TextColor = LevelManager.Instance.BackgroundColor;
+			this.AddChild(QuitButton);
+			
+			DiagonalLine = Support.SpriteFromFile("/Application/assets/images/UI/diagonalLine.png");
+			DiagonalLine.Position = new Vector2( QuitButton.Position.X - DiagonalLine.CalcSizeInPixels().X - 5.0f , 15.0f);
+			DiagonalLine.Color = LevelManager.Instance.BackgroundColor;
+			this.AddChild(DiagonalLine);
+			
+			PossibleSolutionsText = new Label() {
+				Text = "solutions\n  found",
+				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 14, "Bold" ) ),
+				Position = new Vector2(15.0f, 80.0f)
+			};
+//			PossibleSolutionsText.RegisterPalette(0);
+			PossibleSolutionsText.Color = LevelManager.Instance.BackgroundColor;
+			this.AddChild( PossibleSolutionsText );
+			
+			OutOfText = new Label() {
+				Text = "out of",
+				FontMap = PossibleSolutionsText.FontMap,
+				Position = new Vector2(60.0f, 40.0f)
+			};
+			OutOfText.Color = LevelManager.Instance.BackgroundColor;
+			this.AddChild( OutOfText );
+			
+			FoundSolutionsText = new Label() {
+				Text = "00",
+				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold" ) ),
+				Position = new Vector2(24.0f, 90.0f)
+			};
+			FoundSolutionsText.Color = LevelManager.Instance.BackgroundColor;
+			this.AddChild(FoundSolutionsText);
+			
+			TotalSolutionsText = new Label{
+				Text = "00",
+				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold" ) ),
+				Position = new Vector2(62.0f, 15.0f)
+			};
+			TotalSolutionsText.Color = LevelManager.Instance.BackgroundColor;
+			this.AddChild(TotalSolutionsText);
+			
+//			var charHeight = MessageText.FontMap.CharPixelHeight;
+//			Height = (charHeight * 5.0f) + QuitButton.Height;
+			Height = QuitButton.Height;
+//			MessageText.Position = new Vector2(40.0f, QuitButton.Height + 20 );
+//			CenterText();
 			
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
@@ -207,7 +257,7 @@ namespace Crystallography.UI
 			OnSlideInStart -= HandleOnSlideInStart;
 			
 			Background = null;
-			MessageText = null;
+//			MessageText = null;
 			PossibleSolutionsText = null;
 			QuitButton = null;
 			LevelSelectButton = null;
@@ -258,10 +308,14 @@ namespace Crystallography.UI
 				if (okToAdd) {
 					numFound++;
 				}
+				
+				FoundSolutionsText.Text = DataStorage.puzzleSolutionsFound[GameScene.currentLevel].Count.ToString();
+				TotalSolutionsText.Text = LevelManager.Instance.PossibleSolutions.ToString();
+				
 				this.Solutions = new SolutionIcon[LevelManager.Instance.PossibleSolutions];
 				this.Colors = new Vector4[LevelManager.Instance.PossibleSolutions + 1];
 				var completion = ((float)numFound / (float)LevelManager.Instance.PossibleSolutions);
-				PossibleSolutionsText.Text = "possible solutions (found " + numFound.ToString() + " of " + LevelManager.Instance.PossibleSolutions.ToString() + "):";
+//				PossibleSolutionsText.Text = "possible solutions (found " + numFound.ToString() + " of " + LevelManager.Instance.PossibleSolutions.ToString() + "):";
 //				Percentage = completion;
 				visibleSolutionIndex = 0;
 				this.Solutions[0] = new SolutionIcon() {
@@ -300,7 +354,7 @@ namespace Crystallography.UI
 					}
 				}
 			}
-			this.Text = "you clever thing.";
+//			this.Text = "you clever thing.";
 //			MessageText.Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f);
 		}
 		
@@ -349,10 +403,10 @@ namespace Crystallography.UI
 		}
 		
 		
-		protected void CenterText() {
-			var textWidth = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold").GetTextWidth(Text);
-			MessageText.Position = new Vector2(0.5f * (Width - textWidth), MessageText.Position.Y);
-		}
+//		protected void CenterText() {
+//			var textWidth = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold").GetTextWidth(Text);
+//			MessageText.Position = new Vector2(0.5f * (Width - textWidth), MessageText.Position.Y);
+//		}
 		
 		// DESTRUCTOR -------------------------------------------------------------------------------------------------------------
 #if DEBUG

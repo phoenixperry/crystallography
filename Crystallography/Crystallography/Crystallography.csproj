@@ -309,6 +309,10 @@
     <Content Include="assets\images\timerEnd.png" />
     <Content Include="assets\images\UI\BetterButtonTransparent.png" />
     <Content Include="assets\images\UI\ratioIcon.png" />
+    <Content Include="assets\images\UI\arrow.png" />
+    <Content Include="assets\images\UI\levels.png" />
+    <Content Include="assets\images\UI\replay.png" />
+    <Content Include="assets\images\UI\diagonalLine.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
