@@ -131,13 +131,15 @@ namespace Crystallography
 //			Director.Instance.CurrentScene.RunAction(sequence);
 			getNode().RunAction(sequence);
 			
+			float clockwise = GameScene.Random.NextBool() ? 1.0f : -1.0f;
+			
 			sequence = new Sequence();
 			sequence.Add( new DelayTime( 0.1f ) );
-			sequence.Add( new RotateBy( new Vector2(0.96593f, -0.25882f), 0.2f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseInOut(t,2.0f) } );
-			sequence.Add( new RotateBy( new Vector2(-1.0f, 0.0f), 0.4f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseIn(t,2.0f) } );
-			sequence.Add( new RotateBy( new Vector2(-1.0f, 0.0f), 0.2f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear(t) } );
-			sequence.Add( new RotateBy( new Vector2(-1.0f, 0.0f), 0.15f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear(t) } );
-			sequence.Add( new RotateBy( new Vector2(-1.0f, 0.0f), 0.05f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear(t) } );
+			sequence.Add( new RotateBy( new Vector2(0.96593f, -clockwise*0.25882f), 0.2f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseInOut(t,2.0f) } );
+			sequence.Add( new RotateBy( new Vector2(0.0f, clockwise*1.0f), 0.4f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseIn(t,2.0f) } );
+			sequence.Add( new RotateBy( new Vector2(0.0f, clockwise*1.0f), 0.2f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear(t) } );
+			sequence.Add( new RotateBy( new Vector2(0.0f, clockwise*1.0f), 0.15f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear(t) } );
+			sequence.Add( new RotateBy( new Vector2(0.0f, clockwise*1.0f), 0.05f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear(t) } );
 			getNode().RunAction(sequence);
 			
 			addToScene();

@@ -10,11 +10,14 @@ namespace Crystallography.UI
 	{
 		private static readonly Vector2 SingleDigitOffset = new Vector2(48.0f, 84.0f);
 		private static readonly Vector2 DoubleDigitOffset = new Vector2(51.0f, 84.0f);
-		private static readonly Font font = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25);
+//		private static readonly Vector2 SingleDigitOffset = new Vector2(48.0f, 0.0f);
+//		private static readonly Vector2 DoubleDigitOffset = new Vector2(51.0f, 0.0f);
+		private static readonly Font font = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36);
 		private static readonly FontMap map = Crystallography.UI.FontManager.Instance.GetMap( font );
 		
 		protected Node parent;
 		protected Vector2 offset;
+//		protected Label inside;
 		
 		
 		public ScorePopup (Node pParent, int pPoints) : base(pPoints.ToString(), map)
@@ -27,9 +30,20 @@ namespace Crystallography.UI
 			}
 //			velocity = Vector2.Zero;
 			Position = parent.LocalToWorld(parent.Position) + offset;
-			this.RegisterPalette(2);
+//			this.RegisterPalette(0);
+			Color = Support.ExtractColor("333330");
 			Pivot = new Vector2(0.5f, 0.5f);
-			HeightScale = 1.0f;
+//			HeightScale = 1.0f;
+			
+//			inside = new Label() {
+//				Text = pPoints.ToString(),
+//				FontMap = map,
+//				Pivot = Vector2.One/2.0f,
+////				Position = Vector2.One
+////				Scale = new Vector2(0.9f, 0.9f)
+//			};
+//			inside.Color = LevelManager.Instance.BackgroundColor;
+//			this.AddChild(inside);
 						
 			Sequence sequence = new Sequence();
 			sequence.Add( new DelayTime( 0.1f ) );
@@ -51,13 +65,16 @@ namespace Crystallography.UI
 			base.Update (dt);
 			Color.A -= dt/1.5f;
 			
-			if( parent != null) {
-				Position = parent.LocalToWorld(parent.Position) + offset;
-			} 
+//			if( parent != null) {
+//				Position = parent.LocalToWorld(parent.Position) + offset;
+//			} 
 //			else {
 //				Position += offset;
 //			}
-			HeightScale += 0.3f * (dt/1.5f);
+//			HeightScale += 0.3f * (dt/1.5f);
+			
+			Scale += Vector2.One * (dt/1.5f);
+
 			
 			if ( Color.A <= 0) {
 				Destroy();

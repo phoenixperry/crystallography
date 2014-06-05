@@ -36,11 +36,11 @@ namespace Crystallography.UI
 //		}
 		
 		public void ScoreIcons (CardCrystallonEntity pParent, Dictionary<string,int> pQualities) {
-			SpawnIcons (pParent, pQualities, Colors.White);
+//			SpawnIcons (pParent, pQualities, Colors.White);
 		}
 		
 		public void ScoreIcons (GroupCrystallonEntity pParent, Dictionary<string,int> pQualities) {
-			SpawnIcons (pParent.members[0], pQualities, Colors.White);
+//			SpawnIcons (pParent.members[0], pQualities, Colors.White);
 		}
 			
 		
