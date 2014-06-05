@@ -396,9 +396,9 @@ namespace Crystallography
 			GroupManager.Instance.GroupSpawned -= HandleGroupManagerInstanceGroupSpawned;
 			
 			AppMain.ORIENTATION_MATTERS = true;
-			Palette[0] = Support.ExtractColor("F70046");
-			Palette[1] = Support.ExtractColor("CC0686");
-			Palette[2] = Support.ExtractColor("790143");
+			Palette[0] = Support.ExtractColor("f29828");
+			Palette[1] = Support.ExtractColor("fc463a");
+			Palette[2] = Support.ExtractColor("a61885");
 			BackgroundColor = Support.ExtractColor("E5E3D1");
 			PatternPath = "Application/assets/images/set1/gamePieces.png";
 			SymbolPath = "Application/assets/images/set1/symbol.png";

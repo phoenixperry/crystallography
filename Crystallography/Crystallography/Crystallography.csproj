@@ -313,6 +313,8 @@
     <Content Include="assets\images\UI\levels.png" />
     <Content Include="assets\images\UI\replay.png" />
     <Content Include="assets\images\UI\diagonalLine.png" />
+    <Content Include="assets\images\UI\pause.png" />
+    <Content Include="assets\images\UI\plus.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

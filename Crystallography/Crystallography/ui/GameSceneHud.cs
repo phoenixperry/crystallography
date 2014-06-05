@@ -590,22 +590,26 @@ namespace Crystallography.UI
 			}
 			
 			PauseButton = new BetterButton("/Application/assets/images/UI/BetterButtonTransparent.png", 115.0f, 71.0f) {
-				Text = "| |",
+				Text = "",
+				Icon = Support.SpriteFromFile("Application/assets/images/UI/pause.png"),
 				Position = new Vector2(845.0f, 473.0f),
 			};
 			this.AddChild(PauseButton);
 			PauseButton.background.RegisterPalette(2);
-			PauseButton.ButtonLabel.RegisterPalette(2);
+			PauseButton.background.Scale = new Vector2(115.0f/16.0f, 71.0f/16.0f);
+			PauseButton.Icon.RegisterPalette(2);
 			PauseButton.ButtonUpAction += HandlePauseButtonButtonUpAction;
 			
 			HitMeButton = new BetterButton("/Application/assets/images/UI/BetterButtonTransparent.png", 115.0f, 71.0f) {
-				Text = "+",
+				Text = "",
+				Icon = Support.SpriteFromFile("Application/assets/images/UI/plus.png"),
 				Position = new Vector2(720.0f, 473.0f),
 			};
 			HitMeButton.On(!LevelManager.Instance.HitMeDisabled);
 			this.AddChild(HitMeButton);
 			HitMeButton.background.RegisterPalette(1);
-			HitMeButton.ButtonLabel.RegisterPalette(1);
+			HitMeButton.background.Scale = new Vector2(115.0f/16.0f, 71.0f/16.0f);
+			HitMeButton.Icon.RegisterPalette(1);
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
 			
 			_initialized = true;
