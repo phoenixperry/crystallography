@@ -41,120 +41,132 @@ namespace Crystallography.UI
 			var bgcolor = Director.Instance.GL.Context.GetClearColor();
 			bgcolor.A = 1.0f;
 			
-			MenuBGBottom = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_bottom.png");
-			MenuBGBottom.Position = new Vector2(351.0f, 32.0f);
-			MenuBGBottom.RegisterPalette(1);
-			this.AddChild(MenuBGBottom);
 			
-			MaskBGBottom = Support.UnicolorSprite("white", 255, 255, 255, 255);
-			MaskBGBottom.Color = bgcolor;
-			MaskBGBottom.Position = new Vector2(351.0f, 32.0f);
-			MaskBGBottom.Scale = new Vector2(16.0f, 4.9375f);
-			this.AddChild(MaskBGBottom);
+			
+			MenuBGTop = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_top.png");
+			MenuBGTop.Position = new Vector2(351.0f, 436.0f);
+			MenuBGTop.RegisterPalette(1);
+			
+			
+			MaskBGTop = Support.UnicolorSprite("white", 255, 255, 255, 255);
+			MaskBGTop.Color = bgcolor;
+			MaskBGTop.Position = MenuBGTop.Position.Xy;
+			MaskBGTop.Scale = new Vector2(16.0f, 4.875f);
+			
+			
+			NewGameButton = new BetterButton(256.0f, 64.0f) {
+				Text = "tutorial",
+				Position = new Vector2(94.0f, 372.0f),
+			};
+			NewGameButton.background.RegisterPalette(1);
+			
+			MaskBGButton1 = Support.UnicolorSprite("white", 255, 255, 255, 255);
+			MaskBGButton1.Color = bgcolor;
+			MaskBGButton1.Position = NewGameButton.Position.Xy;
+			MaskBGButton1.Scale = new Vector2(16.1f, 4.0f);
+			
+			
+			MenuBGSpacer1 = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_blue2.png");
+			MenuBGSpacer1.Position = new Vector2(351.0f, 285.0f);
+			MenuBGSpacer1.FlipU = true;
+			MenuBGSpacer1.RegisterPalette(2);
+			
+			MaskBGSpacer1 = Support.UnicolorSprite("white", 255, 255, 255, 255);
+			MaskBGSpacer1.Color = bgcolor;
+			MaskBGSpacer1.Position = MenuBGSpacer1.Position.Xy;
+			MaskBGSpacer1.Scale = new Vector2(16.2f, 9.4375f);
+			
+			
+			LevelSelectButton = new BetterButton(256.0f, 64.0f) {
+				Text = "puzzle mode",
+				Position = new Vector2(94.0f, 285.0f),
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			};
+			LevelSelectButton.background.RegisterPalette(2);
+			
+			MaskBGButton2 = Support.UnicolorSprite("white", 255, 255, 255, 255);
+			MaskBGButton2.Color = bgcolor;
+			MaskBGButton2.Position = LevelSelectButton.Position.Xy;
+			MaskBGButton2.Scale = new Vector2(16.1f, 4.0f);
+			
+			
+			MenuBGSpacer2 = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_red2.png");
+			MenuBGSpacer2.Position = new Vector2(351.0f, 198.0f);
+			MenuBGSpacer2.FlipU = true;
+			MenuBGSpacer2.RegisterPalette(1);
+			
+			MaskBGSpacer2 = Support.UnicolorSprite("white", 255, 255, 255, 255);
+			MaskBGSpacer2.Color = bgcolor;;
+			MaskBGSpacer2.Position = MenuBGSpacer2.Position.Xy;
+			MaskBGSpacer2.Scale = new Vector2(16.2f, 9.4375f);
+			
+			
+			InstructionsButton = new BetterButton(256.0f, 64.0f) {
+				Text = "challenge mode",
+				Position = new Vector2(94.0f, 198.0f),
+			};
+			InstructionsButton.background.RegisterPalette(1);
+			
+			MaskBGButton3 = Support.UnicolorSprite("white", 255, 255, 255, 255);
+			MaskBGButton3.Color = bgcolor;
+			MaskBGButton3.Position = InstructionsButton.Position.Xy;
+			MaskBGButton3.Scale = new Vector2(16.1f, 4.0f);
+			
 			
 			MenuBGSpacer3 = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_blue2.png");
 			MenuBGSpacer3.Position = new Vector2(351.0f, 111.0f);
 			MenuBGSpacer3.FlipU = true;
 			MenuBGSpacer3.RegisterPalette(2);
-			this.AddChild(MenuBGSpacer3);
 			
 			MaskBGSpacer3 = Support.UnicolorSprite("white", 255, 255, 255, 255);
 			MaskBGSpacer3.Color = bgcolor;
-			MaskBGSpacer3.Position = new Vector2(351.0f, 112.0f);
+			MaskBGSpacer3.Position = MenuBGSpacer3.Position.Xy;
 			MaskBGSpacer3.Scale = new Vector2(16.2f, 9.4375f);
-			this.AddChild(MaskBGSpacer3);
 			
-			MenuBGSpacer2 = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_red2.png");
-			MenuBGSpacer2.Position = new Vector2(351.0f, 192.0f);
-			MenuBGSpacer2.FlipU = true;
-			MenuBGSpacer2.RegisterPalette(1);
-			this.AddChild(MenuBGSpacer2);
-			
-			MaskBGSpacer2 = Support.UnicolorSprite("white", 255, 255, 255, 255);
-			MaskBGSpacer2.Color = bgcolor;;
-			MaskBGSpacer2.Position = new Vector2(351.0f, 194.0f);
-			MaskBGSpacer2.Scale = new Vector2(16.2f, 9.4375f);
-			this.AddChild(MaskBGSpacer2);
-			
-			MenuBGSpacer1 = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_blue2.png");
-			MenuBGSpacer1.Position = new Vector2(351.0f, 279.0f);
-			MenuBGSpacer1.FlipU = true;
-			MenuBGSpacer1.RegisterPalette(2);
-			this.AddChild(MenuBGSpacer1);
-			
-			MaskBGSpacer1 = Support.UnicolorSprite("white", 255, 255, 255, 255);
-			MaskBGSpacer1.Color = bgcolor;
-			MaskBGSpacer1.Position = new Vector2(351.0f, 281.0f);
-			MaskBGSpacer1.Scale = new Vector2(16.2f, 9.4375f);
-			this.AddChild(MaskBGSpacer1);
-			
-			MenuBGTop = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_top.png");
-			MenuBGTop.Position = new Vector2(351.0f, 423.0f);
-			MenuBGTop.RegisterPalette(1);
-			this.AddChild(MenuBGTop);
-			
-			MaskBGTop = Support.UnicolorSprite("white", 255, 255, 255, 255);
-			MaskBGTop.Color = bgcolor;
-			MaskBGTop.Position = new Vector2(351.0f, 423.0f);
-			MaskBGTop.Scale = new Vector2(16.0f, 4.875f);
-			this.AddChild(MaskBGTop);
-			
-			
-			NewGameButton = new BetterButton(256.0f, 64.0f) {
-				Text = "tutorial",
-				Position = new Vector2(94.0f, 365.0f),
-//				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f),
-			};
-			NewGameButton.background.RegisterPalette(1);
-			this.AddChild(NewGameButton);
-			
-			LevelSelectButton = new BetterButton(256.0f, 64.0f) {
-				Text = "puzzle mode",
-				Position = new Vector2(94.0f, 281.0f),
-//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
-			};
-			LevelSelectButton.background.RegisterPalette(2);
-			this.AddChild(LevelSelectButton);
-			
-			InstructionsButton = new BetterButton(256.0f, 64.0f) {
-				Text = "challenge mode",
-				Position = new Vector2(94.0f, 197.0f),
-//				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
-			};
-			InstructionsButton.background.RegisterPalette(1);
-			this.AddChild(InstructionsButton);
 			
 			CreditsButton = new BetterButton(256.0f, 64.0f) {
 				Text = "options",
-				Position = new Vector2(94.0f, 112.0f),
+				Position = new Vector2(94.0f, 111.0f),
 //				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
 			CreditsButton.background.RegisterPalette(2);
-			this.AddChild(CreditsButton);
-			
-			MaskBGButton1 = Support.UnicolorSprite("white", 255, 255, 255, 255);
-			MaskBGButton1.Color = bgcolor;
-			MaskBGButton1.Position = new Vector2(94.0f, 365.0f);
-			MaskBGButton1.Scale = new Vector2(16.1f, 4.0f);
-			this.AddChild(MaskBGButton1);
-			
-			MaskBGButton2 = Support.UnicolorSprite("white", 255, 255, 255, 255);
-			MaskBGButton2.Color = bgcolor;
-			MaskBGButton2.Position = new Vector2(94.0f, 281.0f);
-			MaskBGButton2.Scale = new Vector2(16.1f, 4.0f);
-			this.AddChild(MaskBGButton2);
-			
-			MaskBGButton3 = Support.UnicolorSprite("white", 255, 255, 255, 255);
-			MaskBGButton3.Color = bgcolor;
-			MaskBGButton3.Position = new Vector2(94.0f, 197.0f);
-			MaskBGButton3.Scale = new Vector2(16.1f, 4.0f);
-			this.AddChild(MaskBGButton3);
 			
 			MaskBGButton4 = Support.UnicolorSprite("white", 255, 255, 255, 255);
 			MaskBGButton4.Color = bgcolor;
-			MaskBGButton4.Position = new Vector2(94.0f, 112.0f);
+			MaskBGButton4.Position = CreditsButton.Position.Xy;
 			MaskBGButton4.Scale = new Vector2(16.1f, 4.0f);
+			
+			
+			MenuBGBottom = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_bottom.png");
+			MenuBGBottom.Position = new Vector2(351.0f, 32.0f);
+			MenuBGBottom.RegisterPalette(1);
+			
+			MaskBGBottom = Support.UnicolorSprite("white", 255, 255, 255, 255);
+			MaskBGBottom.Color = bgcolor;
+			MaskBGBottom.Position = MenuBGBottom.Position.Xy;
+			MaskBGBottom.Scale = new Vector2(16.0f, 4.9375f);
+			
+			
+			
+			this.AddChild(MenuBGBottom);
+			this.AddChild(MaskBGBottom);
+			this.AddChild(MenuBGSpacer3);
+			this.AddChild(MaskBGSpacer3);
+			this.AddChild(MenuBGSpacer2);
+			this.AddChild(MaskBGSpacer2);
+			this.AddChild(MenuBGSpacer1);
+			this.AddChild(MaskBGSpacer1);
+			this.AddChild(MenuBGTop);
+			this.AddChild(MaskBGTop);
+			this.AddChild(NewGameButton);
+			this.AddChild(LevelSelectButton);
+			this.AddChild(InstructionsButton);
+			this.AddChild(CreditsButton);
+			this.AddChild(MaskBGButton1);
+			this.AddChild(MaskBGButton2);
+			this.AddChild(MaskBGButton3);
 			this.AddChild(MaskBGButton4);
+			
 			
 #if METRICS
 			HoldTimer = 0.0f;
