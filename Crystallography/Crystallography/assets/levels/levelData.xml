@@ -1,6 +1,6 @@
 <GameData>
 	<Level Value="0">
-		<Color LightHex="f29828" MidHex="fc463a" DarkHex="a61885" />
+		<Color LightHex="35ca37" MidHex="24b197" DarkHex="257899" />
 		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
 		<Pattern Path="Application/assets/images/set4/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
@@ -18,7 +18,7 @@
 		<Event Type="CubesEqual" Value="1" Action="SetPatternPath" Args="Application/assets/images/set1/gamePieces.png" />
 		<Event Type="CubesEqual" Value="1" Action="AddScoringQuality" Args="QColor" />
 		<Event Type="CubesEqual" Value="1" Action="SetBonus" Args="0" />
-		<Event Type="CubesEqual" Value="1" Action="UpdateMessagePanel" Args="3 of a kind.;;pieces can have 'qualities.'&#xA;'color' is just such a quality. red in this case.;;0.0;;0.0" />
+		<Event Type="CubesEqual" Value="1" Action="UpdateMessagePanel" Args="3 of a kind.;;pieces can have 'qualities.'&#xA;'color' is just such a quality. teal in this case.;;0.0;;0.0" />
 		<Event Type="CubesEqual" Value="2" Action="UpdateMessagePanel" Args="3 all unique.;;you can also form a cube when a quality is all-different.&#xA;3 different colors means 3 points.;;0.0;;0.0" />
 		<Event Type="CubesEqual" Value="3" Action="AddScoringQuality" Args="QPattern" />
 		<Event Type="CubesEqual" Value="3" Action="RemoveScoringQuality" Args="QColor" />

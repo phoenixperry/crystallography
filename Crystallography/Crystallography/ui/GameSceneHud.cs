@@ -360,9 +360,10 @@ namespace Crystallography.UI
 				(_nextLevelPanel as InfiniteModeEndPanel).RetryDetected += HandlePausePanelResetButtonPressDetected;
 				(_nextLevelPanel as InfiniteModeEndPanel).QuitDetected += Handle_nextLevelPanelQuitButtonPressDetected;
 			} else {
-			(_nextLevelPanel as NextLevelPanel).NextLevelDetected += Handle_nextLevelPanelButtonButtonUpAction;
-			(_nextLevelPanel as NextLevelPanel).QuitDetected += Handle_nextLevelPanelQuitButtonPressDetected;
-			(_nextLevelPanel as NextLevelPanel).LevelSelectDetected += Handle_nextLevelPanelLevelSelectDetected;
+				(_nextLevelPanel as NextLevelPanel).ReplayDetected += HandlePausePanelResetButtonPressDetected;
+				(_nextLevelPanel as NextLevelPanel).NextLevelDetected += Handle_nextLevelPanelButtonButtonUpAction;
+				(_nextLevelPanel as NextLevelPanel).QuitDetected += Handle_nextLevelPanelQuitButtonPressDetected;
+				(_nextLevelPanel as NextLevelPanel).LevelSelectDetected += Handle_nextLevelPanelLevelSelectDetected;
 			}
 #if METRICS
 			DataStorage.AddMetric( "Goal", () => Goal, MetricSort.LAST );
@@ -396,9 +397,10 @@ namespace Crystallography.UI
 				(_nextLevelPanel as InfiniteModeEndPanel).RetryDetected -= HandlePausePanelResetButtonPressDetected;
 				(_nextLevelPanel as InfiniteModeEndPanel).QuitDetected -= Handle_nextLevelPanelQuitButtonPressDetected;
 			} else {
+				(_nextLevelPanel as NextLevelPanel).ReplayDetected -= HandlePausePanelResetButtonPressDetected;
 				(_nextLevelPanel as NextLevelPanel).NextLevelDetected -= Handle_nextLevelPanelButtonButtonUpAction;
-			(_nextLevelPanel as NextLevelPanel).QuitDetected -= Handle_nextLevelPanelQuitButtonPressDetected;
-			(_nextLevelPanel as NextLevelPanel).LevelSelectDetected -= Handle_nextLevelPanelLevelSelectDetected;
+				(_nextLevelPanel as NextLevelPanel).QuitDetected -= Handle_nextLevelPanelQuitButtonPressDetected;
+				(_nextLevelPanel as NextLevelPanel).LevelSelectDetected -= Handle_nextLevelPanelLevelSelectDetected;
 			}
 			
 			_nextLevelPanel = null;
@@ -503,7 +505,7 @@ namespace Crystallography.UI
 			
 			if (GameScene.currentLevel == 999) {
 				_nextLevelPanel = new InfiniteModeEndPanel(){
-					Offset = new Vector2(510.0f, 0.0f),
+					Offset = new Vector2(Director.Instance.GL.Context.Screen.Width-248.0f, 0.0f),
 					
 				};
 			} else {

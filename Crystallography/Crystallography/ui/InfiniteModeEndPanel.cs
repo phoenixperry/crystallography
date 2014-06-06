@@ -16,7 +16,7 @@ namespace Crystallography.UI
 		Label PossibleSolutionsText;
 		
 		BetterButton QuitButton;
-		BetterButton RetryButton;
+		BetterButton ReplayButton;
 		
 		public SolutionIcon[] Solutions;
 		public Vector4[] Colors;
@@ -42,49 +42,64 @@ namespace Crystallography.UI
 		
 		public InfiniteModeEndPanel () {
 			DismissDelay = 0.0f;
-			Width = 448.0f;
+			Width = 248.0f;
 			
-			Background = Support.UnicolorSprite("Grey", 40, 40, 40, 200);
-			Background.Scale = new Vector2(28.0f, 15.0f);
+			Background = Support.UnicolorSprite("white", 255, 255, 255, 255);
+			Background.Scale = new Vector2(Width/16.0f, 128.0f/16.0f);
+			Background.RegisterPalette(0);
 			this.AddChild(Background);
 			
-			PossibleSolutionsText = new Label() {
-				Text = "all possible solutions:",
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold" ) ),
-				Position = new Vector2(40.0f, 180.0f)
-			};
-			PossibleSolutionsText.RegisterPalette(0);
-			this.AddChild( PossibleSolutionsText );
+//			PossibleSolutionsText = new Label() {
+//				Text = "all possible solutions:",
+//				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold" ) ),
+//				Position = new Vector2(40.0f, 180.0f)
+//			};
+//			PossibleSolutionsText.RegisterPalette(0);
+//			this.AddChild( PossibleSolutionsText );
 			
-			MessageText = new Label() {
-				Text = "you clever thing.",
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold" ) ),
-			};
-			MessageText.RegisterPalette(0);
-			this.AddChild( MessageText );
+//			MessageText = new Label() {
+//				Text = "you clever thing.",
+//				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold" ) ),
+//			};
+//			MessageText.RegisterPalette(0);
+//			this.AddChild( MessageText );
 			
-			
-			QuitButton = new BetterButton(117.0f, 53.0f) {
-				Text = "quit",
+			ReplayButton = new BetterButton(94.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {
+				Text = "replay",
 				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
-				Position = new Vector2(0.0f, 0.0f),
-				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+				Icon = Support.SpriteFromFile("/Application/assets/images/UI/replay.png"),
+				IconAndTextOffset = new Vector2(32.0f, 10.0f),
+				TextOffset = new Vector2(-45.0f, -45.0f),
+				Position = new Vector2(Width - 124.0f, 0.0f),
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
-			QuitButton.background.RegisterPalette(2);
+			ReplayButton.background.RegisterPalette(0);
+			ReplayButton.Icon.Color = LevelManager.Instance.BackgroundColor;
+			ReplayButton.TextColor = LevelManager.Instance.BackgroundColor;
+			this.AddChild(ReplayButton);
+			
+			
+			QuitButton = new BetterButton(94.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {
+				Text = "menu",
+				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
+				Icon = Support.SpriteFromFile("/Application/assets/images/UI/arrow.png"),
+				IconAndTextOffset = new Vector2(32.0f, 80.0f),
+				TextOffset = new Vector2(-38.0f, -45.0f),
+				Position = new Vector2(Width - ReplayButton.Width - 124.0f, 0.0f),
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			};
+			QuitButton.background.RegisterPalette(0);
+			QuitButton.Icon.Color = LevelManager.Instance.BackgroundColor;
+			QuitButton.Icon.Rotation = new Vector2(0.0f, -1.0f);
+			QuitButton.TextColor = LevelManager.Instance.BackgroundColor;
 			this.AddChild(QuitButton);
 			
-			RetryButton = new BetterButton(176.0f, 53.0f) {
-				Text = "try again",
-				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
-				Position = new Vector2(QuitButton.Width + 4.0f , 0.0f),
-			};
-			RetryButton.background.RegisterPalette(2);
-			this.AddChild(RetryButton);
+			Height = QuitButton.Height;
 			
-			var charHeight = MessageText.FontMap.CharPixelHeight;
-			Height = (charHeight * 5.0f) + QuitButton.Height;
-			MessageText.Position = new Vector2(40.0f, QuitButton.Height + 20 );
-			CenterText();
+//			var charHeight = MessageText.FontMap.CharPixelHeight;
+//			Height = (charHeight * 5.0f) + QuitButton.Height;
+//			MessageText.Position = new Vector2(40.0f, QuitButton.Height + 20 );
+//			CenterText();
 			
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
@@ -104,9 +119,9 @@ namespace Crystallography.UI
 		
 		void HandleOnSlideInStart (object sender, EventArgs e)
 		{
-			RetryButton.On(true);
+			ReplayButton.On(true);
 			QuitButton.On(true);
-			RetryButton.ButtonUpAction += HandleRetryButtonButtonUpAction;
+			ReplayButton.ButtonUpAction += HandleReplayButtonButtonUpAction;
 			QuitButton.ButtonUpAction += HandleQuitButtonButtonUpAction;
 		}
 		
@@ -118,11 +133,11 @@ namespace Crystallography.UI
 		void HandleOnSlideOutStart (object sender, EventArgs e)
 		{
 //			this.Unschedule(SwapMessage);
-			RetryButton.ButtonUpAction -= HandleRetryButtonButtonUpAction;
+			ReplayButton.ButtonUpAction -= HandleReplayButtonButtonUpAction;
 			QuitButton.ButtonUpAction -= HandleQuitButtonButtonUpAction;
 		}
 		
-		void HandleRetryButtonButtonUpAction (object sender, EventArgs e)
+		void HandleReplayButtonButtonUpAction (object sender, EventArgs e)
 		{
 			EventHandler handler = RetryDetected;
 			if (handler != null ) {
@@ -152,7 +167,7 @@ namespace Crystallography.UI
 
 		public override void OnExit ()
 		{
-			RetryButton.ButtonUpAction -= HandleRetryButtonButtonUpAction;
+			ReplayButton.ButtonUpAction -= HandleReplayButtonButtonUpAction;
 			QuitButton.ButtonUpAction -= HandleQuitButtonButtonUpAction;
 			OnSlideInComplete -= HandleOnSlideInComplete;
 			OnSlideOutComplete -= HandleOnSlideOutComplete;
@@ -163,7 +178,7 @@ namespace Crystallography.UI
 			MessageText = null;
 			PossibleSolutionsText = null;
 			QuitButton = null;
-			RetryButton = null;
+			ReplayButton = null;
 			
 			CleanUpSolutions();
 			
@@ -178,7 +193,7 @@ namespace Crystallography.UI
 		
 		public void Populate( int pCubes, int pScore) {
 			PossibleSolutionsText.Text = "";
-			this.Text = "you clever thing.";
+//			this.Text = "you clever thing.";
 //			MessageText.Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f);
 		}
 		

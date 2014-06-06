@@ -20,11 +20,8 @@ namespace Crystallography.UI
 		Label OutOfText;
 		Label TotalSolutionsText;
 		
-//		ButtonEntity QuitButton;
-//		ButtonEntity LevelSelectButton;
-//		ButtonEntity NextLevelButton;
-		
 		BetterButton QuitButton;
+		BetterButton ReplayButton;
 		BetterButton LevelSelectButton;
 		BetterButton NextLevelButton;
 		
@@ -54,6 +51,7 @@ namespace Crystallography.UI
 //		}
 		
 		public event EventHandler QuitDetected;
+		public event EventHandler ReplayDetected;
 		public event EventHandler LevelSelectDetected;
 		public event EventHandler NextLevelDetected;
 		
@@ -109,7 +107,7 @@ namespace Crystallography.UI
 			LevelSelectButton.TextColor = LevelManager.Instance.BackgroundColor;
 			this.AddChild(LevelSelectButton);
 			
-			QuitButton = new BetterButton(94.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {
+			ReplayButton = new BetterButton(94.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {
 				Text = "replay",
 				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
 				Icon = Support.SpriteFromFile("/Application/assets/images/UI/replay.png"),
@@ -118,10 +116,31 @@ namespace Crystallography.UI
 				Position = new Vector2(Width - NextLevelButton.Width - LevelSelectButton.Width - 124.0f, 0.0f),
 //				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
 			};
+			ReplayButton.background.RegisterPalette(0);
+			ReplayButton.Icon.Color = LevelManager.Instance.BackgroundColor;
+			ReplayButton.TextColor = LevelManager.Instance.BackgroundColor;
+//			this.AddChild(ReplayButton);
+			
+			QuitButton = new BetterButton(94.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {
+				Text = "menu",
+				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
+				Icon = Support.SpriteFromFile("/Application/assets/images/UI/arrow.png"),
+				IconAndTextOffset = new Vector2(32.0f, 80.0f),
+				TextOffset = new Vector2(-38.0f, -45.0f),
+				Position = new Vector2(Width - NextLevelButton.Width - LevelSelectButton.Width - 124.0f, 0.0f),
+//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			};
 			QuitButton.background.RegisterPalette(0);
 			QuitButton.Icon.Color = LevelManager.Instance.BackgroundColor;
+			QuitButton.Icon.Rotation = new Vector2(0.0f, -1.0f);
 			QuitButton.TextColor = LevelManager.Instance.BackgroundColor;
-			this.AddChild(QuitButton);
+//			this.AddChild(QuitButton);
+			
+			if(GameScene.currentLevel != 0) {
+				this.AddChild(ReplayButton);
+			} else {
+				this.AddChild(QuitButton);
+			}
 			
 			DiagonalLine = Support.SpriteFromFile("/Application/assets/images/UI/diagonalLine.png");
 			DiagonalLine.Position = new Vector2( QuitButton.Position.X - DiagonalLine.CalcSizeInPixels().X - 5.0f , 15.0f);
@@ -198,6 +217,15 @@ namespace Crystallography.UI
 				}
 			}
 			QuitButton.ButtonUpAction += HandleQuitButtonButtonUpAction;
+			ReplayButton.ButtonUpAction += HandleReplayButtonButtonUpAction;
+		}
+
+		void HandleReplayButtonButtonUpAction (object sender, EventArgs e)
+		{
+			EventHandler handler = ReplayDetected;
+			if (handler != null) {
+				handler(this, null);
+			}
 		}
 		
 		void HandleOnSlideOutComplete (object sender, EventArgs e)
@@ -210,6 +238,7 @@ namespace Crystallography.UI
 			this.Unschedule(SwapMessage);
 			NextLevelButton.ButtonUpAction -= HandleNextLevelButtonButtonUpAction;
 			LevelSelectButton.ButtonUpAction -= HandleLevelSelectButtonButtonUpAction;
+			ReplayButton.ButtonUpAction -= HandleReplayButtonButtonUpAction;
 			QuitButton.ButtonUpAction -= HandleQuitButtonButtonUpAction;
 		}
 		
@@ -253,6 +282,7 @@ namespace Crystallography.UI
 		{
 			NextLevelButton.ButtonUpAction -= HandleNextLevelButtonButtonUpAction;
 			LevelSelectButton.ButtonUpAction -= HandleLevelSelectButtonButtonUpAction;
+			ReplayButton.ButtonUpAction -= HandleReplayButtonButtonUpAction;
 			QuitButton.ButtonUpAction -= HandleQuitButtonButtonUpAction;
 			OnSlideInComplete -= HandleOnSlideInComplete;
 			OnSlideOutStart -= HandleOnSlideOutStart;
@@ -311,8 +341,6 @@ namespace Crystallography.UI
 					numFound++;
 				}
 				
-				FoundSolutionsText.Text = DataStorage.puzzleSolutionsFound[GameScene.currentLevel].Count.ToString();
-				TotalSolutionsText.Text = LevelManager.Instance.PossibleSolutions.ToString();
 				
 				this.Solutions = new SolutionIcon[LevelManager.Instance.PossibleSolutions];
 				this.Colors = new Vector4[LevelManager.Instance.PossibleSolutions + 1];
@@ -355,6 +383,8 @@ namespace Crystallography.UI
 						}
 					}
 				}
+				FoundSolutionsText.Text = numFound.ToString();
+				TotalSolutionsText.Text = LevelManager.Instance.PossibleSolutions.ToString();
 			}
 //			this.Text = "you clever thing.";
 //			MessageText.Color = new Vector4(0.161f, 0.886f, 0.886f, 1.0f);
