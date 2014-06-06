@@ -122,6 +122,10 @@ namespace Crystallography.UI
 			sequence.Add( new DelayTime( 0.5f * ICON_MOVE_DURATION ) );
 			sequence.Add ( new CallFunc ( () => {
 				base.SlideOut ();
+				foreach ( Label l in QualityNames) {
+					l.Parent.RemoveChild(l, true);
+				}
+				QualityNames.Clear();
 			}));
 			Director.Instance.CurrentScene.RunAction(sequence);
 		}
@@ -199,10 +203,7 @@ namespace Crystallography.UI
 		/// P names.
 		/// </param>
 		public void SetQualityNames( string[] pNames ) {
-			foreach ( Label l in QualityNames) {
-				l.Parent.RemoveChild(l, true);
-			}
-			QualityNames.Clear();
+			
 			Label n;
 			int i = 0;
 			foreach(HudPanel icon in IconSliders) {

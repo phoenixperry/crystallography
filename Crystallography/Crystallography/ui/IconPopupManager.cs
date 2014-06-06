@@ -10,7 +10,8 @@ namespace Crystallography.UI
 	public class IconPopupManager
 	{
 		protected static IconPopupManager _instance;
-		protected SpriteTile icon;
+		protected Node icon;
+		protected Vector2 iconSize;
 		
 		public static IconPopupManager Instance {
 			get {
@@ -25,7 +26,8 @@ namespace Crystallography.UI
 		}
 		
 		protected IconPopupManager () {
-			icon = Support.SpriteFromFile("/Application/assets/images/icons/thumb.png");
+			icon = Support.SpriteFromFile("/Application/assets/images/icons/icons.png");
+			iconSize = (icon as SpriteTile).CalcSizeInPixels();
 //			icon.Pivot = Vector2.One;
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
@@ -48,37 +50,62 @@ namespace Crystallography.UI
 			
 		
 		public void FailedIcons (ICrystallonEntity pParent, Dictionary<string,int> pQualities) {
-//			SpawnIcons (pParent, pQualities, Colors.Pink);
+			SpawnIcons (pParent, pQualities, Colors.Pink);
 		}
 		
 		
 		
 		protected void SpawnIcons (ICrystallonEntity pParent, Dictionary<string,int> pQualities, Vector4 pColor) {
-			Console.WriteLine(pParent.Parent.Parent.ToString());
-			icon.Position = pParent.Parent.Parent.Position.Xy - icon.CalcSizeInPixels();
-			icon.Color = Colors.Red.Xyz0;
-			GameScene.Layers[2].AddChild(icon);
+//			Console.WriteLine(pParent.Parent.Parent.ToString());
+			
+//			icon.Color = Colors.Red.Xyz0;
+			
+			icon = null;
+			
 			Sequence sequence = new Sequence();
-			sequence.Add(new CallFunc( () => { icon.RunAction(new TintTo( Colors.Red, 0.3f )); } ));
-			sequence.Add (new DelayTime(1.0f));
 			
 			foreach( string key in pQualities.Keys) {
+				if (icon != null) {
+					continue;
+				}
 				if(key=="Orientation") {
 					continue;
 				}
 				switch(key){
 				case("Color"):
+//					sequence.Add( new CallFunc( () => {
+						icon = ColorIcon.Instance;
+//					}));
+//					sequence.Add( new DelayTime(1.0f));
+					break;
 				default:
-					sequence.Add( new CallFunc( () => {
-						icon.TextureInfo = Support.SpriteFromFile("/Application/assets/images/icons/icons.png").TextureInfo;
-						icon.Color = Colors.White;
-						icon.TileIndex1D = (int)EnumHelper.FromString<Crystallography.Icons>(key);
-					}));
-					sequence.Add( new DelayTime(1.0f));
+					int ix = (int)EnumHelper.FromString<Crystallography.Icons>(key);
+					icon = Support.TiledSpriteFromFile("/Application/assets/images/icons/icons.png", 4, 2 );
+					(icon as SpriteTile).TileIndex1D = ix;
+					(icon as SpriteBase).RegisterPalette((int)FMath.Floor(GameScene.Random.NextFloat()*3));
+//					sequence.Add(new CallFunc( () => { icon.RunAction(new TintTo( Colors.Red, 0.3f )); } ));
 					break;
 				}
-				sequence.Add( new DelayTime(1.0f));
 			}
+			
+			icon.Position = pParent.Parent.Parent.Position.Xy - iconSize/2.0f;
+			if(icon.Parent != null){
+				icon.Parent.RemoveChild(icon, false);
+			}
+			GameScene.Layers[2].AddChild(icon);
+			
+			sequence.Add( new DelayTime(0.1f));
+			sequence.Add( new CallFunc( () => {icon.Visible = false;}));
+			sequence.Add (new DelayTime(0.05f));
+			sequence.Add( new CallFunc( () => {icon.Visible = true;}));
+			sequence.Add( new DelayTime(0.1f));
+			sequence.Add( new CallFunc( () => {icon.Visible = false;}));
+			sequence.Add (new DelayTime(0.05f));
+			sequence.Add( new CallFunc( () => {icon.Visible = true;}));
+			sequence.Add( new DelayTime(0.75f));
+			sequence.Add( new CallFunc( () => {icon.Visible = false;}));
+//			sequence.Add (new DelayTime(0.1f));
+//			sequence.Add( new CallFunc( () => {icon.Visible = true;}));
 			
 //			foreach( string key in pQualities.Keys) {
 //				if(key == "Orientation") {
@@ -111,9 +138,12 @@ namespace Crystallography.UI
 //				}
 //			}
 			
-			sequence.Add(new CallFunc( () => { icon.RunAction(new TintTo(Colors.White.Xyz0, 0.3f)); } ));
-			sequence.Add (new DelayTime(0.25f));
-			sequence.Add(new CallFunc( () => { GameScene.Layers[2].RemoveChild(icon, false);}));
+//			sequence.Add(new CallFunc( () => { icon.RunAction(new TintTo(Colors.White.Xyz0, 0.3f)); } ));
+//			sequence.Add (new DelayTime(0.25f));
+			sequence.Add(new CallFunc( () => { 
+				icon.Visible = true;
+				GameScene.Layers[2].RemoveChild(icon, true);
+			}));
 			
 			pParent.getNode().RunAction(sequence);
 		}
