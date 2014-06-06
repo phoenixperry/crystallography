@@ -21,6 +21,7 @@ namespace Crystallography
 		/// qualityDict[ "QualityClassName" ][0]	:	List of all CardCrystallonEntities with variation 0 of QualityClassName
 		/// </summary>
 		public Dictionary<string, List<int>[]> qualityDict;
+		public Dictionary<AbstractQuality, bool> allSameScoreDict;
 		
 		public Dictionary<int,int> countdownDict;
 		
@@ -56,6 +57,7 @@ namespace Crystallography
 		protected QualityManager() {
 			Instance = this;
 			qualityDict = new Dictionary<string, List<int>[]>();
+			allSameScoreDict = new Dictionary<AbstractQuality, bool>();
 			countdownDict = new Dictionary<int, int>();
 			scoringQualityList = new List<string>();
 			
@@ -298,14 +300,12 @@ namespace Crystallography
 		/// Whether this is for points or not
 		/// </param>
 		public bool CheckForMatch( GroupCrystallonEntity pGroup, bool pForScore = true ) {
-			Dictionary<AbstractQuality, bool> qDict;
-			
-			if (pGroup.population < pGroup.maxPopulation) {
-				return false;
-			}
-			if ( EvaluateMatch( pGroup.members, out qDict, pForScore ) ) {
+//			if (pGroup.population < pGroup.maxPopulation) {
+//				return false;
+//			}
+			if ( EvaluateMatch( pGroup.members, pForScore ) ) {
 				if ( pForScore ) {
-					MatchScoreEventArgs scoreArgs = CalculateMatchScore( qDict );
+					MatchScoreEventArgs scoreArgs = CalculateMatchScore( allSameScoreDict );
 					scoreArgs.Node = pGroup.pucks[0].Children.First();
 					scoreArgs.Entity = pGroup;
 					
@@ -332,8 +332,6 @@ namespace Crystallography
 		/// Whether this is for points or not
 		/// </param>
 		public bool CheckForMatch( CardCrystallonEntity[] pCards, bool pForScore = false ) {
-			Dictionary<AbstractQuality, bool> qDict;
-			
 			int len = pCards.Length;
 			if (len < SelectionGroup.MAX_CAPACITY) {
 				return false;
@@ -346,9 +344,9 @@ namespace Crystallography
 						triad[0] = pCards[i];
 						triad[1] = pCards[j];
 						triad[2] = pCards[k];
-						if (EvaluateMatch( triad, out qDict, pForScore ) ) {
+						if (EvaluateMatch( triad, pForScore ) ) {
 							if ( pForScore ) {
-								MatchScoreEventArgs scoreArgs = CalculateMatchScore( qDict );
+								MatchScoreEventArgs scoreArgs = CalculateMatchScore( allSameScoreDict );
 								scoreArgs.Node = pCards[0].getNode();
 								scoreArgs.Entity = pCards[0];
 								
@@ -460,16 +458,17 @@ namespace Crystallography
 		/// <param name='pForScore'>
 		/// Is this to score points, or just to test whether matches are still possible? Default = <c>false</c>.
 		/// </param>
-		private bool EvaluateMatch( ICrystallonEntity[] pEntities, out Dictionary<AbstractQuality, bool> pQDict, bool pForScore) {
+//		private bool EvaluateMatch( ICrystallonEntity[] pEntities, out Dictionary<AbstractQuality, bool> pQDict, bool pForScore) {
+		private bool EvaluateMatch( ICrystallonEntity[] pEntities, bool pForScore) {
 			// TODO this whole function is inefficient... revisit later.
 			
 			int score;
 			bool failed = false;
-			FailedMatchEventArgs failArgs = new FailedMatchEventArgs{ Names = new Dictionary<string,int>()};
+			FailedMatchEventArgs.Names.Clear();
+			FailedMatchEventArgs failArgs = new FailedMatchEventArgs();
 			EventHandler<FailedMatchEventArgs> failHandler;
-			pQDict = new Dictionary<AbstractQuality, bool>();
+			allSameScoreDict.Clear();
 			
-//			foreach ( string key in qualityDict.Keys ) {
 			foreach ( string key in scoringQualityList ) {
 				var variations = qualityDict[key];
 				var type = Type.GetType( "Crystallography." + key );
@@ -482,11 +481,11 @@ namespace Crystallography
 					score = quality.Match( pEntities, pForScore );
 					if ( score == 0 ) {	//------------------------------------------------------------ No match. Just quit.
 						if (pForScore) { //----------------------------------------------------------- This is a player-triggered Match Evaluation that has failed
-							failArgs.Names.Add(key.ToString().Substring(1),1); //                      as opposed to one from CardManager.MatchesPossible()
+							FailedMatchEventArgs.Names.Add(key.ToString().Substring(1),1); //                      as opposed to one from CardManager.MatchesPossible()
 						}
 						failed = true;
 					} else {	// ------------------------------------------------------------------- Is it an All-Same match?
-						pQDict.Add ( quality, (score == quality.allSameScore) ) ;
+						allSameScoreDict.Add ( quality, (score == quality.allSameScore) ) ;
 					}
 				}
 			}
@@ -496,44 +495,8 @@ namespace Crystallography
 				if (failHandler != null) {
 					failHandler( this, failArgs);
 				}
-//				qDict.Clear();
-//				qDict = null;
 				return false;
 			}
-//			if (pForScore) {
-//				int s = LevelManager.Instance.Bonus;
-//				MatchScoreEventArgs scoreArgs = new MatchScoreEventArgs();
-//				scoreArgs.ScoreQualities = new Dictionary<string, int>();
-//				EventHandler<MatchScoreEventArgs> handler;
-//				foreach ( AbstractQuality key in pQDict.Keys ) {
-//					if (AppMain.ORIENTATION_MATTERS) {
-//						if ( key is QOrientation) {	// we need to match orientation to ensure valid sets exist, but don't score points for it.
-//							continue;
-//						}
-//					}
-//					var thisQualityScore = key.Score( pQDict[key] );
-//					scoreArgs.ScoreQualities.Add(key.ToString().Substring(17), thisQualityScore );
-//					s+= thisQualityScore;
-////					args = new MatchScoreEventArgs{ 
-////						Points = key.Score( pQDict[key] ),
-////						QualityName = key.ToString().Substring(17),
-////						Entity = pEntities[0]
-////					};
-////					handler = MatchScoreDetected;
-////					if ( handler != null ) {
-////						handler( this, args );
-////					}
-////					s += key.Score( pQDict[key] ); //pEntities[0].getNode().Parent.Parent.Position );
-//				}
-//				scoreArgs.Points = s;
-//				scoreArgs.Entity = pEntities[0];
-//				handler = MatchScoreDetected;
-//				if ( handler != null ) {
-//					handler( this, scoreArgs );
-//				}
-//			}
-////			pQDict.Clear();
-////			pQDict = null;
 			return true;
 		}
 		
@@ -549,13 +512,13 @@ namespace Crystallography
 		private MatchScoreEventArgs CalculateMatchScore( Dictionary<AbstractQuality, bool> pQDict) {
 			int score = LevelManager.Instance.Bonus;
 			MatchScoreEventArgs scoreArgs = new MatchScoreEventArgs();
-			scoreArgs.ScoreQualities = new Dictionary<string, int>();
+			MatchScoreEventArgs.ScoreQualities.Clear();
 			
 			foreach ( AbstractQuality key in pQDict.Keys ) {
 				string name = key.ToString().Substring(17);
 				if ( scoringQualityList.Contains("Q" + name) ) {
 					var thisQualityScore = key.Score( pQDict[key] );
-					scoreArgs.ScoreQualities.Add(name, thisQualityScore );
+					MatchScoreEventArgs.ScoreQualities.Add(name, thisQualityScore );
 					score += thisQualityScore;
 				}
 			}
@@ -672,14 +635,15 @@ namespace Crystallography
 	// HELPER CLASSES ------------------------------------------------------------------------------------------------
 	
 	public class MatchScoreEventArgs : EventArgs {
+		public static Dictionary<string, int> ScoreQualities = new Dictionary<string, int>();
 		public int Points { get; set; }
-		public Dictionary<string, int> ScoreQualities {get; set;}
 		public Node Node { get; set; }
 		public ICrystallonEntity Entity { get; set; }
 	}
 	
 	public class FailedMatchEventArgs : EventArgs {
-		public Dictionary<string,int> Names {get; set;}
+//		public static Dictionary<string,int> Names
+		public static Dictionary<string,int> Names = new Dictionary<string, int>();
 		public ICrystallonEntity Entity { get; set; }
 	}
 }

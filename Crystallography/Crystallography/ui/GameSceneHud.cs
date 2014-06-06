@@ -187,11 +187,12 @@ namespace Crystallography.UI
 			
 			ScheduleScoreModifier( e.Points );
 			new ScorePopup( e.Node, e.Points );
-			if (e.Entity is GroupCrystallonEntity) {
-				IconPopupManager.Instance.ScoreIcons( e.Entity as GroupCrystallonEntity, e.ScoreQualities );
-			} else {
-				IconPopupManager.Instance.ScoreIcons( e.Entity as CardCrystallonEntity, e.ScoreQualities );
-			}
+//			if (e.Entity is GroupCrystallonEntity) {
+//				IconPopupManager.Instance.ScoreIcons( e.Entity as GroupCrystallonEntity, e.ScoreQualities );
+//			} else {
+//				IconPopupManager.Instance.ScoreIcons( e.Entity as CardCrystallonEntity, e.ScoreQualities );
+//			}
+			
 //			if ( GameScene.currentLevel == 999 ) {
 //				DisplayTimer -= 10.0f;
 //			}
@@ -202,7 +203,7 @@ namespace Crystallography.UI
 		/// </summary>
 		void HandleQualityManagerFailedMatchDetected (object sender, FailedMatchEventArgs e)
 		{
-			IconPopupManager.Instance.FailedIcons( e.Entity, e.Names );
+			IconPopupManager.Instance.FailedIcons( e.Entity, FailedMatchEventArgs.Names );
 		}
 		
 		

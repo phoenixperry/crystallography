@@ -520,14 +520,13 @@ namespace Crystallography
 			bool isComplete = false;
 			if ( !pForceBreak ) {	// --------------------------- don't bother testing if Break forced
 				if ( population  == MAX_CAPACITY ) { // -------------------------------------------------------- EVALUATE CUBES!
-						if (QualityManager.Instance.CheckForMatch( this, true ) ) {
-							GroupComplete();
-							isComplete = true;
-						} else {
-							GroupFailed();
-							return null;
-						}
-//					}
+					if (QualityManager.Instance.CheckForMatch( this, true ) ) {
+						GroupComplete();
+						isComplete = true;
+					} else {
+						GroupFailed();
+						return null;
+					}
 				}
 			}
 			if ( entity is NodeCrystallonEntity ) {

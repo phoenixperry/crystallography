@@ -152,6 +152,9 @@ namespace Crystallography.UI
 			List<Action> proc = new List<Action> {
 			// PRE-LOAD IMAGES
 				() => {
+					LevelManager.Instance.GetLevelSettings(_levelNumber);
+				},
+				() => {
 					var temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 16, "Bold");
 					temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Regular");
 					temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold");

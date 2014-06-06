@@ -119,7 +119,7 @@ namespace Crystallography
 			sequence.Add( new CallFunc( () => {
 				foreach( AbstractCrystallonEntity e in members ) {
 					if (e is CardCrystallonEntity) {
-						Console.WriteLine(e.id.ToString());
+//						Console.WriteLine(e.id.ToString());
 						(e as CardCrystallonEntity).HideGlow();
 						(e as CardCrystallonEntity).Scored = true;
 //						(e as CardCrystallonEntity).TintTo( Vector4.Zero, 0.5f, true);
