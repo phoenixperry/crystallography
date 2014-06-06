@@ -92,6 +92,8 @@ namespace Crystallography.UI
 			NextLevelButton.background.RegisterPalette(0);
 			NextLevelButton.Icon.Color = LevelManager.Instance.BackgroundColor;
 			NextLevelButton.TextColor = LevelManager.Instance.BackgroundColor;
+//			NextLevelButton.Icon.RegisterPalette(1);
+//			NextLevelButton.ButtonLabel.RegisterPalette(1);
 			this.AddChild(NextLevelButton);
 			
 			LevelSelectButton = new BetterButton(80.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {

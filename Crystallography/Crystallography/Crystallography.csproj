@@ -315,6 +315,7 @@
     <Content Include="assets\images\UI\diagonalLine.png" />
     <Content Include="assets\images\UI\pause.png" />
     <Content Include="assets\images\UI\plus.png" />
+    <Content Include="assets\images\icons\thumb.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
