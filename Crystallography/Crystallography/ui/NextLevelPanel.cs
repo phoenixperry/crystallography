@@ -110,10 +110,10 @@ namespace Crystallography.UI
 			this.AddChild(LevelSelectButton);
 			
 			QuitButton = new BetterButton(94.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {
-				Text = "quit",
+				Text = "replay",
 				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
 				Icon = Support.SpriteFromFile("/Application/assets/images/UI/replay.png"),
-				IconAndTextOffset = new Vector2(22.0f, 10.0f),
+				IconAndTextOffset = new Vector2(32.0f, 10.0f),
 				TextOffset = new Vector2(-45.0f, -45.0f),
 				Position = new Vector2(Width - NextLevelButton.Width - LevelSelectButton.Width - 124.0f, 0.0f),
 //				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
