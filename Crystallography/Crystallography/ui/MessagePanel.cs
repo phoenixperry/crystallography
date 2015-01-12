@@ -48,8 +48,9 @@ namespace Crystallography.UI
 		public override void Update (float dt)
 		{
 			base.Update (dt);
-			body.Position = Position / GamePhysics.PtoM;
-
+			if(body != null) {
+				body.Position = Position / GamePhysics.PtoM;
+			}
 		}
 		
 		protected void Initialize ( float pWidth, float pHeight ) {
