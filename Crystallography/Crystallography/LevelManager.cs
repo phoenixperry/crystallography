@@ -411,7 +411,7 @@ namespace Crystallography
 			MessageTitle = "";
 			StandardPop = 15;
 			HitMeDisabled = false;
-			SpawnRect = new Vector4(220.0f, 50.0f, 0.6f * 960.0f, 0.75f * 544.0f);
+			SpawnRect = new Vector4(50.0f, 50.0f, 743.0f, 326.0f);
 			
 			if ( levelEventDict != null ) {
 				foreach (var list in levelEventDict.Values) {

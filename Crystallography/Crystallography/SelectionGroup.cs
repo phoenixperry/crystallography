@@ -149,10 +149,6 @@ namespace Crystallography
 			lastPosition.Clear();
 			if ( GameScene.paused ) return;
 			if ( GameScene.Hud.MetGoalTime != 0.0f) return;
-			
-//			if ( population > 0 && (easeState == EaseState.OUT || easeState == EaseState.MOVING_OUT) ) {
-//				EaseIn();
-//			}
 			LetGo();
 			Scheduler.Instance.Unschedule(this.getNode(), AddParticle);
 		}
@@ -231,33 +227,8 @@ namespace Crystallography
 						if ( entity == null && _pucks[(int)POSITIONS.RIGHT].Children.Count != 0){
 							entity = GetEntityAtPosition( getNode().LocalToWorld(RIGHT_UP_SELECTION_POINT), POSITIONS.TOP);
 						}
-						
-						
-//						if (population < 3 && selectionDelay == 0.0f) {
-//							var pos = e.touchPosition - heading.Normalize() * FMath.Max( 80.0f, FMath.Min(120.0f, (120.0f * (SelectionGroup.Instance.velocity/100.0f))));
-//							var ent = GetEntityAtPosition( pos );
-//							if (ent != null ) {
-//								Pull (ent);
-//							}
-//						}
-						
-//						foreach ( Node puck in pucks ) {
-//							if (puck.Children.Count == 0) {
-//								entity = GetEntityAtPosition( getNode().LocalToWorld(puck.Position) );
-//								break;
-//							}
-//						}
 					}
-					
 					if (entity != null) {
-//						if (entity is CubeCrystallonEntity) { // ------------------------------------------ IGNORE CUBES
-//							return; 
-//						} else if (entity.GetType().ToString() == "Crystallography.GroupCrystallonEntity") {
-//							var g = entity as GroupCrystallonEntity;
-//							MemberType = g.MemberType;
-//						} else {
-//							MemberType = entity.GetType ();
-//						}
 						if ( selectionDelay == 0.0f) {
 							Add (entity);
 						}
@@ -336,16 +307,11 @@ namespace Crystallography
 			} else {
 				velocity = 0.0f;
 			}
-//			if (velocity > 0.0f) {
-//				Console.WriteLine("Velocity: {0}", velocity);
-//			}
-			
-//			heading = lastPosition - getPosition();
+
 			lastPosition.Add( getPosition() );
 			if (lastPosition.Count > 10) {
 				lastPosition.RemoveAt(0);
 			}
-//			Console.WriteLine("velocity: {0} heading: {1}, {2}", velocity, heading.X, heading.Y);
 		}
 		
 		// METHODS ---------------------------------------------------------------
@@ -416,27 +382,13 @@ namespace Crystallography
 			_pucks[(int)POSITIONS.TOP].RunAction( sequence );
 			
 			sequence = new Sequence(){ Tag=1 };
-//			if ( typeof(CardCrystallonEntity).IsAssignableFrom(this.MemberType) ) {
-//				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE-30.0f, 20.5f), 0.2f)
 				sequence.Add( new MoveTo( LEFT_OFFSET, 0.2f)
 				            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			}
-//			else {
-//				sequence.Add( new MoveTo( new Vector2(-EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
-//				            { Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			}
 			_pucks[(int)POSITIONS.LEFT].RunAction( sequence );
 			
 			sequence = new Sequence(){ Tag=1 };
-//			if ( typeof (CardCrystallonEntity).IsAssignableFrom(this.MemberType) ) {
-//				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE+30.0f, 20.5f), 0.2f)
 				sequence.Add( new MoveTo( RIGHT_OFFSET, 0.2f)
 			           	 	{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			} 
-//			else {
-//				sequence.Add( new MoveTo( new Vector2(EASE_DISTANCE, EASE_DISTANCE + 40.5f), 0.2f)
-//			           	 	{ Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear} );
-//			}
 			sequence.Add( new CallFunc( () => {easeState = EaseState.OUT;} ) );
 			_pucks[(int)POSITIONS.RIGHT].RunAction( sequence );
 		}
@@ -451,9 +403,6 @@ namespace Crystallography
 		/// Screen Position in pixels.
 		/// </param>
 		protected AbstractCrystallonEntity GetEntityAtPosition( Vector2 position, POSITIONS? pos=null ) {
-//			Bounds2 pickupArea = Bounds2.Zero;
-//			var lowerLeft = Vector2.Zero;
-//			var upperRight = Vector2.Zero;
 			System.Collections.ObjectModel.ReadOnlyCollection<ICrystallonEntity> allEntities = GameScene.getAllEntities();
 			foreach (ICrystallonEntity e in allEntities) {
 				if (e == null) continue;	// e IS NOT ACTUALLY A THING -- IGNORE (BUT IF THIS EVER HAPPENS, IT'S PROBS A BUG)
@@ -462,23 +411,6 @@ namespace Crystallography
 						return e as AbstractCrystallonEntity;
 					}
 				}
-//				if ( e is NodeCrystallonEntity ) { // ----------------------------- e DESCENDS FROM NodeCrystallonEntity, LIKE GROUPS DO
-//					PhysicsBody body = e.getBody();
-//					if (body == null) continue; // e IS SINGLE POINT IN SPACE -- IGNORE
-//					lowerLeft = body.AabbMin * GamePhysics.PtoM;
-//					upperRight = body.AabbMax * GamePhysics.PtoM;
-//				} else if (e is SpriteTileCrystallonEntity) { // ----------------- e DESCENDS FROM SpriteTileCrystallonEntity (rarer)
-//					if (AppMain.ORIENTATION_MATTERS 
-//					    && pos != null
-//					    && (e as SpriteTileCrystallonEntity).getOrientation() != (int)pos) { // ----- test for orientation-related pickup points
-//							continue;
-//					}
-//					Node puck = e.getNode();
-//					Vector2 halfDimensions = new Vector2((e as SpriteTileCrystallonEntity).Width, (e as SpriteTileCrystallonEntity).Height)/4.0f;
-//					lowerLeft = (e as SpriteTileCrystallonEntity).getPosition() - halfDimensions;
-//					upperRight = (e as SpriteTileCrystallonEntity).getPosition() + halfDimensions;
-//				}
-//				pickupArea = Bounds2.SafeBounds(lowerLeft, upperRight);
 				if (AppMain.ORIENTATION_MATTERS 
 				    && pos != null
 				    && e is SpriteTileCrystallonEntity
@@ -486,9 +418,6 @@ namespace Crystallography
 							continue;
 					}
 				if ( e.getBounds().IsInside(position) ) {
-//				if ( pickupArea.IsInside(position) ){
-//				if (position.X >= lowerLeft.X && position.Y >= lowerLeft.Y &&
-//			    	position.X <= upperRight.X && position.Y <= upperRight.Y) {
 					return e as AbstractCrystallonEntity;
 				}
 			}
@@ -556,23 +485,7 @@ namespace Crystallography
 			}
 			return lastEntityReleased = null;
 		}
-		
-//		/// <summary>
-//		/// Called if the SelectionGroup only has 1 CardCrystallonEntity attached.
-//		/// </summary>
-//		/// <returns>
-//		/// The CardCrystallonEntity
-//		/// </returns>
-//		protected override AbstractCrystallonEntity ReleaseSingle ( AbstractCrystallonEntity e )
-//		{
-//			var entity = base.ReleaseSingle( e );
-//			float angle = Support.GetAngle(lastPosition, getPosition());
-//			Console.WriteLine(angle);
-//			if ( angle != 0.0f ) {
-//				entity.setVelocity( CardCrystallonEntity.DEFAULT_SPEED, angle );
-//			}
-//			return entity;
-//		}
+
 		
 		/// <summary>
 		/// Called if the SelectionGroup has 2+ AbstractCrystallonEntities attached. Releases them as children of a GroupCrystallonEntity
