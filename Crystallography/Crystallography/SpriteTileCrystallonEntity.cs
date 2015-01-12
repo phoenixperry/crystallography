@@ -158,6 +158,10 @@ namespace Crystallography
 		public override bool CanBeAddedTo (GroupCrystallonEntity pGroup)
 		{
 			bool okToSnap = false;
+			if (_sprite.Color.W < 0.8f) {
+				Console.WriteLine(_sprite.Color.W);
+				return false;
+			}
 //			if( pGroup.MemberType.IsAssignableFrom(this.GetType()) ) { // CHECK FOR OBJECT TYPE COMPATIBILITY WITH GROUP
 			if ( pGroup.CheckMemberTypeCompatability(this) ){
 				if (AppMain.ORIENTATION_MATTERS) { // ------------------- ORIENTATION TEST

@@ -109,6 +109,7 @@ namespace Crystallography
 		void HandleInputManagerInstanceDragDetected (object sender, SustainedTouchEventArgs e)
 		{
 			if( GameScene.paused ) return;
+			if ( GameScene.Hud.MetGoalTime != 0.0f) return;
 		}
 		
 		/// <summary>
@@ -147,10 +148,12 @@ namespace Crystallography
 		{
 			lastPosition.Clear();
 			if ( GameScene.paused ) return;
+			if ( GameScene.Hud.MetGoalTime != 0.0f) return;
 			
-			if ( population > 0 && (easeState == EaseState.OUT || easeState == EaseState.MOVING_OUT) ) {
-				EaseIn();
-			}
+//			if ( population > 0 && (easeState == EaseState.OUT || easeState == EaseState.MOVING_OUT) ) {
+//				EaseIn();
+//			}
+			LetGo();
 			Scheduler.Instance.Unschedule(this.getNode(), AddParticle);
 		}
 		
@@ -166,6 +169,7 @@ namespace Crystallography
 		void HandleInputManagerInstanceTouchJustDownDetected (object sender, BaseTouchEventArgs e)
 		{
 			if ( GameScene.paused ) return;
+			if ( GameScene.Hud.MetGoalTime != 0.0f) return;
 			setPosition( e.touchPosition );
 			
 			lastEntityTouched = justDownPositionEntity = GetEntityAtPosition( e.touchPosition ) as AbstractCrystallonEntity;
@@ -190,7 +194,11 @@ namespace Crystallography
 		/// </param>
 		void HandleInputManagerInstanceTouchDownDetected (object sender, SustainedTouchEventArgs e)
 		{
+			// NO TOUCHING PIECES WHEN GAME IS PAUSED
 			if ( GameScene.paused ) return;
+			// NO TOUCHING PIECES WHEN LEVEL IS OVER
+			if ( GameScene.Hud.MetGoalTime != 0.0f) return;
+			
 			setPosition( e.touchPosition );
 
 			if (velocity < MAXIMUM_PICKUP_VELOCITY) {
@@ -281,6 +289,14 @@ namespace Crystallography
 			// Selection Group should never be added to any other group.
 			return this;
 		}
+		
+		
+		public void LetGo(bool pForceBreak = false) {
+			if ( population > 0 && (easeState == EaseState.OUT || easeState == EaseState.MOVING_OUT) ) {
+				EaseIn(pForceBreak);
+			}
+		}
+		
 		
 		/// <summary>
 		///  DON'T CALL THIS FUNCTION ON SELECTION GROUP. RETURNS NULL.
@@ -498,6 +514,8 @@ namespace Crystallography
 			this.Break();
 		}
 		
+		
+		
 		public void Pull(AbstractCrystallonEntity pEntity) {
 			var dir = getPosition() - pEntity.getPosition();
 			pEntity.addImpulse(0.03f * dir.Normalize() * GamePhysics.PtoM );
@@ -512,13 +530,17 @@ namespace Crystallography
 			AbstractCrystallonEntity entity = e;
 			if (pForceBreak) {
 				lastEntityReleased = null;
+				if (entity is GroupCrystallonEntity) {
+					this.Break ();
+					return entity;
+				}
 				return ReleaseSingle ( entity );
 			} else if (population == 1) {
 				entity = members[0];
 				return lastEntityReleased = ReleaseSingle ( entity );
 			}
 			bool isComplete = false;
-			if ( !pForceBreak ) {	// --------------------------- don't bother testing if Break forced
+			if ( !pForceBreak ) {	// --------------------------- don't bother testing completeness if Break forced
 				if ( population  == MAX_CAPACITY ) { // -------------------------------------------------------- EVALUATE CUBES!
 					if (QualityManager.Instance.CheckForMatch( this, true ) ) {
 						GroupComplete();

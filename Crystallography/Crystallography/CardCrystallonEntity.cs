@@ -316,7 +316,7 @@ namespace Crystallography
 			if ( _symbol != null ) {
 				_symbol.Color.W = 0.0f;
 			}
-			TintTo(QColor.palette[getColor()], 2.0f, true);
+			TintTo(QColor.palette[getColor()], 1.0f, true);
 		}
 		
 		public void TintTo( Vector4 pColor, float pDuration, bool alpha) {

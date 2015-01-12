@@ -14,7 +14,7 @@ namespace Crystallography.UI
 		Node GameHudBar;
 		SpriteTile HudBarMask;
 		SpriteTile HudBarLine;
-		SpriteUV ScoreIcon;
+		SpriteTile ScoreIcon;
 		SpriteTile CubeIcon;
 		SpriteTile BlueBox;
 		SpriteTile RedBox;
@@ -28,8 +28,10 @@ namespace Crystallography.UI
 		Label CubeText;
 		
 		TimerEntity GameTimer;
+		BonusTimer BonusBar;
+//		public StrikeHud Strikes;
 		
-		SpriteTile TimeBar;
+//		SpriteTile TimeBar;
 		
 		public LevelTitleMkTwo levelTitle;
 		public MessagePanel _messagePanel;
@@ -170,6 +172,10 @@ namespace Crystallography.UI
 		void HandleCardManagerInstanceCardSpawned (object sender, EventArgs e) {
 			EnableHitMeButton();
 			GameTimer.Pause(false);
+			
+			if (GameScene.currentLevel == 999) {
+				BonusBar.Pause(false);
+			}
 		}
 		
 		/// <summary>
@@ -187,15 +193,8 @@ namespace Crystallography.UI
 			
 			ScheduleScoreModifier( e.Points );
 			new ScorePopup( e.Node, e.Points );
-//			if (e.Entity is GroupCrystallonEntity) {
-//				IconPopupManager.Instance.ScoreIcons( e.Entity as GroupCrystallonEntity, e.ScoreQualities );
-//			} else {
-//				IconPopupManager.Instance.ScoreIcons( e.Entity as CardCrystallonEntity, e.ScoreQualities );
-//			}
 			
-//			if ( GameScene.currentLevel == 999 ) {
-//				DisplayTimer -= 10.0f;
-//			}
+//			Strikes.Hope();
 		}
 		
 		/// <summary>
@@ -281,21 +280,63 @@ namespace Crystallography.UI
 		
 		void HandleGameTimerBarFilled (object sender, EventArgs e)
 		{
-			// DIFFICULTY INCREASE!
-			LevelManager.Instance.ChangeDifficulty(1);
-			GameTimer.SetDisplayTimer(15.0f);
+			
+			
 		}
 
 		void HandleGameTimerBarEmptied (object sender, EventArgs e)
 		{
-			if (LevelManager.Instance.difficulty > LevelManager.MIN_DIFFICULTY) {
+//			if (LevelManager.Instance.difficulty > LevelManager.MIN_DIFFICULTY) {
 				// DIFFICULTY DECREASE!
-				LevelManager.Instance.ChangeDifficulty(-1);
-				GameTimer.SetDisplayTimer(0.0f);
-			} else {
+//				LevelManager.Instance.ChangeDifficulty(-1);
+//				GameTimer.SetDisplayTimer(0.01f, false);
+//			} else {
 				// BOTTOM OUT -- GAME OVER
 				MetGoal();
+//			}
+//			Strikes.Despair();
+			GameTimer.SetDisplayTimer(0.01f, false);
+			GameTimer.Pause(true);
+			BonusBar.Pause(true);
+		}
+		
+		void HandleBonusBarBarFilled (object sender, EventArgs e)
+		{
+			// DIFFICULTY INCREASE!
+			LevelManager.Instance.ChangeDifficulty(1);
+			BonusBar.increaseDifficulty();
+			float bonusTime = 15.0f + 5.0f * LevelManager.Instance.difficulty;
+			Console.WriteLine(GameTimer.DisplayTimer);
+			if (bonusTime > GameTimer.DisplayTimer) {
+				GameTimer.MaxTime += bonusTime - GameTimer.DisplayTimer;
 			}
+			var time = Sce.PlayStation.Core.FMath.Max(0.01f, GameTimer.DisplayTimer - (bonusTime));
+			GameTimer.SetDisplayTimer(time, false);
+			
+			Console.WriteLine(GameTimer.MaxTime);
+			Console.WriteLine(time);
+		}
+		
+		void HandleBonusBarBarEmptied (object sender, EventArgs e)
+		{
+			
+		}
+
+		
+		void HandleStrikesStrikeBarFailure (object sender, EventArgs e)
+		{
+			// BOTTOM OUT -- GAME OVER
+			MetGoal();
+//			Strikes.Reset();
+		}
+
+		void HandleStrikesStrikeBarSuccess (object sender, EventArgs e)
+		{
+			// DIFFICULTY INCREASE!
+			LevelManager.Instance.ChangeDifficulty(1);
+			GameTimer.SetDisplayTimer(0.01f, false);
+//			Strikes.Reset();
+
 		}
 		
 		// OVERRIDES -----------------------------------------------------------------------------------------------
@@ -357,6 +398,10 @@ namespace Crystallography.UI
 			if(GameScene.currentLevel == 999) {
 				GameTimer.BarEmptied += HandleGameTimerBarEmptied;
 				GameTimer.BarFilled += HandleGameTimerBarFilled;
+				BonusBar.BarFilled += HandleBonusBarBarFilled;
+				BonusBar.BarEmptied += HandleBonusBarBarEmptied; 
+//				Strikes.StrikeBarSuccess += HandleStrikesStrikeBarSuccess;
+//				Strikes.StrikeBarFailure += HandleStrikesStrikeBarFailure;
 				(_nextLevelPanel as InfiniteModeEndPanel).RetryDetected += HandlePausePanelResetButtonPressDetected;
 				(_nextLevelPanel as InfiniteModeEndPanel).QuitDetected += Handle_nextLevelPanelQuitButtonPressDetected;
 			} else {
@@ -376,6 +421,9 @@ namespace Crystallography.UI
 			DataStorage.AddMetric( "Exit Code", () => ExitCode, MetricSort.LAST );
 #endif
 		}
+
+		
+		
 		
 		public override void OnExit () {
 			base.OnExit();
@@ -394,6 +442,8 @@ namespace Crystallography.UI
 			if(GameScene.currentLevel == 999) {
 				GameTimer.BarEmptied -= HandleGameTimerBarEmptied;
 				GameTimer.BarFilled -= HandleGameTimerBarFilled;
+				BonusBar.BarFilled -= HandleBonusBarBarFilled;
+				BonusBar.BarEmptied -= HandleBonusBarBarEmptied;
 				(_nextLevelPanel as InfiniteModeEndPanel).RetryDetected -= HandlePausePanelResetButtonPressDetected;
 				(_nextLevelPanel as InfiniteModeEndPanel).QuitDetected -= Handle_nextLevelPanelQuitButtonPressDetected;
 			} else {
@@ -453,9 +503,9 @@ namespace Crystallography.UI
 				LevelManager.Instance.ChangeDifficulty(-1);
 				DisplayTimer = 0.0f;
 			}
-			var xscale = 200.0f/16.0f;
+//			var xscale = 200.0f/16.0f;
 			
-			TimeBar.Scale = new Vector2(xscale * ((30.0f-DisplayTimer)/30.0f), 1.0f);
+//			TimeBar.Scale = new Vector2(xscale * ((30.0f-DisplayTimer)/30.0f), 1.0f);
 		}
 		
 		public void EnableHitMeButton() {
@@ -469,10 +519,12 @@ namespace Crystallography.UI
 			FontMap map = FontManager.Instance.GetMap( FontManager.Instance.GetInGame("Bariol", 25, "Bold") );
 			FontMap bigMap = FontManager.Instance.GetMap( FontManager.Instance.GetInGame("Bariol", 44, "Bold") );
 			
+			// CREATE PAUSE MENU
 			pausePanel = new PausePanel(_scene);
 			_scene.DialogLayer.AddChild(pausePanel);
 			pausePanel.Hide();
 			
+			// CREATE THE HUD BAR AT THE TOP OF THE SCREEN
 			GameHudBar = new Node(){
 				Position = new Vector2(0.0f, 473.0f)
 			};
@@ -488,13 +540,7 @@ namespace Crystallography.UI
 			HudBarLine.Scale = new Vector2(60.0f, 0.0625f);
 			GameHudBar.AddChild(HudBarLine);
 			
-			
-//			levelTitle = new LevelTitle(_scene){
-//				SlideInDirection = SlideDirection.RIGHT,
-//				SlideOutDirection = SlideDirection.LEFT,
-//				Offset = new Vector2(LevelTitle.X_OFFSET, -432.0f),
-//				Lifetime = 4.0f
-//			};
+			// CREATE THE LEVEL TITLE HUD
 			levelTitle = new LevelTitleMkTwo() {
 				SlideInDirection = SlideDirection.RIGHT,
 				SlideOutDirection = SlideDirection.LEFT,
@@ -503,12 +549,15 @@ namespace Crystallography.UI
 			};
 			this.AddChild(levelTitle, -1);
 			
+			// CREATE THE END-OF-LEVEL DROP-DOWN PANEL
 			if (GameScene.currentLevel == 999) {
+				// INFINITE MODE VERSION
 				_nextLevelPanel = new InfiniteModeEndPanel(){
 					Offset = new Vector2(Director.Instance.GL.Context.Screen.Width-248.0f, 0.0f),
 					
 				};
 			} else {
+				// PUZZLE/TUTORIAL MODE VERSION
 				_nextLevelPanel = new NextLevelPanel(){
 					Offset = new Vector2(510.0f, 0.0f),
 					
@@ -516,9 +565,11 @@ namespace Crystallography.UI
 			}
 			GameHudBar.AddChild(_nextLevelPanel, -1);
 			
+			// CREATE MESSAGE PANEL
 			_messagePanel = new MessagePanel(920.0f, 148.0f ){
+				SourceObject = this,
 				Offset = new Vector2(20.0f, 0.0f),
-				Position = new Vector2(0.0f, 0.0f),
+				Position = new Vector2(0.0f, -148.0f),
 				Lifetime = 0.0f
 			};
 			this.AddChild(_messagePanel);
@@ -526,8 +577,9 @@ namespace Crystallography.UI
 			_messagePanel.AdHocDraw += () => {
 				_messagePanel.body.Position = _messagePanel.Position / GamePhysics.PtoM;
 			};
-
-			ScoreIcon = Support.SpriteUVFromFile("/Application/assets/images/handIcon.png");
+			
+			// SCORE STUFF
+			ScoreIcon = Support.SpriteFromFile("/Application/assets/images/handIcon.png");
 			ScoreIcon.Position = new Vector2(184.0f, 16.0f);
 			ScoreIcon.RegisterPalette(1);
 			GameHudBar.AddChild(ScoreIcon);
@@ -547,6 +599,7 @@ namespace Crystallography.UI
 			ScoreText.RegisterPalette(1);
 			GameHudBar.AddChild(ScoreText);
 			
+			// CUBE STUFF
 			CubeIcon = Support.SpriteFromFile("/Application/assets/images/stopIcon.png");
 			CubeIcon.Position = new Vector2(20.0f,16.0f);
 			CubeIcon.RegisterPalette(2);
@@ -567,31 +620,22 @@ namespace Crystallography.UI
 			CubeText.RegisterPalette(2);
 			GameHudBar.AddChild(CubeText);
 			
+			// TIMER & STRIKES STUFF
 			GameTimer = new TimerEntity();
-			if (GameScene.currentLevel == 999) {
-				GameTimer.Position = new Vector2(348.0f, 16.0f);
+			if (GameScene.currentLevel == 999) {	// ------------------- IF INFINITE MODE
+				GameTimer.Position = new Vector2(348.0f, 16.0f);	// ----- ADD THE TIME BAR
 				GameHudBar.AddChild(GameTimer);
-//				TimeBox = Support.SpriteUVFromFile("/Application/assets/images/timerIcon.png");
-//				TimeBox.Position = new Vector2(468.0f, 16.0f);
-//				GameHudBar.AddChild(TimeBox);
-//				
-//				TimerSeparatorText = new Label(":", bigMap);
-//				TimerSeparatorText.Position = new Vector2(97.0f, -2.0f);
-//				TimeBox.AddChild(TimerSeparatorText);
-//			
-//				TimerSecondsText = new Label("00.0", bigMap);
-//				TimerSecondsText.Position = new Vector2(107.0f, -4.0f);
-//				TimeBox.AddChild(TimerSecondsText);
-//			
-//				TimerMinutesText = new Label("00", bigMap);
-//				TimerMinutesText.Position = new Vector2(45.0f, -4.0f);
-//				TimeBox.AddChild(TimerMinutesText);
-//				
-//				TimeBar = Support.UnicolorSprite("TimeBar", 255, 0, 0, 255);
-//				TimeBar.Position = new Vector2(45.0f, 0.0f);
-//				TimeBox.AddChild(TimeBar);
+				
+				BonusBar = new BonusTimer() {
+					Position = new Vector2(348.0f, 44.0f)
+				};
+				GameHudBar.AddChild(BonusBar);
+				
+//				Strikes.Position = new Vector2(395.0f, 44.0f);
+//				GameHudBar.AddChild(Strikes);
 			}
 			
+			// PAUSE BUTTON
 			PauseButton = new BetterButton("/Application/assets/images/UI/BetterButtonTransparent.png", 115.0f, 71.0f) {
 				Text = "",
 				Icon = Support.SpriteFromFile("Application/assets/images/UI/pause.png"),
@@ -603,6 +647,7 @@ namespace Crystallography.UI
 			PauseButton.Icon.RegisterPalette(2);
 			PauseButton.ButtonUpAction += HandlePauseButtonButtonUpAction;
 			
+			// HIT ME BUTTON
 			HitMeButton = new BetterButton("/Application/assets/images/UI/BetterButtonTransparent.png", 115.0f, 71.0f) {
 				Text = "",
 				Icon = Support.SpriteFromFile("Application/assets/images/UI/plus.png"),
@@ -633,7 +678,14 @@ namespace Crystallography.UI
 			BreaksDetected = 0;
 			HitMesDetected = 0;
 			
+			
 			ExitCode = LevelExitCode.NULL;
+			
+			if (GameScene.currentLevel == 999) {
+//				Strikes.Reset();
+				BonusBar.Reset();
+				BonusBar.Pause(true);
+			}
 			
 			GameTimer.Reset();
 			GameTimer.Pause(true);
@@ -667,6 +719,7 @@ namespace Crystallography.UI
 		}
 		
 		public void MetGoal() {
+			GameScene.SG.LetGo(true);
 			MetGoalTime = GameTimer.LevelTimer;
 			Support.SoundSystem.Instance.Play(LevelManager.Instance.SoundPrefix + "levelcomplete.wav");
 			if (GameScene.currentLevel != 999) {

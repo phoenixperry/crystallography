@@ -111,6 +111,9 @@
     <Compile Include="ui\ColorIcon.cs" />
     <Compile Include="Tags.cs" />
     <Compile Include="ui\InfiniteModeEndPanel.cs" />
+    <Compile Include="ui\Strike.cs" />
+    <Compile Include="ui\StrikeHud.cs" />
+    <Compile Include="ui\BonusTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -316,6 +319,9 @@
     <Content Include="assets\images\UI\pause.png" />
     <Content Include="assets\images\UI\plus.png" />
     <Content Include="assets\images\icons\thumb.png" />
+    <Content Include="assets\images\UI\whitePageIcon.png" />
+    <Content Include="assets\images\UI\x.png" />
+    <Content Include="assets\images\UI\strikeCube.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

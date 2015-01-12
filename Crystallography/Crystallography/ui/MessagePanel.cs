@@ -45,6 +45,13 @@ namespace Crystallography.UI
 		
 		// METHODS ----------------------------------------------------------------------------------------------------------------
 		
+		public override void Update (float dt)
+		{
+			base.Update (dt);
+			body.Position = Position / GamePhysics.PtoM;
+
+		}
+		
 		protected void Initialize ( float pWidth, float pHeight ) {
 			DismissDelay = 1.0f;
 			Height = pHeight;
