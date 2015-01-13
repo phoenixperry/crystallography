@@ -14,6 +14,8 @@ namespace Crystallography.UI
 		protected SpriteTile TimeBar2;
 		
 		public BonusTimer () : base() {
+//			this.TimerIcon.TextureInfo = Support.SpriteFromFile("Application/assets/images/UI/strikeCube.png").TextureInfo;
+//			TimerIcon.Quad.S = new Vector2(TimerIcon.TextureInfo.Texture.Width, TimerIcon.TextureInfo.Texture.Height);
 		}
 		
 		

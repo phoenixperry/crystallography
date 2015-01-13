@@ -25,7 +25,8 @@ namespace Crystallography.UI
 				if(!_filled) {
 					Icon.TextureInfo = EMPTY_STRIKE_TEXTUREINFO;
 					Icon.Quad.S = new Vector2(EMPTY_STRIKE_TEXTUREINFO.Texture.Width, EMPTY_STRIKE_TEXTUREINFO.Texture.Height);
-					Icon.Quad.T = -Icon.Quad.S/4.0f;
+//					Icon.Quad.T = -Icon.Quad.S/4.0f;
+					Icon.Quad.T = Vector2.Zero;
 				}
 			}
 		}
@@ -38,7 +39,6 @@ namespace Crystallography.UI
 		private void Initialize() {
 			Icon = Support.SpriteFromFile("/Application/assets/images/UI/whitePageIcon.png");
 			_filled = false;
-//			Icon.Pivot = new Vector2(0.5f, 0.5f);
 			Icon.RegisterPalette(1);
 			this.AddChild(Icon);
 		}
@@ -59,7 +59,7 @@ namespace Crystallography.UI
 		}
 		
 		public void Reset() {
-			_filled = false;
+			filled = false;
 		}
 	}
 }

@@ -170,7 +170,7 @@ namespace Crystallography
 			}
 		}
 		
-		public void GetLevelSettings( int pLevelNumber ) {
+		public void GetLevelSettings( int pLevelNumber, string elementName = null ) {
 			PossibleSolutions = 0;
 			goalDict.Clear();
 			var levels = from data
@@ -181,6 +181,9 @@ namespace Crystallography
 				foreach( XElement element in level.AllElements ) {
 					if ( (int)element.Attribute("Value") == pLevelNumber ) {
 						foreach (XElement line in element.Nodes()) {
+							if(elementName != null && elementName != line.Name.LocalName) {
+								continue;
+							}
 							if (line.Name.LocalName == "Color") {
 								Palette[0] = Support.ExtractColor(line.Attribute("LightHex").Value);
 								Palette[1] = Support.ExtractColor(line.Attribute("MidHex").Value);
@@ -245,6 +248,9 @@ namespace Crystallography
 									Args = line.Attribute("Args").Value
 								});
 							}
+							if(elementName != null && elementName == line.Name.LocalName) {
+								break;
+							}
 						}
 						return;
 					}
@@ -308,6 +314,11 @@ namespace Crystallography
 				pDeltaDiff = MAX_DIFFICULTY - difficulty;	// ------------------------ ENFORCE UPPER CAP
 			}
 			
+			GetLevelSettings(difficulty, "Color");
+			QColor.Instance.setPalette();
+			QColor.Instance.ShiftColors(1, 1.0f);
+			CardManager.Instance.TintAllCards(1.0f);
+			
 			for ( var i = 0; i < pDeltaDiff; i++ ) {
 				if (up) {
 					IncreaseDifficulty();
@@ -329,7 +340,7 @@ namespace Crystallography
 		protected void IncreaseDifficulty() {
 #if DEBUG
 			Console.WriteLine("Increase Difficulty");
-#endif
+#endif		
 			switch (QualityManager.Instance.scoringQualityList.Count) {
 			case 1:
 				CardManager.Instance.AddQuality("QPattern");

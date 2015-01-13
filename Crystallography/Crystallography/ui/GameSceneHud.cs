@@ -29,7 +29,7 @@ namespace Crystallography.UI
 		
 		TimerEntity GameTimer;
 		BonusTimer BonusBar;
-//		public StrikeHud Strikes;
+		public StrikeHud Strikes;
 		
 //		SpriteTile TimeBar;
 		
@@ -142,6 +142,15 @@ namespace Crystallography.UI
 		/// On Hit Me Button Up
 		/// </summary>
 		void HandleHitMeButtonButtonUpAction (object sender, EventArgs e) {
+			if(GameScene.currentLevel == 999) {
+				if(CardManager.availableCards.Count < LevelManager.Instance.StandardPop) {
+					if(CardManager.Instance.MatchesPossible()) {
+						Strikes.Despair();
+					} else {
+						Strikes.Hope();
+					}
+				}
+			}
 			HitMesDetected++;
 			CardManager.Instance.Populate( true );
 		}
@@ -203,6 +212,7 @@ namespace Crystallography.UI
 		void HandleQualityManagerFailedMatchDetected (object sender, FailedMatchEventArgs e)
 		{
 			IconPopupManager.Instance.FailedIcons( e.Entity, FailedMatchEventArgs.Names );
+			Strikes.Despair();
 		}
 		
 		
@@ -292,7 +302,7 @@ namespace Crystallography.UI
 //				GameTimer.SetDisplayTimer(0.01f, false);
 //			} else {
 				// BOTTOM OUT -- GAME OVER
-				MetGoal();
+//				MetGoal();
 //			}
 //			Strikes.Despair();
 			GameTimer.SetDisplayTimer(0.01f, false);
@@ -305,16 +315,14 @@ namespace Crystallography.UI
 			// DIFFICULTY INCREASE!
 			LevelManager.Instance.ChangeDifficulty(1);
 			BonusBar.increaseDifficulty();
-			float bonusTime = 15.0f + 5.0f * LevelManager.Instance.difficulty;
-			Console.WriteLine(GameTimer.DisplayTimer);
-			if (bonusTime > GameTimer.DisplayTimer) {
-				GameTimer.MaxTime += bonusTime - GameTimer.DisplayTimer;
-			}
-			var time = Sce.PlayStation.Core.FMath.Max(0.01f, GameTimer.DisplayTimer - (bonusTime));
-			GameTimer.SetDisplayTimer(time, false);
-			
-			Console.WriteLine(GameTimer.MaxTime);
-			Console.WriteLine(time);
+			Strikes.Hope();
+//			float bonusTime = 15.0f + 5.0f * LevelManager.Instance.difficulty;
+//
+//			if (bonusTime > GameTimer.DisplayTimer) {
+//				GameTimer.MaxTime += bonusTime - GameTimer.DisplayTimer;
+//			}
+//			var time = Sce.PlayStation.Core.FMath.Max(0.01f, GameTimer.DisplayTimer - (bonusTime));
+//			GameTimer.SetDisplayTimer(time, false);
 		}
 		
 		void HandleBonusBarBarEmptied (object sender, EventArgs e)
@@ -335,7 +343,7 @@ namespace Crystallography.UI
 			// DIFFICULTY INCREASE!
 			LevelManager.Instance.ChangeDifficulty(1);
 			GameTimer.SetDisplayTimer(0.01f, false);
-//			Strikes.Reset();
+			Strikes.Reset();
 
 		}
 		
@@ -400,8 +408,8 @@ namespace Crystallography.UI
 				GameTimer.BarFilled += HandleGameTimerBarFilled;
 				BonusBar.BarFilled += HandleBonusBarBarFilled;
 				BonusBar.BarEmptied += HandleBonusBarBarEmptied; 
-//				Strikes.StrikeBarSuccess += HandleStrikesStrikeBarSuccess;
-//				Strikes.StrikeBarFailure += HandleStrikesStrikeBarFailure;
+				Strikes.StrikeBarSuccess += HandleStrikesStrikeBarSuccess;
+				Strikes.StrikeBarFailure += HandleStrikesStrikeBarFailure;
 				(_nextLevelPanel as InfiniteModeEndPanel).RetryDetected += HandlePausePanelResetButtonPressDetected;
 				(_nextLevelPanel as InfiniteModeEndPanel).QuitDetected += Handle_nextLevelPanelQuitButtonPressDetected;
 			} else {
@@ -623,16 +631,19 @@ namespace Crystallography.UI
 			// TIMER & STRIKES STUFF
 			GameTimer = new TimerEntity();
 			if (GameScene.currentLevel == 999) {	// ------------------- IF INFINITE MODE
-				GameTimer.Position = new Vector2(348.0f, 16.0f);	// ----- ADD THE TIME BAR
-				GameHudBar.AddChild(GameTimer);
+//				GameTimer.Position = new Vector2(348.0f, 16.0f);	// ----- ADD THE TIME BAR
+//				GameHudBar.AddChild(GameTimer);
 				
 				BonusBar = new BonusTimer() {
-					Position = new Vector2(348.0f, 44.0f)
+//					Position = new Vector2(348.0f, 44.0f)
+					Position = new Vector2(348.0f, 16.0f)
 				};
 				GameHudBar.AddChild(BonusBar);
 				
-//				Strikes.Position = new Vector2(395.0f, 44.0f);
-//				GameHudBar.AddChild(Strikes);
+				Strikes = new StrikeHud() {
+					Position = new Vector2(395.0f, 44.0f)
+				};
+				GameHudBar.AddChild(Strikes);
 			}
 			
 			// PAUSE BUTTON
@@ -682,7 +693,7 @@ namespace Crystallography.UI
 			ExitCode = LevelExitCode.NULL;
 			
 			if (GameScene.currentLevel == 999) {
-//				Strikes.Reset();
+				Strikes.Reset();
 				BonusBar.Reset();
 				BonusBar.Pause(true);
 			}

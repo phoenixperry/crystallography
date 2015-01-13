@@ -58,12 +58,13 @@ namespace Crystallography.UI
 		}
 		
 		public void Despair() {
-			for(int i=strikeCount-1; i>=0; i--) {
+//			for(int i=strikeCount-1; i>=0; i--) {
+			for(int i=0; i<strikeCount; i++) {
 				Strike strike = strikeList[i];
 				if(strike.filled == false || strike.isGood == true) { 
 					strike.fill(false);
 					Shake(strike);
-					if(i == 0) {
+					if(i == strikeCount-1) {
 						EventHandler handler = StrikeBarFailure;
 						if (handler != null) {
 							handler( this, null );
@@ -75,19 +76,24 @@ namespace Crystallography.UI
 		}
 		
 		public void Hope() {
-			for(int i=0; i<strikeCount; i++) {
+			for(int i=strikeCount-1; i>=0; i--) {
 				Strike strike = strikeList[i];
-				if(strike.filled == false || strike.isGood == false) { 
-					strike.fill(true);
-					Shake (strike);
-					if(i == strikeCount-1) {
-						EventHandler handler = StrikeBarSuccess;
-						if (handler != null) {
-							handler( this, null );
-						}
-					}
+				if(strike.filled) {
+					strike.Reset();
+					Shake(strike);
 					break;
 				}
+//				if(strike.filled == false || strike.isGood == false) { 
+//					strike.fill(true);
+//					Shake (strike);
+//					if(i == strikeCount-1) {
+//						EventHandler handler = StrikeBarSuccess;
+//						if (handler != null) {
+//							handler( this, null );
+//						}
+//					}
+//					break;
+//				}
 			}
 		}
 		
