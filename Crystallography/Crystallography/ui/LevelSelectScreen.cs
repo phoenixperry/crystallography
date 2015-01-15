@@ -233,7 +233,7 @@ namespace Crystallography.UI
 			Console.WriteLine("Back");
 #endif
 //			MenuSystem.SetScreen("Menu");
-			Director.Instance.ReplaceScene( new LoadingScene(0, false, "Menu") );
+			Director.Instance.ReplaceScene( new LoadingScene("Menu") );
 		}
 		
 		void HandlePlayButtonButtonUpAction (object sender, EventArgs e)
@@ -241,7 +241,10 @@ namespace Crystallography.UI
 #if DEBUG
 			Console.WriteLine("Play: {0}", SelectedLevel);
 #endif
-			Director.Instance.ReplaceScene(new LoadingScene(SelectedLevel, false) );
+			LoadingScene.GAME_SCENE_DATA.level = SelectedLevel;
+			LoadingScene.GAME_SCENE_DATA.timeLimit = 0.0f;
+			LoadingScene.GAME_SCENE_DATA.fourthQuality = "none";
+			Director.Instance.ReplaceScene(new LoadingScene("Game", LoadingScene.GAME_SCENE_DATA ) );
 		}
 		
 		void HandleLevelSelectItemLevelSelectionDetected (object sender, LevelSelectionEventArgs e)

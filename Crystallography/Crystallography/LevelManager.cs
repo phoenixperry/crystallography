@@ -341,18 +341,26 @@ namespace Crystallography
 #if DEBUG
 			Console.WriteLine("Increase Difficulty");
 #endif		
+			difficulty++;
 			switch (QualityManager.Instance.scoringQualityList.Count) {
 			case 1:
 				CardManager.Instance.AddQuality("QPattern");
-				difficulty++;
+				
 				break;
 			case 2:
 				CardManager.Instance.AddQuality("QSymbol");
-				difficulty++;
 				break;
 			case 3:
-				CardManager.Instance.AddQuality("QSound");
-				difficulty++;
+				switch(GameScene.fourthQuality) {
+				case "sound":
+					CardManager.Instance.AddQuality("QSound");
+					break;
+				case "particles":
+					CardManager.Instance.AddQuality("QParticle");
+					break;
+				default:
+					break;
+				}
 				break;
 			case 4:
 			default:
@@ -365,18 +373,29 @@ namespace Crystallography
 #if DEBUG
 			Console.WriteLine("Reduce Difficulty");
 #endif
+			difficulty--;
+			if (difficulty<0) {
+				difficulty = 0;
+			}
+			
 			switch (QualityManager.Instance.scoringQualityList.Count) {
 			case 4:
-				CardManager.Instance.RemoveQuality("QSound");
-				difficulty--;
+				switch(GameScene.fourthQuality) {
+				case "sound":
+					CardManager.Instance.RemoveQuality("QSound");
+					break;
+				case "particles":
+					CardManager.Instance.RemoveQuality("QParticle");
+					break;
+				default:
+					break;
+				}
 				break;
 			case 3:
 				CardManager.Instance.RemoveQuality("QSymbol");
-				difficulty--;
 				break;
 			case 2:
 				CardManager.Instance.RemoveQuality("QPattern");
-				difficulty--;
 				break;
 			case 1:
 			default:

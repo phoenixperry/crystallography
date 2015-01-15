@@ -31,8 +31,6 @@ namespace Crystallography.UI
 		BonusTimer BonusBar;
 		public StrikeHud Strikes;
 		
-//		SpriteTile TimeBar;
-		
 		public LevelTitleMkTwo levelTitle;
 		public MessagePanel _messagePanel;
 		public HudPanel _nextLevelPanel;
@@ -101,10 +99,8 @@ namespace Crystallography.UI
 		/// Handles the card manager instance no matches possible detected.
 		/// </summary>
 		void HandleCardManagerInstanceNoMatchesPossibleDetected (object sender, EventArgs e) {
-//			NoMatchesPossibleTime = DisplayTimer;
 			NoMatchesPossibleTime = GameTimer.LevelTimer;
 			MetGoal();
-//			_pauseTimer = true;
 			GameTimer.Pause(true);
 		}
 		
@@ -130,6 +126,10 @@ namespace Crystallography.UI
 				break;
 			case 999:
 				levelTitle.Title = "crystallon challenge mode";
+				if(GameScene.gameTimeLimit > 0.0f) {
+					float minutes = GameScene.gameTimeLimit/60.0f;
+					levelTitle.Title += ": " + minutes.ToString("#0.#") + " minute limit";
+				}
 				break;
 			default:
 				levelTitle.Title = "crystallon puzzle " + GameScene.currentLevel.ToString();
@@ -182,7 +182,7 @@ namespace Crystallography.UI
 			EnableHitMeButton();
 			GameTimer.Pause(false);
 			
-			if (GameScene.currentLevel == 999) {
+			if (GameScene.currentLevel == 999 && BonusBar != null) {
 				BonusBar.Pause(false);
 			}
 		}
@@ -305,9 +305,13 @@ namespace Crystallography.UI
 //				MetGoal();
 //			}
 //			Strikes.Despair();
+			if(GameScene.gameTimeLimit > 0.0f) {
+				// TIMED MODE TIMER ELAPSED
+				MetGoal();
+			}
 			GameTimer.SetDisplayTimer(0.01f, false);
 			GameTimer.Pause(true);
-			BonusBar.Pause(true);
+//			BonusBar.Pause(true);
 		}
 		
 		void HandleBonusBarBarFilled (object sender, EventArgs e)
@@ -406,8 +410,10 @@ namespace Crystallography.UI
 			if(GameScene.currentLevel == 999) {
 				GameTimer.BarEmptied += HandleGameTimerBarEmptied;
 				GameTimer.BarFilled += HandleGameTimerBarFilled;
-				BonusBar.BarFilled += HandleBonusBarBarFilled;
-				BonusBar.BarEmptied += HandleBonusBarBarEmptied; 
+				if(BonusBar != null) {
+					BonusBar.BarFilled += HandleBonusBarBarFilled;
+					BonusBar.BarEmptied += HandleBonusBarBarEmptied; 
+				}
 				Strikes.StrikeBarSuccess += HandleStrikesStrikeBarSuccess;
 				Strikes.StrikeBarFailure += HandleStrikesStrikeBarFailure;
 				(_nextLevelPanel as InfiniteModeEndPanel).RetryDetected += HandlePausePanelResetButtonPressDetected;
@@ -450,8 +456,10 @@ namespace Crystallography.UI
 			if(GameScene.currentLevel == 999) {
 				GameTimer.BarEmptied -= HandleGameTimerBarEmptied;
 				GameTimer.BarFilled -= HandleGameTimerBarFilled;
-				BonusBar.BarFilled -= HandleBonusBarBarFilled;
-				BonusBar.BarEmptied -= HandleBonusBarBarEmptied;
+				if (BonusBar != null) {
+					BonusBar.BarFilled -= HandleBonusBarBarFilled;
+					BonusBar.BarEmptied -= HandleBonusBarBarEmptied;
+				}
 				(_nextLevelPanel as InfiniteModeEndPanel).RetryDetected -= HandlePausePanelResetButtonPressDetected;
 				(_nextLevelPanel as InfiniteModeEndPanel).QuitDetected -= Handle_nextLevelPanelQuitButtonPressDetected;
 			} else {
@@ -630,15 +638,17 @@ namespace Crystallography.UI
 			
 			// TIMER & STRIKES STUFF
 			GameTimer = new TimerEntity();
-			if (GameScene.currentLevel == 999) {	// ------------------- IF INFINITE MODE
-//				GameTimer.Position = new Vector2(348.0f, 16.0f);	// ----- ADD THE TIME BAR
-//				GameHudBar.AddChild(GameTimer);
-				
-				BonusBar = new BonusTimer() {
-//					Position = new Vector2(348.0f, 44.0f)
-					Position = new Vector2(348.0f, 16.0f)
-				};
-				GameHudBar.AddChild(BonusBar);
+			if (GameScene.currentLevel == 999) {	// ------------------- IF CHALLENGE MODE
+				if(GameScene.gameTimeLimit > 0.0f) {
+					GameTimer.Position = new Vector2(348.0f, 16.0f);	// ----- ADD THE TIME BAR
+					GameHudBar.AddChild(GameTimer);
+				} else {
+					BonusBar = new BonusTimer() {
+//						Position = new Vector2(348.0f, 44.0f)
+						Position = new Vector2(348.0f, 16.0f)
+					};
+					GameHudBar.AddChild(BonusBar);
+				}
 				
 				Strikes = new StrikeHud() {
 					Position = new Vector2(395.0f, 44.0f)
@@ -694,8 +704,10 @@ namespace Crystallography.UI
 			
 			if (GameScene.currentLevel == 999) {
 				Strikes.Reset();
-				BonusBar.Reset();
-				BonusBar.Pause(true);
+				if(BonusBar != null) {
+					BonusBar.Reset();
+					BonusBar.Pause(true);
+				}
 			}
 			
 			GameTimer.Reset();
@@ -705,6 +717,10 @@ namespace Crystallography.UI
 			
 			CubeText.Text = "0";
 			CenterCubeScoreText(CubeText, CUBES_TEXT_POS);
+		}
+		
+		public void SetGameTimeLimit(float pTime) {
+			GameTimer.MaxTime = pTime;
 		}
 		
 		private void CenterCubeScoreText(Label pLabel, Vector2 pAnchor) {

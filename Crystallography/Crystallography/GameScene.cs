@@ -39,6 +39,8 @@ namespace Crystallography
 		// GET & SET -----------------------------------------------------------------------------------
 		
 		public static int currentLevel { get; private set; }
+		public static float gameTimeLimit { get; private set; }
+		public static string fourthQuality { get; private set; }
 		
 		public static System.Collections.ObjectModel.ReadOnlyCollection<ICrystallonEntity> getAllEntities() {
 			return _allEntites.AsReadOnly();
@@ -50,35 +52,33 @@ namespace Crystallography
 			get {
 				if (Hud == null) {
 					return false;
-				}// else {
-//					return (Hud.levelEndPanel.Visible == false);
-//				}
+				}
 				return true;
 			}
 		}
 		
 		// CONSTRUCTOR ----------------------------------------------------------------------------------
 		
-        public GameScene ( int pCurrentLevel, bool pTimed )
+        public GameScene ( GameSceneData pData )
 		{	
+			gameTimeLimit = pData.timeLimit;
+			
 			this.AddChild( BackgroundLayer = new Layer() );
 			this.AddChild( GameplayLayer = new Layer() );
 			this.AddChild( ForegroundLayer = new Layer() );
 			this.AddChild( DialogLayer = new Layer() );
 			Layers = new Layer[] {BackgroundLayer, GameplayLayer, ForegroundLayer, DialogLayer};
-						
-//			LevelManager.Instance.GetLevelSettings( pCurrentLevel );
 			
 			Touch.GetData(0).Clear();
 			InputManager.Instance.Reset();
 			
-			currentLevel = pCurrentLevel;
+			currentLevel = pData.level;
             this.Camera.SetViewFromViewport();
             _physics = GamePhysics.Instance;
 			
 			Hud = new Crystallography.UI.GameSceneHud(this);
-			if (pTimed) {
-				// TODO Set Up Timer
+			if (gameTimeLimit > 0.0f) {
+				Hud.SetGameTimeLimit(gameTimeLimit);
 			}
 			ForegroundLayer.AddChild(Hud);
 			
@@ -165,13 +165,6 @@ namespace Crystallography
 			this.RunAction(sequence);
 			
 			ForegroundLayer.AddChild( Support.ParticleEffectsManager.Instance );
-			
-//			var c = new Vector4(0.271f, 0.688f, 0.525f, 0.666f);
-//			Console.WriteLine(c.ToString());
-//			c = Support.RGBToHSB(c);
-//			Console.WriteLine(c.ToString());
-//			c = Support.HSBToRGB(c);
-//			Console.WriteLine(c.ToString());
 			
 #if METRICS
 			DataStorage.AddMetric("Level", () => currentLevel, 1);
@@ -300,14 +293,12 @@ namespace Crystallography
 				LevelManager.Instance.GetLevelSettings( currentLevel );
 				Clear();
 				QualityManager.Instance.Reset( currentLevel );
-//				CardManager.Instance.Populate();
 				EventHandler handler = LevelChangeDetected;
 				if (handler != null) {
 					handler( this, null );
 				}
 				
 				QColor.Instance.ShiftColors(1, 1.0f);
-//				CardManager.Instance.RotateColors(-1, 1.0f, 5.0f);
 				
 			} else {
 #if DEBUG
@@ -325,13 +316,13 @@ namespace Crystallography
 		public static void QuitToTitle() {
 			( Director.Instance.CurrentScene as GameScene ).Clear();
 			ForceGarbageCollection();
-			Director.Instance.ReplaceScene( new Crystallography.UI.LoadingScene(0,false,"Menu") );
+			Director.Instance.ReplaceScene( new Crystallography.UI.LoadingScene("Menu") );
 		}
 		
 		public static void QuitToLevelSelect() {
 			( Director.Instance.CurrentScene as GameScene ).Clear();
 			ForceGarbageCollection();
-			Director.Instance.ReplaceScene( new Crystallography.UI.LoadingScene(0,false,"Level Select") );
+			Director.Instance.ReplaceScene( new Crystallography.UI.LoadingScene("Level Select") );
 		}
 		
 		private static void ForceGarbageCollection() {
@@ -348,4 +339,12 @@ namespace Crystallography
         }
 #endif
 	}
+	
+	public class GameSceneData
+	{
+		public int level;
+		public float timeLimit = 0.0f;
+		public string fourthQuality = "none";
+	}
+	
 }

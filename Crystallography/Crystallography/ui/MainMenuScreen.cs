@@ -195,7 +195,10 @@ namespace Crystallography.UI
 //			Console.WriteLine("New Game");
 			Console.WriteLine("Tutorial");
 #endif
-			Director.Instance.ReplaceScene(new LoadingScene(0, false) );
+			LoadingScene.GAME_SCENE_DATA.level = 0;
+			LoadingScene.GAME_SCENE_DATA.timeLimit = 0.0f;
+			LoadingScene.GAME_SCENE_DATA.fourthQuality = "none";
+			Director.Instance.ReplaceScene(new LoadingScene("Game", LoadingScene.GAME_SCENE_DATA) );
 		}
 		
 		void HandleLevelSelectButtonButtonUpAction (object sender, EventArgs e) {
@@ -203,8 +206,11 @@ namespace Crystallography.UI
 //			Console.WriteLine("Level Select");
 			Console.WriteLine("New Game");
 #endif
-//			Director.Instance.ReplaceScene(new LoadingScene(0, false, "Level Select") );
-			Director.Instance.ReplaceScene(new LoadingScene(1, false) );
+			LoadingScene.GAME_SCENE_DATA.level = 1;
+			LoadingScene.GAME_SCENE_DATA.timeLimit = 0.0f;
+			LoadingScene.GAME_SCENE_DATA.fourthQuality = "none";
+//			Director.Instance.ReplaceScene(new LoadingScene(0, 0.0f, "Level Select") );
+			Director.Instance.ReplaceScene(new LoadingScene("Game", LoadingScene.GAME_SCENE_DATA) );
 		}
 		
 		void HandleCreditsButtonButtonUpAction (object sender, EventArgs e) {

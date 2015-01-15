@@ -9,6 +9,8 @@ namespace Crystallography.UI
 	public class LoadingScene : Sce.PlayStation.HighLevel.GameEngine2D.Scene
 	{
 		readonly TimeSpan minProcTime = new TimeSpan(0, 0, 0, 0, 30);
+		readonly GameSceneData DEFAULT_GAME_SCENE_DATA = new GameSceneData(){level=0, timeLimit=0.0f, fourthQuality="none"};
+		public static GameSceneData GAME_SCENE_DATA = new GameSceneData();
 		List<Action> loadProc;
 		Stopwatch stopwatch;
 		int _loadIndex;
@@ -20,7 +22,7 @@ namespace Crystallography.UI
 		protected int _levelNumber;
 		protected float _timer;
 		protected float _angle;
-		protected bool _timed;
+		protected float _gameTimer;
 		
 		SpriteTile LoadingSpinner;
 		Node Hub;
@@ -28,13 +30,18 @@ namespace Crystallography.UI
 		
 		// CONSTRUCTOR ---------------------------------------------------------------------------------------
 		
-		public LoadingScene (int pLevelNumber=0, bool pTimed=false, string pDestination="Game") {
+		public LoadingScene (string pDestination, GameSceneData pData = null) {
+			if(pData==null) {
+				pData = DEFAULT_GAME_SCENE_DATA;
+				GAME_SCENE_DATA = pData;
+			}
+			
 			this.Camera.SetViewFromViewport();
 			
 			stopwatch = Stopwatch.StartNew();
 			
-			_levelNumber = pLevelNumber;
-			_timed = pTimed;
+			_levelNumber = pData.level;
+			_gameTimer = pData.timeLimit;
 			_angle = 0.0f;
 			_timer = 0.0f;
 			_loadIndex = 0;
@@ -230,7 +237,7 @@ namespace Crystallography.UI
 				},
 				// PREPARE GAME SCENE
 				() => {
-					_scene = new GameScene(_levelNumber, _timed);
+					_scene = new GameScene(GAME_SCENE_DATA);
 				},
 				() => {
 					while (GameScene.Hud.Initialized == false) {

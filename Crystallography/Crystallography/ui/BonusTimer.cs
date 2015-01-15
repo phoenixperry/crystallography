@@ -73,7 +73,7 @@ namespace Crystallography.UI
 		public override void Reset ()
 		{
 			base.Reset ();
-			this._timerSpeed = 0.3f;
+			this._timerSpeed = 0.0f;
 			DisplayTimer = _maxTime * (1.0f - 1.0f/X_SCALE);
 			
 //			_maxTime * (1 - ( 1 - 1/X_SCALE));

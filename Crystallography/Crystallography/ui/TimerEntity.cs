@@ -31,6 +31,7 @@ namespace Crystallography.UI
 		protected float _barAdjustmentTimer;
 		
 		protected float _maxTime;
+		protected float _maxTimeStart;
 		
 		public event EventHandler BarFilled;
 		public event EventHandler BarEmptied;
@@ -41,7 +42,14 @@ namespace Crystallography.UI
 		public float LevelTimer {get; private set;}
 		public float AbsoluteTimer {get; private set;}
 		
-		public float MaxTime {get {return _maxTime;} set {_maxTime = value;} }
+		public float MaxTime {get {return _maxTime;}
+							  set {
+										if(value>0.0f) {
+											_maxTime = value;
+											_maxTimeStart = value;
+										}
+								  }
+							  }
 		
 		// CONSTRUCTORS ----------------------------------------------------
 		
@@ -125,6 +133,7 @@ namespace Crystallography.UI
 			_intialized = true;
 			_pauseTimer = pStartPaused;
 			AbsoluteTimer = 0.0f;
+			_maxTimeStart = MAX_TIME_DEFAULT;
 			
 			TimerIcon = Support.TiledSpriteFromFile(TIMER_ICON_PATH, 1, 1);
 			TimerIcon.RegisterPalette(0);
@@ -134,8 +143,6 @@ namespace Crystallography.UI
 			TimeBar.Position = new Vector2(45.0f, 0.0f);
 			TimeBar.RegisterPalette(0);
 			TimerIcon.AddChild(TimeBar);
-			
-			
 			
 			LeftEnd = Support.TiledSpriteFromFile(TIMER_END_PATH, 1, 1);
 			LeftEnd.FlipU = true;
@@ -160,7 +167,7 @@ namespace Crystallography.UI
 			_barAdjustmentTimer = 0.0f;
 			DisplayTimer = 0.001f;
 			LevelTimer = 0.0f;
-			_maxTime = MAX_TIME_DEFAULT;
+			_maxTime = _maxTimeStart;
 		}
 		
 		public void SetDisplayTimer( float pTime, bool instant=true ) {
