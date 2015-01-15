@@ -217,18 +217,6 @@ namespace Crystallography.UI
 				() => {
 					var temp = Support.TiledSpriteFromFile("/Application/assets/images/icons/icons.png", 4, 2);
 				},
-//				() => {
-//					LevelManager.Instance.Reset();
-//				},
-//				() => {
-//					LevelManager.Instance.GetLevelSettings( _levelNumber );
-//				},
-//				() => {
-//					QualityManager.Instance.Reset( CardManager.Instance, _levelNumber );
-//				},
-//				() => {
-//					var temp = GroupManager.Instance;
-//				},
 				() => {
 					var temp = Crystallography.UI.IconPopupManager.Instance;
 				},
@@ -257,7 +245,6 @@ namespace Crystallography.UI
 		protected void AddMenuProcs() {
 			List<Action> proc = new List<Action> {
 				() => {
-//					var temp = Support.SpriteFromFile("/Application/assets/images/UI/menuButtonBackground.png");
 					var temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_bottom.png");
 				},
 				() => {

@@ -664,7 +664,7 @@ namespace Crystallography.UI
 			};
 			this.AddChild(PauseButton);
 			PauseButton.background.RegisterPalette(2);
-			PauseButton.background.Scale = new Vector2(115.0f/16.0f, 71.0f/16.0f);
+			PauseButton.background.Scale = new Vector2(115.0f/32.0f, 71.0f/16.0f);
 			PauseButton.Icon.RegisterPalette(2);
 			PauseButton.ButtonUpAction += HandlePauseButtonButtonUpAction;
 			
@@ -677,7 +677,7 @@ namespace Crystallography.UI
 			HitMeButton.On(!LevelManager.Instance.HitMeDisabled);
 			this.AddChild(HitMeButton);
 			HitMeButton.background.RegisterPalette(1);
-			HitMeButton.background.Scale = new Vector2(115.0f/16.0f, 71.0f/16.0f);
+			HitMeButton.background.Scale = new Vector2(115.0f/32.0f, 71.0f/16.0f);
 			HitMeButton.Icon.RegisterPalette(1);
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
 			
