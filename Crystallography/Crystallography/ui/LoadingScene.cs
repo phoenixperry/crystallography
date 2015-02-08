@@ -160,6 +160,7 @@ namespace Crystallography.UI
 			// PRE-LOAD IMAGES
 				() => {
 					LevelManager.Instance.GetLevelSettings(_levelNumber);
+					LevelManager.Instance.timeLimit = _gameTimer;
 				},
 				() => {
 					var temp = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 16, "Bold");

@@ -18,13 +18,33 @@ namespace Crystallography.UI
 		protected Slider timeLimitSlider;
 		protected Slider fourthQualitySlider;
 		
+		protected Label _bestTitleText;
+		protected Label _bestCubesText;
+		protected Label _bestPointsText;
+		protected Label _bestTimeText;
+		
+		protected int _bestCubes;
+		protected int _bestPoints;
+		protected float _bestTime;
+		
+		protected HighScoreEntry[] _highScoreEntries;
+		
+//		protected SpriteTile _cubeIcon;
+//		protected SpriteTile _scoreIcon;
+//		protected SpriteTile _timeIcon;
+		
 		// CONSTRUCTOR ------------------------------------------
 		
 		public InfiniteModeScreen (MenuSystemScene pMenuSystem) {
 			MenuSystem = pMenuSystem;
 			
+			var map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
+			
+			_bestCubes = _bestPoints = 0;
+			_bestTime = 0.0f;
+			
 			_timeLimitText = new Label() {
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") )
+				FontMap = map
 			};
 			_timeLimitText.RegisterPalette(0);
 			this.AddChild(_timeLimitText);
@@ -38,8 +58,38 @@ namespace Crystallography.UI
 				OnChange = (unused) => {
 					if ( timeLimitSlider.Value != timeLimitSlider.max ) {
 						_timeLimitText.Text = timeLimitSlider.Value.ToString() + " minutes";
+						if(_highScoreEntries != null) {
+							_highScoreEntries[0].ShowBestTime(false);
+							_highScoreEntries[0].BestCubes = DataStorage.timedCubes[timeLimitSlider.SelectedOption,0,0];
+							_highScoreEntries[0].BestPoints = DataStorage.timedScores[timeLimitSlider.SelectedOption,0,1];
+//							for(int i=0; i < 2; i++){
+//								_highScoreEntries[i].BestCubes = DataStorage.timedCubes[timeLimitSlider.SelectedOption,i,0];
+//								_highScoreEntries[i].BestPoints = DataStorage.timedScores[timeLimitSlider.SelectedOption,i,1];
+//							}
+						}
 					} else {
 						_timeLimitText.Text = "infinite";
+						if(_highScoreEntries != null) {
+							_highScoreEntries[0].ShowBestTime(true);
+							
+							_highScoreEntries[0].BestCubes = DataStorage.infiniteCubes[0,0];
+							_highScoreEntries[0].BestPoints = DataStorage.infiniteScores[0,1];
+							_highScoreEntries[0].BestTime = DataStorage.infiniteTimes[0,2];
+							
+//							_highScoreEntries[1].BestCubes = DataStorage.infiniteScores[0,0];
+//							_highScoreEntries[1].BestPoints = DataStorage.infiniteScores[0,1];
+//							_highScoreEntries[1].BestTime = DataStorage.infiniteScores[0,2];
+//							
+//							_highScoreEntries[2].BestCubes = DataStorage.infiniteTimes[0,0];
+//							_highScoreEntries[2].BestPoints = DataStorage.infiniteTimes[0,1];
+//							_highScoreEntries[2].BestTime = DataStorage.infiniteTimes[0,2];
+							
+//							for(int i=0; i < 3; i++){
+//								_highScoreEntries[i].BestCubes = DataStorage.infiniteCubes[i,0];
+//								_highScoreEntries[i].BestPoints = DataStorage.infiniteScores[i,1];
+//								_highScoreEntries[i].BestTime = DataStorage.infiniteTimes[i,2];
+//							}
+						}
 					}
 				}
 			};
@@ -51,7 +101,7 @@ namespace Crystallography.UI
 			_timeLimitText.Position = new Vector2(timeLimitSlider.Position.X + timeLimitSlider.Length + 20.0f, timeLimitSlider.Position.Y);
 			
 			_fourthQualityText = new Label() {
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") )
+				FontMap = map
 			};
 			_fourthQualityText.RegisterPalette(1);
 			this.AddChild(_fourthQualityText);
@@ -82,6 +132,39 @@ namespace Crystallography.UI
 			this.AddChild(fourthQualitySlider);
 			
 			_fourthQualityText.Position = new Vector2(fourthQualitySlider.Position.X + fourthQualitySlider.Length + 20.0f, fourthQualitySlider.Position.Y);
+			
+			
+			_bestTitleText = new Label() {
+				Text = "best",
+				FontMap = map,
+				Position = new Vector2(fourthQualitySlider.Position.X, fourthQualitySlider.Position.Y - 80.0f)
+			};
+			_bestTitleText.RegisterPalette(2);
+			this.AddChild(_bestTitleText);
+			
+			_highScoreEntries = new HighScoreEntry[3];
+			_highScoreEntries[0] = new HighScoreEntry() {
+				BestCubes = DataStorage.infiniteCubes[0,0],
+				BestPoints = DataStorage.infiniteCubes[0,1],
+				BestTime = (float)DataStorage.infiniteCubes[0,2],
+				Position = new Vector2(_bestTitleText.Position.X, _bestTitleText.Position.Y - 60)
+			};
+//			_highScoreEntries[1] = new HighScoreEntry() {
+//				BestCubes = DataStorage.infiniteScores[0,0],
+//				BestPoints = DataStorage.infiniteScores[0,1],
+//				BestTime = (float)DataStorage.infiniteScores[0,2],
+//				Position = new Vector2(_bestTitleText.Position.X, _bestTitleText.Position.Y - 120)
+//			};
+//			_highScoreEntries[2] = new HighScoreEntry() {
+//				BestCubes = DataStorage.infiniteTimes[0,0],
+//				BestPoints = DataStorage.infiniteTimes[0,1],
+//				BestTime = (float)DataStorage.infiniteTimes[0,2],
+//				Position = new Vector2(_bestTitleText.Position.X, _bestTitleText.Position.Y - 180)
+//			};
+//			for(int i=0; i<3; i++){
+//				this.AddChild(_highScoreEntries[i]);
+//			}
+			this.AddChild(_highScoreEntries[0]);
 			
 			cancelButton = new BetterButton(289.0f, 71.0f) {
 				Text = "main menu",

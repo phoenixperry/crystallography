@@ -28,6 +28,9 @@ namespace Crystallography.UI
 		
 		// GET & SET --------------------------------------------------------------------------
 		
+		public int NumOptions { get; protected set; }
+		public int SelectedOption { get; protected set;}
+		
 		public float Value {
 			get { return val; }
 		}
@@ -152,6 +155,7 @@ namespace Crystallography.UI
 			val = Sce.PlayStation.Core.FMath.Min(pValue, max);
 			val = Sce.PlayStation.Core.FMath.Max(val, min);
 			Knob.Position = new Vector2( length * ((pValue-min)/(max-min)), 0.0f);
+			SelectedOption = discreteOptions.IndexOf(pValue);
 			if ( false == pSilent && OnChange != null) {
 				OnChange(val);
 			}
@@ -159,6 +163,7 @@ namespace Crystallography.UI
 		
 		public void AddTickmarks() {
 			if (discreteOptions != null && discreteOptions.Count > 0) {
+				NumOptions = discreteOptions.Count;
 				if (Ticks != null) {
 					foreach (SpriteTile s in Ticks) {
 						this.RemoveChild(s, true);

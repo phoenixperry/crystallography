@@ -58,6 +58,8 @@ namespace Crystallography
 		public bool HitMeDisabled	 { get; set; }
 		public Vector4 SpawnRect	 { get; set; }
 		
+		public float timeLimit;
+		
 		public Vector4 BackgroundColor {
 			get { return Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.GL.Context.GetClearColor(); }
 			set { Sce.PlayStation.HighLevel.GameEngine2D.Director.Instance.GL.Context.SetClearColor(value); }

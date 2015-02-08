@@ -114,6 +114,7 @@
     <Compile Include="ui\Strike.cs" />
     <Compile Include="ui\StrikeHud.cs" />
     <Compile Include="ui\BonusTimer.cs" />
+    <Compile Include="ui\HighScoreEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

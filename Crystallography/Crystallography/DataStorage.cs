@@ -11,21 +11,24 @@ namespace Crystallography
 		static readonly string SAVE_TEMP = "/Documents/crystallon.tmp";
 		
 		static readonly int numPuzzles = 41;
+		static readonly int numTimedModes = 4;
 		static readonly int numTimedHighScores = 3;
 		static readonly int numTimedHighCubes = 3;
-		static readonly int numInfiniteHighScores = 3;
-		static readonly int numInfiniteHighCubes = 3;
+		static readonly int numInfiniteHighScores = 1;
+		static readonly int numInfiniteHighCubes = 1;
+		static readonly int numInfiniteHighTimes = 1;
 		
 		static public Boolean[] puzzleComplete = new Boolean[numPuzzles];
 		static public Boolean[] puzzleLocked = new Boolean[numPuzzles];
 		static public Dictionary<Int32, List<Int32[]>> puzzleSolutionsFound = new Dictionary<Int32, List<Int32[]>>();
 		static public Int32[] puzzleSolutionsCount = new Int32[numPuzzles];
 		
-		static public Int32[,] timedScores = new Int32[numTimedHighScores, 2];
-		static public Int32[,] timedCubes = new Int32[numTimedHighCubes, 2];
+		static public Int32[,,] timedScores = new Int32[numTimedModes, numTimedHighScores, 2];
+		static public Int32[,,] timedCubes = new Int32[numTimedModes, numTimedHighCubes, 2];
 		
-		static public Int32[,] infiniteScores = new Int32[numInfiniteHighScores, 2];
-		static public Int32[,] infiniteCubes = new Int32[numInfiniteHighCubes, 2];
+		static public Int32[,] infiniteScores = new Int32[numInfiniteHighScores, 3];
+		static public Int32[,] infiniteCubes = new Int32[numInfiniteHighCubes, 3];
+		static public Int32[,] infiniteTimes = new Int32[numInfiniteHighTimes, 3];
 		
 		static public Int32[] options = new Int32[5];
 		
@@ -62,16 +65,19 @@ namespace Crystallography
 			}
 		}
 		
-		public static void SaveTimedScore(int pCubes, int pScore) {
+		public static void SaveTimedScore(int pCubes, int pScore, int pWhichTimedMode) {
+#if DEBUG
+			Console.WriteLine("### SAVING TIMED SCORE DATA: Lv {0} Cu {1} Sc {2} Mode {3}", 999, pCubes, pScore, pWhichTimedMode);
+#endif
 			int score = pScore;
 			int cubes = pCubes;
 			int[] buffer = {0,0};
 			for( int i=0; i<numTimedHighScores; i++) {
-				if (timedScores[i,1] < score) {
-					buffer[0] = timedScores[i, 0];
-					buffer[1] = timedScores[i, 1];
-					timedScores[i, 0] = cubes;
-					timedScores[i, 1] = score;
+				if (timedScores[pWhichTimedMode,i,1] < score) {
+					buffer[0] = timedScores[pWhichTimedMode, i, 0];
+					buffer[1] = timedScores[pWhichTimedMode, i, 1];
+					timedScores[pWhichTimedMode, i, 0] = cubes;
+					timedScores[pWhichTimedMode, i, 1] = score;
 					cubes = buffer[0];
 					score = buffer[1];
 				}
@@ -79,11 +85,11 @@ namespace Crystallography
 			score = pScore;
 			cubes = pCubes;
 			for( int i=0; i<numTimedHighCubes; i++) {
-				if( timedCubes[i, 0] < cubes ) {
-					buffer[0] = timedCubes[i, 0];
-					buffer[1] = timedCubes[i, 1];
-					timedCubes[i, 0] = cubes;
-					timedCubes[i, 1] = score;
+				if( timedCubes[pWhichTimedMode, i, 0] < cubes ) {
+					buffer[0] = timedCubes[pWhichTimedMode, i, 0];
+					buffer[1] = timedCubes[pWhichTimedMode, i, 1];
+					timedCubes[pWhichTimedMode, i, 0] = cubes;
+					timedCubes[pWhichTimedMode, i, 1] = score;
 					cubes = buffer[0];
 					score = buffer[1];
 				}
@@ -91,30 +97,62 @@ namespace Crystallography
 			SaveData();
 		}
 		
-		public static void SaveInfiniteScore(int pCubes, int pScore) {
+		public static void SaveInfiniteScore(int pCubes, int pScore, float pTime) {
+			int iTime = (int)Sce.PlayStation.Core.FMath.Floor(pTime);
+#if DEBUG
+			Console.WriteLine("### SAVING INF SCORE DATA: Lv {0} Cu {1} Sc {2} Time {3}", 999, pCubes, pScore, iTime);
+#endif
+			int[] buffer = {0,0,0};
+			
+			// BEST SCORES
 			int score = pScore;
 			int cubes = pCubes;
-			int[] buffer = {0,0};
+			int time = iTime;
 			for( int i=0; i<numInfiniteHighScores; i++ ) {
 				if (infiniteScores[i, 1] < score) {
 					buffer[0] = infiniteScores[i, 0];
 					buffer[1] = infiniteScores[i, 1];
+					buffer[2] = infiniteScores[i, 2];
 					infiniteScores[i, 0] = cubes;
 					infiniteScores[i, 1] = score;
+					infiniteScores[i, 2] = time;
 					cubes = buffer[0];
 					score = buffer[1];
+					time  = buffer[2];
 				}
 			}
+			// BEST CUBES
 			score = pScore;
 			cubes = pCubes;
+			time = iTime;
 			for( int i=0; i<numInfiniteHighCubes; i++ ) {
 				if (infiniteCubes[i, 0] < cubes) {
-					buffer[0] = infiniteScores[i, 0];
-					buffer[1] = infiniteScores[i, 1];
-					infiniteScores[i, 0] = cubes;
-					infiniteScores[i, 1] = score;
+					buffer[0] = infiniteCubes[i, 0];
+					buffer[1] = infiniteCubes[i, 1];
+					buffer[2] = infiniteCubes[i, 2];
+					infiniteCubes[i, 0] = cubes;
+					infiniteCubes[i, 1] = score;
+					infiniteCubes[i, 2] = time;
 					cubes = buffer[0];
 					score = buffer[1];
+					time  = buffer[2];
+				}
+			}
+			// BEST TIMES
+			score = pScore;
+			cubes = pCubes;
+			time = iTime;
+			for( int i=0; i<numInfiniteHighTimes; i++ ) {
+				if (infiniteTimes[i, 2] < time) {
+					buffer[0] = infiniteTimes[i, 0];
+					buffer[1] = infiniteTimes[i, 1];
+					buffer[2] = infiniteTimes[i, 2];
+					infiniteTimes[i, 0] = cubes;
+					infiniteTimes[i, 1] = score;
+					infiniteTimes[i, 2] = time;
+					cubes = buffer[0];
+					score = buffer[1];
+					time  = buffer[2];
 				}
 			}
 			SaveData();
@@ -137,10 +175,11 @@ namespace Crystallography
 			int bufferSize = sizeof(Int32) * numRecords;
 			bufferSize += sizeof(Boolean) * numRecords;	// complete?
 			bufferSize += sizeof(Boolean) * numRecords; // locked?
-			bufferSize += sizeof(Int32) * 2 * numTimedHighScores;
-			bufferSize += sizeof(Int32) * 2 * numTimedHighCubes;
-			bufferSize += sizeof(Int32) * 2 * numInfiniteHighScores;
-			bufferSize += sizeof(Int32) * 2 * numInfiniteHighCubes;
+			bufferSize += sizeof(Int32) * 2 * numTimedHighScores * numTimedModes;
+			bufferSize += sizeof(Int32) * 2 * numTimedHighCubes * numTimedModes;
+			bufferSize += sizeof(Int32) * 3 * numInfiniteHighScores;
+			bufferSize += sizeof(Int32) * 3 * numInfiniteHighCubes;
+			bufferSize += sizeof(Int32) * 3 * numInfiniteHighTimes;
 			bufferSize += sizeof(Int32) * options.Length; // options
 			bufferSize += sizeof(Int32) * 1; // hash
 			
@@ -195,36 +234,42 @@ namespace Crystallography
 			// TIMED MODE DATA
 			count = 0;
 			var row = 0;
-			for( int i=0; i < 2 * numTimedHighScores; ++i ) {
-				Buffer.BlockCopy(timedScores, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
-				count++;
-				sum += timedScores[row,0];
-				i++;
-				Buffer.BlockCopy(timedScores, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
-				count++;
-				sum += timedScores[row,1];
-				row++;
+			for( int mode=0; mode < numTimedModes; mode++ ) {
+				for( int i=0; i < 2 * numTimedHighScores; ++i ) {
+					Buffer.BlockCopy(timedScores, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
+					count++;
+					sum += timedScores[mode,row,0];
+					i++;
+					Buffer.BlockCopy(timedScores, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
+					count++;
+					sum += timedScores[mode,row,1];
+					row++;
+				}
+				row = 0;
 			}
 			bufferBase += sizeof(Int32) * count;
 			
 			count = 0;
 			row = 0;
-			for( int i=0; i < 2 * numTimedHighCubes; ++i ) {
-				Buffer.BlockCopy(timedCubes, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
-				count++;
-				sum += timedCubes[row,0];
-				i++;
-				Buffer.BlockCopy(timedCubes, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
-				count++;
-				sum += timedCubes[row,1];
-				row++;
+			for( int mode=0; mode < numTimedModes; mode++ ) {
+				for( int i=0; i < 2 * numTimedHighCubes; ++i ) {
+					Buffer.BlockCopy(timedCubes, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
+					count++;
+					sum += timedCubes[mode,row,0];
+					i++;
+					Buffer.BlockCopy(timedCubes, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
+					count++;
+					sum += timedCubes[mode,row,1];
+					row++;
+				}
+				row = 0;
 			}
 			bufferBase += sizeof(Int32) * count;
 			
 			// INFINITE MODE DATA
 			count = 0;
 			row = 0;
-			for( int i=0; i < 2 * numInfiniteHighScores; ++i ) {
+			for( int i=0; i < 3 * numInfiniteHighScores; ++i ) {
 				Buffer.BlockCopy(infiniteScores, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
 				count++;
 				sum += infiniteScores[row,0];
@@ -232,13 +277,17 @@ namespace Crystallography
 				Buffer.BlockCopy(infiniteScores, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
 				count++;
 				sum+=infiniteScores[row,1];
+				i++;
+				Buffer.BlockCopy(infiniteScores, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
+				count++;
+				sum+=infiniteScores[row,2];
 				row++;
 			}
 			bufferBase += sizeof(Int32) * count;
 			
 			count = 0;
 			row = 0;
-			for( int i=0; i < 2 * numInfiniteHighCubes; ++i ) {
+			for( int i=0; i < 3 * numInfiniteHighCubes; ++i ) {
 				Buffer.BlockCopy(infiniteCubes, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
 				count++;
 				sum += infiniteCubes[row,0];
@@ -246,6 +295,28 @@ namespace Crystallography
 				Buffer.BlockCopy(infiniteCubes, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
 				count++;
 				sum+=infiniteCubes[row,1];
+				i++;
+				Buffer.BlockCopy(infiniteCubes, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
+				count++;
+				sum+=infiniteCubes[row,2];
+				row++;
+			}
+			bufferBase += sizeof(Int32) * count;
+			
+			count = 0;
+			row = 0;
+			for( int i=0; i < 3 * numInfiniteHighTimes; ++i ) {
+				Buffer.BlockCopy(infiniteTimes, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
+				count++;
+				sum += infiniteTimes[row,0];
+				i++;
+				Buffer.BlockCopy(infiniteTimes, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
+				count++;
+				sum+=infiniteTimes[row,1];
+				i++;
+				Buffer.BlockCopy(infiniteTimes, sizeof(Int32) * i, buffer, bufferBase + sizeof(Int32) * count, sizeof(Int32));
+				count++;
+				sum+=infiniteTimes[row,2];
 				row++;
 			}
 			bufferBase += sizeof(Int32) * count;
@@ -352,36 +423,42 @@ namespace Crystallography
 						// TIMED MODE DATA
 						count = 0;
 						var row = 0;
-						for( int i=0; i<2*numTimedHighScores; ++i ) {
-							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, timedScores, sizeof(Int32) * i, sizeof(Int32) );
-							count++;
-							sum += timedScores[row,0];
-							i++;
-							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, timedScores, sizeof(Int32) * i, sizeof(Int32) );
-							count++;
-							sum += timedScores[row,1];
-							row++;
+						for( int mode=0; mode < numTimedModes; mode++ ) {
+							for( int i=0; i<2*numTimedHighScores; ++i ) {
+								Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, timedScores, sizeof(Int32) * i, sizeof(Int32) );
+								count++;
+								sum += timedScores[mode,row,0];
+								i++;
+								Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, timedScores, sizeof(Int32) * i, sizeof(Int32) );
+								count++;
+								sum += timedScores[mode,row,1];
+								row++;
+							}
+							row = 0;
 						}
 						bufferBase += sizeof(Int32) * count;
 						
 						count = 0;
 						row = 0;
-						for( int i=0; i<2*numTimedHighCubes; ++i ) {
-							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, timedCubes, sizeof(Int32) * i, sizeof(Int32) );
-							count++;
-							sum += timedCubes[row,0];
-							i++;
-							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, timedCubes, sizeof(Int32) * i, sizeof(Int32) );
-							count++;
-							sum += timedCubes[row,1];
-							row++;
+						for( int mode=0; mode < numTimedModes; mode++ ) {
+							for( int i=0; i<2*numTimedHighCubes; ++i ) {
+								Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, timedCubes, sizeof(Int32) * i, sizeof(Int32) );
+								count++;
+								sum += timedCubes[mode,row,0];
+								i++;
+								Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, timedCubes, sizeof(Int32) * i, sizeof(Int32) );
+								count++;
+								sum += timedCubes[mode,row,1];
+								row++;
+							}
+							row = 0;
 						}
 						bufferBase += sizeof(Int32) * count;
 						
 						// INFINITE MODE DATA
 						count = 0;
 						row = 0;
-						for( int i=0; i<2*numInfiniteHighScores; ++i ) {
+						for( int i=0; i<3 * numInfiniteHighScores; ++i ) {
 							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, infiniteScores, sizeof(Int32) * i, sizeof(Int32) );
 							count++;
 							sum += infiniteScores[row,0];
@@ -389,13 +466,17 @@ namespace Crystallography
 							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, infiniteScores, sizeof(Int32) * i, sizeof(Int32) );
 							count++;
 							sum += infiniteScores[row,1];
+							i++;
+							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, infiniteScores, sizeof(Int32) * i, sizeof(Int32) );
+							count++;
+							sum += infiniteScores[row,2];
 							row++;
 						}
 						bufferBase += sizeof(Int32) * count;
 						
 						count = 0;
 						row = 0;
-						for( int i=0; i<2*numInfiniteHighCubes; ++i ) {
+						for( int i=0; i<3 * numInfiniteHighCubes; ++i ) {
 							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, infiniteCubes, sizeof(Int32) * i, sizeof(Int32) );
 							count++;
 							sum += infiniteCubes[row,0];
@@ -403,6 +484,28 @@ namespace Crystallography
 							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, infiniteCubes, sizeof(Int32) * i, sizeof(Int32) );
 							count++;
 							sum += infiniteCubes[row,1];
+							i++;
+							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, infiniteCubes, sizeof(Int32) * i, sizeof(Int32) );
+							count++;
+							sum += infiniteCubes[row,2];
+							row++;
+						}
+						bufferBase += sizeof(Int32) * count;
+						
+						count = 0;
+						row = 0;
+						for( int i=0; i<3 * numInfiniteHighTimes; ++i ) {
+							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, infiniteTimes, sizeof(Int32) * i, sizeof(Int32) );
+							count++;
+							sum += infiniteTimes[row,0];
+							i++;
+							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, infiniteTimes, sizeof(Int32) * i, sizeof(Int32) );
+							count++;
+							sum += infiniteTimes[row,1];
+							i++;
+							Buffer.BlockCopy(buffer, bufferBase + sizeof(Int32) * count, infiniteTimes, sizeof(Int32) * i, sizeof(Int32) );
+							count++;
+							sum += infiniteTimes[row,2];
 							row++;
 						}
 						bufferBase += sizeof(Int32) * count;
@@ -456,22 +559,31 @@ namespace Crystallography
 			}
 			puzzleLocked[0] = false;
 			// TIMED MODE DATA
-			for( int i=0; i<numTimedHighScores; i++ ) {
-				timedScores[i,0] = 0;
-				timedScores[i,1] = 0;
-			}
-			for( int i=0; i<numTimedHighCubes; i++ ) {
-				timedCubes[i,0] = 0;
-				timedCubes[i,1] = 0;
+			for( int mode=0; mode < numTimedModes; mode++) {
+				for( int i=0; i<numTimedHighScores; i++ ) {
+					timedScores[mode,i,0] = 10 + mode;
+					timedScores[mode,i,1] = 11 + mode;
+				}
+				for( int i=0; i<numTimedHighCubes; i++ ) {
+					timedCubes[mode,i,0] = 12;
+					timedCubes[mode,i,1] = 13;
+				}
 			}
 			// INFINITE MODE DATA
 			for( int i=0; i < numInfiniteHighScores; i++ ) {
-				infiniteScores[i,0] = 0;
-				infiniteScores[i,1] = 0;
+				infiniteScores[i,0] = 7;
+				infiniteScores[i,1] = 8;
+				infiniteScores[i,2] = 9;
 			}
 			for( int i=0; i < numInfiniteHighCubes; i++ ) {
-				infiniteCubes[i,0] = 0;
-				infiniteCubes[i,1] = 0;
+				infiniteCubes[i,0] = 4;
+				infiniteCubes[i,1] = 5;
+				infiniteCubes[i,2] = 6;
+			}
+			for( int i=0; i < numInfiniteHighTimes; i++) {
+				infiniteTimes[i,0] = 1;
+				infiniteTimes[i,1] = 2;
+				infiniteTimes[i,2] = 3;
 			}
 			// OPTIONS
 			options[0] = 40;	// OPTIONS: MUSIC VOL

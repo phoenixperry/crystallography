@@ -156,26 +156,6 @@ namespace Crystallography.UI
 		}
 		
 		/// <summary>
-		/// On Next Level Button Up
-		/// </summary>
-		void Handle_nextLevelPanelButtonButtonUpAction (object sender, EventArgs e) {
-			ExitCode = LevelExitCode.NEXT_LEVEL;
-#if METRICS
-			DataStorage.CollectMetrics();
-#endif
-			_nextLevelPanel.SlideOut();
-			_messagePanel.SlideOut();
-			bool complete = false;
-			if( GameScene.currentLevel != 999 ) {
-				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
-			}
-			CardManager.Instance.Reset( Director.Instance.CurrentScene );
-			GroupManager.Instance.Reset( Director.Instance.CurrentScene );
-			InputManager.Instance.CircleJustUpDetected -= Handle_nextLevelPanelButtonButtonUpAction;
-			_scene.GoToNextLevel();
-		}
-		
-		/// <summary>
 		/// On Card Spawn
 		/// </summary>
 		void HandleCardManagerInstanceCardSpawned (object sender, EventArgs e) {
@@ -246,6 +226,42 @@ namespace Crystallography.UI
 			_scene.ResetToLevel();
 		}
 		
+		/// <summary>
+		/// On Next Level Button Up
+		/// </summary>
+		void Handle_nextLevelPanelButtonButtonUpAction (object sender, EventArgs e) {
+			ExitCode = LevelExitCode.NEXT_LEVEL;
+#if METRICS
+			DataStorage.CollectMetrics();
+#endif
+			_nextLevelPanel.SlideOut();
+			_messagePanel.SlideOut();
+			SavePlayData();
+//			bool complete = false;
+//			if( GameScene.currentLevel != 999 ) {
+//				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
+//			} else {
+//				if (LevelManager.Instance.timeLimit == 0.0f){	//------- INFINITE MODE
+//					DataStorage.SaveInfiniteScore(Cubes, Score, MetGoalTime);
+//				} else {	//------------------------------------------- TIMED MODE
+//					int mode = 0;
+//					if(LevelManager.Instance.timeLimit == 300.0f) {
+//						mode = 0;
+//					} else if (LevelManager.Instance.timeLimit == 600.0f) {
+//						mode = 1;
+//					} else if (LevelManager.Instance.timeLimit == 1200.0f) {
+//						mode = 2;
+//					} else if (LevelManager.Instance.timeLimit == 2100.0f) {
+//						mode = 3;
+//					}
+//					DataStorage.SaveTimedScore(Cubes, Score, mode);
+//				}
+//			}
+			CardManager.Instance.Reset( Director.Instance.CurrentScene );
+			GroupManager.Instance.Reset( Director.Instance.CurrentScene );
+			InputManager.Instance.CircleJustUpDetected -= Handle_nextLevelPanelButtonButtonUpAction;
+			_scene.GoToNextLevel();
+		}
 		
 		/// <summary>
 		/// On LevelSelectButton Up
@@ -257,17 +273,19 @@ namespace Crystallography.UI
 #if METRICS
 			DataStorage.CollectMetrics();
 #endif
-			if( GameScene.currentLevel != 999 ) {
-				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
-			}
+//			if( GameScene.currentLevel != 999 ) {
+//				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
+//			}
+			SavePlayData();
 			GameScene.QuitToLevelSelect();
 		}
 		
 		void Handle_nextLevelPanelQuitButtonPressDetected (object sender, EventArgs e) {
 			bool complete = false;
-			if( GameScene.currentLevel != 999 ) {
-				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
-			}
+//			if( GameScene.currentLevel != 999 ) {
+//				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
+//			}
+			SavePlayData();
 			HandlePausePanelQuitButtonPressDetected( sender, e );
 		}
 		
@@ -756,6 +774,29 @@ namespace Crystallography.UI
 			}
 			_nextLevelPanel.SlideIn();
 			GameTimer.Pause(true);
+		}
+		
+		public void SavePlayData() {
+			bool complete = false;
+			if( GameScene.currentLevel != 999 ) {
+				DataStorage.SavePuzzleScore( GameScene.currentLevel, Cubes, Score, complete );
+			} else {
+				if (LevelManager.Instance.timeLimit == 0.0f){	//------- INFINITE MODE
+					DataStorage.SaveInfiniteScore(Cubes, Score, MetGoalTime);
+				} else {	//------------------------------------------- TIMED MODE
+					int mode = 0;
+					if(LevelManager.Instance.timeLimit == 300.0f) {
+						mode = 0;
+					} else if (LevelManager.Instance.timeLimit == 600.0f) {
+						mode = 1;
+					} else if (LevelManager.Instance.timeLimit == 1200.0f) {
+						mode = 2;
+					} else if (LevelManager.Instance.timeLimit == 2100.0f) {
+						mode = 3;
+					}
+					DataStorage.SaveTimedScore(Cubes, Score, mode);
+				}
+			}
 		}
 		
 		// DESTRUCTOR -------------------------------------------------------------------------------------
