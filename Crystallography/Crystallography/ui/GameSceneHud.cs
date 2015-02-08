@@ -212,7 +212,9 @@ namespace Crystallography.UI
 		void HandleQualityManagerFailedMatchDetected (object sender, FailedMatchEventArgs e)
 		{
 			IconPopupManager.Instance.FailedIcons( e.Entity, FailedMatchEventArgs.Names );
-			Strikes.Despair();
+			if(GameScene.currentLevel == 999) {
+				Strikes.Despair();
+			}
 		}
 		
 		
