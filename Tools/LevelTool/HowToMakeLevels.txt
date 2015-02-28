@@ -1,4 +1,4 @@
-HOW TO MAKE LEVELS WITH THE LEVEL TOOL
+ HOW TO MAKE LEVELS WITH THE LEVEL TOOL
 --------------------------------------
 
 1. OPEN. Open crystalonlevels.xls in your favorite spreadsheet editor.
