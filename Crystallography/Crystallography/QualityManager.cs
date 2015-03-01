@@ -61,10 +61,10 @@ namespace Crystallography
 			countdownDict = new Dictionary<int, int>();
 			scoringQualityList = new List<string>();
 			
-			InputManager.Instance.CrossJustUpDetected += delegate {
+//			InputManager.Instance.CrossJustUpDetected += delegate {
 //				CountdownTick();
-				ScrambleQuality( "QColor" );
-			};
+//				ScrambleQuality( "QColor" );
+//			};
 			
 #if DEBUG
 			Console.WriteLine(GetType().ToString() + " created" );
