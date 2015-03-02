@@ -209,8 +209,12 @@ namespace Crystallography.UI
 			LoadingScene.GAME_SCENE_DATA.level = 1;
 			LoadingScene.GAME_SCENE_DATA.timeLimit = 0.0f;
 			LoadingScene.GAME_SCENE_DATA.fourthQuality = "none";
-//			Director.Instance.ReplaceScene(new LoadingScene(0, 0.0f, "Level Select") );
-			Director.Instance.ReplaceScene(new LoadingScene("Game", LoadingScene.GAME_SCENE_DATA) );
+			Console.WriteLine(DataStorage.puzzleLocked[2]);
+			if(DataStorage.puzzleLocked[2] == false) {
+				Director.Instance.ReplaceScene(new LoadingScene("Level Select") );
+			} else {
+				Director.Instance.ReplaceScene(new LoadingScene("Game", LoadingScene.GAME_SCENE_DATA) );
+			}
 		}
 		
 		void HandleCreditsButtonButtonUpAction (object sender, EventArgs e) {
