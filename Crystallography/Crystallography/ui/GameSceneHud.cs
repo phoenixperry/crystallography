@@ -571,11 +571,6 @@ namespace Crystallography.UI
 			HudBarMask.Scale = new Vector2(60.0f, 4.4375f);
 			GameHudBar.AddChild(HudBarMask);
 			
-			HudBarLine = Support.UnicolorSprite("white", 255, 255, 255, 255);
-			HudBarLine.RegisterPalette(0);
-			HudBarLine.Scale = new Vector2(60.0f, 0.0625f);
-			GameHudBar.AddChild(HudBarLine);
-			
 			// CREATE THE LEVEL TITLE HUD
 			levelTitle = new LevelTitleMkTwo() {
 				SlideInDirection = SlideDirection.RIGHT,
@@ -680,9 +675,11 @@ namespace Crystallography.UI
 			PauseButton = new BetterButton("/Application/assets/images/UI/BetterButtonTransparent.png", 115.0f, 71.0f) {
 				Text = "",
 				Icon = Support.SpriteFromFile("Application/assets/images/UI/pause.png"),
-				Position = new Vector2(845.0f, 473.0f),
+//				Position = new Vector2(845.0f, 473.0f),
+				Position = new Vector2(845.0f, 0.0f)
 			};
-			this.AddChild(PauseButton);
+//			this.AddChild(PauseButton);
+			GameHudBar.AddChild(PauseButton);
 			PauseButton.background.RegisterPalette(2);
 			PauseButton.background.Scale = new Vector2(115.0f/32.0f, 71.0f/16.0f);
 			PauseButton.Icon.RegisterPalette(2);
@@ -692,14 +689,22 @@ namespace Crystallography.UI
 			HitMeButton = new BetterButton("/Application/assets/images/UI/BetterButtonTransparent.png", 115.0f, 71.0f) {
 				Text = "",
 				Icon = Support.SpriteFromFile("Application/assets/images/UI/plus.png"),
-				Position = new Vector2(720.0f, 473.0f),
+//				Position = new Vector2(720.0f, 473.0f),
+				Position = new Vector2(720.0f, 0.0f)
 			};
 			HitMeButton.On(!LevelManager.Instance.HitMeDisabled);
-			this.AddChild(HitMeButton);
+//			this.AddChild(HitMeButton);
+			GameHudBar.AddChild(HitMeButton);
 			HitMeButton.background.RegisterPalette(1);
 			HitMeButton.background.Scale = new Vector2(115.0f/32.0f, 71.0f/16.0f);
 			HitMeButton.Icon.RegisterPalette(1);
 			HitMeButton.ButtonUpAction += HandleHitMeButtonButtonUpAction;
+			
+			
+			HudBarLine = Support.UnicolorSprite("white", 255, 255, 255, 255);
+			HudBarLine.RegisterPalette(0);
+			HudBarLine.Scale = new Vector2(60.0f, 0.125f);
+			GameHudBar.AddChild(HudBarLine);
 			
 			_initialized = true;
 		}
