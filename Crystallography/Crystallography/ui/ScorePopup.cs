@@ -12,7 +12,7 @@ namespace Crystallography.UI
 		private static readonly Vector2 DoubleDigitOffset = new Vector2(51.0f, 84.0f);
 //		private static readonly Vector2 SingleDigitOffset = new Vector2(48.0f, 0.0f);
 //		private static readonly Vector2 DoubleDigitOffset = new Vector2(51.0f, 0.0f);
-		private static readonly Font font = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36);
+		private static readonly Font font = Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25);
 		private static readonly FontMap map = Crystallography.UI.FontManager.Instance.GetMap( font );
 		
 		protected Node parent;

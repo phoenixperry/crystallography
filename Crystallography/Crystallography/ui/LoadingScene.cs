@@ -185,6 +185,11 @@ namespace Crystallography.UI
 					Support.SoundSystem.Instance.Stop(LevelManager.Instance.SoundPrefix + "break.wav");
 				},
 				() => {
+					Support.SoundSystem.Instance.Stop(LevelManager.Instance.SoundPrefix + "low.wav");
+					Support.SoundSystem.Instance.Stop(LevelManager.Instance.SoundPrefix + "mid.wav");
+					Support.SoundSystem.Instance.Stop(LevelManager.Instance.SoundPrefix + "high.wav");
+				},
+				() => {
 					var temp = Support.SpriteFromFile("/Application/assets/images/blueBox.png");
 				},
 				() => {

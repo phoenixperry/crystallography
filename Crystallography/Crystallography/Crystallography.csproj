@@ -9,7 +9,6 @@
     <ProjectTypeGuids>{69878862-DA7D-4DC6-B0A1-50D8FAB4242F};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
     <RootNamespace>Crystallography</RootNamespace>
-    <AssemblyName>Crystallography</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,6 +24,7 @@
         <Command type="AfterClean" command="" externalConsole="true" pauseExternalConsole="true" />
       </CustomCommands>
     </CustomCommands>
+    <AssemblyName>Crystallography_d</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <DefineConstants>ORIENTATION_MATTERS, UNLOCK_ALL</DefineConstants>
+    <AssemblyName>Crystallography_r</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
