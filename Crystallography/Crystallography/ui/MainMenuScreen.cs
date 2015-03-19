@@ -268,6 +268,7 @@ namespace Crystallography.UI
 			sequence.Add( new DelayTime( delay0 ) );
 			var duration1 = 78.0f/speed * 4.0f;
 			sequence.Add( new CallFunc( () => {
+				Support.SoundSystem.Instance.Play("Paper5.wav");
 				MaskBGTop.RunAction( new MoveBy( new Vector2(0.0f, -78.0f), duration1) {
 					Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear
 				} );
@@ -278,6 +279,7 @@ namespace Crystallography.UI
 			var duration2 = 257.0f/speed;
 			sequence.Add( new CallFunc( () => {
 //				NewGameButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration2) {
+				Support.SoundSystem.Instance.Play("Paper4.wav");
 				NewGameButton.RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration2) {
 					Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear
 				} );
@@ -287,6 +289,7 @@ namespace Crystallography.UI
 			
 			var duration3 = 151.0f/speed * 2.0f;
 			sequence.Add( new CallFunc( () => {
+				Support.SoundSystem.Instance.Play("Paper4.wav");
 				MaskBGSpacer1.RunAction( new MoveBy( new Vector2(0.0f, -151.0f), duration3) {
 					Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear
 				} );
@@ -296,6 +299,7 @@ namespace Crystallography.UI
 			
 			var duration4 = 257.0f/speed;
 			sequence.Add( new CallFunc( () => {
+				Support.SoundSystem.Instance.Play("Paper5.wav");
 //				LevelSelectButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration4) {
 				LevelSelectButton.RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration4) {
 					Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear
@@ -306,6 +310,7 @@ namespace Crystallography.UI
 			
 			var duration5 = 151.0f/speed * 2.0f;
 			sequence.Add( new CallFunc( () => { 
+				Support.SoundSystem.Instance.Play("Paper4.wav");
 				MaskBGSpacer2.RunAction( new MoveBy( new Vector2(0.0f, -151.0f), duration5) {
 					Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear
 				} );
@@ -315,6 +320,7 @@ namespace Crystallography.UI
 			
 			var duration6 = 257.0f/speed;
 			sequence.Add( new CallFunc( () => {
+				Support.SoundSystem.Instance.Play("Paper5.wav");
 //				InstructionsButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration6 ) {
 				InstructionsButton.RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration6 ) {
 					Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear
@@ -334,6 +340,7 @@ namespace Crystallography.UI
 			
 			var duration8 = 257.0f/speed;
 			sequence.Add( new CallFunc( () => {
+				Support.SoundSystem.Instance.Play("Paper4.wav");
 //				CreditsButton.getNode().RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration8) {
 				CreditsButton.RunAction( new MoveBy( new Vector2(257.0f, 0.0f), duration8) {
 					Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear
@@ -344,6 +351,7 @@ namespace Crystallography.UI
 			
 			var duration9 = 79.0f/speed * 4.0f;
 			sequence.Add( new CallFunc( () => {
+				Support.SoundSystem.Instance.Play("Paper5.wav");
 				MaskBGBottom.RunAction( new MoveBy( new Vector2(0.0f, -79.0f), duration9) {
 					Tween = Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.Linear
 				} );

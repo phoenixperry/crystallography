@@ -324,6 +324,12 @@
     <Content Include="assets\images\UI\whitePageIcon.png" />
     <Content Include="assets\images\UI\x.png" />
     <Content Include="assets\images\UI\strikeCube.png" />
+    <Content Include="assets\audio\bgm\europa.mp3" />
+    <Content Include="assets\audio\bgm\ganymede.mp3" />
+    <Content Include="assets\audio\bgm\io.mp3" />
+    <Content Include="assets\audio\sfx\Paper1.wav" />
+    <Content Include="assets\audio\sfx\Paper4.wav" />
+    <Content Include="assets\audio\sfx\Paper5.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

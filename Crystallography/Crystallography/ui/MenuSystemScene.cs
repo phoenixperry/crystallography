@@ -27,7 +27,7 @@ namespace Crystallography.UI
 			Console.WriteLine("########### ENTER MenuSystemScene ###############");
 #endif
 			base.OnEnter ();
-			Support.MusicSystem.Instance.Play("intromusic.mp3");
+			Support.MusicSystem.Instance.Play("europa.mp3");
 		}
 		
 		public override void OnExit ()

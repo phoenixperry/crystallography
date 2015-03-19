@@ -195,9 +195,9 @@ namespace Crystallography
 #endif
 			base.OnEnter();
 			if( Random.NextFloat() > 0.5f ) {
-				Support.MusicSystem.Instance.Play("stack1music.mp3");
+				Support.MusicSystem.Instance.Play("ganymede.mp3");
 			} else {
-				Support.MusicSystem.Instance.Play("stack2music.mp3");
+				Support.MusicSystem.Instance.Play("io.mp3");
 			}
 			Crystallography.UI.PausePanel.PauseDetected += HandleCrystallographyUIPausePanelPauseDetected;
 			
