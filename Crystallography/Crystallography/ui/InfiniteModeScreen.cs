@@ -9,6 +9,7 @@ namespace Crystallography.UI
 	public class InfiniteModeScreen : Layer
 	{
 		protected MenuSystemScene MenuSystem;
+		
 		protected BetterButton playButton;
 		protected BetterButton cancelButton;
 		
@@ -17,6 +18,8 @@ namespace Crystallography.UI
 		
 		protected Slider timeLimitSlider;
 		protected Slider fourthQualitySlider;
+		
+		protected SpriteTile _bestBG;
 		
 		protected Label _bestTitleText;
 		protected Label _bestCubesText;
@@ -38,34 +41,32 @@ namespace Crystallography.UI
 		public InfiniteModeScreen (MenuSystemScene pMenuSystem) {
 			MenuSystem = pMenuSystem;
 			
-			var map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
+			var map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Bold") );
 			
 			_bestCubes = _bestPoints = 0;
 			_bestTime = 0.0f;
 			
 			_timeLimitText = new Label() {
-				FontMap = map
+				FontMap = map,
+				Color = Colors.Black
 			};
-			_timeLimitText.RegisterPalette(0);
+//			_timeLimitText.RegisterPalette(0);
 			this.AddChild(_timeLimitText);
 			
-			timeLimitSlider = new Slider() {
+			timeLimitSlider = new Slider(540) {
 				Text = "time limit",
-				Position = new Vector2(320.0f, 400.0f),
+				Position = new Vector2(33.0f, 440.0f),
 				max = 60.0f,
 				min = 5.0f,
 				discreteOptions = new List<float>() { 5.0f, 10.0f, 20.0f, 35.0f, 60.0f },
 				OnChange = (unused) => {
 					if ( timeLimitSlider.Value != timeLimitSlider.max ) {
 						_timeLimitText.Text = timeLimitSlider.Value.ToString() + " minutes";
+						_bestTitleText.Text = _timeLimitText.Text;
 						if(_highScoreEntries != null) {
 							_highScoreEntries[0].ShowBestTime(false);
 							_highScoreEntries[0].BestCubes = DataStorage.timedCubes[timeLimitSlider.SelectedOption,0,0];
 							_highScoreEntries[0].BestPoints = DataStorage.timedScores[timeLimitSlider.SelectedOption,0,1];
-//							for(int i=0; i < 2; i++){
-//								_highScoreEntries[i].BestCubes = DataStorage.timedCubes[timeLimitSlider.SelectedOption,i,0];
-//								_highScoreEntries[i].BestPoints = DataStorage.timedScores[timeLimitSlider.SelectedOption,i,1];
-//							}
 						}
 					} else {
 						_timeLimitText.Text = "infinite";
@@ -75,20 +76,6 @@ namespace Crystallography.UI
 							_highScoreEntries[0].BestCubes = DataStorage.infiniteCubes[0,0];
 							_highScoreEntries[0].BestPoints = DataStorage.infiniteScores[0,1];
 							_highScoreEntries[0].BestTime = DataStorage.infiniteTimes[0,2];
-							
-//							_highScoreEntries[1].BestCubes = DataStorage.infiniteScores[0,0];
-//							_highScoreEntries[1].BestPoints = DataStorage.infiniteScores[0,1];
-//							_highScoreEntries[1].BestTime = DataStorage.infiniteScores[0,2];
-//							
-//							_highScoreEntries[2].BestCubes = DataStorage.infiniteTimes[0,0];
-//							_highScoreEntries[2].BestPoints = DataStorage.infiniteTimes[0,1];
-//							_highScoreEntries[2].BestTime = DataStorage.infiniteTimes[0,2];
-							
-//							for(int i=0; i < 3; i++){
-//								_highScoreEntries[i].BestCubes = DataStorage.infiniteCubes[i,0];
-//								_highScoreEntries[i].BestPoints = DataStorage.infiniteScores[i,1];
-//								_highScoreEntries[i].BestTime = DataStorage.infiniteTimes[i,2];
-//							}
 						}
 					}
 				}
@@ -98,7 +85,8 @@ namespace Crystallography.UI
 			timeLimitSlider.SetSliderValue( (float)DataStorage.options[4] );
 			this.AddChild(timeLimitSlider);
 			
-			_timeLimitText.Position = new Vector2(timeLimitSlider.Position.X + timeLimitSlider.Length + 20.0f, timeLimitSlider.Position.Y);
+//			_timeLimitText.Position = new Vector2(timeLimitSlider.Position.X + timeLimitSlider.Length + 20.0f, timeLimitSlider.Position.Y);
+			_timeLimitText.Position = new Vector2(timeLimitSlider.Position.X + 4.0f, timeLimitSlider.Position.Y - 41.0f);
 			
 			_fourthQualityText = new Label() {
 				FontMap = map
@@ -134,20 +122,27 @@ namespace Crystallography.UI
 			_fourthQualityText.Position = new Vector2(fourthQualitySlider.Position.X + fourthQualitySlider.Length + 20.0f, fourthQualitySlider.Position.Y);
 			
 			
+			_bestBG = Support.UnicolorSprite("black", 0,0,0,255);
+			_bestBG.Position = new Vector2(598.0f, 0.0f);
+			_bestBG.Scale = new Vector2(22.625f, 34.0f);
+			this.AddChild(_bestBG);
+			
 			_bestTitleText = new Label() {
-				Text = "best",
-				FontMap = map,
-				Position = new Vector2(fourthQualitySlider.Position.X, fourthQualitySlider.Position.Y - 80.0f)
+				Text = _timeLimitText.Text,
+				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") ),
+				Position = new Vector2(_bestBG.Position.X + 41.0f, 465.0f)
 			};
-			_bestTitleText.RegisterPalette(2);
+//			_bestTitleText.RegisterPalette(2);
+//			_bestTitleText.Color = Colors.White;
 			this.AddChild(_bestTitleText);
+			
 			
 			_highScoreEntries = new HighScoreEntry[3];
 			_highScoreEntries[0] = new HighScoreEntry() {
 				BestCubes = DataStorage.infiniteCubes[0,0],
 				BestPoints = DataStorage.infiniteCubes[0,1],
 				BestTime = (float)DataStorage.infiniteCubes[0,2],
-				Position = new Vector2(_bestTitleText.Position.X, _bestTitleText.Position.Y - 60)
+				Position = new Vector2(_bestTitleText.Position.X, _bestTitleText.Position.Y - 316.0f)
 			};
 //			_highScoreEntries[1] = new HighScoreEntry() {
 //				BestCubes = DataStorage.infiniteScores[0,0],
@@ -166,16 +161,16 @@ namespace Crystallography.UI
 //			}
 			this.AddChild(_highScoreEntries[0]);
 			
-			cancelButton = new BetterButton(289.0f, 71.0f) {
+			cancelButton = new BetterButton(362.0f, 62.0f) {
 				Text = "main menu",
-				Position = new Vector2(671.0f, 71.0f)
+				Position = new Vector2(598.0f, 62.0f)
 			};
 			cancelButton.background.RegisterPalette(2);
 			this.AddChild(cancelButton);
 			
-			playButton = new BetterButton(289.0f, 71.0f) {
+			playButton = new BetterButton(362.0f, 62.0f) {
 				Text = "play",
-				Position = new Vector2(671.0f, 0.0f)
+				Position = new Vector2(598.0f, 0.0f)
 			};
 			playButton.background.RegisterPalette(0);
 			this.AddChild(playButton);

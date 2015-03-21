@@ -8,7 +8,7 @@ namespace Crystallography.UI
 {
 	public class Slider : Node
 	{
-		protected static readonly float TICK_WIDTH = 3.0f/16.0f;
+		protected static readonly float TICK_WIDTH = 8.0f/16.0f;
 		
 		Label Title;
 		SpriteTile Track;
@@ -50,12 +50,13 @@ namespace Crystallography.UI
 		
 		// CONSTRUCTOR -----------------------------------------------------------------------
 		
-		public Slider () {
+		public Slider (int trackLength=320) {
 			active = false;
 			
 			Title = new Label() {
 				FontMap = FontManager.Instance.GetMap( FontManager.Instance.GetInGame("Bariol", 25, "Bold") ),
-				Position = new Vector2(0.0f, 36.0f)
+				Position = new Vector2(-TICK_WIDTH/2.0f, 29.0f),
+				Color = Colors.Black
 			};
 			this.AddChild(Title);
 			
@@ -63,9 +64,9 @@ namespace Crystallography.UI
 			max = 100.0f;
 			val = min;
 			Track = Support.UnicolorSprite("white", 255, 255, 255, 255);
-			Track.Scale = new Vector2(20.0f, 0.5f);
+			Track.Scale = new Vector2((float)trackLength/16.0f, 0.625f);
 			this.AddChild(Track);
-			length = 320;
+			length = (float)trackLength;
 			
 			Knob = Support.UnicolorSprite("white", 255, 255, 255, 255);
 			Knob.CenterSprite(new Vector2(0.5f, 0.0f));
@@ -175,7 +176,7 @@ namespace Crystallography.UI
 				float offsetX = -( 1 + Sce.PlayStation.Core.FMath.Floor(TICK_WIDTH * 8.0f) );
 				for (int i=0; i < Ticks.Length; i ++) {
 					Ticks[i] = Support.UnicolorSprite("white", 255, 255, 255, 255);
-					Ticks[i].Scale = new Vector2( TICK_WIDTH, 1f);
+					Ticks[i].Scale = new Vector2( TICK_WIDTH, 1.125f);
 					Ticks[i].Position = new Vector2( length * ((optionsArray[i]-min) / (max-min)) + offsetX, -8.0f );
 					Ticks[i].Color = Track.Color;
 					this.AddChild(Ticks[i]);
@@ -184,7 +185,7 @@ namespace Crystallography.UI
 		}
 		
 		public void RegisterPalette(int pIndex) {
-			Title.RegisterPalette(pIndex);
+//			Title.RegisterPalette(pIndex);
 			Knob.RegisterPalette(pIndex);
 			Track.RegisterPalette(pIndex);
 			if(Ticks != null ) {
@@ -195,7 +196,7 @@ namespace Crystallography.UI
 		}
 		
 		public void UnregisterPalette() {
-			Title.UnregisterPalette();
+//			Title.UnregisterPalette();
 			Knob.UnregisterPalette();
 			Track.UnregisterPalette();
 			if(Ticks != null ) {
