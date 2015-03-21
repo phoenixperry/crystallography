@@ -8,6 +8,8 @@ namespace Crystallography.UI
 {
 	public class InfiniteModeScreen : Layer
 	{
+		public string fourthQuality;
+		
 		protected MenuSystemScene MenuSystem;
 		
 		protected BetterButton playButton;
@@ -16,8 +18,15 @@ namespace Crystallography.UI
 		protected Label _timeLimitText;
 		protected Label _fourthQualityText;
 		
+		protected Label _fourthQualityTitle;
+		
 		protected Slider timeLimitSlider;
 		protected Slider fourthQualitySlider;
+		
+		protected SpriteTile _buttonHighlight;
+		protected BetterButton _soundButton;
+		protected BetterButton _particleButton;
+		protected BetterButton _noneButton;
 		
 		protected SpriteTile _bestBG;
 		
@@ -64,63 +73,113 @@ namespace Crystallography.UI
 						_timeLimitText.Text = timeLimitSlider.Value.ToString() + " minutes";
 						_bestTitleText.Text = _timeLimitText.Text;
 						if(_highScoreEntries != null) {
-							_highScoreEntries[0].ShowBestTime(false);
+//							_highScoreEntries[0].ShowBestTime(false);
 							_highScoreEntries[0].BestCubes = DataStorage.timedCubes[timeLimitSlider.SelectedOption,0,0];
 							_highScoreEntries[0].BestPoints = DataStorage.timedScores[timeLimitSlider.SelectedOption,0,1];
 						}
 					} else {
 						_timeLimitText.Text = "infinite";
 						if(_highScoreEntries != null) {
-							_highScoreEntries[0].ShowBestTime(true);
+//							_highScoreEntries[0].ShowBestTime(true);
 							
 							_highScoreEntries[0].BestCubes = DataStorage.infiniteCubes[0,0];
 							_highScoreEntries[0].BestPoints = DataStorage.infiniteScores[0,1];
-							_highScoreEntries[0].BestTime = DataStorage.infiniteTimes[0,2];
+//							_highScoreEntries[0].BestTime = DataStorage.infiniteTimes[0,2];
 						}
 					}
 				}
 			};
 			timeLimitSlider.AddTickmarks();
-			timeLimitSlider.RegisterPalette(0);
+			timeLimitSlider.RegisterPalette(2);
 			timeLimitSlider.SetSliderValue( (float)DataStorage.options[4] );
 			this.AddChild(timeLimitSlider);
 			
 //			_timeLimitText.Position = new Vector2(timeLimitSlider.Position.X + timeLimitSlider.Length + 20.0f, timeLimitSlider.Position.Y);
 			_timeLimitText.Position = new Vector2(timeLimitSlider.Position.X + 4.0f, timeLimitSlider.Position.Y - 41.0f);
 			
-			_fourthQualityText = new Label() {
-				FontMap = map
+//			_fourthQualityText = new Label() {
+//				FontMap = map
+//			};
+//			_fourthQualityText.RegisterPalette(1);
+//			this.AddChild(_fourthQualityText);
+			
+//			fourthQualitySlider = new Slider() {
+//				Text = "fourth quality",
+//				Position = new Vector2(timeLimitSlider.Position.X, timeLimitSlider.Position.Y - 100.0f),
+//				max = 2.0f,
+//				min = 0.0f,
+//				discreteOptions = new List<float>() { 0.0f, 1.0f, 2.0f },
+//				OnChange = (unused) => {
+//					switch(fourthQualitySlider.Value.ToString("#0.#")) {
+//					case("0"):
+//						_fourthQualityText.Text = "none";
+//						break;
+//					case("1"):
+//						_fourthQualityText.Text = "particles";
+//						break;
+//					case("2"):
+//						_fourthQualityText.Text = "sound";
+//						break;
+//					}
+//				}
+//			};
+//			fourthQualitySlider.AddTickmarks();
+//			fourthQualitySlider.RegisterPalette(1);
+//			fourthQualitySlider.SetSliderValue( 1.0f );
+////			this.AddChild(fourthQualitySlider);
+//			
+//			_fourthQualityText.Position = new Vector2(fourthQualitySlider.Position.X + fourthQualitySlider.Length + 20.0f, fourthQualitySlider.Position.Y);
+//			
+			_fourthQualityTitle = new Label() {
+				Text = "bonus quality",
+				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold") ),
+				Position = new Vector2(33.0f, 326.0f),
+				Color = Colors.Black
 			};
-			_fourthQualityText.RegisterPalette(1);
-			this.AddChild(_fourthQualityText);
+			this.AddChild(_fourthQualityTitle);
 			
-			fourthQualitySlider = new Slider() {
-				Text = "fourth quality",
-				Position = new Vector2(timeLimitSlider.Position.X, timeLimitSlider.Position.Y - 100.0f),
-				max = 2.0f,
-				min = 0.0f,
-				discreteOptions = new List<float>() { 0.0f, 1.0f, 2.0f },
-				OnChange = (unused) => {
-					switch(fourthQualitySlider.Value.ToString("#0.#")) {
-					case("0"):
-						_fourthQualityText.Text = "none";
-						break;
-					case("1"):
-						_fourthQualityText.Text = "particles";
-						break;
-					case("2"):
-						_fourthQualityText.Text = "sound";
-						break;
-					}
-				}
+			
+			_buttonHighlight = Support.UnicolorSprite("Black", 0,0,0,255);
+			_buttonHighlight.Scale = new Vector2(10.8125f, 12.125f);
+			this.AddChild(_buttonHighlight);
+			
+			_soundButton = new BetterButton(173.0f, 176.0f) {
+				Text = "sound",
+				TextFont = FontManager.Instance.GetInGame("Bariol", 25, "Bold"),
+				Icon = Support.TiledSpriteFromFile("/Application/assets/images/icons/icons.png", 4, 2),
+				IconAndTextOffset = new Vector2(31.0f, 17.0f),
+				TextOffset = new Vector2(-58.0f, -50.0f),
+				Position = new Vector2(33.0f, 109.0f)
 			};
-			fourthQualitySlider.AddTickmarks();
-			fourthQualitySlider.RegisterPalette(1);
-			fourthQualitySlider.SetSliderValue( 1.0f );
-			this.AddChild(fourthQualitySlider);
+			_soundButton.Icon.TileIndex1D = 4;
+			_soundButton.background.RegisterPalette(0);
+			_soundButton.Icon.Color = LevelManager.Instance.BackgroundColor;
+			this.AddChild(_soundButton);
 			
-			_fourthQualityText.Position = new Vector2(fourthQualitySlider.Position.X + fourthQualitySlider.Length + 20.0f, fourthQualitySlider.Position.Y);
+			_particleButton = new BetterButton(173.0f, 176.0f) {
+				Text = "particles",
+				TextFont = FontManager.Instance.GetInGame("Bariol", 25, "Bold"),
+				Icon = Support.TiledSpriteFromFile("/Application/assets/images/icons/icons.png", 4, 2),
+				IconAndTextOffset = new Vector2(31.0f, 17.0f),
+				TextOffset = new Vector2(-58.0f, -50.0f),
+				Position = new Vector2(216.0f, 109.0f)
+			};
+			_particleButton.Icon.TileIndex1D = 2;
+			_particleButton.background.RegisterPalette(1);
+			_particleButton.Icon.Color = LevelManager.Instance.BackgroundColor;
+			this.AddChild(_particleButton);
 			
+			_noneButton = new BetterButton(173.0f, 176.0f) {
+				Text = "none",
+				TextFont = FontManager.Instance.GetInGame("Bariol", 25, "Bold"),
+				Icon = Support.TiledSpriteFromFile("/Application/assets/images/icons/icons.png", 4, 2),
+				IconAndTextOffset = new Vector2(31.0f, 17.0f),
+				TextOffset = new Vector2(-64.0f, -50.0f),
+				Position = new Vector2(399.0f, 109.0f)
+			};
+			_noneButton.Icon.TileIndex1D = 6;
+			_noneButton.background.RegisterPalette(2);
+			this.AddChild(_noneButton);
 			
 			_bestBG = Support.UnicolorSprite("black", 0,0,0,255);
 			_bestBG.Position = new Vector2(598.0f, 0.0f);
@@ -133,7 +192,7 @@ namespace Crystallography.UI
 				Position = new Vector2(_bestBG.Position.X + 41.0f, 465.0f)
 			};
 //			_bestTitleText.RegisterPalette(2);
-//			_bestTitleText.Color = Colors.White;
+			_bestTitleText.Color = LevelManager.Instance.BackgroundColor;
 			this.AddChild(_bestTitleText);
 			
 			
@@ -141,7 +200,7 @@ namespace Crystallography.UI
 			_highScoreEntries[0] = new HighScoreEntry() {
 				BestCubes = DataStorage.infiniteCubes[0,0],
 				BestPoints = DataStorage.infiniteCubes[0,1],
-				BestTime = (float)DataStorage.infiniteCubes[0,2],
+//				BestTime = (float)DataStorage.infiniteCubes[0,2],
 				Position = new Vector2(_bestTitleText.Position.X, _bestTitleText.Position.Y - 316.0f)
 			};
 //			_highScoreEntries[1] = new HighScoreEntry() {
@@ -165,7 +224,7 @@ namespace Crystallography.UI
 				Text = "main menu",
 				Position = new Vector2(598.0f, 62.0f)
 			};
-			cancelButton.background.RegisterPalette(2);
+			cancelButton.background.RegisterPalette(1);
 			this.AddChild(cancelButton);
 			
 			playButton = new BetterButton(362.0f, 62.0f) {
@@ -190,8 +249,26 @@ namespace Crystallography.UI
 			float limit = (timeLimitSlider.Value < 60.0f) ? timeLimitSlider.Value * 60.0f : 0.0f;
 			LoadingScene.GAME_SCENE_DATA.level = 999;
 			LoadingScene.GAME_SCENE_DATA.timeLimit = limit;
-			LoadingScene.GAME_SCENE_DATA.fourthQuality = _fourthQualityText.Text;
+			LoadingScene.GAME_SCENE_DATA.fourthQuality = fourthQuality;
 			Director.Instance.ReplaceScene(new LoadingScene("Game", LoadingScene.GAME_SCENE_DATA) );
+		}
+		
+		void HandleQualityButtonUpAction(object sender, EventArgs e)
+		{
+			fourthQuality = (sender as BetterButton).Text;
+			switch((sender as BetterButton).Text) {
+			case("sound"):
+				_buttonHighlight.Position = new Vector2(_soundButton.Position.X, _soundButton.Position.Y - 9.0f);
+				break;
+			case("particles"):
+				_buttonHighlight.Position = new Vector2(_particleButton.Position.X, _particleButton.Position.Y - 9.0f);
+				break;
+			case("none"):
+			default:
+				_buttonHighlight.Position = new Vector2(_noneButton.Position.X, _noneButton.Position.Y - 9.0f);
+				break;
+			}
+			
 		}
 		
 		// OVERRIDES ---------------------------------------------
@@ -201,14 +278,46 @@ namespace Crystallography.UI
 			base.OnEnter ();
 			playButton.ButtonUpAction += HandleplayButtonButtonUpAction;
 			cancelButton.ButtonUpAction += HandleCancelButtonButtonUpAction;
+			_soundButton.ButtonUpAction += HandleQualityButtonUpAction;
+			_particleButton.ButtonUpAction += HandleQualityButtonUpAction;
+			_noneButton.ButtonUpAction += HandleQualityButtonUpAction;
+			
+			_noneButton.FakePress();
 		}
 		
 		public override void OnExit ()
 		{
 			playButton.ButtonUpAction -= HandleplayButtonButtonUpAction;
+			cancelButton.ButtonUpAction -= HandleCancelButtonButtonUpAction;
+			_soundButton.ButtonUpAction -= HandleQualityButtonUpAction;
+			_particleButton.ButtonUpAction -= HandleQualityButtonUpAction;
+			_noneButton.ButtonUpAction -= HandleQualityButtonUpAction;
+			
+//			fourthQuality = null;
+//			MenuSystem = null;
+//			playButton = null;
+//			cancelButton = null;
+//			_fourthQualityTitle = null;
+//			timeLimitSlider = null;
+//			_buttonHighlight.TextureInfo.Dispose();
+//			_buttonHighlight = null;
+//			_soundButton = null;
+//			_particleButton = null;
+//			_noneButton = null;
+//			_bestBG.TextureInfo.Dispose();
+//			_bestBG = null;
+//			_bestTitleText = null;
+//			_bestCubesText = null;
+//			_bestPointsText = null;
+//			for(int i=0; i<3; i++){
+//				_highScoreEntries[i] = null;
+//			}
+//			_highScoreEntries = null;
+			
+			
 			base.OnExit ();
-			timeLimitSlider = null;
-			playButton = null;
+//			timeLimitSlider = null;
+//			playButton = null;
 		}
 		
 		// METHODS -----------------------------------------------

@@ -38,7 +38,8 @@ namespace Crystallography.UI
 		public MainMenuScreen (MenuSystemScene pMenuSystem) {
 			MenuSystem = pMenuSystem;
 			
-			var bgcolor = Director.Instance.GL.Context.GetClearColor();
+//			var bgcolor = Director.Instance.GL.Context.GetClearColor();
+			var bgcolor = LevelManager.Instance.BackgroundColor;
 			bgcolor.A = 1.0f;
 			
 			

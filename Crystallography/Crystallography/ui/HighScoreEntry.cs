@@ -14,15 +14,12 @@ namespace Crystallography
 		
 		protected Label _bestCubesText;
 		protected Label _bestPointsText;
-		protected Label _bestTimeText;
 		
 		protected int _bestCubes;
 		protected int _bestPoints;
-		protected float _bestTime;
 		
 		protected SpriteTile _cubeIcon;
 		protected SpriteTile _scoreIcon;
-		protected SpriteTile _timeIcon;
 		
 		
 		public int BestCubes {
@@ -43,32 +40,22 @@ namespace Crystallography
 			}
 		}
 		
-		public float BestTime {
-			get {return _bestTime;} 
-			set {
-				_bestTime = value;
-				if(_bestTimeText != null)
-					_bestTimeText.Text = TimeSpan.FromSeconds((double)_bestTime).ToString("c");
-			}
-		}
-		
 		public HighScoreEntry ()
 		{
-			var map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") );
+			var map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 102, "Bold") );
 			
 			_bestCubes = _bestPoints = 0;
-			_bestTime = 0.0f;
 			
 			_bestCubesTitle = new Label() {
 				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold") ),
 				Text = "the most cubes",
-				Position = new Vector2(0.0f, 263.0f)
+				Position = new Vector2(0.0f, 279.0f)
 			};
 			_bestCubesTitle.RegisterPalette(0);
 			this.AddChild(_bestCubesTitle);
 			
 			_cubeIcon = Support.SpriteFromFile("/Application/assets/images/stopIcon.png");
-			_cubeIcon.Position = new Vector2(0.0f, 174.0f);
+			_cubeIcon.Position = new Vector2(0.0f, 194.0f);
 			_cubeIcon.RegisterPalette(0);
 			this.AddChild(_cubeIcon);
 			
@@ -84,14 +71,14 @@ namespace Crystallography
 			_bestPointsTitle = new Label() {
 				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold") ),
 				Text = "the most points",
-				Position = new Vector2(0.0f, 93.0f)
+				Position = new Vector2(0.0f, 108.0f)
 			};
 			_bestPointsTitle.RegisterPalette(1);
 			this.AddChild(_bestPointsTitle);
 			
 			
 			_scoreIcon = Support.SpriteFromFile("/Application/assets/images/handIcon.png");
-			_scoreIcon.Position = new Vector2(0.0f, 0.0f);
+			_scoreIcon.Position = new Vector2(0.0f, 20.0f);
 			_scoreIcon.RegisterPalette(1);
 			this.AddChild(_scoreIcon);
 			
@@ -103,27 +90,18 @@ namespace Crystallography
 			_bestPointsText.RegisterPalette(1);
 			this.AddChild(_bestPointsText);
 			
-			
-			_timeIcon = Support.SpriteFromFile("/Application/assets/images/timerIcon.png");
-			_timeIcon.Position = new Vector2(240.0f, 0.0f);
-			_timeIcon.RegisterPalette(2);
-//			this.AddChild(_timeIcon);
-			
-			var time = TimeSpan.FromSeconds((double)_bestTime);
-			
-			_bestTimeText = new Label() {
-				Text = time.ToString("c"),
-				FontMap = map,
-				Position = new Vector2(300.0f, 0.0f)
-			};
-			_bestTimeText.RegisterPalette(2);
-//			this.AddChild(_bestTimeText);
 		}
 		
-		public void ShowBestTime(bool pShow)
+		public override void OnExit ()
 		{
-			_timeIcon.Visible = pShow;
-			_bestTimeText.Visible = pShow;
+			_bestCubesTitle = null;
+			_bestPointsTitle = null;
+			_bestCubesText = null;
+			_bestPointsTitle = null;
+			_cubeIcon = null;
+			_scoreIcon = null;
+			
+			base.OnExit ();
 		}
 	}
 }
