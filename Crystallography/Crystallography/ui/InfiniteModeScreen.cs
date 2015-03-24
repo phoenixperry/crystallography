@@ -50,7 +50,7 @@ namespace Crystallography.UI
 		public InfiniteModeScreen (MenuSystemScene pMenuSystem) {
 			MenuSystem = pMenuSystem;
 			
-			var map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Bold") );
+			var map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold") );
 			
 			_bestCubes = _bestPoints = 0;
 			_bestTime = 0.0f;
@@ -132,7 +132,7 @@ namespace Crystallography.UI
 //			
 			_fourthQualityTitle = new Label() {
 				Text = "bonus quality",
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Bold") ),
+				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold") ),
 				Position = new Vector2(33.0f, 326.0f),
 				Color = Colors.Black
 			};
@@ -188,7 +188,7 @@ namespace Crystallography.UI
 			
 			_bestTitleText = new Label() {
 				Text = _timeLimitText.Text,
-				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Bold") ),
+				FontMap = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 32, "Bold") ),
 				Position = new Vector2(_bestBG.Position.X + 41.0f, 465.0f)
 			};
 //			_bestTitleText.RegisterPalette(2);

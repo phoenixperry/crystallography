@@ -330,6 +330,9 @@
     <Content Include="assets\audio\sfx\Paper1.wav" />
     <Content Include="assets\audio\sfx\Paper4.wav" />
     <Content Include="assets\audio\sfx\Paper5.wav" />
+    <Content Include="assets\images\UI\cubes_big.png" />
+    <Content Include="assets\images\UI\points_big.png" />
+    <Content Include="assets\images\UI\sliderLozenge.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

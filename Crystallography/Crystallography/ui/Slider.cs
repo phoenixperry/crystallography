@@ -54,7 +54,7 @@ namespace Crystallography.UI
 			active = false;
 			
 			Title = new Label() {
-				FontMap = FontManager.Instance.GetMap( FontManager.Instance.GetInGame("Bariol", 25, "Bold") ),
+				FontMap = FontManager.Instance.GetMap( FontManager.Instance.GetInGame("Bariol", 32, "Bold") ),
 				Position = new Vector2(-TICK_WIDTH/2.0f, 29.0f),
 				Color = Colors.Black
 			};
@@ -68,10 +68,11 @@ namespace Crystallography.UI
 			this.AddChild(Track);
 			length = (float)trackLength;
 			
-			Knob = Support.UnicolorSprite("white", 255, 255, 255, 255);
-			Knob.CenterSprite(new Vector2(0.5f, 0.0f));
+//			Knob = Support.UnicolorSprite("white", 255, 255, 255, 255);
+			Knob = Support.SpriteFromFile("/Application/assets/images/UI/sliderLozenge.png");
+			Knob.CenterSprite(new Vector2(0.5f, 0.36f));
 //			Knob.Position = new Vector2((pValue/(max-min+min))*length, 0.0f);
-			this.AddChild(Knob);
+			this.AddChild(Knob,100);
 			
 			bounds = new Bounds2( new Vector2(-20.0f, -20.0f), new Vector2(length+20.0f, 36.0f) );
 #if DEBUG
@@ -186,7 +187,7 @@ namespace Crystallography.UI
 		
 		public void RegisterPalette(int pIndex) {
 //			Title.RegisterPalette(pIndex);
-			Knob.RegisterPalette(pIndex);
+			Knob.RegisterPalette(((pIndex+1)%3+1)%3);
 			Track.RegisterPalette(pIndex);
 			if(Ticks != null ) {
 				foreach (var tick in Ticks) {

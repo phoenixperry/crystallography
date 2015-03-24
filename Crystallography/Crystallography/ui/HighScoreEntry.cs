@@ -54,7 +54,7 @@ namespace Crystallography
 			_bestCubesTitle.RegisterPalette(0);
 			this.AddChild(_bestCubesTitle);
 			
-			_cubeIcon = Support.SpriteFromFile("/Application/assets/images/stopIcon.png");
+			_cubeIcon = Support.SpriteFromFile("/Application/assets/images/UI/cubes_big.png");
 			_cubeIcon.Position = new Vector2(0.0f, 194.0f);
 			_cubeIcon.RegisterPalette(0);
 			this.AddChild(_cubeIcon);
@@ -77,7 +77,7 @@ namespace Crystallography
 			this.AddChild(_bestPointsTitle);
 			
 			
-			_scoreIcon = Support.SpriteFromFile("/Application/assets/images/handIcon.png");
+			_scoreIcon = Support.SpriteFromFile("/Application/assets/images/UI/points_big.png");
 			_scoreIcon.Position = new Vector2(0.0f, 20.0f);
 			_scoreIcon.RegisterPalette(1);
 			this.AddChild(_scoreIcon);
