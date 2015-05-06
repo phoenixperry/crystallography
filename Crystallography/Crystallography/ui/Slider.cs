@@ -110,8 +110,8 @@ namespace Crystallography.UI
 						}
 					}
 					val = finalVal;
-					SetSliderValue(val);
 				}
+				SetSliderValue(val);
 				active = false;
 			}
 		}
@@ -157,7 +157,9 @@ namespace Crystallography.UI
 			val = Sce.PlayStation.Core.FMath.Min(pValue, max);
 			val = Sce.PlayStation.Core.FMath.Max(val, min);
 			Knob.Position = new Vector2( length * ((pValue-min)/(max-min)), 0.0f);
-			SelectedOption = discreteOptions.IndexOf(pValue);
+			if(discreteOptions != null && discreteOptions.Count > 0) {
+				SelectedOption = discreteOptions.IndexOf(pValue);
+			}
 			if ( false == pSilent && OnChange != null) {
 				OnChange(val);
 			}
