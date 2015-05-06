@@ -37,16 +37,16 @@ namespace Crystallography.UI
 			System.GC.Collect();
 			AppMain.UI_INPUT_ENABLED = false;
 			
-			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions1.png");
-			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions2.png");
-			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions3.png");
-			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions4.png");
-			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions5.png");
-			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions8.png");
-			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions7.png");
-			Support.RemoveTextureWithFileName("/Application/assets/images/UI/icons/tie.png");
-			Support.RemoveTextureWithFileName("/Application/assets/images/UI/icons/phones.png");
-			Support.RemoveTextureWithFileName("/Application/assets/images/UI/icons/glasses.png");
+//			Support.RemoveTextureWithFilFeName("/Application/assets/images/UI/instructions1.png");
+//			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions2.png");
+//			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions3.png");
+//			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions4.png");
+//			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions5.png");
+//			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions8.png");
+//			Support.RemoveTextureWithFileName("/Application/assets/images/UI/instructions7.png");
+//			Support.RemoveTextureWithFileName("/Application/assets/images/UI/icons/tie.png");
+//			Support.RemoveTextureWithFileName("/Application/assets/images/UI/icons/phones.png");
+//			Support.RemoveTextureWithFileName("/Application/assets/images/UI/icons/glasses.png");
 #if DEBUG
 			Console.WriteLine("########### EXIT MenuSystemScene ###############");
 #endif

@@ -198,9 +198,9 @@ namespace Crystallography.UI
 //				() => {
 //					var temp = Support.SpriteFromFile("/Application/assets/images/redbox.png");
 //				},
-				() => {
-					var temp = Support.SpriteFromFile("/Application/assets/images/UI/cubePoints.png");
-				},
+//				() => {
+//					var temp = Support.SpriteFromFile("/Application/assets/images/UI/cubePoints.png");
+//				},
 				() => {
 //					if (_levelNumber != 999) {
 //						var temp = Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3);
@@ -264,18 +264,18 @@ namespace Crystallography.UI
 				() => {
 					var temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_top.png");
 				},
-				() => {
-					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/NewGameButton.png", 1, 3);
-				},
-				() => {
-					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/LevelSelectButton.png", 1, 3);
-				},
-				() => {
-					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/CreditsButton.png", 1, 3);
-				},
-				() => {
-					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/InstructionsButton.png", 1, 3);
-				},
+//				() => {
+//					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/NewGameButton.png", 1, 3);
+//				},
+//				() => {
+//					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/LevelSelectButton.png", 1, 3);
+//				},
+//				() => {
+//					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/CreditsButton.png", 1, 3);
+//				},
+//				() => {
+//					var temp = Support.TiledSpriteFromFile("/Application/assets/images/UI/InstructionsButton.png", 1, 3);
+//				},
 				() => {
 					System.GC.Collect();
 				},
@@ -293,9 +293,9 @@ namespace Crystallography.UI
 		/// </summary>
 		protected void AddLevelSelectProcs() {
 			List<Action> proc = new List<Action>{
-				() => {
-					var temp = Support.SpriteFromFile("/Application/assets/images/UI/statsBox.png");
-				},
+//				() => {
+//					var temp = Support.SpriteFromFile("/Application/assets/images/UI/statsBox.png");
+//				},
 				() => {
 					var temp = Support.SpriteFromFile("Application/assets/images/UI/LevelSelectIndicator.png");
 				},
