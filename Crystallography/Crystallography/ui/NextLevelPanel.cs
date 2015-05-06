@@ -97,8 +97,8 @@ namespace Crystallography.UI
 			LevelSelectButton = new BetterButton(80.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {
 				Text = "select",
 				Icon = Support.SpriteFromFile("/Application/assets/images/UI/levels.png"),
-				IconAndTextOffset = new Vector2(30.0f, 10.0f),
-				TextOffset = new Vector2(-35.0f, -45.0f),
+				IconAndTextOffset = new Vector2(55.0f, 40.0f),
+				TextOffset = new Vector2(-65.0f, -45.0f),
 				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
 				Position = new Vector2(Width - NextLevelButton.Width - 110.0f, 0.0f),
 			};
