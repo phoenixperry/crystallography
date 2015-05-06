@@ -87,18 +87,15 @@
     <Compile Include="ui\ButtonEntity.cs" />
     <Compile Include="ui\HudPanel.cs" />
     <Compile Include="ui\LevelSelectScreen.cs" />
-    <Compile Include="ui\LevelTitle.cs" />
     <Compile Include="ui\LoadingScene.cs" />
     <Compile Include="ui\MainMenuScreen.cs" />
     <Compile Include="ui\MenuSystemScene.cs" />
     <Compile Include="ui\MessagePanel.cs" />
     <Compile Include="ui\NextLevelPanel.cs" />
     <Compile Include="ui\PausePanel.cs" />
-    <Compile Include="ui\InstructionsScreen.cs" />
     <Compile Include="ui\SplashScreen.cs" />
     <Compile Include="ui\SwipePanels.cs" />
     <Compile Include="ui\TitleScreen.cs" />
-    <Compile Include="ui\CreditsScreen.cs" />
     <Compile Include="ui\GameSceneHud.cs" />
     <Compile Include="ui\OptionsMenuScreen.cs" />
     <Compile Include="ui\Slider.cs" />
@@ -117,6 +114,8 @@
     <Compile Include="ui\BonusTimer.cs" />
     <Compile Include="ui\HighScoreEntry.cs" />
     <Compile Include="ui\ChallengeModeInstructionsPanel.cs" />
+    <Compile Include="deprecated\InstructionsScreen.cs" />
+    <Compile Include="deprecated\CreditsScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -148,7 +147,6 @@
     <Folder Include="assets\images\set4\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\images\title.png" />
     <Content Include="assets\levels\levelData.xml" />
     <Content Include="assets\levels\level_0.xml" />
     <Content Include="assets\levels\level_1.xml" />
@@ -247,19 +245,13 @@
     <Content Include="assets\audio\sfx\stack1levelcomplete.wav" />
     <Content Include="assets\images\UI\credits_btn.png" />
     <Content Include="assets\images\UI\icons\lock.png" />
-    <Content Include="assets\images\nextLevel.png" />
     <Content Include="assets\images\UI\next_level_sm.png" />
     <Content Include="assets\images\UI\next_level_smRoll.png" />
     <Content Include="assets\levels\level_999.xml" />
     <Content Include="assets\images\UI\eyes.png" />
     <Content Include="assets\images\particles.png" />
-    <Content Include="assets\images\button_85x56.png" />
-    <Content Include="assets\images\GameHudBar.png" />
     <Content Include="assets\images\PausePanelBG.png" />
-    <Content Include="assets\images\blueBtn.png" />
-    <Content Include="assets\images\redBtn.png" />
     <Content Include="assets\images\levelSelectBtn.png" />
-    <Content Include="assets\images\quit_game.png" />
     <Content Include="assets\images\UI\loading.png" />
     <Content Include="assets\images\glow.png" />
     <Content Include="assets\levels\level_25.xml" />
@@ -277,14 +269,9 @@
     <Content Include="assets\levels\level_37.xml" />
     <Content Include="assets\levels\level_38.xml" />
     <Content Include="assets\levels\level_39.xml" />
-    <Content Include="assets\images\blueBox.png" />
-    <Content Include="assets\images\redbox.png" />
     <Content Include="assets\images\handIcon.png" />
     <Content Include="assets\images\stopIcon.png" />
-    <Content Include="assets\images\LevelTitleBG.png" />
     <Content Include="assets\animation\animation2.png" />
-    <Content Include="assets\images\hitMe.png" />
-    <Content Include="assets\images\restartBtn.png" />
     <Content Include="assets\images\set4\gamePieces.png" />
     <Content Include="assets\images\icons\icons.png" />
     <Content Include="assets\images\timerIcon.png" />
@@ -297,9 +284,6 @@
     <Content Include="assets\images\SelectionMarker.png" />
     <Content Include="assets\audio\sfx\stack1threetiles.wav" />
     <Content Include="assets\images\UI\header.png" />
-    <Content Include="assets\images\levelBackBtn.png" />
-    <Content Include="assets\images\levelPlayBtn.png" />
-    <Content Include="assets\images\burst.png" />
     <Content Include="assets\images\UI\LevelSelectItemButtonDisabled.png" />
     <Content Include="assets\images\UI\cubePointsLg.png" />
     <Content Include="assets\images\UI\cubePoints.png" />
@@ -334,6 +318,7 @@
     <Content Include="assets\images\UI\cubes_big.png" />
     <Content Include="assets\images\UI\points_big.png" />
     <Content Include="assets\images\UI\sliderLozenge.png" />
+    <Content Include="assets\images\burst.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />
@@ -388,7 +373,6 @@
     <None Include="deprecated\LevelSelectScene.composer.cs" />
     <None Include="deprecated\LevelSelectScene.cs" />
     <None Include="deprecated\LevelTitle.composer.cs" />
-    <None Include="deprecated\LevelTitle.cs" />
     <None Include="deprecated\LoadingPanel.composer.cs" />
     <None Include="deprecated\LoadingPanel.cs" />
     <None Include="deprecated\LoadingScene.composer.cs" />
@@ -406,5 +390,7 @@
     <None Include="deprecated\TitleScene.composer.cs" />
     <None Include="deprecated\TitleScene.cs" />
     <None Include="deprecated\UIStringTable.cs" />
+    <None Include="deprecated\LevelTitle_OLD.cs" />
+    <None Include="deprecated\LevelTitle.cs" />
   </ItemGroup>
 </Project>

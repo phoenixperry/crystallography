@@ -172,9 +172,9 @@ namespace Crystallography.UI
 //				() => {
 //					var temp = Support.TiledSpriteFromFile("Application/assets/images/next_level_sm.png", 1, 3);
 //				},
-				() => {
-					var temp = Support.SpriteFromFile("/Application/assets/images/GameHudBar.png");
-				},
+//				() => {
+//					var temp = Support.SpriteFromFile("/Application/assets/images/GameHudBar.png");
+//				},
 				() => {
 					var temp = Support.SpriteFromFile("/Application/assets/images/handIcon.png");
 				},
@@ -189,34 +189,36 @@ namespace Crystallography.UI
 					Support.SoundSystem.Instance.Stop(LevelManager.Instance.SoundPrefix + "mid.wav");
 					Support.SoundSystem.Instance.Stop(LevelManager.Instance.SoundPrefix + "high.wav");
 				},
-				() => {
-					var temp = Support.SpriteFromFile("/Application/assets/images/blueBox.png");
-				},
+//				() => {
+//					var temp = Support.SpriteFromFile("/Application/assets/images/blueBox.png");
+//				},
 				() => {
 					var temp = Support.SpriteFromFile("/Application/assets/images/stopIcon.png");
 				},
-				() => {
-					var temp = Support.SpriteFromFile("/Application/assets/images/redbox.png");
-				},
+//				() => {
+//					var temp = Support.SpriteFromFile("/Application/assets/images/redbox.png");
+//				},
 				() => {
 					var temp = Support.SpriteFromFile("/Application/assets/images/UI/cubePoints.png");
 				},
 				() => {
-					if (_levelNumber != 999) {
-						var temp = Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3);
-					} else {
+//					if (_levelNumber != 999) {
+//						var temp = Support.TiledSpriteFromFile("Application/assets/images/restartBtn.png", 1, 3);
+//					}
+//					else {
+					if(_levelNumber == 999) {
 						var temp = Support.SpriteUVFromFile("/Application/assets/images/timerIcon.png");
 					}
 				},
-				() => {
-					var temp = Support.TiledSpriteFromFile("Application/assets/images/hitMe.png", 1, 3);
-				},
+//				() => {
+//					var temp = Support.TiledSpriteFromFile("Application/assets/images/hitMe.png", 1, 3);
+//				},
 				() => {
 					var temp = Support.SpriteFromFile("/Application/assets/images/PausePanelBG.png");
 				},
-				() => {
-					var temp = Support.SpriteFromFile("/Application/assets/images/LevelTitleBG.png");
-				},
+//				() => {
+//					var temp = Support.SpriteFromFile("/Application/assets/images/LevelTitleBG.png");
+//				},
 				() => {
 					var temp = Support.SpriteFromFile("Application/assets/images/burst.png");
 				},
