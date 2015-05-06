@@ -28,6 +28,9 @@ namespace Crystallography.UI
 		protected BetterButton _particleButton;
 		protected BetterButton _noneButton;
 		
+		protected BetterButton _instructionsButton;
+		protected ChallengeModeInstructionsPanel _instructionsPanel;
+		
 		protected SpriteTile _bestBG;
 		
 		protected Label _bestTitleText;
@@ -181,6 +184,13 @@ namespace Crystallography.UI
 			_noneButton.background.RegisterPalette(2);
 			this.AddChild(_noneButton);
 			
+			_instructionsButton = new BetterButton(362.0f, 62.0f) {
+				Text = "instructions",
+				Position = Vector2.Zero
+			};
+			_instructionsButton.background.RegisterPalette(2);
+			this.AddChild(_instructionsButton);
+			
 			_bestBG = Support.UnicolorSprite("black", 0,0,0,255);
 			_bestBG.Position = new Vector2(598.0f, 0.0f);
 			_bestBG.Scale = new Vector2(22.625f, 34.0f);
@@ -233,6 +243,9 @@ namespace Crystallography.UI
 			};
 			playButton.background.RegisterPalette(0);
 			this.AddChild(playButton);
+			
+			_instructionsPanel = new ChallengeModeInstructionsPanel();
+			this.AddChild(_instructionsPanel);
 		}
 		
 		// EVENT HANDLERS ----------------------------------------
@@ -276,22 +289,36 @@ namespace Crystallography.UI
 		public override void OnEnter ()
 		{
 			base.OnEnter ();
-			playButton.ButtonUpAction += HandleplayButtonButtonUpAction;
-			cancelButton.ButtonUpAction += HandleCancelButtonButtonUpAction;
-			_soundButton.ButtonUpAction += HandleQualityButtonUpAction;
-			_particleButton.ButtonUpAction += HandleQualityButtonUpAction;
-			_noneButton.ButtonUpAction += HandleQualityButtonUpAction;
+			
+			EnableUI();
+			
+			_instructionsPanel.OnSlideInStart += Handle_instructionsPanelOnSlideInStart;
+			_instructionsPanel.OnSlideOutComplete += Handle_instructionsPanelOnSlideOutComplete;
 			
 			_noneButton.FakePress();
+		}
+
+		void Handle_instructionsPanelOnSlideOutComplete (object sender, EventArgs e)
+		{
+			EnableUI();
+		}
+
+		void Handle_instructionsPanelOnSlideInStart (object sender, EventArgs e)
+		{
+			DisableUI();
+		}
+
+		void Handle_instructionsButtonButtonUpAction (object sender, EventArgs e)
+		{
+			_instructionsPanel.SlideIn();
 		}
 		
 		public override void OnExit ()
 		{
-			playButton.ButtonUpAction -= HandleplayButtonButtonUpAction;
-			cancelButton.ButtonUpAction -= HandleCancelButtonButtonUpAction;
-			_soundButton.ButtonUpAction -= HandleQualityButtonUpAction;
-			_particleButton.ButtonUpAction -= HandleQualityButtonUpAction;
-			_noneButton.ButtonUpAction -= HandleQualityButtonUpAction;
+			DisableUI();
+			
+			_instructionsPanel.OnSlideInStart += Handle_instructionsPanelOnSlideInStart;
+			_instructionsPanel.OnSlideOutComplete += Handle_instructionsPanelOnSlideOutComplete;
 			
 //			fourthQuality = null;
 //			MenuSystem = null;
@@ -321,6 +348,26 @@ namespace Crystallography.UI
 		}
 		
 		// METHODS -----------------------------------------------
+		
+		protected void DisableUI() {
+			playButton.ButtonUpAction -= HandleplayButtonButtonUpAction;
+			cancelButton.ButtonUpAction -= HandleCancelButtonButtonUpAction;
+			_soundButton.ButtonUpAction -= HandleQualityButtonUpAction;
+			_particleButton.ButtonUpAction -= HandleQualityButtonUpAction;
+			_noneButton.ButtonUpAction -= HandleQualityButtonUpAction;
+			
+			_instructionsButton.ButtonUpAction -= Handle_instructionsButtonButtonUpAction;
+		}
+		
+		protected void EnableUI() {
+			playButton.ButtonUpAction += HandleplayButtonButtonUpAction;
+			cancelButton.ButtonUpAction += HandleCancelButtonButtonUpAction;
+			_soundButton.ButtonUpAction += HandleQualityButtonUpAction;
+			_particleButton.ButtonUpAction += HandleQualityButtonUpAction;
+			_noneButton.ButtonUpAction += HandleQualityButtonUpAction;
+			
+			_instructionsButton.ButtonUpAction += Handle_instructionsButtonButtonUpAction;
+		}
 		
 		protected void Exit() {
 			// TODO WRITE SETTINGS TO DATA FOR PERSISTENCE

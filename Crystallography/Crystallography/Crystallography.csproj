@@ -116,6 +116,7 @@
     <Compile Include="ui\StrikeHud.cs" />
     <Compile Include="ui\BonusTimer.cs" />
     <Compile Include="ui\HighScoreEntry.cs" />
+    <Compile Include="ui\ChallengeModeInstructionsPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
