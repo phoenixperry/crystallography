@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $TexturePacker:SmartUpdate:c35b860ac22b782afe80f88332bae948:53841617bf8c5ec1f5a096bb6882d4a8:42ac89c504f4d0dfaab4ba223283fce1$ -->
+<root version="1.0">
+	<info w="512" h="512" />
+    <textures>
+		<texture filename="1.png" x="296" y="0" w="100" h="100" />
+		<texture filename="2.png" x="400" y="0" w="100" h="100" />
+		<texture filename="3.png" x="296" y="104" w="100" h="100" />
+		<texture filename="BetterButton.png" x="484" y="272" w="16" h="48" />
+		<texture filename="BetterButtonTransparent.png" x="184" y="320" w="16" h="48" />
+		<texture filename="LevelSelectIndicator.png" x="296" y="208" w="92" h="108" />
+		<texture filename="LevelSelectItemButton.png" x="0" y="244" w="76" h="264" />
+		<texture filename="LevelSelectItemButtonDisabled.png" x="0" y="244" w="76" h="264" />
+		<texture filename="arrow.png" x="144" y="376" w="72" h="64" />
+		<texture filename="cubes_big.png" x="80" y="244" w="60" h="68" />
+		<texture filename="diagonalLine.png" x="400" y="104" w="100" h="100" />
+		<texture filename="handIcon.png" x="124" y="452" w="32" h="48" />
+		<texture filename="heart.png" x="204" y="320" w="48" h="40" />
+		<texture filename="levels.png" x="392" y="292" w="76" h="76" />
+		<texture filename="loading.png" x="0" y="0" w="292" h="240" />
+		<texture filename="lockIcon.png" x="276" y="244" w="16" h="24" />
+		<texture filename="pause.png" x="80" y="320" w="48" h="48" />
+		<texture filename="plus.png" x="132" y="320" w="48" h="48" />
+		<texture filename="points_big.png" x="144" y="244" w="48" h="68" />
+		<texture filename="ratioIcon.png" x="80" y="376" w="60" h="72" />
+		<texture filename="replay.png" x="392" y="208" w="88" h="80" />
+		<texture filename="sliderLozenge.png" x="256" y="244" w="16" h="40" />
+		<texture filename="stopIcon.png" x="472" y="324" w="40" h="48" />
+		<texture filename="strike.png" x="160" y="444" w="64" h="64" />
+		<texture filename="strikeCube.png" x="484" y="208" w="28" h="32" />
+		<texture filename="timerEnd.png" x="276" y="272" w="16" h="16" />
+		<texture filename="timerIcon.png" x="80" y="452" w="40" h="48" />
+		<texture filename="whitePageIcon.png" x="256" y="288" w="16" h="16" />
+		<texture filename="x.png" x="484" y="244" w="24" h="24" />
+    </textures>
+</root>

@@ -504,10 +504,11 @@ namespace Crystallography.UI
 		
 		public LevelSelectItem(float pComplete, bool pLocked) {
 			if (pComplete == 1.0f) {
-				background = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3);
-				
+//				background = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3);
+				background = Support.TiledSpriteFromAtlas("crystallonUI", "LevelSelectItemButton.png", 1, 3);
 			} else {
-				background = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButtonDisabled.png", 1, 3);
+//				background = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButtonDisabled.png", 1, 3);
+				background = Support.TiledSpriteFromAtlas("crystallonUI", "LevelSelectItemButtonDisabled.png", 1, 3);
 			}
 			background.CenterSprite();
 			var size = background.CalcSizeInPixels();
@@ -515,7 +516,8 @@ namespace Crystallography.UI
 			_bounds = new Bounds2( new Vector2(-Width/2.0f, -Height/2.0f), new Vector2(Width/2.0f, Height/2.0f) );
 			locked = pLocked;
 			if (locked) {
-				var lockIcon = Support.SpriteFromFile("Application/assets/images/UI/lockIcon.png");
+//				var lockIcon = Support.SpriteFromFile("Application/assets/images/UI/lockIcon.png");
+				var lockIcon = Support.SpriteFromAtlas("crystallonUI", "lockIcon.png");
 				lockIcon.Position = new Vector2( 25.0f, -38.0f);
 				this.AddChild( lockIcon );
 			}
@@ -706,6 +708,7 @@ namespace Crystallography.UI
 	public class LevelSelectIndicator : Node {
 		public LevelSelectIndicator() {
 			var img = Support.SpriteFromFile("Application/assets/images/UI/LevelSelectIndicator.png");
+//			var img = Support.SpriteFromAtlas ("crystallonUI", "LevelSelectIndicator.png");
 			img.Position = -0.5f*img.CalcSizeInPixels();
 //			img.Position = new Vector2(img.Position.X, img.Position.Y + 1.0f);
 			AddChild(img);

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $TexturePacker:SmartUpdate:aada9c3cb2fba608ba85c69ab6d2943e:c82a02ff65241c4e6e2be6cb854fc75e:076eb362ae38477d14efb8ae6ffb8ee3$ -->
+<root version="1.0">
+	<info w="512" h="512" />
+    <textures>
+		<texture filename="gamePieces.png" x="2" y="2" w="390" h="348" />
+    </textures>
+</root>

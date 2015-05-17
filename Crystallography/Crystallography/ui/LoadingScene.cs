@@ -50,7 +50,8 @@ namespace Crystallography.UI
 			Hub.Position = new Vector2(480.0f, 272.0f);
 			this.AddChild(Hub);
 			
-			LoadingSpinner = Support.SpriteFromFile("/Application/assets/images/UI/loading.png");
+//			LoadingSpinner = Support.SpriteFromFile("/Application/assets/images/UI/loading.png");
+			LoadingSpinner = Support.SpriteFromAtlas("crystallonUI", "loading.png");
 			LoadingSpinner.Pivot = new Vector2(0.5f, 0.5f);
 			LoadingSpinner.Position = new Vector2(-145.0f, -119.0f);
 			LoadingSpinner.RegisterPalette(1);

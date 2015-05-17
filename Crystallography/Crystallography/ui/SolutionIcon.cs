@@ -19,7 +19,8 @@ namespace Crystallography.UI
 		// CONSTRUCTOR -------------------------------------------------------------------------
 		public SolutionIcon () : base() {
 //			image = Support.SpriteFromFile("/Application/assets/images/UI/cubePoints.png");
-			image = Support.SpriteFromFile("/Application/assets/images/UI/ratioIcon.png");
+//			image = Support.SpriteFromFile("/Application/assets/images/UI/ratioIcon.png");
+			image = Support.SpriteFromAtlas("crystallonUI", "ratioIcon.png");
 			AddChild(image);
 			
 			cubes = new Label(){

@@ -610,7 +610,8 @@ namespace Crystallography.UI
 			};
 			
 			// SCORE STUFF
-			ScoreIcon = Support.SpriteFromFile("/Application/assets/images/handIcon.png");
+//			ScoreIcon = Support.SpriteFromFile("/Application/assets/images/handIcon.png");
+			ScoreIcon = Support.SpriteFromAtlas("crystallonUI", "handIcon.png");
 			ScoreIcon.Position = new Vector2(184.0f, 16.0f);
 			ScoreIcon.RegisterPalette(1);
 			GameHudBar.AddChild(ScoreIcon);
@@ -631,7 +632,8 @@ namespace Crystallography.UI
 			GameHudBar.AddChild(ScoreText);
 			
 			// CUBE STUFF
-			CubeIcon = Support.SpriteFromFile("/Application/assets/images/stopIcon.png");
+//			CubeIcon = Support.SpriteFromFile("/Application/assets/images/stopIcon.png");
+			CubeIcon = Support.SpriteFromAtlas("crystallonUI", "stopIcon.png");
 			CubeIcon.Position = new Vector2(20.0f,16.0f);
 			CubeIcon.RegisterPalette(2);
 			GameHudBar.AddChild(CubeIcon);
@@ -674,7 +676,8 @@ namespace Crystallography.UI
 			// PAUSE BUTTON
 			PauseButton = new BetterButton("/Application/assets/images/UI/BetterButtonTransparent.png", 115.0f, 71.0f) {
 				Text = "",
-				Icon = Support.SpriteFromFile("Application/assets/images/UI/pause.png"),
+//				Icon = Support.SpriteFromFile("Application/assets/images/UI/pause.png"),
+				Icon = Support.SpriteFromAtlas("crystallonUI", "pause.png"),
 //				Position = new Vector2(845.0f, 473.0f),
 				Position = new Vector2(845.0f, 0.0f)
 			};
@@ -688,7 +691,8 @@ namespace Crystallography.UI
 			// HIT ME BUTTON
 			HitMeButton = new BetterButton("/Application/assets/images/UI/BetterButtonTransparent.png", 115.0f, 71.0f) {
 				Text = "",
-				Icon = Support.SpriteFromFile("Application/assets/images/UI/plus.png"),
+//				Icon = Support.SpriteFromFile("Application/assets/images/UI/plus.png"),
+				Icon = Support.SpriteFromAtlas("crystallonUI", "plus.png"),
 //				Position = new Vector2(720.0f, 473.0f),
 				Position = new Vector2(720.0f, 0.0f)
 			};

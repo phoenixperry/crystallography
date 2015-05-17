@@ -55,7 +55,9 @@ namespace Crystallography
 		}
 		
 		public void setPalette( string path, int columns, int rows) {
-			patternTiles = Support.TiledSpriteFromFile( path, columns, rows );
+//			patternTiles = Support.TiledSpriteFromFile( path, columns, rows );
+			var atlas = path.Substring(0, path.LastIndexOf('.'));
+			patternTiles = Support.TiledSpriteFromAtlas(atlas, "gamePieces.png", columns, rows);
 		}
 	}
 }

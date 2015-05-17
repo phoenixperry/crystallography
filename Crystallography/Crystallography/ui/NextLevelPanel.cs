@@ -81,7 +81,8 @@ namespace Crystallography.UI
 				Text = "next",
 				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
 //				IconOnLeft = false,
-				Icon = Support.SpriteFromFile("/Application/assets/images/UI/arrow.png"),
+//				Icon = Support.SpriteFromFile("/Application/assets/images/UI/arrow.png"),
+				Icon = Support.SpriteFromAtlas("crystallonUI", "arrow.png"),
 				IconAndTextOffset = new Vector2(22.0f, 10.0f),
 				TextOffset = new Vector2(-40.0f, -45.0f),
 				Position = new Vector2(Width - 108.0f, 0.0f),
@@ -99,6 +100,9 @@ namespace Crystallography.UI
 				Icon = Support.SpriteFromFile("/Application/assets/images/UI/levels.png"),
 				IconAndTextOffset = new Vector2(55.0f, 40.0f),
 				TextOffset = new Vector2(-65.0f, -45.0f),
+//				Icon = Support.SpriteFromAtlas("crystallonUI", "levels.png"),
+//				IconAndTextOffset = new Vector2(30.0f, 10.0f),
+//				TextOffset = new Vector2(-35.0f, -45.0f),
 				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
 				Position = new Vector2(Width - NextLevelButton.Width - 110.0f, 0.0f),
 			};
@@ -110,7 +114,8 @@ namespace Crystallography.UI
 			ReplayButton = new BetterButton(94.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {
 				Text = "replay",
 				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
-				Icon = Support.SpriteFromFile("/Application/assets/images/UI/replay.png"),
+//				Icon = Support.SpriteFromFile("/Application/assets/images/UI/replay.png"),
+				Icon = Support.SpriteFromAtlas("crystallonUI", "replay.png"),
 				IconAndTextOffset = new Vector2(32.0f, 10.0f),
 				TextOffset = new Vector2(-45.0f, -45.0f),
 				Position = new Vector2(Width - NextLevelButton.Width - LevelSelectButton.Width - 124.0f, 0.0f),
@@ -124,7 +129,8 @@ namespace Crystallography.UI
 			QuitButton = new BetterButton(94.0f + 30.0f, Background.CalcSizeInPixels().Y * Background.Scale.Y) {
 				Text = "menu",
 				TextFont = FontManager.Instance.GetInGame("Bariol", 25),
-				Icon = Support.SpriteFromFile("/Application/assets/images/UI/arrow.png"),
+//				Icon = Support.SpriteFromFile("/Application/assets/images/UI/arrow.png"),
+				Icon = Support.SpriteFromAtlas("crystallonUI", "arrow.png"),
 				IconAndTextOffset = new Vector2(32.0f, 80.0f),
 				TextOffset = new Vector2(-38.0f, -45.0f),
 				Position = new Vector2(Width - NextLevelButton.Width - LevelSelectButton.Width - 124.0f, 0.0f),
@@ -142,7 +148,8 @@ namespace Crystallography.UI
 				this.AddChild(QuitButton);
 			}
 			
-			DiagonalLine = Support.SpriteFromFile("/Application/assets/images/UI/diagonalLine.png");
+//			DiagonalLine = Support.SpriteFromFile("/Application/assets/images/UI/diagonalLine.png");
+			DiagonalLine = Support.SpriteFromAtlas("crystallonUI", "diagonalLine.png");
 			DiagonalLine.Position = new Vector2( QuitButton.Position.X - DiagonalLine.CalcSizeInPixels().X - 5.0f , 15.0f);
 			DiagonalLine.Color = LevelManager.Instance.BackgroundColor;
 			this.AddChild(DiagonalLine);

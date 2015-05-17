@@ -69,7 +69,8 @@ namespace Crystallography.UI
 			length = (float)trackLength;
 			
 //			Knob = Support.UnicolorSprite("white", 255, 255, 255, 255);
-			Knob = Support.SpriteFromFile("/Application/assets/images/UI/sliderLozenge.png");
+//			Knob = Support.SpriteFromFile("/Application/assets/images/UI/sliderLozenge.png");
+			Knob = Support.SpriteFromAtlas("crystallonUI", "sliderLozenge.png");
 			Knob.CenterSprite(new Vector2(0.5f, 0.36f));
 //			Knob.Position = new Vector2((pValue/(max-min+min))*length, 0.0f);
 			this.AddChild(Knob,100);

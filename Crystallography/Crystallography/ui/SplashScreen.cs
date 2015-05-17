@@ -30,6 +30,8 @@ namespace Crystallography.UI
 				() => {
 					SplashImage = Support.SpriteFromFile("/Application/assets/images/UI/eyes.png");
 					this.AddChild(SplashImage);
+				},
+				() => {
 					var temp = Support.SpriteFromFile("/Application/assets/images/UI/header.png");
 					temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_blue2.png");
 					temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_red2.png");
@@ -37,6 +39,8 @@ namespace Crystallography.UI
 					temp = Support.SpriteFromFile("/Application/assets/images/UI/menuBtnBG_top.png");
 					var b = new BetterButton();
 					b.Cleanup();
+					Support.LoadAtlas("crystallonUI", ".png");
+					Support.LoadAtlas("set1/gamePieces", ".png");
 				},
 				() => {
 					Scheduler.Instance.Schedule( this, (dt) => { 

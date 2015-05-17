@@ -432,7 +432,7 @@ namespace Crystallography
 			Palette[1] = Support.ExtractColor("fc463a");
 			Palette[2] = Support.ExtractColor("a61885");
 			BackgroundColor = Support.ExtractColor("f0e8db");
-			PatternPath = "Application/assets/images/set1/gamePieces.png";
+			PatternPath = "set1/gamePieces.png";
 			SymbolPath = "Application/assets/images/set1/symbol.png";
 			SoundPrefix = "stack1";
 			Goal = 1;

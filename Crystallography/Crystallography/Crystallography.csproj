@@ -116,6 +116,7 @@
     <Compile Include="ui\ChallengeModeInstructionsPanel.cs" />
     <Compile Include="deprecated\InstructionsScreen.cs" />
     <Compile Include="deprecated\CreditsScreen.cs" />
+    <Compile Include="utils\UnifiedTexture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -145,6 +146,7 @@
     <Folder Include="assets\audio\bgm\" />
     <Folder Include="assets\images\icons\" />
     <Folder Include="assets\images\set4\" />
+    <Folder Include="utils\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\levels\levelData.xml" />
@@ -176,7 +178,6 @@
     <Content Include="assets\levels\level_23.xml" />
     <Content Include="assets\levels\level_24.xml" />
     <Content Include="assets\images\UI\lockIcon.png" />
-    <Content Include="assets\images\set1\gamePieces.png" />
     <Content Include="assets\images\set2\gamePieces.png" />
     <Content Include="assets\images\set3\gamePieces.png" />
     <Content Include="assets\audio\bgm\intromusic.mp3" />
@@ -265,6 +266,13 @@
     <Content Include="assets\images\UI\points_big.png" />
     <Content Include="assets\images\UI\sliderLozenge.png" />
     <Content Include="assets\images\burst.png" />
+    <Content Include="assets\images\crystallonUI.png" />
+    <Content Include="assets\images\crystallonUI.xml" />
+    <Content Include="assets\images\set1\gamePieces.png" />
+    <Content Include="assets\images\set1\gamePieces.xml" />
+    <Content Include="assets\images\set2\gamePieces.xml" />
+    <Content Include="assets\images\set4\gamePieces.xml" />
+    <Content Include="assets\images\set3\gamePieces.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

@@ -135,7 +135,8 @@ namespace Crystallography.UI
 			AbsoluteTimer = 0.0f;
 			_maxTimeStart = MAX_TIME_DEFAULT;
 			
-			TimerIcon = Support.TiledSpriteFromFile(TIMER_ICON_PATH, 1, 1);
+//			TimerIcon = Support.TiledSpriteFromFile(TIMER_ICON_PATH, 1, 1);
+			TimerIcon = Support.SpriteFromAtlas("crystallonUI", "timerIcon.png");
 			TimerIcon.RegisterPalette(0);
 			this.AddChild(TimerIcon);
 			
@@ -144,9 +145,11 @@ namespace Crystallography.UI
 			TimeBar.RegisterPalette(0);
 			TimerIcon.AddChild(TimeBar);
 			
-			LeftEnd = Support.TiledSpriteFromFile(TIMER_END_PATH, 1, 1);
+//			LeftEnd = Support.TiledSpriteFromFile(TIMER_END_PATH, 1, 1);
+			LeftEnd = Support.SpriteFromAtlas("crystallonUI", "timerEnd.png");
 			LeftEnd.FlipU = true;
-			RightEnd = Support.TiledSpriteFromFile(TIMER_END_PATH, 1, 1);
+//			RightEnd = Support.TiledSpriteFromFile(TIMER_END_PATH, 1, 1);
+			RightEnd = Support.SpriteFromAtlas("crystallonUI", "timerEnd.png");
 			LeftEnd.Color = RightEnd.Color = LevelManager.Instance.BackgroundColor;
 			LeftEnd.Position = TimeBar.Position;
 			RightEnd.Position = new Vector2(TimeBar.Position.X + BASE_SPRITE_WIDTH * TimeBar.Scale.X - BASE_SPRITE_WIDTH, TimeBar.Position.Y);

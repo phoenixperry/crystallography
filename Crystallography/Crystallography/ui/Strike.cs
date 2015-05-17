@@ -7,9 +7,13 @@ namespace Crystallography.UI
 {
 	public class Strike : Node
 	{
-		private static readonly TextureInfo BAD_STRIKE_TEXTUREINFO = Support.SpriteFromFile("/Application/assets/images/UI/x.png").TextureInfo;
-		private static readonly TextureInfo EMPTY_STRIKE_TEXTUREINFO = Support.SpriteFromFile("/Application/assets/images/UI/whitePageIcon.png").TextureInfo;
-		private static readonly TextureInfo GOOD_STRIKE_TEXTUREINFO = Support.SpriteFromFile("Application/assets/images/UI/strikeCube.png").TextureInfo;
+//		private static readonly TextureInfo BAD_STRIKE_TEXTUREINFO = Support.SpriteFromFile("/Application/assets/images/UI/x.png").TextureInfo;
+//		private static readonly TextureInfo EMPTY_STRIKE_TEXTUREINFO = Support.SpriteFromFile("/Application/assets/images/UI/whitePageIcon.png").TextureInfo;
+//		private static readonly TextureInfo GOOD_STRIKE_TEXTUREINFO = Support.SpriteFromFile("Application/assets/images/UI/strikeCube.png").TextureInfo;
+		
+		private static readonly TextureInfo BAD_STRIKE_TEXTUREINFO = Support.SpriteFromAtlas("crystallonUI", "x.png").TextureInfo;
+		private static readonly TextureInfo EMPTY_STRIKE_TEXTUREINFO = Support.SpriteFromAtlas("crystallonUI", "whitePageIcon.png").TextureInfo;
+		private static readonly TextureInfo GOOD_STRIKE_TEXTUREINFO = Support.SpriteFromAtlas("crystallonUI", "strikeCube.png").TextureInfo;
 		
 		private SpriteTile Icon;
 		
@@ -37,7 +41,8 @@ namespace Crystallography.UI
 		}
 		
 		private void Initialize() {
-			Icon = Support.SpriteFromFile("/Application/assets/images/UI/whitePageIcon.png");
+//			Icon = Support.SpriteFromFile("/Application/assets/images/UI/whitePageIcon.png");
+			Icon = Support.SpriteFromAtlas("crystallonUI", "whitePageIcon.png");
 			_filled = false;
 			Icon.RegisterPalette(1);
 			this.AddChild(Icon);
