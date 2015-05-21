@@ -708,6 +708,7 @@ namespace Crystallography.UI
 	public class LevelSelectIndicator : Node {
 		public LevelSelectIndicator() {
 			var img = Support.SpriteFromFile("Application/assets/images/UI/LevelSelectIndicator.png");
+			img.Color = Colors.Black;
 //			var img = Support.SpriteFromAtlas ("crystallonUI", "LevelSelectIndicator.png");
 			img.Position = -0.5f*img.CalcSizeInPixels();
 //			img.Position = new Vector2(img.Position.X, img.Position.Y + 1.0f);
