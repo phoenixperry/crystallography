@@ -12,7 +12,7 @@ namespace Crystallography.UI
 		public static readonly Vector2 CUBES_TEXT_POS = new Vector2(117.0f, 12.0f);
 		
 		Node GameHudBar;
-		SpriteTile HudBarMask;
+		public SpriteTile HudBarMask;
 		SpriteTile HudBarLine;
 		SpriteTile ScoreIcon;
 		SpriteTile CubeIcon;

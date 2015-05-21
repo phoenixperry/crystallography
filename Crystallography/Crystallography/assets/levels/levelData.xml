@@ -1,7 +1,7 @@
 <GameData>
 	<Level Value="0">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set4/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="0" Score="8" />
@@ -33,7 +33,7 @@
 	</Level>
 	<Level Value="1">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="false" />
 		<Goal Cubes="1" Score="3" />
@@ -41,7 +41,7 @@
 	</Level>
 	<Level Value="2">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="1" Score="3" />
@@ -49,7 +49,7 @@
 	</Level>
 	<Level Value="3">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="2" Score="4" />
@@ -59,7 +59,7 @@
 	</Level>
 	<Level Value="4">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="false" />
 		<Goal Cubes="2" Score="2" />
@@ -70,7 +70,7 @@
 	</Level>
 	<Level Value="5">
 		<Color LightHex="fd9e63" MidHex="fc463a" DarkHex="a61885" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set4/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="3" Score="9" />
@@ -82,7 +82,7 @@
 	</Level>
 	<Level Value="6">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="1" Score="2" />
@@ -91,14 +91,14 @@
 	</Level>
 	<Level Value="7">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="4" Score="20" />
 	</Level>
 	<Level Value="8">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set4/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="1" Score="3" />
@@ -106,7 +106,7 @@
 	</Level>
 	<Level Value="9">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
 		<Goal Cubes="2" Score="10" />
@@ -114,7 +114,7 @@
 	</Level>
 	<Level Value="10">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
 		<Goal Cubes="2" Score="18" />
@@ -122,7 +122,7 @@
 	</Level>
 	<Level Value="11">
 		<Color LightHex="fd9e63" MidHex="fc463a" DarkHex="a61885" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
 		<Goal Cubes="3" Score="14" />
@@ -140,7 +140,7 @@
 	</Level>
 	<Level Value="12">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="false" />
 		<Goal Cubes="2" Score="6" />
@@ -148,7 +148,7 @@
 	</Level>
 	<Level Value="13">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="3" Score="16" />
@@ -157,7 +157,7 @@
 	</Level>
 	<Level Value="14">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="2" Score="12" />
@@ -170,7 +170,7 @@
 	</Level>
 	<Level Value="15">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set4/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="3" Score="7" />
@@ -178,7 +178,7 @@
 	</Level>
 	<Level Value="16">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="false" />
 		<Goal Cubes="3" Score="12" />
@@ -192,7 +192,7 @@
 	</Level>
 	<Level Value="17">
 		<Color LightHex="fd9e63" MidHex="fc463a" DarkHex="a61885" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="5" Score="26" />
@@ -205,7 +205,7 @@
 	</Level>
 	<Level Value="18">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="1" Score="9" />
@@ -213,14 +213,14 @@
 	</Level>
 	<Level Value="19">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="4" Score="30" />
 	</Level>
 	<Level Value="20">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="3" Score="21" />
@@ -228,14 +228,14 @@
 	</Level>
 	<Level Value="21">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="3" Score="27" />
 	</Level>
 	<Level Value="22">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="3" Score="21" />
@@ -251,7 +251,7 @@
 	</Level>
 	<Level Value="23">
 		<Color LightHex="fd9e63" MidHex="fc463a" DarkHex="a61885" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="false" />
 		<Goal Cubes="3" Score="15" />
@@ -261,14 +261,14 @@
 	</Level>
 	<Level Value="24">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="3" Score="27" />
 	</Level>
 	<Level Value="25">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set2/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="4" Score="24" />
@@ -279,7 +279,7 @@
 	</Level>
 	<Level Value="26">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
 		<Goal Cubes="4" Score="28" />
@@ -294,14 +294,14 @@
 	</Level>
 	<Level Value="27">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="2" Score="18" />
 	</Level>
 	<Level Value="28">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="2" Score="14" />
@@ -309,7 +309,7 @@
 	</Level>
 	<Level Value="29">
 		<Color LightHex="fd9e63" MidHex="fc463a" DarkHex="a61885" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
 		<Goal Cubes="4" Score="30" />
@@ -324,7 +324,7 @@
 	</Level>
 	<Level Value="30">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set2/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
 		<Goal Cubes="2" Score="18" />
@@ -332,14 +332,14 @@
 	</Level>
 	<Level Value="31">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
 		<Goal Cubes="4" Score="38" />
 	</Level>
 	<Level Value="32">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
 		<Goal Cubes="2" Score="16" />
@@ -347,7 +347,7 @@
 	</Level>
 	<Level Value="33">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="3" Score="30" />
@@ -358,7 +358,7 @@
 	</Level>
 	<Level Value="34">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set2/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
 		<Goal Cubes="4" Score="40" />
@@ -366,14 +366,14 @@
 	</Level>
 	<Level Value="35">
 		<Color LightHex="fd9e63" MidHex="fc463a" DarkHex="a61885" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
 		<Goal Cubes="2" Score="20" />
 	</Level>
 	<Level Value="36">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="3" Score="30" />
@@ -381,7 +381,7 @@
 	</Level>
 	<Level Value="37">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set2/gamePieces.png" />
 		<Sound Prefix="stack3" Glow="true" />
 		<Goal Cubes="4" Score="44" />
@@ -389,7 +389,7 @@
 	</Level>
 	<Level Value="38">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set2/gamePieces.png" />
 		<Sound Prefix="stack1" Glow="true" />
 		<Goal Cubes="4" Score="28" />
@@ -401,7 +401,7 @@
 	</Level>
 	<Level Value="39">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set1/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="3" Score="24" />
@@ -411,7 +411,7 @@
 	</Level>
 	<Level Value="40">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
-		<Background Main="E5E3D1" Grey="7F7E75" Black="333330" />
+		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
 		<Pattern Path="set3/gamePieces.png" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="3" Score="32" />

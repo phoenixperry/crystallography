@@ -333,7 +333,10 @@ namespace Crystallography
 		public void TintBackground( Vector4 pColor, float pDuration ) {
 			var bgTint = new TintTo(pColor, pDuration) {
 				Get = () => BackgroundColor,
-				Set = value => {BackgroundColor = value;},
+				Set = value => {
+					BackgroundColor = value;
+					GameScene.Hud.HudBarMask.Color = value;
+				},
 				Tween = (x) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(x,2)
 			};
 			Director.Instance.CurrentScene.RunAction(bgTint);
