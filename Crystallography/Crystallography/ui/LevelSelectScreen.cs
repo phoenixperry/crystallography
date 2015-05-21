@@ -184,7 +184,7 @@ namespace Crystallography.UI
 			
 			LevelSelectTitleText = new Label(){
 				Text="level select",
-				Position = new Vector2(60.0f, 488.0f),
+				Position = new Vector2(50.0f, 488.0f),
 				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 36, "Regular") ),
 				Color = Support.ExtractColor("333330")
 			};
@@ -192,7 +192,7 @@ namespace Crystallography.UI
 			
 			LevelSelectInstructionsText = new Label(){
 				Text="select a cube and then press play.",
-				Position = new Vector2(60.0f, 465.0f),
+				Position = new Vector2(50.0f, 465.0f),
 				FontMap = UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Regular") ),
 				Color = Support.ExtractColor("333330")
 			};
