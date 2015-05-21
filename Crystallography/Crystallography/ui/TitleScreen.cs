@@ -23,6 +23,7 @@ namespace Crystallography.UI
 			TitleImage = Support.SpriteFromFile("/Application/assets/images/UI/header.png");
 			TouchToStartText = new Label("touch to start", map);
 			TouchToStartText.Position = new Vector2(229.0f, 73.0f);
+			TouchToStartText.Color = LevelManager.Instance.Palette[0];
 			TouchToStartText.Color.A = 0.0f;
 			
 			Scheduler.Instance.Schedule( TouchToStartText, (dt) => {
