@@ -214,6 +214,8 @@ namespace Crystallography.UI
 				icon.RemoveAllChildren(false);
 			}
 			foreach ( string name in pNames ) {
+				if (name == "none")
+					continue;
 				Node node;
 				if (name != "Color") {
 					// default sprite index to 0

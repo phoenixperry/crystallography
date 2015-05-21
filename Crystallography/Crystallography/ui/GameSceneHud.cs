@@ -109,9 +109,10 @@ namespace Crystallography.UI
 		/// </summary>
 		void HandleGameSceneLevelChangeDetected (object sender, EventArgs e) {
 			Reset ();
-//			levelTitle.SetLevelText(GameScene.currentLevel);
-//			levelTitle.Title = GameScene.currentLevel;
 			List<string> variables = new List<string>();
+			
+			// IF A QUALITY IS IN THE LEVEL, AND IT HAS A VARIENT (E.G. FOR COLOR, AT LEAST 2 COLORS ARE USED)
+			// THEN IT IS INCLUDED IN THE LEVEL TITLE AND WILL BE WORTH POINTS
 			foreach (string key in QualityManager.Instance.qualityDict.Keys) {
 				if ( key == "QOrientation") continue;
 				var variations = QualityManager.Instance.qualityDict[key];
@@ -119,13 +120,14 @@ namespace Crystallography.UI
 					variables.Add(key.Substring(1));
 				}
 			}
-			levelTitle.SetQualityNames( variables.ToArray() );
+			
 			switch(GameScene.currentLevel) {
 			case 0:
 				levelTitle.Title = "crystallon tutorial";
 				break;
 			case 999:
 				levelTitle.Title = "crystallon challenge mode";
+				variables[variables.LastIndexOf("Particle")] = LoadingScene.GAME_SCENE_DATA.fourthQuality;
 				if(GameScene.gameTimeLimit > 0.0f) {
 					float minutes = GameScene.gameTimeLimit/60.0f;
 					levelTitle.Title += ": " + minutes.ToString("#0.#") + " minute limit";
@@ -135,6 +137,7 @@ namespace Crystallography.UI
 				levelTitle.Title = "crystallon puzzle " + GameScene.currentLevel.ToString();
 				break;
 			}
+			levelTitle.SetQualityNames( variables.ToArray() );
 			levelTitle.SlideIn();
 		}
 		

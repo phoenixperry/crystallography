@@ -353,11 +353,11 @@ namespace Crystallography
 				CardManager.Instance.AddQuality("QSymbol");
 				break;
 			case 3:
-				switch(GameScene.fourthQuality) {
-				case "sound":
+				switch(UI.LoadingScene.GAME_SCENE_DATA.fourthQuality) {
+				case "Sound":
 					CardManager.Instance.AddQuality("QSound");
 					break;
-				case "particles":
+				case "Particle":
 					CardManager.Instance.AddQuality("QParticle");
 					break;
 				default:

@@ -21,7 +21,7 @@ namespace Crystallography.UI
 		protected Label _fourthQualityTitle;
 		
 		protected Slider timeLimitSlider;
-		protected Slider fourthQualitySlider;
+//		protected Slider fourthQualitySlider;
 		
 		protected SpriteTile _buttonHighlight;
 		protected BetterButton _soundButton;
@@ -268,16 +268,19 @@ namespace Crystallography.UI
 		
 		void HandleQualityButtonUpAction(object sender, EventArgs e)
 		{
-			fourthQuality = (sender as BetterButton).Text;
+//			fourthQuality = (sender as BetterButton).Text;
 			switch((sender as BetterButton).Text) {
 			case("sound"):
+				fourthQuality = "Sound";
 				_buttonHighlight.Position = new Vector2(_soundButton.Position.X, _soundButton.Position.Y - 9.0f);
 				break;
 			case("particles"):
+				fourthQuality = "Particle";
 				_buttonHighlight.Position = new Vector2(_particleButton.Position.X, _particleButton.Position.Y - 9.0f);
 				break;
 			case("none"):
 			default:
+				fourthQuality = "none";
 				_buttonHighlight.Position = new Vector2(_noneButton.Position.X, _noneButton.Position.Y - 9.0f);
 				break;
 			}
