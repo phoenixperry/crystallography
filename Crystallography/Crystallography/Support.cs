@@ -251,7 +251,7 @@ namespace Crystallography
 			var result = new Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile(info);
 			
 			System.Console.WriteLine(info.TileSizeInPixelsf.ToString());
-			result.Quad.S = new Vector2(info.TileSizeInPixelsf.X/columns, info.TileSizeInPixelsf.Y/rows);
+			result.Quad.S = info.TileSizeInPixelsf;
 			
 //			result.Scale = new Vector2(1.0f);
 			

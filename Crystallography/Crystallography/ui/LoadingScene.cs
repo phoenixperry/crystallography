@@ -298,10 +298,10 @@ namespace Crystallography.UI
 //					var temp = Support.SpriteFromFile("/Application/assets/images/UI/statsBox.png");
 //				},
 				() => {
-					var temp = Support.SpriteFromFile("Application/assets/images/UI/LevelSelectIndicator.png");
+//					var temp = Support.SpriteFromFile("Application/assets/images/UI/LevelSelectIndicator.png");
 				},
 				() => {
-					var temp = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3);
+//					var temp = Support.TiledSpriteFromFile("Application/assets/images/UI/LevelSelectItemButton.png", 1, 3);
 				},
 				() => {
 					System.GC.Collect();

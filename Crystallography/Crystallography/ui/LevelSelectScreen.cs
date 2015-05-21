@@ -46,7 +46,7 @@ namespace Crystallography.UI
 			var init = ColorIcon.Instance;
 			MenuSystem = pMenuSystem;
 			
-			var pages = FMath.Ceiling(GameScene.TOTAL_LEVELS / (float)LevelPage.ITEMS_PER_PAGE);
+			var pages = FMath.Ceiling((GameScene.TOTAL_LEVELS-1) / (float)LevelPage.ITEMS_PER_PAGE);
 			
 			Panels = new List<Node>{};
 			
@@ -427,9 +427,9 @@ namespace Crystallography.UI
 		
 		public LevelPage( int pPageNumber ) {
 			Items = new List<LevelSelectItem>();
-			int baseIndex = pPageNumber * ITEMS_PER_PAGE;
+			int baseIndex = pPageNumber * ITEMS_PER_PAGE + 1; // +1 skips level 0, the tutorial
 			int buttonCount = ITEMS_PER_PAGE;
-			if ( GameScene.TOTAL_LEVELS - 1 < baseIndex + ITEMS_PER_PAGE - 1 ){
+			if ( GameScene.TOTAL_LEVELS - 1 < baseIndex + ITEMS_PER_PAGE - 1 ) {
 				buttonCount = GameScene.TOTAL_LEVELS - 1 - baseIndex;
 #if DEBUG
 				Console.WriteLine(baseIndex + "/" + GameScene.TOTAL_LEVELS);
@@ -512,7 +512,10 @@ namespace Crystallography.UI
 			}
 			background.CenterSprite();
 			var size = background.CalcSizeInPixels();
+			
 			Initialize(size.X, size.Y);
+			Console.WriteLine(size.X.ToString() + " " + size.Y.ToString());
+			Console.WriteLine(Scale.ToString());
 			_bounds = new Bounds2( new Vector2(-Width/2.0f, -Height/2.0f), new Vector2(Width/2.0f, Height/2.0f) );
 			locked = pLocked;
 			if (locked) {

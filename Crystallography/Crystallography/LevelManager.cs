@@ -335,7 +335,8 @@ namespace Crystallography
 				Get = () => BackgroundColor,
 				Set = value => {
 					BackgroundColor = value;
-					GameScene.Hud.HudBarMask.Color = value;
+					if(GameScene.Hud != null)
+						GameScene.Hud.HudBarMask.Color = value;
 				},
 				Tween = (x) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(x,2)
 			};
