@@ -92,40 +92,44 @@ namespace Crystallography.UI
 			_initialized = true;
 			FontMap map = Crystallography.UI.FontManager.Instance.GetMap( Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 44, "Bold") );
 			
-			Background = Support.UnicolorSprite("med_grey", 153, 153, 153, 255);
-			Background.Position = new Vector2(328.0f, 112.0f);
-			Background.Scale = new Vector2(20.0f, 18.9375f);
-			this.AddChild(Background);
+			Background = Support.UnicolorSprite("black", 0, 0, 0, 255);
+			Background.Position = new Vector2(298.0f, 97.0f);
+			Background.Scale = new Vector2(22.125f, 22.125f);
 			
-			PauseText = new Label("Paused.", map);
-			PauseText.Position = new Vector2(418.0f, 365.0f);
-			this.AddChild(PauseText);
 			
-			ResetButton = new BetterButton(289.0f, 71.0f) {
-				Text = "restart",
-				Position = new Vector2(343.0f, 203.0f),
-//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
+			PauseText = new Label("paused", map) {
+				Position = new Vector2(415.0f, 342.0f),
+				Color = LevelManager.Instance.BackgroundColor
 			};
-			ResetButton.background.RegisterPalette(2);
-			ResetButton.On(false);
-			this.AddChild(ResetButton);
 			
-			ResumeButton = new BetterButton(289.0f, 71.0f) {
-				Text = "resume",
-				Position = new Vector2(343.0f, 284.0f),
-//				Color = new Vector4(0.1608f, 0.8863f, 0.8863f, 1.0f)
-			};
-			ResumeButton.background.RegisterPalette(2);
-			ResumeButton.On (false);
-			this.AddChild(ResumeButton);
 			
-			GiveUpButton = new BetterButton(289.0f, 71.0f) {
+			GiveUpButton = new BetterButton(354.0f, 61.0f) {
 				Text = "quit",
-				Position = new Vector2(343.0f, 122.0f),
-//				Color = new Vector4(0.8980f, 0.0745f, 0.0745f, 1.0f)
+				Position = Background.Position
 			};
-			GiveUpButton.background.RegisterPalette(1);
+			GiveUpButton.background.RegisterPalette(2);
 			GiveUpButton.On(false);
+			
+			
+			ResetButton = new BetterButton(354.0f, 61.0f) {
+				Text = "restart",
+				Position = new Vector2(GiveUpButton.Position.X, GiveUpButton.Position.Y + GiveUpButton.Height),
+			};
+			ResetButton.background.RegisterPalette(1);
+			ResetButton.On(false);
+			
+			
+			ResumeButton = new BetterButton(354.0f, 61.0f) {
+				Text = "resume",
+				Position = new Vector2(ResetButton.Position.X, ResetButton.Position.Y + ResetButton.Height)
+			};
+			ResumeButton.background.RegisterPalette(0);
+			ResumeButton.On (false);
+			
+			this.AddChild(Background);
+			this.AddChild(PauseText);
+			this.AddChild(ResetButton);
+			this.AddChild(ResumeButton);
 			this.AddChild(GiveUpButton);
 			
 		
