@@ -33,6 +33,11 @@ namespace Crystallography.UI
 			}
 		}
 		
+		public float BackgroundAlpha {
+			get {return Background.Color.A;}
+			set {Background.Color = new Vector4(Background.Color.R, Background.Color.G, Background.Color.B, value);}
+		}
+		
 		// CONSTRUCTOR ------------------------------------------------------------------------------------------------------------
 		public MessagePanel() {
 			Initialize( 480.0f, 176.0f );
@@ -62,8 +67,9 @@ namespace Crystallography.UI
 			SlideInDirection = SlideDirection.UP;
 			SlideOutDirection = SlideDirection.DOWN;
 			
-			Background = Support.UnicolorSprite("Grey", 40, 40, 40, 200);
+			Background = Support.UnicolorSprite("Grey", 40, 40, 40, 255);
 			Background.Scale = new Vector2(xScale, yScale);
+			Background.Color = new Vector4(Background.Color.R, Background.Color.G, Background.Color.B, 200.0f/255.0f);
 			this.AddChild(Background);
 			
 			Bar = Support.UnicolorSprite("white", 255, 255, 255, 255);
