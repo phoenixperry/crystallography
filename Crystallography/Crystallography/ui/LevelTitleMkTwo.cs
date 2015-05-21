@@ -9,14 +9,16 @@ namespace Crystallography.UI
 {
 	public class LevelTitleMkTwo : HudPanel 
 	{
+		static readonly float ICON_MOVE_DURATION = 0.5f;
+		
+		static readonly float ICON_LABEL_V_OFFSET = -50.0f;
+		
 		Node[] Icons;
 		HudPanel[] IconSliders;
 		Label TapToDismissLabel;
         Label LevelTitleLabel;
 		HudPanel LevelTitleSlider;
 		List<Label> QualityNames;
-		
-		static readonly float ICON_MOVE_DURATION = 0.5f;
 		
 		protected float iconWidth;
 		protected float iconHeight;
@@ -225,10 +227,11 @@ namespace Crystallography.UI
 				IconSliders[i].AddChild(node);
 				node.Position = new Vector2(0.0f, 544.0f/2.0f - iconHeight/2.0f );
 				QualityNames.Add( n = new Label() {
-					FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 18, "Bold")),
-					Text = name
+					FontMap = Crystallography.UI.FontManager.Instance.GetMap(Crystallography.UI.FontManager.Instance.GetInGame("Bariol", 25, "Regular")),
+					Text = name.ToLower()
 				});
-				n.Position = new Vector2( 0.5f * (iconWidth - n.GetlContentLocalBounds().Size.X), -25.0f ); // CENTER TEXT UNDER ICON
+				// CENTER TEXT UNDER ICON
+				n.Position = new Vector2( 0.5f * (iconWidth - n.GetlContentLocalBounds().Size.X), ICON_LABEL_V_OFFSET );
 				n.Color = Support.ExtractColor("7F7E75");
 				node.AddChild(n);
 				i++;
