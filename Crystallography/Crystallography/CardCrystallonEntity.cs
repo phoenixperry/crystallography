@@ -61,6 +61,8 @@ namespace Crystallography
 			} 
 			if (_symbol == null) {
 				_symbol = new SpriteTile(QSymbol.Instance.symbolTiles.TextureInfo);
+				_symbol.Scale = _symbol.CalcSizeInPixels();
+				_symbol.Position = _symbol.Scale/-2.0f;
 				_symbol.RegisterPalette(_colorIndex);
 				getNode().AddChild(_symbol);
 			}
@@ -77,6 +79,8 @@ namespace Crystallography
 			}
 			_glowIndex = pGlow;
 			GlowSprite = new SpriteTile(QGlow.Instance.GlowTiles.TextureInfo, _orientationIndex);
+			GlowSprite.Scale = GlowSprite.CalcSizeInPixels();
+			GlowSprite.Position = GlowSprite.Scale/-2.0f;
 			HideGlow();
 			this.getNode().AddChild(GlowSprite);
 		}
@@ -129,7 +133,8 @@ namespace Crystallography
 			_anim = null;
 			GlowSprite = null;
 			Scored = false;
-			_sprite.Scale*=CARD_SCALAR;
+//			_sprite.Scale*=CARD_SCALAR;
+			_sprite.Position = new Vector2(-Width/2, -Height/2);
 			_keepOnScreenTimer = -1.0f;
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 		}
@@ -147,7 +152,7 @@ namespace Crystallography
 		/// </param>
 		public override AbstractCrystallonEntity BeAddedToGroup (GroupCrystallonEntity pGroup)
 		{
-			(this.getNode() as SpriteTile).Color.W = 1.0f; // make fully opaque if selected while fading in.
+			getSprite().Color.W = 1.0f; // make fully opaque if selected while fading in.
 			HideGlow();
 			pGroup.Attach( this );
 			pGroup.PostAttach( this );
@@ -186,7 +191,7 @@ namespace Crystallography
 			}
 			CardManager.Instance.Add( this as CardCrystallonEntity );
 			setBody(_physics.RegisterPhysicsBody(_physics.SceneShapes[(int)GamePhysics.BODIES.Card], 0.02f, 0.008f, pPosition));
-			_sprite.Position = _body.Position * GamePhysics.PtoM;
+			_node.Position = _body.Position * GamePhysics.PtoM;
 			setVelocity(DEFAULT_SPEED, GameScene.Random.NextAngle());
 			addToScene();
 			HideGlow();
@@ -222,6 +227,9 @@ namespace Crystallography
 					_anim.Cleanup();
 					_anim = null;
 				}
+				_symbol = null;
+				GlowSprite = null;
+				
 			}
 			base.removeFromScene (doCleanup);
 		}
@@ -271,18 +279,23 @@ namespace Crystallography
 		}
 		
 		public void setAnim( SpriteTile anim, int pStart, int pEnd ) {
-			if (pStart == pEnd) {
-				if (_anim != null) {
-					this.getNode().RemoveChild(_anim, true);
-					_anim = null;
-				}
-				return;
+			// REMOVE ANY PREVIOUSLY APPLIED ANIMATION
+			if (_anim != null) {
+				this.getNode().RemoveChild(_anim, true);
+				_anim = null;
 			}
 			
+			// IF SET TO "NO ANIMATION", WE'RE DONE.
+			if (pStart == pEnd) {
+				return;
+			}
+		
 			_anim = new SpriteTile( anim.TextureInfo, anim.TileIndex2D );
+			_anim.Scale = _anim.CalcSizeInPixels();
 			_anim.RegisterPalette(_colorIndex);
+			_anim.Position = _anim.Scale/-2.0f;
 			
-			_anim.Pivot = this.getNode().Pivot;
+//			_anim.Pivot = this.getNode().Pivot;
 
 			_anim.RunAction( new Support.AnimationAction(_anim, pStart, pEnd, 0.1f*(1+pEnd-pStart), true) );
 
@@ -321,7 +334,7 @@ namespace Crystallography
 		
 		public void TintTo( Vector4 pColor, float pDuration, bool alpha) {
 			if (alpha) {
-				(this.getNode() as SpriteBase).ShiftSpriteAlpha(pColor, pDuration);
+				(this.getSprite() as SpriteBase).ShiftSpriteAlpha(pColor, pDuration);
 				if (_anim != null) {
 					_anim.ShiftSpriteAlpha(pColor, pDuration);
 				}
@@ -329,7 +342,7 @@ namespace Crystallography
 					_symbol.ShiftSpriteAlpha(pColor, pDuration);
 				}
 			} else {
-				(this.getNode() as SpriteBase).ShiftSpriteColor(pColor, pDuration);
+				(this.getSprite() as SpriteBase).ShiftSpriteColor(pColor, pDuration);
 				if (_anim != null) {
 					_anim.ShiftSpriteAlpha(pColor, pDuration);
 				}

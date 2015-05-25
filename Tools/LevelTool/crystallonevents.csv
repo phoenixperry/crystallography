@@ -4,7 +4,7 @@ Level,Type,Value,Action,Args
 0,BreaksEqual,1,RemoveScoringQuality,QPattern
 0,BreaksEqual,1,RemoveScoringQuality,QColor
 0,BreaksEqual,1,UpdateMessagePanel,"just so.;;now, let's make a cube, shall we?&#xA;cubes need a top, a left and a right.;;0.0;;0.0"
-0,CubesEqual,1,SetPatternPath,Application/assets/images/set1/gamePieces.png
+0,CubesEqual,1,SetPatternPath,set1/gamePieces.png
 0,CubesEqual,1,AddScoringQuality,QColor
 0,CubesEqual,1,SetBonus,0
 0,CubesEqual,1,UpdateMessagePanel,3 of a kind.;;pieces can have 'qualities.'&#xA;'color' is just such a quality. red in this case.;;0.0;;0.0

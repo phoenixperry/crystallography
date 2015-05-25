@@ -64,13 +64,8 @@ namespace Crystallography
 					_body.Velocity = _body.Velocity.Normalize() * len;
 				}
 //				_sprite.Position = _body.Position * GamePhysics.PtoM;
+				_node.Position = _body.Position * GamePhysics.PtoM;
 			}
-			
-//			if (_body != null) {
-//				if (_body.Velocity.Length() != 0.3f) {
-//						_body.Velocity = _body.Velocity.Normalize() * 0.3f;
-//					}
-//			}
 		}
 		
 		// METHODS----------------------------------

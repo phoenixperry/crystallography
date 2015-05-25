@@ -46,24 +46,8 @@ namespace Crystallography
 			SpriteTileCrystallonEntity e = pEntity as SpriteTileCrystallonEntity;
 			e.setOrientation(pVariant);
 			
-//			switch(pVariant)
-//			{
-//			case (0):
-//				e.setOrientation("Top");
-//				break;
-//			case (1):
-//				e.setOrientation("Left");
-//				break;
-//			case (2):
-//				e.setOrientation("Right");
-//				break;
-//			default:
-//				throw new NotImplementedException("QOrientation.Apply : pVariant must be 0,1,2");
-//				break;
-//			}
-//			var ss = SpriteSingleton.getInstance();
-			if (e.getNode() != null ) {
-				(e.getNode() as SpriteTile).TileIndex2D = new Vector2i( e.getOrientation(), e.getPattern() ); //= ss.Get( e.getOrientation() + e.getPattern() ).TileIndex2D;
+			if (e.getSprite() != null ) {
+				(e.getSprite() as SpriteTile).TileIndex2D = new Vector2i( e.getOrientation(), e.getPattern() ); //= ss.Get( e.getOrientation() + e.getPattern() ).TileIndex2D;
 			}
 		}
 		

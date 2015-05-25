@@ -7,9 +7,9 @@ using Sce.PlayStation.HighLevel.Physics2D;
 	
 namespace Crystallography
 {
-	public abstract class SpriteTileCrystallonEntity : AbstractCrystallonEntity {
+	public abstract class SpriteTileCrystallonEntity : NodeCrystallonEntity {
 		protected SpriteTile _sprite;
-		protected PhysicsBody _body;
+//		protected PhysicsBody _body;
 		protected int _orientationIndex;
 		protected int _patternIndex;
 		protected int _colorIndex;
@@ -17,12 +17,16 @@ namespace Crystallography
 		
 		// GET & SET---------------------------------
 		
-		public override Node getNode() {
-			return _sprite;
-		}
+//		public override Node getNode() {
+//			return _sprite;
+//		}
+//		
+//		public override PhysicsBody getBody() {
+//			return _body;
+//		}
 		
-		public override PhysicsBody getBody() {
-			return _body;
+		public SpriteTile getSprite() {
+			return _sprite;
 		}
 		
 		public override Bounds2 getBounds ()
@@ -51,13 +55,13 @@ namespace Crystallography
 			return _patternIndex;
 		}
 		
-		public override void setBody (PhysicsBody body) {
-			_body = body;
-		}
+//		public override void setBody (PhysicsBody body) {
+//			_body = body;
+//		}
 		
-		public override void setNode ( Node node ) {
-			_sprite = node as SpriteTile;
-		}
+//		public override void setNode ( Node node ) {
+//			_sprite = node as SpriteTile;
+//		}
 		
 		public virtual void setOrientation ( int pOrientation ) {
 			_orientationIndex = pOrientation;
@@ -82,37 +86,38 @@ namespace Crystallography
 		
 		public SpriteTileCrystallonEntity( Scene pScene, GamePhysics pGamePhysics, 
 		                              TextureInfo pTextureInfo, Vector2i pTileIndex2D, PhysicsShape pShape = null) 
-												: base(pScene, pGamePhysics) {
+												: base(pScene, pGamePhysics, pShape) {
 			
 			// SPRITE STUFF
 			_orientationIndex = 0;
 			_patternIndex = 0;
 			_sprite = new SpriteTile(pTextureInfo, pTileIndex2D);
 			_sprite.Scale = _sprite.CalcSizeInPixels();
-			_sprite.Pivot = new Vector2(0.5f, 0.5f);
+//			_sprite.Pivot = new Vector2(0.5f, 0.5f);
+			_node.AddChild(_sprite);
 			
 			// PHYSICS STUFF
-			if (pShape != null) {
-				_body = _physics.RegisterPhysicsBody(pShape, 0.1f, 0.01f, _sprite.Position);
-			} else {
-				_body = null;
-			}
-			Scheduler.Instance.Schedule(_sprite, Update, 0.0f, false);
+//			if (pShape != null) {
+//				_body = _physics.RegisterPhysicsBody(pShape, 0.1f, 0.01f, _sprite.Position);
+//			} else {
+//				_body = null;
+//			}
+//			Scheduler.Instance.Schedule(_sprite, Update, 0.0f, false);
 		}
 		
 		// OVERRIDES------------------------------------------------------------------------------
 		
-		public override void Update (float dt)
-		{
-			if(getBody() != null) {
-				var len = _body.Velocity.Length();
-				if (len > 0.3f) {
-					len = FMath.Min ( 4.0f, FMath.Max(0.3f, len - dt * 5.0f));
-					_body.Velocity = _body.Velocity.Normalize() * len;
-				}
-				_sprite.Position = _body.Position * GamePhysics.PtoM;
-			}
-		}
+//		public override void Update (float dt)
+//		{
+//			if(getBody() != null) {
+//				var len = _body.Velocity.Length();
+//				if (len > 0.3f) {
+//					len = FMath.Min ( 4.0f, FMath.Max(0.3f, len - dt * 5.0f));
+//					_body.Velocity = _body.Velocity.Normalize() * len;
+//				}
+//				_sprite.Position = _body.Position * GamePhysics.PtoM;
+//			}
+//		}
 		
 		public override AbstractCrystallonEntity BeReleased ( Vector2 position ) {
 			return this;
@@ -172,6 +177,15 @@ namespace Crystallography
 				}
 			}
 			return okToSnap;
+		}
+		
+		public override void removeFromScene (bool doCleanup)
+		{
+			if(doCleanup)
+			{
+				_sprite = null;
+			}
+			base.removeFromScene (doCleanup);
 		}
 		
 		// METHODS -------------------------------------------------------------------------------

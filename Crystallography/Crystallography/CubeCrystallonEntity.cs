@@ -119,16 +119,13 @@ namespace Crystallography
 			sequence.Add( new CallFunc( () => {
 				foreach( AbstractCrystallonEntity e in members ) {
 					if (e is CardCrystallonEntity) {
-//						Console.WriteLine(e.id.ToString());
 						(e as CardCrystallonEntity).HideGlow();
 						(e as CardCrystallonEntity).Scored = true;
-//						(e as CardCrystallonEntity).TintTo( Vector4.Zero, 0.5f, true);
 					}
 				}
 			}));
 			sequence.Add( new ScaleTo( Vector2.One * 1.3f, 0.2f ) {  Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseOut(t,2.0f) } );
 			sequence.Add( new ScaleTo( Vector2.Zero, 0.8f) { Tween = (t) => Sce.PlayStation.HighLevel.GameEngine2D.Base.Math.PowEaseIn(t,2.0f) } );
-//			Director.Instance.CurrentScene.RunAction(sequence);
 			getNode().RunAction(sequence);
 			
 			float clockwise = GameScene.Random.NextBool() ? 1.0f : -1.0f;
@@ -153,7 +150,7 @@ namespace Crystallography
 				radialNodes[i].Position = getNode().Position;
 				radialSprites[i] = Support.SpriteFromFile("Application/assets/images/burst.png");
 				radialSprites[i].Position = -radialSprites[i].CalcSizeInPixels() * radialSprites[i].Scale.X * 0.5f;
-				radialSprites[i].Color = (members[i].getNode() as SpriteBase).Color.Xyz0;
+				radialSprites[i].Color = (members[i] as CardCrystallonEntity).getSprite().Color.Xyz0;
 				radialSprites[i].Pivot = new Vector2(0.5f, 0.5f);
 				radialSprites[i].Scale = new Vector2(0.1f, 0.1f);
 				radialNodes[i].AddChild (radialSprites[i]);

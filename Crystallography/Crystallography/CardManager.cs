@@ -432,17 +432,6 @@ namespace Crystallography
 			pCard.getNode().RunAction( new CallFunc( () => { pCard.FadeIn(); } ) );
 		}
 		
-		/// <summary>
-		/// Fades the specified card in.
-		/// </summary>
-		/// <param name='pCard'>
-		/// P card.
-		/// </param>
-//		protected void FadeIn(CardCrystallonEntity pCard) {
-//			pCard.Visible = true;
-//			(pCard.getNode() as SpriteBase).Color.W = 0.0f;
-//			pCard.TintTo(QColor.palette[pCard.getColor()], 2.0f, true);
-//		}
 		
 		public void TintAllCards(float pDuration = 1.0f) {
 			foreach (var card in availableCards) {

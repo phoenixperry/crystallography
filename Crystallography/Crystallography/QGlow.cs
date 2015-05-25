@@ -52,7 +52,6 @@ namespace Crystallography
 		}
 		
 		public void setPalette() {
-//			setPalette( new Vector4(0.6627451f, 0.14117647f, 1.0f, 1.0f), new Vector4(0.0f, 1.0f, 0.9254902f, 1.0f), new Vector4(1.0f, 1.0f, 0.1176471f, 1.0f));
 			setPalette( new Vector4(0.89411765f, 0.61176471f, 1.0f, 1.0f), new Vector4(0.0f, 1.0f, 0.9254902f, 1.0f), new Vector4(1.0f, 1.0f, 0.1176471f, 1.0f));
 		}
 		

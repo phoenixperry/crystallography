@@ -45,8 +45,9 @@ namespace Crystallography
 		
 		public override void Apply ( ICrystallonEntity pEntity, int pVariant ) {
 			if ( pEntity is SpriteTileCrystallonEntity ) {
-				(pEntity.getNode() as SpriteBase).Color = palette[pVariant];
-				( pEntity as SpriteTileCrystallonEntity ).setColor(pVariant);
+				var e = (pEntity as SpriteTileCrystallonEntity);
+				e.getSprite().Color = palette[pVariant];
+				e.setColor(pVariant);
 			}
 		}
 		
