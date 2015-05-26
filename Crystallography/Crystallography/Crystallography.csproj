@@ -270,6 +270,8 @@
     <Content Include="assets\images\set3\gamePieces.xml" />
     <Content Include="assets\images\gamePieces.png" />
     <Content Include="assets\images\gamePieces.xml" />
+    <Content Include="assets\images\symbol.png" />
+    <Content Include="assets\images\symbol.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="deprecated\Card.cs" />

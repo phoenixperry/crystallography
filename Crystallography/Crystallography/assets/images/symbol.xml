@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $TexturePacker:SmartUpdate:ca0776b9ab4c1952c880a48b55ccf4ed:faa1f4188c93c6b3f9a951a980483ec0:e8ff9d5fcbaf36002d5a61b4e3cb6072$ -->
+<root version="1.0">
+	<info w="256" h="256" />
+    <textures>
+		<texture filename="set1_v0_L.png" x="174" y="4" w="43" h="71" />
+		<texture filename="set1_v0_R.png" x="89" y="59" w="43" h="71" />
+		<texture filename="set1_v0_T.png" x="4" y="4" w="81" h="51" />
+		<texture filename="set1_v1_L.png" x="4" y="114" w="43" h="71" />
+		<texture filename="set1_v1_R.png" x="51" y="134" w="43" h="71" />
+		<texture filename="set1_v1_T.png" x="89" y="4" w="81" h="51" />
+		<texture filename="set1_v2_L.png" x="98" y="134" w="43" h="71" />
+		<texture filename="set1_v2_R.png" x="145" y="79" w="43" h="71" />
+		<texture filename="set1_v2_T.png" x="4" y="59" w="81" h="51" />
+    </textures>
+</root>

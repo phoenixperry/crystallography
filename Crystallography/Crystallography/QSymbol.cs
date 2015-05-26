@@ -41,6 +41,7 @@ namespace Crystallography
 		
 		public override void Apply ( ICrystallonEntity pEntity, int pVariant) {
 			CardCrystallonEntity e = pEntity as CardCrystallonEntity;
+			
 			if ( QualityManager.Instance.scoringQualityList.Contains("QSymbol") ) {
 				e.setSymbol( pVariant );
 			} else {
@@ -52,14 +53,15 @@ namespace Crystallography
 		/// Sets the palette to a default palette.
 		/// </summary>
 		public void setPalette () {
-			setPalette( LevelManager.Instance.SymbolPath, 3, 3);
+//			setPalette( LevelManager.Instance.SymbolPath, 3, 3);
 		}
 		
 		/// <summary>
 		/// Sets the palette to a specified palette.
 		/// </summary>
 		public void setPalette( string path, int columns, int rows) {
-			symbolTiles = Support.TiledSpriteFromFile( path, columns, rows );
+			LevelManager.Instance.SymbolPath = path;
+//			symbolTiles = Support.TiledSpriteFromFile( path, columns, rows );
 		}
 	}
 }

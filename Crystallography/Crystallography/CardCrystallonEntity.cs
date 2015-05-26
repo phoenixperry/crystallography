@@ -58,16 +58,32 @@ namespace Crystallography
 				}
 				_symbol = null;
 				return;
-			} 
+			}
+			
+			string orient;
+			switch(getOrientation()) {
+			case(0):
+			default:
+				orient = "T";
+				break;
+			case(1):
+				orient = "L";
+				break;
+			case(2):
+				orient = "R";
+				break;
+			}
+			
 			if (_symbol == null) {
-				_symbol = new SpriteTile(QSymbol.Instance.symbolTiles.TextureInfo);
+//				_symbol = new SpriteTile(QSymbol.Instance.symbolTiles.TextureInfo);
+				_symbol = new SpriteTile(Support.TextureInfoFromAtlas("symbol", LevelManager.Instance.SymbolPath + "_v" + pSymbol.ToString() + "_" + orient + ".png"));
 				_symbol.Scale = _symbol.CalcSizeInPixels();
 				_symbol.Position = _symbol.Scale/-2.0f;
 				_symbol.RegisterPalette(_colorIndex);
 				getNode().AddChild(_symbol);
 			}
-			_symbol.TileIndex2D.X = _orientationIndex;
-			_symbol.TileIndex2D.Y = _symbolIndex ?? 0;
+//			_symbol.TileIndex2D.X = _orientationIndex;
+//			_symbol.TileIndex2D.Y = _symbolIndex ?? 0;
 		}
 		
 		public virtual void setGlow(int pGlow) {

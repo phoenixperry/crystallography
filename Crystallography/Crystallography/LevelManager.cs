@@ -438,7 +438,8 @@ namespace Crystallography
 			BackgroundColor = Support.ExtractColor("f0e8db");
 //			PatternPath = "set1/gamePieces.png";
 			PatternPath = "set1";
-			SymbolPath = "Application/assets/images/set1/symbol.png";
+//			SymbolPath = "Application/assets/images/set1/symbol.png";
+			SymbolPath = "set1";
 			SoundPrefix = "stack1";
 			Goal = 1;
 			PossibleSolutions = 0;
