@@ -40,7 +40,7 @@ namespace Crystallography.UI
 					var b = new BetterButton();
 					b.Cleanup();
 					Support.LoadAtlas("crystallonUI", ".png");
-					Support.LoadAtlas("set1/gamePieces", ".png");
+					Support.LoadAtlas("gamePieces", ".png");
 				},
 				() => {
 					Scheduler.Instance.Schedule( this, (dt) => { 

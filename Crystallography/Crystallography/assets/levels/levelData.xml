@@ -2,7 +2,7 @@
 	<Level Value="0">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set4/gamePieces.png" />
+		<Pattern Path="set4" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="0" Score="8" />
 		<Bonus Value="1" />
@@ -15,7 +15,7 @@
 		<Event Type="BreaksEqual" Value="1" Action="RemoveScoringQuality" Args="QPattern" />
 		<Event Type="BreaksEqual" Value="1" Action="RemoveScoringQuality" Args="QColor" />
 		<Event Type="BreaksEqual" Value="1" Action="UpdateMessagePanel" Args="just so.;;now, let's make a cube, shall we?&#xA;cubes need a top, a left and a right.;;0.0;;0.0" />
-		<Event Type="CubesEqual" Value="1" Action="SetPatternPath" Args="set1/gamePieces.png" />
+		<Event Type="CubesEqual" Value="1" Action="SetPatternPath" Args="set1" />
 		<Event Type="CubesEqual" Value="1" Action="AddScoringQuality" Args="QColor" />
 		<Event Type="CubesEqual" Value="1" Action="SetBonus" Args="0" />
 		<Event Type="CubesEqual" Value="1" Action="UpdateMessagePanel" Args="3 of a kind.;;pieces can have 'qualities.'&#xA;'color' is just such a quality. red in this case.;;0.0;;0.0" />
@@ -34,7 +34,7 @@
 	<Level Value="1">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack2" Glow="false" />
 		<Goal Cubes="1" Score="3" />
 		<Message Title="the rule." Body="all the sides of a cube must be the same or all the sides must be different." />
@@ -42,7 +42,7 @@
 	<Level Value="2">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="1" Score="3" />
 		<Message Title="fixed orientation." Body="the orientation of sides cannot be changed." />
@@ -50,7 +50,7 @@
 	<Level Value="3">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="2" Score="4" />
 		<Goal Cubes="4" Score="6" />
@@ -60,7 +60,7 @@
 	<Level Value="4">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack2" Glow="false" />
 		<Goal Cubes="2" Score="2" />
 		<Goal Cubes="2" Score="6" />
@@ -71,7 +71,7 @@
 	<Level Value="5">
 		<Color LightHex="fd9e63" MidHex="fc463a" DarkHex="a61885" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set4/gamePieces.png" />
+		<Pattern Path="set4" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="3" Score="9" />
 		<Goal Cubes="3" Score="5" />
@@ -83,7 +83,7 @@
 	<Level Value="6">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set2/gamePieces.png" />
+		<Pattern Path="set2" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="1" Score="2" />
 		<Goal Cubes="3" Score="16" />
@@ -92,14 +92,14 @@
 	<Level Value="7">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="4" Score="20" />
 	</Level>
 	<Level Value="8">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set4/gamePieces.png" />
+		<Pattern Path="set4" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="1" Score="3" />
 		<Message Title="noise reduction." Body="not every trait is visual. &#xA;&#xA;touch a piece and listen to the sound it makes." />
@@ -107,7 +107,7 @@
 	<Level Value="9">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set2/gamePieces.png" />
+		<Pattern Path="set2" />
 		<Sound Prefix="stack1" Glow="true" />
 		<Goal Cubes="2" Score="10" />
 		<Goal Cubes="2" Score="12" />
@@ -115,7 +115,7 @@
 	<Level Value="10">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack3" Glow="true" />
 		<Goal Cubes="2" Score="18" />
 		<Goal Cubes="4" Score="34" />
@@ -123,7 +123,7 @@
 	<Level Value="11">
 		<Color LightHex="fd9e63" MidHex="fc463a" DarkHex="a61885" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack1" Glow="true" />
 		<Goal Cubes="3" Score="14" />
 		<Goal Cubes="3" Score="12" />
@@ -141,7 +141,7 @@
 	<Level Value="12">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack2" Glow="false" />
 		<Goal Cubes="2" Score="6" />
 		<Message Title="how moving." Body="this is the animation trait. &#xA;&#xA;it's probably easier than sound was." />
@@ -149,7 +149,7 @@
 	<Level Value="13">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="3" Score="16" />
 		<Goal Cubes="3" Score="18" />
@@ -158,7 +158,7 @@
 	<Level Value="14">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="2" Score="12" />
 		<Goal Cubes="2" Score="10" />
@@ -171,7 +171,7 @@
 	<Level Value="15">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set4/gamePieces.png" />
+		<Pattern Path="set4" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="3" Score="7" />
 		<Message Title="particle-ular." Body="this is the particle trait. &#xA;&#xA;in 2002 this feature alone would have driven sales." />
@@ -179,7 +179,7 @@
 	<Level Value="16">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack2" Glow="false" />
 		<Goal Cubes="3" Score="12" />
 		<Goal Cubes="4" Score="20" />
@@ -193,7 +193,7 @@
 	<Level Value="17">
 		<Color LightHex="fd9e63" MidHex="fc463a" DarkHex="a61885" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="5" Score="26" />
 		<Goal Cubes="5" Score="24" />
@@ -206,7 +206,7 @@
 	<Level Value="18">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="1" Score="9" />
 		<Message Title="triple trouble." Body="we're too classy to make a three-way joke." />
@@ -214,14 +214,14 @@
 	<Level Value="19">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="4" Score="30" />
 	</Level>
 	<Level Value="20">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack1" Glow="false" />
 		<Goal Cubes="3" Score="21" />
 		<Goal Cubes="5" Score="37" />
@@ -229,14 +229,14 @@
 	<Level Value="21">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="3" Score="27" />
 	</Level>
 	<Level Value="22">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack3" Glow="false" />
 		<Goal Cubes="3" Score="21" />
 		<Goal Cubes="3" Score="23" />
@@ -252,7 +252,7 @@
 	<Level Value="23">
 		<Color LightHex="fd9e63" MidHex="fc463a" DarkHex="a61885" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack2" Glow="false" />
 		<Goal Cubes="3" Score="15" />
 		<Goal Cubes="3" Score="19" />
@@ -262,14 +262,14 @@
 	<Level Value="24">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="3" Score="27" />
 	</Level>
 	<Level Value="25">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set2/gamePieces.png" />
+		<Pattern Path="set2" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="4" Score="24" />
 		<Goal Cubes="4" Score="26" />
@@ -280,7 +280,7 @@
 	<Level Value="26">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack3" Glow="true" />
 		<Goal Cubes="4" Score="28" />
 		<Goal Cubes="4" Score="32" />
@@ -295,14 +295,14 @@
 	<Level Value="27">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="2" Score="18" />
 	</Level>
 	<Level Value="28">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="2" Score="14" />
 		<Goal Cubes="4" Score="30" />
@@ -310,7 +310,7 @@
 	<Level Value="29">
 		<Color LightHex="fd9e63" MidHex="fc463a" DarkHex="a61885" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set2/gamePieces.png" />
+		<Pattern Path="set2" />
 		<Sound Prefix="stack1" Glow="true" />
 		<Goal Cubes="4" Score="30" />
 		<Goal Cubes="4" Score="28" />
@@ -325,7 +325,7 @@
 	<Level Value="30">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set2/gamePieces.png" />
+		<Pattern Path="set2" />
 		<Sound Prefix="stack3" Glow="true" />
 		<Goal Cubes="2" Score="18" />
 		<Message Title="four!" Body="just when you had three traits mastered." />
@@ -333,14 +333,14 @@
 	<Level Value="31">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack3" Glow="true" />
 		<Goal Cubes="4" Score="38" />
 	</Level>
 	<Level Value="32">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set2/gamePieces.png" />
+		<Pattern Path="set2" />
 		<Sound Prefix="stack1" Glow="true" />
 		<Goal Cubes="2" Score="16" />
 		<Goal Cubes="4" Score="36" />
@@ -348,7 +348,7 @@
 	<Level Value="33">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="3" Score="30" />
 		<Goal Cubes="4" Score="38" />
@@ -359,7 +359,7 @@
 	<Level Value="34">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set2/gamePieces.png" />
+		<Pattern Path="set2" />
 		<Sound Prefix="stack3" Glow="true" />
 		<Goal Cubes="4" Score="40" />
 		<Goal Cubes="6" Score="56" />
@@ -367,14 +367,14 @@
 	<Level Value="35">
 		<Color LightHex="fd9e63" MidHex="fc463a" DarkHex="a61885" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set2/gamePieces.png" />
+		<Pattern Path="set2" />
 		<Sound Prefix="stack1" Glow="true" />
 		<Goal Cubes="2" Score="20" />
 	</Level>
 	<Level Value="36">
 		<Color LightHex="f2b111" MidHex="1dacbf" DarkHex="a80b86" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="3" Score="30" />
 		<Goal Cubes="3" Score="28" />
@@ -382,7 +382,7 @@
 	<Level Value="37">
 		<Color LightHex="ea8e0a" MidHex="14b297" DarkHex="bf0000" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set2/gamePieces.png" />
+		<Pattern Path="set2" />
 		<Sound Prefix="stack3" Glow="true" />
 		<Goal Cubes="4" Score="44" />
 		<Goal Cubes="5" Score="48" />
@@ -390,7 +390,7 @@
 	<Level Value="38">
 		<Color LightHex="14ad26" MidHex="e5372e" DarkHex="7a2d50" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set2/gamePieces.png" />
+		<Pattern Path="set2" />
 		<Sound Prefix="stack1" Glow="true" />
 		<Goal Cubes="4" Score="28" />
 		<Goal Cubes="4" Score="40" />
@@ -402,7 +402,7 @@
 	<Level Value="39">
 		<Color LightHex="e5372e" MidHex="99177f" DarkHex="bd0712" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set1/gamePieces.png" />
+		<Pattern Path="set1" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="3" Score="24" />
 		<Goal Cubes="4" Score="34" />
@@ -412,7 +412,7 @@
 	<Level Value="40">
 		<Color LightHex="e1bb29" MidHex="14ad26" DarkHex="7622ab" />
 		<Background Main="f0e8db" Grey="7F7E75" Black="333330" />
-		<Pattern Path="set3/gamePieces.png" />
+		<Pattern Path="set3" />
 		<Sound Prefix="stack2" Glow="true" />
 		<Goal Cubes="3" Score="32" />
 		<Goal Cubes="4" Score="40" />

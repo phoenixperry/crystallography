@@ -75,12 +75,12 @@ namespace Crystallography.UI
 			case ("Level Select"):
 				Screen = new LevelSelectScreen(this);
 				break;
-			case ("Credits"):
-				Screen = new CreditsScreen(this);
-				break;
-			case ("Instructions"):
-				Screen = new InstructionsScreen(this);
-				break;
+//			case ("Credits"):
+//				Screen = new CreditsScreen(this);
+//				break;
+//			case ("Instructions"):
+//				Screen = new InstructionsScreen(this);
+//				break;
 			case("Options"):
 				Screen = new OptionsMenuScreen(this);
 				break;

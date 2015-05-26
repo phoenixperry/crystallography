@@ -153,12 +153,10 @@ namespace Crystallography
 //			    && GameScene.Random.NextFloat() < WILDCARD_BASE_CHANCE) { // ------------------------------------------ POSSIBLE WILDCARD
 			    && WildcardIDs.Contains(pId) ) {
 				
-				card = new WildCardCrystallonEntity(_scene, _physics, pId, QPattern.Instance.patternTiles.TextureInfo, 
-			                                QPattern.Instance.patternTiles.TileIndex2D, _physics.SceneShapes[0]);
+				card = new WildCardCrystallonEntity(_scene, _physics, pId, _physics.SceneShapes[0]);
 				availableWildCards.Add(card);
 			} else { // ----------------------------------------------------------------------------------------------- NORMAL CARD
-				card = new CardCrystallonEntity(_scene, _physics, pId, QPattern.Instance.patternTiles.TextureInfo, 
-			                                QPattern.Instance.patternTiles.TileIndex2D, _physics.SceneShapes[0]);
+				card = new CardCrystallonEntity(_scene, _physics, pId, _physics.SceneShapes[0]);
 			}
 			availableCards.Add(card);
 			return card;

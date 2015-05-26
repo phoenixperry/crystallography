@@ -126,9 +126,7 @@ namespace Crystallography
 		/// <param name='pShape'>
 		/// <see cref="Sce.PlayStation.HighLevel.Physics2D.PhysicsShape"/>
 		/// </param>
-		public CardCrystallonEntity (Scene pScene, GamePhysics pGamePhysics, int pId,
-		                             TextureInfo pTextureInfo, Vector2i pTileIndex2D, PhysicsShape pShape)
-													: base(pScene, pGamePhysics, pTextureInfo, pTileIndex2D, pShape) {
+		public CardCrystallonEntity (Scene pScene, GamePhysics pGamePhysics, int pId, PhysicsShape pShape) : base(pScene, pGamePhysics, pShape) {
 			id = pId;
 			_anim = null;
 			GlowSprite = null;

@@ -30,9 +30,9 @@ namespace Crystallography
 		/// <param name='pShape'>
 		/// <see cref="Sce.PlayStation.HighLevel.Physics2D.PhysicsShape"/>
 		/// </param>
-		public WildCardCrystallonEntity (Scene pScene, GamePhysics pGamePhysics, int pId,
-		                             TextureInfo pTextureInfo, Vector2i pTileIndex2D, PhysicsShape pShape)
-													: base(pScene, pGamePhysics, pId, pTextureInfo, pTileIndex2D, pShape) {
+		public WildCardCrystallonEntity (Scene pScene, GamePhysics pGamePhysics, int pId, PhysicsShape pShape) : base(pScene, pGamePhysics, pId,
+//			      pTextureInfo, pTileIndex2D, 
+			      pShape) {
 			Wild = true;
 			Flash ();
 		}
@@ -41,6 +41,8 @@ namespace Crystallography
 		
 		public override void ApplyQualities () {
 			// WILDCARDS HAVE NO QUALITIES
+			QPattern.Instance.Apply(this, 0); // assign a "solid" pattern for visual purposes
+			QOrientation.Instance.Apply(this,0); // assign a "top" orientation for visual purposes
 			QualityManager.Instance.RemoveAll(this);
 		}
 		

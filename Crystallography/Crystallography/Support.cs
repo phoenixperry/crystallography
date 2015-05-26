@@ -209,53 +209,68 @@ namespace Crystallography
 		
 		public static Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile SpriteFromAtlas(string atlas, string filename)
 		{
-			if(TextureCache.ContainsKey(atlas) == false)
-			{
-				LoadAtlas(atlas);
-			}
 			string assetName = atlas + "_" + filename;
+			TextureInfo info;
 			if (TextureInfoCache.ContainsKey(assetName) == false)
 			{
-				UnifiedTextureInfo uInfo = GetAtlas(atlas)[filename];
-//				System.Console.WriteLine(assetName + ": " + uInfo.u0.ToString() + " " + uInfo.v0.ToString() + " " + uInfo.w.ToString() + " " + uInfo.h.ToString());
-				TRS trs = new TRS(new Bounds2(new Vector2(uInfo.u0, uInfo.v0), new Vector2(uInfo.u1, uInfo.v1)));
-				TextureInfoCache[assetName] = new TextureInfo(TextureCache[atlas], new Vector2i(1,1), trs);
-//				System.Console.WriteLine(TextureInfoCache[filename].TileSizeInPixelsf.ToString());
+				info = MakeTextureInfoFromAtlas(atlas, filename, 1, 1);
+			} else {
+				
+				info = TextureInfoCache[assetName];
 			}
-			
-			TextureInfo info = TextureInfoCache[assetName];
 			var result = new Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile(info);
 			
 			result.Quad.S = info.TileSizeInPixelsf;
-			result.Scale = Vector2.One;
+//			result.Scale = Vector2.One;
 			
 			return result;
 		}
 		
 		public static Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile TiledSpriteFromAtlas(string atlas, string filename, int columns, int rows)
 		{
+			string assetName = atlas + "_" + filename;
+			TextureInfo info;
+			if (TextureInfoCache.ContainsKey(assetName) == false)
+			{
+				info = MakeTextureInfoFromAtlas(atlas, filename, columns, rows);
+			} else {
+				
+				info = TextureInfoCache[assetName];
+			}
+			var result = new Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile(info);
+			
+//			System.Console.WriteLine(info.TileSizeInPixelsf.ToString());
+			result.Quad.S = info.TileSizeInPixelsf;
+			
+			return result;
+		}
+		
+		
+		public static Sce.PlayStation.HighLevel.GameEngine2D.Base.TextureInfo TextureInfoFromAtlas(string atlas, string filename) {
+			string assetName = atlas + "_" + filename;
 			if(TextureCache.ContainsKey(atlas) == false)
 			{
 				LoadAtlas(atlas);
 			}
-			string assetName = atlas + "_" + filename;
-			if (TextureInfoCache.ContainsKey(assetName) == false)
-			{
-				UnifiedTextureInfo uInfo = GetAtlas(atlas)[filename];
-				System.Console.WriteLine(assetName + ": " + uInfo.u0.ToString() + " " + uInfo.v0.ToString() + " " + uInfo.w.ToString() + " " + uInfo.h.ToString());
-				TRS trs = new TRS(new Bounds2(new Vector2(uInfo.u0, uInfo.v0), new Vector2(uInfo.u1, uInfo.v1)));
-				TextureInfoCache[assetName] = new TextureInfo(TextureCache[atlas], new Vector2i(columns,rows), trs);
+			TextureInfo result;
+			if (TextureInfoCache.ContainsKey(assetName) == false) {
+				result = MakeTextureInfoFromAtlas(atlas, filename, 1, 1);
+			} else {
+				result = TextureInfoCache[assetName];
 			}
 			
-			TextureInfo info = TextureInfoCache[assetName];
-			var result = new Sce.PlayStation.HighLevel.GameEngine2D.SpriteTile(info);
-			
-			System.Console.WriteLine(info.TileSizeInPixelsf.ToString());
-			result.Quad.S = info.TileSizeInPixelsf;
-			
-//			result.Scale = new Vector2(1.0f);
-			
 			return result;
+		}
+		
+		
+		private static Sce.PlayStation.HighLevel.GameEngine2D.Base.TextureInfo MakeTextureInfoFromAtlas(string atlas, string filename, int columns=1, int rows=1) {
+			string assetName = atlas + "_" + filename;
+			UnifiedTextureInfo uInfo = GetAtlas(atlas)[filename];
+//			System.Console.WriteLine(assetName + ": " + uInfo.u0.ToString() + " " + uInfo.v0.ToString() + " " + uInfo.w.ToString() + " " + uInfo.h.ToString());
+			TRS trs = new TRS(new Bounds2(new Vector2(uInfo.u0, uInfo.v0), new Vector2(uInfo.u1, uInfo.v1)));
+			var info = new TextureInfo(TextureCache[atlas], new Vector2i(columns,rows), trs);
+			TextureInfoCache[assetName] = info;
+			return info;
 		}
 		
 		

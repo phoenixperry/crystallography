@@ -71,7 +71,7 @@ for row in rows:
     #xmlData.write('\t\t<Color Hex="' + row['BLUE'] + '" />\n')
     if row['Background'] != '':
         xmlData.write('\t\t<Background Main="' + row['MAIN'] + '" Grey="' + row['GREY'] + '" Black="' + row['BLACK'] + '" />\n')
-    xmlData.write('\t\t<Pattern Path="' + row['Pattern'].lower() + '/gamePieces.png" />\n')
+    xmlData.write('\t\t<Pattern Path="' + row['Pattern'].lower() + '" />\n')
     xmlData.write('\t\t<Sound Prefix="stack' + row['Sound'][-1] + '" Glow="' + row['Glow'].lower() + '" />\n')
     for goal in GoalDict[row['Level']]:
         xmlData.write('\t\t<Goal Cubes="' + goal[0] + '" Score="' + goal[1] + '" />\n')

@@ -11,6 +11,7 @@ namespace Crystallography
 		public SpriteTile patternTiles;
 		
 		protected static AbstractQuality _instance;
+		protected static string atlas;
 		
 		// GET & SET --------------------------------------------------------------
 		
@@ -45,19 +46,38 @@ namespace Crystallography
 		{
 			SpriteTileCrystallonEntity e = pEntity as SpriteTileCrystallonEntity;
 			
-			e.setPattern(pVariant);
+			string orient;
+			switch(e.getOrientation()) {
+			case(0):
+			default:
+				orient = "T";
+				break;
+			case(1):
+				orient = "L";
+				break;
+			case(2):
+				orient = "R";
+				break;
+			}
 			
-			e.getSprite().TileIndex2D = new Vector2i( e.getOrientation(), e.getPattern() );
+//			string setName = LevelManager.Instance.PatternPath.Substring(0,4);
+			
+			e.setPattern(pVariant);
+			e.getSprite().TextureInfo = Support.SpriteFromAtlas("gamePieces", LevelManager.Instance.PatternPath + "_v" + pVariant.ToString() + "_" + orient + ".png").TextureInfo;
+			
+//			e.getSprite().TileIndex2D = new Vector2i( e.getOrientation(), e.getPattern() );
 		}
 		
 		public void setPalette () {
-			setPalette( LevelManager.Instance.PatternPath, 3, 3);
+//			setPalette( LevelManager.Instance.PatternPath, 3, 3);
 		}
 		
 		public void setPalette( string path, int columns, int rows) {
+			LevelManager.Instance.PatternPath = path;
 //			patternTiles = Support.TiledSpriteFromFile( path, columns, rows );
-			var atlas = path.Substring(0, path.LastIndexOf('.'));
-			patternTiles = Support.TiledSpriteFromAtlas(atlas, "gamePieces.png", columns, rows);
+//			atlas = path.Substring(0, path.LastIndexOf('.'));
+//			patternTiles = Support.TiledSpriteFromAtlas(atlas, "gamePieces.png", columns, rows);
+//			patternTiles = Support.SpriteFromAtlas("gamePieces", "set1_v0_T.png");
 		}
 	}
 }

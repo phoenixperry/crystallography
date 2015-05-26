@@ -44,10 +44,29 @@ namespace Crystallography
 		public override void Apply ( ICrystallonEntity pEntity, int pVariant )
 		{
 			SpriteTileCrystallonEntity e = pEntity as SpriteTileCrystallonEntity;
+			var sprite = e.getSprite();
 			e.setOrientation(pVariant);
 			
-			if (e.getSprite() != null ) {
-				(e.getSprite() as SpriteTile).TileIndex2D = new Vector2i( e.getOrientation(), e.getPattern() ); //= ss.Get( e.getOrientation() + e.getPattern() ).TileIndex2D;
+			string orient;
+			switch(pVariant) {
+			case(0):
+			default:
+				orient = "T";
+				break;
+			case(1):
+				orient = "L";
+				break;
+			case(2):
+				orient = "R";
+				break;
+			}
+			
+//			string setName = LevelManager.Instance.PatternPath.Substring(0,4);
+			
+			if (sprite != null ) {
+				sprite.TextureInfo = Support.TextureInfoFromAtlas("gamePieces", LevelManager.Instance.PatternPath + "_v" + e.getPattern().ToString() + "_" + orient + ".png");
+				sprite.Scale = e.getSprite().CalcSizeInPixels();
+				sprite.Position = sprite.Scale/-2.0f;
 			}
 		}
 		

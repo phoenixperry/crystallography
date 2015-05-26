@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $TexturePacker:SmartUpdate:abdb5fc4616850c4c93302866444016c:1a1b6e3b0bbdbabac77537e5777978d3:076eb362ae38477d14efb8ae6ffb8ee3$ -->
+<root version="1.0">
+	<info w="512" h="512" />
+    <textures>
+		<texture filename="set1_v0_L.png" x="406" y="4" w="68" h="112" />
+		<texture filename="set1_v0_R.png" x="406" y="118" w="68" h="112" />
+		<texture filename="set1_v0_T.png" x="4" y="4" w="132" h="76" />
+		<texture filename="set1_v1_L.png" x="4" y="232" w="68" h="112" />
+		<texture filename="set1_v1_R.png" x="4" y="346" w="68" h="112" />
+		<texture filename="set1_v1_T.png" x="138" y="4" w="132" h="76" />
+		<texture filename="set1_v2_L.png" x="74" y="232" w="68" h="112" />
+		<texture filename="set1_v2_R.png" x="74" y="346" w="68" h="112" />
+		<texture filename="set1_v2_T.png" x="272" y="4" w="132" h="76" />
+		<texture filename="set2_v0_L.png" x="406" y="4" w="68" h="112" />
+		<texture filename="set2_v0_R.png" x="144" y="232" w="68" h="112" />
+		<texture filename="set2_v0_T.png" x="4" y="82" w="132" h="76" />
+		<texture filename="set2_v1_L.png" x="144" y="346" w="68" h="112" />
+		<texture filename="set2_v1_R.png" x="214" y="160" w="68" h="112" />
+		<texture filename="set2_v1_T.png" x="138" y="82" w="132" h="76" />
+		<texture filename="set2_v2_L.png" x="284" y="160" w="68" h="112" />
+		<texture filename="set2_v2_R.png" x="354" y="232" w="68" h="112" />
+		<texture filename="set2_v2_T.png" x="272" y="82" w="132" h="76" />
+		<texture filename="set3_v0_L.png" x="406" y="4" w="68" h="112" />
+		<texture filename="set3_v0_R.png" x="406" y="118" w="68" h="112" />
+		<texture filename="set3_v0_T.png" x="4" y="4" w="132" h="76" />
+		<texture filename="set3_v1_L.png" x="4" y="232" w="68" h="112" />
+		<texture filename="set3_v1_R.png" x="4" y="346" w="68" h="112" />
+		<texture filename="set3_v1_T.png" x="138" y="4" w="132" h="76" />
+		<texture filename="set3_v2_L.png" x="74" y="232" w="68" h="112" />
+		<texture filename="set3_v2_R.png" x="74" y="346" w="68" h="112" />
+		<texture filename="set3_v2_T.png" x="272" y="4" w="132" h="76" />
+		<texture filename="set4_v0_L.png" x="406" y="4" w="68" h="112" />
+		<texture filename="set4_v0_R.png" x="406" y="118" w="68" h="112" />
+		<texture filename="set4_v0_T.png" x="4" y="4" w="132" h="76" />
+		<texture filename="set4_v1_L.png" x="4" y="232" w="68" h="112" />
+		<texture filename="set4_v1_R.png" x="4" y="346" w="68" h="112" />
+		<texture filename="set4_v1_T.png" x="138" y="4" w="132" h="76" />
+		<texture filename="set4_v2_L.png" x="74" y="232" w="68" h="112" />
+		<texture filename="set4_v2_R.png" x="74" y="346" w="68" h="112" />
+		<texture filename="set4_v2_T.png" x="272" y="4" w="132" h="76" />
+    </textures>
+</root>

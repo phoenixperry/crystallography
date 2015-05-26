@@ -84,16 +84,15 @@ namespace Crystallography
 		
 		// CONSTRUCTORS----------------------------------------------------------------------------
 		
-		public SpriteTileCrystallonEntity( Scene pScene, GamePhysics pGamePhysics, 
-		                              TextureInfo pTextureInfo, Vector2i pTileIndex2D, PhysicsShape pShape = null) 
+		public SpriteTileCrystallonEntity( Scene pScene, GamePhysics pGamePhysics, PhysicsShape pShape = null) 
 												: base(pScene, pGamePhysics, pShape) {
 			
 			// SPRITE STUFF
 			_orientationIndex = 0;
 			_patternIndex = 0;
-			_sprite = new SpriteTile(pTextureInfo, pTileIndex2D);
-			_sprite.Scale = _sprite.CalcSizeInPixels();
-//			_sprite.Pivot = new Vector2(0.5f, 0.5f);
+//			_sprite = new SpriteTile(pTextureInfo);
+			_sprite = new SpriteTile();
+//			_sprite.Scale = _sprite.CalcSizeInPixels();
 			_node.AddChild(_sprite);
 			
 			// PHYSICS STUFF
