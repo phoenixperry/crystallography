@@ -437,6 +437,12 @@ namespace Crystallography
 			}
 		}
 		
+		public void HideAllCards(bool pHide=true) {
+			foreach (var card in availableCards) {
+				card.getNode().Visible = !pHide;
+			}
+		}
+		
 		public void RotateColors( int rotations, float pRotateTime, float pRestTime=1.0f) {
 			Director.Instance.CurrentScene.StopActionByTag(30);
 			var cRot = new Sequence();

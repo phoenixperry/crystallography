@@ -266,6 +266,7 @@ namespace Crystallography
 		}
 		
 		private void Pause( bool pOn ) {
+			CardManager.Instance.HideAllCards(pOn);
 			SchedulerPaused = paused = pOn;
 		}
 		
